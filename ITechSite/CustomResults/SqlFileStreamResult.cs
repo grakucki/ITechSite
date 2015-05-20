@@ -19,11 +19,18 @@ namespace ITechSite
 
         protected override void WriteFile(HttpResponseBase response)
         {
-            response.BufferOutput = false;
-            response.AddHeader("Content-Length", FileStream.Length.ToString());
-            response.AddHeader("Content-Disposition", string.Format("attachment; filename=\"{0}\"", FileName));
+            try
+            {
+                response.BufferOutput = false;
+                response.AddHeader("Content-Length", FileStream.Length.ToString());
+                if (!string.IsNullOrEmpty(FileName))
+                    response.AddHeader("Content-Disposition", string.Format("attachment; filename=\"{0}\"", FileName));
 
-            base.WriteFile(response);
+                base.WriteFile(response);
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

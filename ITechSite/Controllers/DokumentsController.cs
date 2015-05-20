@@ -66,6 +66,7 @@ namespace ITechSite.Controllers
                     dokument.FileType = Path.GetExtension(dokument.FileName);
                     if (dokument.File != null)
                     {
+                        long i = dokument.File.Length;
                         var fc = new FileContent();
                         fc.CodeName = dokument.CodeName;
                         byte [] c = {0};
@@ -103,42 +104,7 @@ namespace ITechSite.Controllers
             return View(dokument);
         }
 
-        public ActionResult Create2()
-        {
-            return View();
-        }
-
-        // POST: Dokuments/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        public ActionResult Create2( FileData dokument)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    
-                    if (dokument.File != null)
-                    {
-                        // zapisz plik
-                    }
-                    
-                    return RedirectToAction("Index");
-                }
-
-            }
-            catch (DbEntityValidationException ex)
-            {
-                throw;
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-
-            return View(dokument);
-        }
+    
         // GET: Dokuments/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -231,7 +197,18 @@ namespace ITechSite.Controllers
 
             
             return new SqlFileStreamResult(new DBFile().Get(query), dokument.FileName, "application/octet-stream");
-            
+        }
+
+
+        [HttpGet]
+        public FileResult Show(int id)
+        {
+            Dokument dokument = db.Dokument.Find(id);
+            if (dokument == null)
+                throw new HttpException(404, "Not found");
+            var query = (from x in dokument.FileContent select x.FileID).FirstOrDefault();
+
+            return new SqlFileStreamResult(new DBFile().Get(query), "", MimeMapping.GetMimeMapping(dokument.FileName));
         }
 
     }

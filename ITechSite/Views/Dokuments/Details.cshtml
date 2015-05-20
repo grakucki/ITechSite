@@ -9,71 +9,98 @@
 <div>
     <h4>Dokument</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FileName)
-        </dt>
+   
+    @Html.ActionLink("Download", "Download", new { id = Model.Id }) |
+    @Html.ActionLink("Show", "Show", new { id = Model.Id }) <br />
 
-        <dd>
-            @Html.DisplayFor(model => model.FileName)
-        </dd>
+    @if (Model.FileType == ".pdf")
+    {
+        <b>pdf not suported</b>
+    }
+    @if (Model.FileType == ".jpg")
+    {
+        <img src="http://localhost:49429/Dokuments/show/@Model.Id" alt="Image" />
+    }
+    @if (Model.FileType == ".mp4")
+    {
+        @Microsoft.Web.Helpers.Video.MediaPlayer("http://localhost:49429/Dokuments/show/" + @Model.Id)
+        @*<br />
+        @Microsoft.Web.Helpers.Video.Silverlight("http://localhost:49429/Dokuments/show/"+@Model.Id, "300", "200")
+        <br />
+        @Microsoft.Web.Helpers.Video.Flash("http://localhost:49429/Dokuments/show/"+@Model.Id, "300", "200")*@
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastWriteTime)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastWriteTime)
-        </dd>
+    @*<video width="320" height="240" controls>
+        <source src="http://localhost:49429/Dokuments/show/@Model.Id" typ="video/mp4">
+        <source src="http://localhost:49429/Dokuments/show/@Model.Id" typ="video/wmv">
+        Twoja przeglądarka nie robi ' t obsługuje elementu video
+    </video>*@
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FileName)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.WorkProcess.Name)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FileName)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.WorkProcess.Name)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastWriteTime)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Enabled)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastWriteTime)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Enabled)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.WorkProcess.Name)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FileType)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.WorkProcess.Name)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.FileType)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Enabled)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Enabled)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FileType)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ValidDtmOn)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FileType)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ValidDtmOn)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ValidDtmOff)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.ValidDtmOff)
-        </dd>
-    </dl>
+            <dt>
+                @Html.DisplayNameFor(model => model.ValidDtmOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ValidDtmOn)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ValidDtmOff)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ValidDtmOff)
+            </dd>
+        </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |

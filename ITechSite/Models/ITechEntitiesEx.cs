@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,8 @@ namespace ITechSite.Models
     {
         private static string EntitiesName()
         {
-            int i = 1;
+
+            int i = 2;
             String n=string.Empty;
             switch (i)
             {
@@ -18,7 +20,13 @@ namespace ITechSite.Models
                     break;
                 case 1: n = "name=ITechEntities2";
                     break;
-                case 2: n = @"Data Source=Akacjowa5\;Initial Catalog=ITech;Integrated Security=True";
+                case 2:
+                    {
+                        var c = ConfigurationManager.ConnectionStrings["ITechEntities"];
+                        n = c.ConnectionString.Replace(@"data source=COOLER7\SQLEXPRESS",@"data source=Akacjowa5\" );
+                        //n = "name=ITechEntities2";
+                        //n = @"metadata=res://*/Models.ITechModel.csdl|res://*/Models.ITechModel.ssdl|res://*/Models.ITechModel.msl;provider=System.Data.SqlClient;provider connection string='data source=Akacjowa5\;initial catalog=ITech;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework'";
+                    }
                     break;
                 default:
                     n = "name=ITechEntities";
@@ -31,6 +39,7 @@ namespace ITechSite.Models
         public ITechEntities(int i)
             : base(EntitiesName())
         {
+
         }
     }
 }
