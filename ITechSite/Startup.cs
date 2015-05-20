@@ -11,7 +11,6 @@ namespace ITechSite
             // komentarz na początku z Akacjowej
             // Komentarz z Skłodowskiej
             ConfigureAuth(app);
-            
         }
     }
 }

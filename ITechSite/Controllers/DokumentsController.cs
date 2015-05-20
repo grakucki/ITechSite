@@ -229,7 +229,7 @@ namespace ITechSite.Controllers
                 throw new HttpException(404, "Not found");
             var query = (from x in dokument.FileContent select x.FileID).FirstOrDefault();
 
-            ' komentarz dodany puźniej'
+            
             return new SqlFileStreamResult(new DBFile().Get(query), dokument.FileName, "application/octet-stream");
             
         }
