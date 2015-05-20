@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "ITech";
+}
+
+<div class="jumbotron">
+    <h1>ITech</h1>
+    <p class="lead">System udostępniania dokumentów na stanowiska robocze </p>
+   
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Dokumenty</h2>
+        <p>
+            Zarządzaj dokumenta, instrukacjami
+        </p>
+        <p>@Html.ActionLink("more  >>", "Index", "Dokuments", new { area = "" }, new { @class = "btn btn-default" })</p>
+    </div>
+    <div class="col-md-4">
+        <h2>Zasoby</h2>
+        <p>Zarządzaj Stanowiskami robaczymi oraz modelami </p>
+        <p><a class="btn btn-default" href=".">more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Plan informacyjny</h2>
+        <p>Zarządzaj Planami Informacyjnymi. Definuj jakie instrukcje mają być wyświetlane na stanowiskach roboczych </p>
+        <p><a class="btn btn-default" href="">more &raquo;</a></p>
+    </div>
+</div>

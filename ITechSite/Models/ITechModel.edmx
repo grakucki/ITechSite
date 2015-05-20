@@ -1,0 +1,588 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ITechModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Dokument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CodeName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastWriteTime" Type="datetime" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="FileType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ValidDtmOn" Type="datetime" Nullable="false" />
+          <Property Name="ValidDtmOff" Type="datetime" />
+          <Property Name="WorkProcess_Id" Type="int" />
+        </EntityType>
+        <EntityType Name="DokumentsInformationPlan">
+          <Key>
+            <PropertyRef Name="Dokuments_Id" />
+            <PropertyRef Name="InformationPlan_Id" />
+          </Key>
+          <Property Name="Dokuments_Id" Type="int" Nullable="false" />
+          <Property Name="InformationPlan_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FileContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dokument_Id" Type="int" />
+          <Property Name="CodeName" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="FileID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Content" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="InformationPlan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastWriteTime" Type="datetime" Nullable="false" />
+          <Property Name="WorkProcess" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Car" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="LastWriteTime" Type="datetime" Nullable="false" />
+          <Property Name="No" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="WorkProcess" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResourceInformationPlan">
+          <Key>
+            <PropertyRef Name="Resource_Id" />
+            <PropertyRef Name="InformationPlan_Id" />
+          </Key>
+          <Property Name="Resource_Id" Type="int" Nullable="false" />
+          <Property Name="InformationPlan_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkProcess">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workstation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkstationGroup" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Factory" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Area" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkstationGroup">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Dokument_WorkProcess">
+          <End Role="WorkProcess" Type="Self.WorkProcess" Multiplicity="0..1" />
+          <End Role="Dokument" Type="Self.Dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkProcess">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dokument">
+              <PropertyRef Name="WorkProcess_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DokumentsInformationPlan_Dokuments">
+          <End Role="Dokument" Type="Self.Dokument" Multiplicity="1" />
+          <End Role="DokumentsInformationPlan" Type="Self.DokumentsInformationPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dokument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DokumentsInformationPlan">
+              <PropertyRef Name="Dokuments_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DokumentsInformationPlan_InformationPlan">
+          <End Role="InformationPlan" Type="Self.InformationPlan" Multiplicity="1" />
+          <End Role="DokumentsInformationPlan" Type="Self.DokumentsInformationPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformationPlan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DokumentsInformationPlan">
+              <PropertyRef Name="InformationPlan_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileContent_Dokument1">
+          <End Role="Dokument" Type="Self.Dokument" Multiplicity="0..1" />
+          <End Role="FileContent" Type="Self.FileContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dokument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileContent">
+              <PropertyRef Name="Dokument_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Model_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="Model" Type="Self.Model" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Model">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResourceInformationPlan_InformationPlan">
+          <End Role="InformationPlan" Type="Self.InformationPlan" Multiplicity="1" />
+          <End Role="ResourceInformationPlan" Type="Self.ResourceInformationPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformationPlan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResourceInformationPlan">
+              <PropertyRef Name="InformationPlan_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResourceInformationPlan_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="ResourceInformationPlan" Type="Self.ResourceInformationPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResourceInformationPlan">
+              <PropertyRef Name="Resource_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workstation_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="Workstation" Type="Self.Workstation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workstation">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workstation_WorkstationGroup">
+          <End Role="WorkstationGroup" Type="Self.WorkstationGroup" Multiplicity="1" />
+          <End Role="Workstation" Type="Self.Workstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkstationGroup">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Workstation">
+              <PropertyRef Name="WorkstationGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ITechModelStoreContainer">
+          <EntitySet Name="Dokument" EntityType="Self.Dokument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DokumentsInformationPlan" EntityType="Self.DokumentsInformationPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileContent" EntityType="Self.FileContent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InformationPlan" EntityType="Self.InformationPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResourceInformationPlan" EntityType="Self.ResourceInformationPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkProcess" EntityType="Self.WorkProcess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkstationGroup" EntityType="Self.WorkstationGroup" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Dokument_WorkProcess" Association="Self.FK_Dokument_WorkProcess">
+            <End Role="WorkProcess" EntitySet="WorkProcess" />
+            <End Role="Dokument" EntitySet="Dokument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DokumentsInformationPlan_Dokuments" Association="Self.FK_DokumentsInformationPlan_Dokuments">
+            <End Role="Dokument" EntitySet="Dokument" />
+            <End Role="DokumentsInformationPlan" EntitySet="DokumentsInformationPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DokumentsInformationPlan_InformationPlan" Association="Self.FK_DokumentsInformationPlan_InformationPlan">
+            <End Role="InformationPlan" EntitySet="InformationPlan" />
+            <End Role="DokumentsInformationPlan" EntitySet="DokumentsInformationPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileContent_Dokument1" Association="Self.FK_FileContent_Dokument1">
+            <End Role="Dokument" EntitySet="Dokument" />
+            <End Role="FileContent" EntitySet="FileContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Model_Resource" Association="Self.FK_Model_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="Model" EntitySet="Model" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResourceInformationPlan_InformationPlan" Association="Self.FK_ResourceInformationPlan_InformationPlan">
+            <End Role="InformationPlan" EntitySet="InformationPlan" />
+            <End Role="ResourceInformationPlan" EntitySet="ResourceInformationPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResourceInformationPlan_Resource" Association="Self.FK_ResourceInformationPlan_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ResourceInformationPlan" EntitySet="ResourceInformationPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workstation_Resource" Association="Self.FK_Workstation_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="Workstation" EntitySet="Workstation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workstation_WorkstationGroup" Association="Self.FK_Workstation_WorkstationGroup">
+            <End Role="WorkstationGroup" EntitySet="WorkstationGroup" />
+            <End Role="Workstation" EntitySet="Workstation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ITechModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FileContent">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="true" />
+          <Property Name="CodeName" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="FileID" Type="Guid" Nullable="false" />
+          <Property Name="Dokument_Id" Type="Int32" />
+          <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_FileContent_Dokument1" FromRole="FileContent" ToRole="Dokument" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Car" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Resource1" Relationship="ITechModel.FK_Model_Resource" FromRole="Model" ToRole="Resource" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastWriteTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="No" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WorkProcess" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="InformationPlan" Relationship="ITechModel.ResourceInformationPlan" FromRole="Resource" ToRole="InformationPlan" />
+          <NavigationProperty Name="Model1" Relationship="ITechModel.FK_Model_Resource" FromRole="Resource" ToRole="Model" />
+          <NavigationProperty Name="Workstation1" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
+        </EntityType>
+        <EntityType Name="Workstation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkstationGroup" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Factory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Area" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Resource1" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Workstation" ToRole="Resource" />
+          <NavigationProperty Name="WorkstationGroup1" Relationship="ITechModel.FK_Workstation_WorkstationGroup" FromRole="Workstation" ToRole="WorkstationGroup" />
+        </EntityType>
+        <EntityContainer Name="ITechEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FileContent" EntityType="Self.FileContent" />
+          <EntitySet Name="Model" EntityType="Self.Model" />
+          <EntitySet Name="Resource" EntityType="Self.Resource" />
+          <EntitySet Name="Workstation" EntityType="Self.Workstation" />
+          <EntitySet Name="WorkProcess" EntityType="ITechModel.WorkProcess" />
+          <EntitySet Name="InformationPlan" EntityType="ITechModel.InformationPlan" />
+          <AssociationSet Name="ResourceInformationPlan" Association="ITechModel.ResourceInformationPlan">
+            <End Role="InformationPlan" EntitySet="InformationPlan" />
+            <End Role="Resource" EntitySet="Resource" />
+          </AssociationSet>
+          <EntitySet Name="Dokument" EntityType="ITechModel.Dokument" />
+          <AssociationSet Name="FK_Dokument_WorkProcess" Association="ITechModel.FK_Dokument_WorkProcess">
+            <End Role="WorkProcess" EntitySet="WorkProcess" />
+            <End Role="Dokument" EntitySet="Dokument" />
+          </AssociationSet>
+          <AssociationSet Name="DokumentsInformationPlan" Association="ITechModel.DokumentsInformationPlan">
+            <End Role="Dokument" EntitySet="Dokument" />
+            <End Role="InformationPlan" EntitySet="InformationPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Model_Resource" Association="ITechModel.FK_Model_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="Model" EntitySet="Model" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workstation_Resource" Association="ITechModel.FK_Workstation_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="Workstation" EntitySet="Workstation" />
+          </AssociationSet>
+          <EntitySet Name="WorkstationGroup" EntityType="ITechModel.WorkstationGroup" />
+          <AssociationSet Name="FK_Workstation_WorkstationGroup" Association="ITechModel.FK_Workstation_WorkstationGroup">
+            <End Role="WorkstationGroup" EntitySet="WorkstationGroup" />
+            <End Role="Workstation" EntitySet="Workstation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileContent_Dokument1" Association="ITechModel.FK_FileContent_Dokument1">
+            <End Role="Dokument" EntitySet="Dokument" />
+            <End Role="FileContent" EntitySet="FileContent" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="WorkProcess">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_Dokument_WorkProcess" FromRole="WorkProcess" ToRole="Dokument" />
+        </EntityType>
+        <EntityType Name="InformationPlan">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastWriteTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="WorkProcess" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Resource" Relationship="ITechModel.ResourceInformationPlan" FromRole="InformationPlan" ToRole="Resource" />
+          <NavigationProperty Name="Dokument" Relationship="ITechModel.DokumentsInformationPlan" FromRole="InformationPlan" ToRole="Dokument" />
+        </EntityType>
+        <Association Name="ResourceInformationPlan">
+          <End Type="ITechModel.InformationPlan" Role="InformationPlan" Multiplicity="*" />
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Dokument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CodeName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastWriteTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="FileType" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ValidDtmOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ValidDtmOff" Type="DateTime" Precision="3" />
+          <Property Name="WorkProcess_Id" Type="Int32" />
+          <NavigationProperty Name="WorkProcess" Relationship="ITechModel.FK_Dokument_WorkProcess" FromRole="Dokument" ToRole="WorkProcess" />
+          <NavigationProperty Name="InformationPlan" Relationship="ITechModel.DokumentsInformationPlan" FromRole="Dokument" ToRole="InformationPlan" />
+          <NavigationProperty Name="FileContent" Relationship="ITechModel.FK_FileContent_Dokument1" FromRole="Dokument" ToRole="FileContent" />
+        </EntityType>
+        <Association Name="FK_Dokument_WorkProcess">
+          <End Type="ITechModel.WorkProcess" Role="WorkProcess" Multiplicity="0..1" />
+          <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkProcess">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dokument">
+              <PropertyRef Name="WorkProcess_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DokumentsInformationPlan">
+          <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="*" />
+          <End Type="ITechModel.InformationPlan" Role="InformationPlan" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Model_Resource">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="ITechModel.Model" Role="Model" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Model">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workstation_Resource">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="ITechModel.Workstation" Role="Workstation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workstation">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WorkstationGroup">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_WorkstationGroup" FromRole="WorkstationGroup" ToRole="Workstation" />
+        </EntityType>
+        <Association Name="FK_Workstation_WorkstationGroup">
+          <End Type="ITechModel.WorkstationGroup" Role="WorkstationGroup" Multiplicity="1" />
+          <End Type="ITechModel.Workstation" Role="Workstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkstationGroup">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="Workstation">
+              <PropertyRef Name="WorkstationGroup" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileContent_Dokument1">
+          <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="0..1" />
+          <End Type="ITechModel.FileContent" Role="FileContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dokument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FileContent">
+              <PropertyRef Name="Dokument_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ITechModelStoreContainer" CdmEntityContainer="ITechEntities">
+          <EntitySetMapping Name="FileContent">
+            <EntityTypeMapping TypeName="ITechModel.FileContent">
+              <MappingFragment StoreEntitySet="FileContent">
+                <ScalarProperty Name="Dokument_Id" ColumnName="Dokument_Id" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="CodeName" ColumnName="CodeName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Model">
+            <EntityTypeMapping TypeName="ITechModel.Model">
+              <MappingFragment StoreEntitySet="Model">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Car" ColumnName="Car" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resource">
+            <EntityTypeMapping TypeName="ITechModel.Resource">
+              <MappingFragment StoreEntitySet="Resource">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="LastWriteTime" ColumnName="LastWriteTime" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="WorkProcess" ColumnName="WorkProcess" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workstation">
+            <EntityTypeMapping TypeName="ITechModel.Workstation">
+              <MappingFragment StoreEntitySet="Workstation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="WorkstationGroup" ColumnName="WorkstationGroup" />
+                <ScalarProperty Name="Factory" ColumnName="Factory" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkProcess">
+            <EntityTypeMapping TypeName="ITechModel.WorkProcess">
+              <MappingFragment StoreEntitySet="WorkProcess">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InformationPlan">
+            <EntityTypeMapping TypeName="ITechModel.InformationPlan">
+              <MappingFragment StoreEntitySet="InformationPlan">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="WorkProcess" ColumnName="WorkProcess" />
+                <ScalarProperty Name="LastWriteTime" ColumnName="LastWriteTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ResourceInformationPlan" TypeName="ITechModel.ResourceInformationPlan" StoreEntitySet="ResourceInformationPlan">
+            <EndProperty Name="Resource">
+              <ScalarProperty Name="Id" ColumnName="Resource_Id" />
+            </EndProperty>
+            <EndProperty Name="InformationPlan">
+              <ScalarProperty Name="Id" ColumnName="InformationPlan_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Dokument">
+            <EntityTypeMapping TypeName="ITechModel.Dokument">
+              <MappingFragment StoreEntitySet="Dokument">
+                <ScalarProperty Name="WorkProcess_Id" ColumnName="WorkProcess_Id" />
+                <ScalarProperty Name="ValidDtmOff" ColumnName="ValidDtmOff" />
+                <ScalarProperty Name="ValidDtmOn" ColumnName="ValidDtmOn" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="LastWriteTime" ColumnName="LastWriteTime" />
+                <ScalarProperty Name="CodeName" ColumnName="CodeName" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DokumentsInformationPlan" TypeName="ITechModel.DokumentsInformationPlan" StoreEntitySet="DokumentsInformationPlan">
+            <EndProperty Name="InformationPlan">
+              <ScalarProperty Name="Id" ColumnName="InformationPlan_Id" />
+            </EndProperty>
+            <EndProperty Name="Dokument">
+              <ScalarProperty Name="Id" ColumnName="Dokuments_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="WorkstationGroup">
+            <EntityTypeMapping TypeName="ITechModel.WorkstationGroup">
+              <MappingFragment StoreEntitySet="WorkstationGroup">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

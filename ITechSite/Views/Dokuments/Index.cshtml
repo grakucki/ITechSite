@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ITechSite.Models.Dokument>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastWriteTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Enabled)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValidDtmOn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValidDtmOff)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkProcess.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastWriteTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enabled)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValidDtmOn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValidDtmOff)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkProcess.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Download", "Download", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
