@@ -8,8 +8,9 @@ namespace ITechSite
     {
         public void Configuration(IAppBuilder app)
         {
+            // komentarz na początku z Akacjowej
             ConfigureAuth(app);
-            //kompe
+            
         }
     }
 }
