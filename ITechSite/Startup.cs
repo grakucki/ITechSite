@@ -9,6 +9,7 @@ namespace ITechSite
         public void Configuration(IAppBuilder app)
         {
             // komentarz na początku z Akacjowej
+            // Komentarz z Skłodowskiej
             ConfigureAuth(app);
             
         }
