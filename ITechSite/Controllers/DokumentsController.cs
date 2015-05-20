@@ -14,7 +14,7 @@ namespace ITechSite.Controllers
 {
     public class DokumentsController : Controller
     {
-        private ITechEntities db = new ITechEntities();
+        private ITechEntities db = new ITechEntities(0);
 
         // GET: Dokuments
         public ActionResult Index()

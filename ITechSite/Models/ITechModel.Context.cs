@@ -15,7 +15,7 @@ namespace ITechSite.Models
     
     public partial class ITechEntities : DbContext
     {
-        public ITechEntities()
+        private ITechEntities()
             : base("name=ITechEntities")
         {
         }

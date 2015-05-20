@@ -122,7 +122,10 @@ namespace ITechSite.Models
 
         private SqlConnection OpenConnection()
         {
-            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            ITechEntities m = new ITechEntities(0);
+            var c = m.Database.Connection.ConnectionString;
+//            var connection = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+            var connection = new SqlConnection(c);
             connection.Open();
             return connection;
         }

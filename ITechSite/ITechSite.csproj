@@ -183,6 +183,7 @@
     <Compile Include="Models\InformationPlan.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ITechEntitiesEx.cs" />
     <Compile Include="Models\ITechModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
