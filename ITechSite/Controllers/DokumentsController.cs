@@ -19,7 +19,8 @@ namespace ITechSite.Controllers
         // GET: Dokuments
         public ActionResult Index()
         {
-            var dokument = db.Dokument.Include(d => d.FileContent).Include(d => d.WorkProcess);
+            //var dokument = db.Dokument.Include(d => d.FileContent).Include(d => d.WorkProcess);
+            var dokument = db.Dokument.Include(d => d.WorkProcess);
             return View(dokument.ToList());
         }
 
@@ -90,12 +91,12 @@ namespace ITechSite.Controllers
 
                 ViewBag.WorkProcess_Id = new SelectList(db.WorkProcess, "Id", "Name", dokument.WorkProcess_Id);
             }
-            catch (DbEntityValidationException ex)
+            catch (DbEntityValidationException)
             {
 
                 throw;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
@@ -121,29 +122,65 @@ namespace ITechSite.Controllers
             return View(dokument);
         }
 
+        private void SaveFileContent(Dokument dokument)
+        {
+            if (dokument.File != null)
+            {
+                //var fileID = db.Dokument.Where(m => m.Id == dokument.Id).FirstOrDefault().FileContent.Select(b => b.FileID).FirstOrDefault();
+                var x = db.Entry(dokument).Collection(f=>f.FileContent).Query().Select(f => f.FileID);
+                var fileID = x.FirstOrDefault();
+                if (fileID == null)
+                {
+                    // rekort FileContent nie isnieje
+                    var fc = new FileContent();
+                    fc.CodeName = dokument.CodeName;
+                    byte[] c = { 0 };
+                    fc.Content = c;
+                    fc.FileID = Guid.NewGuid();
+                    fileID = fc.FileID;
+                    dokument.FileContent.Add(fc);
+                    db.SaveChanges();
+                }
+                // zapisujemy plik
+                // zapisz plik
+                FileData uploadData = new FileData();
+                uploadData.Name = dokument.CodeName;
+                uploadData.File = dokument.File;
+
+                var fileRepository = new DBFile();
+                fileRepository.Save(uploadData, fileID);
+            }
+        }
+
         // POST: Dokuments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FileName,SourceFileName,LastWriteTime,CodeName,Enabled,FileType,Description,ValidDtmOn,ValidDtmOff,FileContent_Id,WorkProcess_Id")] Dokument dokument)
+        public ActionResult Edit([Bind(Include = "Id,FileName,CodeName,Enabled,Description,ValidDtmOn,ValidDtmOff,WorkProcess_Id,File")] Dokument dokument)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+
                     dokument.LastWriteTime = DateTime.Now;
+                    dokument.FileType = Path.GetExtension(dokument.FileName);
                     db.Entry(dokument).State = EntityState.Modified;
+
                     db.SaveChanges();
+
+                    SaveFileContent(dokument);
+
                     return RedirectToAction("Index");
                 }
                 ViewBag.WorkProcess_Id = new SelectList(db.WorkProcess, "Id", "Name", dokument.WorkProcess_Id);
             }
-            catch (DbEntityValidationException ex)
+            catch (DbEntityValidationException)
             {
                 throw;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;

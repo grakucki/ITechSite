@@ -1,13 +1,13 @@
 ﻿@model ITechSite.Models.Dokument
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edycja Dokumentu";
 }
 
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Dokuments", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -17,13 +17,24 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
+
         <div class="form-group">
             @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FileName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
+
+                <input type="file" name="File" id="File" value="@Model.FileName">
             </div>
         </div>
+
+        <script>
+            document.querySelector("[name=File]").addEventListener("change", function (e) {
+            var name = document.querySelector("[name=FileName]");
+            if (name.value === "")
+                name.value = this.value.substr(this.value.lastIndexOf("\\") + 1);
+             });
+        </script>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CodeName, htmlAttributes: new { @class = "control-label col-md-2" })

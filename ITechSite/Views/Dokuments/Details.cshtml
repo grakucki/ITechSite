@@ -10,9 +10,6 @@
     <h4>Dokument</h4>
     <hr />
    
-    @Html.ActionLink("Download", "Download", new { id = Model.Id }) |
-    @Html.ActionLink("Show", "Show", new { id = Model.Id }) <br />
-
     @if (Model.FileType == ".pdf")
     {
         <b>pdf not suported</b>
@@ -36,6 +33,8 @@
         <source src="http://localhost:49429/Dokuments/show/@Model.Id" typ="video/wmv">
         Twoja przeglądarka nie robi ' t obsługuje elementu video
     </video>*@
+    
+
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.FileName)
@@ -103,6 +102,8 @@
         </dl>
 </div>
 <p>
+    @Html.ActionLink("Download", "Download", new { id = Model.Id }) |
+    @Html.ActionLink("Show", "Show", new { id = Model.Id }) |
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
