@@ -177,11 +177,13 @@
     <Compile Include="Controllers\DokumentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ResourcesController.cs" />
     <Compile Include="CustomResults\SqlFileStreamResult.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\UniqueAttribute.cs" />
     <Compile Include="Models\DBFile.cs" />
     <Compile Include="Models\DocumentFileModels.cs" />
     <Compile Include="Models\Dokument.cs">
@@ -215,7 +217,11 @@
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OpenSqlFileStream.cs" />
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Models\Resource.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ResourceType.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\WorkProcess.cs">
@@ -227,7 +233,6 @@
     <Compile Include="Models\WorkstationGroup.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -309,6 +314,11 @@
     <Content Include="Views\Dokuments\Edit.cshtml" />
     <Content Include="Views\Dokuments\Index.cshtml" />
     <Content Include="Views\Dokuments\View.cshtml" />
+    <Content Include="Views\Resources\Index.cshtml" />
+    <Content Include="Views\Resources\Create.cshtml" />
+    <Content Include="Views\Resources\Details.cshtml" />
+    <Content Include="Views\Resources\Edit.cshtml" />
+    <Content Include="Views\Resources\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

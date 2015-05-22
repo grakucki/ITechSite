@@ -47,7 +47,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="Car" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Resource">
@@ -55,12 +55,14 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Type" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="Type" Type="int" Nullable="false" />
     <Property Name="LastWriteTime" Type="datetime" Nullable="false" />
-    <Property Name="No" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="WorkProcess" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="No" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="WorkProcess" Type="nvarchar" MaxLength="32" Nullable="false" />
     <Property Name="Enabled" Type="bit" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Keywords" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="ResourceInformationPlan">
     <Key>
@@ -69,6 +71,13 @@
     </Key>
     <Property Name="Resource_Id" Type="int" Nullable="false" />
     <Property Name="InformationPlan_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ResourceType">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="WorkProcess">
     <Key>
@@ -81,7 +90,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="WorkstationGroup" Type="nvarchar" MaxLength="16" Nullable="false" />
     <Property Name="Factory" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Area" Type="nvarchar(max)" Nullable="false" />
@@ -141,15 +150,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Model_Resource">
-    <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
-    <End Role="Model" Type="Self.Model" Multiplicity="0..1" />
+  <Association Name="FK_Resource_Type">
+    <End Role="ResourceType" Type="Self.ResourceType" Multiplicity="1" />
+    <End Role="Resource" Type="Self.Resource" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Resource">
-        <PropertyRef Name="Id" />
+      <Principal Role="ResourceType">
+        <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="Model">
-        <PropertyRef Name="Id" />
+      <Dependent Role="Resource">
+        <PropertyRef Name="Type" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -177,18 +186,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Workstation_Resource">
-    <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
-    <End Role="Workstation" Type="Self.Workstation" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="Resource">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Workstation">
-        <PropertyRef Name="Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Workstation_WorkstationGroup">
     <End Role="WorkstationGroup" Type="Self.WorkstationGroup" Multiplicity="1" />
     <End Role="Workstation" Type="Self.Workstation" Multiplicity="*" />
@@ -209,6 +206,7 @@
     <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ResourceInformationPlan" EntityType="Self.ResourceInformationPlan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResourceType" EntityType="Self.ResourceType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorkProcess" EntityType="Self.WorkProcess" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorkstationGroup" EntityType="Self.WorkstationGroup" Schema="dbo" store:Type="Tables" />
@@ -228,9 +226,9 @@
       <End Role="Dokument" EntitySet="Dokument" />
       <End Role="FileContent" EntitySet="FileContent" />
     </AssociationSet>
-    <AssociationSet Name="FK_Model_Resource" Association="Self.FK_Model_Resource">
+    <AssociationSet Name="FK_Resource_Type" Association="Self.FK_Resource_Type">
+      <End Role="ResourceType" EntitySet="ResourceType" />
       <End Role="Resource" EntitySet="Resource" />
-      <End Role="Model" EntitySet="Model" />
     </AssociationSet>
     <AssociationSet Name="FK_ResourceInformationPlan_InformationPlan" Association="Self.FK_ResourceInformationPlan_InformationPlan">
       <End Role="InformationPlan" EntitySet="InformationPlan" />
@@ -239,10 +237,6 @@
     <AssociationSet Name="FK_ResourceInformationPlan_Resource" Association="Self.FK_ResourceInformationPlan_Resource">
       <End Role="Resource" EntitySet="Resource" />
       <End Role="ResourceInformationPlan" EntitySet="ResourceInformationPlan" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Workstation_Resource" Association="Self.FK_Workstation_Resource">
-      <End Role="Resource" EntitySet="Resource" />
-      <End Role="Workstation" EntitySet="Workstation" />
     </AssociationSet>
     <AssociationSet Name="FK_Workstation_WorkstationGroup" Association="Self.FK_Workstation_WorkstationGroup">
       <End Role="WorkstationGroup" EntitySet="WorkstationGroup" />

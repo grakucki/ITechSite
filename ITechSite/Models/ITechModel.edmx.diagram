@@ -6,21 +6,21 @@
     <edmx:Diagrams>
       <Diagram DiagramId="f7b5d33c4c714c9ba3dbfd9400f38094" Name="Diagram1">
         <EntityTypeShape EntityType="ITechModel.FileContent" Width="1.5" PointX="0.5" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ITechModel.Model" Width="1.5" PointX="7.875" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="ITechModel.Resource" Width="1.5" PointX="7.625" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="10.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITechModel.Model" Width="1.5" PointX="9.5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="9.5" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.WorkProcess" Width="1.5" PointX="0.5" PointY="5" />
         <EntityTypeShape EntityType="ITechModel.InformationPlan" Width="1.5" PointX="5" PointY="1.5" />
-        <AssociationConnector Association="ITechModel.ResourceInformationPlan" />
         <EntityTypeShape EntityType="ITechModel.Dokument" Width="1.5" PointX="2.75" PointY="1.625" />
         <AssociationConnector Association="ITechModel.FK_Dokument_WorkProcess" />
         <AssociationConnector Association="ITechModel.DokumentsInformationPlan" />
-        <AssociationConnector Association="ITechModel.FK_Model_Resource" />
-        <AssociationConnector Association="ITechModel.FK_Workstation_Resource" />
-        <EntityTypeShape EntityType="ITechModel.WorkstationGroup" Width="1.5" PointX="11" PointY="3.75" />
+        <EntityTypeShape EntityType="ITechModel.WorkstationGroup" Width="1.5" PointX="11.875" PointY="1.875" />
         <AssociationConnector Association="ITechModel.FK_Workstation_WorkstationGroup" />
         <AssociationConnector Association="ITechModel.FK_FileContent_Dokument1" />
-      </Diagram>
+        <EntityTypeShape EntityType="ITechModel.ResourceType" Width="1.5" PointX="6.625" PointY="4.75" />
+        <EntityTypeShape EntityType="ITechModel.Resource" Width="1.5" PointX="7.5" PointY="1.125" />
+        <AssociationConnector Association="ITechModel.FK_Resource_Type" />
+        <AssociationConnector Association="ITechModel.ResourceInformationPlan" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -16,19 +16,21 @@ namespace ITechSite.Models
     {
         public Resource()
         {
+            this.Enabled = true;
             this.InformationPlan = new HashSet<InformationPlan>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Type { get; set; }
+        public int Type { get; set; }
         public System.DateTime LastWriteTime { get; set; }
         public string No { get; set; }
         public string WorkProcess { get; set; }
         public bool Enabled { get; set; }
+        public string Description { get; set; }
+        public string Keywords { get; set; }
     
+        public virtual ResourceType ResourceType { get; set; }
         public virtual ICollection<InformationPlan> InformationPlan { get; set; }
-        public virtual Model Model1 { get; set; }
-        public virtual Workstation Workstation1 { get; set; }
     }
 }

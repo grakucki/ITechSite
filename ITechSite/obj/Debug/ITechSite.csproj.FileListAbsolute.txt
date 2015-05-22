@@ -53,8 +53,6 @@ D:\Dysk Google\code\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.M
 D:\Dysk Google\code\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.dll
 D:\Dysk Google\code\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.pdb
 D:\Dysk Google\code\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.csprojResolveAssemblyReference.cache
-D:\projekty\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.dll
-D:\projekty\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.pdb
 D:\projekty\automotive\ITechSite\ITechSite\bin\ITechSite.dll.config
 D:\projekty\automotive\ITechSite\ITechSite\bin\ITechSite.dll
 D:\projekty\automotive\ITechSite\ITechSite\bin\ITechSite.pdb
@@ -73,6 +71,7 @@ D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.Google.dl
 D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.OAuth.dll
 D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.Twitter.dll
+D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Web.Helpers.dll
 D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Web.Infrastructure.dll
 D:\projekty\automotive\ITechSite\ITechSite\bin\Newtonsoft.Json.dll
 D:\projekty\automotive\ITechSite\ITechSite\bin\Owin.dll
@@ -84,14 +83,18 @@ D:\projekty\automotive\ITechSite\ITechSite\bin\System.Web.WebPages.Deployment.dl
 D:\projekty\automotive\ITechSite\ITechSite\bin\System.Web.WebPages.dll
 D:\projekty\automotive\ITechSite\ITechSite\bin\System.Web.WebPages.Razor.dll
 D:\projekty\automotive\ITechSite\ITechSite\bin\WebGrease.dll
+D:\projekty\automotive\ITechSite\ITechSite\bin\WebMatrix.Data.dll
+D:\projekty\automotive\ITechSite\ITechSite\bin\WebMatrix.WebData.dll
 D:\projekty\automotive\ITechSite\ITechSite\bin\System.Web.Helpers.xml
-D:\projekty\automotive\ITechSite\ITechSite\bin\System.Web.Mvc.xml
-D:\projekty\automotive\ITechSite\ITechSite\bin\System.Web.Optimization.xml
 D:\projekty\automotive\ITechSite\ITechSite\bin\System.Web.Razor.xml
 D:\projekty\automotive\ITechSite\ITechSite\bin\System.Web.WebPages.xml
 D:\projekty\automotive\ITechSite\ITechSite\bin\System.Web.WebPages.Deployment.xml
 D:\projekty\automotive\ITechSite\ITechSite\bin\System.Web.WebPages.Razor.xml
+D:\projekty\automotive\ITechSite\ITechSite\bin\System.Web.Mvc.xml
+D:\projekty\automotive\ITechSite\ITechSite\bin\System.Web.Optimization.xml
 D:\projekty\automotive\ITechSite\ITechSite\bin\Antlr3.Runtime.pdb
+D:\projekty\automotive\ITechSite\ITechSite\bin\WebMatrix.Data.xml
+D:\projekty\automotive\ITechSite\ITechSite\bin\WebMatrix.WebData.xml
 D:\projekty\automotive\ITechSite\ITechSite\bin\Newtonsoft.Json.xml
 D:\projekty\automotive\ITechSite\ITechSite\bin\EntityFramework.xml
 D:\projekty\automotive\ITechSite\ITechSite\bin\EntityFramework.SqlServer.xml
@@ -107,9 +110,5 @@ D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.OAuth.xml
 D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.Google.xml
 D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.Twitter.xml
 D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Web.Helpers.dll
-D:\projekty\automotive\ITechSite\ITechSite\bin\WebMatrix.Data.dll
-D:\projekty\automotive\ITechSite\ITechSite\bin\WebMatrix.WebData.dll
-D:\projekty\automotive\ITechSite\ITechSite\bin\WebMatrix.Data.xml
-D:\projekty\automotive\ITechSite\ITechSite\bin\WebMatrix.WebData.xml
-D:\projekty\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.csprojResolveAssemblyReference.cache
+D:\projekty\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.dll
+D:\projekty\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.pdb

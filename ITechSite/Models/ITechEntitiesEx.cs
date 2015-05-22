@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
@@ -41,5 +43,21 @@ namespace ITechSite.Models
         {
 
         }
+    }
+
+
+    [MetadataType(typeof(ResourceMetaData))]
+    public partial class Resource
+    {
+
+    }
+
+
+    public class ResourceMetaData
+    {
+        [Unique]
+        [DisplayName("Nazwa")]
+        [Required(ErrorMessage = "Nazwa jest wymagana.")]
+        public string Name { get; set; }
     }
 }
