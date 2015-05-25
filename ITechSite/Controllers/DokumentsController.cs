@@ -17,13 +17,80 @@ namespace ITechSite.Controllers
         private ITechEntities db = new ITechEntities(0);
 
         // GET: Dokuments
-        public ActionResult Index()
+       // public ActionResult Index()
+       // {
+       //     //var dokument = db.Dokument.Include(d => d.FileContent).Include(d => d.WorkProcess);
+       //     var dokument = db.Dokument.Include(d => d.WorkProcess);
+       //     return View(dokument.ToList());
+       //}
+
+
+        //public ActionResult Index(string CodeName)
+        //{
+        //    //FindDokumentModel Find = Find1.Find;
+        //    //var dokument = db.Dokument.Include(d => d.FileContent).Include(d => d.WorkProcess);
+        //    IndexDokumentModel model = new IndexDokumentModel();
+        //    model.CodeName = CodeName;
+
+        //    if (CodeName==null)
+        //        model.CodeName= (string) Session["DokumentCodeName"];
+        //    else
+        //        Session["DokumentCodeName"]=model.CodeName;
+        //    if (!string.IsNullOrEmpty(model.CodeName))
+        //        model.Dokuments = db.Dokument.Where(m => m.CodeName.IndexOf(model.CodeName) >= 0).Include(d => d.WorkProcess);
+        //    else
+        //        model.Dokuments = db.Dokument.Include(d => d.WorkProcess);
+        //    return View(model);
+        //}
+        public ActionResult Find(IndexDokumentModel model)
         {
-            //var dokument = db.Dokument.Include(d => d.FileContent).Include(d => d.WorkProcess);
-            var dokument = db.Dokument.Include(d => d.WorkProcess);
-            return View(dokument.ToList());
+            return RedirectToAction("index");
+
         }
 
+        public ActionResult Index(IndexDokumentModel model)
+        {
+            //FindDokumentModel Find = Find1.Find;
+            //var dokument = db.Dokument.Include(d => d.FileContent).Include(d => d.WorkProcess);
+            //IndexDokumentModel model = new IndexDokumentModel();
+
+            if (model == null)
+            {
+                model = new IndexDokumentModel();
+            }
+
+            if (model.Find == null)
+                model.Find = new FindDokumentModel();
+
+
+            if (string.IsNullOrEmpty(model.Find.Action))
+            {
+                if (Session["DokumentCodeName"] != null)
+                    model.Find = (FindDokumentModel)Session["DokumentCodeName"];
+            }
+            else
+                Session["DokumentCodeName"] = model.Find;
+
+
+            if (!string.IsNullOrEmpty(model.Find.CodeName))
+            {
+                var query = db.Dokument.Where(m => (m.CodeName.Contains(model.Find.CodeName) || m.FileName.Contains(model.Find.CodeName)));
+
+                query = query.Include(d => d.WorkProcess);
+                model.Dokuments = query;
+            }
+            else
+                model.Dokuments = db.Dokument.Include(d => d.WorkProcess);
+
+
+            //if (!string.IsNullOrEmpty(model.Find.CodeName))
+            //    model.Dokuments = db.Dokument.Where(m => m.CodeName.IndexOf(model.Find.CodeName) >= 0).Include(d => d.WorkProcess);
+            //else
+            //    model.Dokuments = db.Dokument.Include(d => d.WorkProcess);
+
+            ViewBag.FindDokumentModel = model.Find;
+            return View(model);
+        }
         // GET: Dokuments/Details/5
         public ActionResult Details(int? id)
         {
@@ -150,7 +217,7 @@ namespace ITechSite.Controllers
                 var fileRepository = new DBFile();
                 fileRepository.Save(uploadData, fileID);
             }
-        }
+        } 
 
         // POST: Dokuments/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
