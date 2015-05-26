@@ -20,19 +20,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Resource">
-      <EntityTypeMapping TypeName="ITechModel.Resource">
-        <MappingFragment StoreEntitySet="Resource">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="LastWriteTime" ColumnName="LastWriteTime" />
-          <ScalarProperty Name="No" ColumnName="No" />
-          <ScalarProperty Name="WorkProcess" ColumnName="WorkProcess" />
-          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Workstation">
       <EntityTypeMapping TypeName="ITechModel.Workstation">
         <MappingFragment StoreEntitySet="Workstation">
@@ -62,14 +49,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="ResourceInformationPlan" TypeName="ITechModel.ResourceInformationPlan" StoreEntitySet="ResourceInformationPlan">
-      <EndProperty Name="Resource">
-        <ScalarProperty Name="Id" ColumnName="Resource_Id" />
-      </EndProperty>
-      <EndProperty Name="InformationPlan">
-        <ScalarProperty Name="Id" ColumnName="InformationPlan_Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <EntitySetMapping Name="Dokument">
       <EntityTypeMapping TypeName="ITechModel.Dokument">
         <MappingFragment StoreEntitySet="Dokument">
@@ -102,5 +81,36 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ResourceType">
+      <EntityTypeMapping TypeName="ITechModel.ResourceType">
+        <MappingFragment StoreEntitySet="ResourceType">
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource">
+      <EntityTypeMapping TypeName="ITechModel.Resource">
+        <MappingFragment StoreEntitySet="Resource">
+          <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="WorkProcess" ColumnName="WorkProcess" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="LastWriteTime" ColumnName="LastWriteTime" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ResourceInformationPlan" TypeName="ITechModel.ResourceInformationPlan" StoreEntitySet="ResourceInformationPlan">
+      <EndProperty Name="Resource">
+        <ScalarProperty Name="Id" ColumnName="Resource_Id" />
+      </EndProperty>
+      <EndProperty Name="InformationPlan">
+        <ScalarProperty Name="Id" ColumnName="InformationPlan_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -12,9 +12,16 @@ namespace ITechSite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Model
+    public partial class ResourceType
     {
-        public int Id { get; set; }
-        public string Car { get; set; }
+        public ResourceType()
+        {
+            this.Resource = new HashSet<Resource>();
+        }
+    
+        public int id { get; set; }
+        public string Type { get; set; }
+    
+        public virtual ICollection<Resource> Resource { get; set; }
     }
 }

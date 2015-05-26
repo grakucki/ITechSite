@@ -19,7 +19,6 @@ namespace ITechSite.Models
         public string Factory { get; set; }
         public string Area { get; set; }
     
-        public virtual Resource Resource1 { get; set; }
         public virtual WorkstationGroup WorkstationGroup1 { get; set; }
     }
 }

@@ -1,47 +1,55 @@
-﻿@model IEnumerable<ITechSite.Models.Dokument>
+﻿@model ITechSite.Models.IndexDokumentModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dokumenty";
+    ITechSite.Models.FindDokumentModel info = ViewBag.FindDokumentModel;
 }
 
 <h2>Index</h2>
 
+@using (Html.BeginForm("Index", "Dokuments", FormMethod.Get))
+{
+    <div>
+        @Html.TextBoxFor(model => model.Find.CodeName)
+        <input type="submit" name="Find.Action" value="find" class="btn btn-default" />
+    </div>
+}
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Nowy dokument", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FileName)
+            Nazwa pliku
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CodeName)
+            Nazwa kodowa
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastWriteTime)
+            Zmodyfikowany
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Enabled)
+            Aktywny
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FileType)
+            Typ pliku
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Opis
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ValidDtmOn)
+            Data aktywności początek
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ValidDtmOff)
+            Data aktywności koniec
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.WorkProcess.Name)
+            Proces roboczy
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Dokuments) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.FileName)
@@ -71,11 +79,9 @@
             @Html.DisplayFor(modelItem => item.WorkProcess.Name)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
             @Html.ActionLink("Download", "Download", new { id = item.Id }) |
             @Html.ActionLink("Show", "Show", new { id = item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
     </tr>
 }

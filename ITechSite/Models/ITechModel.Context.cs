@@ -15,7 +15,7 @@ namespace ITechSite.Models
     
     public partial class ITechEntities : DbContext
     {
-        private ITechEntities()
+        public ITechEntities()
             : base("name=ITechEntities")
         {
         }
@@ -27,11 +27,12 @@ namespace ITechSite.Models
     
         public virtual DbSet<FileContent> FileContent { get; set; }
         public virtual DbSet<Model> Model { get; set; }
-        public virtual DbSet<Resource> Resource { get; set; }
         public virtual DbSet<Workstation> Workstation { get; set; }
         public virtual DbSet<WorkProcess> WorkProcess { get; set; }
         public virtual DbSet<InformationPlan> InformationPlan { get; set; }
         public virtual DbSet<Dokument> Dokument { get; set; }
         public virtual DbSet<WorkstationGroup> WorkstationGroup { get; set; }
+        public virtual DbSet<ResourceType> ResourceType { get; set; }
+        public virtual DbSet<Resource> Resource { get; set; }
     }
 }

@@ -16,8 +16,8 @@ namespace ITechSite.Models
     {
         public InformationPlan()
         {
-            this.Resource = new HashSet<Resource>();
             this.Dokument = new HashSet<Dokument>();
+            this.Resource = new HashSet<Resource>();
         }
     
         public int Id { get; set; }
@@ -26,7 +26,7 @@ namespace ITechSite.Models
         public string WorkProcess { get; set; }
         public bool Enabled { get; set; }
     
-        public virtual ICollection<Resource> Resource { get; set; }
         public virtual ICollection<Dokument> Dokument { get; set; }
+        public virtual ICollection<Resource> Resource { get; set; }
     }
 }
