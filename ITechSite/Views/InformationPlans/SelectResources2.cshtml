@@ -1,0 +1,70 @@
+﻿@*@model IEnumerable<ITechSite.Models.Resource>*@
+@model ITechSite.Models.ResourceListFind
+
+@{
+    ViewBag.Title = "SelectResources2";
+}
+
+<h2>SelectResources2</h2>
+
+
+@Html.Partial("_SelectResources")
+
+<table class="table">
+    <tr>
+        <th>
+        </th>
+        <th>
+            Nazwa
+        </th>
+        <th>
+            Nr
+        </th>
+        <th>
+            Proces roboczy
+        </th>
+        <th>
+            Aktywny
+        </th>
+        <th>
+            Opis
+        </th>
+        <th>
+            Słowa kluczowe
+        </th>
+        <th>
+            Rodzaj
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Resources) {
+    <tr>
+        <td>
+            @Html.ActionLink("Wybierz", "Index", new { IdR = item.Id })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkProcess)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enabled)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Keywords)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResourceType.Type)
+        </td>
+    </tr>
+}
+
+</table>

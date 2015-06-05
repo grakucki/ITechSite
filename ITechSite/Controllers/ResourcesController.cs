@@ -15,10 +15,14 @@ namespace ITechSite.Controllers
         private ITechEntities db = new ITechEntities(0);
 
         // GET: Resources
-        public ActionResult Index()
+        public ActionResult Index(ResourceListFind rlf)
         {
-            var resource = db.Resource;//.Include(r=>r.ResourceType);
-            return View(resource.ToList());
+            //var resource = db.Resource;//.Include(r=>r.ResourceType);
+            if (rlf==null)
+                rlf = new ResourceListFind();
+            rlf.Fill(db);
+            return View(rlf);
+//            return View(resource.ToList());
         }
 
         // GET: Resources/Details/5

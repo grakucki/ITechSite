@@ -1,0 +1,43 @@
+﻿@model ITechSite.Models.InformationPlan
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InformationPlan</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+
+        <dt>
+           @Model.Resource.ResourceType.Type.ToString()
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resource.Name)
+        </dd>
+        <dt>
+            Plik dokumentu
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dokument.CodeName)
+            @Html.DisplayFor(model => model.Dokument.FileName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Order)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Order)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

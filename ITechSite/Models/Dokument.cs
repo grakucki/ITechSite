@@ -16,8 +16,8 @@ namespace ITechSite.Models
     {
         public Dokument()
         {
-            this.InformationPlan = new HashSet<InformationPlan>();
             this.FileContent = new HashSet<FileContent>();
+            this.InformationPlan = new HashSet<InformationPlan>();
         }
     
         public int Id { get; set; }
@@ -30,9 +30,10 @@ namespace ITechSite.Models
         public System.DateTime ValidDtmOn { get; set; }
         public Nullable<System.DateTime> ValidDtmOff { get; set; }
         public Nullable<int> WorkProcess_Id { get; set; }
+        public string Keywords { get; set; }
     
         public virtual WorkProcess WorkProcess { get; set; }
-        public virtual ICollection<InformationPlan> InformationPlan { get; set; }
         public virtual ICollection<FileContent> FileContent { get; set; }
+        public virtual ICollection<InformationPlan> InformationPlan { get; set; }
     }
 }

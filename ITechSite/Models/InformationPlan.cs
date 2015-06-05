@@ -14,19 +14,13 @@ namespace ITechSite.Models
     
     public partial class InformationPlan
     {
-        public InformationPlan()
-        {
-            this.Dokument = new HashSet<Dokument>();
-            this.Resource = new HashSet<Resource>();
-        }
+        public int id { get; set; }
+        public int idR { get; set; }
+        public int IdD { get; set; }
+        public Nullable<int> Order { get; set; }
+        public Nullable<bool> Enabled { get; set; }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public System.DateTime LastWriteTime { get; set; }
-        public string WorkProcess { get; set; }
-        public bool Enabled { get; set; }
-    
-        public virtual ICollection<Dokument> Dokument { get; set; }
-        public virtual ICollection<Resource> Resource { get; set; }
+        public virtual Dokument Dokument { get; set; }
+        public virtual Resource Resource { get; set; }
     }
 }

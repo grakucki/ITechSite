@@ -1,46 +1,42 @@
-﻿@model IEnumerable<ITechSite.Models.Resource>
-
+﻿@*@model IEnumerable<ITechSite.Models.Resource>*@
+@model ITechSite.Models.ResourceListFind
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Lista zasobów";
 }
 
 <h2>View</h2>
-
+@Html.Partial("_SelectResources")
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Utwórz nowy", "Create")
 </p>
 <table class="table">
     <tr>
-        
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+           @Html.DisplayName("Nazwa")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.No)
+            @Html.DisplayName("No")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.WorkProcess)
+            @Html.DisplayName("WorkProcess")
+            @*@Html.DisplayNameFor(model => model.Resources.WorkProcess)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Enabled)
+            @Html.DisplayName("Enabled")
+            @*@Html.DisplayNameFor(model => model.Resources.Enabled)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ResourceType.Type)
+            @Html.DisplayName("Type")
+            @*@Html.DisplayNameFor(model => model.Resources.ResourceType.Type)*@
         </th>
          <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Model.Car)
-        </th>*@
-        @*<th>
-            @Html.DisplayNameFor(model => model.Workstation.WorkstationGroup)
-        </th>*@
-       
+             @Html.DisplayName("Description")
+            @*@Html.DisplayNameFor(model => model.Resources.Description)*@
+        </th>       
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Resources) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -63,9 +59,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.ResourceType.Type)
         </td>
-        <th>
+        <td>
             @Html.DisplayFor(modelItem => item.Description)
-        </th>
+        </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |

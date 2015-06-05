@@ -33,15 +33,10 @@
     <EntitySet Name="Model" EntityType="Self.Model" />
     <EntitySet Name="Workstation" EntityType="Self.Workstation" />
     <EntitySet Name="WorkProcess" EntityType="ITechModel.WorkProcess" />
-    <EntitySet Name="InformationPlan" EntityType="ITechModel.InformationPlan" />
     <EntitySet Name="Dokument" EntityType="ITechModel.Dokument" />
     <AssociationSet Name="FK_Dokument_WorkProcess" Association="ITechModel.FK_Dokument_WorkProcess">
       <End Role="WorkProcess" EntitySet="WorkProcess" />
       <End Role="Dokument" EntitySet="Dokument" />
-    </AssociationSet>
-    <AssociationSet Name="DokumentsInformationPlan" Association="ITechModel.DokumentsInformationPlan">
-      <End Role="Dokument" EntitySet="Dokument" />
-      <End Role="InformationPlan" EntitySet="InformationPlan" />
     </AssociationSet>
     <EntitySet Name="WorkstationGroup" EntityType="ITechModel.WorkstationGroup" />
     <AssociationSet Name="FK_Workstation_WorkstationGroup" Association="ITechModel.FK_Workstation_WorkstationGroup">
@@ -58,9 +53,14 @@
       <End Role="ResourceType" EntitySet="ResourceType" />
       <End Role="Resource" EntitySet="Resource" />
     </AssociationSet>
-    <AssociationSet Name="ResourceInformationPlan" Association="ITechModel.ResourceInformationPlan">
+    <EntitySet Name="InformationPlan" EntityType="ITechModel.InformationPlan" />
+    <AssociationSet Name="FK_InformationPlan_Dokument" Association="ITechModel.FK_InformationPlan_Dokument">
+      <End Role="Dokument" EntitySet="Dokument" />
       <End Role="InformationPlan" EntitySet="InformationPlan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InformationPlan_Resource" Association="ITechModel.FK_InformationPlan_Resource">
       <End Role="Resource" EntitySet="Resource" />
+      <End Role="InformationPlan" EntitySet="InformationPlan" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="WorkProcess">
@@ -70,18 +70,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_Dokument_WorkProcess" FromRole="WorkProcess" ToRole="Dokument" />
-  </EntityType>
-  <EntityType Name="InformationPlan">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="LastWriteTime" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="WorkProcess" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Enabled" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="Dokument" Relationship="ITechModel.DokumentsInformationPlan" FromRole="InformationPlan" ToRole="Dokument" />
-    <NavigationProperty Name="Resource" Relationship="ITechModel.ResourceInformationPlan" FromRole="InformationPlan" ToRole="Resource" />
   </EntityType>
   <EntityType Name="Dokument">
     <Key>
@@ -98,8 +86,9 @@
     <Property Name="ValidDtmOff" Type="DateTime" Precision="3" />
     <Property Name="WorkProcess_Id" Type="Int32" />
     <NavigationProperty Name="WorkProcess" Relationship="ITechModel.FK_Dokument_WorkProcess" FromRole="Dokument" ToRole="WorkProcess" />
-    <NavigationProperty Name="InformationPlan" Relationship="ITechModel.DokumentsInformationPlan" FromRole="Dokument" ToRole="InformationPlan" />
     <NavigationProperty Name="FileContent" Relationship="ITechModel.FK_FileContent_Dokument1" FromRole="Dokument" ToRole="FileContent" />
+    <NavigationProperty Name="InformationPlan" Relationship="ITechModel.FK_InformationPlan_Dokument" FromRole="Dokument" ToRole="InformationPlan" />
+    <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Dokument_WorkProcess">
     <End Type="ITechModel.WorkProcess" Role="WorkProcess" Multiplicity="0..1" />
@@ -112,10 +101,6 @@
         <PropertyRef Name="WorkProcess_Id" />
       </Dependent>
     </ReferentialConstraint>
-  </Association>
-  <Association Name="DokumentsInformationPlan">
-    <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="*" />
-    <End Type="ITechModel.InformationPlan" Role="InformationPlan" Multiplicity="*" />
   </Association>
   <EntityType Name="WorkstationGroup">
     <Key>
@@ -174,9 +159,9 @@
     <Property Name="WorkProcess" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="Enabled" Type="Boolean" Nullable="false" DefaultValue="True" />
     <NavigationProperty Name="ResourceType" Relationship="ITechModel.FK_Resource_Type" FromRole="Resource" ToRole="ResourceType" />
-    <NavigationProperty Name="InformationPlan" Relationship="ITechModel.ResourceInformationPlan" FromRole="Resource" ToRole="InformationPlan" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="InformationPlan" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="Resource" ToRole="InformationPlan" />
   </EntityType>
   <Association Name="FK_Resource_Type">
     <End Type="ITechModel.ResourceType" Role="ResourceType" Multiplicity="1" />
@@ -190,8 +175,40 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ResourceInformationPlan">
+  <EntityType Name="InformationPlan">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idR" Type="Int32" Nullable="false" />
+    <Property Name="IdD" Type="Int32" Nullable="false" />
+    <Property Name="Order" Type="Int32" />
+    <Property Name="Enabled" Type="Boolean" />
+    <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_InformationPlan_Dokument" FromRole="InformationPlan" ToRole="Dokument" />
+    <NavigationProperty Name="Resource" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="InformationPlan" ToRole="Resource" />
+  </EntityType>
+  <Association Name="FK_InformationPlan_Dokument">
+    <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="1" />
     <End Type="ITechModel.InformationPlan" Role="InformationPlan" Multiplicity="*" />
-    <End Type="ITechModel.Resource" Role="Resource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dokument">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformationPlan">
+        <PropertyRef Name="IdD" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InformationPlan_Resource">
+    <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
+    <End Type="ITechModel.InformationPlan" Role="InformationPlan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformationPlan">
+        <PropertyRef Name="idR" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>
