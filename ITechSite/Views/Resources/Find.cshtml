@@ -1,0 +1,74 @@
+﻿@*@model IEnumerable<ITechSite.Models.Resource>*@
+@model ITechSite.Models.ResourceListFind
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Find";
+}
+
+<h2>Wybierz stanowisko lub model</h2>
+
+@Html.Partial("_SelectResources")
+
+<div>
+    Zanleziono @Model.Resources.TotalItemCount pozycji. Wyswietlonio stronę @(Model.Resources.PageCount < Model.Resources.PageNumber ? 0 : Model.Resources.PageNumber) z @Model.Resources.PageCount
+    @Html.PagedListPager(Model.Resources, page => Url.Action("Find", new { page, Find_ResourceType = @Model.Find_ResourceType, Find_WorkProcess = @Model.Find_WorkProcess, Find_Word = @Model.Find_Word, ReturnUrl = @Model.ReturnUrl }))
+</div>
+<table class="table">
+    <tr>
+        <th>
+        </th>
+        <th>
+            Nazwa
+        </th>
+        <th>
+            Nr
+        </th>
+        <th>
+            Proces roboczy
+        </th>
+        <th>
+            Aktywny
+        </th>
+        <th>
+            Opis
+        </th>
+        <th>
+            Słowa kluczowe
+        </th>
+        <th>
+            Rodzaj
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Resources) {
+    <tr>
+        <td>
+            @Html.ActionLink("Wybierz", "Find", new { IdR = item.Id, ReturnUrl = @Model.ReturnUrl })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkProcess)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enabled)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Keywords)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResourceType.Type)
+        </td>
+    </tr>
+}
+
+</table>

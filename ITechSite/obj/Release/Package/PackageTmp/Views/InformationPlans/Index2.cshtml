@@ -1,15 +1,21 @@
 ﻿@*@model IEnumerable<ITechSite.Models.Resource>*@
 @model ITechSite.Models.ResourceListFind
+@using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "SelectResources2";
+    ViewBag.Title = "Index2";
 }
 
-<h2>SelectResources2</h2>
+<h2>Wybierz stanowisko lub model:</h2>
 
 
 @Html.Partial("_SelectResources")
 
+<div>
+    
+    Zanleziono @Model.Resources.TotalItemCount pozycji. Wyswietlonio stronę @(Model.Resources.PageCount < Model.Resources.PageNumber ? 0 : Model.Resources.PageNumber) z @Model.Resources.PageCount
+    @Html.PagedListPager(Model.Resources, page => Url.Action("Index2", new { page, Find_ResourceType = @Model.Find_ResourceType }))
+</div>
 <table class="table">
     <tr>
         <th>

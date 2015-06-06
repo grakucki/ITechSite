@@ -7,49 +7,38 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ITechSite.Models;
+using System.Web.Routing;
 
 namespace ITechSite.Controllers
 {
+        [Authorize]
     public class InformationPlansController : Controller
     {
         private ITechEntities db = new ITechEntities();
+
+
+//        public static string AbsoluteAction(this UrlHelper url, string actionName, string controllerName, object routeValues = null)
+        public string MyAction()
+        {
+
+            return HttpUtility.UrlEncode(Request.Url.AbsoluteUri.ToString());
+        }
 
         // GET: InformationPlans
         public ActionResult Index(int? IdR)
         {
             if (IdR == null || IdR==0)
             {
-                return RedirectToAction("SelectResources2");
+                var rf = new ResourceListFind();
+                rf.ReturnUrl = MyAction();
+                    
+                //rf.ReturnUrl = "./InformationPlans/Index";
+                TempData["ResourceListFind"] = rf;
+                return RedirectToAction("Find", "Resources");
             }
 
             var informationPlan = db.InformationPlan.Where(m => m.idR == IdR).OrderBy(m=>m.Order).Include(i => i.Dokument).Include(i => i.Resource);
             return View(informationPlan.ToList());
-        }
-
-//        public ActionResult SelectResources([Bind(Include = "IdR")] int? IdR)
-
-        public ActionResult SelectResources(int? IdR)
-        {
-            if (IdR == null || IdR == 0)
-            {
-                ViewBag.IdR = new SelectList(db.Resource.Where(i => i.Enabled).OrderBy(i => i.Name), "Id", "Name");
-                return View();
-            }
-            return RedirectToAction("Index", new { IdR = IdR });
-        }
-
-        public ActionResult SelectResources2(int? IdR, ResourceListFind rf)
-        {
-            if (IdR == null || IdR == 0)
-            {
-                if (rf == null)
-                    rf = new ResourceListFind();
-                ViewBag.WorkProcess = new SelectList(db.WorkProcess, "Name", "Name");
-                rf.Fill(db);
-                //rf.Resources = db.Resource.Where(i => i.Enabled).Where(i=>i.Name.IndexOf(rf.Find)>=0 | i.Description.IndexOf(rf.Find)>=0 | rf.Find == null).OrderBy(i => i.Name).ToList();
-                return View(rf);
-            }
-            return RedirectToAction("Index", new { IdR = IdR });
         }
 
 

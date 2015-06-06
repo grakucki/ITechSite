@@ -43,6 +43,12 @@
     <Reference Include="Microsoft.Web.Helpers">
       <HintPath>..\packages\Microsoft.AspNet.WebHelpers.3.2.3\lib\net45\Microsoft.Web.Helpers.dll</HintPath>
     </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -241,6 +247,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -264,6 +271,7 @@
       <DependentUpon>ITechModel.edmx</DependentUpon>
       <LastGenOutput>ITechModel.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\insofter.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -327,14 +335,12 @@
     <Content Include="Views\InformationPlans\Details.cshtml" />
     <Content Include="Views\InformationPlans\Edit.cshtml" />
     <Content Include="Views\InformationPlans\Index.cshtml" />
-    <Content Include="Views\InformationPlans\SelectResources.cshtml" />
-    <Content Include="Views\InformationPlans\SelectResources2.cshtml" />
-    <Content Include="Views\Resources\_SelectResources.cshtml" />
+    <Content Include="Views\InformationPlans\Index2.cshtml" />
     <Content Include="Views\Shared\_SelectResources.cshtml" />
+    <Content Include="Views\Resources\Find.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

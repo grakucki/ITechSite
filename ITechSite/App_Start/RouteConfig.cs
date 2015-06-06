@@ -17,7 +17,7 @@ namespace ITechSite
             routes.MapRoute(
                 name: "InformationPlains",
                 url: "InformationPlans/{IdR}/{action}/{id}",
-                defaults: new { controller = "InformationPlans", action = "Index", IdR= 0, Id = UrlParameter.Optional }
+                defaults: new { controller = "InformationPlans", action = "Index", IdR= "0", Id = UrlParameter.Optional }
             );
 
             

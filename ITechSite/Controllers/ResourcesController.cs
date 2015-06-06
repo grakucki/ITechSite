@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ITechSite.Models;
+using PagedList;
 
 namespace ITechSite.Controllers
 {
+        [Authorize]
     public class ResourcesController : Controller
     {
         private ITechEntities db = new ITechEntities(0);
@@ -23,6 +25,40 @@ namespace ITechSite.Controllers
             rlf.Fill(db);
             return View(rlf);
 //            return View(resource.ToList());
+        }
+
+        public ActionResult Find(int? IdR, ResourceListFind rf)
+        {
+            var r = (ResourceListFind)TempData["ResourceListFind"];
+
+            if (r != null)
+            {
+                rf = (ResourceListFind)TempData["ResourceListFind"];
+            }
+
+            if (IdR == null || IdR == 0)
+            {
+                rf.Fill(db);
+                return View(rf);
+            }
+
+
+//            return RedirectToAction("Index", new { IdR = IdR });
+            
+            string decodedUrl = "";
+            if (!string.IsNullOrEmpty(rf.ReturnUrl))
+            {
+                decodedUrl = Server.UrlDecode(rf.ReturnUrl);
+                return Redirect(decodedUrl + "/" + IdR.ToString());
+            }
+
+            if (Url.IsLocalUrl(decodedUrl))
+            {
+                return Redirect(decodedUrl + "?" + "IdR=" + IdR.ToString());
+            }
+
+            return RedirectToAction("Index", "Home", new { IdR=IdR});
+
         }
 
         // GET: Resources/Details/5

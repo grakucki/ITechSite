@@ -12,6 +12,7 @@ using System.IO;
 
 namespace ITechSite.Controllers
 {
+    [Authorize]
     public class DokumentsController : Controller
     {
         private ITechEntities db = new ITechEntities(0);

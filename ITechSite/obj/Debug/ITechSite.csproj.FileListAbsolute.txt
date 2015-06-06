@@ -112,4 +112,8 @@ D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.Twitter.x
 D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\projekty\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.dll
 D:\projekty\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.pdb
+D:\projekty\automotive\ITechSite\ITechSite\bin\PagedList.dll
+D:\projekty\automotive\ITechSite\ITechSite\bin\PagedList.Mvc.dll
+D:\projekty\automotive\ITechSite\ITechSite\bin\PagedList.xml
+D:\projekty\automotive\ITechSite\ITechSite\bin\PagedList.Mvc.xml
 D:\projekty\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.csprojResolveAssemblyReference.cache
