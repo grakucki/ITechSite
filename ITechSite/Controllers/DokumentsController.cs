@@ -211,12 +211,17 @@ namespace ITechSite.Controllers
                 }
                 // zapisujemy plik
                 // zapisz plik
-                FileData uploadData = new FileData();
-                uploadData.Name = dokument.CodeName;
-                uploadData.File = dokument.File;
 
-                var fileRepository = new DBFile();
-                fileRepository.Save(uploadData, fileID);
+                if (dokument.File.Length>0)
+                { 
+                    // zapisujemy dane pliku tylko gdy został podany
+                    FileData uploadData = new FileData();
+                    uploadData.Name = dokument.CodeName;
+                    uploadData.File = dokument.File;
+
+                    var fileRepository = new DBFile();
+                    fileRepository.Save(uploadData, fileID);
+                }
             }
         } 
 

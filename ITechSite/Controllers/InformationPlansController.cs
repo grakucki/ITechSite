@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using ITechSite.Models;
 using System.Web.Routing;
+using System.IO;
+using System.Xml;
+using System.Runtime.Serialization;
 
 namespace ITechSite.Controllers
 {
@@ -24,6 +27,47 @@ namespace ITechSite.Controllers
             return HttpUtility.UrlEncode(Request.Url.AbsoluteUri.ToString());
         }
 
+        public XmlResult GetXml2(int? IdR)
+        {
+            //var informationPlan = db.InformationPlan.Where(m => m.idR == IdR).OrderBy(m => m.Order).Include(i => i.Dokument).Include(i => i.Resource).ToList();
+
+            using (var d = new ITechEntities() )
+            { 
+                var doc = d.Resource.ToList();
+
+                MemoryStream ms = new MemoryStream();
+                using (XmlWriter writer = XmlWriter.Create(ms))
+                {
+                    //System.Runtime.Serialization.
+                    DataContractSerializer serializer = new DataContractSerializer(d.GetType());
+                    serializer.WriteObject(writer, d);
+                }
+                var sr = new StreamReader(ms);
+                var myStr = sr.ReadToEnd();
+
+                var ret = new XmlResult(d);
+                return ret;
+            }
+            
+
+        }
+        
+        public ActionResult GetXml(int? IdR)
+        {
+            if (IdR == null || IdR == 0)
+            {
+                var rf = new ResourceListFind();
+                rf.ReturnUrl = MyAction();
+                TempData["ResourceListFind"] = rf;
+                return RedirectToAction("Find", "Resources");
+            }
+
+            //var informationPlan = db.InformationPlan.Where(m => m.idR == IdR).OrderBy(m => m.Order).Include(i => i.Dokument).Include(i => i.Resource);
+
+            return GetXml2(IdR);
+        }
+
+
         // GET: InformationPlans
         public ActionResult Index(int? IdR)
         {
@@ -37,6 +81,7 @@ namespace ITechSite.Controllers
                 return RedirectToAction("Find", "Resources");
             }
 
+            return GetXml(IdR);
             var informationPlan = db.InformationPlan.Where(m => m.idR == IdR).OrderBy(m=>m.Order).Include(i => i.Dokument).Include(i => i.Resource);
             return View(informationPlan.ToList());
         }
