@@ -75,7 +75,7 @@
             this.buttonModel.Name = "buttonModel";
             this.buttonModel.Size = new System.Drawing.Size(192, 157);
             this.buttonModel.TabIndex = 1;
-            this.buttonModel.Text = "Instrukcje modelów produkcyjnych";
+            this.buttonModel.Text = "Instrukcje modeli produkcyjnych";
             this.buttonModel.UseVisualStyleBackColor = true;
             this.buttonModel.Click += new System.EventHandler(this.button2_Click);
             // 
