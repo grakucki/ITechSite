@@ -19,6 +19,7 @@ namespace ItechGeneratorInstrukcji
                 typeNamespace = dictionary.Add("http://schemas.datacontract.org/2004/07/ItechGeneratorInstrukcji");
                 return true; // indicating that this resolver knows how to handle "Dog".
                 //.
+
             }
             else if (dataContractType.BaseType == typeof(InformationPlan))
             {
