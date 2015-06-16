@@ -22,7 +22,7 @@ public class OpenSqlFileStream : Stream, IDisposable
         Transaction = transaction;
     }
 
-    public void Dispose()
+    public new void Dispose()
     {
         Transaction.Dispose();
         Connection.Dispose();
