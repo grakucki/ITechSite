@@ -27,8 +27,8 @@ namespace InstrukcjeProdukcyjne
             set
             {
                 _FileName = value;
-                label1.Text = _FileName;
-                //this.axAcroPDF1.LoadFile(_FileName);
+                //label1.Text = _FileName;
+                this.axAcroPDF1.LoadFile(_FileName);
             }
         }
         private void PdfViewerControl_Load(object sender, EventArgs e)
@@ -44,7 +44,7 @@ namespace InstrukcjeProdukcyjne
 
         public void Start(string fileName)
         {
-            _FileName = fileName;
+            FileName = fileName;
         }
 
         public void Pause()

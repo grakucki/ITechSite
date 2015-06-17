@@ -28,34 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PdfViewerControl));
+            this.axAcroPDF1 = new AxAcroPDFLib.AxAcroPDF();
+            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // axAcroPDF1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 17);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(23, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Pdf";
+            this.axAcroPDF1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.axAcroPDF1.Enabled = true;
+            this.axAcroPDF1.Location = new System.Drawing.Point(0, 0);
+            this.axAcroPDF1.Name = "axAcroPDF1";
+            this.axAcroPDF1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axAcroPDF1.OcxState")));
+            this.axAcroPDF1.Size = new System.Drawing.Size(324, 257);
+            this.axAcroPDF1.TabIndex = 1;
             // 
             // PdfViewerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.axAcroPDF1);
             this.Name = "PdfViewerControl";
             this.Size = new System.Drawing.Size(324, 257);
             this.Load += new System.EventHandler(this.PdfViewerControl_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private AxAcroPDFLib.AxAcroPDF axAcroPDF1;
 
     }
 }

@@ -170,6 +170,7 @@
             // 
             this.stanowiskaComboBox.DataSource = this.WorkStationBindingSource;
             this.stanowiskaComboBox.DisplayMember = "Name";
+            this.stanowiskaComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.stanowiskaComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.stanowiskaComboBox.FormattingEnabled = true;
             this.stanowiskaComboBox.Location = new System.Drawing.Point(107, 13);
@@ -207,6 +208,7 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(489, 12);
@@ -230,6 +232,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.elementyComboBox.DataSource = this.ModelBindingSource;
             this.elementyComboBox.DisplayMember = "Name";
+            this.elementyComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.elementyComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.elementyComboBox.FormattingEnabled = true;
             this.elementyComboBox.Location = new System.Drawing.Point(837, 9);
