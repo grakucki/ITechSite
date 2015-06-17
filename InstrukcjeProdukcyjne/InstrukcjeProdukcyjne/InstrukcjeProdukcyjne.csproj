@@ -71,6 +71,12 @@
       <DependentUpon>MediaViewerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="MyFileInfo.cs" />
+    <Compile Include="PdfViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PdfViewerControl.Designer.cs">
+      <DependentUpon>PdfViewerControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlanInformacyjny.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +85,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MediaViewerControl.resx">
       <DependentUpon>MediaViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PdfViewerControl.resx">
+      <DependentUpon>PdfViewerControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
