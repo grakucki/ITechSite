@@ -23,41 +23,44 @@ namespace InstrukcjeProdukcyjne
 
         }
 
-        private void ChangeDokument(string fileName)
+        public void ShowDokument(string fileName)
         {
-            this.Controls.Clear();
+            if (this.Controls.Count > 0)
+            {
+                IMediaViewer mv = (IMediaViewer)this.Controls[0];
+                mv.Stop();
+                this.Controls.Clear();
+            }
+
+
+
+            IMediaViewer newmv = null;
 
             string filetype = Path.GetExtension(fileName).ToLower();
-            if (".pdf".IndexOf(filetype) >= 0)
+            if (PdfViewerControl.MediaSuported(filetype))
             {
-                var uc = new PdfViewerControl();
-                uc.FileName = fileName;
-                uc.Dock = DockStyle.Fill;
-                this.Controls.Add(uc);
-                return;
+                newmv = new PdfViewerControl();
             }
+            else
+                if (VideoViewerControl.MediaSuported(filetype))
+                {
+                    newmv = new VideoViewerControl();
+                }
+                else
+                    if (PictureViewerControl.MediaSuported(filetype))
+                    {
+                        newmv = new PictureViewerControl();
+                    }
 
-            if (".mp4.avi".IndexOf(filetype) >= 0)
-            {
-                var uc = new VideoViewerControl();
-                uc.FileName = fileName;
-                uc.Dock = DockStyle.Fill;
-                this.Controls.Add(uc);
-                return;
-            }
+            if (newmv==null)
+                throw new Exception("Pliki " + Path.GetExtension(fileName) + " nie są obsługiwane");
 
-            if (".jpg.avi".IndexOf(filetype) >= 0)
-            {
-                var uc = new PictureBox();
-                uc.Image = Image.FromFile(fileName);
-                uc.Dock = DockStyle.Fill;
-                uc.SizeMode = PictureBoxSizeMode.Zoom;
-                this.Controls.Add(uc);
-                return;
-            }
 
-            throw new Exception("Pliki " + Path.GetExtension(fileName) + " nie są obsługiwane");
+            Control c = (Control)newmv;
+            c.Dock = DockStyle.Fill;
+            this.Controls.Add(c);
 
+            newmv.Start(fileName);
         }
 
     }

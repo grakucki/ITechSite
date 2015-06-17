@@ -64,6 +64,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="IMediaViewer.cs" />
     <Compile Include="MediaViewerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -76,6 +77,12 @@
     </Compile>
     <Compile Include="PdfViewerControl.Designer.cs">
       <DependentUpon>PdfViewerControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PictureViewerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PictureViewerControl.Designer.cs">
+      <DependentUpon>PictureViewerControl.cs</DependentUpon>
     </Compile>
     <Compile Include="PlanInformacyjny.cs" />
     <Compile Include="Program.cs" />
@@ -94,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PdfViewerControl.resx">
       <DependentUpon>PdfViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PictureViewerControl.resx">
+      <DependentUpon>PictureViewerControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

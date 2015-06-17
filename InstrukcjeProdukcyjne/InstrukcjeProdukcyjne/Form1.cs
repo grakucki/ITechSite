@@ -155,22 +155,38 @@ namespace InstrukcjeProdukcyjne
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            var senderList = (ListView)sender;
-            var clickedItem = senderList.HitTest(e.Location).Item;
-            if (clickedItem != null)
+            try
             {
-                var mfi = (MyFileInfo)clickedItem.Tag;
-                if (mfi != null)
+                var senderList = (ListView)sender;
+                var clickedItem = senderList.HitTest(e.Location).Item;
+                if (clickedItem != null)
                 {
-                    if (File.Exists(mfi.FullFileName))
-                        Process.Start(mfi.FullFileName);
-                    else
-                        MessageBox.Show("Nie odnaleziono pliku " + mfi.FileName);
-                }
-                //do coś 
-            }        
-            //string file listView1.se;
-            //Process.Start(OpisyPath);
+                    var mfi = (MyFileInfo)clickedItem.Tag;
+                    if (mfi != null)
+                    {
+                        if (File.Exists(mfi.FullFileName))
+                        {
+                            mediaViewerControl1.ShowDokument(mfi.FullFileName);
+                            KomunikatLabel.Text = mfi.FullFileName;
+                            //Process.Start(mfi.FullFileName);
+                        }
+                        
+                        else
+                            MessageBox.Show("Nie odnaleziono pliku." + mfi.FileName);
+                    }
+                    //do coś 
+                }        
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
 

@@ -10,41 +10,30 @@ using System.Windows.Forms;
 
 namespace InstrukcjeProdukcyjne
 {
-    public partial class PdfViewerControl : UserControl, IMediaViewer
+    public partial class PictureViewerControl : UserControl, IMediaViewer
     {
-        public PdfViewerControl()
+        public PictureViewerControl()
         {
             InitializeComponent();
         }
 
-        private string _FileName = "";
-        public string FileName
-        {
-            get
-            {
-                return _FileName;
-            }
-            set
-            {
-                _FileName = value;
-                label1.Text = _FileName;
-                //this.axAcroPDF1.LoadFile(_FileName);
-            }
-        }
-        private void PdfViewerControl_Load(object sender, EventArgs e)
+        private void PictureViewerControl_Load(object sender, EventArgs e)
         {
 
         }
+
 
         public static bool MediaSuported(string filetype)
         {
-            string SuportedEx = ".pdf";
+            string SuportedEx = ".jpg.bmp";
             return (SuportedEx.IndexOf(filetype) >= 0);
         }
 
+
         public void Start(string fileName)
         {
-            _FileName = fileName;
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            this.pictureBox1.Image = Image.FromFile(fileName);
         }
 
         public void Pause()
@@ -55,6 +44,11 @@ namespace InstrukcjeProdukcyjne
         public void Stop()
         {
             return;
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

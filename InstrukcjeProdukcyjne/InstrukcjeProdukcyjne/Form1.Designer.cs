@@ -49,7 +49,8 @@
             this.ModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
+            this.KomunikatLabel = new System.Windows.Forms.Label();
+            this.mediaViewerControl1 = new InstrukcjeProdukcyjne.MediaViewerControl();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WorkStationBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -60,7 +61,7 @@
             // buttonWorkstation
             // 
             this.buttonWorkstation.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonWorkstation.Location = new System.Drawing.Point(1, 98);
+            this.buttonWorkstation.Location = new System.Drawing.Point(1, 63);
             this.buttonWorkstation.Name = "buttonWorkstation";
             this.buttonWorkstation.Size = new System.Drawing.Size(193, 169);
             this.buttonWorkstation.TabIndex = 0;
@@ -71,9 +72,9 @@
             // buttonModel
             // 
             this.buttonModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonModel.Location = new System.Drawing.Point(1, 273);
+            this.buttonModel.Location = new System.Drawing.Point(200, 64);
             this.buttonModel.Name = "buttonModel";
-            this.buttonModel.Size = new System.Drawing.Size(192, 157);
+            this.buttonModel.Size = new System.Drawing.Size(192, 168);
             this.buttonModel.TabIndex = 1;
             this.buttonModel.Text = "Instrukcje modeli produkcyjnych";
             this.buttonModel.UseVisualStyleBackColor = true;
@@ -85,13 +86,14 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(200, 98);
+            this.listView1.Location = new System.Drawing.Point(1, 238);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(379, 552);
+            this.listView1.Size = new System.Drawing.Size(391, 412);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Tile;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
@@ -172,7 +174,7 @@
             this.stanowiskaComboBox.FormattingEnabled = true;
             this.stanowiskaComboBox.Location = new System.Drawing.Point(107, 13);
             this.stanowiskaComboBox.Name = "stanowiskaComboBox";
-            this.stanowiskaComboBox.Size = new System.Drawing.Size(344, 32);
+            this.stanowiskaComboBox.Size = new System.Drawing.Size(266, 32);
             this.stanowiskaComboBox.TabIndex = 4;
             // 
             // WorkStationBindingSource
@@ -190,14 +192,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1433, 92);
+            this.panel1.Size = new System.Drawing.Size(1433, 57);
             this.panel1.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(718, 16);
+            this.label4.Location = new System.Drawing.Point(380, 15);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(103, 24);
             this.label4.TabIndex = 9;
@@ -207,16 +209,16 @@
             // 
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(827, 12);
+            this.comboBox1.Location = new System.Drawing.Point(489, 12);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(374, 32);
+            this.comboBox1.Size = new System.Drawing.Size(273, 32);
             this.comboBox1.TabIndex = 8;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(43, 52);
+            this.label2.Location = new System.Drawing.Point(768, 12);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(63, 24);
             this.label2.TabIndex = 7;
@@ -224,13 +226,15 @@
             // 
             // elementyComboBox
             // 
+            this.elementyComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.elementyComboBox.DataSource = this.ModelBindingSource;
             this.elementyComboBox.DisplayMember = "Name";
             this.elementyComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.elementyComboBox.FormattingEnabled = true;
-            this.elementyComboBox.Location = new System.Drawing.Point(107, 51);
+            this.elementyComboBox.Location = new System.Drawing.Point(837, 9);
             this.elementyComboBox.Name = "elementyComboBox";
-            this.elementyComboBox.Size = new System.Drawing.Size(1094, 32);
+            this.elementyComboBox.Size = new System.Drawing.Size(584, 32);
             this.elementyComboBox.TabIndex = 6;
             // 
             // ModelBindingSource
@@ -250,28 +254,40 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.KomunikatLabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 656);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1433, 33);
             this.panel2.TabIndex = 6;
             // 
-            // label3
+            // KomunikatLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(4, 4);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(195, 20);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Komunikat stanowisko ......";
+            this.KomunikatLabel.AutoSize = true;
+            this.KomunikatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.KomunikatLabel.Location = new System.Drawing.Point(4, 4);
+            this.KomunikatLabel.Name = "KomunikatLabel";
+            this.KomunikatLabel.Size = new System.Drawing.Size(195, 20);
+            this.KomunikatLabel.TabIndex = 0;
+            this.KomunikatLabel.Text = "Komunikat stanowisko ......";
+            // 
+            // mediaViewerControl1
+            // 
+            this.mediaViewerControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mediaViewerControl1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.mediaViewerControl1.Location = new System.Drawing.Point(411, 64);
+            this.mediaViewerControl1.Name = "mediaViewerControl1";
+            this.mediaViewerControl1.Size = new System.Drawing.Size(1010, 586);
+            this.mediaViewerControl1.TabIndex = 7;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1433, 713);
+            this.Controls.Add(this.mediaViewerControl1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
@@ -311,12 +327,13 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label KomunikatLabel;
         private System.Windows.Forms.BindingSource ModelBindingSource;
         private System.Windows.Forms.BindingSource WorkStationBindingSource;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+        private MediaViewerControl mediaViewerControl1;
     }
 }
 
