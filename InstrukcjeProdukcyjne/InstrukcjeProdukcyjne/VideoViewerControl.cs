@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace InstrukcjeProdukcyjne
 {
-    public partial class PdfViewerControl : UserControl
+    public partial class VideoViewerControl : UserControl
     {
-        public PdfViewerControl()
+        public VideoViewerControl()
         {
             InitializeComponent();
         }
@@ -27,11 +27,11 @@ namespace InstrukcjeProdukcyjne
             set
             {
                 _FileName = value;
-                label1.Text = _FileName;
-                //this.axAcroPDF1.LoadFile(_FileName);
+                
             }
         }
-        private void PdfViewerControl_Load(object sender, EventArgs e)
+
+        private void VideoViewerControl_Load(object sender, EventArgs e)
         {
 
         }
