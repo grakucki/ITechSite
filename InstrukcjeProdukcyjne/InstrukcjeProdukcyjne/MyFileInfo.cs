@@ -29,6 +29,7 @@ namespace InstrukcjeProdukcyjne
                 string ex = Path.GetExtension(FullFileName).ToLower();
 
                 return Math.Max(0, Array.IndexOf(extab, ex));
+                //
             }
         }
     }
