@@ -42,6 +42,7 @@
             this.axAcroPDF1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axAcroPDF1.OcxState")));
             this.axAcroPDF1.Size = new System.Drawing.Size(324, 257);
             this.axAcroPDF1.TabIndex = 1;
+            this.axAcroPDF1.OnError += new System.EventHandler(this.axAcroPDF1_OnError);
             // 
             // PdfViewerControl
             // 

@@ -28,7 +28,7 @@ namespace InstrukcjeProdukcyjne
             {
                 _FileName = value;
                 //label1.Text = _FileName;
-                this.axAcroPDF1.LoadFile(_FileName);
+                var b =this.axAcroPDF1.LoadFile(_FileName);
             }
         }
         private void PdfViewerControl_Load(object sender, EventArgs e)
@@ -45,6 +45,9 @@ namespace InstrukcjeProdukcyjne
         public void Start(string fileName)
         {
             FileName = fileName;
+            this.Show();            
+            this.axAcroPDF1.Focus();
+            //this.axAcroPDF1.setPageMode("thumbs");
         }
 
         public void Pause()
@@ -55,6 +58,11 @@ namespace InstrukcjeProdukcyjne
         public void Stop()
         {
             return;
+        }
+
+        private void axAcroPDF1_OnError(object sender, EventArgs e)
+        {
+            MessageBox.Show("PdfError");
         }
     }
 }
