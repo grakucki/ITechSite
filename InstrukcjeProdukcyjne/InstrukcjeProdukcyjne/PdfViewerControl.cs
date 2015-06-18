@@ -45,9 +45,10 @@ namespace InstrukcjeProdukcyjne
         public void Start(string fileName)
         {
             FileName = fileName;
-            this.Show();            
             this.axAcroPDF1.Focus();
-            //this.axAcroPDF1.setPageMode("thumbs");
+            this.axAcroPDF1.setShowScrollbars(true);
+            this.axAcroPDF1.setShowToolbar(false);
+            this.axAcroPDF1.setPageMode("thumbs");
         }
 
         public void Pause()
@@ -62,7 +63,7 @@ namespace InstrukcjeProdukcyjne
 
         private void axAcroPDF1_OnError(object sender, EventArgs e)
         {
-            MessageBox.Show("PdfError");
+            MessageBox.Show("Pdf Error");
         }
     }
 }

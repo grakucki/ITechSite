@@ -29,16 +29,64 @@ namespace InstrukcjeProdukcyjne
 
         ITechInstrukcjeModel.ITechEntities db = new ITechInstrukcjeModel.ITechEntities();
 
+        private SitechUser LoginUser = null;
+
         private enum FolderType
 	    {
 	         Stanowsika,
             Elementy
 	    }
 
+
+        private void GoFullscreen(bool fullscreen)
+        {
+            if (fullscreen)
+            {
+                this.WindowState = FormWindowState.Normal;
+                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+                this.Bounds = Screen.PrimaryScreen.Bounds;
+            }
+            else
+            {
+                this.WindowState = FormWindowState.Maximized;
+                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+            }
+        }
+
+        private bool DoLogin(SitechUser user)
+        {
+            LoginUser = user;
+            return true;
+        }
+
+        private DialogResult ShowLoginDlg(String message, bool allowCancel)
+        {
+            LoginForm login = new LoginForm();
+            login.Message=message;
+
+            while (true)
+            {
+                var ret = login.ShowDialog();
+                if (allowCancel)
+                {
+                    if (ret == System.Windows.Forms.DialogResult.Cancel)
+                        return ret;
+                }
+                if (ret== System.Windows.Forms.DialogResult.OK)
+                {
+                    if (DoLogin(login.User))
+                        return ret;
+                }
+            }
+
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             try
             {
+                GoFullscreen(true);
+
                 db.WorkDir = Settings.Default.WorkDir;
                 toolStripStatusLabel1.Text = Path.GetFullPath(db.WorkDir);
                 db.ImportResource();
@@ -46,6 +94,11 @@ namespace InstrukcjeProdukcyjne
                 ZaładujStanowiska();
                 ZaładujElementy();
                 OnResourceChange(0);
+
+                if (ShowLoginDlg("",true)==System.Windows.Forms.DialogResult.Cancel)
+                    this.Close();
+
+                textBoxUser.Text = string.Format("{0} ({1})", LoginUser.UserName, LoginUser.NrKarty);
 
             }
             catch (Exception ex)
@@ -187,6 +240,39 @@ namespace InstrukcjeProdukcyjne
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void toolStripStatusLabel4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Control c = (Control)sender;
+            contextMenuStrip1.Show(c, 0, c.Size.Height);
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            ShowLoginDlg("Użyj kart aby odblokować", false);
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            // ustawienia
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            // zakończ
+            this.Close();
+        }
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            //if (this.WindowState == FormWindowState.Normal)
+            //    this.WindowState = FormWindowState.Maximized;
         }
 
 
