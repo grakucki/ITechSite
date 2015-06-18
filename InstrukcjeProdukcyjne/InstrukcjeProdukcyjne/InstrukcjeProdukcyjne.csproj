@@ -105,6 +105,7 @@
     <Content Include="image\pdf.bmp" />
     <Content Include="image\Image1.bmp" />
     <Content Include="image\mp4.bmp" />
+    <Content Include="readme.txt" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
