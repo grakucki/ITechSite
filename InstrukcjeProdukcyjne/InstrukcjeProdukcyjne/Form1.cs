@@ -101,7 +101,7 @@ namespace InstrukcjeProdukcyjne
 
                 textBoxUser.Text = string.Format("{0} ({1})", LoginUser.UserName, LoginUser.NrKarty);
 
-                StartupApp.GetRole();
+                
                 StartupApp.CreateWorkDirektory(@"C:\ItechTest");
             }
             catch (Exception ex)
