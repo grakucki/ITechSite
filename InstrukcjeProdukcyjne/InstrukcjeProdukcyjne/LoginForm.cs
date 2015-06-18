@@ -24,9 +24,12 @@ namespace InstrukcjeProdukcyjne
         {
             SetError(textBoxUser, "");
             SetError(textBoxCard, "");
-            textBoxUser.Focus();
+
+            
             if (!string.IsNullOrEmpty(Message))
                 labelMessage.Text = Message;
+
+            textBoxUser.Focus();
         }
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)

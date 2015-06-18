@@ -85,6 +85,7 @@ namespace InstrukcjeProdukcyjne
         {
             try
             {
+
                 GoFullscreen(true);
 
                 db.WorkDir = Settings.Default.WorkDir;
@@ -100,6 +101,8 @@ namespace InstrukcjeProdukcyjne
 
                 textBoxUser.Text = string.Format("{0} ({1})", LoginUser.UserName, LoginUser.NrKarty);
 
+                StartupApp.GetRole();
+                StartupApp.CreateWorkDirektory(@"C:\ItechTest");
             }
             catch (Exception ex)
             {
@@ -260,6 +263,15 @@ namespace InstrukcjeProdukcyjne
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var dial = new SettingsDlg();
+                dial.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             // ustawienia
         }
 
