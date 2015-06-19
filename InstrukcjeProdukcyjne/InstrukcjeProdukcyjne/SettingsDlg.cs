@@ -59,22 +59,26 @@ namespace InstrukcjeProdukcyjne
 
         private void LoadSettings()
         {
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData).ToString();
-            var file = Path.Combine(path, "setings.xml");
-            label1.Text = file;
-            if (File.Exists(file))
-            {
-                textBox1.Text= File.ReadAllText(file);
-            }
-
+            //var path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData).ToString();
+            //var file = Path.Combine(path, "setings.xml");
+            //label1.Text = file;
+            //if (File.Exists(file))
+            //{
+            //    textBox1.Text= File.ReadAllText(file);
+            //}
+            textBox1.Text = Properties.Settings.Default.App.ServerDoc;
+            textBox2.Text = Properties.Settings.Default.App.LocalDoc;
         }
 
         private void SaveSettings()
         {
-            var path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData).ToString();
+            //var path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData).ToString();
 
             var s= textBox1.Text;
-            File.WriteAllText(Path.Combine(path, "setings.xml"), s);
+            //File.WriteAllText(Path.Combine(path, "setings.xml"), s);
+            Properties.Settings.Default.App.ServerDoc = textBox1.Text;
+            Properties.Settings.Default.App.LocalDoc = textBox2.Text;
+            Properties.Settings.Default.Save();
         }
 
     }
