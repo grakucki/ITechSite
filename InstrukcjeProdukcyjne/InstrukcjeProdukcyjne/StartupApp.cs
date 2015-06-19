@@ -85,13 +85,11 @@ namespace InstrukcjeProdukcyjne
             if (Directory.Exists(p))
             {
                 //Directory.Delete(p);
-                File.AppendAllText(Path.Combine(p, "outtest.txt"), DateTime.Now.ToString() + WindowsIdentity.GetCurrent().Name + Environment.NewLine);
+                //File.AppendAllText(Path.Combine(p, "outtest.txt"), DateTime.Now.ToString() + WindowsIdentity.GetCurrent().Name + Environment.NewLine);
                 return;
             }
 
             Directory.CreateDirectory(p);
-            //AddDirectorySecurity(p, @"BUILTIN\Użytkownicy", FileSystemRights.Modify, AccessControlType.Allow);
-            //AddDirectorySecurity(p, @"Cooler7\Użytkownicy", FileSystemRights.Modify, AccessControlType.Allow);
             SetPermissions(p);
  
         }

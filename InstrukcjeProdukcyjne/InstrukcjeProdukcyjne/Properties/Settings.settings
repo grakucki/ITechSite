@@ -5,8 +5,8 @@
     <Setting Name="WorkDir" Type="System.String" Scope="Application">
       <Value Profile="(Default)">d:\Itech</Value>
     </Setting>
-    <Setting Name="AppSet1" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">1</Value>
+    <Setting Name="LocalDir" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\ProgramData\Itech</Value>
     </Setting>
   </Settings>
 </SettingsFile>

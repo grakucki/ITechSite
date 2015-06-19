@@ -87,9 +87,20 @@ namespace InstrukcjeProdukcyjne
             {
 
                 GoFullscreen(true);
-
-                db.WorkDir = Settings.Default.WorkDir;
+                var s = Settings.Default.LocalDir;
+                db.WorkDir = Settings.Default.App.LocalDoc;
                 toolStripStatusLabel1.Text = Path.GetFullPath(db.WorkDir);
+                StartupApp.CreateWorkDirektory(db.WorkDir);
+
+                var resourcesFile = Path.Combine(db.WorkDir, "resources.xml");
+                if (!File.Exists(resourcesFile))
+                {
+                    Process.Start(db.WorkDir);
+                    throw new Exception("Nie odnaleziono plików konfiguracyjnych. umieść je ręcznie w " + db.WorkDir);
+                }
+
+
+
                 db.ImportResource();
 
                 ZaładujStanowiska();
@@ -102,7 +113,7 @@ namespace InstrukcjeProdukcyjne
                 textBoxUser.Text = string.Format("{0} ({1})", LoginUser.UserName, LoginUser.NrKarty);
 
                 
-                StartupApp.CreateWorkDirektory(@"C:\ItechTest");
+//                StartupApp.CreateWorkDirektory(@"C:\ItechTest");
             }
             catch (Exception ex)
             {

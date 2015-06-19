@@ -41,6 +41,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -80,6 +81,7 @@
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ITechModelEx.cs" />
+    <Compile Include="XmlStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ITechModel.edmx">

@@ -12,6 +12,7 @@ using System.Runtime.Serialization;
 using System.Data.Entity.Validation;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.Diagnostics;
 
 
 namespace ITechInstrukcjeModel
@@ -41,7 +42,11 @@ namespace ITechInstrukcjeModel
 
         }
 
-
+        /// <summary>
+        /// use [DataContract] and [DataMember] in class to save
+        /// </summary>
+        /// <param name="objectToSerialize">obiekkt do serializacji</param>
+        /// <param name="filename"> pełna nazwa pliku </param>
         private void SaveToXml(object objectToSerialize, string filename)
         {
 
@@ -74,7 +79,9 @@ namespace ITechInstrukcjeModel
         /// <returns></returns>
         public List<Resource> ImportResource()
         {
-            ResourceList=LoadFromXml(Path.Combine(WorkDir, "resources.xml"));
+            var resourcesFile = Path.Combine(WorkDir, "resources.xml");
+           
+            ResourceList = LoadFromXml(resourcesFile);
             this.Resource.Local.Clear();
             this.Resource.AddRange(ResourceList);
             return ResourceList;
