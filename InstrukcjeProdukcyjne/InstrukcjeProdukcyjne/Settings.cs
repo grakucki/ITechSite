@@ -66,6 +66,7 @@ namespace InstrukcjeProdukcyjne.Properties {
             var x = Path.GetDirectoryName(filename);
             if (!Directory.Exists(x))
                 StartupApp.CreateWorkDirektory(x);
+
         }
 
 
