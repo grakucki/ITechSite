@@ -298,6 +298,19 @@ namespace InstrukcjeProdukcyjne
             //    this.WindowState = FormWindowState.Maximized;
         }
 
+        private void oAplikacjiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AboutBox1 dial = new AboutBox1();
+                dial.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
 
              
 
