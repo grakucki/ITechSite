@@ -48,6 +48,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.oAplikacjiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             this.textBoxUser = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -58,7 +59,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.KomunikatLabel = new System.Windows.Forms.Label();
             this.mediaViewerControl1 = new InstrukcjeProdukcyjne.MediaViewerControl();
-            this.oAplikacjiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WorkStationBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -232,7 +232,7 @@
             this.oAplikacjiToolStripMenuItem,
             this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(313, 238);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(313, 216);
             // 
             // toolStripMenuItem1
             // 
@@ -257,6 +257,13 @@
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(309, 6);
+            // 
+            // oAplikacjiToolStripMenuItem
+            // 
+            this.oAplikacjiToolStripMenuItem.Name = "oAplikacjiToolStripMenuItem";
+            this.oAplikacjiToolStripMenuItem.Size = new System.Drawing.Size(312, 50);
+            this.oAplikacjiToolStripMenuItem.Text = "O Aplikacji";
+            this.oAplikacjiToolStripMenuItem.Click += new System.EventHandler(this.oAplikacjiToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
@@ -356,13 +363,6 @@
             this.mediaViewerControl1.Name = "mediaViewerControl1";
             this.mediaViewerControl1.Size = new System.Drawing.Size(1010, 586);
             this.mediaViewerControl1.TabIndex = 7;
-            // 
-            // oAplikacjiToolStripMenuItem
-            // 
-            this.oAplikacjiToolStripMenuItem.Name = "oAplikacjiToolStripMenuItem";
-            this.oAplikacjiToolStripMenuItem.Size = new System.Drawing.Size(312, 50);
-            this.oAplikacjiToolStripMenuItem.Text = "O Aplikacji";
-            this.oAplikacjiToolStripMenuItem.Click += new System.EventHandler(this.oAplikacjiToolStripMenuItem_Click);
             // 
             // Form1
             // 

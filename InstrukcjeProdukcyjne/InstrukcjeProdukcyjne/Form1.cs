@@ -33,7 +33,7 @@ namespace InstrukcjeProdukcyjne
 
         private enum FolderType
 	    {
-	         Stanowsika,
+	        Stanowsika,
             Elementy
 	    }
 
@@ -92,6 +92,7 @@ namespace InstrukcjeProdukcyjne
                 toolStripStatusLabel1.Text = Path.GetFullPath(db.WorkDir);
                 StartupApp.CreateWorkDirektory(db.WorkDir);
 
+
                 var resourcesFile = Path.Combine(db.WorkDir, "resources.xml");
                 if (!File.Exists(resourcesFile))
                 {
@@ -104,11 +105,15 @@ namespace InstrukcjeProdukcyjne
                 db.ImportResource();
 
                 ZaładujStanowiska();
+
                 ZaładujElementy();
+                
                 OnResourceChange(0);
 
                 if (ShowLoginDlg("",true)==System.Windows.Forms.DialogResult.Cancel)
                     this.Close();
+
+                
 
                 textBoxUser.Text = string.Format("{0} ({1})", LoginUser.UserName, LoginUser.NrKarty);
 

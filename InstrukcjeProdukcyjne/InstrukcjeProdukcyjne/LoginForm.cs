@@ -62,24 +62,34 @@ namespace InstrukcjeProdukcyjne
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            bool Requed = false;
+
             if (this.DialogResult == System.Windows.Forms.DialogResult.OK)
             {
-                if (string.IsNullOrEmpty(textBoxUser.Text))
+                if (Requed)
                 {
-                    e.Cancel = true;
-                    SetError(textBoxUser, "Podaj Użytkownika");
-                }
-                else
-                    SetError(textBoxUser, "");
+                    if (string.IsNullOrEmpty(textBoxUser.Text))
+                    {
+                        e.Cancel = true;
+                        SetError(textBoxUser, "Podaj Użytkownika");
+                    }
+                    else
+                        SetError(textBoxUser, "");
 
-                if (string.IsNullOrEmpty(textBoxCard.Text))
-                {
-                    e.Cancel = true;
-                    SetError(textBoxCard, "Podaj Nr karty");
+                    if (string.IsNullOrEmpty(textBoxCard.Text))
+                    {
+                        e.Cancel = true;
+                        SetError(textBoxCard, "Podaj Nr karty");
+                    }
+                    else
+                        SetError(textBoxCard, "");
                 }
-                else
-                    SetError(textBoxCard, "");
             }
+        }
+
+        private void buttonOk_Click(object sender, EventArgs e)
+        {
+
         }
 
         

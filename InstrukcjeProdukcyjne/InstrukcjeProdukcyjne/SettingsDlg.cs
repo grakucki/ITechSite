@@ -19,13 +19,26 @@ namespace InstrukcjeProdukcyjne
             InitializeComponent();
         }
 
+        ITechInstrukcjeModel.ITechEntities db = new ITechInstrukcjeModel.ITechEntities();
+
         private void SettingsDlg_Load(object sender, EventArgs e)
         {
             try
             {
 
                 LoadSettings();
+                db.WorkDir = Properties.Settings.Default.App.LocalDoc;
+                var r = db.ImportResource();
+                var workstations = db.ResourceWorkstation;
 
+                resourceBindingSource.DataSource = workstations;
+
+                ITechInstrukcjeModel.Resource w = null;
+                int? id = Properties.Settings.Default.App.Stanowisko;
+                if (id != null)
+                    w= workstations.Where(m=>m.Id==id).FirstOrDefault();
+                WorkstationComboBox.SelectedItem = w;
+                
             }
             catch (Exception ex)
             {
@@ -78,6 +91,12 @@ namespace InstrukcjeProdukcyjne
             //File.WriteAllText(Path.Combine(path, "setings.xml"), s);
             Properties.Settings.Default.App.ServerDoc = textBox1.Text;
             Properties.Settings.Default.App.LocalDoc = textBox2.Text;
+            var w = (ITechInstrukcjeModel.Resource) WorkstationComboBox.SelectedItem;
+
+            if (w != null)
+                Properties.Settings.Default.App.Stanowisko = w.Id;
+            else
+                Properties.Settings.Default.App.Stanowisko = null;
             Properties.Settings.Default.Save();
         }
 

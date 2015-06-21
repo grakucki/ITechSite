@@ -20,6 +20,10 @@ namespace InstrukcjeProdukcyjne
         [DataMember]
         public string LocalDoc { get; set; }
 
+        [DataMember]
+        public int? Stanowisko { get; set; }
+
+
         public void ApplyDefaultIfEmpty()
         {
             ApplyDefault(true);
@@ -32,6 +36,8 @@ namespace InstrukcjeProdukcyjne
 
             if (!IfEmpty || String.IsNullOrEmpty(LocalDoc))
                 LocalDoc = @"c:\ProgramData\Itech\Instrukcje";
+
+            Stanowisko = null;
         }
 
         public void ApplyDefault()
@@ -43,7 +49,7 @@ namespace InstrukcjeProdukcyjne
         {
             return Path.Combine(path, "configs", "settings.xml");
         }
-    
-
     }
+
+
 }
