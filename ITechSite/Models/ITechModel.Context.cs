@@ -35,5 +35,6 @@ namespace ITechSite.Models
         public virtual DbSet<Resource> Resource { get; set; }
         public virtual DbSet<InformationPlan> InformationPlan { get; set; }
         public virtual DbSet<SimaticCpuType> SimaticCpuType { get; set; }
+        public virtual DbSet<News> News { get; set; }
     }
 }

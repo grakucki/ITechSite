@@ -28,5 +28,6 @@ namespace ITechInstrukcjeModel
         public virtual DbSet<Dokument> Dokument { get; set; }
         public virtual DbSet<InformationPlan> InformationPlan { get; set; }
         public virtual DbSet<Resource> Resource { get; set; }
+        public virtual DbSet<Workstation> Workstation { get; set; }
     }
 }

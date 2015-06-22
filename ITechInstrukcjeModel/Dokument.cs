@@ -32,7 +32,7 @@ namespace ITechInstrukcjeModel
         public Nullable<int> WorkProcess_Id { get; set; }
         public string Keywords { get; set; }
 
-         [IgnoreDataMember]
+        [IgnoreDataMember]
         public virtual ICollection<InformationPlan> InformationPlan { get; set; }
     }
 }

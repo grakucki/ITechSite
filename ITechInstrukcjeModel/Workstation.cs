@@ -13,17 +13,18 @@ namespace ITechInstrukcjeModel
     using System.Collections.Generic;
     using System.Runtime.Serialization;
     
-    public partial class InformationPlan
+    public partial class Workstation
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int idR { get; set; }
-        public int IdD { get; set; }
-        public Nullable<int> Order { get; set; }
-        public Nullable<bool> Enabled { get; set; }
-    
+        public string WorkstationGroup { get; set; }
+        public string Factory { get; set; }
+        public string Area { get; set; }
+        public string Sterownik_Ip { get; set; }
+        public string Sterownik_Model { get; set; }
+        public Nullable<int> Setrownik_DB { get; set; }
 
-        public virtual Dokument Dokument { get; set; }
-        [IgnoreDataMember]
+         [IgnoreDataMember]
         public virtual Resource Resource { get; set; }
     }
 }

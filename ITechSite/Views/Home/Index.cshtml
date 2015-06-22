@@ -3,28 +3,49 @@
 }
 
 <div class="jumbotron">
-    <h1>ITech</h1>
+    <img src='@Url.Content(@"~/Content/Images/Header.jpg")' />
     <p class="lead">System udostępniania dokumentacji produkcyjnej na stanowiska robocze </p>
    
 </div>
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Dokumenty</h2>
-        <p>
-            Zarządzaj dokumenta, instrukacjami
-        </p>
-        <p>@Html.ActionLink("more  >>", "Index", "Dokuments", new { area = "" }, new { @class = "btn btn-default" })</p>
+        <a href='@Url.Action("Index", "Dokuments")'>
+            <img src='@Url.Content(@"~/Content/Images/Dokumenty.jpg")' />
+        </a>
     </div>
     <div class="col-md-4">
-        <h2>Zasoby</h2>
-        <p>Zarządzaj Stanowiskami robaczymi oraz modelami </p>
-        <p>@Html.ActionLink("more  >>", "Index", "Resources", new { area = "" }, new { @class = "btn btn-default" })</p>
+        <a href='@Url.Action("Index", "Resources")'>
+            <img src='@Url.Content(@"~/Content/Images/Zasoby.jpg")' />
+        </a>
     </div>
     <div class="col-md-4">
-        <h2>Plan informacyjny</h2>
-        <p>Zarządzaj Planami Informacyjnymi. Definuj jakie instrukcje mają być wyświetlane na stanowiskach roboczych </p>
-                                                  
-        <p>@Html.ActionLink("more  >>", "Index", "InformationPlans", new { area = "" }, new { @class = "btn btn-default" })</p>
+        <a href='@Url.Action("Index", "InformationPlans")'>
+            <img src='@Url.Content(@"~/Content/Images/Dokumenty.jpg")' />
+        </a>
     </div>
-</div>
+    <div class="col-md-4">
+        <a href='@Url.Action("Index", "News")'>
+            <img src='@Url.Content(@"~/Content/Images/Komunikaty.jpg")' />
+        </a>
+    </div>
+
+        @*<div class="col-md-4">
+            <h2>Dokumenty</h2>
+            <p>
+                Zarządzaj dokumenta, instrukacjami
+            </p>
+            <p>@Html.ActionLink("more  >>", "Index", "Dokuments", new { area = "" }, new { @class = "btn btn-default" })</p>
+        </div>
+        <div class="col-md-4">
+            <h2>Zasoby</h2>
+            <p>Zarządzaj Stanowiskami robaczymi oraz modelami </p>
+            <p>@Html.ActionLink("more  >>", "Index", "Resources", new { area = "" }, new { @class = "btn btn-default" })</p>
+        </div>
+        <div class="col-md-4">
+            <h2>Plan informacyjny</h2>
+            <p>Zarządzaj Planami Informacyjnymi. Definuj jakie instrukcje mają być wyświetlane na stanowiskach roboczych </p>
+
+            <p>@Html.ActionLink("more  >>", "Index", "InformationPlans", new { area = "" }, new { @class = "btn btn-default" })</p>
+        </div>*@
+    </div>

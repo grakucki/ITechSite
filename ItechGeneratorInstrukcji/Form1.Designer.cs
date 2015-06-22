@@ -354,7 +354,7 @@
             // 
             // informationPlanBindingSource
             // 
-            this.informationPlanBindingSource.DataSource = typeof(ItechGeneratorInstrukcji.InformationPlan);
+            this.informationPlanBindingSource.DataSource = typeof(ITechInstrukcjeModel.InformationPlan);
             // 
             // idDataGridViewTextBoxColumn1
             // 
@@ -460,11 +460,11 @@
             // 
             // resourceBindingSource
             // 
-            this.resourceBindingSource.DataSource = typeof(ItechGeneratorInstrukcji.Resource);
+            this.resourceBindingSource.DataSource = typeof(ITechInstrukcjeModel.Resource);
             // 
             // dokumentBindingSource
             // 
-            this.dokumentBindingSource.DataSource = typeof(ItechGeneratorInstrukcji.Dokument);
+            this.dokumentBindingSource.DataSource = typeof(ITechInstrukcjeModel.Dokument);
             // 
             // Form1
             // 

@@ -17,6 +17,7 @@ namespace ITechInstrukcjeModel
         public Resource()
         {
             this.InformationPlan = new HashSet<InformationPlan>();
+            this.Workstation = new HashSet<Workstation>();
         }
     
         public int Id { get; set; }
@@ -30,5 +31,7 @@ namespace ITechInstrukcjeModel
         public string Keywords { get; set; }
     
         public virtual ICollection<InformationPlan> InformationPlan { get; set; }
+
+        public virtual ICollection<Workstation> Workstation { get; set; }
     }
 }

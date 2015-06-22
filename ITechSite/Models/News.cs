@@ -7,23 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ITechInstrukcjeModel
+namespace ITechSite.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
     
-    public partial class InformationPlan
+    public partial class News
     {
         public int id { get; set; }
-        public int idR { get; set; }
-        public int IdD { get; set; }
-        public Nullable<int> Order { get; set; }
-        public Nullable<bool> Enabled { get; set; }
+        public string News1 { get; set; }
+        public System.DateTime ValidEnd { get; set; }
     
-
-        public virtual Dokument Dokument { get; set; }
-        [IgnoreDataMember]
         public virtual Resource Resource { get; set; }
     }
 }

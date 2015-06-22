@@ -36,7 +36,7 @@ namespace ItechGeneratorInstrukcji.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("d:\\ITech")]
+        [global::System.Configuration.DefaultSettingValueAttribute("c:\\ITech")]
         public string WorkDir {
             get {
                 return ((string)(this["WorkDir"]));

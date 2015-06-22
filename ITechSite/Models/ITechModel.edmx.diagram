@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="f7b5d33c4c714c9ba3dbfd9400f38094" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="ITechModel.FileContent" Width="1.5" PointX="0.625" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ITechModel.Model" Width="1.5" PointX="11.125" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITechModel.Model" Width="1.5" PointX="11.625" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="9.375" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.WorkProcess" Width="1.5" PointX="0.625" PointY="3.875" />
         <EntityTypeShape EntityType="ITechModel.Dokument" Width="1.5" PointX="3" PointY="1.125" />
@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="ITechModel.WorkstationGroup" Width="1.5" PointX="11.125" PointY="1.125" />
         <AssociationConnector Association="ITechModel.FK_Workstation_WorkstationGroup" />
         <AssociationConnector Association="ITechModel.FK_FileContent_Dokument1" />
-        <EntityTypeShape EntityType="ITechModel.ResourceType" Width="1.5" PointX="7.375" PointY="5" />
+        <EntityTypeShape EntityType="ITechModel.ResourceType" Width="1.5" PointX="7.25" PointY="5.25" />
         <EntityTypeShape EntityType="ITechModel.Resource" Width="1.5" PointX="7.5" PointY="1.125" />
         <AssociationConnector Association="ITechModel.FK_Resource_Type" />
         <EntityTypeShape EntityType="ITechModel.InformationPlan" Width="1.5" PointX="5.375" PointY="0.875" />
@@ -22,6 +22,8 @@
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Resource" />
         <AssociationConnector Association="ITechModel.FK_Workstation_Resource" />
         <EntityTypeShape EntityType="ITechModel.SimaticCpuType" Width="1.5" PointX="5.25" PointY="3.875" />
+        <EntityTypeShape EntityType="ITechModel.News" Width="1.5" PointX="9.75" PointY="4.5" />
+        <AssociationConnector Association="ITechModel.FK_News_Resource" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

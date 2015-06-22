@@ -10,9 +10,12 @@ using System.Xml.Serialization;
 using System.Runtime.Serialization;
 
 using System.Data.Entity.Validation;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Diagnostics;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 
 
 namespace ITechInstrukcjeModel
@@ -42,6 +45,7 @@ namespace ITechInstrukcjeModel
 
         }
 
+
         /// <summary>
         /// use [DataContract] and [DataMember] in class to save
         /// </summary>
@@ -66,6 +70,7 @@ namespace ITechInstrukcjeModel
             FileStream fs = new FileStream(filename, FileMode.Open);
             XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
 
+
             List<Resource> plan = (List<Resource>)dcs.ReadObject(reader);
             reader.Close();
             fs.Close();
@@ -82,8 +87,11 @@ namespace ITechInstrukcjeModel
             var resourcesFile = Path.Combine(WorkDir, "resources.xml");
            
             ResourceList = LoadFromXml(resourcesFile);
+
             this.Resource.Local.Clear();
             this.Resource.AddRange(ResourceList);
+
+
             return ResourceList;
         }
 
@@ -104,7 +112,9 @@ namespace ITechInstrukcjeModel
                 Directory.CreateDirectory(WorkDir);
             using (var db = new ITechEntities())
             {
-                var q = db.Resource.Where(m => m.Enabled).OrderBy(m => m.Id).ToList();
+                
+                var q = db.Resource.Where(m => m.Enabled).Include(m=>m.InformationPlan).OrderBy(m => m.Id).ToList();
+
                 SaveToXml(q, Path.Combine(WorkDir, "resources.xml"));
             }
         }

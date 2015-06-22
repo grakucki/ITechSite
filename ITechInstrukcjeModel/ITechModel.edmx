@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ITechModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ITechModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Dokument">
           <Key>
             <PropertyRef Name="Id" />
@@ -45,6 +45,19 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Keywords" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Workstation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idR" Type="int" Nullable="false" />
+          <Property Name="WorkstationGroup" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Factory" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Area" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sterownik_Ip" Type="nvarchar" MaxLength="15" />
+          <Property Name="Sterownik_Model" Type="nvarchar" MaxLength="15" />
+          <Property Name="Setrownik_DB" Type="int" />
+        </EntityType>
         <Association Name="FK_InformationPlan_Dokument">
           <End Role="Dokument" Type="Self.Dokument" Multiplicity="1" />
           <End Role="InformationPlan" Type="Self.InformationPlan" Multiplicity="*" />
@@ -69,10 +82,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Workstation_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="Workstation" Type="Self.Workstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workstation">
+              <PropertyRef Name="idR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ITechModelStoreContainer">
           <EntitySet Name="Dokument" EntityType="Self.Dokument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InformationPlan" EntityType="Self.InformationPlan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_InformationPlan_Dokument" Association="Self.FK_InformationPlan_Dokument">
             <End Role="Dokument" EntitySet="Dokument" />
             <End Role="InformationPlan" EntitySet="InformationPlan" />
@@ -81,9 +107,12 @@
             <End Role="Resource" EntitySet="Resource" />
             <End Role="InformationPlan" EntitySet="InformationPlan" />
           </AssociationSet>
+          <AssociationSet Name="FK_Workstation_Resource" Association="Self.FK_Workstation_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="Workstation" EntitySet="Workstation" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ITechModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -130,6 +159,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="InformationPlan" Relationship="Self.FK_InformationPlan_Resource" FromRole="Resource" ToRole="InformationPlan" />
+          <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
         </EntityType>
         <Association Name="FK_InformationPlan_Dokument">
           <End Role="Dokument" Type="Self.Dokument" Multiplicity="1" />
@@ -167,7 +197,38 @@
             <End Role="Resource" EntitySet="Resource" />
             <End Role="InformationPlan" EntitySet="InformationPlan" />
           </AssociationSet>
+          <EntitySet Name="Workstation" EntityType="ITechModel.Workstation" />
+          <AssociationSet Name="FK_Workstation_Resource" Association="ITechModel.FK_Workstation_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="Workstation" EntitySet="Workstation" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Workstation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idR" Type="Int32" Nullable="false" />
+          <Property Name="WorkstationGroup" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Factory" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sterownik_Ip" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Sterownik_Model" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Setrownik_DB" Type="Int32" />
+          <NavigationProperty Name="Resource" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Workstation" ToRole="Resource" />
+        </EntityType>
+        <Association Name="FK_Workstation_Resource">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="ITechModel.Workstation" Role="Workstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workstation">
+              <PropertyRef Name="idR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -214,6 +275,20 @@
                 <ScalarProperty Name="Enabled" ColumnName="Enabled" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workstation">
+            <EntityTypeMapping TypeName="ITechModel.Workstation">
+              <MappingFragment StoreEntitySet="Workstation">
+                <ScalarProperty Name="Setrownik_DB" ColumnName="Setrownik_DB" />
+                <ScalarProperty Name="Sterownik_Model" ColumnName="Sterownik_Model" />
+                <ScalarProperty Name="Sterownik_Ip" ColumnName="Sterownik_Ip" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Factory" ColumnName="Factory" />
+                <ScalarProperty Name="WorkstationGroup" ColumnName="WorkstationGroup" />
+                <ScalarProperty Name="idR" ColumnName="idR" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

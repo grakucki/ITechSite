@@ -33,6 +33,13 @@ namespace ITechInstrukcjeModel
                 typeNamespace = dictionary.Add("http://schemas.datacontract.org/2004/07/ItechGeneratorInstrukcji");
                 return true;
             }
+            else if (dataContractType.BaseType == typeof(Workstation))
+            {
+                XmlDictionary dictionary = new XmlDictionary();
+                typeName = dictionary.Add("Workstation");
+                typeNamespace = dictionary.Add("http://schemas.datacontract.org/2004/07/ItechGeneratorInstrukcji");
+                return true;
+            }
             else
             {
                 // Defer to the known type resolver
@@ -55,6 +62,11 @@ namespace ITechInstrukcjeModel
             {
                 return typeof(InformationPlan);
             }
+            else if (typeName.IndexOf("Workstation") >= 0)
+            {
+                return typeof(Workstation);
+            }
+
             else
             {
                 // Defer to the known type resolver

@@ -11,7 +11,7 @@
       <Value Profile="(Default)">Data Source=Akacjowa5;Initial Catalog=ITech;Integrated Security=True;MultipleActiveResultSets=True;Application Name=EntityFramework</Value>
     </Setting>
     <Setting Name="WorkDir" Type="System.String" Scope="User">
-      <Value Profile="(Default)">d:\ITech</Value>
+      <Value Profile="(Default)">c:\ITech</Value>
     </Setting>
   </Settings>
 </SettingsFile>

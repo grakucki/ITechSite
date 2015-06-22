@@ -41,11 +41,9 @@ namespace ItechGeneratorInstrukcji
                 db.WorkDir=Settings.Default.WorkDir;
                 db.ExportResources();
                 db.ExportDokuments();
-               
-                //ExportResources();
-                //ExportDokuments();
-                //Savetoxml(@"d:\out.xml");
-                MessageBox.Show("ok");
+
+
+                MessageBox.Show("Zapis ok " + db.WorkDir);
             }
             catch (Exception ex)
             {
