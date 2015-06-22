@@ -11,7 +11,7 @@ using PagedList;
 
 namespace ITechSite.Controllers
 {
-        [Authorize]
+    [Authorize]
     public class ResourcesController : Controller
     {
         private ITechEntities db = new ITechEntities(0);

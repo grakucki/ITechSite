@@ -198,7 +198,9 @@
     <Compile Include="Models\News.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NewsController.cs" />
     <Compile Include="Models\ResourceListEx.cs" />
+    <Compile Include="Models\SelectedResources.cs" />
     <Compile Include="Models\SimaticCpuType.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
@@ -358,6 +360,7 @@
     <Content Include="Views\Workstations\Details.cshtml" />
     <Content Include="Views\Workstations\Edit.cshtml" />
     <Content Include="Views\Workstations\Index.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

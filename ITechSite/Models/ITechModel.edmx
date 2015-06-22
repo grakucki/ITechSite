@@ -54,7 +54,7 @@
           </Key>
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="News" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="ValidEnd" Type="datetime" Nullable="false" />
+          <Property Name="ValidEnd" Type="datetime" />
         </EntityType>
         <EntityType Name="Resource">
           <Key>
@@ -493,7 +493,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="News1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ValidEnd" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ValidEnd" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Resource" Relationship="ITechModel.FK_News_Resource" FromRole="News" ToRole="Resource" />
         </EntityType>
         <Association Name="FK_News_Resource">
