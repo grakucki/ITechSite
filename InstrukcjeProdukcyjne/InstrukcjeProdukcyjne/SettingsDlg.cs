@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ITechInstrukcjeModel;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,17 +28,7 @@ namespace InstrukcjeProdukcyjne
             {
 
                 LoadSettings();
-                db.WorkDir = Properties.Settings.Default.App.LocalDoc;
-                var r = db.ImportResource();
-                var workstations = db.ResourceWorkstation;
 
-                resourceBindingSource.DataSource = workstations;
-
-                ITechInstrukcjeModel.Resource w = null;
-                int? id = Properties.Settings.Default.App.Stanowisko;
-                if (id != null)
-                    w= workstations.Where(m=>m.Id==id).FirstOrDefault();
-                WorkstationComboBox.SelectedItem = w;
                 
             }
             catch (Exception ex)
@@ -79,8 +70,24 @@ namespace InstrukcjeProdukcyjne
             //{
             //    textBox1.Text= File.ReadAllText(file);
             //}
+            var x = Properties.Settings.Default.App;
             textBox1.Text = Properties.Settings.Default.App.ServerDoc;
             textBox2.Text = Properties.Settings.Default.App.LocalDoc;
+            int? id = Properties.Settings.Default.App.Stanowisko;
+
+            db.WorkDir = Properties.Settings.Default.App.LocalDoc;
+            var r = db.ImportResource();
+
+            
+            var workstations = db.ResourceWorkstation;
+
+            resourceBindingSource.DataSource = workstations;
+
+            ITechInstrukcjeModel.Resource w = null;
+            if (id != null)
+                w = workstations.Where(m => m.Id == id).FirstOrDefault();
+            WorkstationComboBox.SelectedItem = w;
+
         }
 
         private void SaveSettings()
@@ -98,6 +105,30 @@ namespace InstrukcjeProdukcyjne
             else
                 Properties.Settings.Default.App.Stanowisko = null;
             Properties.Settings.Default.Save();
+        }
+
+        private Resource GetCurrent()
+        {
+            return (Resource)resourceBindingSource.Current;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dial = new SimaticDlg();
+                dial.Workstation = GetCurrent().Workstation.FirstOrDefault();
+                dial.ShowDialog();
+
+
+                db.SaveChanges();
+
+                MessageBox.Show(GetCurrent().Workstation.FirstOrDefault().Sterownik_Ip);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
     }

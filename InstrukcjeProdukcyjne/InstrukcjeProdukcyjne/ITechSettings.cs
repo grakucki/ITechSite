@@ -37,7 +37,8 @@ namespace InstrukcjeProdukcyjne
             if (!IfEmpty || String.IsNullOrEmpty(LocalDoc))
                 LocalDoc = @"c:\ProgramData\Itech\Instrukcje";
 
-            Stanowisko = null;
+            if (!IfEmpty || (Stanowisko == null))
+                Stanowisko = 0;
         }
 
         public void ApplyDefault()

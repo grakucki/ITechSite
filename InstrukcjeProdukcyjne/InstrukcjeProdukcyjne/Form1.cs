@@ -316,13 +316,10 @@ namespace InstrukcjeProdukcyjne
             }
         }
 
-        Process onScreenKeyboardProc = null;
         private void klawiaturaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             VirtualKeyboard.Show();
-
-}
+        }
 
 
              
