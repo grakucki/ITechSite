@@ -18,7 +18,12 @@ namespace ITechSite.Models
         public string WorkstationGroup { get; set; }
         public string Factory { get; set; }
         public string Area { get; set; }
+        public int idR { get; set; }
+        public string Sterownik_Ip { get; set; }
+        public string Sterownik_Model { get; set; }
+        public Nullable<int> Setrownik_DB { get; set; }
     
         public virtual WorkstationGroup WorkstationGroup1 { get; set; }
+        public virtual Resource Resource { get; set; }
     }
 }

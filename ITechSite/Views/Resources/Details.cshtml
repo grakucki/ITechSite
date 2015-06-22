@@ -74,9 +74,15 @@
             @Html.DisplayFor(model => model.ResourceType.Type)
         </dd>
 
-    </dl>
+        <dt>
+            @Html.Label("Ustawienia Stanowiska")
+        </dt>
+        <dd>
+            @Html.ActionLink("Pokaż", "Details", "Workstations", new { idR = Model.Id }, new { htmlAttributes = new { @class = "btn btn-default" } })
+        </dd>
+</dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
     @Html.ActionLink("Back to List", "Index")
 </p>

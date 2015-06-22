@@ -159,6 +159,11 @@ namespace ITechSite.Controllers
             return View(resource);
         }
 
+        public ActionResult Workstation(int? idR)
+        {
+            return RedirectToAction("Edit", "Workstations", new { idR = idR }); ;
+        }
+
         // GET: Resources/Delete/5
         public ActionResult Delete(int? id)
         {

@@ -7,22 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ItechGeneratorInstrukcji
+namespace ITechSite.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    public partial class InformationPlan
+    
+    public partial class SimaticCpuType
     {
         public int id { get; set; }
-        public int idR { get; set; }
-        public int IdD { get; set; }
-        public Nullable<int> Order { get; set; }
-        public Nullable<bool> Enabled { get; set; }
-
-        [IgnoreDataMember]
-        public virtual Resource Resource { get; set; }
-        public virtual Dokument Dokument { get; set; }
+        public string CpuType { get; set; }
     }
 }

@@ -1,0 +1,67 @@
+﻿@model ITechSite.Models.Workstation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Workstation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayName("Stanowisko")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resource.Name)
+        </dd>
+
+        <dt>
+            @Html.Display("Fabryka")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Factory)
+        </dd>
+
+        <dt>
+            @Html.Display("Dział")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Area)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("IP Sterownika")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sterownik_Ip)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Sterownik Model")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sterownik_Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayName("Sterownik DB")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Setrownik_DB)
+        </dd>
+
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@
+    @Html.ActionLink("Powrót", "Details", "Resources", new {id = Model.idR }, null)
+</p>

@@ -69,6 +69,13 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="SimaticCpuType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CpuType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="WorkProcess">
           <Key>
             <PropertyRef Name="Id" />
@@ -80,10 +87,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idR" Type="int" Nullable="false" />
           <Property Name="WorkstationGroup" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="Factory" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Area" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Sterownik_Ip" Type="nvarchar" MaxLength="15" />
+          <Property Name="Sterownik_Model" Type="nvarchar" MaxLength="15" />
+          <Property Name="Setrownik_DB" Type="int" />
         </EntityType>
         <EntityType Name="WorkstationGroup">
           <Key>
@@ -152,15 +163,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Workstation_WorkstationGroup">
-          <End Role="WorkstationGroup" Type="Self.WorkstationGroup" Multiplicity="1" />
+        <Association Name="FK_Workstation_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
           <End Role="Workstation" Type="Self.Workstation" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="WorkstationGroup">
-              <PropertyRef Name="Name" />
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Workstation">
-              <PropertyRef Name="WorkstationGroup" />
+              <PropertyRef Name="idR" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -171,6 +182,7 @@
           <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResourceType" EntityType="Self.ResourceType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SimaticCpuType" EntityType="Self.SimaticCpuType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkProcess" EntityType="Self.WorkProcess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkstationGroup" EntityType="Self.WorkstationGroup" Schema="dbo" store:Type="Tables" />
@@ -194,8 +206,8 @@
             <End Role="ResourceType" EntitySet="ResourceType" />
             <End Role="Resource" EntitySet="Resource" />
           </AssociationSet>
-          <AssociationSet Name="FK_Workstation_WorkstationGroup" Association="Self.FK_Workstation_WorkstationGroup">
-            <End Role="WorkstationGroup" EntitySet="WorkstationGroup" />
+          <AssociationSet Name="FK_Workstation_Resource" Association="Self.FK_Workstation_Resource">
+            <End Role="Resource" EntitySet="Resource" />
             <End Role="Workstation" EntitySet="Workstation" />
           </AssociationSet>
         </EntityContainer>
@@ -230,6 +242,11 @@
           <Property Name="Factory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Area" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="WorkstationGroup1" Relationship="ITechModel.FK_Workstation_WorkstationGroup" FromRole="Workstation" ToRole="WorkstationGroup" />
+          <Property Name="idR" Type="Int32" Nullable="false" />
+          <Property Name="Sterownik_Ip" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Sterownik_Model" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Setrownik_DB" Type="Int32" />
+          <NavigationProperty Name="Resource" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Workstation" ToRole="Resource" />
         </EntityType>
         <EntityContainer Name="ITechEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="FileContent" EntityType="Self.FileContent" />
@@ -265,6 +282,11 @@
             <End Role="Resource" EntitySet="Resource" />
             <End Role="InformationPlan" EntitySet="InformationPlan" />
           </AssociationSet>
+          <AssociationSet Name="FK_Workstation_Resource" Association="ITechModel.FK_Workstation_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="Workstation" EntitySet="Workstation" />
+          </AssociationSet>
+          <EntitySet Name="SimaticCpuType" EntityType="ITechModel.SimaticCpuType" />
           </EntityContainer>
         <EntityType Name="WorkProcess">
           <Key>
@@ -365,6 +387,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="InformationPlan" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="Resource" ToRole="InformationPlan" />
+          <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
         </EntityType>
         <Association Name="FK_Resource_Type">
           <End Type="ITechModel.ResourceType" Role="ResourceType" Multiplicity="1" />
@@ -414,6 +437,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Workstation_Resource">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="ITechModel.Workstation" Role="Workstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workstation">
+              <PropertyRef Name="idR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SimaticCpuType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CpuType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -442,6 +484,10 @@
           <EntitySetMapping Name="Workstation">
             <EntityTypeMapping TypeName="ITechModel.Workstation">
               <MappingFragment StoreEntitySet="Workstation">
+                <ScalarProperty Name="Setrownik_DB" ColumnName="Setrownik_DB" />
+                <ScalarProperty Name="Sterownik_Model" ColumnName="Sterownik_Model" />
+                <ScalarProperty Name="Sterownik_Ip" ColumnName="Sterownik_Ip" />
+                <ScalarProperty Name="idR" ColumnName="idR" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="WorkstationGroup" ColumnName="WorkstationGroup" />
                 <ScalarProperty Name="Factory" ColumnName="Factory" />
@@ -512,6 +558,14 @@
                 <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="IdD" ColumnName="IdD" />
                 <ScalarProperty Name="idR" ColumnName="idR" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SimaticCpuType">
+            <EntityTypeMapping TypeName="ITechModel.SimaticCpuType">
+              <MappingFragment StoreEntitySet="SimaticCpuType">
+                <ScalarProperty Name="CpuType" ColumnName="CpuType" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

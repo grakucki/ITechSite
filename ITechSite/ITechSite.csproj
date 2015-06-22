@@ -186,6 +186,7 @@
     <Compile Include="Controllers\InformationPlansController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ResourcesController.cs" />
+    <Compile Include="Controllers\WorkstationsController.cs" />
     <Compile Include="CustomResults\XmlResult.cs" />
     <Compile Include="CustomResults\SqlFileStreamResult.cs" />
     <Compile Include="Global.asax.cs">
@@ -193,6 +194,9 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ResourceListEx.cs" />
+    <Compile Include="Models\SimaticCpuType.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UniqueAttribute.cs" />
     <Compile Include="Models\DBFile.cs" />
     <Compile Include="Models\DocumentModels.cs" />
@@ -339,6 +343,11 @@
     <Content Include="Views\InformationPlans\Index2.cshtml" />
     <Content Include="Views\Shared\_SelectResources.cshtml" />
     <Content Include="Views\Resources\Find.cshtml" />
+    <Content Include="Views\Workstations\Create.cshtml" />
+    <Content Include="Views\Workstations\Delete.cshtml" />
+    <Content Include="Views\Workstations\Details.cshtml" />
+    <Content Include="Views\Workstations\Edit.cshtml" />
+    <Content Include="Views\Workstations\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

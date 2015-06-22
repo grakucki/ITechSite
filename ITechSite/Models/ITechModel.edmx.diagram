@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="f7b5d33c4c714c9ba3dbfd9400f38094" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="ITechModel.FileContent" Width="1.5" PointX="0.625" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ITechModel.Model" Width="1.5" PointX="9.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITechModel.Model" Width="1.5" PointX="11.125" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="9.375" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.WorkProcess" Width="1.5" PointX="0.625" PointY="3.875" />
         <EntityTypeShape EntityType="ITechModel.Dokument" Width="1.5" PointX="3" PointY="1.125" />
@@ -20,6 +20,8 @@
         <EntityTypeShape EntityType="ITechModel.InformationPlan" Width="1.5" PointX="5.375" PointY="0.875" />
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Dokument" />
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Resource" />
+        <AssociationConnector Association="ITechModel.FK_Workstation_Resource" />
+        <EntityTypeShape EntityType="ITechModel.SimaticCpuType" Width="1.5" PointX="5.25" PointY="3.875" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
