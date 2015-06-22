@@ -46,6 +46,7 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.klawiaturaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.oAplikacjiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +71,7 @@
             // buttonWorkstation
             // 
             this.buttonWorkstation.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonWorkstation.Location = new System.Drawing.Point(1, 63);
+            this.buttonWorkstation.Location = new System.Drawing.Point(10, 73);
             this.buttonWorkstation.Name = "buttonWorkstation";
             this.buttonWorkstation.Size = new System.Drawing.Size(193, 169);
             this.buttonWorkstation.TabIndex = 0;
@@ -81,7 +82,7 @@
             // buttonModel
             // 
             this.buttonModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonModel.Location = new System.Drawing.Point(200, 64);
+            this.buttonModel.Location = new System.Drawing.Point(212, 74);
             this.buttonModel.Name = "buttonModel";
             this.buttonModel.Size = new System.Drawing.Size(192, 168);
             this.buttonModel.TabIndex = 1;
@@ -95,9 +96,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(1, 238);
+            this.listView1.Location = new System.Drawing.Point(11, 248);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(391, 412);
+            this.listView1.Size = new System.Drawing.Size(393, 392);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -124,16 +125,16 @@
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel2,
             this.toolStripStatusLabel3});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 689);
+            this.statusStrip1.Location = new System.Drawing.Point(10, 679);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1433, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1413, 24);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(818, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(798, 19);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -202,9 +203,9 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.stanowiskaComboBox);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1433, 57);
+            this.panel1.Size = new System.Drawing.Size(1413, 57);
             this.panel1.TabIndex = 5;
             // 
             // button1
@@ -213,7 +214,7 @@
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button1.ContextMenuStrip = this.contextMenuStrip1;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(1368, 12);
+            this.button1.Location = new System.Drawing.Point(1348, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(52, 33);
             this.button1.TabIndex = 11;
@@ -227,12 +228,13 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.toolStripSeparator1,
+            this.klawiaturaToolStripMenuItem,
             this.toolStripMenuItem2,
             this.toolStripSeparator2,
             this.oAplikacjiToolStripMenuItem,
             this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(313, 216);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(313, 266);
             // 
             // toolStripMenuItem1
             // 
@@ -245,6 +247,13 @@
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(309, 6);
+            // 
+            // klawiaturaToolStripMenuItem
+            // 
+            this.klawiaturaToolStripMenuItem.Name = "klawiaturaToolStripMenuItem";
+            this.klawiaturaToolStripMenuItem.Size = new System.Drawing.Size(312, 50);
+            this.klawiaturaToolStripMenuItem.Text = "Klawiatura";
+            this.klawiaturaToolStripMenuItem.Click += new System.EventHandler(this.klawiaturaToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -276,7 +285,7 @@
             // 
             this.textBoxUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.textBoxUser.Location = new System.Drawing.Point(1119, 13);
+            this.textBoxUser.Location = new System.Drawing.Point(1099, 13);
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.ReadOnly = true;
             this.textBoxUser.Size = new System.Drawing.Size(237, 29);
@@ -287,7 +296,7 @@
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label4.Location = new System.Drawing.Point(1010, 16);
+            this.label4.Location = new System.Drawing.Point(990, 16);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(103, 24);
             this.label4.TabIndex = 9;
@@ -314,7 +323,7 @@
             this.elementyComboBox.FormattingEnabled = true;
             this.elementyComboBox.Location = new System.Drawing.Point(470, 12);
             this.elementyComboBox.Name = "elementyComboBox";
-            this.elementyComboBox.Size = new System.Drawing.Size(530, 32);
+            this.elementyComboBox.Size = new System.Drawing.Size(510, 32);
             this.elementyComboBox.TabIndex = 6;
             // 
             // ModelBindingSource
@@ -336,9 +345,9 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.panel2.Controls.Add(this.KomunikatLabel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 656);
+            this.panel2.Location = new System.Drawing.Point(10, 646);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1433, 33);
+            this.panel2.Size = new System.Drawing.Size(1413, 33);
             this.panel2.TabIndex = 6;
             // 
             // KomunikatLabel
@@ -359,9 +368,9 @@
             this.mediaViewerControl1.BackgroundImage = global::InstrukcjeProdukcyjne.Properties.Resources.Logo;
             this.mediaViewerControl1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.mediaViewerControl1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.mediaViewerControl1.Location = new System.Drawing.Point(411, 64);
+            this.mediaViewerControl1.Location = new System.Drawing.Point(421, 74);
             this.mediaViewerControl1.Name = "mediaViewerControl1";
-            this.mediaViewerControl1.Size = new System.Drawing.Size(1010, 586);
+            this.mediaViewerControl1.Size = new System.Drawing.Size(1002, 566);
             this.mediaViewerControl1.TabIndex = 7;
             // 
             // Form1
@@ -380,6 +389,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
+            this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "ITech - Sitech";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
@@ -428,6 +438,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem oAplikacjiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem klawiaturaToolStripMenuItem;
     }
 }
 
