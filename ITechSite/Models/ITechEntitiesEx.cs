@@ -14,7 +14,7 @@ namespace ITechSite.Models
         private static string EntitiesName()
         {
 
-            int i = 2;
+            int i = 0;
             String n=string.Empty;
             switch (i)
             {

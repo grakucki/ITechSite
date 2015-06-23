@@ -493,7 +493,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="News1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ValidEnd" Type="DateTime" Precision="3" />
+          <Property Name="ValidEnd" Type="DateTime" Precision="3" Nullable="true" />
           <NavigationProperty Name="Resource" Relationship="ITechModel.FK_News_Resource" FromRole="News" ToRole="Resource" />
         </EntityType>
         <Association Name="FK_News_Resource">

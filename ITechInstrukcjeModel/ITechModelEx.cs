@@ -62,7 +62,7 @@ namespace ITechInstrukcjeModel
             }
         }
 
-       
+
         public List<Resource> LoadFromXml(string filename)
         {
 

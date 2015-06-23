@@ -64,8 +64,15 @@ namespace ITechSite.Models
                         item.Selected2 = true;
                     }
                 }
+                try
+                {
+                    db.SaveChanges();
 
-                db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+
+                }
 
             }
             return View(news);

@@ -49,7 +49,7 @@
     </Key>
     <Property Name="id" Type="int" Nullable="false" />
     <Property Name="News" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ValidEnd" Type="datetime" Nullable="false" />
+    <Property Name="ValidEnd" Type="datetime" />
   </EntityType>
   <EntityType Name="Resource">
     <Key>

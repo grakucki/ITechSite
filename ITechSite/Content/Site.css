@@ -22,3 +22,24 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.text-OneLine
+{
+    max-width: 100%;
+    width: 100%;
+}
+
+.text-Yelow
+{
+    background-color: yellow;
+}
+
+.text-Red
+{
+    background-color: lightpink;
+}
+
+.text-green
+{
+    background-color: lightgreen;
+}

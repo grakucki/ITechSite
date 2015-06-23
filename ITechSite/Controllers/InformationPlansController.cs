@@ -81,7 +81,7 @@ namespace ITechSite.Controllers
                 return RedirectToAction("Find", "Resources");
             }
 
-            return GetXml(IdR);
+            //return GetXml(IdR);
             var informationPlan = db.InformationPlan.Where(m => m.idR == IdR).OrderBy(m=>m.Order).Include(i => i.Dokument).Include(i => i.Resource);
             return View(informationPlan.ToList());
         }

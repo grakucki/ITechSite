@@ -98,13 +98,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(11, 326);
+            this.listView1.Location = new System.Drawing.Point(11, 250);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(417, 265);
+            this.listView1.Size = new System.Drawing.Size(404, 231);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Tile;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
@@ -336,6 +335,7 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -343,11 +343,11 @@
             this.tableLayoutPanel1.Controls.Add(this.button2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.button3, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.button4, 2, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 248);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 487);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(394, 72);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(394, 100);
             this.tableLayoutPanel1.TabIndex = 8;
             // 
             // button2
@@ -357,7 +357,7 @@
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button2.Location = new System.Drawing.Point(3, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 66);
+            this.button2.Size = new System.Drawing.Size(125, 94);
             this.button2.TabIndex = 0;
             this.button2.Text = "Sterwonik";
             this.button2.UseVisualStyleBackColor = false;
@@ -369,19 +369,19 @@
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button3.Location = new System.Drawing.Point(134, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(125, 66);
+            this.button3.Size = new System.Drawing.Size(125, 94);
             this.button3.TabIndex = 1;
             this.button3.Text = "Itech";
             this.button3.UseVisualStyleBackColor = false;
             // 
             // button4
             // 
-            this.button4.BackColor = System.Drawing.Color.Red;
+            this.button4.BackColor = System.Drawing.Color.Green;
             this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button4.Location = new System.Drawing.Point(265, 3);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(126, 66);
+            this.button4.Size = new System.Drawing.Size(126, 94);
             this.button4.TabIndex = 2;
             this.button4.Text = "Czytnik";
             this.button4.UseVisualStyleBackColor = false;
