@@ -185,6 +185,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformationPlansController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ResourcesController.cs" />
     <Compile Include="Controllers\WorkstationsController.cs">
       <SubType>Code</SubType>
@@ -198,7 +199,6 @@
     <Compile Include="Models\News.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\NewsController.cs" />
     <Compile Include="Models\ResourceListEx.cs" />
     <Compile Include="Models\SelectedResources.cs" />
     <Compile Include="Models\SimaticCpuType.cs">
