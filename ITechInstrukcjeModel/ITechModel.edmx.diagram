@@ -10,8 +10,10 @@
         <EntityTypeShape EntityType="ITechModel.Resource" Width="1.5" PointX="5.5" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Dokument" ManuallyRouted="false" />
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Resource" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="9.125" PointY="1.5" />
+        <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="9.625" PointY="0.875" />
         <AssociationConnector Association="ITechModel.FK_Workstation_Resource" />
+        <EntityTypeShape EntityType="ITechModel.News" Width="1.5" PointX="8" PointY="3.625" />
+        <AssociationConnector Association="ITechModel.FK_News_Resource" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

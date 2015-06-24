@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -129,6 +130,53 @@ namespace InstrukcjeProdukcyjne
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+
+        public static string UrlPathCombine(string path1, string path2)
+        {
+            path1 = path1.TrimEnd('/') + "/";
+            path2 = path2.TrimStart('/');
+
+            return Path.Combine(path1, path2)
+                .Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+            var addr = textBox1.Text;
+            //http://localhost:53854/ServiceWorkstation.svc
+
+
+
+            ServiceWorkstation.ServiceWorkstationClient client = null;
+            try
+            {
+                string s = string.Empty;
+                int idR = GetCurrent().Workstation.FirstOrDefault().idR;
+                using(new CursorWait())
+                { 
+                    client = ServiceWorkstation.ServiceWorkstationClient.WorkstationClient(addr);
+                    s = client.TestConnection(idR);
+                    client.Close();
+                }
+                MessageBox.Show(s);
+            }
+           
+            catch (CommunicationException exception)
+            {
+                if (client != null)
+                    client.Abort();
+                MessageBox.Show(string.Format("3.{0} : {1}", exception.GetType(), exception.Message));
+            }
+            catch (Exception ex)
+            {
+                if (client != null)
+                    client.Abort();
+                MessageBox.Show(string.Format("4.{0} : {1}", ex.GetType(), ex.Message));
+            }
+
         }
 
     }

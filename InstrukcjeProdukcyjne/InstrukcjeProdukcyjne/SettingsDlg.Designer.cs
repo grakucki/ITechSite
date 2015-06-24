@@ -39,6 +39,7 @@
             this.resourceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.WorkstationComboBox = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             nameLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.resourceBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -47,7 +48,7 @@
             // 
             nameLabel.AutoSize = true;
             nameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            nameLabel.Location = new System.Drawing.Point(96, 102);
+            nameLabel.Location = new System.Drawing.Point(96, 184);
             nameLabel.Name = "nameLabel";
             nameLabel.Size = new System.Drawing.Size(122, 25);
             nameLabel.TabIndex = 7;
@@ -98,7 +99,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(83, 59);
+            this.label2.Location = new System.Drawing.Point(83, 141);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(132, 25);
             this.label2.TabIndex = 7;
@@ -107,7 +108,7 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox2.Location = new System.Drawing.Point(221, 53);
+            this.textBox2.Location = new System.Drawing.Point(221, 135);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(453, 31);
             this.textBox2.TabIndex = 6;
@@ -122,7 +123,7 @@
             this.WorkstationComboBox.DisplayMember = "Name";
             this.WorkstationComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.WorkstationComboBox.FormattingEnabled = true;
-            this.WorkstationComboBox.Location = new System.Drawing.Point(221, 99);
+            this.WorkstationComboBox.Location = new System.Drawing.Point(221, 181);
             this.WorkstationComboBox.Name = "WorkstationComboBox";
             this.WorkstationComboBox.Size = new System.Drawing.Size(453, 33);
             this.WorkstationComboBox.TabIndex = 8;
@@ -130,7 +131,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(50, 188);
+            this.button1.Location = new System.Drawing.Point(527, 244);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(147, 82);
             this.button1.TabIndex = 9;
@@ -138,11 +139,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
+            this.button2.Location = new System.Drawing.Point(526, 47);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(148, 82);
+            this.button2.TabIndex = 10;
+            this.button2.Text = "Test serwera plików";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // SettingsDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(705, 506);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(nameLabel);
             this.Controls.Add(this.WorkstationComboBox);
@@ -176,5 +189,6 @@
         private System.Windows.Forms.BindingSource resourceBindingSource;
         private System.Windows.Forms.ComboBox WorkstationComboBox;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

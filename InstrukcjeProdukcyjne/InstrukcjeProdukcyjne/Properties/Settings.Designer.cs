@@ -40,5 +40,14 @@ namespace InstrukcjeProdukcyjne.Properties {
                 return ((string)(this["LocalDir"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Yes")]
+        public string Load {
+            get {
+                return ((string)(this["Load"]));
+            }
+        }
     }
 }

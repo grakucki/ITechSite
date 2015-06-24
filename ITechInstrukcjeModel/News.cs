@@ -12,16 +12,11 @@ namespace ITechInstrukcjeModel
     using System;
     using System.Collections.Generic;
     
-    public partial class Workstation
+    public partial class News
     {
-        public int Id { get; set; }
-        public int idR { get; set; }
-        public string WorkstationGroup { get; set; }
-        public string Factory { get; set; }
-        public string Area { get; set; }
-        public string Sterownik_Ip { get; set; }
-        public string Sterownik_Model { get; set; }
-        public Nullable<int> Setrownik_DB { get; set; }
+        public int id { get; set; }
+        public string News1 { get; set; }
+        public Nullable<System.DateTime> ValidEnd { get; set; }
     
         public virtual Resource Resource { get; set; }
     }

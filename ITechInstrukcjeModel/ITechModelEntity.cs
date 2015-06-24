@@ -20,7 +20,8 @@ namespace ITechInstrukcjeModel
 
     public class Simatic
     {
-        public static string[] AvalibleSimaticCpuType = new string[] {"S7200" ,
+        public static string[] AvalibleSimaticCpuType = new string[] {
+        "S7200" ,
         "S7300" ,
         "S7400" ,
         "S71200",

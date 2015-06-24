@@ -31,6 +31,14 @@
           <Property Name="Order" Type="int" />
           <Property Name="Enabled" Type="bit" />
         </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="News" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ValidEnd" Type="datetime" />
+        </EntityType>
         <EntityType Name="Resource">
           <Key>
             <PropertyRef Name="Id" />
@@ -82,6 +90,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_News_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Workstation_Resource">
           <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
           <End Role="Workstation" Type="Self.Workstation" Multiplicity="*" />
@@ -97,6 +117,7 @@
         <EntityContainer Name="ITechModelStoreContainer">
           <EntitySet Name="Dokument" EntityType="Self.Dokument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InformationPlan" EntityType="Self.InformationPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_InformationPlan_Dokument" Association="Self.FK_InformationPlan_Dokument">
@@ -106,6 +127,10 @@
           <AssociationSet Name="FK_InformationPlan_Resource" Association="Self.FK_InformationPlan_Resource">
             <End Role="Resource" EntitySet="Resource" />
             <End Role="InformationPlan" EntitySet="InformationPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_Resource" Association="Self.FK_News_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="News" EntitySet="News" />
           </AssociationSet>
           <AssociationSet Name="FK_Workstation_Resource" Association="Self.FK_Workstation_Resource">
             <End Role="Resource" EntitySet="Resource" />
@@ -160,6 +185,7 @@
           <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="InformationPlan" Relationship="Self.FK_InformationPlan_Resource" FromRole="Resource" ToRole="InformationPlan" />
           <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
+          <NavigationProperty Name="News" Relationship="ITechModel.FK_News_Resource" FromRole="Resource" ToRole="News" />
         </EntityType>
         <Association Name="FK_InformationPlan_Dokument">
           <End Role="Dokument" Type="Self.Dokument" Multiplicity="1" />
@@ -202,6 +228,11 @@
             <End Role="Resource" EntitySet="Resource" />
             <End Role="Workstation" EntitySet="Workstation" />
           </AssociationSet>
+          <EntitySet Name="News" EntityType="ITechModel.News" />
+          <AssociationSet Name="FK_News_Resource" Association="ITechModel.FK_News_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Workstation">
           <Key>
@@ -226,6 +257,27 @@
             </Principal>
             <Dependent Role="Workstation">
               <PropertyRef Name="idR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="News1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ValidEnd" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Resource" Relationship="ITechModel.FK_News_Resource" FromRole="News" ToRole="Resource" />
+        </EntityType>
+        <Association Name="FK_News_Resource">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="ITechModel.News" Role="News" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -289,6 +341,15 @@
                 <ScalarProperty Name="WorkstationGroup" ColumnName="WorkstationGroup" />
                 <ScalarProperty Name="idR" ColumnName="idR" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="ITechModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="ValidEnd" ColumnName="ValidEnd" />
+                <ScalarProperty Name="News1" ColumnName="News" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

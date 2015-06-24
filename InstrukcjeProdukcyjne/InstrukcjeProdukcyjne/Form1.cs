@@ -13,6 +13,7 @@ using System.Runtime.Serialization;
 using System.Xml;
 using InstrukcjeProdukcyjne.Properties;
 using ITechInstrukcjeModel;
+using System.ServiceModel;
 
 namespace InstrukcjeProdukcyjne
 {
@@ -30,6 +31,8 @@ namespace InstrukcjeProdukcyjne
         ITechInstrukcjeModel.ITechEntities db = new ITechInstrukcjeModel.ITechEntities();
 
         private SitechUser LoginUser = null;
+        private Resource CurrentWorkstation = null;
+
 
         private enum FolderType
 	    {
@@ -87,7 +90,7 @@ namespace InstrukcjeProdukcyjne
             {
 
                 GoFullscreen(true);
-                var s = Settings.Default.LocalDir;
+                var s = Settings.Default.Load;
                 db.WorkDir = Settings.Default.App.LocalDoc;
                 toolStripStatusLabel1.Text = Path.GetFullPath(db.WorkDir);
                 StartupApp.CreateWorkDirektory(db.WorkDir);
@@ -113,6 +116,8 @@ namespace InstrukcjeProdukcyjne
                 if (ShowLoginDlg("",true)==System.Windows.Forms.DialogResult.Cancel)
                     this.Close();
 
+                SelectWorkstation();
+
                 
 
                 textBoxUser.Text = string.Format("{0} ({1})", LoginUser.UserName, LoginUser.NrKarty);
@@ -124,6 +129,31 @@ namespace InstrukcjeProdukcyjne
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void SelectWorkstation(int? newidR=null)
+        {
+            if (newidR==null)
+            {
+                //Load from settings
+                if (Settings.Default.App.Stanowisko.HasValue)
+                    newidR = Settings.Default.App.Stanowisko.Value;
+                else
+                {
+                    ShowSettings();
+                    if (Settings.Default.App.Stanowisko.HasValue)
+                        newidR = Settings.Default.App.Stanowisko.Value;
+                }
+            }
+
+            if (!newidR.HasValue)
+                return;
+            var q = db.ResourceWorkstation.Where(m=>m.Id==newidR).FirstOrDefault();
+            if (q==null)
+                return;
+
+            CurrentWorkstation = q;
+            stanowiskaComboBox.SelectedValue = q.Id;
         }
 
         private void ZaładujElementy()
@@ -277,17 +307,25 @@ namespace InstrukcjeProdukcyjne
             ShowLoginDlg("Użyj kart aby odblokować", false);
         }
 
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        private void ShowSettings()
         {
             try
             {
                 var dial = new SettingsDlg();
-                dial.ShowDialog();
+                if (dial.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    SelectWorkstation();
+
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
+        }
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ShowSettings();
             // ustawienia
         }
 
@@ -320,6 +358,36 @@ namespace InstrukcjeProdukcyjne
         {
             VirtualKeyboard.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CurrentWorkstation==null)
+                    return;
+
+                var idR = CurrentWorkstation.Id;
+                using(var client = ServiceWorkstation.ServiceWorkstationClient.WorkstationClient())
+                {
+                    var news = client.GetNews(idR);
+                    if (news!=null)
+                        KomunikatLabel.Text = news.News1;
+                    else
+                        KomunikatLabel.Text = "";
+                }
+            }
+            catch(CommunicationException ex)
+            {
+                MessageBox.Show(ex.InnerException.Message);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+       
 
 
              

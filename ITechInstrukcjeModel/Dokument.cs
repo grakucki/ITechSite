@@ -11,7 +11,6 @@ namespace ITechInstrukcjeModel
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
     
     public partial class Dokument
     {
@@ -31,8 +30,7 @@ namespace ITechInstrukcjeModel
         public Nullable<System.DateTime> ValidDtmOff { get; set; }
         public Nullable<int> WorkProcess_Id { get; set; }
         public string Keywords { get; set; }
-
-        [IgnoreDataMember]
+    
         public virtual ICollection<InformationPlan> InformationPlan { get; set; }
     }
 }

@@ -148,6 +148,7 @@
             this.stanowiskaComboBox.Name = "stanowiskaComboBox";
             this.stanowiskaComboBox.Size = new System.Drawing.Size(266, 32);
             this.stanowiskaComboBox.TabIndex = 4;
+            this.stanowiskaComboBox.ValueMember = "Id";
             // 
             // WorkStationBindingSource
             // 
@@ -312,11 +313,11 @@
             // 
             // KomunikatLabel
             // 
-            this.KomunikatLabel.AutoSize = true;
+            this.KomunikatLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.KomunikatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.KomunikatLabel.Location = new System.Drawing.Point(4, 4);
+            this.KomunikatLabel.Location = new System.Drawing.Point(0, 0);
             this.KomunikatLabel.Name = "KomunikatLabel";
-            this.KomunikatLabel.Size = new System.Drawing.Size(195, 20);
+            this.KomunikatLabel.Size = new System.Drawing.Size(1437, 35);
             this.KomunikatLabel.TabIndex = 0;
             this.KomunikatLabel.Text = "Komunikat stanowisko ......";
             // 
@@ -373,6 +374,7 @@
             this.button3.TabIndex = 1;
             this.button3.Text = "Itech";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -415,7 +417,6 @@
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ModelBindingSource)).EndInit();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

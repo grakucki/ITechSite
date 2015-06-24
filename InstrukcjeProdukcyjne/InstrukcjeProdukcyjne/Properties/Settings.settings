@@ -8,5 +8,8 @@
     <Setting Name="LocalDir" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\ProgramData\Itech</Value>
     </Setting>
+    <Setting Name="Load" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Yes</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
