@@ -31,7 +31,19 @@ namespace InstrukcjeProdukcyjne
         ITechInstrukcjeModel.ITechEntities db = new ITechInstrukcjeModel.ITechEntities();
 
         private SitechUser LoginUser = null;
-        private Resource CurrentWorkstation = null;
+        private Resource _CurrentWorkstation = null;
+        public Resource CurrentWorkstation
+        {
+            get
+            {
+                return _CurrentWorkstation;
+            }
+            set
+            {
+                _CurrentWorkstation = value;
+                WorkStationBindingSource.DataSource = _CurrentWorkstation;
+            }
+        }
 
 
         private enum FolderType
@@ -88,35 +100,27 @@ namespace InstrukcjeProdukcyjne
         {
             try
             {
-
+                // ustawiamy aplikację pełnoekranową
                 GoFullscreen(true);
+
+                // ładujemy ustawienia aplikacji
                 var s = Settings.Default.Load;
                 db.WorkDir = Settings.Default.App.LocalDoc;
                 toolStripStatusLabel1.Text = Path.GetFullPath(db.WorkDir);
                 StartupApp.CreateWorkDirektory(db.WorkDir);
 
 
-                var resourcesFile = Path.Combine(db.WorkDir, "resources.xml");
-                if (!File.Exists(resourcesFile))
-                {
-                    Process.Start(db.WorkDir);
-                    throw new Exception("Nie odnaleziono plików konfiguracyjnych. umieść je ręcznie w " + db.WorkDir);
-                }
+                // ładujemy resources
+                LoadResource(Settings.Default.App.Stanowisko);
 
+                //ZaładujStanowiska();
 
-
-                db.ImportResource();
-
-                ZaładujStanowiska();
-
-                ZaładujElementy();
                 
-                OnResourceChange(0);
+                OnResourceFileListChange(0);
 
                 if (ShowLoginDlg("",true)==System.Windows.Forms.DialogResult.Cancel)
                     this.Close();
 
-                SelectWorkstation();
 
                 
 
@@ -131,45 +135,95 @@ namespace InstrukcjeProdukcyjne
             }
         }
 
-        private void SelectWorkstation(int? newidR=null)
+
+
+        /// <summary>
+        /// Załaduj Resource 
+        /// Ustaw  Workstation o zadanym idR
+        /// Jeśli jest dostępna baza to z bazy jeśli nie to z pliku
+        /// </summary>
+        /// <param name="idR"></param>
+        private void LoadResource(int? idR)
         {
-            if (newidR==null)
+            using(var stat = new  ActionControlStatus(buttonItech))
             {
-                //Load from settings
-                if (Settings.Default.App.Stanowisko.HasValue)
-                    newidR = Settings.Default.App.Stanowisko.Value;
-                else
+                using(var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
                 {
-                    ShowSettings();
-                    if (Settings.Default.App.Stanowisko.HasValue)
-                        newidR = Settings.Default.App.Stanowisko.Value;
+                    if (client.IsOnLine())
+                    {
+                            db.ResourceList = client.GetInformationPlainsList().ToList();
+                    }
+                    else
+                    {
+                        var resourcesFile = Path.Combine(db.WorkDir, "resources.xml");
+                        if (!File.Exists(resourcesFile))
+                        {
+                            throw new Exception("Nie odnaleziono plików konfiguracyjnych. Musisz być połaczony aby zainicjować aplikację.");
+                        }
+
+                        // pobieramy z pliku
+                        db.ImportResource(null);
+                    }
                 }
+
+                if (idR.HasValue)
+                    CurrentWorkstation = db.ResourceWorkstation_Local.Where(m => m.Id == idR.Value).FirstOrDefault();
+                else
+                    CurrentWorkstation = null;
+
+
+                if (CurrentWorkstation==null)
+                    stat.SetState(ActionControlStatus.ActionControlState.Warning,"");
+                else
+                    stat.SetState(ActionControlStatus.ActionControlState.Ok, "");
+
+
+                ZaładujElementy(CurrentWorkstation);
+                LoadNews(CurrentWorkstation.Id);
+
             }
-
-            if (!newidR.HasValue)
-                return;
-            var q = db.ResourceWorkstation.Where(m=>m.Id==newidR).FirstOrDefault();
-            if (q==null)
-                return;
-
-            CurrentWorkstation = q;
-            stanowiskaComboBox.SelectedValue = q.Id;
         }
 
-        private void ZaładujElementy()
+        //private void SelectWorkstation(int? newidR=null)
+        //{
+        //    if (newidR==null)
+        //    {
+        //        //Load from settings
+        //        if (Settings.Default.App.Stanowisko.HasValue)
+        //            newidR = Settings.Default.App.Stanowisko.Value;
+        //        else
+        //        {
+        //            ShowSettings();
+        //            if (Settings.Default.App.Stanowisko.HasValue)
+        //                newidR = Settings.Default.App.Stanowisko.Value;
+        //        }
+        //    }
+
+        //    if (!newidR.HasValue)
+        //        return;
+
+        //    var q = db.ResourceWorkstation_Local.Where(m => m.Id == newidR).FirstOrDefault();
+        //    if (q==null)
+        //        return;
+
+        //    CurrentWorkstation = q;
+        //    stanowiskaComboBox.SelectedValue = q.Id;
+        //}
+
+        private void ZaładujElementy(Resource res)
         {
-            var data = db.ResourceModel;
+            var data = db.ResourceModel_Local;
             ModelBindingSource.DataSource = data;
 
         }
 
         private void ZaładujStanowiska()
         {
-            var data = db.ResourceWorkstation;
+            var data = db.ResourceWorkstation_Local;
             WorkStationBindingSource.DataSource = data;
         }
 
-        private void OnResourceChange(int NewResurceType)
+        private void OnResourceFileListChange(int NewResurceType)
         {
             Color cOn = Color.Green;
             Color cOff = Color.Orange;
@@ -182,8 +236,10 @@ namespace InstrukcjeProdukcyjne
         {
             // załaduj instrukcje stanowiskowe
             var x = WorkStationBindingSource.Current;
+            if (x == null)
+                return;
             Resource xx = (Resource )x;
-            OnResourceChange(xx.Type);
+            OnResourceFileListChange(xx.Type);
             ZaładujPliki(xx);
         }
 
@@ -192,8 +248,11 @@ namespace InstrukcjeProdukcyjne
             // załaduj instrukcje Modelu
             //ZaładujPliki(FolderType.Elementy, elementyComboBox.Text);
             var x = ModelBindingSource.Current;
+            if (x == null)
+                return;
+
             Resource xx = (Resource )x;
-            OnResourceChange(xx.Type);
+            OnResourceFileListChange(xx.Type);
             ZaładujPliki(xx);
         }
 
@@ -267,16 +326,10 @@ namespace InstrukcjeProdukcyjne
                     if (mfi != null)
                     {
                         if (File.Exists(mfi.FullFileName))
-                        {
                             mediaViewerControl1.ShowDokument(mfi.FullFileName);
-                            KomunikatLabel.Text = mfi.FullFileName;
-                            //Process.Start(mfi.FullFileName);
-                        }
-                        
                         else
                             MessageBox.Show("Nie odnaleziono pliku." + mfi.FileName);
                     }
-                    //do coś 
                 }        
 
             }
@@ -313,7 +366,8 @@ namespace InstrukcjeProdukcyjne
             {
                 var dial = new SettingsDlg();
                 if (dial.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    SelectWorkstation();
+                    LoadResource(Properties.Settings.Default.App.Stanowisko);
+                    
 
 
             }
@@ -359,6 +413,32 @@ namespace InstrukcjeProdukcyjne
             VirtualKeyboard.Show();
         }
 
+
+        private void LoadNews(int idR)
+        {
+            using (var Work = new InstrukcjeProdukcyjne.ActionControlStatus(buttonItech))
+            {
+                Work.SetState(ActionControlStatus.ActionControlState.Working, "");
+                using(var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+                {
+                    var d = client.Ping();
+                    toolStripStatusITechTime.Text = (d.ToShortTimeString());
+                    var news = client.GetNews(idR);
+                    if (news != null)
+                    {
+                        KomunikatLabel.Text =news.News1;
+                        labelCzasNews.Text = (news.CreatedAt.HasValue ? news.CreatedAt.Value.ToString() : "");
+                    }
+                    else
+                    {
+                        KomunikatLabel.Text = "";
+                        labelCzasNews.Text = "";
+                    }
+                }
+                Work.SetState(ActionControlStatus.ActionControlState.Ok, "");
+            }
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             try
@@ -366,24 +446,24 @@ namespace InstrukcjeProdukcyjne
                 if (CurrentWorkstation==null)
                     return;
 
-                var idR = CurrentWorkstation.Id;
-                using(var client = ServiceWorkstation.ServiceWorkstationClient.WorkstationClient())
-                {
-                    var news = client.GetNews(idR);
-                    if (news!=null)
-                        KomunikatLabel.Text = news.News1;
-                    else
-                        KomunikatLabel.Text = "";
-                }
+                LoadNews(CurrentWorkstation.Id);
             }
             catch(CommunicationException ex)
             {
-                MessageBox.Show(ex.InnerException.Message);
+                if (ex.InnerException!=null)
+                    MessageBox.Show(ex.InnerException.Message);
+                else
+                    MessageBox.Show(ex.Message);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
+        }
+
+        private void buttonCzytnik_Click(object sender, EventArgs e)
+        {
 
         }
 

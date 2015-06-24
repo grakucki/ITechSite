@@ -4,21 +4,21 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ITechService" />
-      <xsd:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" />
+      <xsd:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" />
+      <xsd:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="IServiceWorkstation_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceWorkstation_TestConnection_InputMessage">
     <wsdl:part name="parameters" element="tns:TestConnection" />
   </wsdl:message>
   <wsdl:message name="IServiceWorkstation_TestConnection_OutputMessage">
     <wsdl:part name="parameters" element="tns:TestConnectionResponse" />
-  </wsdl:message>
-  <wsdl:message name="IServiceWorkstation_GetDataUsingDataContract_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContract" />
-  </wsdl:message>
-  <wsdl:message name="IServiceWorkstation_GetDataUsingDataContract_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetDataUsingDataContractResponse" />
   </wsdl:message>
   <wsdl:message name="IServiceWorkstation_GetNews_InputMessage">
     <wsdl:part name="parameters" element="tns:GetNews" />
@@ -26,22 +26,71 @@
   <wsdl:message name="IServiceWorkstation_GetNews_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetNewsResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetSimaticCpuType_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimaticCpuType" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetSimaticCpuType_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSimaticCpuTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetWorkstationList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkstationList" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetWorkstationList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetWorkstationListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetInformationPlain_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInformationPlain" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetInformationPlain_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInformationPlainResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetInformationPlainsList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInformationPlainsList" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetInformationPlainsList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInformationPlainsListResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceWorkstation">
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/Ping" message="tns:IServiceWorkstation_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/PingResponse" message="tns:IServiceWorkstation_Ping_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="TestConnection">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/TestConnection" message="tns:IServiceWorkstation_TestConnection_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/TestConnectionResponse" message="tns:IServiceWorkstation_TestConnection_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetDataUsingDataContract" message="tns:IServiceWorkstation_GetDataUsingDataContract_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetDataUsingDataContractResponse" message="tns:IServiceWorkstation_GetDataUsingDataContract_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetNews">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetNews" message="tns:IServiceWorkstation_GetNews_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetNewsResponse" message="tns:IServiceWorkstation_GetNews_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetSimaticCpuType">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetSimaticCpuType" message="tns:IServiceWorkstation_GetSimaticCpuType_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetSimaticCpuTypeResponse" message="tns:IServiceWorkstation_GetSimaticCpuType_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkstationList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetWorkstationList" message="tns:IServiceWorkstation_GetWorkstationList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetWorkstationListResponse" message="tns:IServiceWorkstation_GetWorkstationList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInformationPlain">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetInformationPlain" message="tns:IServiceWorkstation_GetInformationPlain_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetInformationPlainResponse" message="tns:IServiceWorkstation_GetInformationPlain_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInformationPlainsList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetInformationPlainsList" message="tns:IServiceWorkstation_GetInformationPlainsList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetInformationPlainsListResponse" message="tns:IServiceWorkstation_GetInformationPlainsList_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceWorkstation" type="tns:IServiceWorkstation">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="TestConnection">
       <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/TestConnection" style="document" />
       <wsdl:input>
@@ -51,8 +100,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetDataUsingDataContract">
-      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetDataUsingDataContract" style="document" />
+    <wsdl:operation name="GetNews">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetNews" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -60,8 +109,35 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetNews">
-      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetNews" style="document" />
+    <wsdl:operation name="GetSimaticCpuType">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetSimaticCpuType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWorkstationList">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetWorkstationList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInformationPlain">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetInformationPlain" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInformationPlainsList">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetInformationPlainsList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

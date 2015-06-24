@@ -1,10 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ITechService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ITechService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="CompositeType">
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="News">
     <xs:sequence>
-      <xs:element minOccurs="0" name="BoolValue" type="xs:boolean" />
-      <xs:element minOccurs="0" name="StringValue" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="News1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ValidEnd" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="CompositeType" nillable="true" type="tns:CompositeType" />
+  <xs:element name="News" nillable="true" type="tns:News" />
+  <xs:complexType name="ArrayOfResource">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Resource" nillable="true" type="tns:Resource" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfResource" nillable="true" type="tns:ArrayOfResource" />
+  <xs:complexType name="Resource">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Enabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="InformationPlan" nillable="true" type="tns:ArrayOfInformationPlan" />
+      <xs:element minOccurs="0" name="Keywords" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastWriteTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="News" nillable="true" type="tns:News" />
+      <xs:element minOccurs="0" name="No" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" type="xs:int" />
+      <xs:element minOccurs="0" name="WorkProcess" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Workstation" nillable="true" type="tns:ArrayOfWorkstation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Resource" nillable="true" type="tns:Resource" />
+  <xs:complexType name="ArrayOfInformationPlan">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InformationPlan" nillable="true" type="tns:InformationPlan" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfInformationPlan" nillable="true" type="tns:ArrayOfInformationPlan" />
+  <xs:complexType name="InformationPlan">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Dokument" nillable="true" type="tns:Dokument" />
+      <xs:element minOccurs="0" name="Enabled" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IdD" type="xs:int" />
+      <xs:element minOccurs="0" name="Order" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="idR" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="InformationPlan" nillable="true" type="tns:InformationPlan" />
+  <xs:complexType name="Dokument">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodeName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Enabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FileType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Keywords" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastWriteTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ValidDtmOff" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ValidDtmOn" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="WorkProcess_Id" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Dokument" nillable="true" type="tns:Dokument" />
+  <xs:complexType name="ArrayOfWorkstation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Workstation" nillable="true" type="tns:Workstation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfWorkstation" nillable="true" type="tns:ArrayOfWorkstation" />
+  <xs:complexType name="Workstation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Area" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Factory" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Resource" nillable="true" type="tns:Resource" />
+      <xs:element minOccurs="0" name="Setrownik_DB" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Sterownik_Ip" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Sterownik_Model" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="WorkstationGroup" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="idR" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Workstation" nillable="true" type="tns:Workstation" />
 </xs:schema>

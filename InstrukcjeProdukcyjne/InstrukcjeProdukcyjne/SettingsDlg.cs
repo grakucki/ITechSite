@@ -77,10 +77,11 @@ namespace InstrukcjeProdukcyjne
             int? id = Properties.Settings.Default.App.Stanowisko;
 
             db.WorkDir = Properties.Settings.Default.App.LocalDoc;
-            var r = db.ImportResource();
-
             
-            var workstations = db.ResourceWorkstation;
+            var r = db.ImportResource(null);
+
+
+            var workstations = db.ResourceWorkstation_Local;
 
             resourceBindingSource.DataSource = workstations;
 
@@ -157,7 +158,7 @@ namespace InstrukcjeProdukcyjne
                 int idR = GetCurrent().Workstation.FirstOrDefault().idR;
                 using(new CursorWait())
                 { 
-                    client = ServiceWorkstation.ServiceWorkstationClient.WorkstationClient(addr);
+                    client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient(addr);
                     s = client.TestConnection(idR);
                     client.Close();
                 }

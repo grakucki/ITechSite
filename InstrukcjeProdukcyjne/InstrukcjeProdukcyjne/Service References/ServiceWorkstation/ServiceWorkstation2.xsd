@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ITechService" />
-  <xs:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" />
+  <xs:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" />
+  <xs:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="Ping">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PingResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="PingResult" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="TestConnection">
     <xs:complexType>
       <xs:sequence>
@@ -16,20 +28,6 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetDataUsingDataContract">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ITechService" minOccurs="0" name="composite" nillable="true" type="q1:CompositeType" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetDataUsingDataContractResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ITechService" minOccurs="0" name="GetDataUsingDataContractResult" nillable="true" type="q2:CompositeType" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="GetNews">
     <xs:complexType>
       <xs:sequence>
@@ -40,7 +38,57 @@
   <xs:element name="GetNewsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetNewsResult" nillable="true" type="q3:News" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetNewsResult" nillable="true" type="q1:News" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSimaticCpuType">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSimaticCpuTypeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetSimaticCpuTypeResult" nillable="true" type="q2:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWorkstationList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetWorkstationListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetWorkstationListResult" nillable="true" type="q3:ArrayOfResource" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInformationPlain">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idR" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInformationPlainResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetInformationPlainResult" nillable="true" type="q4:Resource" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInformationPlainsList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetInformationPlainsListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetInformationPlainsListResult" nillable="true" type="q5:ArrayOfResource" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

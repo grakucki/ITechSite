@@ -55,18 +55,22 @@
             this.ModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.KomunikatLabel = new System.Windows.Forms.Label();
+            this.labelCzasNews = new System.Windows.Forms.Label();
             this.mediaViewerControl1 = new InstrukcjeProdukcyjne.MediaViewerControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.buttonSterownik = new System.Windows.Forms.Button();
+            this.buttonItech = new System.Windows.Forms.Button();
+            this.buttonCzytnik = new System.Windows.Forms.Button();
+            this.toolStripStatusITechTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WorkStationBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ModelBindingSource)).BeginInit();
             this.panel2.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -122,7 +126,8 @@
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.toolStripStatusLabel1,
+            this.toolStripStatusITechTime});
             this.statusStrip1.Location = new System.Drawing.Point(10, 632);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1437, 22);
@@ -132,7 +137,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1422, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1348, 17);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -304,22 +309,47 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.panel2.Controls.Add(this.KomunikatLabel);
+            this.panel2.Controls.Add(this.tableLayoutPanel2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(10, 597);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1437, 35);
             this.panel2.TabIndex = 6;
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.KomunikatLabel, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.labelCzasNews, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1437, 35);
+            this.tableLayoutPanel2.TabIndex = 1;
+            // 
             // KomunikatLabel
             // 
             this.KomunikatLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.KomunikatLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.KomunikatLabel.Location = new System.Drawing.Point(0, 0);
+            this.KomunikatLabel.Location = new System.Drawing.Point(103, 0);
             this.KomunikatLabel.Name = "KomunikatLabel";
-            this.KomunikatLabel.Size = new System.Drawing.Size(1437, 35);
+            this.KomunikatLabel.Size = new System.Drawing.Size(1331, 35);
             this.KomunikatLabel.TabIndex = 0;
             this.KomunikatLabel.Text = "Komunikat stanowisko ......";
+            this.KomunikatLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelCzasNews
+            // 
+            this.labelCzasNews.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelCzasNews.Location = new System.Drawing.Point(3, 0);
+            this.labelCzasNews.Name = "labelCzasNews";
+            this.labelCzasNews.Size = new System.Drawing.Size(94, 35);
+            this.labelCzasNews.TabIndex = 1;
+            this.labelCzasNews.Text = "...";
             // 
             // mediaViewerControl1
             // 
@@ -341,9 +371,9 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Controls.Add(this.button2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button3, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.button4, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.buttonSterownik, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.buttonItech, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.buttonCzytnik, 2, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 487);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
@@ -351,42 +381,50 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(394, 100);
             this.tableLayoutPanel1.TabIndex = 8;
             // 
-            // button2
+            // buttonSterownik
             // 
-            this.button2.BackColor = System.Drawing.Color.Red;
-            this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button2.Location = new System.Drawing.Point(3, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(125, 94);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Sterwonik";
-            this.button2.UseVisualStyleBackColor = false;
+            this.buttonSterownik.BackColor = System.Drawing.Color.Red;
+            this.buttonSterownik.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonSterownik.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonSterownik.Location = new System.Drawing.Point(3, 3);
+            this.buttonSterownik.Name = "buttonSterownik";
+            this.buttonSterownik.Size = new System.Drawing.Size(125, 94);
+            this.buttonSterownik.TabIndex = 0;
+            this.buttonSterownik.Text = "Sterownik";
+            this.buttonSterownik.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // buttonItech
             // 
-            this.button3.BackColor = System.Drawing.Color.Red;
-            this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button3.Location = new System.Drawing.Point(134, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(125, 94);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Itech";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonItech.BackColor = System.Drawing.Color.Red;
+            this.buttonItech.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonItech.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonItech.Location = new System.Drawing.Point(134, 3);
+            this.buttonItech.Name = "buttonItech";
+            this.buttonItech.Size = new System.Drawing.Size(125, 94);
+            this.buttonItech.TabIndex = 1;
+            this.buttonItech.Text = "Itech";
+            this.buttonItech.UseVisualStyleBackColor = false;
+            this.buttonItech.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // buttonCzytnik
             // 
-            this.button4.BackColor = System.Drawing.Color.Green;
-            this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button4.Location = new System.Drawing.Point(265, 3);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(126, 94);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "Czytnik";
-            this.button4.UseVisualStyleBackColor = false;
+            this.buttonCzytnik.BackColor = System.Drawing.Color.Green;
+            this.buttonCzytnik.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonCzytnik.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonCzytnik.Location = new System.Drawing.Point(265, 3);
+            this.buttonCzytnik.Name = "buttonCzytnik";
+            this.buttonCzytnik.Size = new System.Drawing.Size(126, 94);
+            this.buttonCzytnik.TabIndex = 2;
+            this.buttonCzytnik.Text = "Czytnik";
+            this.buttonCzytnik.UseVisualStyleBackColor = false;
+            this.buttonCzytnik.Click += new System.EventHandler(this.buttonCzytnik_Click);
+            // 
+            // toolStripStatusITechTime
+            // 
+            this.toolStripStatusITechTime.AutoSize = false;
+            this.toolStripStatusITechTime.Name = "toolStripStatusITechTime";
+            this.toolStripStatusITechTime.Size = new System.Drawing.Size(43, 17);
+            this.toolStripStatusITechTime.Text = "  00:00 ";
             // 
             // Form1
             // 
@@ -417,6 +455,7 @@
             this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ModelBindingSource)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -453,9 +492,12 @@
         private System.Windows.Forms.ToolStripMenuItem oAplikacjiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem klawiaturaToolStripMenuItem;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button buttonSterownik;
+        private System.Windows.Forms.Button buttonItech;
+        private System.Windows.Forms.Button buttonCzytnik;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label labelCzasNews;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusITechTime;
     }
 }
 
