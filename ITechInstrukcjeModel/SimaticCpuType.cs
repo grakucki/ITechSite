@@ -11,15 +11,11 @@ namespace ITechInstrukcjeModel
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
     
-    public partial class News
+    public partial class SimaticCpuType
     {
         public int id { get; set; }
-        public string News1 { get; set; }
-        public Nullable<System.DateTime> ValidEnd { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        [IgnoreDataMember]
-        public virtual Resource Resource { get; set; }
+        public string CpuType { get; set; }
+        public bool Enabled { get; set; }
     }
 }

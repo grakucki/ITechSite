@@ -155,7 +155,7 @@ namespace InstrukcjeProdukcyjne
             try
             {
                 string s = string.Empty;
-                int idR = GetCurrent().Workstation.FirstOrDefault().idR;
+                int idR = GetCurrent().Id;
                 using(new CursorWait())
                 { 
                     client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient(addr);

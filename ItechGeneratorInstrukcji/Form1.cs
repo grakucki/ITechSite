@@ -56,7 +56,7 @@ namespace ItechGeneratorInstrukcji
         {
             try
             {
-                var r = db.ImportResource();
+                var r = db.ImportResource(null);
                 resourceBindingSource.DataSource = r;
                 informationPlanBindingSource.DataSource = r.FirstOrDefault().InformationPlan;
 

@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnonymousType.cs" />
     <Compile Include="Class1.cs" />
     <Compile Include="Dokument.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
@@ -86,8 +87,14 @@
     <Compile Include="Resource.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SimaticCpuType.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UstawieniaSterwnika.cs" />
     <Compile Include="Workstation.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WorkstationGroup.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
     <Compile Include="XmlStore.cs" />

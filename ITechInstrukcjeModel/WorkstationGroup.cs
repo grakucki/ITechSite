@@ -11,15 +11,10 @@ namespace ITechInstrukcjeModel
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
     
-    public partial class News
+    public partial class WorkstationGroup
     {
-        public int id { get; set; }
-        public string News1 { get; set; }
-        public Nullable<System.DateTime> ValidEnd { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        [IgnoreDataMember]
-        public virtual Resource Resource { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace ITechService
             if (ex is DbEntityValidationException)
             {
                 DbEntityValidationException dev = (DbEntityValidationException ) ex;
-                sb.AppendLine("DbEntityValidation:");
+                sb.AppendLine("DbEntityValidation: " + dev.Message);
                 foreach (var item in dev.EntityValidationErrors)
                 {
                     foreach (var b in item.ValidationErrors)

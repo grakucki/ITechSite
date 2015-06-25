@@ -367,9 +367,6 @@ namespace InstrukcjeProdukcyjne
                 var dial = new SettingsDlg();
                 if (dial.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     LoadResource(Properties.Settings.Default.App.Stanowisko);
-                    
-
-
             }
             catch (Exception ex)
             {

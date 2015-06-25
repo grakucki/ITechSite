@@ -28,18 +28,14 @@ namespace ITechInstrukcjeModel
         "S71500"};
     }
 
-    [MetadataType(typeof(DokumentMetaData))]
-    public partial class Dokument
+
+
+    public partial class News
     {
-
-    }
-
-
-    public class DokumentMetaData
-    {
-        [IgnoreDataMember]
-        public ICollection<InformationPlan> InformationPlan { get; set; }
-
+        public static News Clone(News o)
+        {
+            return new News().From(o);
+        }
     }
 
 
@@ -50,19 +46,6 @@ namespace ITechInstrukcjeModel
     //    public ICollection<InformationPlan> InformationPlan { get; set; }
     //}
 
-
-    [MetadataType(typeof(InformationMetaData))]
-    public partial class InformationPlan
-    {
-
-    }
-
-
-    public class InformationMetaData
-    {
-        [IgnoreDataMember]
-        public Resource Resource { get; set; }
-    }
 
 
     //public partial class InformationPlan

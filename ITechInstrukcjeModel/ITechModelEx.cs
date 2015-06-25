@@ -26,24 +26,44 @@ namespace ITechInstrukcjeModel
         public string WorkDir { get; set; }
         public List<Resource> ResourceList { get; set; }
 
-        public List<Resource> ResourceModel
+
+        public IQueryable<Resource> ResourceModel
         {
             get
             {
-                return this.Resource.Local.Where(m => m.Type == 2).ToList();
+                return this.Resource.Where(m => m.Type == 2 && m.Enabled);
             }
 
         }
 
-
-        public List<Resource> ResourceWorkstation
+        public List<Resource> ResourceModel_Local
         {
             get
             {
-                return this.Resource.Local.Where(m => m.Type == 1).ToList();
+                //return this.Resource.Local.Where(m => m.Type == 2).ToList();
+                return ResourceList.Where(m => m.Type == 2).ToList();
             }
 
         }
+
+        public IQueryable<Resource> ResourceWorkstation
+        {
+            get
+            {
+               return this.Resource.Where(m => m.Type == 1 && m.Enabled);
+               
+            }
+        }
+
+        public List<Resource> ResourceWorkstation_Local
+        {
+            get
+            {
+                return this.ResourceList.Where(m => m.Type == 1).ToList();
+            }
+        }
+
+
 
 
         /// <summary>
@@ -78,21 +98,20 @@ namespace ITechInstrukcjeModel
 
             return plan;
         }
+        
+
         /// <summary>
         /// Load resource from xml file 
         /// </summary>
         /// <returns></returns>
-        public List<Resource> ImportResource()
+        public List<Resource> ImportResource(string filename)
         {
-            var resourcesFile = Path.Combine(WorkDir, "resources.xml");
-           
+            var resourcesFile = Path.Combine(WorkDir, filename ?? "resources.xml");
             ResourceList = LoadFromXml(resourcesFile);
+            //this.Resource.Local.Clear();
+            //this.Resource.AddRange(ResourceList);
 
-            this.Resource.Local.Clear();
-            this.Resource.AddRange(ResourceList);
-
-
-            return ResourceList;
+            return this.Resource.ToList();
         }
 
 

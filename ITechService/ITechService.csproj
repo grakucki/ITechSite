@@ -49,6 +49,7 @@
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -72,7 +73,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnonymousType.cs" />
     <Compile Include="ExceptionResolver.cs" />
+    <Compile Include="ItechInstrukcjieEx.cs" />
     <Compile Include="ServiceWorkstation.svc.cs">
       <DependentUpon>ServiceWorkstation.svc</DependentUpon>
     </Compile>
