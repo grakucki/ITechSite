@@ -151,7 +151,7 @@ namespace InstrukcjeProdukcyjne
 
 
 
-            ServiceWorkstation.ServiceWorkstationClient client = null;
+            ServiceWorkstation.ServiceWorkstationClientEx client = null;
             try
             {
                 string s = string.Empty;

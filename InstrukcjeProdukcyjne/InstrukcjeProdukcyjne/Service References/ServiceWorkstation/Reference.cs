@@ -9,7 +9,118 @@
 //------------------------------------------------------------------------------
 
 namespace InstrukcjeProdukcyjne.ServiceWorkstation {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DokumentIdentity", Namespace="http://schemas.datacontract.org/2004/07/ITechService")]
+    [System.SerializableAttribute()]
+    public partial class DokumentIdentity : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CodeNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime LastWriteTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LocalFileNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long SizeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CodeName {
+            get {
+                return this.CodeNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CodeNameField, value) != true)) {
+                    this.CodeNameField = value;
+                    this.RaisePropertyChanged("CodeName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime LastWriteTime {
+            get {
+                return this.LastWriteTimeField;
+            }
+            set {
+                if ((this.LastWriteTimeField.Equals(value) != true)) {
+                    this.LastWriteTimeField = value;
+                    this.RaisePropertyChanged("LastWriteTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LocalFileName {
+            get {
+                return this.LocalFileNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LocalFileNameField, value) != true)) {
+                    this.LocalFileNameField = value;
+                    this.RaisePropertyChanged("LocalFileName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long Size {
+            get {
+                return this.SizeField;
+            }
+            set {
+                if ((this.SizeField.Equals(value) != true)) {
+                    this.SizeField = value;
+                    this.RaisePropertyChanged("Size");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceWorkstation.IServiceWorkstation")]
@@ -52,10 +163,22 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         System.Threading.Tasks.Task<ITechInstrukcjeModel.Resource> GetInformationPlainAsync(int idR);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetInformationPlainsList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetInformationPlainsListResponse")]
-        ITechInstrukcjeModel.Resource[] GetInformationPlainsList();
+        ITechInstrukcjeModel.Resource[] GetInformationPlainsList(int idR);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetInformationPlainsList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetInformationPlainsListResponse")]
-        System.Threading.Tasks.Task<ITechInstrukcjeModel.Resource[]> GetInformationPlainsListAsync();
+        System.Threading.Tasks.Task<ITechInstrukcjeModel.Resource[]> GetInformationPlainsListAsync(int idR);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetDokumentsList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetDokumentsListResponse")]
+        InstrukcjeProdukcyjne.ServiceWorkstation.DokumentIdentity[] GetDokumentsList(int idR);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetDokumentsList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetDokumentsListResponse")]
+        System.Threading.Tasks.Task<InstrukcjeProdukcyjne.ServiceWorkstation.DokumentIdentity[]> GetDokumentsListAsync(int idR);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/RetrieveFile", ReplyAction="http://tempuri.org/IServiceWorkstation/RetrieveFileResponse")]
+        System.IO.Stream RetrieveFile();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/RetrieveFile", ReplyAction="http://tempuri.org/IServiceWorkstation/RetrieveFileResponse")]
+        System.Threading.Tasks.Task<System.IO.Stream> RetrieveFileAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -133,12 +256,28 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
             return base.Channel.GetInformationPlainAsync(idR);
         }
         
-        public ITechInstrukcjeModel.Resource[] GetInformationPlainsList() {
-            return base.Channel.GetInformationPlainsList();
+        public ITechInstrukcjeModel.Resource[] GetInformationPlainsList(int idR) {
+            return base.Channel.GetInformationPlainsList(idR);
         }
         
-        public System.Threading.Tasks.Task<ITechInstrukcjeModel.Resource[]> GetInformationPlainsListAsync() {
-            return base.Channel.GetInformationPlainsListAsync();
+        public System.Threading.Tasks.Task<ITechInstrukcjeModel.Resource[]> GetInformationPlainsListAsync(int idR) {
+            return base.Channel.GetInformationPlainsListAsync(idR);
+        }
+        
+        public InstrukcjeProdukcyjne.ServiceWorkstation.DokumentIdentity[] GetDokumentsList(int idR) {
+            return base.Channel.GetDokumentsList(idR);
+        }
+        
+        public System.Threading.Tasks.Task<InstrukcjeProdukcyjne.ServiceWorkstation.DokumentIdentity[]> GetDokumentsListAsync(int idR) {
+            return base.Channel.GetDokumentsListAsync(idR);
+        }
+        
+        public System.IO.Stream RetrieveFile() {
+            return base.Channel.RetrieveFile();
+        }
+        
+        public System.Threading.Tasks.Task<System.IO.Stream> RetrieveFileAsync() {
+            return base.Channel.RetrieveFileAsync();
         }
     }
 }

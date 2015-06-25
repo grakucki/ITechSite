@@ -78,6 +78,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -132,6 +133,11 @@
     <Compile Include="PlanInformacyjny.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\ServiceDokument\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ServiceWorkstation\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -211,6 +217,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Service References\ServiceDokument\ServiceDokument.wsdl" />
+    <None Include="Service References\ServiceDokument\ServiceDokument.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDokument\ServiceDokument1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceDokument\ServiceDokument2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceWorkstation\InstrukcjeProdukcyjne.ServiceWorkstation.DokumentIdentity.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ServiceWorkstation\ServiceWorkstation.wsdl" />
     <None Include="Service References\ServiceWorkstation\ServiceWorkstation.xsd">
       <SubType>Designer</SubType>
@@ -224,9 +243,17 @@
     <None Include="Service References\ServiceWorkstation\ServiceWorkstation3.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ServiceWorkstation\ServiceWorkstation4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceWorkstation\ServiceWorkstation5.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon1.ico" />
@@ -239,6 +266,13 @@
     <Content Include="image\Image1.bmp" />
     <Content Include="image\mp4.bmp" />
     <Content Include="readme.txt" />
+    <None Include="Service References\ServiceDokument\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ServiceDokument\configuration.svcinfo" />
+    <None Include="Service References\ServiceDokument\configuration91.svcinfo" />
+    <None Include="Service References\ServiceDokument\ServiceDokument.disco" />
     <None Include="Service References\ServiceWorkstation\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -313,6 +347,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceDokument\" />
     <WCFMetadataStorage Include="Service References\ServiceWorkstation\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

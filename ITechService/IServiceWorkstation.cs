@@ -1,6 +1,7 @@
 ﻿using ITechInstrukcjeModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
@@ -18,6 +19,7 @@ namespace ITechService
         /// </summary>
         /// <returns>Data i czas serwera</returns>
         [OperationContract]
+        [WebGet(UriTemplate = "Ping")]
         DateTime Ping();
 
 

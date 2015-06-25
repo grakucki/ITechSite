@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d5d0d7f9-7f5b-4b0b-97ce-3a3f52302bba" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="696c15f8-a059-4990-ac3a-fa93cf00eae1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,12 +22,14 @@
     <MetadataSource Address="http://localhost:53854/ServiceWorkstation.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="ServiceWorkstation.disco" MetadataType="Disco" ID="15d63b2a-a778-43e6-b4fb-cb22096e0d5b" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?disco" />
-    <MetadataFile FileName="ServiceWorkstation.xsd" MetadataType="Schema" ID="55545994-4726-49fc-b4cd-411a0792b302" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd1" />
-    <MetadataFile FileName="ServiceWorkstation.wsdl" MetadataType="Wsdl" ID="910b8a0d-3d67-4a0d-8b0f-dab675b3c644" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?wsdl" />
-    <MetadataFile FileName="ServiceWorkstation2.xsd" MetadataType="Schema" ID="3026acef-19d7-44cd-b466-fc15d37eeb69" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd0" />
-    <MetadataFile FileName="ServiceWorkstation3.xsd" MetadataType="Schema" ID="bc739859-43ee-455e-9a9c-52049452c59c" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd3" />
-    <MetadataFile FileName="ServiceWorkstation1.xsd" MetadataType="Schema" ID="a693f039-0f68-46ee-ba97-96ee4a72e11a" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceWorkstation.disco" MetadataType="Disco" ID="078e4283-6c07-4820-a00d-cbd148537228" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?disco" />
+    <MetadataFile FileName="ServiceWorkstation.xsd" MetadataType="Schema" ID="086e6b0f-5b44-4a2e-a8e6-0a6f11bb9a90" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceWorkstation1.xsd" MetadataType="Schema" ID="2e12c2a5-2a42-4ae8-aad2-ba6f4fa84827" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd5" />
+    <MetadataFile FileName="ServiceWorkstation2.xsd" MetadataType="Schema" ID="9936f94a-95ef-4c51-9f8c-ad1bb4365d5f" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd4" />
+    <MetadataFile FileName="ServiceWorkstation.wsdl" MetadataType="Wsdl" ID="575d081a-08c1-47e9-9588-2d55e6d1e646" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?wsdl" />
+    <MetadataFile FileName="ServiceWorkstation3.xsd" MetadataType="Schema" ID="91bbc648-a517-4a15-a739-478bdd1d45c5" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceWorkstation4.xsd" MetadataType="Schema" ID="a86e5f50-b918-4b24-af90-a79b4b410cac" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd3" />
+    <MetadataFile FileName="ServiceWorkstation5.xsd" MetadataType="Schema" ID="e5160cb0-1d06-48b1-aaff-6f57a5d01d6b" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd2" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

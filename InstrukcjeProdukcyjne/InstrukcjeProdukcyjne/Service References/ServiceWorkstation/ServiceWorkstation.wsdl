@@ -6,6 +6,8 @@
       <xsd:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" />
       <xsd:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ITechService" />
+      <xsd:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/Message" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceWorkstation_Ping_InputMessage">
@@ -50,6 +52,18 @@
   <wsdl:message name="IServiceWorkstation_GetInformationPlainsList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetInformationPlainsListResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetDokumentsList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDokumentsList" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetDokumentsList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDokumentsListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_RetrieveFile_InputMessage">
+    <wsdl:part name="parameters" element="tns:RetrieveFile" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_RetrieveFile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RetrieveFileResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceWorkstation">
     <wsdl:operation name="Ping">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/Ping" message="tns:IServiceWorkstation_Ping_InputMessage" />
@@ -78,6 +92,14 @@
     <wsdl:operation name="GetInformationPlainsList">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetInformationPlainsList" message="tns:IServiceWorkstation_GetInformationPlainsList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetInformationPlainsListResponse" message="tns:IServiceWorkstation_GetInformationPlainsList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDokumentsList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetDokumentsList" message="tns:IServiceWorkstation_GetDokumentsList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetDokumentsListResponse" message="tns:IServiceWorkstation_GetDokumentsList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveFile">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/RetrieveFile" message="tns:IServiceWorkstation_RetrieveFile_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/RetrieveFileResponse" message="tns:IServiceWorkstation_RetrieveFile_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceWorkstation" type="tns:IServiceWorkstation">
@@ -138,6 +160,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetInformationPlainsList">
       <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetInformationPlainsList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDokumentsList">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetDokumentsList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RetrieveFile">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/RetrieveFile" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

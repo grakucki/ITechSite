@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITechSite", "ITechSite\ITechSite.csproj", "{18392ED0-DE70-4EAF-9F9B-4092DA2E991E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItechGeneratorInstrukcji", "ItechGeneratorInstrukcji\ItechGeneratorInstrukcji.csproj", "{69F414B1-39A1-48EC-8E7E-246EEF7A02E1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A5679F9B-88B6-4EEA-83CE-2AC2B9D25BA3} = {A5679F9B-88B6-4EEA-83CE-2AC2B9D25BA3}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstrukcjeProdukcyjne", "InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne.csproj", "{B22AE071-B4E8-4837-8412-ADBAB72CABEC}"
 	ProjectSection(ProjectDependencies) = postProject

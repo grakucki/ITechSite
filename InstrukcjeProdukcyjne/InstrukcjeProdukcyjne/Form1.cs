@@ -14,6 +14,7 @@ using System.Xml;
 using InstrukcjeProdukcyjne.Properties;
 using ITechInstrukcjeModel;
 using System.ServiceModel;
+using System.Net;
 
 namespace InstrukcjeProdukcyjne
 {
@@ -130,7 +131,38 @@ namespace InstrukcjeProdukcyjne
             }
         }
 
+        private void DownloadFile(int idd)
+        {
+            try 
+        	{
+                //sprawdzić NetTcpBinding
+                //https://petermeinl.wordpress.com/2012/02/20/managing-blobs-using-sql-server-filestream-via-ef-and-wcf-streaming/
 
+                System.ServiceModel.WebHttpBinding webhttpbinding = new WebHttpBinding();
+                EndpointAddress adr = new EndpointAddress("http://localhost:53854/ServiceDokument.svc");
+
+//                using (var client = new ServiceDokument.ServiceDokumentClient(webhttpbinding, adr))
+                using (var client = new ServiceDokument.ServiceDokumentClient())
+                {
+                    SaveFile(@"d:\out.jpg", client.DownloadDokument(2));
+                    SaveFile(@"d:\out.pdf", client.DownloadDokument(5));
+                    //client.getim
+                }
+    	    }
+        	catch (Exception ex)
+	        {
+		
+		        MessageBox.Show(ex.Message);
+	        }
+        }
+
+        private void SaveFile(string downloadedFileSaveLocation, Stream fileStream)
+        {
+            using (var file = File.Create(downloadedFileSaveLocation))
+            {
+                fileStream.CopyTo(file);
+            }
+        }  
 
         /// <summary>
         /// Załaduj Resource 
@@ -140,6 +172,9 @@ namespace InstrukcjeProdukcyjne
         /// <param name="idR"></param>
         private void LoadResource(int? idR)
         {
+            DownloadFile(0);
+            if (!idR.HasValue)
+                return;
             using(var stat = new  ActionControlStatus(buttonItech))
             {
 
@@ -147,7 +182,7 @@ namespace InstrukcjeProdukcyjne
                 {
                     if (client.IsOnLine())
                     {
-                            db.Resource_Local = client.GetInformationPlainsList().ToList();
+                        db.Resource_Local = client.GetInformationPlainsList(idR.Value).ToList();
                             db.ExportResources(null);
                         
                     }
