@@ -36,6 +36,7 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusITechTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.stanowiskaComboBox = new System.Windows.Forms.ComboBox();
             this.WorkStationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
@@ -63,7 +64,6 @@
             this.buttonSterownik = new System.Windows.Forms.Button();
             this.buttonItech = new System.Windows.Forms.Button();
             this.buttonCzytnik = new System.Windows.Forms.Button();
-            this.toolStripStatusITechTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WorkStationBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -137,10 +137,17 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1348, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1379, 17);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripStatusITechTime
+            // 
+            this.toolStripStatusITechTime.AutoSize = false;
+            this.toolStripStatusITechTime.Name = "toolStripStatusITechTime";
+            this.toolStripStatusITechTime.Size = new System.Drawing.Size(43, 17);
+            this.toolStripStatusITechTime.Text = "  00:00 ";
             // 
             // stanowiskaComboBox
             // 
@@ -291,10 +298,12 @@
             this.elementyComboBox.Name = "elementyComboBox";
             this.elementyComboBox.Size = new System.Drawing.Size(534, 32);
             this.elementyComboBox.TabIndex = 6;
+            this.elementyComboBox.SelectedIndexChanged += new System.EventHandler(this.elementyComboBox_SelectedIndexChanged);
             // 
             // ModelBindingSource
             // 
             this.ModelBindingSource.DataSource = typeof(ITechInstrukcjeModel.Resource);
+            this.ModelBindingSource.PositionChanged += new System.EventHandler(this.ModelBindingSource_PositionChanged);
             // 
             // label1
             // 
@@ -418,13 +427,6 @@
             this.buttonCzytnik.Text = "Czytnik";
             this.buttonCzytnik.UseVisualStyleBackColor = false;
             this.buttonCzytnik.Click += new System.EventHandler(this.buttonCzytnik_Click);
-            // 
-            // toolStripStatusITechTime
-            // 
-            this.toolStripStatusITechTime.AutoSize = false;
-            this.toolStripStatusITechTime.Name = "toolStripStatusITechTime";
-            this.toolStripStatusITechTime.Size = new System.Drawing.Size(43, 17);
-            this.toolStripStatusITechTime.Text = "  00:00 ";
             // 
             // Form1
             // 

@@ -39,7 +39,7 @@ namespace ItechGeneratorInstrukcji
             {
                 var db = new ITechInstrukcjeModel.ITechEntities();
                 db.WorkDir=Settings.Default.WorkDir;
-                db.ExportResources();
+                db.ExportResources(null);
                 db.ExportDokuments();
 
 

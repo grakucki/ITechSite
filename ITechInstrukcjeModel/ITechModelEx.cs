@@ -24,7 +24,7 @@ namespace ITechInstrukcjeModel
     {
 
         public string WorkDir { get; set; }
-        public List<Resource> ResourceList { get; set; }
+        public List<Resource> Resource_Local { get; set; }
 
 
         public IQueryable<Resource> ResourceModel
@@ -41,7 +41,7 @@ namespace ITechInstrukcjeModel
             get
             {
                 //return this.Resource.Local.Where(m => m.Type == 2).ToList();
-                return ResourceList.Where(m => m.Type == 2).ToList();
+                return Resource_Local.Where(m => m.Type == 2).ToList();
             }
 
         }
@@ -59,7 +59,7 @@ namespace ITechInstrukcjeModel
         {
             get
             {
-                return this.ResourceList.Where(m => m.Type == 1).ToList();
+                return this.Resource_Local.Where(m => m.Type == 1).ToList();
             }
         }
 
@@ -106,14 +106,29 @@ namespace ITechInstrukcjeModel
         /// <returns></returns>
         public List<Resource> ImportResource(string filename)
         {
-            var resourcesFile = Path.Combine(WorkDir, filename ?? "resources.xml");
-            ResourceList = LoadFromXml(resourcesFile);
+            filename= Path.Combine(WorkDir, filename ?? "resources.xml");
+            if (!File.Exists(filename))
+            {
+                throw new Exception("Nie odnaleziono plików konfiguracyjnych. Musisz być połaczony z serwerem aby zainicjować aplikację.");
+            }
+
+            var resourcesFile = Path.Combine(filename);
+            Resource_Local = LoadFromXml(resourcesFile);
             //this.Resource.Local.Clear();
             //this.Resource.AddRange(ResourceList);
 
             return this.Resource.ToList();
         }
 
+        public void ExportResources(string filename)
+        {
+
+            if (!Directory.Exists(WorkDir))
+                Directory.CreateDirectory(WorkDir);
+
+            var q = Resource_Local;
+                SaveToXml(q, Path.Combine(WorkDir, filename ?? "resources.xml"));
+        }
 
         public string GetFileDocName(int DocId)
         {
@@ -124,19 +139,7 @@ namespace ITechInstrukcjeModel
             return CreateLocalFileName(d);
         }
 
-        public void ExportResources()
-        {
-            
-            if (!Directory.Exists(WorkDir))
-                Directory.CreateDirectory(WorkDir);
-            using (var db = new ITechEntities())
-            {
-                
-                var q = db.Resource.Where(m => m.Enabled).Include(m=>m.InformationPlan).OrderBy(m => m.Id).ToList();
-
-                SaveToXml(q, Path.Combine(WorkDir, "resources.xml"));
-            }
-        }
+       
 
         public void ExportDokuments()
         {

@@ -109,11 +109,9 @@ namespace InstrukcjeProdukcyjne
                 toolStripStatusLabel1.Text = Path.GetFullPath(db.WorkDir);
                 StartupApp.CreateWorkDirektory(db.WorkDir);
 
-
+                Application.DoEvents();
                 // ładujemy resources
                 LoadResource(Settings.Default.App.Stanowisko);
-
-                //ZaładujStanowiska();
 
                 
                 OnResourceFileListChange(0);
@@ -122,12 +120,9 @@ namespace InstrukcjeProdukcyjne
                     this.Close();
 
 
-                
-
                 textBoxUser.Text = string.Format("{0} ({1})", LoginUser.UserName, LoginUser.NrKarty);
 
                 
-//                StartupApp.CreateWorkDirektory(@"C:\ItechTest");
             }
             catch (Exception ex)
             {
@@ -147,23 +142,21 @@ namespace InstrukcjeProdukcyjne
         {
             using(var stat = new  ActionControlStatus(buttonItech))
             {
+
                 using(var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
                 {
                     if (client.IsOnLine())
                     {
-                            db.ResourceList = client.GetInformationPlainsList().ToList();
+                            db.Resource_Local = client.GetInformationPlainsList().ToList();
+                            db.ExportResources(null);
+                        
                     }
-                    else
-                    {
-                        var resourcesFile = Path.Combine(db.WorkDir, "resources.xml");
-                        if (!File.Exists(resourcesFile))
-                        {
-                            throw new Exception("Nie odnaleziono plików konfiguracyjnych. Musisz być połaczony aby zainicjować aplikację.");
-                        }
+                }
 
-                        // pobieramy z pliku
-                        db.ImportResource(null);
-                    }
+                if (db.Resource_Local==null)
+                {
+                    // pobieramy z pliku
+                    db.ImportResource(null);
                 }
 
                 if (idR.HasValue)
@@ -217,12 +210,6 @@ namespace InstrukcjeProdukcyjne
 
         }
 
-        private void ZaładujStanowiska()
-        {
-            var data = db.ResourceWorkstation_Local;
-            WorkStationBindingSource.DataSource = data;
-        }
-
         private void OnResourceFileListChange(int NewResurceType)
         {
             Color cOn = Color.Green;
@@ -246,17 +233,35 @@ namespace InstrukcjeProdukcyjne
         private void button2_Click(object sender, EventArgs e)
         {
             // załaduj instrukcje Modelu
-            //ZaładujPliki(FolderType.Elementy, elementyComboBox.Text);
-            var x = ModelBindingSource.Current;
-            if (x == null)
-                return;
-
-            Resource xx = (Resource )x;
-            OnResourceFileListChange(xx.Type);
-            ZaładujPliki(xx);
+            OnModelChanged();
         }
 
+        private void OnModelChanged()
+        {
+            var x = ModelBindingSource.Current;
+            if (x == null)
+            {
+                OnResourceFileListChange(-1);
+                ZaładujPliki(null);
+                return;
+            }
 
+            Resource NewModel = (Resource)x;
+            OnResourceFileListChange(NewModel.Type);
+            ZaładujPliki(NewModel);
+        }
+
+        private void OnModelChanged(Resource newModel)
+        {
+            if (newModel == null)
+            {
+                OnResourceFileListChange(-1);
+                ZaładujPliki(null);
+                return;
+            }
+            OnResourceFileListChange(newModel.Type);
+            ZaładujPliki(newModel);
+        }
 
         private string GetFullPath(FolderType folderType, string DetalName)
         {
@@ -297,6 +302,9 @@ namespace InstrukcjeProdukcyjne
         private void ZaładujPliki(Resource res)
         {
             listView1.Items.Clear();
+            if (res == null)
+                return;
+
             var IP = res.InformationPlan;
             foreach (var item in IP)
             {
@@ -464,6 +472,17 @@ namespace InstrukcjeProdukcyjne
 
         }
 
+        private void elementyComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void ModelBindingSource_PositionChanged(object sender, EventArgs e)
+        {
+            OnModelChanged();
+        }
+
+      
        
 
 
