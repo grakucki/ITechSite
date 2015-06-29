@@ -24,7 +24,6 @@
   <Metadata>
     <MetadataFile FileName="ServiceWorkstation.disco" MetadataType="Disco" ID="078e4283-6c07-4820-a00d-cbd148537228" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?disco" />
     <MetadataFile FileName="ServiceWorkstation.xsd" MetadataType="Schema" ID="086e6b0f-5b44-4a2e-a8e6-0a6f11bb9a90" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd1" />
-    <MetadataFile FileName="ServiceWorkstation1.xsd" MetadataType="Schema" ID="2e12c2a5-2a42-4ae8-aad2-ba6f4fa84827" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd5" />
     <MetadataFile FileName="ServiceWorkstation2.xsd" MetadataType="Schema" ID="9936f94a-95ef-4c51-9f8c-ad1bb4365d5f" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd4" />
     <MetadataFile FileName="ServiceWorkstation.wsdl" MetadataType="Wsdl" ID="575d081a-08c1-47e9-9588-2d55e6d1e646" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?wsdl" />
     <MetadataFile FileName="ServiceWorkstation3.xsd" MetadataType="Schema" ID="91bbc648-a517-4a15-a739-478bdd1d45c5" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd0" />

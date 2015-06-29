@@ -243,9 +243,6 @@
     <None Include="Service References\ServiceWorkstation\ServiceWorkstation.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ServiceWorkstation\ServiceWorkstation1.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Service References\ServiceWorkstation\ServiceWorkstation2.xsd">
       <SubType>Designer</SubType>
     </None>

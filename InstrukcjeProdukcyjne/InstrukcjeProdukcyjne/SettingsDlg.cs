@@ -120,12 +120,51 @@ namespace InstrukcjeProdukcyjne
             {
                 var dial = new SimaticDlg();
                 dial.Workstation = GetCurrent().Workstation.FirstOrDefault();
-                dial.ShowDialog();
+                if (dial.Workstation==null)
+                {
+                    //dodajemy nowy nbo nie ma jeszcze konfiguracji
+                    dial.Workstation = new Workstation();
+                    dial.Workstation.idR = GetCurrent().Id;
+                    GetCurrent().Workstation = new List<Workstation>();
+                    GetCurrent().Workstation.Add(dial.Workstation);
+                }
+                if (dial.ShowDialog()== System.Windows.Forms.DialogResult.Cancel)
+                    return;
 
 
-                db.SaveChanges();
 
-                MessageBox.Show(GetCurrent().Workstation.FirstOrDefault().Sterownik_Ip);
+                var addr = textBox1.Text;
+                //http://localhost:53854/ServiceWorkstation.svc
+
+
+
+                ServiceWorkstation.ServiceWorkstationClientEx client = null;
+                try
+                {
+                    string s = string.Empty;
+                    int idR = GetCurrent().Id;
+                    using (new CursorWait())
+                    {
+                        client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient(addr);
+                        client.UpdateWorkstation(dial.Workstation);
+                        client.Close();
+                    }
+                }
+
+                catch (CommunicationException exception)
+                {
+                    if (client != null)
+                        client.Abort();
+                    MessageBox.Show(string.Format("3.{0} : {1}", exception.GetType(), exception.Message));
+                }
+                catch (Exception ex)
+                {
+                    if (client != null)
+                        client.Abort();
+                    MessageBox.Show(string.Format("4.{0} : {1}", ex.GetType(), ex.Message));
+                }
+
+
             }
             catch (Exception ex)
             {

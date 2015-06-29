@@ -78,6 +78,16 @@ namespace ITechService
         [OperationContract]
         List<DokumentIdentity> GetDokumentsList(int idR);
 
+        /// <summary>
+        /// Lista plików dla wzkazanego workstation oraz produkowanych dla niego modeli
+        /// </summary>
+        /// <param name="idR">Identyfikator zasobu dla którego ma zostać wygenerowana lista</param>
+        /// <returns></returns>
+        [OperationContract]
+        void UpdateWorkstation(Workstation idR);
+
+
+
     }
 
 

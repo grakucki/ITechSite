@@ -3,7 +3,6 @@
   <xs:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" />
   <xs:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/ITechService" />
-  <xs:import schemaLocation="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd5" namespace="http://schemas.microsoft.com/Message" />
   <xs:element name="Ping">
     <xs:complexType>
       <xs:sequence />
@@ -110,16 +109,16 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="RetrieveFile">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="RetrieveFileResponse">
+  <xs:element name="UpdateWorkstation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.microsoft.com/Message" name="RetrieveFileResult" type="q7:StreamBody" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="idR" nillable="true" type="q7:Workstation" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateWorkstationResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

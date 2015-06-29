@@ -76,6 +76,16 @@
             Sterownik_DBLabel.TabIndex = 4;
             Sterownik_DBLabel.Text = "Sterownik DB:";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            label1.Location = new System.Drawing.Point(96, 23);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(396, 25);
+            label1.TabIndex = 9;
+            label1.Text = "Ustawienia komunikacji ze sterownikiem";
+            // 
             // sterownik_IpTextBox
             // 
             this.sterownik_IpTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSource1, "Sterownik_Ip", true));
@@ -108,6 +118,7 @@
             this.buttonOk.TabIndex = 6;
             this.buttonOk.Text = "Ok";
             this.buttonOk.UseVisualStyleBackColor = true;
+            this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
             // buttonCancel
             // 
@@ -130,16 +141,6 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(300, 47);
             this.comboBox1.TabIndex = 8;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            label1.Location = new System.Drawing.Point(96, 23);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(396, 25);
-            label1.TabIndex = 9;
-            label1.Text = "Ustawienia komunikacji ze sterownikiem";
             // 
             // SimaticDlg
             // 

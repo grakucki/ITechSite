@@ -174,11 +174,11 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetDokumentsList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetDokumentsListResponse")]
         System.Threading.Tasks.Task<InstrukcjeProdukcyjne.ServiceWorkstation.DokumentIdentity[]> GetDokumentsListAsync(int idR);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/RetrieveFile", ReplyAction="http://tempuri.org/IServiceWorkstation/RetrieveFileResponse")]
-        System.IO.Stream RetrieveFile();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/UpdateWorkstation", ReplyAction="http://tempuri.org/IServiceWorkstation/UpdateWorkstationResponse")]
+        void UpdateWorkstation(ITechInstrukcjeModel.Workstation idR);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/RetrieveFile", ReplyAction="http://tempuri.org/IServiceWorkstation/RetrieveFileResponse")]
-        System.Threading.Tasks.Task<System.IO.Stream> RetrieveFileAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/UpdateWorkstation", ReplyAction="http://tempuri.org/IServiceWorkstation/UpdateWorkstationResponse")]
+        System.Threading.Tasks.Task UpdateWorkstationAsync(ITechInstrukcjeModel.Workstation idR);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -272,12 +272,12 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
             return base.Channel.GetDokumentsListAsync(idR);
         }
         
-        public System.IO.Stream RetrieveFile() {
-            return base.Channel.RetrieveFile();
+        public void UpdateWorkstation(ITechInstrukcjeModel.Workstation idR) {
+            base.Channel.UpdateWorkstation(idR);
         }
         
-        public System.Threading.Tasks.Task<System.IO.Stream> RetrieveFileAsync() {
-            return base.Channel.RetrieveFileAsync();
+        public System.Threading.Tasks.Task UpdateWorkstationAsync(ITechInstrukcjeModel.Workstation idR) {
+            return base.Channel.UpdateWorkstationAsync(idR);
         }
     }
 }
