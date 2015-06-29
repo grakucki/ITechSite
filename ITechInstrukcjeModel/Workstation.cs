@@ -11,6 +11,7 @@ namespace ITechInstrukcjeModel
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     
     public partial class Workstation
     {
@@ -22,7 +23,7 @@ namespace ITechInstrukcjeModel
         public string Sterownik_Ip { get; set; }
         public string Sterownik_Model { get; set; }
         public Nullable<int> Setrownik_DB { get; set; }
-    
+        [IgnoreDataMember]
         public virtual Resource Resource { get; set; }
     }
 }

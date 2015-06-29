@@ -160,7 +160,7 @@ namespace ITechInstrukcjeModel
         public String CreateLocalFileName(Dokument item)
         {
             var DokDir = Path.Combine(WorkDir, "Dokuments");
-            return Path.Combine(DokDir, "Dok_" + item.Id + item.FileType);
+            return Path.Combine(DokDir, item.LocalFileName);
         }
 
         //public void ExportDok(ITechEntities db, string DestPath, Dokument item)

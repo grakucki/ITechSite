@@ -21,6 +21,7 @@
           <Property Name="WorkProcess_Id" Type="int" />
           <Property Name="Keywords" Type="nvarchar(max)" />
           <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
+          <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
         <EntityType Name="InformationPlan">
           <Key>
@@ -177,6 +178,7 @@
           <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="InformationPlan" Relationship="Self.FK_InformationPlan_Dokument" FromRole="Dokument" ToRole="InformationPlan" />
           <Property Name="Size" Type="Int64" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="LocalFileName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         <EntityType Name="InformationPlan">
           <Key>
@@ -328,6 +330,7 @@
           <EntitySetMapping Name="Dokument">
             <EntityTypeMapping TypeName="IsTypeOf(ITechModel.Dokument)">
               <MappingFragment StoreEntitySet="Dokument">
+                <ScalarProperty Name="LocalFileName" ColumnName="LocalFileName" />
                 <ScalarProperty Name="Size" ColumnName="Size" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Keywords" ColumnName="Keywords" />

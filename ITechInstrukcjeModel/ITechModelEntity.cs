@@ -46,11 +46,21 @@ namespace ITechInstrukcjeModel
     //    public ICollection<InformationPlan> InformationPlan { get; set; }
     //}
 
-
-
     //public partial class InformationPlan
     //{
     //    //[IgnoreDataMember]
     //    //public virtual Resource Resource { get; set; }
+    //}
+
+    //public partial class News
+    //{
+    //    [IgnoreDataMember]
+    //    public virtual Resource Resource { get; set; }
+    //}
+
+    //public partial class Workstation
+    //{
+    //    [IgnoreDataMember]
+    //    public virtual Resource Resource { get; set; }
     //}
 }

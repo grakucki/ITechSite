@@ -15,6 +15,7 @@ using InstrukcjeProdukcyjne.Properties;
 using ITechInstrukcjeModel;
 using System.ServiceModel;
 using System.Net;
+using System.Threading;
 
 namespace InstrukcjeProdukcyjne
 {
@@ -131,38 +132,9 @@ namespace InstrukcjeProdukcyjne
             }
         }
 
-        private void DownloadFile(int idd)
-        {
-            try 
-        	{
-                //sprawdzić NetTcpBinding
-                //https://petermeinl.wordpress.com/2012/02/20/managing-blobs-using-sql-server-filestream-via-ef-and-wcf-streaming/
 
-                System.ServiceModel.WebHttpBinding webhttpbinding = new WebHttpBinding();
-                EndpointAddress adr = new EndpointAddress("http://localhost:53854/ServiceDokument.svc");
 
-//                using (var client = new ServiceDokument.ServiceDokumentClient(webhttpbinding, adr))
-                using (var client = new ServiceDokument.ServiceDokumentClient())
-                {
-                    SaveFile(@"d:\out.jpg", client.DownloadDokument(2));
-                    SaveFile(@"d:\out.pdf", client.DownloadDokument(5));
-                    //client.getim
-                }
-    	    }
-        	catch (Exception ex)
-	        {
-		
-		        MessageBox.Show(ex.Message);
-	        }
-        }
-
-        private void SaveFile(string downloadedFileSaveLocation, Stream fileStream)
-        {
-            using (var file = File.Create(downloadedFileSaveLocation))
-            {
-                fileStream.CopyTo(file);
-            }
-        }  
+        
 
         /// <summary>
         /// Załaduj Resource 
@@ -172,7 +144,6 @@ namespace InstrukcjeProdukcyjne
         /// <param name="idR"></param>
         private void LoadResource(int? idR)
         {
-            DownloadFile(0);
             if (!idR.HasValue)
                 return;
             using(var stat = new  ActionControlStatus(buttonItech))
@@ -517,6 +488,16 @@ namespace InstrukcjeProdukcyjne
             OnModelChanged();
         }
 
+        private DokumentSyncDlg DocSyncDlg = new DokumentSyncDlg();
+
+        private void synchronizujPlikiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            DocSyncDlg.Sync();
+            DocSyncDlg.ShowDialog();
+            //DocSyncDlg.Sync(Settings.Default.App.Stanowisko);
+        }
+
       
        
 
@@ -526,3 +507,6 @@ namespace InstrukcjeProdukcyjne
        
     }
 }
+
+
+

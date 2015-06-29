@@ -45,6 +45,7 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.klawiaturaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.synchronizujPlikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.oAplikacjiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -187,9 +188,9 @@
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button1.ContextMenuStrip = this.contextMenuStrip1;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(1372, 12);
+            this.button1.Location = new System.Drawing.Point(1352, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(52, 33);
+            this.button1.Size = new System.Drawing.Size(82, 54);
             this.button1.TabIndex = 11;
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = false;
@@ -202,55 +203,63 @@
             this.toolStripMenuItem1,
             this.toolStripSeparator1,
             this.klawiaturaToolStripMenuItem,
+            this.synchronizujPlikiToolStripMenuItem,
             this.toolStripMenuItem2,
             this.toolStripSeparator2,
             this.oAplikacjiToolStripMenuItem,
             this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(313, 266);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(348, 316);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(312, 50);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(347, 50);
             this.toolStripMenuItem1.Text = "Zablokuj stację";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(309, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(344, 6);
             // 
             // klawiaturaToolStripMenuItem
             // 
             this.klawiaturaToolStripMenuItem.Name = "klawiaturaToolStripMenuItem";
-            this.klawiaturaToolStripMenuItem.Size = new System.Drawing.Size(312, 50);
+            this.klawiaturaToolStripMenuItem.Size = new System.Drawing.Size(347, 50);
             this.klawiaturaToolStripMenuItem.Text = "Klawiatura";
             this.klawiaturaToolStripMenuItem.Click += new System.EventHandler(this.klawiaturaToolStripMenuItem_Click);
+            // 
+            // synchronizujPlikiToolStripMenuItem
+            // 
+            this.synchronizujPlikiToolStripMenuItem.Name = "synchronizujPlikiToolStripMenuItem";
+            this.synchronizujPlikiToolStripMenuItem.Size = new System.Drawing.Size(347, 50);
+            this.synchronizujPlikiToolStripMenuItem.Text = "Synchronizuj pliki";
+            this.synchronizujPlikiToolStripMenuItem.Click += new System.EventHandler(this.synchronizujPlikiToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(312, 50);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(347, 50);
             this.toolStripMenuItem2.Text = "Ustawienia";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(309, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(344, 6);
             // 
             // oAplikacjiToolStripMenuItem
             // 
             this.oAplikacjiToolStripMenuItem.Name = "oAplikacjiToolStripMenuItem";
-            this.oAplikacjiToolStripMenuItem.Size = new System.Drawing.Size(312, 50);
+            this.oAplikacjiToolStripMenuItem.Size = new System.Drawing.Size(347, 50);
             this.oAplikacjiToolStripMenuItem.Text = "O Aplikacji";
             this.oAplikacjiToolStripMenuItem.Click += new System.EventHandler(this.oAplikacjiToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(312, 50);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(347, 50);
             this.toolStripMenuItem3.Text = "Zakończ";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
@@ -261,7 +270,7 @@
             this.textBoxUser.Location = new System.Drawing.Point(1123, 13);
             this.textBoxUser.Name = "textBoxUser";
             this.textBoxUser.ReadOnly = true;
-            this.textBoxUser.Size = new System.Drawing.Size(237, 29);
+            this.textBoxUser.Size = new System.Drawing.Size(223, 29);
             this.textBoxUser.TabIndex = 10;
             // 
             // label4
@@ -500,6 +509,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label labelCzasNews;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusITechTime;
+        private System.Windows.Forms.ToolStripMenuItem synchronizujPlikiToolStripMenuItem;
     }
 }
 
