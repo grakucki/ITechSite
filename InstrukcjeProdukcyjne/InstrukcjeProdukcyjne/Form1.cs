@@ -130,6 +130,8 @@ namespace InstrukcjeProdukcyjne
             {
                 MessageBox.Show(ex.Message);
             }
+            timer1.Enabled = true;
+
         }
 
 
@@ -424,30 +426,58 @@ namespace InstrukcjeProdukcyjne
             VirtualKeyboard.Show();
         }
 
-
-        private void LoadNews(int idR)
+        public DateTime _LastReadNews { get; set; }
+        AutoResetEvent _TaskNewsIsRunning = new AutoResetEvent(true);
+        private async void LoadNews(int idR)
         {
-            using (var Work = new InstrukcjeProdukcyjne.ActionControlStatus(buttonItech))
+            try
             {
-                Work.SetState(ActionControlStatus.ActionControlState.Working, "");
-                using(var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+                
+                if (!_TaskNewsIsRunning.WaitOne(0))
+                    return;
+
+                using (var Work = new InstrukcjeProdukcyjne.ActionControlStatus(buttonItech))
                 {
-                    var d = client.Ping();
-                    toolStripStatusITechTime.Text = (d.ToShortTimeString());
-                    var news = client.GetNews(idR);
-                    if (news != null)
+                    Work.SetState(ActionControlStatus.ActionControlState.Working, "");
+                    using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
                     {
-                        KomunikatLabel.Text =news.News1;
-                        labelCzasNews.Text = (news.CreatedAt.HasValue ? news.CreatedAt.Value.ToString() : "");
+                        var d = await client.PingAsync();
+                        toolStripStatusITechTime.Text = (d.ToShortTimeString());
+                        News news = await client.GetNewsAsync(idR);
+                        if (news != null)
+                        {
+                            KomunikatLabel.Text = news.News1;
+                            labelCzasNews.Text = (news.CreatedAt.HasValue ? news.CreatedAt.Value.ToString() : "");
+                            panelNews.Visible = true;
+                        }
+                        else
+                        {
+                            panelNews.Visible = false;
+                            KomunikatLabel.Text = "";
+                            labelCzasNews.Text = "";
+                        }
                     }
-                    else
-                    {
-                        KomunikatLabel.Text = "";
-                        labelCzasNews.Text = "";
-                    }
+                    Work.SetState(ActionControlStatus.ActionControlState.Ok, "");
                 }
-                Work.SetState(ActionControlStatus.ActionControlState.Ok, "");
             }
+            finally
+            {
+                _LastReadNews = DateTime.Now;
+                _TaskNewsIsRunning.Set();
+            }
+        }
+
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            try 
+	        {	        
+		        if (CurrentWorkstation!=null)
+                    LoadNews(CurrentWorkstation.Id);
+	        }
+	        catch (Exception)
+	        {
+		    }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -497,6 +527,8 @@ namespace InstrukcjeProdukcyjne
             DocSyncDlg.ShowDialog();
             //DocSyncDlg.Sync(Settings.Default.App.Stanowisko);
         }
+
+        
 
       
        
