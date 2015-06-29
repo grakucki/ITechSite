@@ -80,6 +80,9 @@
     </Compile>
     <Compile Include="ITechModelEntity.cs" />
     <Compile Include="ModelResolver.cs" />
+    <Compile Include="ModelsWorkstation.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="News.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>

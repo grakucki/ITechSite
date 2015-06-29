@@ -122,6 +122,131 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ModelWorkstationInfo", Namespace="http://schemas.datacontract.org/2004/07/ITechService")]
+    [System.SerializableAttribute()]
+    public partial class ModelWorkstationInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ModelNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SterownikIndexField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WorkstationNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int idField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> idMField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<int> idWField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModelName {
+            get {
+                return this.ModelNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModelNameField, value) != true)) {
+                    this.ModelNameField = value;
+                    this.RaisePropertyChanged("ModelName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SterownikIndex {
+            get {
+                return this.SterownikIndexField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SterownikIndexField, value) != true)) {
+                    this.SterownikIndexField = value;
+                    this.RaisePropertyChanged("SterownikIndex");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string WorkstationName {
+            get {
+                return this.WorkstationNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WorkstationNameField, value) != true)) {
+                    this.WorkstationNameField = value;
+                    this.RaisePropertyChanged("WorkstationName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int id {
+            get {
+                return this.idField;
+            }
+            set {
+                if ((this.idField.Equals(value) != true)) {
+                    this.idField = value;
+                    this.RaisePropertyChanged("id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> idM {
+            get {
+                return this.idMField;
+            }
+            set {
+                if ((this.idMField.Equals(value) != true)) {
+                    this.idMField = value;
+                    this.RaisePropertyChanged("idM");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<int> idW {
+            get {
+                return this.idWField;
+            }
+            set {
+                if ((this.idWField.Equals(value) != true)) {
+                    this.idWField = value;
+                    this.RaisePropertyChanged("idW");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceWorkstation.IServiceWorkstation")]
     public interface IServiceWorkstation {
@@ -179,6 +304,24 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/UpdateWorkstation", ReplyAction="http://tempuri.org/IServiceWorkstation/UpdateWorkstationResponse")]
         System.Threading.Tasks.Task UpdateWorkstationAsync(ITechInstrukcjeModel.Workstation idR);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetModelWorkstationInfo", ReplyAction="http://tempuri.org/IServiceWorkstation/GetModelWorkstationInfoResponse")]
+        InstrukcjeProdukcyjne.ServiceWorkstation.ModelWorkstationInfo[] GetModelWorkstationInfo(int idR);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetModelWorkstationInfo", ReplyAction="http://tempuri.org/IServiceWorkstation/GetModelWorkstationInfoResponse")]
+        System.Threading.Tasks.Task<InstrukcjeProdukcyjne.ServiceWorkstation.ModelWorkstationInfo[]> GetModelWorkstationInfoAsync(int idR);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetModels", ReplyAction="http://tempuri.org/IServiceWorkstation/GetModelsResponse")]
+        ITechInstrukcjeModel.Resource[] GetModels();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetModels", ReplyAction="http://tempuri.org/IServiceWorkstation/GetModelsResponse")]
+        System.Threading.Tasks.Task<ITechInstrukcjeModel.Resource[]> GetModelsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/UpdateModelWorkstationInfo", ReplyAction="http://tempuri.org/IServiceWorkstation/UpdateModelWorkstationInfoResponse")]
+        void UpdateModelWorkstationInfo(InstrukcjeProdukcyjne.ServiceWorkstation.ModelWorkstationInfo modelWorkstationInfo, bool Remove);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/UpdateModelWorkstationInfo", ReplyAction="http://tempuri.org/IServiceWorkstation/UpdateModelWorkstationInfoResponse")]
+        System.Threading.Tasks.Task UpdateModelWorkstationInfoAsync(InstrukcjeProdukcyjne.ServiceWorkstation.ModelWorkstationInfo modelWorkstationInfo, bool Remove);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -278,6 +421,30 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         
         public System.Threading.Tasks.Task UpdateWorkstationAsync(ITechInstrukcjeModel.Workstation idR) {
             return base.Channel.UpdateWorkstationAsync(idR);
+        }
+        
+        public InstrukcjeProdukcyjne.ServiceWorkstation.ModelWorkstationInfo[] GetModelWorkstationInfo(int idR) {
+            return base.Channel.GetModelWorkstationInfo(idR);
+        }
+        
+        public System.Threading.Tasks.Task<InstrukcjeProdukcyjne.ServiceWorkstation.ModelWorkstationInfo[]> GetModelWorkstationInfoAsync(int idR) {
+            return base.Channel.GetModelWorkstationInfoAsync(idR);
+        }
+        
+        public ITechInstrukcjeModel.Resource[] GetModels() {
+            return base.Channel.GetModels();
+        }
+        
+        public System.Threading.Tasks.Task<ITechInstrukcjeModel.Resource[]> GetModelsAsync() {
+            return base.Channel.GetModelsAsync();
+        }
+        
+        public void UpdateModelWorkstationInfo(InstrukcjeProdukcyjne.ServiceWorkstation.ModelWorkstationInfo modelWorkstationInfo, bool Remove) {
+            base.Channel.UpdateModelWorkstationInfo(modelWorkstationInfo, Remove);
+        }
+        
+        public System.Threading.Tasks.Task UpdateModelWorkstationInfoAsync(InstrukcjeProdukcyjne.ServiceWorkstation.ModelWorkstationInfo modelWorkstationInfo, bool Remove) {
+            return base.Channel.UpdateModelWorkstationInfoAsync(modelWorkstationInfo, Remove);
         }
     }
 }

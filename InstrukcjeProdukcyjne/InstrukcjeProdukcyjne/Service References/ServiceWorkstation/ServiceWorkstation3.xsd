@@ -121,4 +121,43 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetModelWorkstationInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idR" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetModelWorkstationInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ITechService" minOccurs="0" name="GetModelWorkstationInfoResult" nillable="true" type="q8:ArrayOfModelWorkstationInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetModels">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetModelsResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetModelsResult" nillable="true" type="q9:ArrayOfResource" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateModelWorkstationInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/ITechService" minOccurs="0" name="modelWorkstationInfo" nillable="true" type="q10:ModelWorkstationInfo" />
+        <xs:element minOccurs="0" name="Remove" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateModelWorkstationInfoResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

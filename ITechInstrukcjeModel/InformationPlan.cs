@@ -20,7 +20,7 @@ namespace ITechInstrukcjeModel
         public int IdD { get; set; }
         public Nullable<int> Order { get; set; }
         public bool Enabled { get; set; }
-    
+
         public virtual Dokument Dokument { get; set; }
         [IgnoreDataMember]
         public virtual Resource Resource { get; set; }

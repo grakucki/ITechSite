@@ -63,6 +63,24 @@
   <wsdl:message name="IServiceWorkstation_UpdateWorkstation_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateWorkstationResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetModelWorkstationInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetModelWorkstationInfo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetModelWorkstationInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetModelWorkstationInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetModels_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetModels" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetModels_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetModelsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_UpdateModelWorkstationInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateModelWorkstationInfo" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_UpdateModelWorkstationInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateModelWorkstationInfoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceWorkstation">
     <wsdl:operation name="Ping">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/Ping" message="tns:IServiceWorkstation_Ping_InputMessage" />
@@ -99,6 +117,18 @@
     <wsdl:operation name="UpdateWorkstation">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/UpdateWorkstation" message="tns:IServiceWorkstation_UpdateWorkstation_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/UpdateWorkstationResponse" message="tns:IServiceWorkstation_UpdateWorkstation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModelWorkstationInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetModelWorkstationInfo" message="tns:IServiceWorkstation_GetModelWorkstationInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetModelWorkstationInfoResponse" message="tns:IServiceWorkstation_GetModelWorkstationInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetModels">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetModels" message="tns:IServiceWorkstation_GetModels_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetModelsResponse" message="tns:IServiceWorkstation_GetModels_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateModelWorkstationInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/UpdateModelWorkstationInfo" message="tns:IServiceWorkstation_UpdateModelWorkstationInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/UpdateModelWorkstationInfoResponse" message="tns:IServiceWorkstation_UpdateModelWorkstationInfo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceWorkstation" type="tns:IServiceWorkstation">
@@ -177,6 +207,33 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateWorkstation">
       <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/UpdateWorkstation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModelWorkstationInfo">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetModelWorkstationInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetModels">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetModels" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateModelWorkstationInfo">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/UpdateModelWorkstationInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

@@ -16,5 +16,14 @@ namespace InstrukcjeProdukcyjne
         {
             InitializeComponent();
         }
+
+        public List<ITechInstrukcjeModel.Resource> Models { get; set; }
+        public ServiceWorkstation.ModelWorkstationInfo ModelWorkstationInfo { get; set; }
+
+        private void ModelsWorkstationEditDlg_Load(object sender, EventArgs e)
+        {
+            resourceBindingSource.DataSource = Models;
+            bindingSource1.DataSource = ModelWorkstationInfo;
+        }
     }
 }

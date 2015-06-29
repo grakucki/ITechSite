@@ -257,6 +257,9 @@
     <None Include="Service References\ServiceWorkstation\InstrukcjeProdukcyjne.ServiceWorkstation.DokumentIdentity.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ServiceWorkstation\InstrukcjeProdukcyjne.ServiceWorkstation.ModelWorkstationInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ServiceWorkstation\ServiceWorkstation.wsdl" />
     <None Include="Service References\ServiceWorkstation\ServiceWorkstation.xsd">
       <SubType>Designer</SubType>

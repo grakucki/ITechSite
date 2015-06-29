@@ -79,14 +79,35 @@ namespace ITechService
         List<DokumentIdentity> GetDokumentsList(int idR);
 
         /// <summary>
-        /// Lista plików dla wzkazanego workstation oraz produkowanych dla niego modeli
+        /// Update ustawień stacji roboczej
         /// </summary>
-        /// <param name="idR">Identyfikator zasobu dla którego ma zostać wygenerowana lista</param>
+        /// <param name="idR">stacja robocza</param>
         /// <returns></returns>
         [OperationContract]
         void UpdateWorkstation(Workstation idR);
 
 
+        /// <summary>
+        /// zwara listę na podtrzeby wyświelaenia jakie modele są produkowane na stacji roboczej
+        /// </summary>
+        /// <param name="idR"></param>
+        [OperationContract]
+        List<ModelWorkstationInfo> GetModelWorkstationInfo(int idR);
+
+
+        /// <summary>
+        ///  lista dostępnych modeli 
+        /// </summary>
+        /// <returns></returns>
+        [OperationContract]
+        List<Resource> GetModels();
+
+        /// <summary>
+        /// aktualizacja tabeli ModelWorkstation
+        /// </summary>
+        /// <param name="modelWorkstationInfo"></param>
+        [OperationContract]
+        void UpdateModelWorkstationInfo(ModelWorkstationInfo modelWorkstationInfo, bool Remove = false);
 
     }
 
@@ -124,6 +145,47 @@ namespace ITechService
         /// </summary>
         [DataMember]
         public DateTime LastWriteTime { get; set; }
+    }
+
+    [DataContract]
+    public class ModelWorkstationInfo
+    {
+
+        /// <summary>
+        /// identyfikator rekordu w tabeli [ModelsWorkstation]
+        /// </summary>
+        [DataMember]
+        public int id { get; set; }
+
+        /// <summary>
+        /// identyfikator resources
+        /// </summary>
+        [DataMember]
+        public int? idW { get; set; }
+
+        /// <summary>
+        /// identyfikator modelu
+        /// </summary>
+        [DataMember]
+        public int? idM { get; set; }
+
+        /// <summary>
+        /// Nazwa stanowiska roboczego
+        /// </summary>
+        [DataMember]
+        public string WorkstationName { get; set; }
+
+        /// <summary>
+        /// Nazwa Modelu
+        /// </summary>
+        [DataMember]
+        public string ModelName { get; set; }
+
+        /// <summary>
+        /// indeks Modelu na sterowniku
+        /// </summary>
+        [DataMember]
+        public string SterownikIndex { get; set; }
     }
 
 

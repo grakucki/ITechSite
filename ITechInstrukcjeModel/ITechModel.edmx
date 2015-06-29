@@ -33,6 +33,15 @@
           <Property Name="Order" Type="int" />
           <Property Name="Enabled" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="ModelsWorkstation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idW" Type="int" />
+          <Property Name="idM" Type="int" />
+          <Property Name="index" Type="nvarchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="News">
           <Key>
             <PropertyRef Name="id" />
@@ -108,6 +117,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ModelsWorkstation_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="0..1" />
+          <End Role="ModelsWorkstation" Type="Self.ModelsWorkstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModelsWorkstation">
+              <PropertyRef Name="idW" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModelsWorkstation_Resource1">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="0..1" />
+          <End Role="ModelsWorkstation" Type="Self.ModelsWorkstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModelsWorkstation">
+              <PropertyRef Name="idM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_News_Resource">
           <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
           <End Role="News" Type="Self.News" Multiplicity="0..1" />
@@ -135,6 +168,7 @@
         <EntityContainer Name="ITechModelStoreContainer">
           <EntitySet Name="Dokument" EntityType="Self.Dokument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InformationPlan" EntityType="Self.InformationPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModelsWorkstation" EntityType="Self.ModelsWorkstation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SimaticCpuType" EntityType="Self.SimaticCpuType" Schema="dbo" store:Type="Tables" />
@@ -147,6 +181,14 @@
           <AssociationSet Name="FK_InformationPlan_Resource" Association="Self.FK_InformationPlan_Resource">
             <End Role="Resource" EntitySet="Resource" />
             <End Role="InformationPlan" EntitySet="InformationPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelsWorkstation_Resource" Association="Self.FK_ModelsWorkstation_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ModelsWorkstation" EntitySet="ModelsWorkstation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelsWorkstation_Resource1" Association="Self.FK_ModelsWorkstation_Resource1">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ModelsWorkstation" EntitySet="ModelsWorkstation" />
           </AssociationSet>
           <AssociationSet Name="FK_News_Resource" Association="Self.FK_News_Resource">
             <End Role="Resource" EntitySet="Resource" />
@@ -228,6 +270,15 @@
             <End Role="Resource" EntitySet="Resource" />
             <End Role="Workstation" EntitySet="Workstation" />
           </AssociationSet>
+          <EntitySet Name="ModelsWorkstation" EntityType="ITechModel.ModelsWorkstation" />
+          <AssociationSet Name="FK_ModelsWorkstation_Resource" Association="ITechModel.FK_ModelsWorkstation_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ModelsWorkstation" EntitySet="ModelsWorkstation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelsWorkstation_Resource1" Association="ITechModel.FK_ModelsWorkstation_Resource1">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ModelsWorkstation" EntitySet="ModelsWorkstation" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Workstation">
           <Key>
@@ -269,6 +320,8 @@
           <NavigationProperty Name="InformationPlan" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="Resource" ToRole="InformationPlan" />
           <NavigationProperty Name="News" Relationship="ITechModel.FK_News_Resource" FromRole="Resource" ToRole="News" />
           <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
+          <NavigationProperty Name="ModelsWorkstation" Relationship="ITechModel.FK_ModelsWorkstation_Resource" FromRole="Resource" ToRole="ModelsWorkstation" />
+          <NavigationProperty Name="ModelsWorkstation1" Relationship="ITechModel.FK_ModelsWorkstation_Resource1" FromRole="Resource" ToRole="ModelsWorkstation" />
         </EntityType>
         <EntityType Name="WorkstationGroup">
           <Key>
@@ -318,6 +371,41 @@
             </Principal>
             <Dependent Role="Workstation">
               <PropertyRef Name="idR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ModelsWorkstation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="idW" Type="Int32" />
+          <Property Name="idM" Type="Int32" />
+          <Property Name="index" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_ModelsWorkstation_Resource" FromRole="ModelsWorkstation" ToRole="Resource" />
+          <NavigationProperty Name="Models" Relationship="ITechModel.FK_ModelsWorkstation_Resource1" FromRole="ModelsWorkstation" ToRole="Resource" />
+        </EntityType>
+        <Association Name="FK_ModelsWorkstation_Resource">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="0..1" />
+          <End Type="ITechModel.ModelsWorkstation" Role="ModelsWorkstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModelsWorkstation">
+              <PropertyRef Name="idW" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModelsWorkstation_Resource1">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="0..1" />
+          <End Type="ITechModel.ModelsWorkstation" Role="ModelsWorkstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModelsWorkstation">
+              <PropertyRef Name="idM" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -409,6 +497,16 @@
               <MappingFragment StoreEntitySet="SimaticCpuType">
                 <ScalarProperty Name="Enabled" ColumnName="Enabled" />
                 <ScalarProperty Name="CpuType" ColumnName="CpuType" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModelsWorkstation">
+            <EntityTypeMapping TypeName="ITechModel.ModelsWorkstation">
+              <MappingFragment StoreEntitySet="ModelsWorkstation">
+                <ScalarProperty Name="index" ColumnName="index" />
+                <ScalarProperty Name="idM" ColumnName="idM" />
+                <ScalarProperty Name="idW" ColumnName="idW" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

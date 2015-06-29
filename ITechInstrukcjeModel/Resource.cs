@@ -18,6 +18,8 @@ namespace ITechInstrukcjeModel
         {
             this.InformationPlan = new HashSet<InformationPlan>();
             this.Workstation = new HashSet<Workstation>();
+            this.ModelsWorkstation = new HashSet<ModelsWorkstation>();
+            this.ModelsWorkstation1 = new HashSet<ModelsWorkstation>();
         }
     
         public int Id { get; set; }
@@ -33,5 +35,7 @@ namespace ITechInstrukcjeModel
         public virtual ICollection<InformationPlan> InformationPlan { get; set; }
         public virtual News News { get; set; }
         public virtual ICollection<Workstation> Workstation { get; set; }
+        public virtual ICollection<ModelsWorkstation> ModelsWorkstation { get; set; }
+        public virtual ICollection<ModelsWorkstation> ModelsWorkstation1 { get; set; }
     }
 }

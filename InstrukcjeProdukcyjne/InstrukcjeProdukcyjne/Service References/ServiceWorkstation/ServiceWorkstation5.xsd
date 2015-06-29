@@ -23,6 +23,8 @@
       <xs:element minOccurs="0" name="InformationPlan" nillable="true" type="tns:ArrayOfInformationPlan" />
       <xs:element minOccurs="0" name="Keywords" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="LastWriteTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ModelsWorkstation" nillable="true" type="tns:ArrayOfModelsWorkstation" />
+      <xs:element minOccurs="0" name="ModelsWorkstation1" nillable="true" type="tns:ArrayOfModelsWorkstation" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="News" nillable="true" type="tns:News" />
       <xs:element minOccurs="0" name="No" nillable="true" type="xs:string" />
@@ -67,6 +69,23 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Dokument" nillable="true" type="tns:Dokument" />
+  <xs:complexType name="ArrayOfModelsWorkstation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ModelsWorkstation" nillable="true" type="tns:ModelsWorkstation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfModelsWorkstation" nillable="true" type="tns:ArrayOfModelsWorkstation" />
+  <xs:complexType name="ModelsWorkstation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Models" nillable="true" type="tns:Resource" />
+      <xs:element minOccurs="0" name="Workstation" nillable="true" type="tns:Resource" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+      <xs:element minOccurs="0" name="idM" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="idW" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="index" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ModelsWorkstation" nillable="true" type="tns:ModelsWorkstation" />
   <xs:complexType name="ArrayOfWorkstation">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Workstation" nillable="true" type="tns:Workstation" />
