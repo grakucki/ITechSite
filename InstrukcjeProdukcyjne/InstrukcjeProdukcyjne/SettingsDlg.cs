@@ -219,5 +219,22 @@ namespace InstrukcjeProdukcyjne
 
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            
+            try 
+	        {	        
+	            ModelsWorkstationDlg dial = new ModelsWorkstationDlg();
+                dial.idR = GetCurrent().Id;
+                dial.ShowDialog();
+	        }
+	        catch (Exception ex) 
+	        {
+
+                MessageBox.Show(ex.Message);
+	        }
+
+        }
+
     }
 }

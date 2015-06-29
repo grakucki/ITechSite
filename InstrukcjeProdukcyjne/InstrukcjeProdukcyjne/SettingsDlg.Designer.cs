@@ -132,7 +132,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(221, 251);
+            this.button1.Location = new System.Drawing.Point(230, 231);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(147, 94);
             this.button1.TabIndex = 9;
@@ -154,12 +154,13 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button3.Location = new System.Drawing.Point(398, 251);
+            this.button3.Location = new System.Drawing.Point(394, 231);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(147, 94);
             this.button3.TabIndex = 11;
             this.button3.Text = "Ustawienia modeli na sterowniku";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // SettingsDlg
             // 

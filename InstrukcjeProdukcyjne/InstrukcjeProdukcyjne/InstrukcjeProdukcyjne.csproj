@@ -123,6 +123,18 @@
     <Compile Include="MediaViewerControl.Designer.cs">
       <DependentUpon>MediaViewerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModelsWorkstationDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModelsWorkstationDlg.Designer.cs">
+      <DependentUpon>ModelsWorkstationDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ModelsWorkstationEditDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModelsWorkstationEditDlg.Designer.cs">
+      <DependentUpon>ModelsWorkstationEditDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyFileInfo.cs" />
     <Compile Include="PdfViewerControl.cs">
       <SubType>UserControl</SubType>
@@ -186,6 +198,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MediaViewerControl.resx">
       <DependentUpon>MediaViewerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModelsWorkstationDlg.resx">
+      <DependentUpon>ModelsWorkstationDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModelsWorkstationEditDlg.resx">
+      <DependentUpon>ModelsWorkstationEditDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PdfViewerControl.resx">
       <DependentUpon>PdfViewerControl.cs</DependentUpon>

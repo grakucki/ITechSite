@@ -156,7 +156,7 @@ namespace InstrukcjeProdukcyjne
                     if (client.IsOnLine())
                     {
                         db.Resource_Local = client.GetInformationPlainsList(idR.Value).ToList();
-                            db.ExportResources(null);
+                        db.ExportResources(null);
                         
                     }
                 }
