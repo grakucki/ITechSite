@@ -67,8 +67,9 @@ namespace InstrukcjeProdukcyjne
         {
             try
             {
-
-                // dodaj nowy model
+                ble ble
+                    dodac identity namespace idDataGridViewTextBoxColumn w 
+                // dodaj nowy model [ModelsWorkstation] w sql
                 var n = new ServiceWorkstation.ModelWorkstationInfo();
                 n.idW = idR;
 
