@@ -204,6 +204,7 @@
     <Compile Include="Models\SimaticCpuType.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Content Include="Content\images\Testy.jpg" />
     <Content Include="Models\sql\2015-06-23.sql" />
     <Compile Include="Models\UniqueAttribute.cs" />
     <Compile Include="Models\DBFile.cs" />
