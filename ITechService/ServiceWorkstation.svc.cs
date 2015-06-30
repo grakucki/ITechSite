@@ -207,10 +207,14 @@ namespace ITechService
                     context.Configuration.LazyLoadingEnabled = false;
                     context.Configuration.ProxyCreationEnabled = false;
 
+                    // stacja robocza
                     var q = context.Dokument.Where(m => m.InformationPlan.Any(i => i.idR == idR && i.Enabled == true))
                         .Select(m=>new DokumentIdentity { id=m.Id, CodeName = m.CodeName, LastWriteTime=m.LastWriteTime, LocalFileName=m.LocalFileName, Size=m.Size ?? 0});
 
-                    var q2 = context.Dokument.Where(m => m.InformationPlan.Any(i => i.idR == 2 && i.Enabled == true))
+
+                    // modele dorobić aby zwracała tylko potrzebne dokumenty dla wszystkich modeli produkowanych na stacji
+
+                    var q2 = context.Dokument.Where(m => m.InformationPlan.Any(i => i.Resource.Type == 2 && i.Enabled == true))
                         .Select(m => new DokumentIdentity { id = m.Id, CodeName = m.CodeName, LastWriteTime = m.LastWriteTime, LocalFileName = m.LocalFileName, Size = m.Size ?? 0 });
                     q=q.Union(q2);
                     if (q != null)

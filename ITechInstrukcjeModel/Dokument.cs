@@ -33,8 +33,7 @@ namespace ITechInstrukcjeModel
         public string Keywords { get; set; }
         public Nullable<long> Size { get; set; }
         public string LocalFileName { get; set; }
-
-        [IgnoreDataMember]
+    [IgnoreDataMember]
         public virtual ICollection<InformationPlan> InformationPlan { get; set; }
     }
 }

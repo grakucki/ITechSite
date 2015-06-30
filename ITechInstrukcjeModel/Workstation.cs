@@ -23,8 +23,7 @@ namespace ITechInstrukcjeModel
         public string Sterownik_Ip { get; set; }
         public string Sterownik_Model { get; set; }
         public Nullable<int> Setrownik_DB { get; set; }
-
-        [IgnoreDataMember]
+    [IgnoreDataMember]
         public virtual Resource Resource { get; set; }
     }
 }

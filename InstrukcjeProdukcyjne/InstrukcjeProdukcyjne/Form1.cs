@@ -529,6 +529,8 @@ namespace InstrukcjeProdukcyjne
 
             DocSyncDlg.Sync();
             DocSyncDlg.ShowDialog();
+
+            //TODO: zmienić namiary serwis dokuimentów bo działa na localhost
             //DocSyncDlg.Sync(Settings.Default.App.Stanowisko);
         }
 

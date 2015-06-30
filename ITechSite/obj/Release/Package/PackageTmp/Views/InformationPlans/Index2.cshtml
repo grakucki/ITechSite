@@ -1,76 +1,61 @@
-﻿@*@model IEnumerable<ITechSite.Models.Resource>*@
-@model ITechSite.Models.ResourceListFind
-@using PagedList.Mvc;
+﻿@model IEnumerable<ITechSite.Models.InformationPlan>
 
 @{
-    ViewBag.Title = "Index2";
+    ViewBag.Title = "Lista dokumentów";
 }
 
-<h2>Wybierz stanowisko lub model:</h2>
-
-
-@Html.Partial("_SelectResources")
-
+<h2>Lista Dokumentów dla</h2>
 <div>
-    
-    Zanleziono @Model.Resources.TotalItemCount pozycji. Wyswietlonio stronę @(Model.Resources.PageCount < Model.Resources.PageNumber ? 0 : Model.Resources.PageNumber) z @Model.Resources.PageCount
-    @Html.PagedListPager(Model.Resources, page => Url.Action("Index2", new { page, Find_ResourceType = @Model.Find_ResourceType }))
+    <h3>
+        @if(Model!=null)
+        { 
+            if (Model.FirstOrDefault()!=null)
+            {
+                @Model.First().Resource.ResourceType.Type
+                @Model.First().Resource.Name
+            }
+        }
+</h3>
 </div>
+
 <table class="table">
     <tr>
         <th>
+            Plik
         </th>
         <th>
-            Nazwa
-        </th>
-        <th>
-            Nr
-        </th>
-        <th>
-            Proces roboczy
-        </th>
-        <th>
-            Aktywny
+            Kod dokumentu
         </th>
         <th>
             Opis
         </th>
         <th>
-            Słowa kluczowe
-        </th>
-        <th>
-            Rodzaj
+            Sortowanie
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model.Resources) {
+@foreach (var item in Model) {
     <tr>
         <td>
-            @Html.ActionLink("Wybierz", "Index", new { IdR = item.Id })
+            @Html.DisplayFor(modelItem => item.Dokument.FileName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
+            @Html.DisplayFor(modelItem => item.Dokument.CodeName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.No)
+            @Html.DisplayFor(modelItem => item.Dokument.Description)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WorkProcess)
+            @Html.DisplayFor(modelItem => item.Order)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Enabled)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Keywords)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ResourceType.Type)
+            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id  }) |
+            @Html.ActionLink("Delete", "Delete", new {  id=item.id })
         </td>
     </tr>
 }
 
 </table>
+@Html.ActionLink("Dodaj kolejny dokument z biblioteki", "Create")

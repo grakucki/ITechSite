@@ -14,7 +14,7 @@ namespace ITechSite.Models
         private static string EntitiesName()
         {
 
-            int i = 0;
+            int i = 1;
             String n=string.Empty;
             switch (i)
             {
@@ -24,7 +24,7 @@ namespace ITechSite.Models
                     break;
                 case 2:
                     {
-                        var c = ConfigurationManager.ConnectionStrings["ITechEntities"];
+                        var c = ConfigurationManager.ConnectionStrings["ITechEntities2"];
                         n = c.ConnectionString.Replace(@"data source=COOLER7\SQLEXPRESS",@"data source=Akacjowa5\" );
                         //n = "name=ITechEntities2";
                         //n = @"metadata=res://*/Models.ITechModel.csdl|res://*/Models.ITechModel.ssdl|res://*/Models.ITechModel.msl;provider=System.Data.SqlClient;provider connection string='data source=Akacjowa5\;initial catalog=ITech;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework'";
