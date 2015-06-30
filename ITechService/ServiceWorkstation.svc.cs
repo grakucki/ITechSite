@@ -108,17 +108,15 @@ namespace ITechService
 
         public List<Resource> GetWorkstationList()
         {
-
             StringBuilder ret = new StringBuilder();
             List<Resource> o = null;
             try
             {
-
                 using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
                 {
                     context.Configuration.LazyLoadingEnabled = false;
                     context.Configuration.ProxyCreationEnabled = false;
-                    o = context.ResourceWorkstation.OrderBy(m=>m.Name).ToList();
+                    o = context.ResourceWorkstation.Include(m=>m.Workstation).OrderBy(m=>m.Name).ToList();
                 }
             }
             catch (Exception ex)
@@ -146,6 +144,7 @@ namespace ITechService
                     var q = context.Resource.Where(m => m.Id == idR)
                         .Include(m => m.InformationPlan)
                         .Include(m=>m.InformationPlan.Select(y=>y.Dokument))
+                        .Include(m=>m.Workstation)
                         .Include(m => m.News);
                     o=q.FirstOrDefault();
                 }

@@ -11,6 +11,7 @@ namespace ITechInstrukcjeModel
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     
     public partial class Dokument
     {
@@ -32,7 +33,8 @@ namespace ITechInstrukcjeModel
         public string Keywords { get; set; }
         public Nullable<long> Size { get; set; }
         public string LocalFileName { get; set; }
-    
+
+        [IgnoreDataMember]
         public virtual ICollection<InformationPlan> InformationPlan { get; set; }
     }
 }

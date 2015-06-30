@@ -77,11 +77,8 @@ namespace InstrukcjeProdukcyjne
             int? id = Properties.Settings.Default.App.Stanowisko;
 
             db.WorkDir = Properties.Settings.Default.App.LocalDoc;
-            
-            var r = db.ImportResource(null);
 
-
-            var workstations = db.ResourceWorkstation_Local;
+            var workstations = GetWorsktationList();
 
             resourceBindingSource.DataSource = workstations;
 
@@ -100,7 +97,7 @@ namespace InstrukcjeProdukcyjne
             //File.WriteAllText(Path.Combine(path, "setings.xml"), s);
             Properties.Settings.Default.App.ServerDoc = textBox1.Text;
             Properties.Settings.Default.App.LocalDoc = textBox2.Text;
-            var w = (ITechInstrukcjeModel.Resource) WorkstationComboBox.SelectedItem;
+            var w = (Resource) WorkstationComboBox.SelectedItem;
 
             if (w != null)
                 Properties.Settings.Default.App.Stanowisko = w.Id;
@@ -116,6 +113,7 @@ namespace InstrukcjeProdukcyjne
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // ustawienia sterownika
             try
             {
                 var dial = new SimaticDlg();
@@ -128,7 +126,7 @@ namespace InstrukcjeProdukcyjne
                     GetCurrent().Workstation = new List<Workstation>();
                     GetCurrent().Workstation.Add(dial.Workstation);
                 }
-                if (dial.ShowDialog()== System.Windows.Forms.DialogResult.Cancel)
+                if (dial.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
                     return;
 
 
@@ -182,9 +180,26 @@ namespace InstrukcjeProdukcyjne
                 .Replace(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
         }
 
+        private List<Resource> GetWorsktationList()
+        {
+            ServiceWorkstation.ServiceWorkstationClientEx client = null;
+            var addr = textBox1.Text;
+            if (string.IsNullOrEmpty(textBox1.Text))
+                throw new Exception("Podaj adres serwera");
+
+             List<Resource> s =null;
+            using (new CursorWait())
+            {
+                client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient(addr);
+                s = client.GetWorkstationList().ToList();
+                client.Close();
+            }
+            return s;
+        }
+
         private void button2_Click(object sender, EventArgs e)
         {
-
+            // test połaczenia
             var addr = textBox1.Text;
             //http://localhost:53854/ServiceWorkstation.svc
 
@@ -194,11 +209,12 @@ namespace InstrukcjeProdukcyjne
             try
             {
                 string s = string.Empty;
-                int idR = GetCurrent().Id;
+                int idR = 0;// GetCurrent().Id;
                 using(new CursorWait())
                 { 
                     client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient(addr);
                     s = client.TestConnection(idR);
+                    resourceBindingSource.DataSource = client.GetWorkstationList();
                     client.Close();
                 }
                 MessageBox.Show(s);
@@ -216,12 +232,11 @@ namespace InstrukcjeProdukcyjne
                     client.Abort();
                 MessageBox.Show(string.Format("4.{0} : {1}", ex.GetType(), ex.Message));
             }
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            
+            // ustawienia modeli
             try 
 	        {	        
 	            ModelsWorkstationDlg dial = new ModelsWorkstationDlg();

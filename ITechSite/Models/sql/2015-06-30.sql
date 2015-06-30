@@ -1,0 +1,74 @@
+﻿BEGIN TRANSACTION
+SET QUOTED_IDENTIFIER ON
+SET ARITHABORT ON
+SET NUMERIC_ROUNDABORT OFF
+SET CONCAT_NULL_YIELDS_NULL ON
+SET ANSI_NULLS ON
+SET ANSI_PADDING ON
+SET ANSI_WARNINGS ON
+COMMIT
+BEGIN TRANSACTION
+GO
+ALTER TABLE dbo.ModelsWorkstation
+	DROP CONSTRAINT FK_ModelsWorkstation_Resource
+GO
+ALTER TABLE dbo.ModelsWorkstation
+	DROP CONSTRAINT FK_ModelsWorkstation_Resource1
+GO
+ALTER TABLE dbo.Resource SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
+BEGIN TRANSACTION
+GO
+CREATE TABLE dbo.Tmp_ModelsWorkstation
+	(
+	id int NOT NULL IDENTITY (1, 1),
+	idW int NULL,
+	idM int NULL,
+	[index] nvarchar(10) NULL
+	)  ON [PRIMARY]
+GO
+ALTER TABLE dbo.Tmp_ModelsWorkstation SET (LOCK_ESCALATION = TABLE)
+GO
+SET IDENTITY_INSERT dbo.Tmp_ModelsWorkstation ON
+GO
+IF EXISTS(SELECT * FROM dbo.ModelsWorkstation)
+	 EXEC('INSERT INTO dbo.Tmp_ModelsWorkstation (id, idW, idM, [index])
+		SELECT id, idW, idM, [index] FROM dbo.ModelsWorkstation WITH (HOLDLOCK TABLOCKX)')
+GO
+SET IDENTITY_INSERT dbo.Tmp_ModelsWorkstation OFF
+GO
+DROP TABLE dbo.ModelsWorkstation
+GO
+EXECUTE sp_rename N'dbo.Tmp_ModelsWorkstation', N'ModelsWorkstation', 'OBJECT' 
+GO
+ALTER TABLE dbo.ModelsWorkstation ADD CONSTRAINT
+	PK_ModelsWorkstation PRIMARY KEY CLUSTERED 
+	(
+	id
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.ModelsWorkstation ADD CONSTRAINT
+	FK_ModelsWorkstation_Resource FOREIGN KEY
+	(
+	idW
+	) REFERENCES dbo.Resource
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+ALTER TABLE dbo.ModelsWorkstation ADD CONSTRAINT
+	FK_ModelsWorkstation_Resource1 FOREIGN KEY
+	(
+	idM
+	) REFERENCES dbo.Resource
+	(
+	Id
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
+GO
+COMMIT

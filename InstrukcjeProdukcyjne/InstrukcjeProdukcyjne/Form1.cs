@@ -111,10 +111,14 @@ namespace InstrukcjeProdukcyjne
                 toolStripStatusLabel1.Text = Path.GetFullPath(db.WorkDir);
                 StartupApp.CreateWorkDirektory(db.WorkDir);
 
+
                 Application.DoEvents();
+
+                if (Settings.Default.App.Stanowisko.Value==0)
+                    ShowSettings();
+
                 // ładujemy resources
                 LoadResource(Settings.Default.App.Stanowisko);
-
                 
                 OnResourceFileListChange(0);
 

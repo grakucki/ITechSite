@@ -11,6 +11,7 @@ namespace ITechInstrukcjeModel
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     
     public partial class News
     {
@@ -18,7 +19,8 @@ namespace ITechInstrukcjeModel
         public string News1 { get; set; }
         public Nullable<System.DateTime> ValidEnd { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-    
+
+        [IgnoreDataMember]
         public virtual Resource Resource { get; set; }
     }
 }

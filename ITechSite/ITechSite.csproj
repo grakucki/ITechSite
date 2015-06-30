@@ -271,6 +271,11 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Models\sql\2015-06-25.sql" />
+    <Content Include="Models\sql\2015-06-30.sql" />
+    <Content Include="Models\sql\2015-06-30_2.sql" />
+    <Content Include="Models\sql\2015-06-30_3.sql" />
+    <Content Include="Models\sql\2015-06-30_4.sql" />
+    <Content Include="Models\sql\2015-06-30_5.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\ITechModel.edmx">
