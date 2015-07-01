@@ -61,6 +61,8 @@ namespace ITechSite.Models
         public string Name { get; set; }
     }
 
+
+
     public partial class Dokument
     {
         public string Size2
@@ -71,13 +73,13 @@ namespace ITechSite.Models
                     return "-";
                 var units = new[] { "B", "KB", "MB", "GB", "TB" };
                 var index = 0;
-                long size = this.Size.Value;
+                double size = this.Size.Value;
                 while (size > 1024 && index + 1 < units.Length)
                 {
                     size /= 1024;
                     index++;
                 }
-                return string.Format("{0:2} {1}", size, units[index]);
+                return string.Format("{0:N2} {1}", size, units[index]);
             }
         }
     }

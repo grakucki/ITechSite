@@ -84,6 +84,7 @@ namespace ITechSite.Controllers
                 model.Dokuments = db.Dokument.Include(d => d.WorkProcess);
 
 
+
             //if (!string.IsNullOrEmpty(model.Find.CodeName))
             //    model.Dokuments = db.Dokument.Where(m => m.CodeName.IndexOf(model.Find.CodeName) >= 0).Include(d => d.WorkProcess);
             //else
