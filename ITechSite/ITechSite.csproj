@@ -187,6 +187,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ResourcesController.cs" />
+    <Compile Include="Controllers\TestyController.cs" />
     <Compile Include="Controllers\WorkstationsController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -371,6 +372,7 @@
     <Content Include="Views\Workstations\Index.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\InformationPlans\Index2.cshtml" />
+    <Content Include="Views\Testy\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -34,6 +34,8 @@ namespace ITechSite.Models
                     ret = ReplaceCaseInsensitive(c.ConnectionString,@"data source=COOLER7\SQLEXPRESS", @"data source=Akacjowa5\");
                 }
             }
+            else
+                ret =name;
             return ret;
         }
 
