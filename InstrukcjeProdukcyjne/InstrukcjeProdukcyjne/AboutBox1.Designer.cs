@@ -35,6 +35,8 @@
             this.labelCompanyName = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.okButton = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.labelUpdateAddres = new System.Windows.Forms.Label();
             this.tableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -51,6 +53,8 @@
             this.tableLayoutPanel.Controls.Add(this.labelCompanyName, 1, 3);
             this.tableLayoutPanel.Controls.Add(this.textBoxDescription, 1, 4);
             this.tableLayoutPanel.Controls.Add(this.okButton, 1, 5);
+            this.tableLayoutPanel.Controls.Add(this.button1, 0, 5);
+            this.tableLayoutPanel.Controls.Add(this.labelUpdateAddres, 0, 4);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(9, 9);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
@@ -148,6 +152,25 @@
             this.okButton.TabIndex = 24;
             this.okButton.Text = "&OK";
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button1.Location = new System.Drawing.Point(3, 320);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(206, 31);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "Sprawdź aktualizacje";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // labelUpdateAddres
+            // 
+            this.labelUpdateAddres.Location = new System.Drawing.Point(3, 140);
+            this.labelUpdateAddres.Name = "labelUpdateAddres";
+            this.labelUpdateAddres.Size = new System.Drawing.Size(206, 125);
+            this.labelUpdateAddres.TabIndex = 26;
+            this.labelUpdateAddres.Text = "labelUpdateAddres";
+            // 
             // AboutBox1
             // 
             this.AcceptButton = this.okButton;
@@ -164,6 +187,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "O Aplikacji";
+            this.Load += new System.EventHandler(this.AboutBox1_Load);
             this.tableLayoutPanel.ResumeLayout(false);
             this.tableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).EndInit();
@@ -181,5 +205,7 @@
         private System.Windows.Forms.Label labelCompanyName;
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label labelUpdateAddres;
     }
 }
