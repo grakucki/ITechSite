@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITechInstrukcjeModel", "ITe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITechService", "ITechService\ITechService.csproj", "{A5679F9B-88B6-4EEA-83CE-2AC2B9D25BA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITechUnitTestProject", "ITechUnitTestProject\ITechUnitTestProject.csproj", "{34B17394-BBEF-4C56-BB19-1C1A42C5CECE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{A5679F9B-88B6-4EEA-83CE-2AC2B9D25BA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5679F9B-88B6-4EEA-83CE-2AC2B9D25BA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5679F9B-88B6-4EEA-83CE-2AC2B9D25BA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34B17394-BBEF-4C56-BB19-1C1A42C5CECE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34B17394-BBEF-4C56-BB19-1C1A42C5CECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34B17394-BBEF-4C56-BB19-1C1A42C5CECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34B17394-BBEF-4C56-BB19-1C1A42C5CECE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
