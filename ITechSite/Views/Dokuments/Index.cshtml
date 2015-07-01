@@ -1,8 +1,8 @@
 ﻿@model ITechSite.Models.IndexDokumentModel
-
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Dokumenty";
-    ITechSite.Models.FindDokumentModel info = ViewBag.FindDokumentModel;
+    //ITechSite.Models.FindDokumentModel info = ViewBag.FindDokumentModel;
 }
 
 <h2>Index</h2>
@@ -10,10 +10,14 @@
 @using (Html.BeginForm("Index", "Dokuments", FormMethod.Get))
 {
     <div>
-        @Html.TextBoxFor(model => model.Find.CodeName)
-        <input type="submit" name="Find.Action" value="find" class="btn btn-default" />
+        @Html.TextBoxFor(model => model.CodeName)
+        <input type="submit" name="FindAction" value="Szukaj" class="btn btn-default" />
     </div>
 }
+<div>
+    @Html.PagedListPager(Model.Dokuments, page => Url.Action("Index", new { page, CodeName = Model.CodeName, FindAction = "page" }))
+</div>
+
 <p>
     @Html.ActionLink("Nowy dokument", "Create")
 </p>

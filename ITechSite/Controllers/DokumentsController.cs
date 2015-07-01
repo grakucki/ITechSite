@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using ITechSite.Models;
 using System.Data.Entity.Validation;
 using System.IO;
+using PagedList;
 
 namespace ITechSite.Controllers
 {
@@ -60,28 +61,24 @@ namespace ITechSite.Controllers
                 model = new IndexDokumentModel();
             }
 
-            if (model.Find == null)
-                model.Find = new FindDokumentModel();
 
-
-            if (string.IsNullOrEmpty(model.Find.Action))
+            if (string.IsNullOrEmpty(model.FindAction))
             {
                 if (Session["DokumentCodeName"] != null)
-                    model.Find = (FindDokumentModel)Session["DokumentCodeName"];
+                    model = (IndexDokumentModel)Session["DokumentCodeName"];
             }
             else
-                Session["DokumentCodeName"] = model.Find;
+                Session["DokumentCodeName"] = model;
 
 
-            if (!string.IsNullOrEmpty(model.Find.CodeName))
+            if (!string.IsNullOrEmpty(model.CodeName))
             {
-                var query = db.Dokument.Where(m => (m.CodeName.Contains(model.Find.CodeName) || m.FileName.Contains(model.Find.CodeName)));
-
+                var query = db.Dokument.Where(m => (m.CodeName.Contains(model.CodeName) || m.FileName.Contains(model.CodeName)));
                 query = query.Include(d => d.WorkProcess);
-                model.Dokuments = query;
+                model.Dokuments = query.OrderBy(m => m.CodeName).ToPagedList(model.page ?? 1, 5);
             }
             else
-                model.Dokuments = db.Dokument.Include(d => d.WorkProcess);
+                model.Dokuments = db.Dokument.Include(d => d.WorkProcess).OrderBy(m=>m.CodeName).ToPagedList(model.page ?? 1, 5);
 
 
 
@@ -90,7 +87,7 @@ namespace ITechSite.Controllers
             //else
             //    model.Dokuments = db.Dokument.Include(d => d.WorkProcess);
 
-            ViewBag.FindDokumentModel = model.Find;
+            //ViewBag.FindDokumentModel = model.Find;
             return View(model);
         }
         // GET: Dokuments/Details/5

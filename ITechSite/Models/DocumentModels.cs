@@ -26,7 +26,7 @@ namespace ITechSite.Models
         }
     }
 
-    public class FindDokumentModel
+    public class FindDokumentModel2
     {
         public string CodeName { get; set; }
         public string Action { get; set; }
@@ -34,9 +34,12 @@ namespace ITechSite.Models
     
     public class IndexDokumentModel
     {
-         public  FindDokumentModel Find { get; set; }
-         public string CodeName2 { get; set; }
-         public IEnumerable<Dokument> Dokuments { get; set; }
+//         public  FindDokumentModel Find { get; set; }
+         public string CodeName { get; set; }
+         public string FindAction { get; set; }
+         public int? page { get; set; }
+
+         public PagedList.IPagedList<Dokument> Dokuments { get; set; }
     }
 
 }
