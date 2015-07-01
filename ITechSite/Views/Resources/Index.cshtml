@@ -1,13 +1,22 @@
 ﻿@*@model IEnumerable<ITechSite.Models.Resource>*@
 @model ITechSite.Models.ResourceListFind
 @using PagedList.Mvc;
+
 @{
     ViewBag.Title = "Lista zasobów";
 }
 
 <h2>Szukaj stanowisko lub model</h2>
-@Html.Partial("_SelectResources")
 
+@Html.Partial("_SelectResources")
+<div>
+    Zanleziono @Model.Resources.TotalItemCount pozycji. Wyswietlonio stronę @(Model.Resources.PageCount < Model.Resources.PageNumber ? 0 : Model.Resources.PageNumber) z @Model.Resources.PageCount
+    @Html.PagedListPager(Model.Resources, page => Url.Action("index", new { page, Find_ResourceType = @Model.Find_ResourceType, Find_WorkProcess = @Model.Find_WorkProcess, Find_Word = @Model.Find_Word, ReturnUrl = @Model.ReturnUrl, FindAction="Page" }))
+
+    @*@Html.PagedListPager(Model.Resources, page => Url.Action("Index", new { page }))*@
+
+
+</div>
 
 <p>
     @Html.ActionLink("Utwórz nowy", "Create")
@@ -75,5 +84,3 @@
 
 </table>
 
-Strona @(Model.Resources.PageCount < Model.Resources.PageNumber ? 0 : Model.Resources.PageNumber) z @Model.Resources.PageCount
-@Html.PagedListPager(Model.Resources, page => Url.Action("Index", new { page }))

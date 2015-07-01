@@ -19,10 +19,10 @@ namespace ITechSite.Models
         public string Find_ResourceType { get; set; }
 
         public bool Allow_ResourceType { get; set; }
-
         
         public string ReturnUrl { get; set; }
-        
+
+        public string FindAction { get; set; }
 
         public int? page { get; set; }
 

@@ -16,14 +16,9 @@ namespace ITechSite.Controllers
     {
         private ITechEntities db = new ITechEntities(0);
 
-        private ResourceListFind GetOrDefault(ResourceListFind rlf)
+        private ResourceListFind GetOrDefault()
         {
-            if (rlf != null)
-                return rlf;
-            var rf = (ResourceListFind)TempData["ResourceListFind"];
-            if (rf != null)
-                return rf;
-            rf = (ResourceListFind)Session["ResourceListFind"];
+            var rf = (ResourceListFind)Session["ResourceListFind"];
             if (rf != null)
                 return rf;
             return new ResourceListFind();
@@ -34,24 +29,34 @@ namespace ITechSite.Controllers
             Session["ResourceListFind"] = rlf;
         }
 
-        public ActionResult Index()
-        {
-            var rlf = GetOrDefault(null);
-            rlf.Fill(db);
-            return View(rlf);
+        //[HttpGet]
+        //public ActionResult Index(ResourceListFind rf)
+        //{
+        //    var rlf = GetOrDefault(null);
+        //    rlf.Fill(db);
+        //    return View(rlf);
+        //}
 
-        }
         // GET: Resources
-        [HttpPost]
-        public ActionResult Index(ResourceListFind rlf)
+        //[HttpPost]
+        public ActionResult Index2()
         {
-            //var resource = db.Resource;//.Include(r=>r.ResourceType);
+            ResourceListFind rf = GetOrDefault();
+            return RedirectToAction("Index", new { rf = rf });
+        }
 
-            rlf = GetOrDefault(rlf);
-            SetDefault(rlf);
-            rlf.Fill(db);
-            return View(rlf);
-//            return View(resource.ToList());
+
+        public ActionResult Index(ResourceListFind rf)
+        {
+            if (rf == null)
+                rf = GetOrDefault();
+            else
+                if (rf.FindAction == null)
+                    rf = GetOrDefault();
+                else
+                    SetDefault(rf);
+            rf.Fill(db);
+            return View(rf);
         }
 
         public ActionResult Find(int? IdR, ResourceListFind rf)

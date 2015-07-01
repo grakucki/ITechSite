@@ -194,7 +194,6 @@ namespace ITechService
         }
 
 
-
         public List<DokumentIdentity> GetDokumentsList(int idR)
         {
             StringBuilder ret = new StringBuilder();

@@ -6,14 +6,15 @@
     ViewBag.Title = "Find";
 }
 
-<h2>Wybierz stanowisko  aby edytować plan inforamacyjny</h2>
+<h2>Wybierz stanowisko  aby edytować plan informacyjny</h2>
 
 @Html.Partial("_SelectResources")
-
 <div>
     Zanleziono @Model.Resources.TotalItemCount pozycji. Wyswietlonio stronę @(Model.Resources.PageCount < Model.Resources.PageNumber ? 0 : Model.Resources.PageNumber) z @Model.Resources.PageCount
     @Html.PagedListPager(Model.Resources, page => Url.Action("Find", new { page, Find_ResourceType = @Model.Find_ResourceType, Find_WorkProcess = @Model.Find_WorkProcess, Find_Word = @Model.Find_Word, ReturnUrl = @Model.ReturnUrl }))
 </div>
+
+
 <table class="table">
     <tr>
         <th>

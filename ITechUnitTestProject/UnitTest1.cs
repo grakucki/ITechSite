@@ -37,8 +37,15 @@ namespace ITechUnitTestProject
             StringAssert.Contains(Size2(x * 1024 + 200), "7,20 KB");
             StringAssert.Contains(Size2(x * 1024 * 1024), "7,00 MB");
             StringAssert.Contains(Size2(x * 1024 * 1024 * 1024), "7,00 GB");
-
-            
         }
+
+
+        [TestMethod]
+        public void Dokument_List_test()
+        {
+            var d = new ITechService.ServiceWorkstation();
+            d.GetDokumentsList(10);
+        }
+
     }
 }

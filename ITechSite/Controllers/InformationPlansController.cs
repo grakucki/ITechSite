@@ -119,6 +119,7 @@ namespace ITechSite.Controllers
         {
             if (ModelState.IsValid)
             {
+                informationPlan.Enabled=true;
                 db.InformationPlan.Add(informationPlan);
                 db.SaveChanges();
                 return RedirectToAction("Index");

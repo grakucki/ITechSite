@@ -57,6 +57,10 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ITechService\ITechService.csproj">
+      <Project>{a5679f9b-88b6-4eea-83ce-2ac2b9d25ba3}</Project>
+      <Name>ITechService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ITechSite\ITechSite.csproj">
       <Project>{18392ed0-de70-4eaf-9f9b-4092da2e991e}</Project>
       <Name>ITechSite</Name>
