@@ -20,6 +20,8 @@
           <Property Name="ValidDtmOff" Type="datetime" />
           <Property Name="WorkProcess_Id" Type="int" />
           <Property Name="Keywords" Type="nvarchar(max)" />
+          <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
+          <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
         <EntityType Name="FileContent">
           <Key>
@@ -39,7 +41,7 @@
           <Property Name="idR" Type="int" Nullable="false" />
           <Property Name="IdD" Type="int" Nullable="false" />
           <Property Name="Order" Type="int" />
-          <Property Name="Enabled" Type="bit" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Model">
           <Key>
@@ -55,6 +57,7 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="News" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ValidEnd" Type="datetime" />
+          <Property Name="CreatedAt" Type="datetime" />
         </EntityType>
         <EntityType Name="Resource">
           <Key>
@@ -83,6 +86,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CpuType" Type="nvarchar" MaxLength="50" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="WorkProcess">
           <Key>
@@ -111,18 +115,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="16" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Dokument_WorkProcess">
-          <End Role="WorkProcess" Type="Self.WorkProcess" Multiplicity="0..1" />
-          <End Role="Dokument" Type="Self.Dokument" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkProcess">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Dokument">
-              <PropertyRef Name="WorkProcess_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_FileContent_Dokument1">
           <End Role="Dokument" Type="Self.Dokument" Multiplicity="0..1" />
           <End Role="FileContent" Type="Self.FileContent" Multiplicity="*" />
@@ -207,10 +199,6 @@
           <EntitySet Name="WorkProcess" EntityType="Self.WorkProcess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkstationGroup" EntityType="Self.WorkstationGroup" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Dokument_WorkProcess" Association="Self.FK_Dokument_WorkProcess">
-            <End Role="WorkProcess" EntitySet="WorkProcess" />
-            <End Role="Dokument" EntitySet="Dokument" />
-          </AssociationSet>
           <AssociationSet Name="FK_FileContent_Dokument1" Association="Self.FK_FileContent_Dokument1">
             <End Role="Dokument" EntitySet="Dokument" />
             <End Role="FileContent" EntitySet="FileContent" />
@@ -344,6 +332,8 @@
           <NavigationProperty Name="FileContent" Relationship="ITechModel.FK_FileContent_Dokument1" FromRole="Dokument" ToRole="FileContent" />
           <NavigationProperty Name="InformationPlan" Relationship="ITechModel.FK_InformationPlan_Dokument" FromRole="Dokument" ToRole="InformationPlan" />
           <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Int64" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="LocalFileName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
         </EntityType>
         <Association Name="FK_Dokument_WorkProcess">
           <End Type="ITechModel.WorkProcess" Role="WorkProcess" Multiplicity="0..1" />
@@ -440,7 +430,7 @@
           <Property Name="idR" Type="Int32" Nullable="false" />
           <Property Name="IdD" Type="Int32" Nullable="false" />
           <Property Name="Order" Type="Int32" />
-          <Property Name="Enabled" Type="Boolean" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_InformationPlan_Dokument" FromRole="InformationPlan" ToRole="Dokument" />
           <NavigationProperty Name="Resource" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="InformationPlan" ToRole="Resource" />
         </EntityType>
@@ -486,6 +476,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CpuType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="News">
           <Key>
@@ -495,6 +486,7 @@
           <Property Name="News1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ValidEnd" Type="DateTime" Precision="3" Nullable="true" />
           <NavigationProperty Name="Resource" Relationship="ITechModel.FK_News_Resource" FromRole="News" ToRole="Resource" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_News_Resource">
           <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
@@ -558,6 +550,8 @@
           <EntitySetMapping Name="Dokument">
             <EntityTypeMapping TypeName="ITechModel.Dokument">
               <MappingFragment StoreEntitySet="Dokument">
+                <ScalarProperty Name="LocalFileName" ColumnName="LocalFileName" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
                 <ScalarProperty Name="Keywords" ColumnName="Keywords" />
                 <ScalarProperty Name="WorkProcess_Id" ColumnName="WorkProcess_Id" />
                 <ScalarProperty Name="ValidDtmOff" ColumnName="ValidDtmOff" />
@@ -617,6 +611,7 @@
           <EntitySetMapping Name="SimaticCpuType">
             <EntityTypeMapping TypeName="ITechModel.SimaticCpuType">
               <MappingFragment StoreEntitySet="SimaticCpuType">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
                 <ScalarProperty Name="CpuType" ColumnName="CpuType" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -625,6 +620,7 @@
           <EntitySetMapping Name="News">
             <EntityTypeMapping TypeName="ITechModel.News">
               <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="ValidEnd" ColumnName="ValidEnd" />
                 <ScalarProperty Name="News1" ColumnName="News" />
                 <ScalarProperty Name="id" ColumnName="id" />

@@ -16,6 +16,13 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation
             return WorkstationClient(Properties.Settings.Default.App.ServerDoc);
         }
 
+        public ServiceDokument.ServiceDokumentClient DokumentClient()
+        {
+            var adr = this.Endpoint.Address.Uri;
+            string remoteAddress = adr.ToString().Replace("/ServiceWorkstation.svc", "/ServiceDokument.svc");
+            return new ServiceDokument.ServiceDokumentClient("webHttpBinding_IServiceDokument", remoteAddress);
+        }
+
         public static ServiceWorkstationClientEx WorkstationClient(string remoteAddress)
         {
             if (remoteAddress.IndexOf("http")<0)

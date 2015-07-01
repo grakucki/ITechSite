@@ -96,7 +96,7 @@ namespace InstrukcjeProdukcyjne
                     var dokc = client.GetDokumentsList(Settings.Default.App.Stanowisko.Value);
 
                     backgroundWorker1.ReportProgress(0, new ProgressState("ok.", true));
-                    using (var clientD = new ServiceDokument.ServiceDokumentClient())
+                    using (var clientD = client.DokumentClient())
                     {
                         // pobieramy listę wymaganych dokumentów
 

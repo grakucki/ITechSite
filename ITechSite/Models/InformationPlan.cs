@@ -18,7 +18,7 @@ namespace ITechSite.Models
         public int idR { get; set; }
         public int IdD { get; set; }
         public Nullable<int> Order { get; set; }
-        public Nullable<bool> Enabled { get; set; }
+        public bool Enabled { get; set; }
     
         public virtual Dokument Dokument { get; set; }
         public virtual Resource Resource { get; set; }

@@ -16,5 +16,6 @@ namespace ITechSite.Models
     {
         public int id { get; set; }
         public string CpuType { get; set; }
+        public bool Enabled { get; set; }
     }
 }

@@ -104,6 +104,8 @@
     <NavigationProperty Name="FileContent" Relationship="ITechModel.FK_FileContent_Dokument1" FromRole="Dokument" ToRole="FileContent" />
     <NavigationProperty Name="InformationPlan" Relationship="ITechModel.FK_InformationPlan_Dokument" FromRole="Dokument" ToRole="InformationPlan" />
     <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Size" Type="Int64" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="LocalFileName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
   </EntityType>
   <Association Name="FK_Dokument_WorkProcess">
     <End Type="ITechModel.WorkProcess" Role="WorkProcess" Multiplicity="0..1" />
@@ -200,7 +202,7 @@
     <Property Name="idR" Type="Int32" Nullable="false" />
     <Property Name="IdD" Type="Int32" Nullable="false" />
     <Property Name="Order" Type="Int32" />
-    <Property Name="Enabled" Type="Boolean" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_InformationPlan_Dokument" FromRole="InformationPlan" ToRole="Dokument" />
     <NavigationProperty Name="Resource" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="InformationPlan" ToRole="Resource" />
   </EntityType>
@@ -246,6 +248,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="CpuType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityType Name="News">
     <Key>
@@ -255,6 +258,7 @@
     <Property Name="News1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ValidEnd" Type="DateTime" Precision="3" Nullable="true" />
     <NavigationProperty Name="Resource" Relationship="ITechModel.FK_News_Resource" FromRole="News" ToRole="Resource" />
+    <Property Name="CreatedAt" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK_News_Resource">
     <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />

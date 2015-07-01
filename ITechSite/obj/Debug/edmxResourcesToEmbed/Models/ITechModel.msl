@@ -45,6 +45,8 @@
     <EntitySetMapping Name="Dokument">
       <EntityTypeMapping TypeName="ITechModel.Dokument">
         <MappingFragment StoreEntitySet="Dokument">
+          <ScalarProperty Name="LocalFileName" ColumnName="LocalFileName" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
           <ScalarProperty Name="Keywords" ColumnName="Keywords" />
           <ScalarProperty Name="WorkProcess_Id" ColumnName="WorkProcess_Id" />
           <ScalarProperty Name="ValidDtmOff" ColumnName="ValidDtmOff" />
@@ -104,6 +106,7 @@
     <EntitySetMapping Name="SimaticCpuType">
       <EntityTypeMapping TypeName="ITechModel.SimaticCpuType">
         <MappingFragment StoreEntitySet="SimaticCpuType">
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
           <ScalarProperty Name="CpuType" ColumnName="CpuType" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
@@ -112,6 +115,7 @@
     <EntitySetMapping Name="News">
       <EntityTypeMapping TypeName="ITechModel.News">
         <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="ValidEnd" ColumnName="ValidEnd" />
           <ScalarProperty Name="News1" ColumnName="News" />
           <ScalarProperty Name="id" ColumnName="id" />

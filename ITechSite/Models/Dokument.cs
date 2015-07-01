@@ -31,6 +31,8 @@ namespace ITechSite.Models
         public Nullable<System.DateTime> ValidDtmOff { get; set; }
         public Nullable<int> WorkProcess_Id { get; set; }
         public string Keywords { get; set; }
+        public Nullable<long> Size { get; set; }
+        public string LocalFileName { get; set; }
     
         public virtual WorkProcess WorkProcess { get; set; }
         public virtual ICollection<FileContent> FileContent { get; set; }
