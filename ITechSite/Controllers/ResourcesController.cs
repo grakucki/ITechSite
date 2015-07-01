@@ -16,12 +16,39 @@ namespace ITechSite.Controllers
     {
         private ITechEntities db = new ITechEntities(0);
 
+        private ResourceListFind GetOrDefault(ResourceListFind rlf)
+        {
+            if (rlf != null)
+                return rlf;
+            var rf = (ResourceListFind)TempData["ResourceListFind"];
+            if (rf != null)
+                return rf;
+            rf = (ResourceListFind)Session["ResourceListFind"];
+            if (rf != null)
+                return rf;
+            return new ResourceListFind();
+        }
+
+        private void SetDefault(ResourceListFind rlf)
+        {
+            Session["ResourceListFind"] = rlf;
+        }
+
+        public ActionResult Index()
+        {
+            var rlf = GetOrDefault(null);
+            rlf.Fill(db);
+            return View(rlf);
+
+        }
         // GET: Resources
+        [HttpPost]
         public ActionResult Index(ResourceListFind rlf)
         {
             //var resource = db.Resource;//.Include(r=>r.ResourceType);
-            if (rlf==null)
-                rlf = new ResourceListFind();
+
+            rlf = GetOrDefault(rlf);
+            SetDefault(rlf);
             rlf.Fill(db);
             return View(rlf);
 //            return View(resource.ToList());
@@ -30,6 +57,7 @@ namespace ITechSite.Controllers
         public ActionResult Find(int? IdR, ResourceListFind rf)
         {
             var r = (ResourceListFind)TempData["ResourceListFind"];
+                //(ResourceListFind)TempData["ResourceListFind"];
 
 
             if (r != null)

@@ -20,10 +20,24 @@ namespace ITechSite.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+
+        public static string GetConnectionstring()
+        {
+            return ITechEntities.GetPrepareConnectionString("DefaultConnection");
+        }
+
+
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base(GetConnectionstring(), throwIfV1Schema: false)
         {
         }
+
+
+        //public ApplicationDbContext()
+        //    : base("DefaultConnection", throwIfV1Schema: false)
+        //{
+        //}
+
 
         public static ApplicationDbContext Create()
         {

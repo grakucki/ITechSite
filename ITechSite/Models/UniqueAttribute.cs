@@ -67,7 +67,7 @@ namespace ITechSite
 
         //TODO: If placed in your domain, uncomment and replace MyDbContext with your domain's DbContext/ObjectContext class.
 
-        public UniqueAttribute() : this(typeof(ITechSite.Models.ITechEntities)) { }
+        public UniqueAttribute() : this(typeof(ITechSite.Models.ITechEntities2)) { }
 
 
         /// <summary>

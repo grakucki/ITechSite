@@ -75,14 +75,14 @@ namespace ITechSite.Controllers
             {
                 var rf = new ResourceListFind();
                 rf.ReturnUrl = MyAction();
-                    
                 //rf.ReturnUrl = "./InformationPlans/Index";
                 TempData["ResourceListFind"] = rf;
                 return RedirectToAction("Find", "Resources");
             }
 
             //return GetXml(IdR);
-            var informationPlan = db.InformationPlan.Where(m => m.idR == IdR).OrderBy(m=>m.Order).Include(i => i.Dokument).Include(i => i.Resource);
+            var informationPlan = db.InformationPlan.Where(m => m.idR == IdR).OrderBy(m=>m.Order)
+                .Include(i => i.Dokument).Include(i => i.Resource);
             return View(informationPlan.ToList());
         }
 
