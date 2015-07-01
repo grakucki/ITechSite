@@ -31,7 +31,7 @@
         <script>
             document.querySelector("[name=File]").addEventListener("change", function (e) {
             var name = document.querySelector("[name=FileName]");
-            if (name.value === "")
+            //if (name.value === "")
                 name.value = this.value.substr(this.value.lastIndexOf("\\") + 1);
              });
         </script>

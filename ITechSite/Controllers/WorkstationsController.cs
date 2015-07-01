@@ -32,7 +32,7 @@ namespace ITechSite.Controllers
             Workstation workstation = db.Workstation.Where(mbox=>mbox.idR==idR).FirstOrDefault();
             if (workstation == null)
             {
-                return RedirectToAction("Details", "Resources", new { idR = workstation.idR });
+                return RedirectToAction("Details", "Resources", new { id = idR });
 
             }
             return View(workstation);
