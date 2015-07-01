@@ -73,22 +73,44 @@
         <dd>
             @Html.DisplayFor(model => model.ResourceType.Type)
         </dd>
-
-        @*<dt>
-            @Html.Label("Plan informacyjny")
-        </dt>
-        <dd>
-            @Html.ActionLink("Pokaż", "Details", "InformationPlans", new { idR = Model.Id }, new { htmlAttributes = new { @class = "btn btn-default" } })
-        </dd>*@
-@if (Model.ResourceType.id == 1)
-{
-        <dt>
+            @*<dt>
+                @Html.Label("Plan informacyjny")
+            </dt>
+            <dd>
+                @Html.ActionLink("Pokaż", "Details", "InformationPlans", new { idR = Model.Id }, new { htmlAttributes = new { @class = "btn btn-default" } })
+            </dd>*@
+            @if (Model.ResourceType.id == 1)
+            {
+<dt>
             @Html.Label("Ustawienia Stanowiska")
         </dt>
         <dd>
             @Html.ActionLink("Pokaż", "Details", "Workstations", new { idR = Model.Id }, new { htmlAttributes = new { @class = "btn btn-default" } })
         </dd>
-}
+    <dt>
+        Pliki
+    </dt>
+    <dd>
+        <table>
+            @if (Model.InformationPlan.FirstOrDefault() != null)
+            {
+                foreach (var item in Model.InformationPlan)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Dokument.FileName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Dokument.CodeName)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Dokument.Enabled)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Dokument.Description)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Dokument.Size2)</td>
+                        <td>@Html.ActionLink("Szczegóły", "Details", "Dokuments", new { id = item.IdD }, null)</td>
+                        <td>@Html.ActionLink("Pokaż", "Show", "Dokuments", new { id = item.IdD }, null)</td>
+                    </tr>
+                }
+            }
+        </table>
+    </dd>
+
+            }
 </dl>
 </div>
 <p>

@@ -121,7 +121,28 @@
             <dd>
                 @Html.DisplayFor(model => model.LocalFileName)
             </dd>
-        </dl>
+            <dt>
+                Plan informacyjny
+            </dt>
+
+            <dd>
+                <table>
+                    @if (Model.InformationPlan.FirstOrDefault() != null)
+                    {
+                        foreach (var item in Model.InformationPlan.OrderBy(m=>m.Order))
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(modelItem => item.Resource.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Resource.ResourceType.Type)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Resource.Enabled)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Resource.Description)</td>
+                                <td>@Html.ActionLink("Szczegóły", "Details", "Resources", new { id = item.idR }, null)</td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </dd>
+</dl>
 </div>
 <p>
     @Html.ActionLink("Download", "Download", new { id = Model.Id }) |
