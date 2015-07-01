@@ -23,6 +23,10 @@
     <EntitySetMapping Name="Workstation">
       <EntityTypeMapping TypeName="ITechModel.Workstation">
         <MappingFragment StoreEntitySet="Workstation">
+          <ScalarProperty Name="Setrownik_DB" ColumnName="Setrownik_DB" />
+          <ScalarProperty Name="Sterownik_Model" ColumnName="Sterownik_Model" />
+          <ScalarProperty Name="Sterownik_Ip" ColumnName="Sterownik_Ip" />
+          <ScalarProperty Name="idR" ColumnName="idR" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="WorkstationGroup" ColumnName="WorkstationGroup" />
           <ScalarProperty Name="Factory" ColumnName="Factory" />
@@ -41,6 +45,8 @@
     <EntitySetMapping Name="Dokument">
       <EntityTypeMapping TypeName="ITechModel.Dokument">
         <MappingFragment StoreEntitySet="Dokument">
+          <ScalarProperty Name="LocalFileName" ColumnName="LocalFileName" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
           <ScalarProperty Name="Keywords" ColumnName="Keywords" />
           <ScalarProperty Name="WorkProcess_Id" ColumnName="WorkProcess_Id" />
           <ScalarProperty Name="ValidDtmOff" ColumnName="ValidDtmOff" />
@@ -93,6 +99,25 @@
           <ScalarProperty Name="Order" ColumnName="Order" />
           <ScalarProperty Name="IdD" ColumnName="IdD" />
           <ScalarProperty Name="idR" ColumnName="idR" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SimaticCpuType">
+      <EntityTypeMapping TypeName="ITechModel.SimaticCpuType">
+        <MappingFragment StoreEntitySet="SimaticCpuType">
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="CpuType" ColumnName="CpuType" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="News">
+      <EntityTypeMapping TypeName="ITechModel.News">
+        <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+          <ScalarProperty Name="ValidEnd" ColumnName="ValidEnd" />
+          <ScalarProperty Name="News1" ColumnName="News" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

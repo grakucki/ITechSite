@@ -71,7 +71,7 @@ namespace ITechSite.Models
                     return "-";
                 var units = new[] { "B", "KB", "MB", "GB", "TB" };
                 var index = 0;
-                double size = this.Size.Value;
+                long size = this.Size.Value;
                 while (size > 1024 && index + 1 < units.Length)
                 {
                     size /= 1024;

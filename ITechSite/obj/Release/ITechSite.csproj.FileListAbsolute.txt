@@ -179,3 +179,4 @@ D:\projekty2\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.Twitter.
 D:\projekty2\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\projekty2\automotive\ITechSite\ITechSite\obj\Release\ITechSite.dll
 D:\projekty2\automotive\ITechSite\ITechSite\obj\Release\ITechSite.pdb
+D:\projekty2\automotive\ITechSite\ITechSite\obj\Release\ITechSite.csprojResolveAssemblyReference.cache
