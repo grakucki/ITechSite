@@ -17,7 +17,7 @@ namespace ITechSite.Controllers
         [Authorize]
     public class InformationPlansController : Controller
     {
-        private ITechEntities db = new ITechEntities();
+            private ITechEntities db = new ITechEntities(0);
 
 
 //        public static string AbsoluteAction(this UrlHelper url, string actionName, string controllerName, object routeValues = null)
@@ -31,7 +31,7 @@ namespace ITechSite.Controllers
         {
             //var informationPlan = db.InformationPlan.Where(m => m.idR == IdR).OrderBy(m => m.Order).Include(i => i.Dokument).Include(i => i.Resource).ToList();
 
-            using (var d = new ITechEntities() )
+            using (var d = new ITechEntities(0) )
             { 
                 var doc = d.Resource.ToList();
 
