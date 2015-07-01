@@ -1,0 +1,15 @@
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\bin\Debug\ItechGeneratorInstrukcji.exe.config
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\bin\Debug\ItechGeneratorInstrukcji.exe
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\bin\Debug\ItechGeneratorInstrukcji.pdb
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\bin\Debug\EntityFramework.dll
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\bin\Debug\EntityFramework.SqlServer.dll
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\bin\Debug\ITechInstrukcjeModel.dll
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\bin\Debug\ITechInstrukcjeModel.pdb
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\bin\Debug\EntityFramework.xml
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\bin\Debug\EntityFramework.SqlServer.xml
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.csprojResolveAssemblyReference.cache
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.Form1.resources
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.Properties.Resources.resources
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.csproj.GenerateResource.Cache
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.exe
+D:\projekty\automotive\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.pdb

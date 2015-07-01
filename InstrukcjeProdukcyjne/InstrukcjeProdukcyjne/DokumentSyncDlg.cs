@@ -214,6 +214,20 @@ namespace InstrukcjeProdukcyjne
             using (var file = File.Create(downloadedFileSaveLocation))
             {
                 fileStream.CopyTo(file);
+                //CopyStrem(fileStream, file);
+            }
+        }
+
+        private void CopyStrem(Stream source, Stream dest)
+        {
+            byte[] buffer = new byte[4096]; //4MB buffer
+            int bytesread = 1;
+
+            while (bytesread > 0)
+            {
+                bytesread = source.Read(buffer, 0, buffer.Length);
+                dest.Write(buffer, 0, bytesread);
+                backgroundWorker1.ReportProgress(0, new ProgressState(".", false));
             }
         }
 
