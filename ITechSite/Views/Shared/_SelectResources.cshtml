@@ -4,11 +4,14 @@
 @using (Html.BeginForm())
 {
     <div>
+        @if(Model.Allow_ResourceType)
+        { 
+            @Html.LabelFor(model => model.Find_ResourceType, new { htmlAttributes = new { @class = "form-control" } })
+    @*@{ var l2 = new SelectList(Model.ResourceType, "Type", "Type"); }*@
+            var l2 = new SelectList(Model.ResourceType, "Type", "Type"); 
+            @Html.DropDownList("Find_ResourceType", l2, htmlAttributes: new { @class = "form-control" })
+        }
         
-        @Html.LabelFor(model => model.Find_ResourceType, new { htmlAttributes = new { @class = "form-control" } })
-        @{ var l2 = new SelectList(Model.ResourceType, "Type", "Type"); }
-        @Html.DropDownList("Find_ResourceType", l2, htmlAttributes: new { @class = "form-control" })
-
         @Html.LabelFor(model => model.Find_WorkProcess, new { htmlAttributes = new { @class = "form-control" } })
         @{ var l = new SelectList(Model.WorkProcess, "Name", "Name"); }
         @Html.DropDownList("Find_WorkProcess", l, htmlAttributes: new { @class = "form-control" })

@@ -31,13 +31,16 @@ namespace ITechSite.Controllers
         {
             var r = (ResourceListFind)TempData["ResourceListFind"];
 
+
             if (r != null)
             {
                 rf = (ResourceListFind)TempData["ResourceListFind"];
             }
+            rf.Allow_ResourceType = false;
 
             if (IdR == null || IdR == 0)
             {
+                rf.Find_ResourceType = db.ResourceType.Find(1).Type;
                 rf.Fill(db);
                 return View(rf);
             }

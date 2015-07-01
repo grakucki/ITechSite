@@ -17,6 +17,9 @@ namespace ITechSite.Models
         public string Find_WorkProcess { get; set; }
         [DisplayName("Typ zasobu")]
         public string Find_ResourceType { get; set; }
+
+        public bool Allow_ResourceType { get; set; }
+
         
         public string ReturnUrl { get; set; }
         
@@ -27,7 +30,10 @@ namespace ITechSite.Models
         public List<WorkProcess> WorkProcess { get; set; }
         public List<ResourceType> ResourceType { get; set; }
 
-      
+      public ResourceListFind()
+      {
+          Allow_ResourceType=true;
+      }
        
         public void Fill(ITechEntities context)
         {
