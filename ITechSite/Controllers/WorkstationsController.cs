@@ -13,7 +13,7 @@ namespace ITechSite.Controllers
 {
     public class WorkstationsController : Controller
     {
-        private ITechEntities db = new ITechEntities();
+        private ITechEntities db = new ITechEntities(0);
 
         // GET: Workstations
         public ActionResult Index(int? idR)

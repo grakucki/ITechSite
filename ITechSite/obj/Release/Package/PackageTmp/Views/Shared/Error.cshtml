@@ -7,9 +7,6 @@
 <h1 class="text-danger">Błąd.</h1>
 <h2 class="text-danger">Wytąpił błąd podczas przetwarzania strony.</h2>
 
-<h3>Action</h3>
-<p>@Model.ActionName</p>
-<h3>Controller</h3>
-<p>@Model.ControllerName</p>
-<h3>Exception</h3>
-<p>@Model.Exception.ToString()</p>
+<h3 class="text-danger">@Model.ActionName</h3>
+<h3 class="text-danger">@Model.ControllerName</h3>
+<h3 class="text-danger">@Model.Exception.ToString()</h3>
