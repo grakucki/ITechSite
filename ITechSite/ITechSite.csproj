@@ -362,7 +362,6 @@
     <Content Include="Views\InformationPlans\Details.cshtml" />
     <Content Include="Views\InformationPlans\Edit.cshtml" />
     <Content Include="Views\InformationPlans\Index.cshtml" />
-    <Content Include="Views\InformationPlans\Index2.cshtml" />
     <Content Include="Views\Shared\_SelectResources.cshtml" />
     <Content Include="Views\Resources\Find.cshtml" />
     <Content Include="Views\Workstations\Create.cshtml" />
@@ -371,6 +370,7 @@
     <Content Include="Views\Workstations\Edit.cshtml" />
     <Content Include="Views\Workstations\Index.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\InformationPlans\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
