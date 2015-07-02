@@ -32,7 +32,8 @@ namespace InstrukcjeProdukcyjne
         public void ApplyDefault(bool IfEmpty)
         {
             if (!IfEmpty || String.IsNullOrEmpty(ServerDoc))
-                ServerDoc = @"www.insofter.pl/itech";
+                ServerDoc = @"10.48.120.49/ITechService";
+            //ServerDoc = @"www.insofter.pl/itech/ITechService";
 
             if (!IfEmpty || String.IsNullOrEmpty(LocalDoc))
                 LocalDoc = @"c:\ProgramData\Itech\Instrukcje";
