@@ -46,7 +46,7 @@ namespace ITechSite.Models
             ResourceType.AddRange(context.ResourceType.OrderBy(m => m.Type));
 
 
-            var Resources2 = context.Resource.Where(i => i.Enabled)
+            var Resources2 = context.Resource
                 .Where(i =>
                     (i.Name.IndexOf(Find_Word) >= 0 || i.Description.IndexOf(Find_Word) >= 0 || Find_Word == null)
                     && (Find_WorkProcess == null || Find_WorkProcess == "*" || i.WorkProcess == Find_WorkProcess)
