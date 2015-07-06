@@ -22,6 +22,7 @@ namespace ITechSite.Models
         public string Sterownik_Ip { get; set; }
         public string Sterownik_Model { get; set; }
         public Nullable<int> Setrownik_DB { get; set; }
+        public string AllowIp { get; set; }
     
         public virtual WorkstationGroup WorkstationGroup1 { get; set; }
         public virtual Resource Resource { get; set; }
