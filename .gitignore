@@ -1,3 +1,5 @@
 *.cache
 *.dll
+bin
+obj
 InstrukcjeProdukcyjne/InstrukcjeProdukcyjne/bin/Debug/app.publish/InstrukcjeProdukcyjne.exe
