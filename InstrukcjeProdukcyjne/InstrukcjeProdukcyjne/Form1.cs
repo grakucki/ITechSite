@@ -105,6 +105,7 @@ namespace InstrukcjeProdukcyjne
                 // ustawiamy aplikację pełnoekranową
                 GoFullscreen(true);
 
+
                 // ładujemy ustawienia aplikacji
                 var s = Settings.Default.Load;
                 db.WorkDir = Settings.Default.App.LocalDoc;
