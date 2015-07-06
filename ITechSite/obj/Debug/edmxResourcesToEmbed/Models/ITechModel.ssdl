@@ -102,6 +102,7 @@
     <Property Name="Sterownik_Ip" Type="nvarchar" MaxLength="15" />
     <Property Name="Sterownik_Model" Type="nvarchar" MaxLength="15" />
     <Property Name="Setrownik_DB" Type="int" />
+    <Property Name="AllowIp" Type="nvarchar" MaxLength="15" />
   </EntityType>
   <EntityType Name="WorkstationGroup">
     <Key>

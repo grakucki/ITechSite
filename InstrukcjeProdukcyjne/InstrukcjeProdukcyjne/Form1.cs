@@ -342,6 +342,7 @@ namespace InstrukcjeProdukcyjne
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ShowLoginDlg("Użyj kart aby odblokować", false);
+            LoadResource(Properties.Settings.Default.App.Stanowisko);
             DocSyncDlg.Sync();
 
         }
@@ -500,7 +501,6 @@ namespace InstrukcjeProdukcyjne
             DocSyncDlg.Sync();
             DocSyncDlg.Show(this);
 
-            //TODO: Autoamtyczny download plików
             //TODO: Podłączyć sterowniki simatic
         }
 
