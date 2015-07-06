@@ -260,6 +260,11 @@ namespace InstrukcjeProdukcyjne
         private void button2_Click(object sender, EventArgs e)
         {
             Sync();
+        }
+
+        private void buttonOk_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
         }  
     }
 }

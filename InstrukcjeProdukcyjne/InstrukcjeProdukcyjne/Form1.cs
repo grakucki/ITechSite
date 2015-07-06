@@ -49,10 +49,10 @@ namespace InstrukcjeProdukcyjne
 
 
         private enum FolderType
-	    {
-	        Stanowsika,
+        {
+            Stanowsika,
             Elementy
-	    }
+        }
 
 
         private void GoFullscreen(bool fullscreen)
@@ -79,7 +79,7 @@ namespace InstrukcjeProdukcyjne
         private DialogResult ShowLoginDlg(String message, bool allowCancel)
         {
             LoginForm login = new LoginForm();
-            login.Message=message;
+            login.Message = message;
 
             while (true)
             {
@@ -89,7 +89,7 @@ namespace InstrukcjeProdukcyjne
                     if (ret == System.Windows.Forms.DialogResult.Cancel)
                         return ret;
                 }
-                if (ret== System.Windows.Forms.DialogResult.OK)
+                if (ret == System.Windows.Forms.DialogResult.OK)
                 {
                     if (DoLogin(login.User))
                         return ret;
@@ -115,33 +115,32 @@ namespace InstrukcjeProdukcyjne
 
                 Application.DoEvents();
 
-                if (Settings.Default.App.Stanowisko.Value==0)
+                if (Settings.Default.App.Stanowisko.Value == 0)
                     ShowSettings();
 
                 // ładujemy resources
                 LoadResource(Settings.Default.App.Stanowisko);
-                
+
                 OnResourceFileListChange(0);
 
-                if (ShowLoginDlg("",true)==System.Windows.Forms.DialogResult.Cancel)
+                if (ShowLoginDlg("", true) == System.Windows.Forms.DialogResult.Cancel)
                     this.Close();
 
 
                 textBoxUser.Text = string.Format("{0} ({1})", LoginUser.UserName, LoginUser.NrKarty);
-
-                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
             timer1.Enabled = true;
-
+            timer1_Tick(sender, e);
+            DocSyncDlg.Sync();
         }
 
 
 
-        
+
 
         /// <summary>
         /// Załaduj Resource 
@@ -153,68 +152,32 @@ namespace InstrukcjeProdukcyjne
         {
             if (!idR.HasValue)
                 return;
-            using(var stat = new  ActionControlStatus(buttonItech))
+
+            using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
             {
-
-                using(var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+                if (client.IsOnLine())
                 {
-                    if (client.IsOnLine())
-                    {
-                        db.Resource_Local = client.GetInformationPlainsList(idR.Value).ToList();
-                        db.ExportResources(null);
-                        
-                    }
+                    db.Resource_Local = client.GetInformationPlainsList(idR.Value).ToList();
+                    db.ExportResources(null);
+
                 }
-
-                if (db.Resource_Local==null)
-                {
-                    // pobieramy z pliku
-                    db.ImportResource(null);
-                }
-
-                if (idR.HasValue)
-                    CurrentWorkstation = db.ResourceWorkstation_Local.Where(m => m.Id == idR.Value).FirstOrDefault();
-                else
-                    CurrentWorkstation = null;
-
-
-                if (CurrentWorkstation==null)
-                    stat.SetState(ActionControlStatus.ActionControlState.Warning,"");
-                else
-                    stat.SetState(ActionControlStatus.ActionControlState.Ok, "");
-
-
-                ZaładujElementy(CurrentWorkstation);
-                LoadNews(CurrentWorkstation.Id);
-
             }
+
+            if (db.Resource_Local == null)
+            {
+                // pobieramy z pliku
+                db.ImportResource(null);
+            }
+
+            if (idR.HasValue)
+                CurrentWorkstation = db.ResourceWorkstation_Local.Where(m => m.Id == idR.Value).FirstOrDefault();
+            else
+                CurrentWorkstation = null;
+
+            ZaładujElementy(CurrentWorkstation);
+
         }
 
-        //private void SelectWorkstation(int? newidR=null)
-        //{
-        //    if (newidR==null)
-        //    {
-        //        //Load from settings
-        //        if (Settings.Default.App.Stanowisko.HasValue)
-        //            newidR = Settings.Default.App.Stanowisko.Value;
-        //        else
-        //        {
-        //            ShowSettings();
-        //            if (Settings.Default.App.Stanowisko.HasValue)
-        //                newidR = Settings.Default.App.Stanowisko.Value;
-        //        }
-        //    }
-
-        //    if (!newidR.HasValue)
-        //        return;
-
-        //    var q = db.ResourceWorkstation_Local.Where(m => m.Id == newidR).FirstOrDefault();
-        //    if (q==null)
-        //        return;
-
-        //    CurrentWorkstation = q;
-        //    stanowiskaComboBox.SelectedValue = q.Id;
-        //}
 
         private void ZaładujElementy(Resource res)
         {
@@ -227,7 +190,7 @@ namespace InstrukcjeProdukcyjne
         {
             Color cOn = Color.Green;
             Color cOff = Color.Orange;
-            buttonWorkstation.BackColor = NewResurceType==1 ? cOn : cOff;
+            buttonWorkstation.BackColor = NewResurceType == 1 ? cOn : cOff;
             buttonModel.BackColor = NewResurceType == 2 ? cOn : cOff;
 
         }
@@ -238,7 +201,7 @@ namespace InstrukcjeProdukcyjne
             var x = WorkStationBindingSource.Current;
             if (x == null)
                 return;
-            Resource xx = (Resource )x;
+            Resource xx = (Resource)x;
             OnResourceFileListChange(xx.Type);
             ZaładujPliki(xx);
         }
@@ -285,10 +248,10 @@ namespace InstrukcjeProdukcyjne
             else
                 folder = StanowiskaFolder;
             path = Path.Combine(Path.GetFullPath(DataDir), folder);
-            return Path.Combine(path, DetalName); 
+            return Path.Combine(path, DetalName);
         }
 
-       
+
         //private string[] GetFiles(string folderName)
         //{
         //    string dir = Path.Combine(Path.GetFullPath(DataDir), folderName);
@@ -323,7 +286,7 @@ namespace InstrukcjeProdukcyjne
             {
                 if (item.Dokument != null)
                 {
-                    var d = new MyFileInfo { FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Tag=item.Dokument };
+                    var d = new MyFileInfo { FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Tag = item.Dokument };
                     var i = listView1.Items.Add(d.FullFileName, d.FileName, d.ExtensionIndex);
                     i.Tag = d;
                 }
@@ -332,7 +295,7 @@ namespace InstrukcjeProdukcyjne
 
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
-           
+
         }
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -351,7 +314,7 @@ namespace InstrukcjeProdukcyjne
                         else
                             MessageBox.Show("Nie odnaleziono pliku." + mfi.FileName);
                     }
-                }        
+                }
 
             }
             catch (Exception ex)
@@ -379,6 +342,8 @@ namespace InstrukcjeProdukcyjne
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ShowLoginDlg("Użyj kart aby odblokować", false);
+            DocSyncDlg.Sync();
+
         }
 
         private void ShowSettings()
@@ -437,7 +402,7 @@ namespace InstrukcjeProdukcyjne
         {
             try
             {
-                
+
                 if (!_TaskNewsIsRunning.WaitOne(0))
                     return;
 
@@ -465,6 +430,10 @@ namespace InstrukcjeProdukcyjne
                     Work.SetState(ActionControlStatus.ActionControlState.Ok, "");
                 }
             }
+            catch (Exception ex)
+            {
+
+            }
             finally
             {
                 _LastReadNews = DateTime.Now;
@@ -475,28 +444,28 @@ namespace InstrukcjeProdukcyjne
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            try 
-	        {	        
-		        if (CurrentWorkstation!=null)
+            try
+            {
+                if (CurrentWorkstation != null)
                     LoadNews(CurrentWorkstation.Id);
-	        }
-	        catch (Exception)
-	        {
-		    }
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             try
             {
-                if (CurrentWorkstation==null)
+                if (CurrentWorkstation == null)
                     return;
 
                 LoadNews(CurrentWorkstation.Id);
             }
-            catch(CommunicationException ex)
+            catch (CommunicationException ex)
             {
-                if (ex.InnerException!=null)
+                if (ex.InnerException != null)
                     MessageBox.Show(ex.InnerException.Message);
                 else
                     MessageBox.Show(ex.Message);
@@ -515,7 +484,7 @@ namespace InstrukcjeProdukcyjne
 
         private void elementyComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void ModelBindingSource_PositionChanged(object sender, EventArgs e)
@@ -529,21 +498,21 @@ namespace InstrukcjeProdukcyjne
         {
 
             DocSyncDlg.Sync();
-            DocSyncDlg.ShowDialog();
+            DocSyncDlg.Show(this);
 
-            //TODO: zmienić namiary serwis dokuimentów bo działa na localhost
-            //DocSyncDlg.Sync(Settings.Default.App.Stanowisko);
+            //TODO: Autoamtyczny download plików
+            //TODO: Podłączyć sterowniki simatic
         }
 
-        
-
-      
-       
 
 
-             
 
-       
+
+
+
+
+
+
     }
 }
 
