@@ -502,6 +502,8 @@ namespace InstrukcjeProdukcyjne
             DocSyncDlg.Show(this);
 
             //TODO: Podłączyć sterowniki simatic
+            //czytnik
+            //testy
         }
 
 
