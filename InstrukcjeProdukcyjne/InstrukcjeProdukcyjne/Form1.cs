@@ -104,7 +104,7 @@ namespace InstrukcjeProdukcyjne
             {
                 // ustawiamy aplikację pełnoekranową
                 GoFullscreen(true);
-
+                PrepareListView();
 
                 // ładujemy ustawienia aplikacji
                 var s = Settings.Default.Load;
@@ -136,6 +136,13 @@ namespace InstrukcjeProdukcyjne
             timer1.Enabled = true;
             timer1_Tick(sender, e);
             DocSyncDlg.Sync();
+        }
+
+        private void PrepareListView()
+        {
+            listView1.Columns.Add("Plik", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Opis", -2, HorizontalAlignment.Left);
+            listView1.Columns.Add("Nazwa kodowa", -2, HorizontalAlignment.Left);
         }
 
 
@@ -288,6 +295,8 @@ namespace InstrukcjeProdukcyjne
                 {
                     var d = new MyFileInfo { FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Tag = item.Dokument };
                     var i = listView1.Items.Add(d.FullFileName, d.FileName, d.ExtensionIndex);
+                    i.SubItems.Add(item.Dokument.Description);
+                    i.SubItems.Add(item.Dokument.CodeName);
                     i.Tag = d;
                 }
             }

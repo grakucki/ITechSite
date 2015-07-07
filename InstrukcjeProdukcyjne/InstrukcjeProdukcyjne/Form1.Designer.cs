@@ -63,10 +63,14 @@
             this.mediaViewerControl1 = new InstrukcjeProdukcyjne.MediaViewerControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonSterownik = new System.Windows.Forms.Button();
+            this.imageListSterownik = new System.Windows.Forms.ImageList(this.components);
             this.buttonItech = new System.Windows.Forms.Button();
+            this.imageListServer = new System.Windows.Forms.ImageList(this.components);
             this.buttonCzytnik = new System.Windows.Forms.Button();
+            this.imageListCzytnik = new System.Windows.Forms.ImageList(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WorkStationBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -108,13 +112,15 @@
             this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.listView1.LargeImageList = this.imageList1;
             this.listView1.Location = new System.Drawing.Point(13, 187);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(396, 259);
+            this.listView1.Size = new System.Drawing.Size(396, 232);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Tile;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
@@ -194,7 +200,7 @@
             this.button1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.button1.ContextMenuStrip = this.contextMenuStrip1;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(1404, 0);
+            this.button1.Location = new System.Drawing.Point(1407, 0);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 54);
             this.button1.TabIndex = 11;
@@ -395,11 +401,11 @@
             this.tableLayoutPanel1.Controls.Add(this.buttonSterownik, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.buttonItech, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.buttonCzytnik, 2, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 452);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(13, 425);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(394, 100);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(394, 127);
             this.tableLayoutPanel1.TabIndex = 8;
             // 
             // buttonSterownik
@@ -407,38 +413,65 @@
             this.buttonSterownik.BackColor = System.Drawing.Color.Red;
             this.buttonSterownik.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonSterownik.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonSterownik.ImageIndex = 0;
+            this.buttonSterownik.ImageList = this.imageListSterownik;
             this.buttonSterownik.Location = new System.Drawing.Point(3, 3);
             this.buttonSterownik.Name = "buttonSterownik";
-            this.buttonSterownik.Size = new System.Drawing.Size(125, 94);
+            this.buttonSterownik.Size = new System.Drawing.Size(125, 121);
             this.buttonSterownik.TabIndex = 0;
-            this.buttonSterownik.Text = "Sterownik";
+            this.toolTip1.SetToolTip(this.buttonSterownik, "Sterownik");
             this.buttonSterownik.UseVisualStyleBackColor = false;
+            // 
+            // imageListSterownik
+            // 
+            this.imageListSterownik.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListSterownik.ImageStream")));
+            this.imageListSterownik.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListSterownik.Images.SetKeyName(0, "PLC off 100 X.gif");
+            this.imageListSterownik.Images.SetKeyName(1, "PLC on 100.gif");
             // 
             // buttonItech
             // 
             this.buttonItech.BackColor = System.Drawing.Color.Red;
             this.buttonItech.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonItech.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonItech.ImageIndex = 0;
+            this.buttonItech.ImageList = this.imageListServer;
             this.buttonItech.Location = new System.Drawing.Point(134, 3);
             this.buttonItech.Name = "buttonItech";
-            this.buttonItech.Size = new System.Drawing.Size(125, 94);
+            this.buttonItech.Size = new System.Drawing.Size(125, 121);
             this.buttonItech.TabIndex = 1;
-            this.buttonItech.Text = "Itech";
+            this.toolTip1.SetToolTip(this.buttonItech, "Itech");
             this.buttonItech.UseVisualStyleBackColor = false;
             this.buttonItech.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // imageListServer
+            // 
+            this.imageListServer.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListServer.ImageStream")));
+            this.imageListServer.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListServer.Images.SetKeyName(0, "SRV off 100 X.gif");
+            this.imageListServer.Images.SetKeyName(1, "SRV on 100.gif");
             // 
             // buttonCzytnik
             // 
             this.buttonCzytnik.BackColor = System.Drawing.Color.Green;
             this.buttonCzytnik.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCzytnik.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.buttonCzytnik.ImageIndex = 1;
+            this.buttonCzytnik.ImageList = this.imageListCzytnik;
             this.buttonCzytnik.Location = new System.Drawing.Point(265, 3);
             this.buttonCzytnik.Name = "buttonCzytnik";
-            this.buttonCzytnik.Size = new System.Drawing.Size(126, 94);
+            this.buttonCzytnik.Size = new System.Drawing.Size(126, 121);
             this.buttonCzytnik.TabIndex = 2;
-            this.buttonCzytnik.Text = "Czytnik";
+            this.toolTip1.SetToolTip(this.buttonCzytnik, "Czytnik");
             this.buttonCzytnik.UseVisualStyleBackColor = false;
             this.buttonCzytnik.Click += new System.EventHandler(this.buttonCzytnik_Click);
+            // 
+            // imageListCzytnik
+            // 
+            this.imageListCzytnik.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListCzytnik.ImageStream")));
+            this.imageListCzytnik.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListCzytnik.Images.SetKeyName(0, "CR off 100 X.gif");
+            this.imageListCzytnik.Images.SetKeyName(1, "CR on 100.gif");
             // 
             // splitContainer1
             // 
@@ -541,6 +574,10 @@
         private System.Windows.Forms.ToolStripMenuItem synchronizujPlikiToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ImageList imageListServer;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ImageList imageListSterownik;
+        private System.Windows.Forms.ImageList imageListCzytnik;
     }
 }
 

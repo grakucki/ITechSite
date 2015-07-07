@@ -24,9 +24,11 @@ namespace InstrukcjeProdukcyjne
         public void ControlAction(Button button, ActionControlState state, string message="")
         {
             Color c = Color.Gray;
+            int ImageIndex = 0;
             switch (state)
             {
                 case ActionControlState.Ok: c = Color.Green;
+                    ImageIndex = 1;
                     break;
                 case ActionControlState.Working: c = Color.Orange;
                     break;
@@ -38,6 +40,8 @@ namespace InstrukcjeProdukcyjne
                     break;
             }
             button.BackColor = c;
+            button.ImageIndex = ImageIndex;
+            button.Refresh();
         }
 
         public void SetState(ActionControlState state, string message)
