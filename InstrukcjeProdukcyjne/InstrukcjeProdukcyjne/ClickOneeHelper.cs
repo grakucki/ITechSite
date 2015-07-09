@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace InstrukcjeProdukcyjne
 {
     public static class ClickOnceHelper
-    {
+    { 
         public static void AddShortcutToStartupGroup()
         {
             try
