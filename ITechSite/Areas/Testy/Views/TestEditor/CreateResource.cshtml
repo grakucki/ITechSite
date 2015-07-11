@@ -1,0 +1,31 @@
+﻿@model ITechSite.Areas.ResourceViewModel
+@using ITechSite.Areas.Testy.Models;
+
+@{
+    Layout = "~/Areas/Testy/Views/Shared/_TestyLayout.cshtml";
+    ViewBag.Title = "Nowe stanowisko";
+}
+
+<h2>Nowe stanowisko</h2>
+
+@using(Html.BeginForm())
+{
+    <fieldset>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Name)
+        </div>
+
+        @foreach(var cat in ViewBag.kategorie)
+        {
+            <label for="allowedCat">@cat.name</label>
+            <input type="checkbox" value="@cat.id" name="allowedCat" />
+        }
+
+        <input type="submit" value="Zapisz" />
+        @Html.ActionLink("Anuluj", "Resources", "TestEditor", null, new { @class = "btn btn-cancel" })
+    </fieldset>
+}

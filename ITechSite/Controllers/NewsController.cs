@@ -69,7 +69,7 @@ namespace ITechSite.Models
                     db.SaveChanges();
 
                 }
-                catch (Exception ex)
+                catch (Exception /*ex*/)
                 {
 
                 }

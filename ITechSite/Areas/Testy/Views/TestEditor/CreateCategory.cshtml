@@ -1,0 +1,24 @@
+﻿@model ITechSite.Areas.Testy.Models.Kategorie
+
+@{
+    Layout = "~/Areas/Testy/Views/Shared/_TestyLayout.cshtml";
+    ViewBag.Title = "Tworzenie kategorii";
+}
+
+<h2>Nowa kategoria</h2>
+
+@using(Html.BeginForm())
+{
+    <fieldset>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.name)
+        </div>
+
+        <input type="submit" value="Dodaj kategorię"/>
+        @Html.ActionLink("Anuluj", "Categories", null, new { @class = "btn btn-cancel" })
+    </fieldset>
+}

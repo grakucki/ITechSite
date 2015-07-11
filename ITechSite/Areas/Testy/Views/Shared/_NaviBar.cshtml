@@ -1,0 +1,17 @@
+﻿
+<div>
+    @{string s = ViewContext.RouteData.Values["action"].ToString();}
+    <br />
+                                                                                               
+
+
+@if (s == "Index")
+{  @Html.ActionLink("Dodaj nowe pytanie", "Create", null, new { @class = "btn btn-action200 btn-actionGreen" })}
+    
+@if (s =="Categories")
+{  @Html.ActionLink("Dodaj nowe Kategorię", "CreateCategory", null, new { @class = "btn btn-action200 btn-actionGreen" })}
+
+    @Html.ActionLink("Zarządzaj Pytaniami", "Index", null, new { @class = "btn btn-action200" })
+    @Html.ActionLink("Zarządzaj kategoriami", "Categories", null, new { @class = "btn btn-action200" })
+    @Html.ActionLink("Zarządzaj stanowiskami", "Resources", null, new { @class = "btn btn-action200" })
+</div>

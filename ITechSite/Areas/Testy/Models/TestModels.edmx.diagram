@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5dbc39ad6c164f52993fd817e0f844a3" Name="Diagram1">
+        <EntityTypeShape EntityType="TestModels.Pytania" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestModels.Resource" Width="1.5" PointX="4" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestModels.Kategorie" Width="1.5" PointX="0.75" PointY="5.25" />
+        <EntityTypeShape EntityType="TestModels.Odpowiedzi" Width="1.5" PointX="3" PointY="9" />
+        <EntityTypeShape EntityType="TestModels.RodzajOdpowiedzi" Width="1.5" PointX="7" PointY="0.5" />
+        <EntityTypeShape EntityType="TestModels.TestKompetencji" Width="1.5" PointX="3.375" PointY="5" />
+        <EntityTypeShape EntityType="TestModels.TestKompetencjiLog" Width="1.5" PointX="5.625" PointY="5.25" />
+        <AssociationConnector Association="TestModels.FK_kategoriaId" />
+        <AssociationConnector Association="TestModels.FK_PytanieId" />
+        <AssociationConnector Association="TestModels.FK_TestKompetencjiId" />
+        <EntityTypeShape EntityType="TestModels.AllowedCategories" Width="1.5" PointX="8" PointY="2.875" />
+        <AssociationConnector Association="TestModels.FK_categoryId" />
+        <AssociationConnector Association="TestModels.FK_resourceId" />
+        <EntityTypeShape EntityType="TestModels.StanTestu" Width="1.5" PointX="1.125" PointY="13.625" />
+        <AssociationConnector Association="TestModels.FK_stateId" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

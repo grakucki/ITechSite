@@ -23,6 +23,7 @@
     <EntitySetMapping Name="Workstation">
       <EntityTypeMapping TypeName="ITechModel.Workstation">
         <MappingFragment StoreEntitySet="Workstation">
+          <ScalarProperty Name="AllowIp" ColumnName="AllowIp" />
           <ScalarProperty Name="Setrownik_DB" ColumnName="Setrownik_DB" />
           <ScalarProperty Name="Sterownik_Model" ColumnName="Sterownik_Model" />
           <ScalarProperty Name="Sterownik_Ip" ColumnName="Sterownik_Ip" />

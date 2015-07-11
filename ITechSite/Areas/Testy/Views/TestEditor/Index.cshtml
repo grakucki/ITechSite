@@ -1,0 +1,48 @@
+﻿@using ITechSite.Areas.Testy.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<ITechSite.Areas.Testy.Models.Pytania>
+
+
+@{
+    Layout = "~/Areas/Testy/Views/Shared/_TestyLayout.cshtml";
+    ViewBag.Title = "Pytania";
+}
+
+<h2>Pytania</h2>
+
+                               <div>
+                                   @Html.Partial("_NaviBar")
+                               </div>
+                               <div>
+                                   <table class="questions">
+                                       <thead>
+                                           <tr>
+                                               <th></th>
+                                               <th>Treśc pytania</th>
+                                               @*<th>Ilość odpowiedzi</th>*@
+                                               <th>Kategoria</th>
+                                               <th>Akcje</th>
+                                           </tr>
+                                       </thead>
+                                       <tbody>
+                                           @foreach (var q in Model)
+                                           {
+                                               <tr>
+                                                   <td>@q.code</td>
+                                                   <td>@q.content</td>
+                                                   @*<td>@q.Odpowiedzi.Count()</td>*@
+                                                   <td>@q.Kategorie.name</td>
+                                                   <td>
+                                                       <a href="@Url.Action("Edit", "TestEditor", new{ id = q.id })" class="btn btn-action"><span class="fa fa-pencil"></span>Edytuj</a>
+                                                       <a href="@Url.Action("deleteQuestion", "TestEditor", new{ id = q.id })" class="btn btn-action"><span class="fa fa-remove"></span>Usuń</a>
+                                                   </td>
+                                               </tr>
+                                           }
+                                       </tbody>
+                                   </table>
+                               </div>
+<br />
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

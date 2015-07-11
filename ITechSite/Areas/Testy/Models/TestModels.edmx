@@ -1,0 +1,537 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TestModels.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AllowedCategories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="resourceId" Type="int" Nullable="false" />
+          <Property Name="categoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategorie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Odpowiedzi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="questionId" Type="int" Nullable="false" />
+          <Property Name="content" Type="nvarchar(max)" />
+          <Property Name="order" Type="int" />
+          <Property Name="is_correct" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pytania">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="content" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="answer_type" Type="int" Nullable="false" />
+          <Property Name="categoryId" Type="int" Nullable="false" />
+          <Property Name="keywords" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="LastWriteTime" Type="datetime" Nullable="false" />
+          <Property Name="No" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="WorkProcess" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Keywords" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="RodzajOdpowiedzi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StanTestu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestKompetencji">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="createdAt" Type="datetime" Nullable="false" />
+          <Property Name="finishedAt" Type="datetime" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="xml" Type="nvarchar(max)" />
+          <Property Name="score" Type="int" />
+          <Property Name="accessionNumber" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="stateId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestKompetencjiLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TestId" Type="int" Nullable="false" />
+          <Property Name="loggedAt" Type="datetime" Nullable="false" />
+          <Property Name="questionId" Type="int" Nullable="false" />
+          <Property Name="answers" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_categoryId">
+          <End Role="Kategorie" Type="Self.Kategorie" Multiplicity="1" />
+          <End Role="AllowedCategories" Type="Self.AllowedCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AllowedCategories">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kategoriaId">
+          <End Role="Kategorie" Type="Self.Kategorie" Multiplicity="1" />
+          <End Role="Pytania" Type="Self.Pytania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pytania">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PytanieId">
+          <End Role="Pytania" Type="Self.Pytania" Multiplicity="1" />
+          <End Role="Odpowiedzi" Type="Self.Odpowiedzi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pytania">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Odpowiedzi">
+              <PropertyRef Name="questionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resourceId">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="AllowedCategories" Type="Self.AllowedCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AllowedCategories">
+              <PropertyRef Name="resourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_stateId">
+          <End Role="StanTestu" Type="Self.StanTestu" Multiplicity="1" />
+          <End Role="TestKompetencji" Type="Self.TestKompetencji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StanTestu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TestKompetencji">
+              <PropertyRef Name="stateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestKompetencjiId">
+          <End Role="TestKompetencji" Type="Self.TestKompetencji" Multiplicity="1" />
+          <End Role="TestKompetencjiLog" Type="Self.TestKompetencjiLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestKompetencji">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TestKompetencjiLog">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestModelsStoreContainer">
+          <EntitySet Name="AllowedCategories" EntityType="Self.AllowedCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategorie" EntityType="Self.Kategorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Odpowiedzi" EntityType="Self.Odpowiedzi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pytania" EntityType="Self.Pytania" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RodzajOdpowiedzi" EntityType="Self.RodzajOdpowiedzi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StanTestu" EntityType="Self.StanTestu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestKompetencji" EntityType="Self.TestKompetencji" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestKompetencjiLog" EntityType="Self.TestKompetencjiLog" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_categoryId" Association="Self.FK_categoryId">
+            <End Role="Kategorie" EntitySet="Kategorie" />
+            <End Role="AllowedCategories" EntitySet="AllowedCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kategoriaId" Association="Self.FK_kategoriaId">
+            <End Role="Kategorie" EntitySet="Kategorie" />
+            <End Role="Pytania" EntitySet="Pytania" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PytanieId" Association="Self.FK_PytanieId">
+            <End Role="Pytania" EntitySet="Pytania" />
+            <End Role="Odpowiedzi" EntitySet="Odpowiedzi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resourceId" Association="Self.FK_resourceId">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="AllowedCategories" EntitySet="AllowedCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_stateId" Association="Self.FK_stateId">
+            <End Role="StanTestu" EntitySet="StanTestu" />
+            <End Role="TestKompetencji" EntitySet="TestKompetencji" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestKompetencjiId" Association="Self.FK_TestKompetencjiId">
+            <End Role="TestKompetencji" EntitySet="TestKompetencji" />
+            <End Role="TestKompetencjiLog" EntitySet="TestKompetencjiLog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestModels" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Pytania">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="answer_type" Type="Int32" Nullable="false" />
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <Property Name="keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kategorie" Relationship="TestModels.FK_kategoriaId" FromRole="Pytania" ToRole="Kategorie" />
+          <NavigationProperty Name="Odpowiedzi" Relationship="TestModels.FK_PytanieId" FromRole="Pytania" ToRole="Odpowiedzi" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="LastWriteTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="No" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="WorkProcess" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AllowedCategories" Relationship="TestModels.FK_resourceId" FromRole="Resource" ToRole="AllowedCategories" />
+        </EntityType>
+        <EntityContainer Name="TestyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pytania" EntityType="Self.Pytania" />
+          <EntitySet Name="Resource" EntityType="Self.Resource" />
+          <EntitySet Name="Kategorie" EntityType="TestModels.Kategorie" />
+          <EntitySet Name="Odpowiedzi" EntityType="TestModels.Odpowiedzi" />
+          <EntitySet Name="RodzajOdpowiedzi" EntityType="TestModels.RodzajOdpowiedzi" />
+          <EntitySet Name="TestKompetencji" EntityType="TestModels.TestKompetencji" />
+          <EntitySet Name="TestKompetencjiLog" EntityType="TestModels.TestKompetencjiLog" />
+          <AssociationSet Name="FK_kategoriaId" Association="TestModels.FK_kategoriaId">
+            <End Role="Kategorie" EntitySet="Kategorie" />
+            <End Role="Pytania" EntitySet="Pytania" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PytanieId" Association="TestModels.FK_PytanieId">
+            <End Role="Pytania" EntitySet="Pytania" />
+            <End Role="Odpowiedzi" EntitySet="Odpowiedzi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestKompetencjiId" Association="TestModels.FK_TestKompetencjiId">
+            <End Role="TestKompetencji" EntitySet="TestKompetencji" />
+            <End Role="TestKompetencjiLog" EntitySet="TestKompetencjiLog" />
+          </AssociationSet>
+          <EntitySet Name="AllowedCategories" EntityType="TestModels.AllowedCategories" />
+          <AssociationSet Name="FK_categoryId" Association="TestModels.FK_categoryId">
+            <End Role="Kategorie" EntitySet="Kategorie" />
+            <End Role="AllowedCategories" EntitySet="AllowedCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_resourceId" Association="TestModels.FK_resourceId">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="AllowedCategories" EntitySet="AllowedCategories" />
+          </AssociationSet>
+          <EntitySet Name="StanTestu" EntityType="TestModels.StanTestu" />
+          <AssociationSet Name="FK_stateId" Association="TestModels.FK_stateId">
+            <End Role="StanTestu" EntitySet="StanTestu" />
+            <End Role="TestKompetencji" EntitySet="TestKompetencji" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Kategorie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Pytania" Relationship="TestModels.FK_kategoriaId" FromRole="Kategorie" ToRole="Pytania" />
+          <NavigationProperty Name="AllowedCategories" Relationship="TestModels.FK_categoryId" FromRole="Kategorie" ToRole="AllowedCategories" />
+        </EntityType>
+        <EntityType Name="Odpowiedzi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="questionId" Type="Int32" Nullable="false" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="order" Type="Int32" />
+          <Property Name="is_correct" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Pytania" Relationship="TestModels.FK_PytanieId" FromRole="Odpowiedzi" ToRole="Pytania" />
+        </EntityType>
+        <EntityType Name="RodzajOdpowiedzi">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TestKompetencji">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="finishedAt" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="xml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="score" Type="Int32" />
+          <Property Name="accessionNumber" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="stateId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TestKompetencjiLog" Relationship="TestModels.FK_TestKompetencjiId" FromRole="TestKompetencji" ToRole="TestKompetencjiLog" />
+          <NavigationProperty Name="StanTestu" Relationship="TestModels.FK_stateId" FromRole="TestKompetencji" ToRole="StanTestu" />
+        </EntityType>
+        <EntityType Name="TestKompetencjiLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TestId" Type="Int32" Nullable="false" />
+          <Property Name="loggedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="questionId" Type="Int32" Nullable="false" />
+          <Property Name="answers" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TestKompetencji" Relationship="TestModels.FK_TestKompetencjiId" FromRole="TestKompetencjiLog" ToRole="TestKompetencji" />
+        </EntityType>
+        <Association Name="FK_kategoriaId">
+          <End Type="TestModels.Kategorie" Role="Kategorie" Multiplicity="1" />
+          <End Type="TestModels.Pytania" Role="Pytania" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Pytania">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PytanieId">
+          <End Type="TestModels.Pytania" Role="Pytania" Multiplicity="1" />
+          <End Type="TestModels.Odpowiedzi" Role="Odpowiedzi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pytania">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Odpowiedzi">
+              <PropertyRef Name="questionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestKompetencjiId">
+          <End Type="TestModels.TestKompetencji" Role="TestKompetencji" Multiplicity="1" />
+          <End Type="TestModels.TestKompetencjiLog" Role="TestKompetencjiLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestKompetencji">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TestKompetencjiLog">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AllowedCategories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="resourceId" Type="Int32" Nullable="false" />
+          <Property Name="categoryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kategorie" Relationship="TestModels.FK_categoryId" FromRole="AllowedCategories" ToRole="Kategorie" />
+          <NavigationProperty Name="Resource" Relationship="TestModels.FK_resourceId" FromRole="AllowedCategories" ToRole="Resource" />
+        </EntityType>
+        <Association Name="FK_categoryId">
+          <End Type="TestModels.Kategorie" Role="Kategorie" Multiplicity="1" />
+          <End Type="TestModels.AllowedCategories" Role="AllowedCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AllowedCategories">
+              <PropertyRef Name="categoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_resourceId">
+          <End Type="TestModels.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="TestModels.AllowedCategories" Role="AllowedCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AllowedCategories">
+              <PropertyRef Name="resourceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="StanTestu">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TestKompetencji" Relationship="TestModels.FK_stateId" FromRole="StanTestu" ToRole="TestKompetencji" />
+        </EntityType>
+        <Association Name="FK_stateId">
+          <End Type="TestModels.StanTestu" Role="StanTestu" Multiplicity="1" />
+          <End Type="TestModels.TestKompetencji" Role="TestKompetencji" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StanTestu">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TestKompetencji">
+              <PropertyRef Name="stateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestModelsStoreContainer" CdmEntityContainer="TestyEntities">
+          <EntitySetMapping Name="Pytania">
+            <EntityTypeMapping TypeName="TestModels.Pytania">
+              <MappingFragment StoreEntitySet="Pytania">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="answer_type" ColumnName="answer_type" />
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="keywords" ColumnName="keywords" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resource">
+            <EntityTypeMapping TypeName="TestModels.Resource">
+              <MappingFragment StoreEntitySet="Resource">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="LastWriteTime" ColumnName="LastWriteTime" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="WorkProcess" ColumnName="WorkProcess" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategorie">
+            <EntityTypeMapping TypeName="TestModels.Kategorie">
+              <MappingFragment StoreEntitySet="Kategorie">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Odpowiedzi">
+            <EntityTypeMapping TypeName="TestModels.Odpowiedzi">
+              <MappingFragment StoreEntitySet="Odpowiedzi">
+                <ScalarProperty Name="is_correct" ColumnName="is_correct" />
+                <ScalarProperty Name="order" ColumnName="order" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="questionId" ColumnName="questionId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RodzajOdpowiedzi">
+            <EntityTypeMapping TypeName="TestModels.RodzajOdpowiedzi">
+              <MappingFragment StoreEntitySet="RodzajOdpowiedzi">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestKompetencji">
+            <EntityTypeMapping TypeName="TestModels.TestKompetencji">
+              <MappingFragment StoreEntitySet="TestKompetencji">
+                <ScalarProperty Name="stateId" ColumnName="stateId" />
+                <ScalarProperty Name="accessionNumber" ColumnName="accessionNumber" />
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="xml" ColumnName="xml" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="finishedAt" ColumnName="finishedAt" />
+                <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestKompetencjiLog">
+            <EntityTypeMapping TypeName="TestModels.TestKompetencjiLog">
+              <MappingFragment StoreEntitySet="TestKompetencjiLog">
+                <ScalarProperty Name="answers" ColumnName="answers" />
+                <ScalarProperty Name="questionId" ColumnName="questionId" />
+                <ScalarProperty Name="loggedAt" ColumnName="loggedAt" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllowedCategories">
+            <EntityTypeMapping TypeName="TestModels.AllowedCategories">
+              <MappingFragment StoreEntitySet="AllowedCategories">
+                <ScalarProperty Name="categoryId" ColumnName="categoryId" />
+                <ScalarProperty Name="resourceId" ColumnName="resourceId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StanTestu">
+            <EntityTypeMapping TypeName="TestModels.StanTestu">
+              <MappingFragment StoreEntitySet="StanTestu">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

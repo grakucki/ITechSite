@@ -1,0 +1,16 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Koniec testu";
+}
+<div class="content test-end">
+    <h2>Test zakończony</h2>
+    
+    <p class="test-score">
+        Twój wynik to @ViewBag.score / @ViewBag.quantity (@ViewBag.state)
+    </p>
+
+    <p>
+        Przejrzyj test: @Html.ActionLink("Przeglądaj test", "ViewTest", "Test", new { @accessionNumber = @ViewBag.accessionNumber }, new { @class = "btn btn-action" })
+    </p>
+</div>

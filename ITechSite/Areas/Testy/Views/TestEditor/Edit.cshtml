@@ -1,0 +1,80 @@
+﻿@model ITechSite.Areas.Testy.Models.PytaniaViewModel
+
+@{
+    Layout = "~/Areas/Testy/Views/Shared/_TestyLayout.cshtml";
+    ViewBag.Title = "Edycja";
+}
+
+<h2>Edycja pytania</h2>
+
+@using (Html.BeginForm())
+{
+
+    <fieldset>
+        @Html.HiddenFor(model => model.id)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.code)
+            @Html.ValidationMessageFor(model => model.code)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.code)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.content)
+            @Html.ValidationMessageFor(model => model.content)
+        </div>
+        <div class="editor-field">
+            @*@Html.TextAreaFor(model => model.content)*@
+            @Html.TextAreaFor(model => model.content, new {  rows = "6" } )
+
+
+        </div>
+
+        <fieldset class="answers">
+            <legend>Odpowiedzi</legend>
+            <!-- <button type="button" class="link" id="addAnswer"><i class="fa fa-plus-circle"></i></button> -->
+            @for (int i = 0; i < Model.answerContent.Count(); i++)
+            {
+                <div class="answer">
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.answerContent)
+                        @Html.Label(String.Concat(" ", (i + 1).ToString()))
+                        @Html.ValidationMessageFor(model => model.answerContent)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.answerContent[i])
+                        @*<label>@Html.RadioButtonFor(model => model.isCorrectRatio, i.ToString()) Odpowiedź poprawna</label>*@ 
+                        @Html.CheckBoxFor(model => model.isCorrect[i])
+                        @Html.HiddenFor(model => model.answerIds[i])
+                    </div>
+                </div>
+            }
+        </fieldset>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.categoryId)
+            @Html.ValidationMessageFor(model => model.categoryId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.categoryId, Model.Kategorie)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.keywords)
+            @Html.ValidationMessageFor(model => model.keywords)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.keywords)
+        </div>
+        <input type="submit" value="Zapisz zmiany" />
+        @Html.ActionLink("Anuluj", "Index", null, new { @class = "btn btn-cancel" })
+    </fieldset>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('input[type="checkbox"]').click(function () {
+            var $this = $(this);
+            $('input[type="checkbox"]').prop('checked', false);
+            $this.prop('checked', true);
+        });
+    });
+</script>

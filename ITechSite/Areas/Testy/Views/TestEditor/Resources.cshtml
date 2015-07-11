@@ -1,0 +1,51 @@
+﻿@using ITechSite.Areas.Testy.Models;
+@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<ITechSite.Areas.Testy.Models.Resource>
+
+@{
+    Layout = "~/Areas/Testy/Views/Shared/_TestyLayout.cshtml";
+    ViewBag.Title = "Stanowiska";
+}
+
+<h2>Stanowiska</h2>
+
+<div class="toolbar">
+    @*@Html.ActionLink("Dodaj stanowisko", "CreateResource", "TestEditor")
+    @Html.ActionLink("Zarządzaj pytaniami", "Index", "TestEditor")
+    @Html.ActionLink("Zarządzaj kategoriami", "Categories")*@
+    @Html.Partial("_NaviBar")
+</div>
+
+<table class="resources">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Dostępne kategorie pytań</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var r in Model)
+        {
+            <tr>
+                <td>@r.Name</td>
+                <td>
+                    <ul class="allowed-categories">
+                        @foreach(var c in @r.AllowedCategories)
+                        {
+                            <li>@c.Kategorie.name</li>    
+                        }
+                    </ul>
+                </td>
+                <td>
+                    <a href="@Url.Action("EditResource", "TestEditor", new{ id = @r.Id })" class="btn btn-action"><span class="fa fa-pencil"></span>Edytuj</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+Strona @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) z @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Resources", new { page }))

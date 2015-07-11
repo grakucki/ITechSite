@@ -1,0 +1,25 @@
+﻿@model ITechSite.Areas.Testy.Models.Kategorie
+
+@{
+    Layout = "~/Areas/Testy/Views/Shared/_TestyLayout.cshtml";
+    ViewBag.Title = "Edycja kategorii";
+}
+
+<h2>Edycja kategorii @Model.name</h2>
+
+@using(Html.BeginForm())
+{
+    <fieldset>
+        @Html.HiddenFor(model => model.id)
+        <div class="editor-label">
+            @Html.LabelFor(model => model.name)
+            @Html.ValidationMessageFor(model => model.name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.name)
+        </div>
+
+        <input type="submit" value="Zapisz zmiany"/>
+        @Html.ActionLink("Anuluj", "Categories", null, new { @class = "btn btn-cancel" })
+    </fieldset>
+}

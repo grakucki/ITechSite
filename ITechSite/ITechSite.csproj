@@ -178,6 +178,61 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Testy\Controllers\alaController.cs" />
+    <Compile Include="Areas\Testy\Controllers\TestController.cs" />
+    <Compile Include="Areas\Testy\Controllers\TestEditorController.cs" />
+    <Compile Include="Areas\Testy\Helpers\ModelBinder.cs" />
+    <Compile Include="Areas\Testy\Models\AllowedCategories.cs">
+      <DependentUpon>TestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Testy\Models\Kategorie.cs">
+      <DependentUpon>TestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Testy\Models\Odpowiedzi.cs">
+      <DependentUpon>TestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Testy\Models\Pytania.cs">
+      <DependentUpon>TestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Testy\Models\PytaniaViewModel.cs" />
+    <Compile Include="Areas\Testy\Models\Resource.cs">
+      <DependentUpon>TestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Testy\Models\ResourceViewModel.cs" />
+    <Compile Include="Areas\Testy\Models\RodzajOdpowiedzi.cs">
+      <DependentUpon>TestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Testy\Models\StanTestu.cs">
+      <DependentUpon>TestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Testy\Models\Test.cs" />
+    <Compile Include="Areas\Testy\Models\TestKompetencji.cs">
+      <DependentUpon>TestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Testy\Models\TestKompetencjiLog.cs">
+      <DependentUpon>TestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Testy\Models\TestModels.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestModels.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Testy\Models\TestModels.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Testy\Models\TestModels.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestModels.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Testy\Models\TestQuestions.cs" />
+    <Compile Include="Areas\Testy\Models\TestResult.cs" />
+    <Compile Include="Areas\Testy\Models\UserAnswer.cs" />
+    <Compile Include="Areas\Testy\Models\_Kategorie.cs" />
+    <Compile Include="Areas\Testy\Models\_TestKompetencji.cs" />
+    <Compile Include="Areas\Testy\TestyAreaRegistration.cs" />
     <Compile Include="Binders\StreamBinder.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DokumentsController.cs" />
@@ -205,8 +260,69 @@
     <Compile Include="Models\SimaticCpuType.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Content Include="Areas\Testy\Content\fontawesome\css\font-awesome.css" />
+    <Content Include="Areas\Testy\Content\fontawesome\css\font-awesome.min.css" />
+    <Content Include="Areas\Testy\Content\fontawesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\Testy\Content\Form.css" />
+    <Content Include="Areas\Testy\Content\PagedList.css" />
+    <Content Include="Areas\Testy\Content\Site.css" />
+    <Content Include="Areas\Testy\Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Areas\Testy\Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Areas\Testy\Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Areas\Testy\Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Areas\Testy\Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Areas\Testy\Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Areas\Testy\Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Areas\Testy\Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Areas\Testy\Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Areas\Testy\Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Areas\Testy\Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Areas\Testy\Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Areas\Testy\Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery-ui.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Areas\Testy\Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\images\Testy.jpg" />
     <Content Include="Models\sql\2015-06-23.sql" />
+    <Content Include="Models\sql\2015-07-11.sql" />
     <Compile Include="Models\UniqueAttribute.cs" />
     <Compile Include="Models\DBFile.cs" />
     <Compile Include="Models\DocumentModels.cs" />
@@ -298,6 +414,72 @@
       <LastGenOutput>ITechModel.cs</LastGenOutput>
     </Content>
     <Content Include="Models\sql\2015-07-06.sql" />
+    <Content Include="Areas\Testy\Views\web.config" />
+    <Content Include="Areas\Testy\Views\Test\EndTest.cshtml" />
+    <Content Include="Areas\Testy\Views\Test\Index.cshtml" />
+    <Content Include="Areas\Testy\Views\Test\Test.cshtml" />
+    <Content Include="Areas\Testy\Views\Test\ViewTest.cshtml" />
+    <Content Include="Areas\Testy\Views\TestEditor\Categories.cshtml" />
+    <Content Include="Areas\Testy\Views\TestEditor\Create.cshtml" />
+    <Content Include="Areas\Testy\Views\TestEditor\CreateCategory.cshtml" />
+    <Content Include="Areas\Testy\Views\TestEditor\CreateResource.cshtml" />
+    <Content Include="Areas\Testy\Views\TestEditor\Edit.cshtml" />
+    <Content Include="Areas\Testy\Views\TestEditor\EditCategory.cshtml" />
+    <Content Include="Areas\Testy\Views\TestEditor\EditResource.cshtml" />
+    <Content Include="Areas\Testy\Views\TestEditor\Index.cshtml" />
+    <Content Include="Areas\Testy\Views\TestEditor\Resources.cshtml" />
+    <Content Include="Areas\Testy\Views\ala\Index.cshtml" />
+    <EntityDeploy Include="Areas\Testy\Models\TestModels.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TestModels.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Areas\Testy\Models\TestModels.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TestModels.edmx</DependentUpon>
+      <LastGenOutput>TestModels.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Testy\Models\TestModels.edmx.diagram">
+      <DependentUpon>TestModels.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Testy\Models\TestModels.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TestModels.edmx</DependentUpon>
+      <LastGenOutput>TestModels.cs</LastGenOutput>
+    </Content>
+    <Content Include="Areas\Testy\Content\fontawesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Testy\Content\fontawesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Testy\Content\fontawesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\Testy\Content\fontawesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Testy\Content\fontawesome\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Testy\Content\fontawesome\less\animated.less" />
+    <Content Include="Areas\Testy\Content\fontawesome\less\bordered-pulled.less" />
+    <Content Include="Areas\Testy\Content\fontawesome\less\core.less" />
+    <Content Include="Areas\Testy\Content\fontawesome\less\fixed-width.less" />
+    <Content Include="Areas\Testy\Content\fontawesome\less\font-awesome.less" />
+    <Content Include="Areas\Testy\Content\fontawesome\less\icons.less" />
+    <Content Include="Areas\Testy\Content\fontawesome\less\larger.less" />
+    <Content Include="Areas\Testy\Content\fontawesome\less\list.less" />
+    <Content Include="Areas\Testy\Content\fontawesome\less\mixins.less" />
+    <Content Include="Areas\Testy\Content\fontawesome\less\path.less" />
+    <Content Include="Areas\Testy\Content\fontawesome\less\rotated-flipped.less" />
+    <Content Include="Areas\Testy\Content\fontawesome\less\stacked.less" />
+    <Content Include="Areas\Testy\Content\fontawesome\less\variables.less" />
+    <Content Include="Areas\Testy\Content\fontawesome\scss\font-awesome.scss" />
+    <Content Include="Areas\Testy\Content\fontawesome\scss\_animated.scss" />
+    <Content Include="Areas\Testy\Content\fontawesome\scss\_bordered-pulled.scss" />
+    <Content Include="Areas\Testy\Content\fontawesome\scss\_core.scss" />
+    <Content Include="Areas\Testy\Content\fontawesome\scss\_fixed-width.scss" />
+    <Content Include="Areas\Testy\Content\fontawesome\scss\_icons.scss" />
+    <Content Include="Areas\Testy\Content\fontawesome\scss\_larger.scss" />
+    <Content Include="Areas\Testy\Content\fontawesome\scss\_list.scss" />
+    <Content Include="Areas\Testy\Content\fontawesome\scss\_mixins.scss" />
+    <Content Include="Areas\Testy\Content\fontawesome\scss\_path.scss" />
+    <Content Include="Areas\Testy\Content\fontawesome\scss\_rotated-flipped.scss" />
+    <Content Include="Areas\Testy\Content\fontawesome\scss\_stacked.scss" />
+    <Content Include="Areas\Testy\Content\fontawesome\scss\_variables.scss" />
+    <Content Include="Areas\Testy\Views\Shared\_TestyLayout.cshtml" />
+    <Content Include="Areas\Testy\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Testy\Views\Shared\_NaviBar.cshtml" />
     <None Include="Properties\PublishProfiles\insofter.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

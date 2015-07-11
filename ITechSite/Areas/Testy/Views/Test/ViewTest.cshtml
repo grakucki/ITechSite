@@ -1,0 +1,63 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Przeglądanie testu";
+}
+
+<h2>Przeglądanie testu</h2>
+
+<div class="test">
+    <div class="question">
+        <p>
+            @Model.question.content
+        </p>
+    </div>
+    <div class="answers">
+        @foreach(var ans in @Model.question.Odpowiedzi)
+        {
+            if(ans.id == ViewBag.userAnswer)
+            {
+                if(ViewBag.isCorrect == true)
+                {
+                    <div class="answer" style="background-color: rgb(200, 230, 201);">
+                        <p>
+                            @ans.content
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <div class="answer" style="background-color: #f06292;">
+                        <p>
+                            @ans.content
+                        </p>
+                    </div>
+                }
+            }
+            else if (ans.id == ViewBag.correctAnswer)
+            {
+                <div class="answer" style="background-color: rgb(200, 230, 201);">
+                    <p>
+                        @ans.content
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="answer">
+                    <p>
+                        @ans.content
+                    </p>
+                </div>
+            }
+        }
+    </div>
+</div>
+        @if(Model.test.getPreviousQuestionId(Model.question.id) != 0)
+        {
+            <a href="@Url.Action("ViewTest", "Test", new { @accessionNumber = Model.test.accessionNumber, @questionId = Model.test.getPreviousQuestionId(Model.question.id) })" id="prev"><i class="fa fa-chevron-left"></i></a>
+        }
+        @if(Model.test.getNextQuestionId(Model.question.id) != 0)
+        {
+            <a href="@Url.Action("ViewTest", "Test", new { @accessionNumber = Model.test.accessionNumber, @questionId = Model.test.getNextQuestionId(Model.question.id) })" id="next"><i class="fa fa-chevron-right"></i></a>
+        }
