@@ -11,6 +11,7 @@ using System.Diagnostics;
 
 namespace ITechSite.Controllers
 {
+    [Authorize]
     public class WorkstationsController : Controller
     {
         private ITechEntities db = new ITechEntities(0);

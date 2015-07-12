@@ -91,41 +91,5 @@ namespace ITechSite.Models
         }
     }
 
-    [MetadataType(typeof(ResourceMetaData))]
-    public partial class Resource
-    {
 
-    }
-
-
-    public class ResourceMetaData
-    {
-        [Unique]
-        [DisplayName("Nazwa")]
-        [Required(ErrorMessage = "Nazwa jest wymagana.")]
-        public string Name { get; set; }
-    }
-
-
-
-    public partial class Dokument
-    {
-        public string Size2
-        {
-            get
-            {
-                if (!this.Size.HasValue)
-                    return "-";
-                var units = new[] { "B", "KB", "MB", "GB", "TB" };
-                var index = 0;
-                double size = this.Size.Value;
-                while (size > 1024 && index + 1 < units.Length)
-                {
-                    size /= 1024;
-                    index++;
-                }
-                return string.Format("{0:N2} {1}", size, units[index]);
-            }
-        }
-    }
 }

@@ -1,12 +1,12 @@
 ﻿@model ITechSite.Models.InformationPlan
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Kasowanie planu";
 }
 
-<h2>Delete</h2>
+<h2>Kasowanie planu</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Czy jesteś pewie, że chcesz skasować ten plan informacyjny?</h3>
 <div>
     <h4>InformationPlan</h4>
     <hr />
@@ -41,8 +41,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Skasuj" class="btn btn-default" /> |
+            @Html.ActionLink("Powrót do listy", "Index")
         </div>
     }
 </div>
