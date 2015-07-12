@@ -83,6 +83,7 @@ namespace ITechSite.Controllers
             //return GetXml(IdR);
             var informationPlan = db.InformationPlan.Where(m => m.idR == IdR).OrderBy(m=>m.Order)
                 .Include(i => i.Dokument).Include(i => i.Resource);
+            ViewBag.Ret_idR = IdR;
             return View(informationPlan.ToList());
         }
 
@@ -99,6 +100,7 @@ namespace ITechSite.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.idR = informationPlan.idR;
             return View(informationPlan);
         }
 
@@ -144,6 +146,7 @@ namespace ITechSite.Controllers
             }
             ViewBag.IdD = new SelectList(db.Dokument, "Id", "FileName", informationPlan.IdD);
             ViewBag.idR = new SelectList(db.Resource, "Id", "Name", informationPlan.idR);
+            ViewBag.Ret_idR = informationPlan.idR;
             return View(informationPlan);
         }
 
@@ -162,6 +165,7 @@ namespace ITechSite.Controllers
             }
             ViewBag.IdD = new SelectList(db.Dokument, "Id", "FileName", informationPlan.IdD);
             ViewBag.idR = new SelectList(db.Resource, "Id", "Name", informationPlan.idR);
+            ViewBag.Ret_idR = informationPlan.idR;
             return View(informationPlan);
         }
 

@@ -36,6 +36,7 @@ namespace ITechSite.Controllers
                 return RedirectToAction("Details", "Resources", new { id = idR });
 
             }
+            ViewBag.Ret_idR = idR;
             return View(workstation);
         }
 
@@ -46,6 +47,7 @@ namespace ITechSite.Controllers
             ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == idR), "Id", "Name", idR);
             ViewBag.Sterownik_Model = new SelectList(db.SimaticCpuType, "CpuType", "CpuType");
 
+            ViewBag.Ret_idR = idR;
             return View();
         }
 
@@ -74,9 +76,8 @@ namespace ITechSite.Controllers
 
             ViewBag.WorkstationGroup = new SelectList(db.WorkstationGroup, "Name", "Name", workstation.WorkstationGroup);
             ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == workstation.idR), "Id", "Name", workstation.idR);
-
-
             ViewBag.Sterownik_Model = new SelectList(db.SimaticCpuType, "CpuType", "CpuType", workstation.Sterownik_Model);
+            ViewBag.Ret_idR = workstation.idR;
             return View(workstation);
         }
 
@@ -95,8 +96,8 @@ namespace ITechSite.Controllers
             ViewBag.WorkstationGroup = new SelectList(db.WorkstationGroup, "Name", "Name", workstation.WorkstationGroup);
             ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == workstation.idR), "Id", "Name", workstation.idR);
             ViewBag.Sterownik_Model = new SelectList(db.SimaticCpuType, "CpuType", "CpuType", workstation.Sterownik_Model);
-
-
+            ViewBag.Ret_idR = workstation.idR;
+            
             return View(workstation);
         }
 
@@ -105,19 +106,19 @@ namespace ITechSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,WorkstationGroup,Factory,Area,idR,Sterownik_Ip,Sterownik_Model,Setrownik_DB")] Workstation workstation)
+        public ActionResult Edit([Bind(Include = "Id,WorkstationGroup,Factory,Area,idR,Sterownik_Ip,Sterownik_Model,Setrownik_DB, AllowIp")] Workstation workstation)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(workstation).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Edit", "Resources", new { idR = workstation.idR });
+                return RedirectToAction("Edit", "Resources", new { id = workstation.idR });
             }
             ViewBag.WorkstationGroup = new SelectList(db.WorkstationGroup, "Name", "Name", workstation.WorkstationGroup);
             ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == workstation.idR), "Id", "Name", workstation.idR);
             ViewBag.Sterownik_Model = new SelectList(db.SimaticCpuType, "CpuType", "CpuType", workstation.Sterownik_Model);
 
-
+            ViewBag.Ret_idR = workstation.idR;
             return View(workstation);
         }
 

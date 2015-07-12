@@ -330,3 +330,6 @@ SET IDENTITY_INSERT [dbo].[RodzajOdpowiedzi] ON
 INSERT INTO [dbo].[RodzajOdpowiedzi] ([id], [name]) VALUES (1, 'Jedna poprawna');
 INSERT INTO [dbo].[RodzajOdpowiedzi] ([id], [name]) VALUES (2, 'Kilka poprawnych');
 SET IDENTITY_INSERT [dbo].[RodzajOdpowiedzi] OFF
+
+ALTER TABLE dbo.Workstation ADD
+	AllowIp nvarchar(15) NULL
