@@ -49,10 +49,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.Order)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id  }) |
-            @Html.ActionLink("Delete", "Delete", new {  id=item.id })
+        <td> 
+            @Html.ActionLink("Edytuj", "Edit", new { id = item.id }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id = item.id }) |
+            @Html.ActionLink("Usuń", "Delete", new { id = item.id })
         </td>
     </tr>
 }

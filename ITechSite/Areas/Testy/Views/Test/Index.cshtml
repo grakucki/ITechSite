@@ -1,10 +1,11 @@
 ﻿@{
+    Layout = "~/Areas/Testy/Views/Shared/_TestyNoLayout.cshtml";
     ViewBag.Title = "Rozpocznij test";
 }
 
 <div class="test-start content">
     <h2>Rozpocznij test</h2>
 
-    @Html.ActionLink("Generuj test", "Test", new { @resourceId = 7 }, new { @class = "btn btn-start-test" })
+    @Html.ActionLink("Generuj test", "Test", new { @resourceId = 2 }, new { @class = "btn btn-start-test" })
     
 </div>

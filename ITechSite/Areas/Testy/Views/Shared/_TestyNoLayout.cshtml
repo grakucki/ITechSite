@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/Testy/Content/fontawesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Testy/Content/PagedList.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Testy/Content/Form.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/Testy/Content/Site.css" />
+</head>
+<body>
+    @RenderBody()
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

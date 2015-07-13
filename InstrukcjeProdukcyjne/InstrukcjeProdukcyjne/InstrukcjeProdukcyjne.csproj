@@ -184,6 +184,12 @@
     </Compile>
     <Compile Include="SitechUser.cs" />
     <Compile Include="StartupApp.cs" />
+    <Compile Include="TestKompetencjiDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TestKompetencjiDlg.Designer.cs">
+      <DependentUpon>TestKompetencjiDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="VideoViewerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -233,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SimaticDlg.resx">
       <DependentUpon>SimaticDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TestKompetencjiDlg.resx">
+      <DependentUpon>TestKompetencjiDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VideoViewerControl.resx">
       <DependentUpon>VideoViewerControl.cs</DependentUpon>

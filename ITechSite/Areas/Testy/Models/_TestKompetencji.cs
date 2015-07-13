@@ -15,7 +15,10 @@ namespace ITechSite.Areas.Testy.Models
             doc.LoadXml(xml);
             XmlNodeList nodeList = doc.SelectNodes("/Test/questions/question");
 
-            return Int32.Parse(nodeList[0]["id"].InnerText);
+            if (nodeList.Count > 0)
+                return Int32.Parse(nodeList[0]["id"].InnerText);
+            else
+                return 0;
         }
 
         public int getNextQuestionId(int qId)

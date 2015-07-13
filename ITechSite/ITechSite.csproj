@@ -253,6 +253,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ItechModelEx\Dokument.cs" />
+    <Compile Include="Models\ItechModelEx\News.cs" />
     <Compile Include="Models\ItechModelEx\Resource.cs" />
     <Compile Include="Models\ItechModelEx\WorkProcess.cs" />
     <Compile Include="Models\ItechModelEx\ResourceType.cs" />
@@ -482,9 +483,10 @@
     <Content Include="Areas\Testy\Content\fontawesome\scss\_rotated-flipped.scss" />
     <Content Include="Areas\Testy\Content\fontawesome\scss\_stacked.scss" />
     <Content Include="Areas\Testy\Content\fontawesome\scss\_variables.scss" />
-    <Content Include="Areas\Testy\Views\Shared\_TestyLayout.cshtml" />
+    <Content Include="Areas\Testy\Views\Shared\_TestyNoLayout.cshtml" />
     <Content Include="Areas\Testy\Views\Shared\Error.cshtml" />
     <Content Include="Areas\Testy\Views\Shared\_NaviBar.cshtml" />
+    <Content Include="Areas\Testy\Views\Shared\_TestyLayout.cshtml" />
     <None Include="Properties\PublishProfiles\insofter.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -507,7 +509,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

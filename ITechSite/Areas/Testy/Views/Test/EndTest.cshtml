@@ -1,16 +1,34 @@
 ﻿@model dynamic
 
 @{
+    Layout = "~/Areas/Testy/Views/Shared/_TestyNoLayout.cshtml";
     ViewBag.Title = "Koniec testu";
 }
 <div class="content test-end">
-    <h2>Test zakończony</h2>
-    
-    <p class="test-score">
-        Twój wynik to @ViewBag.score / @ViewBag.quantity (@ViewBag.state)
-    </p>
+    @if (@ViewBag.state == "Zdany")
+    {
+        <div style="background-color: green ">
+            <h2>Test zakończony.</h2>
+            <p class="test-score">
+                Twój wynik to @ViewBag.score / @ViewBag.quantity (@ViewBag.state)
+            </p>
+        </div>
+    }
+    else
+    {
+        <div style="background-color: red ">
+            <h2>Test zakończony.</h2>
+            <p class="test-score">
+                Twój wynik to @ViewBag.score / @ViewBag.quantity (@ViewBag.state)
+            </p>
+        </div>
+    }
 
     <p>
-        Przejrzyj test: @Html.ActionLink("Przeglądaj test", "ViewTest", "Test", new { @accessionNumber = @ViewBag.accessionNumber }, new { @class = "btn btn-action" })
+        @Html.ActionLink("Przeglądaj test", "ViewTest", "Test", new { @accessionNumber = @ViewBag.accessionNumber }, new { @class = "btn btn-action-big" })
+        <br />
+        <br />
+
+        @Html.ActionLink("Zakończ", "EndTest", "Test", new { @accessionNumber = @ViewBag.accessionNumber, @EndViewAcction=true }, new { @class = "btn btn-action-big" })
     </p>
 </div>

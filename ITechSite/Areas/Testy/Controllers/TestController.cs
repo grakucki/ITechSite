@@ -58,8 +58,13 @@ namespace ITechSite.Areas.Testy.Controllers
             for (int i = 0; i < Int32.Parse(this.quantity);i++ )
             {
                 int idx = rand.Next(0, questions.Count);
-                selectedQuestions.Add(questions[idx]);
-                questions.RemoveAt(idx);
+                //TODO GR: Zabezpieczenie przed genrowaniem większej liczby pytań niż dostępna ilość. Test musi się poprawnie generować przy mniejszej liczbie pytań w puli dostępnych (w szczególności gdy w puli =0)
+                
+                if (questions.Count > idx)
+                {
+                    selectedQuestions.Add(questions[idx]);
+                    questions.RemoveAt(idx);
+                }
             }
 
             foreach (var q in selectedQuestions)
@@ -72,9 +77,11 @@ namespace ITechSite.Areas.Testy.Controllers
             sTest.questions = testQuestions.ToArray();
             test.createdAt = DateTime.Now;
             test.accessionNumber = guid;
-            var state = db.StanTestu.Where(s => s.name == "Niezakonczony").First();
-            test.stateId = state.id;
-            sTest.stateId = state.id;
+            
+            // niezakończony
+            test.stateId = 1;
+            sTest.stateId = 1;
+
             db.TestKompetencji.Add(test);
             db.SaveChanges();
             sTest.id = test.id;
@@ -95,6 +102,9 @@ namespace ITechSite.Areas.Testy.Controllers
 [HttpGet]
         public ActionResult ViewTest(string accessionNumber, int questionId = 0)
         {
+
+            //TODO GR: Żle stosuje się styl dla przeglądania testu.
+            //TODO GR: Na zakończenie przeglądania powrót na stronę z zakończonym testem /EndTest?accessionNumbe...
             var test = db.TestKompetencji.Where(t => t.accessionNumber == accessionNumber).FirstOrDefault();
             dynamic model = new ExpandoObject();
 
@@ -127,8 +137,15 @@ namespace ITechSite.Areas.Testy.Controllers
             return View(model);
         }
 
-[HttpGet]
-        public ActionResult Test(int resourceId = 0, int questionId = 0, string accessionNumber = null)
+        [HttpGet]
+        public ActionResult TestBegin(int resourceId = 0, string accessionNumber = null, string UserId=null)
+        {
+            var x= this.prepareTest(test, resourceId, accessionNumber);
+            return RedirectToAction("Test", new { resourceId = resourceId, accessionNumber = x.accessionNumber, UserId = UserId });
+        }
+        
+        [HttpGet]
+        public ActionResult Test(int resourceId = 0, int questionId = -1, string accessionNumber = null)
         {
             dynamic myModel = new ExpandoObject();
             XmlSerializer serializer = new XmlSerializer(typeof(Test));
@@ -307,7 +324,7 @@ namespace ITechSite.Areas.Testy.Controllers
             db.SaveChanges();
 
             ViewBag.score = score;
-            ViewBag.quantity = this.quantity;
+            ViewBag.quantity = Int32.Parse(this.quantity);
             ViewBag.state = state.name;
             ViewBag.accessionNumber = accessionNumber;
 

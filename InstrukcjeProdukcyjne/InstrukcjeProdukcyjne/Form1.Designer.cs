@@ -71,6 +71,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.testKompetencjiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WorkStationBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -215,13 +216,14 @@
             this.toolStripMenuItem1,
             this.toolStripSeparator1,
             this.klawiaturaToolStripMenuItem,
+            this.testKompetencjiToolStripMenuItem,
             this.synchronizujPlikiToolStripMenuItem,
             this.toolStripMenuItem2,
             this.toolStripSeparator2,
             this.oAplikacjiToolStripMenuItem,
             this.toolStripMenuItem3});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(348, 316);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(348, 388);
             // 
             // toolStripMenuItem1
             // 
@@ -499,6 +501,13 @@
             this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // testKompetencjiToolStripMenuItem
+            // 
+            this.testKompetencjiToolStripMenuItem.Name = "testKompetencjiToolStripMenuItem";
+            this.testKompetencjiToolStripMenuItem.Size = new System.Drawing.Size(347, 50);
+            this.testKompetencjiToolStripMenuItem.Text = "Test kompetencji";
+            this.testKompetencjiToolStripMenuItem.Click += new System.EventHandler(this.testKompetencjiToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -578,6 +587,7 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ImageList imageListSterownik;
         private System.Windows.Forms.ImageList imageListCzytnik;
+        private System.Windows.Forms.ToolStripMenuItem testKompetencjiToolStripMenuItem;
     }
 }
 

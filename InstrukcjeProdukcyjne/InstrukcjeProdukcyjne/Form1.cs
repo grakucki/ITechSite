@@ -515,6 +515,20 @@ namespace InstrukcjeProdukcyjne
             //testy
         }
 
+        private void testKompetencjiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dial = new TestKompetencjiDlg();
+                dial.UserId=7;
+                dial.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
 
 
 

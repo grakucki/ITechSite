@@ -29,6 +29,16 @@ namespace InstrukcjeProdukcyjne
             ApplyDefault(true);
         }
 
+
+        public string ServerTestKompetencjiAddress
+        {
+            get
+            {
+                var s = ServerDoc.ToLower().Replace("/itechservice", "/Testy/test/TestBegin");
+                return s;
+            }
+        }
+
         public void ApplyDefault(bool IfEmpty)
         {
             if (!IfEmpty || String.IsNullOrEmpty(ServerDoc))

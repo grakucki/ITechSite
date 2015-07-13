@@ -1,10 +1,11 @@
 ﻿@model dynamic
 
 @{
-    ViewBag.Title = "Test";
+    Layout = "~/Areas/Testy/Views/Shared/_TestyNoLayout.cshtml";
+    ViewBag.Title = "Wybierz właściwą odpowiedź";
 }
+
 <div class="content test-start">
-    <h2>Test</h2>
     @if(@Model.question == null)
     {
         @Html.ActionLink("Rozpocznij", "Test", new { @questionId = Model.test.getFirstQuestionId(), @accessionNumber = Model.test.accessionNumber }, new { @class = "btn btn-start-test" })
@@ -12,7 +13,9 @@
     else
     {
     <div class="test">
-        <div class="question">
+        @ViewBag.Title
+
+         <div class="question">
             <p>
                 @Model.question.content
             </p>

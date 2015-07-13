@@ -1,15 +1,16 @@
 ﻿@model dynamic
 
 @{
+    Layout = "~/Areas/Testy/Views/Shared/_TestyNoLayout.cshtml";
     ViewBag.Title = "Przeglądanie testu";
 }
 
-<h2>Przeglądanie testu</h2>
 
 <div class="test">
+    <h2>@ViewBag.Title</h2>
     <div class="question">
         <p>
-            @Model.question.content
+            @Model.question.content gdgf
         </p>
     </div>
     <div class="answers">
