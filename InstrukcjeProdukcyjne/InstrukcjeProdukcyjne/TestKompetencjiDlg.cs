@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,14 +20,51 @@ namespace InstrukcjeProdukcyjne
 
         public string TestUri { get; set; }
         public int UserId { get; set; }
+        public Guid AccessionNumber { get; set; }
+        public bool TestRes { get; set; }
+
         private void TestKompetencjiDlg_Load(object sender, EventArgs e)
         {
+            TestRes = false;
+            splitContainer1.Panel2Collapsed = true;
+            if (AccessionNumber == Guid.Empty)
+                AccessionNumber = Guid.NewGuid();
             TestUri = Properties.Settings.Default.App.ServerTestKompetencjiAddress;
             TestUri += string.Format(@"?resourceId={0}&accessionNumber={1}@user_id={2}",
                 Properties.Settings.Default.App.Stanowisko,
-                Guid.NewGuid().ToString(),
+                AccessionNumber.ToString(),
                 UserId);
             webBrowser1.Navigate(TestUri);
+        }
+
+        private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+          
+        }
+
+        private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        {
+            // if find in url "EndViewAcction=true" to zamykamy okno i sprawdzamy czy test został zdany
+            string u = e.Url.ToString().ToLower();
+            if (u.IndexOf("EndTest".ToLower()) < 0)
+                return;
+
+
+            TestRes = false;
+            WebClient web = new WebClient();
+            string response = web.DownloadString(e.Url);
+            if (response.IndexOf("<state>zdany</state>") >= 0)
+                TestRes = true;
+
+            splitContainer1.Panel2Collapsed = false;
+            if (TestRes)
+                button1.BackColor = Color.Green;
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

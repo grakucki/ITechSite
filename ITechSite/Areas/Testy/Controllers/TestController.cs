@@ -331,8 +331,8 @@ namespace ITechSite.Areas.Testy.Controllers
             return View();
         }
 
-[HttpGet]
-        public FileContentResult getTestResult(string accessionNumber)
+        [HttpGet]
+        public FileContentResult  getTestResult(string accessionNumber)
         {
             var test = db.TestKompetencji.Where(t => t.accessionNumber == accessionNumber).FirstOrDefault();
 

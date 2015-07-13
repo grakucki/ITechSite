@@ -29,6 +29,7 @@
         <br />
         <br />
 
-        @Html.ActionLink("Zakończ", "EndTest", "Test", new { @accessionNumber = @ViewBag.accessionNumber, @EndViewAcction=true }, new { @class = "btn btn-action-big" })
+        @*@Html.ActionLink("Zakończ", "EndTest", "Test", new { @accessionNumber = @ViewBag.accessionNumber, @EndViewAcction = true }, new { @class = "btn btn-action-big" })*@
+        @Html.ActionLink("Zakończ", "getTestResult", "Test", new { @accessionNumber = @ViewBag.accessionNumber, @EndViewAcction = true }, new { @class = "btn btn-action-big" })
     </p>
 </div>
