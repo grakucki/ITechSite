@@ -153,19 +153,20 @@ textarea {
     }
 
 .test-radio {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     float: left;
     margin-left: 35px;
-    margin-top: 2%;
+    /*margin-top: 4%;*/
 }
 
 #next {
     float: right;
-    width: 100px;
-    height: 100px;
-    margin-top: -24%;
-    background-color: #fafafa;
+    width: 170px;
+    height: 300px;
+    margin-top: -30%;
+    /*background-color: #fafafa;*/
+    background-color: blue;
     border-radius: 50%;
     display: table;
     text-decoration: none;
@@ -173,10 +174,10 @@ textarea {
 
 #prev {
     float: left;
-    width: 100px;
-    height: 100px;
-    margin-top: -24%;
-    background-color: #fafafa;
+    width: 170px;
+    height: 300px;
+    margin-top: -30%;
+    background-color: blue;
     border-radius: 50%;
     display: table;
     text-decoration: none;
@@ -189,12 +190,20 @@ textarea {
         vertical-align: middle;
     }
 
+#next i:before{
+   content: "\f054";
+}
+
+#prev i:before{
+    content: "\f053";
+}
+
 #end_test {
     float: right;
-    width: 100px;
-    height: 100px;
-    margin-top: -24%;
-    background-color: #fafafa;
+    width: 170px;
+    height: 300px;
+    margin-top: -30%;
+    background-color: blue;
     border-radius: 50%;
     display: table;
     text-decoration: none;

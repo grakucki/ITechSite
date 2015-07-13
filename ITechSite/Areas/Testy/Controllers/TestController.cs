@@ -137,15 +137,8 @@ namespace ITechSite.Areas.Testy.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public ActionResult TestBegin(int resourceId = 0, string accessionNumber = null, string UserId=null)
-        {
-            var x= this.prepareTest(test, resourceId, accessionNumber);
-            return RedirectToAction("Test", new { resourceId = resourceId, accessionNumber = x.accessionNumber, UserId = UserId });
-        }
-        
-        [HttpGet]
-        public ActionResult Test(int resourceId = 0, int questionId = -1, string accessionNumber = null)
+[HttpGet]
+        public ActionResult Test(int resourceId = 0, int questionId = 0, string accessionNumber = null)
         {
             dynamic myModel = new ExpandoObject();
             XmlSerializer serializer = new XmlSerializer(typeof(Test));
@@ -324,15 +317,15 @@ namespace ITechSite.Areas.Testy.Controllers
             db.SaveChanges();
 
             ViewBag.score = score;
-            ViewBag.quantity = Int32.Parse(this.quantity);
+            ViewBag.quantity = this.quantity;
             ViewBag.state = state.name;
             ViewBag.accessionNumber = accessionNumber;
 
             return View();
         }
 
-        [HttpGet]
-        public FileContentResult  getTestResult(string accessionNumber)
+[HttpGet]
+        public FileContentResult getTestResult(string accessionNumber)
         {
             var test = db.TestKompetencji.Where(t => t.accessionNumber == accessionNumber).FirstOrDefault();
 
