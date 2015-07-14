@@ -6,3 +6,4 @@ obj
 InstrukcjeProdukcyjne/InstrukcjeProdukcyjne/bin/Debug/app.publish/InstrukcjeProdukcyjne.exe
 ITechService/obj/Debug/ITechService.pdb
 Deploy/ITechSite.zip
+*.suo
