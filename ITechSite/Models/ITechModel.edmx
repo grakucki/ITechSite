@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ITechModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="Dokument">
           <Key>
             <PropertyRef Name="Id" />
@@ -42,6 +49,25 @@
           <Property Name="IdD" Type="int" Nullable="false" />
           <Property Name="Order" Type="int" />
           <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItechUsers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CardNo" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="ItechUsersRoles">
+          <Key>
+            <PropertyRef Name="ItechUserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ItechUserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="WorkstationId" Type="int" />
         </EntityType>
         <EntityType Name="Model">
           <Key>
@@ -100,7 +126,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idR" Type="int" Nullable="false" />
+          <Property Name="idR" Type="int" />
           <Property Name="WorkstationGroup" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="Factory" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Area" Type="nvarchar(max)" Nullable="false" />
@@ -116,6 +142,18 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="16" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Dokument_WorkProcess">
+          <End Role="WorkProcess" Type="Self.WorkProcess" Multiplicity="0..1" />
+          <End Role="Dokument" Type="Self.Dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkProcess">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dokument">
+              <PropertyRef Name="WorkProcess_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FileContent_Dokument1">
           <End Role="Dokument" Type="Self.Dokument" Multiplicity="0..1" />
           <End Role="FileContent" Type="Self.FileContent" Multiplicity="*" />
@@ -128,27 +166,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_InformationPlan_Dokument">
-          <End Role="Dokument" Type="Self.Dokument" Multiplicity="1" />
-          <End Role="InformationPlan" Type="Self.InformationPlan" Multiplicity="*" />
+        <Association Name="FK_ItechUsersRoles_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="ItechUsersRoles" Type="Self.ItechUsersRoles" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Dokument">
+            <Principal Role="AspNetRoles">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="InformationPlan">
-              <PropertyRef Name="IdD" />
+            <Dependent Role="ItechUsersRoles">
+              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_InformationPlan_Resource">
-          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
-          <End Role="InformationPlan" Type="Self.InformationPlan" Multiplicity="*" />
+        <Association Name="FK_ItechUsersRoles_ItechUsers">
+          <End Role="ItechUsers" Type="Self.ItechUsers" Multiplicity="1" />
+          <End Role="ItechUsersRoles" Type="Self.ItechUsersRoles" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Resource">
-              <PropertyRef Name="Id" />
+            <Principal Role="ItechUsers">
+              <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="InformationPlan">
-              <PropertyRef Name="idR" />
+            <Dependent Role="ItechUsersRoles">
+              <PropertyRef Name="ItechUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -177,7 +215,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Workstation_Resource">
-          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="Resource" Type="Self.Resource" Multiplicity="0..1" />
           <End Role="Workstation" Type="Self.Workstation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Resource">
@@ -189,9 +227,12 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ITechModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dokument" EntityType="Self.Dokument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FileContent" EntityType="Self.FileContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InformationPlan" EntityType="Self.InformationPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItechUsers" EntityType="Self.ItechUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItechUsersRoles" EntityType="Self.ItechUsersRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
@@ -200,17 +241,21 @@
           <EntitySet Name="WorkProcess" EntityType="Self.WorkProcess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkstationGroup" EntityType="Self.WorkstationGroup" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Dokument_WorkProcess" Association="Self.FK_Dokument_WorkProcess">
+            <End Role="WorkProcess" EntitySet="WorkProcess" />
+            <End Role="Dokument" EntitySet="Dokument" />
+          </AssociationSet>
           <AssociationSet Name="FK_FileContent_Dokument1" Association="Self.FK_FileContent_Dokument1">
             <End Role="Dokument" EntitySet="Dokument" />
             <End Role="FileContent" EntitySet="FileContent" />
           </AssociationSet>
-          <AssociationSet Name="FK_InformationPlan_Dokument" Association="Self.FK_InformationPlan_Dokument">
-            <End Role="Dokument" EntitySet="Dokument" />
-            <End Role="InformationPlan" EntitySet="InformationPlan" />
+          <AssociationSet Name="FK_ItechUsersRoles_AspNetRoles" Association="Self.FK_ItechUsersRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="ItechUsersRoles" EntitySet="ItechUsersRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_InformationPlan_Resource" Association="Self.FK_InformationPlan_Resource">
-            <End Role="Resource" EntitySet="Resource" />
-            <End Role="InformationPlan" EntitySet="InformationPlan" />
+          <AssociationSet Name="FK_ItechUsersRoles_ItechUsers" Association="Self.FK_ItechUsersRoles_ItechUsers">
+            <End Role="ItechUsers" EntitySet="ItechUsers" />
+            <End Role="ItechUsersRoles" EntitySet="ItechUsersRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_News_Resource" Association="Self.FK_News_Resource">
             <End Role="Resource" EntitySet="Resource" />
@@ -256,12 +301,12 @@
           <Property Name="Factory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Area" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="WorkstationGroup1" Relationship="ITechModel.FK_Workstation_WorkstationGroup" FromRole="Workstation" ToRole="WorkstationGroup" />
-          <Property Name="idR" Type="Int32" Nullable="false" />
+          <Property Name="idR" Type="Int32" />
           <Property Name="Sterownik_Ip" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Sterownik_Model" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Setrownik_DB" Type="Int32" />
-          <NavigationProperty Name="Resource" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Workstation" ToRole="Resource" />
           <Property Name="AllowIp" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Resource" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Workstation" ToRole="Resource" />
         </EntityType>
         <EntityContainer Name="ITechEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="FileContent" EntityType="Self.FileContent" />
@@ -297,15 +342,26 @@
             <End Role="Resource" EntitySet="Resource" />
             <End Role="InformationPlan" EntitySet="InformationPlan" />
           </AssociationSet>
+          <EntitySet Name="News" EntityType="ITechModel.News" />
+          <AssociationSet Name="FK_News_Resource" Association="ITechModel.FK_News_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <EntitySet Name="AspNetRoles" EntityType="ITechModel.AspNetRoles" />
           <AssociationSet Name="FK_Workstation_Resource" Association="ITechModel.FK_Workstation_Resource">
             <End Role="Resource" EntitySet="Resource" />
             <End Role="Workstation" EntitySet="Workstation" />
           </AssociationSet>
           <EntitySet Name="SimaticCpuType" EntityType="ITechModel.SimaticCpuType" />
-          <EntitySet Name="News" EntityType="ITechModel.News" />
-          <AssociationSet Name="FK_News_Resource" Association="ITechModel.FK_News_Resource">
-            <End Role="Resource" EntitySet="Resource" />
-            <End Role="News" EntitySet="News" />
+          <EntitySet Name="ItechUsers" EntityType="ITechModel.ItechUsers" />
+          <EntitySet Name="ItechUsersRoles" EntityType="ITechModel.ItechUsersRoles" />
+          <AssociationSet Name="FK_ItechUsersRoles_AspNetRoles" Association="ITechModel.FK_ItechUsersRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="ItechUsersRoles" EntitySet="ItechUsersRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItechUsersRoles_ItechUsers" Association="ITechModel.FK_ItechUsersRoles_ItechUsers">
+            <End Role="ItechUsers" EntitySet="ItechUsers" />
+            <End Role="ItechUsersRoles" EntitySet="ItechUsersRoles" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="WorkProcess">
@@ -409,8 +465,8 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="InformationPlan" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="Resource" ToRole="InformationPlan" />
-          <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
           <NavigationProperty Name="News" Relationship="ITechModel.FK_News_Resource" FromRole="Resource" ToRole="News" />
+          <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
         </EntityType>
         <Association Name="FK_Resource_Type">
           <End Type="ITechModel.ResourceType" Role="ResourceType" Multiplicity="1" />
@@ -460,26 +516,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Workstation_Resource">
-          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
-          <End Type="ITechModel.Workstation" Role="Workstation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Resource">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Workstation">
-              <PropertyRef Name="idR" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="SimaticCpuType">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CpuType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Enabled" Type="Boolean" Nullable="false" />
-        </EntityType>
         <EntityType Name="News">
           <Key>
             <PropertyRef Name="id" />
@@ -499,6 +535,80 @@
             </Principal>
             <Dependent Role="News">
               <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ItechUsersRoles" Relationship="ITechModel.FK_ItechUsersRoles_AspNetRoles" FromRole="AspNetRoles" ToRole="ItechUsersRoles" />
+        </EntityType>
+        <Association Name="FK_Workstation_Resource">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="0..1" />
+          <End Type="ITechModel.Workstation" Role="Workstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workstation">
+              <PropertyRef Name="idR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SimaticCpuType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CpuType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItechUsers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CardNo" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ItechUsersRoles" Relationship="ITechModel.FK_ItechUsersRoles_ItechUsers" FromRole="ItechUsers" ToRole="ItechUsersRoles" />
+        </EntityType>
+        <EntityType Name="ItechUsersRoles">
+          <Key>
+            <PropertyRef Name="ItechUserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ItechUserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="WorkstationId" Type="Int32" />
+          <NavigationProperty Name="AspNetRoles" Relationship="ITechModel.FK_ItechUsersRoles_AspNetRoles" FromRole="ItechUsersRoles" ToRole="AspNetRoles" />
+          <NavigationProperty Name="ItechUsers" Relationship="ITechModel.FK_ItechUsersRoles_ItechUsers" FromRole="ItechUsersRoles" ToRole="ItechUsers" />
+        </EntityType>
+        <Association Name="FK_ItechUsersRoles_AspNetRoles">
+          <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
+          <End Type="ITechModel.ItechUsersRoles" Role="ItechUsersRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItechUsersRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItechUsersRoles_ItechUsers">
+          <End Type="ITechModel.ItechUsers" Role="ItechUsers" Multiplicity="1" />
+          <End Type="ITechModel.ItechUsersRoles" Role="ItechUsersRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItechUsers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ItechUsersRoles">
+              <PropertyRef Name="ItechUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -611,6 +721,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="ITechModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="ValidEnd" ColumnName="ValidEnd" />
+                <ScalarProperty Name="News1" ColumnName="News" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="ITechModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SimaticCpuType">
             <EntityTypeMapping TypeName="ITechModel.SimaticCpuType">
               <MappingFragment StoreEntitySet="SimaticCpuType">
@@ -620,13 +748,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="News">
-            <EntityTypeMapping TypeName="ITechModel.News">
-              <MappingFragment StoreEntitySet="News">
-                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
-                <ScalarProperty Name="ValidEnd" ColumnName="ValidEnd" />
-                <ScalarProperty Name="News1" ColumnName="News" />
+          <EntitySetMapping Name="ItechUsers">
+            <EntityTypeMapping TypeName="ITechModel.ItechUsers">
+              <MappingFragment StoreEntitySet="ItechUsers">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItechUsersRoles">
+            <EntityTypeMapping TypeName="ITechModel.ItechUsersRoles">
+              <MappingFragment StoreEntitySet="ItechUsersRoles">
+                <ScalarProperty Name="WorkstationId" ColumnName="WorkstationId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ItechUserId" ColumnName="ItechUserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

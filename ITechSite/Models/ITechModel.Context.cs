@@ -34,7 +34,10 @@ namespace ITechSite.Models
         public virtual DbSet<ResourceType> ResourceType { get; set; }
         public virtual DbSet<Resource> Resource { get; set; }
         public virtual DbSet<InformationPlan> InformationPlan { get; set; }
-        public virtual DbSet<SimaticCpuType> SimaticCpuType { get; set; }
         public virtual DbSet<News> News { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<SimaticCpuType> SimaticCpuType { get; set; }
+        public virtual DbSet<ItechUsers> ItechUsers { get; set; }
+        public virtual DbSet<ItechUsersRoles> ItechUsersRoles { get; set; }
     }
 }

@@ -252,11 +252,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ItechModelEx\Dokument.cs" />
     <Compile Include="Models\ItechModelEx\News.cs" />
     <Compile Include="Models\ItechModelEx\Resource.cs" />
     <Compile Include="Models\ItechModelEx\WorkProcess.cs" />
     <Compile Include="Models\ItechModelEx\ResourceType.cs" />
+    <Compile Include="Models\ItechUsers.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ItechUsersRoles.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\News.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
@@ -331,6 +340,7 @@
     <Content Include="Content\images\right.png" />
     <Content Include="Content\images\Testy.jpg" />
     <Content Include="Models\sql\2015-06-23.sql" />
+    <Content Include="Models\sql\2015-07-06 naprawa w istniejących.sql" />
     <Content Include="Models\sql\2015-07-11.sql" />
     <Compile Include="Models\UniqueAttribute.cs" />
     <Compile Include="Models\DBFile.cs" />

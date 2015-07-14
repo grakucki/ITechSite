@@ -33,7 +33,7 @@ namespace ITechSite.Models
     
         public virtual ResourceType ResourceType { get; set; }
         public virtual ICollection<InformationPlan> InformationPlan { get; set; }
-        public virtual ICollection<Workstation> Workstation { get; set; }
         public virtual News News { get; set; }
+        public virtual ICollection<Workstation> Workstation { get; set; }
     }
 }
