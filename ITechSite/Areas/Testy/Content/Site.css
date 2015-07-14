@@ -269,11 +269,12 @@ ul.allowed-categories{
 
 td.submit-right{
     height: 100%;
-    width: auto;
+    width:178px;
 }
 
 td.submit-left{
     height: 100%;
+    width:178px;
 }
 
 .answer{

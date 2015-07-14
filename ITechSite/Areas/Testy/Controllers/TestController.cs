@@ -138,61 +138,118 @@ namespace ITechSite.Areas.Testy.Controllers
         }
 
 [HttpGet]
-        public ActionResult Test(int resourceId = 0, int questionId = 0, string accessionNumber = null)
+public ActionResult Test(int resourceId = 0, int questionId = 0, string accessionNumber = null)
+{
+    dynamic myModel = new ExpandoObject();
+    XmlSerializer serializer = new XmlSerializer(typeof(Test));
+
+    TestKompetencji test = null;
+    if (accessionNumber == null)
+    {
+        test = new TestKompetencji();
+        test = this.prepareTest(test, resourceId);
+    }
+    else
+    {
+        test = db.TestKompetencji.Where(t => t.accessionNumber == accessionNumber).FirstOrDefault();
+        if (test == null)
         {
-            dynamic myModel = new ExpandoObject();
-            XmlSerializer serializer = new XmlSerializer(typeof(Test));
-            
-            TestKompetencji test = null;
-            if (accessionNumber == null)
-            {
-                test = new TestKompetencji();
-                test = this.prepareTest(test, resourceId);
-            }
-            else
-            {
-                test = db.TestKompetencji.Where(t => t.accessionNumber == accessionNumber).FirstOrDefault();
-                if(test == null)
-                {
-                    test = new TestKompetencji();
-                    test = this.prepareTest(test, resourceId, accessionNumber);
-                }
-            }
-            myModel.test = test;
-            var sTest = new Test();
-
-            using(TextReader reader = new StringReader(test.xml))
-            {
-                sTest = (Test)serializer.Deserialize(reader);
-            }
-            List<UserAnswer> uAnswers;
-            if (sTest.userAnswers != null)
-            {
-                uAnswers = sTest.userAnswers.ToList();
-            }
-            else
-            {
-                uAnswers = new List<UserAnswer>();
-            }
-
-            myModel.question = null;
-            if (questionId != 0)
-            {
-                if (uAnswers.Where(u => u.questionId == questionId).SingleOrDefault() != null)
-                {
-                    UserAnswer uAnswer = uAnswers.Where(u => u.questionId == questionId).SingleOrDefault();
-                    ViewBag.userAnswer = uAnswer.answerId;
-                }
-                else
-                {
-                    ViewBag.userAnswer = null;
-                }
-                var question = db.Pytania.Find(questionId);
-                myModel.question = question;
-                return View(myModel);
-            }
-            return View(myModel);
+            test = new TestKompetencji();
+            test = this.prepareTest(test, resourceId, accessionNumber);
         }
+    }
+    myModel.test = test;
+    var sTest = new Test();
+
+    using (TextReader reader = new StringReader(test.xml))
+    {
+        sTest = (Test)serializer.Deserialize(reader);
+    }
+    List<UserAnswer> uAnswers;
+    if (sTest.userAnswers != null)
+    {
+        uAnswers = sTest.userAnswers.ToList();
+    }
+    else
+    {
+        uAnswers = new List<UserAnswer>();
+    }
+
+    myModel.question = null;
+    if (questionId != 0)
+    {
+        if (uAnswers.Where(u => u.questionId == questionId).SingleOrDefault() != null)
+        {
+            UserAnswer uAnswer = uAnswers.Where(u => u.questionId == questionId).SingleOrDefault();
+            ViewBag.userAnswer = uAnswer.answerId;
+        }
+        else
+        {
+            ViewBag.userAnswer = null;
+        }
+        var question = db.Pytania.Find(questionId);
+        myModel.question = question;
+        return View(myModel);
+    }
+    return View(myModel);
+}
+
+[HttpGet]
+public ActionResult Test2(int resourceId = 0, int questionId = 0, string accessionNumber = null)
+{
+    dynamic myModel = new ExpandoObject();
+    XmlSerializer serializer = new XmlSerializer(typeof(Test));
+
+    TestKompetencji test = null;
+    if (accessionNumber == null)
+    {
+        test = new TestKompetencji();
+        test = this.prepareTest(test, resourceId);
+    }
+    else
+    {
+        test = db.TestKompetencji.Where(t => t.accessionNumber == accessionNumber).FirstOrDefault();
+        if (test == null)
+        {
+            test = new TestKompetencji();
+            test = this.prepareTest(test, resourceId, accessionNumber);
+        }
+    }
+    myModel.test = test;
+    var sTest = new Test();
+
+    using (TextReader reader = new StringReader(test.xml))
+    {
+        sTest = (Test)serializer.Deserialize(reader);
+    }
+    List<UserAnswer> uAnswers;
+    if (sTest.userAnswers != null)
+    {
+        uAnswers = sTest.userAnswers.ToList();
+    }
+    else
+    {
+        uAnswers = new List<UserAnswer>();
+    }
+
+    myModel.question = null;
+    if (questionId != 0)
+    {
+        if (uAnswers.Where(u => u.questionId == questionId).SingleOrDefault() != null)
+        {
+            UserAnswer uAnswer = uAnswers.Where(u => u.questionId == questionId).SingleOrDefault();
+            ViewBag.userAnswer = uAnswer.answerId;
+        }
+        else
+        {
+            ViewBag.userAnswer = null;
+        }
+        var question = db.Pytania.Find(questionId);
+        myModel.question = question;
+        return View(myModel);
+    }
+    return View(myModel);
+}
 
         public void LogTest(int questionId, int testId, string answers = null)
         {

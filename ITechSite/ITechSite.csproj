@@ -490,6 +490,7 @@
     <Content Include="Areas\Testy\Views\Shared\Error.cshtml" />
     <Content Include="Areas\Testy\Views\Shared\_NaviBar.cshtml" />
     <Content Include="Areas\Testy\Views\Shared\_TestyLayout.cshtml" />
+    <Content Include="Areas\Testy\Views\Test\Test2.cshtml" />
     <None Include="Properties\PublishProfiles\insofter.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

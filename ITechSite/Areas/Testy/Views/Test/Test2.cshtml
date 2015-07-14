@@ -1,0 +1,99 @@
+﻿
+@{
+    Layout = "~/Areas/Testy/Views/Shared/_TestyNoLayout.cshtml";
+    ViewBag.Title = "Test2";
+}
+
+<style type="text/css">
+    .tg {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border-color: #ccc;
+    }
+
+        .tg td {
+            padding: 11px 12px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #ccc;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .tg th {
+            padding: 11px 12px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #ccc;
+            background-color: #f0f0f0;
+        }
+
+
+.radioLabel input[name=chb]{
+    display:none;   /* comment this line to see the radio buttons */
+}
+.radioLabel label{
+    display:inline-block;
+    width:120px;
+    height:120px;
+    padding:5px 10px;
+}
+.radioLabel input[type="radio"]:checked + label {
+    background-color:rgb(200, 230, 201);
+}
+</style>
+
+
+
+@if(@Model.question == null)
+    {
+    @Html.ActionLink("Rozpocznij", "Test", new { @questionId = Model.test.getFirstQuestionId(), @accessionNumber = Model.test.accessionNumber }, new { @class = "btn btn-start-test" })
+    }
+    else
+    {
+        <table class="tg">
+            <tr>
+                
+                <th class="tg-lahg" colspan="3">
+                    @ViewBag.Title
+                    <div class="question">
+                        @Model.question.content
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <td class="tg-031e">
+                    @if (Model.test.getNextQuestionId(Model.question.id) != 0)
+                    {
+                        <a href="@Url.Action("Test", "Test", new { @questionId = Model.test.getPreviousQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="prev2"><img src="~/Content/images/left.png" /></a>
+                    }
+                </td>
+                <td>
+                    <table>
+                            @foreach (var ans in @Model.question.Odpowiedzi)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="radioLabel">
+                                            <input type="radio" name="answer[]" value="@ans.id" id="@ans.id" class="test-radio" />
+                                            <label for="@ans.id">@ans.content</label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                    </table>
+
+                </td>
+                <td class="tg-031e">
+                    @if (Model.test.getNextQuestionId(Model.question.id) != 0)
+                    {
+                        <a href="@Url.Action("Test", "Test", new { @questionId = Model.test.getNextQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="next2"><img src="~/Content/images/right.png" /></a>
+                    }
+                </td>
+            </tr>
+        </table>
+    }
