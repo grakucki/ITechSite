@@ -458,10 +458,46 @@ namespace InstrukcjeProdukcyjne
             {
                 if (CurrentWorkstation != null)
                     LoadNews(CurrentWorkstation.Id);
+                DownloadDocIf();
             }
             catch (Exception ex)
             {
             }
+        }
+
+        DateTime DownloadDocNext = DateTime.MinValue;
+        DateTime DownloadDocLast= DateTime.Now;
+        TimeSpan DownloadDocPeriod = new TimeSpan(1, 0, 0, 0);
+        private void DownloadDocIf()
+        {
+                if (DownloadDocNext==DateTime.MinValue)
+                {
+                    // losujemy kiedy ma odbyć się następne downloads
+                    var r = new Random();
+                    var time = new TimeSpan(0, 3, r.Next(59), r.Next(59));
+                    DownloadDocNext = DateTime.Now.Date.Add(DownloadDocPeriod).Add(time);
+
+                    if (DownloadDocPeriod.TotalDays < 1)
+                    {
+                        time = new TimeSpan(0, 0, r.Next(59), r.Next(59));
+                        if (DownloadDocPeriod.TotalHours < 1)
+                            time = new TimeSpan(0, 0, 0, r.Next(59), r.Next(99));
+
+                        DownloadDocNext = DateTime.Now.Add(time);
+                    }
+
+
+                }
+                if (DownloadDocNext<DateTime.Now)
+                {
+                    // ustaw nowy czas
+                    DownloadDocNext=DownloadDocNext.Add(DownloadDocPeriod);
+                    
+                    // pobierz dokumenty
+                    DocSyncDlg.Sync();
+                    //DocSyncDlg.Show(this);
+
+                }
         }
 
         private void button3_Click(object sender, EventArgs e)

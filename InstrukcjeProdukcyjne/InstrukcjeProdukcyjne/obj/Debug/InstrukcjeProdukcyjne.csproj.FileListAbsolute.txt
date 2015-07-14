@@ -77,3 +77,4 @@ D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\ob
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.application
 D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.TestKompetencjiDlg.resources
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.TestKompetencjiDlg.resources
+D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.csprojResolveAssemblyReference.cache

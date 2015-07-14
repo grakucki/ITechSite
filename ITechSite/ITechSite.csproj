@@ -337,6 +337,7 @@
     <Content Include="Areas\Testy\Readme.html" />
     <Content Include="Content\images\end.png" />
     <Content Include="Content\images\left.png" />
+    <Content Include="Content\images\operatorzy.jpg" />
     <Content Include="Content\images\right.png" />
     <Content Include="Content\images\Testy.jpg" />
     <Content Include="Models\sql\2015-06-23.sql" />
