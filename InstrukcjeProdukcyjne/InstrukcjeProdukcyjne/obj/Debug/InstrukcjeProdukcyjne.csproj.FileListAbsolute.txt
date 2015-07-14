@@ -59,7 +59,6 @@ D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bi
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bin\Debug\Interop.WMPLib.dll
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bin\Debug\AxInterop.AcroPDFLib.dll
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bin\Debug\AxInterop.WMPLib.dll
-D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.csprojResolveAssemblyReference.cache
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.AboutBox1.resources
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.DokumentSyncDlg.resources
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.Form1.resources
@@ -77,3 +76,4 @@ D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\ob
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.exe.manifest
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.application
 D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.TestKompetencjiDlg.resources
+D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.TestKompetencjiDlg.resources

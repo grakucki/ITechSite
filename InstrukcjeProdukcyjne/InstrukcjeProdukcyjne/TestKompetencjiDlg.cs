@@ -39,7 +39,11 @@ namespace InstrukcjeProdukcyjne
 
         private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
-          
+            if (e.Url.ToString().IndexOf("/getTestResult?") > 0)
+           {
+               e.Cancel=true;
+               this.Close();
+           }
         }
 
         private void webBrowser1_Navigated(object sender, WebBrowserNavigatedEventArgs e)

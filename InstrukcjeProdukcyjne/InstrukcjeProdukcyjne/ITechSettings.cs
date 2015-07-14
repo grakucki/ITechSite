@@ -34,7 +34,7 @@ namespace InstrukcjeProdukcyjne
         {
             get
             {
-                var s = ServerDoc.ToLower().Replace("/itechservice", "/Testy/test/TestBegin");
+                var s = ServerDoc.ToLower().Replace("/itechservice", "/Testy/test/Test");
                 return s;
             }
         }

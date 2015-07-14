@@ -3,32 +3,34 @@
 @{
     Layout = "~/Areas/Testy/Views/Shared/_TestyNoLayout.cshtml";
     ViewBag.Title = "Koniec testu";
+    ViewBag.TestResColor = "red";
 }
 <div class="content test-end">
     @if (@ViewBag.state == "Zdany")
     {
-        <div style="background-color: green ">
-            <h2>Test zakończony.</h2>
+        ViewBag.TestResColor = "green";
+    }
+    
+        <div style="background-color: @ViewBag.TestResColor ">
+            <h2>Test zakończony wynikiem: <BR />@ViewBag.state</h2>
             <p class="test-score">
-                Twój wynik to @ViewBag.score / @ViewBag.quantity (@ViewBag.state)
+                @if (@ViewBag.state == "Zdany")
+                {
+                    <p>Odpowiedziałeś poprawnie na wszystkie pytania testu (@ViewBag.score /@ViewBag.quantity) </p>
+                }
+                else
+                {
+                    <p>Odpowiedziałeś poprawnie tylko na @ViewBag.score pytania (@ViewBag.score /@ViewBag.quantity) </p>
+                    <p>Aby zdać test należy odpowiedzieć poprawnie na WSZYSTKIE pytania. </p>
+                }
+                
             </p>
         </div>
-    }
-    else
-    {
-        <div style="background-color: red ">
-            <h2>Test zakończony.</h2>
-            <p class="test-score">
-                Twój wynik to @ViewBag.score / @ViewBag.quantity (@ViewBag.state)
-            </p>
-        </div>
-    }
 
     <p>
         @Html.ActionLink("Przeglądaj test", "ViewTest", "Test", new { @accessionNumber = @ViewBag.accessionNumber }, new { @class = "btn btn-action-big" })
         <br />
         <br />
-
         @*@Html.ActionLink("Zakończ", "EndTest", "Test", new { @accessionNumber = @ViewBag.accessionNumber, @EndViewAcction = true }, new { @class = "btn btn-action-big" })*@
         @Html.ActionLink("Zakończ", "getTestResult", "Test", new { @accessionNumber = @ViewBag.accessionNumber, @EndViewAcction = true }, new { @class = "btn btn-action-big" })
     </p>
