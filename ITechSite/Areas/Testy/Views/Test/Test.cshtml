@@ -41,28 +41,27 @@
     }
 
     .radioLabel label {
-        display: inline-block;
-        /*width: 120px;*/
+        display: flex;
         height: 120px;
         padding: 5px 10px;
-        align-items: left;
     }
 
-    .tg-031e{
-        table-layout: fixed;
+    .tg-031e {
         width: 178px;
-        max-width:180px;
+        max-width:178px;
     }
 
-    /*.radioLabel input[type="radio"]:checked + label {
+    .radioLabel input[type="radio"]:checked + label {
         background-color: rgb(200, 230, 201);
-    }*/
-
-    .inner-table table{
-        width: 100%;
     }
 
-    .tg td.inner-table{
+    .inner-table table {
+        width: 100%;
+        
+    }
+
+    .tg td.inner-table {
+
         padding: 0;
     }
 </style>
@@ -92,7 +91,7 @@
                     }
                 </td>
                 <td class="inner-table">
-                    <div>
+                    <table>
                         @foreach (var ans in @Model.question.Odpowiedzi)
                         {
                             <tr>
@@ -104,7 +103,7 @@
                                 </td>
                             </tr>
                         }
-                    </div>
+                    </table>
 
                 </td>
                 <td class="tg-031e">

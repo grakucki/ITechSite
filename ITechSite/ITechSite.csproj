@@ -414,6 +414,7 @@
     <Content Include="Models\sql\2015-06-30_3.sql" />
     <Content Include="Models\sql\2015-06-30_4.sql" />
     <Content Include="Models\sql\2015-06-30_5.sql" />
+    <Content Include="Models\sql\2015-07-14 pytania.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\ITechModel.edmx">
