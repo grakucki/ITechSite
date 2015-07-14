@@ -326,6 +326,9 @@
     <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Areas\Testy\Readme.html" />
+    <Content Include="Content\images\end.png" />
+    <Content Include="Content\images\left.png" />
+    <Content Include="Content\images\right.png" />
     <Content Include="Content\images\Testy.jpg" />
     <Content Include="Models\sql\2015-06-23.sql" />
     <Content Include="Models\sql\2015-07-11.sql" />

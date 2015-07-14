@@ -12,39 +12,53 @@
     }
     else
     {
-    <div class="test">
+    <table class="test">
         @ViewBag.Title
 
-         <div class="question">
-            <p>
-                @Model.question.content
-            </p>
-        </div>
+         <thead class="question">
+            <tr>
+                <th>@Model.question.content</th>
+            </tr>
+        </thead>
     
-        <div class="answers">
-            @foreach (var ans in @Model.question.Odpowiedzi)
-            {
-                <div class="answer">
+        <tbody class="answers">
+            <tr class="answer">
+                @if (Model.test.getPreviousQuestionId(Model.question.id) != 0)
+                {
+                    <td class="submit-left">
+                        <a href="@Url.Action("Test", "Test", new { @questionId = Model.test.getPreviousQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="prev"><img src="~/Content/images/left.png"/></a>
+                    </td>
+                }
+                @foreach (var ans in @Model.question.Odpowiedzi)
+                {
+                    <td style="display: block;">
                     <input type="radio" name="answer[]" value="@ans.id" class="test-radio" />
                     <p>
                         @ans.content
                     </p>
-                </div>
+                        </td>
+                
             }
-        </div>
-    </div>    
-        if(Model.test.getPreviousQuestionId(Model.question.id) != 0)
-        {
-            <a href="@Url.Action("Test", "Test", new{ @questionId = Model.test.getPreviousQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="prev"><i class="fa fa-chevron-left"></i></a>    
-        }
-        if(Model.test.getNextQuestionId(Model.question.id) != 0)
-        {
-            <a href="@Url.Action("Test", "Test", new{ @questionId = Model.test.getNextQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="next"><i class="fa fa-chevron-right"></i></a>
-        }
-        else
-        {
-            <a href="@Url.Action("EndTest", "Test", new{ @accessionNumber = Model.test.accessionNumber })" id="end_test"><i class="fa fa-power-off"></i></a>
-        }
+
+            
+            @if (Model.test.getNextQuestionId(Model.question.id) != 0)
+            {
+                <td class="submit-right">
+                <a href="@Url.Action("Test", "Test", new { @questionId = Model.test.getNextQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="next"><img src="~/Content/images/right.png" /></a>
+                    </td>
+            }
+            else
+            {
+                <td class="submit-right">
+                <a href="@Url.Action("EndTest", "Test", new{ @accessionNumber = Model.test.accessionNumber })" id="end_test"><img src="~/Content/images/end.png" /></a>
+                    </td>
+
+            }
+            </tr>
+        </tbody>
+ 
+        
+        </table>
     }
 </div>
 <script type="text/javascript">
@@ -86,9 +100,9 @@
             }
         });
 
-        $('.answer').click(function () {
-            $(this).find('.test-radio').trigger('change');
-            console.log('click');
+        $('.answer td').not('[name^="submit-"]').click(function () {
+            $(this).find('.test-radio').prop('checked', true);
+            //console.log('click');
         });
     });
 </script>
