@@ -5,91 +5,153 @@
     ViewBag.Title = "Wybierz właściwą odpowiedź";
 }
 
+<style type="text/css">
+    .tg {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border-color: #ccc;
+        margin: 0 auto;
+        width: 95%;
+    }
+
+        .tg td {
+            padding: 11px 12px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #ccc;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .tg th {
+            padding: 11px 12px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #ccc;
+            background-color: #f0f0f0;
+        }
+
+
+    .radioLabel input[name=chb] {
+        display: none; /* comment this line to see the radio buttons */
+    }
+
+    .radioLabel label {
+        display: inline-block;
+        /*width: 120px;*/
+        height: 120px;
+        padding: 5px 10px;
+        align-items: left;
+    }
+
+    .tg-031e{
+        table-layout: fixed;
+        width: 178px;
+        max-width:180px;
+    }
+
+    /*.radioLabel input[type="radio"]:checked + label {
+        background-color: rgb(200, 230, 201);
+    }*/
+
+    .inner-table table{
+        width: 100%;
+    }
+
+    .tg td.inner-table{
+        padding: 0;
+    }
+</style>
+
 <div class="content test-start">
-    @if(@Model.question == null)
+    @if (@Model.question == null)
     {
         @Html.ActionLink("Rozpocznij", "Test", new { @questionId = Model.test.getFirstQuestionId(), @accessionNumber = Model.test.accessionNumber }, new { @class = "btn btn-start-test" })
     }
     else
     {
-    <table class="test">
-        @*@ViewBag.Title*@
-
-         <thead class="question">
+        <table class="tg">
             <tr>
-                <th colspan="3">@Model.question.content</th>
+
+                <th class="tg-lahg" colspan="3">
+                    @ViewBag.Title
+                    <div class="question">
+                        @Model.question.content
+                    </div>
+                </th>
             </tr>
-        </thead>
-    
-        <tbody class="answers">
-            <tr class="answer">
-                <td class="submit-left">
+            <tr>
+                <td class="tg-031e">
                     @if (Model.test.getPreviousQuestionId(Model.question.id) != 0)
                     {
-                        <a href="@Url.Action("Test", "Test", new { @questionId = Model.test.getPreviousQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="prev"><img src="~/Content/images/left.png" /></a>
+                        <a href="@Url.Action("Test", "Test", new { @questionId = Model.test.getPreviousQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="prev2"><img src="~/Content/images/left.png" /></a>
                     }
                 </td>
-                <td>
-                @foreach (var ans in @Model.question.Odpowiedzi)
-                {
-
-                    <div class="answer">
-                        <input type="radio" name="answer[]" value="@ans.id" class="test-radio" />
-                        <p>
-                            @ans.content
-                            <br />
-                        </p>
+                <td class="inner-table">
+                    <div>
+                        @foreach (var ans in @Model.question.Odpowiedzi)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="radioLabel">
+                                        <input type="radio" name="answer[]" value="@ans.id" id="@ans.id" class="test-radio" />
+                                        <label for="@ans.id">@ans.content</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
                     </div>
 
-                }
                 </td>
-                <td class="submit-right">
+                <td class="tg-031e">
                     @if (Model.test.getNextQuestionId(Model.question.id) != 0)
                     {
-                        <a href="@Url.Action("Test", "Test", new { @questionId = Model.test.getNextQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="next"><img src="~/Content/images/right.png" /></a>
+                        <a href="@Url.Action("Test", "Test", new { @questionId = Model.test.getNextQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="next2"><img src="~/Content/images/right.png" /></a>
                     }
                     else
                     {
-                        <a href="@Url.Action("EndTest", "Test", new{ @accessionNumber = Model.test.accessionNumber })" id="end_test"><img src="~/Content/images/end.png" /></a>
+                        <a href="@Url.Action("EndTest", new{ @accessionNumber = Model.test.accessionNumber })" id="end2"><img src="~/Content/images/end.png" /></a>
                     }
                 </td>
             </tr>
-        </tbody>
- 
-        
         </table>
     }
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
+
         @if(@Model.question != null)
         {
             <text>
-                $.ajax({
-                    type: "POST",
-                    url: '/Test/LogTest?questionId=@Model.question.id&testId=@Model.test.id'
-                });
-                $(window).unload(function () {
-                    var data = { "answers[]": [] };
-                    $(":checked").each(function () {
-                        data["answers[]"].push($(this).val());
-                    });
-                    $.ajax({
-                        type: 'post',
-                        async: false,
-                        url: '/Test/LogTest?questionId=@Model.question.id&testId=@Model.test.id',
-                        data: data
-                    });
-                });
-            </text>
+        $.ajax({
+            type: "POST",
+            url: '/Test/LogTest?questionId=@Model.question.id&testId=@Model.test.id'
+        });
+        $(window).bind('beforeunload', function () {
+            var data = { "answers[]": [] };
+            $(":checked").each(function () {
+                data["answers[]"].push($(this).val());
+            });
+            $.ajax({
+                type: 'post',
+                async: false,
+                url: '/Test/LogTest?questionId=@Model.question.id&testId=@Model.test.id',
+                data: data
+            });
+        });
+        </text>
         }
 
         @if(@ViewBag.userAnswer != null)
         {
             <text>
-                $('input[value="@ViewBag.userAnswer"]').attr('checked', 'checked');
-                $('input[value="@ViewBag.userAnswer"]').parent().css('background-color', '#C8E6C9');
-            </text>
+        $('input[value="@ViewBag.userAnswer"]').attr('checked', 'checked');
+        $('input[value="@ViewBag.userAnswer"]').parent().css('background-color', '#C8E6C9');
+        </text>
         }
 
         $('.test-radio').change(function () {

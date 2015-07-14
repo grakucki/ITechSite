@@ -4,61 +4,115 @@
     Layout = "~/Areas/Testy/Views/Shared/_TestyNoLayout.cshtml";
     ViewBag.Title = "Przeglądanie testu";
 }
+<style type="text/css">
+    .tg {
+        border-collapse: collapse;
+        border-spacing: 0;
+        border-color: #ccc;
+        margin: 0 auto;
+        width: 95%;
+    }
 
-
-<div class="test">
-    <h2>@ViewBag.Title</h2>
-    <div class="question">
-        <p>
-            @Model.question.content gdgf
-        </p>
-    </div>
-    <div class="answers">
-        @foreach(var ans in @Model.question.Odpowiedzi)
-        {
-            if(ans.id == ViewBag.userAnswer)
-            {
-                if(ViewBag.isCorrect == true)
-                {
-                    <div class="answer" style="background-color: rgb(200, 230, 201);">
-                        <p>
-                            @ans.content
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <div class="answer" style="background-color: #f06292;">
-                        <p>
-                            @ans.content
-                        </p>
-                    </div>
-                }
-            }
-            else if (ans.id == ViewBag.correctAnswer)
-            {
-                <div class="answer" style="background-color: rgb(200, 230, 201);">
-                    <p>
-                        @ans.content
-                    </p>
-                </div>
-            }
-            else
-            {
-                <div class="answer">
-                    <p>
-                        @ans.content
-                    </p>
-                </div>
-            }
+        .tg td {
+            padding: 11px 12px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #ccc;
+            color: #333;
+            background-color: #fff;
         }
-    </div>
+
+        .tg th {
+            padding: 11px 12px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #ccc;
+            background-color: #f0f0f0;
+        }
+
+    .tg-031e {
+        width: 178px;
+    }
+
+    .inner-table table {
+        width: 100%;
+    }
+
+    .tg td.inner-table {
+        padding: 0;
+    }
+</style>
+<div class="content test-start">
+<table class="tg">
+    <tr>
+
+        <th class="tg-lahg" colspan="3">
+            @ViewBag.Title
+            <div class="question">
+                @Model.question.content
+            </div>
+        </th>
+    </tr>
+    <tr>
+        <td class="tg-031e">
+            @if (Model.test.getPreviousQuestionId(Model.question.id) != 0)
+            {
+                <a href="@Url.Action("ViewTest", "Test", new { @accessionNumber = Model.test.accessionNumber, @questionId = Model.test.getPreviousQuestionId(Model.question.id) })" id="prev2"><img src="~/Content/images/left.png" /></a>
+            }
+        </td>
+        <td class="inner-table">
+            <table>
+                @foreach (var ans in @Model.question.Odpowiedzi)
+                {
+                    if (ans.id == ViewBag.userAnswer)
+                    {
+                        if (ViewBag.isCorrect == true)
+                        {
+                            <tr>
+                                <td style="background-color: rgb(200, 230, 201);">
+                                    @ans.content
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td style="background-color: #f06292;">
+                                    @ans.content
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else if (ans.id == ViewBag.correctAnswer)
+                    {
+                        <tr>
+                            <td style="background-color: rgb(200, 230, 201);">
+                                @ans.content
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>
+                                @ans.content
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+
+        </td>
+        <td class="tg-031e">
+            @if (Model.test.getNextQuestionId(Model.question.id) != 0)
+            {
+                <a href="@Url.Action("ViewTest", "Test", new { @accessionNumber = Model.test.accessionNumber, @questionId = Model.test.getNextQuestionId(Model.question.id) })" id="next2"><img src="~/Content/images/right.png" /></a>
+            }
+        </td>
+    </tr>
+</table>
 </div>
-        @if(Model.test.getPreviousQuestionId(Model.question.id) != 0)
-        {
-            <a href="@Url.Action("ViewTest", "Test", new { @accessionNumber = Model.test.accessionNumber, @questionId = Model.test.getPreviousQuestionId(Model.question.id) })" id="prev"><i class="fa fa-chevron-left"></i></a>
-        }
-        @if(Model.test.getNextQuestionId(Model.question.id) != 0)
-        {
-            <a href="@Url.Action("ViewTest", "Test", new { @accessionNumber = Model.test.accessionNumber, @questionId = Model.test.getNextQuestionId(Model.question.id) })" id="next"><i class="fa fa-chevron-right"></i></a>
-        }
