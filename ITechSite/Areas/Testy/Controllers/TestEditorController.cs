@@ -257,7 +257,7 @@ namespace ITechSite.Areas.Testy.Controllers
 [HttpGet]
         public ActionResult Resources(int? page)
         {
-            var resources = db.Resource.ToList();
+            var resources = db.Resource.Where(m=>m.Type==1 && m.Enabled==true).ToList();
 
             int pageSize = 10;
             int pageNo = (page ?? 1);
