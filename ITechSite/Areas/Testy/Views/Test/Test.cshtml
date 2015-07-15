@@ -69,7 +69,15 @@
 <div class="content test-start">
     @if (@Model.question == null)
     {
-        @Html.ActionLink("Rozpocznij", "Test", new { @questionId = Model.test.getFirstQuestionId(), @accessionNumber = Model.test.accessionNumber }, new { @class = "btn btn-start-test" })
+        <div>
+            <img src="~/Content/images/Header.jpg"/>
+            <h1>Test kompetencji</h1>
+            <p>
+                Jeśli jesteś gotowa(y)
+                @Html.ActionLink("naciśnij mnie", "Test", new { @questionId = Model.test.getFirstQuestionId(), @accessionNumber = Model.test.accessionNumber }, new { @class = "btn btn-start-test" })
+                aby rozpoczą test.
+            </p>
+        </div>
     }
     else
     {
