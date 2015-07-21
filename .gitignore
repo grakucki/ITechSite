@@ -7,3 +7,6 @@ InstrukcjeProdukcyjne/InstrukcjeProdukcyjne/bin/Debug/app.publish/InstrukcjeProd
 ITechService/obj/Debug/ITechService.pdb
 Deploy/ITechSite.zip
 *.suo
+ITechSite/bin/ITechSite.dll
+*.pdb
+ITechSite/bin/ITechSite.dll

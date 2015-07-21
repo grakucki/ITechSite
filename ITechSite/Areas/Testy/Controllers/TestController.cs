@@ -28,73 +28,85 @@ namespace ITechSite.Areas.Testy.Controllers
 
         private TestKompetencji prepareTest(TestKompetencji test, int resourceId, string accessionNumber = null)
         {
-            var allowedCategories = db.AllowedCategories.Where(ac => ac.resourceId == resourceId).ToArray();
-            List<Pytania> questions = new List<Pytania>();
-            if (allowedCategories != null)
-            {
-                for (int i = 0; i < allowedCategories.Length; i++)
-                {
-                    int id = allowedCategories[i].categoryId;
-                    var quests = db.Pytania.Where(q => q.categoryId == id).OrderBy(q => Guid.NewGuid()).ToList();
-                    questions.AddRange(quests);
-                }
-            }
-            string guid;
-            if (accessionNumber == null)
-            {
-                guid = Guid.NewGuid().ToString();
-            }
-            else
-            {
-                guid = accessionNumber;
-            }
             Test sTest = new Test();
-            sTest.accessionNumber = guid;
-            List<TestQuestions> testQuestions = new List<TestQuestions>();
-            List<Pytania> selectedQuestions = new List<Pytania>();
-
-            Random rand = new Random(DateTime.Now.ToString().GetHashCode());
-
-            for (int i = 0; i < Int32.Parse(this.quantity);i++ )
+            int ib = 0;
+            try
             {
-                int idx = rand.Next(0, questions.Count);
-                //TODO GR: Zabezpieczenie przed genrowaniem większej liczby pytań niż dostępna ilość. Test musi się poprawnie generować przy mniejszej liczbie pytań w puli dostępnych (w szczególności gdy w puli =0)
-                
-                if (questions.Count > idx)
+                ib++;
+                var allowedCategories = db.AllowedCategories.Where(ac => ac.resourceId == resourceId).ToArray();
+                List<Pytania> questions = new List<Pytania>();
+                if (allowedCategories != null)
                 {
-                    selectedQuestions.Add(questions[idx]);
-                    questions.RemoveAt(idx);
+                    for (int i = 0; i < allowedCategories.Length; i++)
+                    {
+                        int id = allowedCategories[i].categoryId;
+                        var quests = db.Pytania.Where(q => q.categoryId == id).OrderBy(q => Guid.NewGuid()).ToList();
+                        questions.AddRange(quests);
+                    }
                 }
-            }
+                ib++;
+                string guid;
+                if (accessionNumber == null)
+                {
+                    guid = Guid.NewGuid().ToString();
+                }
+                else
+                {
+                    guid = accessionNumber;
+                }
+                ib++;
+                sTest.accessionNumber = guid;
+                List<TestQuestions> testQuestions = new List<TestQuestions>();
+                List<Pytania> selectedQuestions = new List<Pytania>();
+                ib++;
+                Random rand = new Random(DateTime.Now.ToString().GetHashCode());
+                ib++;
+                for (int i = 0; i < Int32.Parse(this.quantity); i++)
+                {
+                    int idx = rand.Next(0, questions.Count);
+                    //TODO GR: Zabezpieczenie przed genrowaniem większej liczby pytań niż dostępna ilość. Test musi się poprawnie generować przy mniejszej liczbie pytań w puli dostępnych (w szczególności gdy w puli =0)
 
-            foreach (var q in selectedQuestions)
-            {
-                var tQuest = new TestQuestions();
-                tQuest.id = q.id;
-                tQuest.content = q.content;
-                testQuestions.Add(tQuest);
+                    if (questions.Count > idx)
+                    {
+                        selectedQuestions.Add(questions[idx]);
+                        questions.RemoveAt(idx);
+                    }
+                }
+                ib++;
+                foreach (var q in selectedQuestions)
+                {
+                    var tQuest = new TestQuestions();
+                    tQuest.id = q.id;
+                    tQuest.content = q.content;
+                    testQuestions.Add(tQuest);
+                }
+                ib++;
+                sTest.questions = testQuestions.ToArray();
+                test.createdAt = DateTime.Now;
+                test.accessionNumber = guid;
+                ib++;
+                // niezakończony
+                test.stateId = 1;
+                sTest.stateId = 1;
+                ib++;
+                db.TestKompetencji.Add(test);
+                db.SaveChanges();
+                sTest.id = test.id;
+                string xml;
+                XmlSerializer serializer = new XmlSerializer(typeof(Test));
+                using (StringWriter writer = new StringWriter())
+                {
+                    serializer.Serialize(writer, sTest);
+                    xml = writer.ToString();
+                }
+                test.xml = xml;
+                db.SaveChanges();
+                this.test = test;
             }
-            sTest.questions = testQuestions.ToArray();
-            test.createdAt = DateTime.Now;
-            test.accessionNumber = guid;
-            
-            // niezakończony
-            test.stateId = 1;
-            sTest.stateId = 1;
-
-            db.TestKompetencji.Add(test);
-            db.SaveChanges();
-            sTest.id = test.id;
-            string xml;
-            XmlSerializer serializer = new XmlSerializer(typeof(Test));
-            using (StringWriter writer = new StringWriter())
+            catch (Exception ex)
             {
-                serializer.Serialize(writer, sTest);
-                xml = writer.ToString();
+                throw new Exception("Bład nr " + ib.ToString());            
             }
-            test.xml = xml;
-            db.SaveChanges();
-            this.test = test;
             return test;
         }
 
