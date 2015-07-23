@@ -299,6 +299,12 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetDokumentsList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetDokumentsListResponse")]
         System.Threading.Tasks.Task<InstrukcjeProdukcyjne.ServiceWorkstation.DokumentIdentity[]> GetDokumentsListAsync(int idR);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetITechUserList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetITechUserListResponse")]
+        ITechInstrukcjeModel.ItechUsers[] GetITechUserList();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetITechUserList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetITechUserListResponse")]
+        System.Threading.Tasks.Task<ITechInstrukcjeModel.ItechUsers[]> GetITechUserListAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/UpdateWorkstation", ReplyAction="http://tempuri.org/IServiceWorkstation/UpdateWorkstationResponse")]
         void UpdateWorkstation(ITechInstrukcjeModel.Workstation idR);
         
@@ -413,6 +419,14 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         
         public System.Threading.Tasks.Task<InstrukcjeProdukcyjne.ServiceWorkstation.DokumentIdentity[]> GetDokumentsListAsync(int idR) {
             return base.Channel.GetDokumentsListAsync(idR);
+        }
+        
+        public ITechInstrukcjeModel.ItechUsers[] GetITechUserList() {
+            return base.Channel.GetITechUserList();
+        }
+        
+        public System.Threading.Tasks.Task<ITechInstrukcjeModel.ItechUsers[]> GetITechUserListAsync() {
+            return base.Channel.GetITechUserListAsync();
         }
         
         public void UpdateWorkstation(ITechInstrukcjeModel.Workstation idR) {

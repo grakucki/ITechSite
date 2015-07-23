@@ -257,6 +257,7 @@
     </EmbeddedResource>
     <None Include="InstrukcjeProdukcyjne_TemporaryKey.pfx" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\ITechInstrukcjeModel.ItechUsers.datasource" />
     <None Include="Properties\DataSources\ITechInstrukcjeModel.News.datasource" />
     <None Include="Properties\DataSources\ITechInstrukcjeModel.Resource.datasource" />
     <None Include="Properties\DataSources\ITechInstrukcjeModel.Workstation.datasource" />

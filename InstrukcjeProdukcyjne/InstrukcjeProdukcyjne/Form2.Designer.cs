@@ -490,6 +490,7 @@
             this.buttonSterownik.TabIndex = 0;
             this.toolTip1.SetToolTip(this.buttonSterownik, "Sterownik");
             this.buttonSterownik.UseVisualStyleBackColor = false;
+            this.buttonSterownik.Click += new System.EventHandler(this.buttonSterownik_Click);
             // 
             // imageListSterownik
             // 

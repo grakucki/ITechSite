@@ -80,6 +80,8 @@ namespace InstrukcjeProdukcyjne
         {
             LoginForm login = new LoginForm();
             login.Message = message;
+            login.db = db;
+            login.AllowRoles = "pracownik,kierownik";
 
             while (true)
             {
@@ -109,7 +111,7 @@ namespace InstrukcjeProdukcyjne
                 // ładujemy ustawienia aplikacji
                 var s = Settings.Default.Load;
                 db.WorkDir = Settings.Default.App.LocalDoc;
-                toolStripStatusLabel1.Text = Path.GetFullPath(db.WorkDir);
+                toolStripStatusLabel1.Text = "Sitech";// Path.GetFullPath(db.WorkDir);
                 StartupApp.CreateWorkDirektory(db.WorkDir);
 
 
@@ -147,9 +149,6 @@ namespace InstrukcjeProdukcyjne
         }
 
 
-
-
-
         /// <summary>
         /// Załaduj Resource 
         /// Ustaw  Workstation o zadanym idR
@@ -167,7 +166,9 @@ namespace InstrukcjeProdukcyjne
                 {
                     db.Resource_Local = client.GetInformationPlainsList(idR.Value).ToList();
                     db.ExportResources(null);
-
+                    var i = client.GetITechUserList();
+                    db.ItechUsers_Local = i.ToList();
+                    db.ExportItechUsers(null);
                 }
             }
 
@@ -176,6 +177,9 @@ namespace InstrukcjeProdukcyjne
                 // pobieramy z pliku
                 db.ImportResource(null);
             }
+
+            if (db.ItechUsers_Local == null)
+                db.ImportItechUsers(null);
 
             if (idR.HasValue)
                 CurrentWorkstation = db.ResourceWorkstation_Local.Where(m => m.Id == idR.Value).FirstOrDefault();
@@ -497,7 +501,7 @@ namespace InstrukcjeProdukcyjne
                 }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void OnSeverClick()
         {
             try
             {
@@ -517,7 +521,11 @@ namespace InstrukcjeProdukcyjne
             {
                 MessageBox.Show(ex.Message);
             }
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OnSeverClick();
         }
 
         private void buttonCzytnik_Click(object sender, EventArgs e)
@@ -570,6 +578,11 @@ namespace InstrukcjeProdukcyjne
         private void timer2_Tick(object sender, EventArgs e)
         {
             labelTime.Text = DateTime.Now.ToString();
+        }
+
+        private void buttonSterownik_Click(object sender, EventArgs e)
+        {
+
         }
 
 

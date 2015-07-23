@@ -23,10 +23,15 @@ namespace InstrukcjeProdukcyjne
         public String Message { get; set; }
         public string CardReaderFileDat { get; set; }
 
+        public ITechInstrukcjeModel.ITechEntities db = null;
+        public string AllowRoles = string.Empty;
+
         private void LoginForm_Load(object sender, EventArgs e)
         {
 
-
+            User = new SitechUser();
+            label2.Text = ""; 
+            label3.Text = "";
             CardReaderFileDat = "c:/Bedanet/transfer/reader1.dat";
             if (!File.Exists(CardReaderFileDat))
             {
@@ -49,7 +54,7 @@ namespace InstrukcjeProdukcyjne
         {
             if (this.DialogResult == System.Windows.Forms.DialogResult.OK)
             {
-                User = new SitechUser { UserName = "Aleksander Kowalski", NrKarty = "17457458"};
+                
             }
         }
 
@@ -57,7 +62,12 @@ namespace InstrukcjeProdukcyjne
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-           
+            if (this.DialogResult!= System.Windows.Forms.DialogResult.Cancel)
+                if (!User.IsLogin)
+                {
+                    e.Cancel = true;
+                    label3.Text = "Użyj karty!";
+                }
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
@@ -78,7 +88,23 @@ namespace InstrukcjeProdukcyjne
                 System.Threading.Thread.Sleep(200);
                 var f = File.ReadAllLines(CardReaderFileDat);
                 {
-                    label2.Text= string.Join(",", f);
+                    
+                    var cardno =  string.Join(",", f);
+                    label2.Text = cardno;
+
+                    var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.IsInRoles(AllowRoles)).FirstOrDefault();
+                    if (u == null)
+                    {
+                        label3.Text = "brak uprawnień do zalogowania";
+                        User = new SitechUser();
+                    }
+                    else
+                    {
+                        label3.Text = u.UserName;
+                        User = new SitechUser { UserName = u.UserName, NrKarty = cardno, IsLogin = true };
+                        timer1.Enabled = true;
+                    }
+                    
                 }
             }
             catch (Exception ex)
@@ -105,6 +131,18 @@ namespace InstrukcjeProdukcyjne
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            timer1.Enabled = false;
+            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.Close();
         }
 
         

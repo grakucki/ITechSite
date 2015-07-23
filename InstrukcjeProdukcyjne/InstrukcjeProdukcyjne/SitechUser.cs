@@ -10,5 +10,6 @@ namespace InstrukcjeProdukcyjne
     {
         public string UserName { get; set; }
         public string NrKarty { get; set; }
+        public bool IsLogin { get; set; }
     }
 }
