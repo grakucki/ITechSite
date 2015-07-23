@@ -19,7 +19,7 @@ namespace InstrukcjeProdukcyjne
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 ClickOnceHelper.AddShortcutToStartupGroup();
-                Application.Run(new Form1());
+                Application.Run(new Form2());
         }
         
 
