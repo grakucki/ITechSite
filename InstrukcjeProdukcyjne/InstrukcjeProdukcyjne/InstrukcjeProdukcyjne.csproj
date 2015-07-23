@@ -103,7 +103,11 @@
     </Compile>
     <Compile Include="ActionControlStatus.cs" />
     <Compile Include="ClickOneeHelper.cs" />
+    <Compile Include="CornerCurveMode.cs" />
     <Compile Include="CursorWait.cs" />
+    <Compile Include="CustomPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DokumentSyncDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +128,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="IMediaViewer.cs" />
+    <Compile Include="LinearGradientMode.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

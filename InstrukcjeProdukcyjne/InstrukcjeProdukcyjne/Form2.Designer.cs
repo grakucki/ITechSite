@@ -98,7 +98,7 @@
             this.buttonWorkstation.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonWorkstation.Location = new System.Drawing.Point(12, 10);
             this.buttonWorkstation.Name = "buttonWorkstation";
-            this.buttonWorkstation.Size = new System.Drawing.Size(193, 169);
+            this.buttonWorkstation.Size = new System.Drawing.Size(193, 70);
             this.buttonWorkstation.TabIndex = 0;
             this.buttonWorkstation.Text = "Instrukcje stanowiskowe";
             this.buttonWorkstation.UseVisualStyleBackColor = true;
@@ -109,7 +109,7 @@
             this.buttonModel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonModel.Location = new System.Drawing.Point(214, 11);
             this.buttonModel.Name = "buttonModel";
-            this.buttonModel.Size = new System.Drawing.Size(192, 168);
+            this.buttonModel.Size = new System.Drawing.Size(192, 69);
             this.buttonModel.TabIndex = 1;
             this.buttonModel.Text = "Instrukcje modeli produkcyjnych";
             this.buttonModel.UseVisualStyleBackColor = true;
@@ -122,9 +122,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(13, 187);
+            this.listView1.Location = new System.Drawing.Point(271, 187);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(396, 182);
+            this.listView1.Size = new System.Drawing.Size(138, 182);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
