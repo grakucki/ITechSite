@@ -1,6 +1,6 @@
 using System;
 
-namespace CSharpCustomPanelControl
+namespace CustomPanelControl
 {
 	[FlagsAttribute()] public enum CornerCurveMode
 	{

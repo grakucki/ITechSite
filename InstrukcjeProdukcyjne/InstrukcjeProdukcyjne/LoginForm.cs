@@ -29,6 +29,7 @@ namespace InstrukcjeProdukcyjne
         private void LoginForm_Load(object sender, EventArgs e)
         {
 
+            panel3.Visible = false;
             User = new SitechUser();
             label2.Text = ""; 
             label3.Text = "";
@@ -47,6 +48,7 @@ namespace InstrukcjeProdukcyjne
 
             fileSystemWatcher1.Path = Path.GetDirectoryName(CardReaderFileDat);
             fileSystemWatcher1.Filter = Path.GetFileName(CardReaderFileDat);
+            textBoxCarNo.Focus();
             
         }
 
@@ -72,14 +74,42 @@ namespace InstrukcjeProdukcyjne
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-
+            ManualLogin();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ManualLogin()
         {
-            VirtualKeyboard.Show();
+            try
+            {
+                System.Threading.Thread.Sleep(200);
+                var f = File.ReadAllLines(CardReaderFileDat);
+                {
 
+                    var cardno = textBoxCarNo.Text;
+                    var pass = textBoxPass.Text;
+                    label2.Text = cardno;
+
+                    var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password==pass && m.IsInRoles(AllowRoles)).FirstOrDefault();
+                    if (u == null)
+                    {
+                        label3.Text = "Brak uprawnień do zalogowania";
+                        User = new SitechUser();
+                    }
+                    else
+                    {
+                        label3.Text = u.UserName;
+                        User = new SitechUser { UserName = u.UserName, NrKarty = cardno, IsLogin = true };
+                        timer1.Enabled = true;
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
 
         private void ReadCard()
         {
@@ -125,7 +155,8 @@ namespace InstrukcjeProdukcyjne
 
         private void labelMessage_Click(object sender, EventArgs e)
         {
-
+            panel3.Visible = true;
+            textBoxCarNo.Focus();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -143,6 +174,11 @@ namespace InstrukcjeProdukcyjne
             timer1.Enabled = false;
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            VirtualKeyboard.Show();
         }
 
         

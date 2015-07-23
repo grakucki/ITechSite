@@ -47,6 +47,19 @@ namespace InstrukcjeProdukcyjne
             }
         }
 
+        public Resource CurrentModel 
+        {
+            get
+            {
+                return (Resource) ModelBindingSource.Current;
+            }
+            set
+            {
+                int i=ModelBindingSource.IndexOf(value);
+                ModelBindingSource.Position=i;
+            }
+        }
+
 
         private enum FolderType
         {
@@ -68,11 +81,15 @@ namespace InstrukcjeProdukcyjne
                 this.WindowState = FormWindowState.Maximized;
                 this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             }
+
         }
 
         private bool DoLogin(SitechUser user)
         {
+            LoginUser = null;
             LoginUser = user;
+            labelUserName.Text = LoginUser.UserName;
+            labelUserNo.Text = LoginUser.NrKarty;
             return true;
         }
 
@@ -105,6 +122,8 @@ namespace InstrukcjeProdukcyjne
             try
             {
                 // ustawiamy aplikację pełnoekranową
+                this.listView1.Focus();
+                ClearControls();
                 GoFullscreen(true);
                 PrepareListView();
 
@@ -123,14 +142,14 @@ namespace InstrukcjeProdukcyjne
                 // ładujemy resources
                 LoadResource(Settings.Default.App.Stanowisko);
 
-                OnResourceFileListChange(0);
 
                 if (ShowLoginDlg("", true) == System.Windows.Forms.DialogResult.Cancel)
                     this.Close();
 
+                ZaładujPliki(CurrentWorkstation, listView1);
+                ZaładujPliki(CurrentModel, listView2);
 
-                labelUserName.Text = LoginUser.UserName;
-                labelUserNo.Text = LoginUser.NrKarty;
+
             }
             catch (Exception ex)
             {
@@ -141,11 +160,25 @@ namespace InstrukcjeProdukcyjne
             DocSyncDlg.Sync();
         }
 
+        private void ClearControls()
+        {
+            labelUserName.Text = string.Empty;
+            labelUserNo.Text = string.Empty;
+            labelTime.Text = string.Empty;
+            KomunikatLabel.Text = string.Empty;
+
+        }
+        private void PrepareListView(ListView listView)
+        {
+            listView.Columns.Add("Plik", -2, HorizontalAlignment.Left);
+            listView.Columns.Add("Opis", -2, HorizontalAlignment.Left);
+            listView.Columns.Add("Nazwa kodowa", -2, HorizontalAlignment.Left);
+        }
         private void PrepareListView()
         {
-            listView1.Columns.Add("Plik", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("Opis", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("Nazwa kodowa", -2, HorizontalAlignment.Left);
+            PrepareListView(listView1);
+            PrepareListView(listView2);
+            PrepareListView(listView3);
         }
 
 
@@ -198,57 +231,33 @@ namespace InstrukcjeProdukcyjne
 
         }
 
-        private void OnResourceFileListChange(int NewResurceType)
-        {
-            Color cOn = Color.Green;
-            Color cOff = Color.Orange;
-            buttonWorkstation.BackColor = NewResurceType == 1 ? cOn : cOff;
-            buttonModel.BackColor = NewResurceType == 2 ? cOn : cOff;
+        
 
-        }
+       
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // załaduj instrukcje stanowiskowe
-            var x = WorkStationBindingSource.Current;
-            if (x == null)
-                return;
-            Resource xx = (Resource)x;
-            OnResourceFileListChange(xx.Type);
-            ZaładujPliki(xx);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            // załaduj instrukcje Modelu
-            OnModelChanged();
-        }
+       
 
         private void OnModelChanged()
         {
             var x = ModelBindingSource.Current;
             if (x == null)
             {
-                OnResourceFileListChange(-1);
-                ZaładujPliki(null);
+                ZaładujPliki(null, listView2);
                 return;
             }
 
             Resource NewModel = (Resource)x;
-            OnResourceFileListChange(NewModel.Type);
-            ZaładujPliki(NewModel);
+            ZaładujPliki(NewModel, listView2);
         }
 
         private void OnModelChanged(Resource newModel)
         {
             if (newModel == null)
             {
-                OnResourceFileListChange(-1);
-                ZaładujPliki(null);
+                ZaładujPliki(null, listView2);
                 return;
             }
-            OnResourceFileListChange(newModel.Type);
-            ZaładujPliki(newModel);
+            ZaładujPliki(newModel, listView2);
         }
 
         private string GetFullPath(FolderType folderType, string DetalName)
@@ -287,32 +296,34 @@ namespace InstrukcjeProdukcyjne
         //}
 
 
-        private void ZaładujPliki(Resource res)
+        private void ZaładujPliki(Resource res, ListView listView)
         {
-            listView1.Items.Clear();
+            listView.Items.Clear();
             if (res == null)
                 return;
-
+            listView1.BeginUpdate();
             var IP = res.InformationPlan;
             foreach (var item in IP)
             {
                 if (item.Dokument != null)
                 {
                     var d = new MyFileInfo { FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Tag = item.Dokument };
-                    var i = listView1.Items.Add(d.FullFileName, d.FileName, d.ExtensionIndex);
-                    i.SubItems.Add(item.Dokument.Description);
+                    var s = string.IsNullOrEmpty(item.Dokument.Description) ? item.Dokument.FileName : item.Dokument.Description;
+                    var i = listView.Items.Add(d.FullFileName, s, d.ExtensionIndex);
                     i.SubItems.Add(item.Dokument.CodeName);
                     i.Tag = d;
                 }
             }
+            listView1.EndUpdate();
         }
 
-        private void listView1_DoubleClick(object sender, EventArgs e)
+        private void listView2_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-
+            listView_MouseDoubleClick(sender, e);
         }
 
-        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+
+        private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             try
             {
@@ -324,7 +335,8 @@ namespace InstrukcjeProdukcyjne
                     if (mfi != null)
                     {
                         if (File.Exists(mfi.FullFileName))
-                            mediaViewerControl1.ShowDokument(mfi.FullFileName);
+                            //mediaViewerControl1.ShowDokument(mfi.FullFileName);
+                            OnDokumentShow(mfi);
                         else
                             MessageBox.Show("Nie odnaleziono pliku." + mfi.FileName);
                     }
@@ -335,6 +347,17 @@ namespace InstrukcjeProdukcyjne
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            listView_MouseDoubleClick(sender, e);
+        }
+
+        private void OnDokumentShow(MyFileInfo file)
+        {
+            MessageBox.Show(file.FileName);
+
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -349,16 +372,24 @@ namespace InstrukcjeProdukcyjne
 
         private void button1_Click_1(object sender, EventArgs e)
         {
+            ShowMyMenu(sender, e);
+        }
+
+        private void ShowMyMenu(object sender, EventArgs e)
+        {
             Control c = (Control)sender;
             contextMenuStrip1.Show(c, 0, c.Size.Height);
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void LogOut()
         {
             ShowLoginDlg("Użyj kart aby odblokować", false);
             LoadResource(Properties.Settings.Default.App.Stanowisko);
             DocSyncDlg.Sync();
-
+        }
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            LogOut();
         }
 
         private void ShowSettings()
@@ -585,13 +616,33 @@ namespace InstrukcjeProdukcyjne
 
         }
 
+        private void label1_Click(object sender, EventArgs e)
+        {
+            ShowMyMenu(sender, e);
+        }
 
 
+        private void panel3_Click(object sender, EventArgs e)
+        {
+            ShowMyMenu(sender, e);
+        }
 
+        private void label2_Click(object sender, EventArgs e)
+        {
+            ShowMyMenu(sender, e);
+        }
 
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            LogOut();
+        }
 
+        private void label6_Click(object sender, EventArgs e)
+        {
 
+        }
 
+    
 
 
     }

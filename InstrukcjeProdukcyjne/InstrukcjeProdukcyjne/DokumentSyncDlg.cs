@@ -127,7 +127,8 @@ namespace InstrukcjeProdukcyjne
             }
             catch (Exception ex)
             {
-                backgroundWorker1.ReportProgress(0, new ProgressState("Błąd " + ex.Message, true));
+                if (!this.IsDisposed)
+                    backgroundWorker1.ReportProgress(0, new ProgressState("Błąd " + ex.Message, true));
             }
 
         }

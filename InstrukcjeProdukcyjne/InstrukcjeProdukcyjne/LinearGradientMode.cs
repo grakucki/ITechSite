@@ -1,5 +1,5 @@
 using System;
-namespace CSharpCustomPanelControl
+namespace CustomPanelControl
 {
 	public enum LinearGradientMode
 	{

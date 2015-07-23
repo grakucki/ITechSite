@@ -1,17 +1,17 @@
-namespace CSharpCustomPanelControl
+namespace CustomPanelControl
 {
 
 	[System.Drawing.ToolboxBitmapAttribute(typeof(System.Windows.Forms.Panel))]
 	public class CustomPanel : System.Windows.Forms.Panel
 	{
-		// Fields
-		private System.Drawing.Color _BackColour1 = System.Drawing.SystemColors.Window;
-		private System.Drawing.Color _BackColour2 = System.Drawing.SystemColors.Window;
-		private LinearGradientMode _GradientMode = LinearGradientMode.None;
-		private System.Windows.Forms.BorderStyle _BorderStyle = System.Windows.Forms.BorderStyle.None;
+        // Fields 0; 192; 192
+        private System.Drawing.Color _BackColour1 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+		private System.Drawing.Color _BackColour2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+		private LinearGradientMode _GradientMode = LinearGradientMode.Vertical; 
+		private System.Windows.Forms.BorderStyle _BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 		private System.Drawing.Color _BorderColour = System.Drawing.SystemColors.WindowFrame;
-		private int _BorderWidth = 1;
-		private int _Curvature = 0;
+		private int _BorderWidth = 3;
+		private int _Curvature = 10;
 		// Properties
 		//   Shadow the Backcolor property so that the base class will still render with a transparent backcolor
 		private CornerCurveMode _CurveMode = CornerCurveMode.All;

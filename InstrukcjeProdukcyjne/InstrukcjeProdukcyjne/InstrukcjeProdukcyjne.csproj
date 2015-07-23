@@ -201,6 +201,12 @@
     <Compile Include="TestKompetencjiDlg.Designer.cs">
       <DependentUpon>TestKompetencjiDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="TransparentComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TransparentComboBox.Designer.cs">
+      <DependentUpon>TransparentComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="VideoViewerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -210,6 +216,9 @@
     <Compile Include="VirtualKeyboard.cs" />
     <EmbeddedResource Include="AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomPanel.resx">
+      <DependentUpon>CustomPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DokumentSyncDlg.resx">
       <DependentUpon>DokumentSyncDlg.cs</DependentUpon>
