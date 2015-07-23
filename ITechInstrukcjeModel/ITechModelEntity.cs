@@ -38,6 +38,37 @@ namespace ITechInstrukcjeModel
         }
     }
 
+     public partial class ItechUsers
+     {
+         /// czy należy to tej jednej konkretnej roli
+         public bool IsInRole(string rolename)
+         {
+             return this.AspNetRoles.Any(m => m.Name == rolename);
+         }
+
+         /// czy należy jednej z podanych ról
+         public bool IsInRoles(string[] rolenames)
+         {
+             foreach (var rolename in rolenames)
+             {
+                 if (this.AspNetRoles.Any(m => m.Name == rolename)==true)
+                    return true;
+             }
+
+             return false;
+         }
+
+         /// czy należy jednej z podanych ról
+         /// role należy podawać po przecinku
+         public bool IsInRoles(string rolenames)
+         {
+             char[] stringSeparators = new char[] { ',' };
+             var r = rolenames.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+             return IsInRoles(r);
+         }
+
+     }
+
 
 
     //public partial class Dokument

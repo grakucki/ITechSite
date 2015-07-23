@@ -13,18 +13,17 @@ namespace ITechInstrukcjeModel
     using System.Collections.Generic;
     using System.Runtime.Serialization;
     
-    public partial class Workstation
+    public partial class AspNetRoles
     {
-        public int Id { get; set; }
-        public int idR { get; set; }
-        public string WorkstationGroup { get; set; }
-        public string Factory { get; set; }
-        public string Area { get; set; }
-        public string Sterownik_Ip { get; set; }
-        public string Sterownik_Model { get; set; }
-        public Nullable<int> Setrownik_DB { get; set; }
-        public string AllowIp { get; set; }
+        public AspNetRoles()
+        {
+            this.ItechUsers = new HashSet<ItechUsers>();
+        }
+    
+        public string Id { get; set; }
+        public string Name { get; set; }
+    
         [IgnoreDataMember]
-        public virtual Resource Resource { get; set; }
+        public virtual ICollection<ItechUsers> ItechUsers { get; set; }
     }
 }
