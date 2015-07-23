@@ -37,7 +37,6 @@ namespace InstrukcjeProdukcyjne
 
         public void Sync()
         {
-
             if (!backgroundWorker1.IsBusy)
             {
                 textBoxLog.Clear();

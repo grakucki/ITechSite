@@ -117,10 +117,21 @@ namespace InstrukcjeProdukcyjne
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
+            var waitDlg = new WaitDlg();
+            waitDlg.Show(this);
+            Application.DoEvents();
             try
             {
+                var t1=DateTime.Now.AddSeconds(5);
+                var t2 = DateTime.Now;
+                while(t2<t1)
+                {
+                    Application.DoEvents();
+                    t2 = DateTime.Now;
+                }
+
                 // ustawiamy aplikację pełnoekranową
                 this.listView1.Focus();
                 ClearControls();
@@ -135,24 +146,29 @@ namespace InstrukcjeProdukcyjne
 
 
                 Application.DoEvents();
-
                 if (Settings.Default.App.Stanowisko.Value == 0)
+                {
+                    waitDlg.Hide();
                     ShowSettings();
-
+                    waitDlg.Show();
+                }
                 // ładujemy resources
-                LoadResource(Settings.Default.App.Stanowisko);
+                //LoadResource(Settings.Default.App.Stanowisko);
+                await LoadResource_Async(Settings.Default.App.Stanowisko);
 
 
+                waitDlg.Hide();
                 if (ShowLoginDlg("", true) == System.Windows.Forms.DialogResult.Cancel)
                     this.Close();
+                waitDlg.Show();
 
-                ZaładujPliki(CurrentWorkstation, listView1);
-                ZaładujPliki(CurrentModel, listView2);
+                ZaładujPliki();
 
-
+                waitDlg.Close();
             }
             catch (Exception ex)
             {
+                waitDlg.Close();
                 MessageBox.Show(ex.Message);
             }
             timer1.Enabled = true;
@@ -182,6 +198,41 @@ namespace InstrukcjeProdukcyjne
         }
 
 
+        async Task LoadResource_Async(int? idR)
+        {
+            if (!idR.HasValue)
+                return;
+
+            using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+            {
+                if (client.IsOnLine())
+                {
+                    var t = await client.GetInformationPlainsListAsync(idR.Value);
+                    db.Resource_Local = t.ToList();
+                    db.ExportResources(null);
+                    var i = await client.GetITechUserListAsync();
+                    db.ItechUsers_Local = i.ToList();
+                    db.ExportItechUsers(null);
+                }
+            }
+
+            if (db.Resource_Local == null)
+            {
+                // pobieramy z pliku
+                db.ImportResource(null);
+            }
+
+            if (db.ItechUsers_Local == null)
+                db.ImportItechUsers(null);
+
+            if (idR.HasValue)
+                CurrentWorkstation = db.ResourceWorkstation_Local.Where(m => m.Id == idR.Value).FirstOrDefault();
+            else
+                CurrentWorkstation = null;
+
+            ZaładujElementy(CurrentWorkstation);
+        }
+
         /// <summary>
         /// Załaduj Resource 
         /// Ustaw  Workstation o zadanym idR
@@ -197,7 +248,7 @@ namespace InstrukcjeProdukcyjne
             {
                 if (client.IsOnLine())
                 {
-                    db.Resource_Local = client.GetInformationPlainsList(idR.Value).ToList();
+                    db.Resource_Local =  client.GetInformationPlainsList(idR.Value).ToList();
                     db.ExportResources(null);
                     var i = client.GetITechUserList();
                     db.ItechUsers_Local = i.ToList();
@@ -230,10 +281,6 @@ namespace InstrukcjeProdukcyjne
             ModelBindingSource.DataSource = data;
 
         }
-
-        
-
-       
 
        
 
@@ -272,7 +319,11 @@ namespace InstrukcjeProdukcyjne
             return Path.Combine(path, DetalName);
         }
 
-
+        private void ZaładujPliki()
+        {
+            ZaładujPliki(CurrentWorkstation, listView1);
+            ZaładujPliki(CurrentModel, listView2);
+        }
  
 
 
@@ -370,24 +421,40 @@ namespace InstrukcjeProdukcyjne
             contextMenuStrip1.Show(c, 0, c.Size.Height);
         }
 
-        private void LogOut()
+        private async void LogOut()
         {
-            ShowLoginDlg("Użyj kart aby odblokować", false);
-            LoadResource(Properties.Settings.Default.App.Stanowisko);
-            DocSyncDlg.Sync();
+            try
+            {
+                ShowLoginDlg("Użyj kart aby odblokować", false);
+                Application.DoEvents();
+                using (var dial = new WaitDlg())
+                {
+                    dial.Show();
+                    await LoadResource_Async(Properties.Settings.Default.App.Stanowisko);
+                    DocSyncDlg.Sync();
+                }
+
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             LogOut();
         }
 
-        private void ShowSettings()
+        private async void ShowSettings()
         {
             try
             {
                 var dial = new SettingsDlg();
                 if (dial.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                    LoadResource(Properties.Settings.Default.App.Stanowisko);
+                {
+                    await LoadResource_Async(Properties.Settings.Default.App.Stanowisko);
+                }
             }
             catch (Exception ex)
             {
