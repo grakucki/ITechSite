@@ -23,13 +23,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://10.48.120.49/app/</InstallUrl>
+    <InstallUrl>http://www.insofter.pl/itech/app/</InstallUrl>
     <ProductName>InstrukcjeProdukcyjne</ProductName>
     <PublisherName>Insofter</PublisherName>
     <SuiteName>Sitech</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>install.html</WebPage>
-    <ApplicationRevision>26</ApplicationRevision>
+    <ApplicationRevision>29</ApplicationRevision>
     <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -107,6 +107,12 @@
     <Compile Include="CursorWait.cs" />
     <Compile Include="CustomPanel.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DokumentShowDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DokumentShowDlg.Designer.cs">
+      <DependentUpon>DokumentShowDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="DokumentSyncDlg.cs">
       <SubType>Form</SubType>
@@ -219,6 +225,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomPanel.resx">
       <DependentUpon>CustomPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DokumentShowDlg.resx">
+      <DependentUpon>DokumentShowDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DokumentSyncDlg.resx">
       <DependentUpon>DokumentSyncDlg.cs</DependentUpon>

@@ -119,7 +119,7 @@
             this.listView1.LargeImageList = this.imageList1;
             this.listView1.Location = new System.Drawing.Point(5, 49);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(352, 380);
+            this.listView1.Size = new System.Drawing.Size(352, 394);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 1;
             this.listView1.TileSize = new System.Drawing.Size(503, 90);
@@ -175,7 +175,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1116, 142);
+            this.panel1.Size = new System.Drawing.Size(1116, 128);
             this.panel1.TabIndex = 5;
             // 
             // tableLayoutPanel3
@@ -560,7 +560,7 @@
             this.customPanel2.Name = "customPanel2";
             this.customPanel2.Padding = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel2.SetRowSpan(this.customPanel2, 2);
-            this.customPanel2.Size = new System.Drawing.Size(362, 434);
+            this.customPanel2.Size = new System.Drawing.Size(362, 448);
             this.customPanel2.TabIndex = 0;
             // 
             // customPanel8
@@ -613,12 +613,12 @@
             this.tableLayoutPanel2.Controls.Add(this.customPanel2, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.customPanel5, 2, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 152);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(10, 138);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1116, 440);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1116, 454);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // customPanel4
@@ -637,7 +637,7 @@
             this.customPanel4.Location = new System.Drawing.Point(739, 3);
             this.customPanel4.Name = "customPanel4";
             this.customPanel4.Padding = new System.Windows.Forms.Padding(5);
-            this.customPanel4.Size = new System.Drawing.Size(374, 385);
+            this.customPanel4.Size = new System.Drawing.Size(374, 399);
             this.customPanel4.TabIndex = 11;
             // 
             // listView3
@@ -649,7 +649,7 @@
             this.listView3.LargeImageList = this.imageList1;
             this.listView3.Location = new System.Drawing.Point(5, 49);
             this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(364, 331);
+            this.listView3.Size = new System.Drawing.Size(364, 345);
             this.listView3.SmallImageList = this.imageList1;
             this.listView3.TabIndex = 0;
             this.listView3.TileSize = new System.Drawing.Size(503, 90);
@@ -700,7 +700,7 @@
             this.customPanel3.Name = "customPanel3";
             this.customPanel3.Padding = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel2.SetRowSpan(this.customPanel3, 2);
-            this.customPanel3.Size = new System.Drawing.Size(362, 434);
+            this.customPanel3.Size = new System.Drawing.Size(362, 448);
             this.customPanel3.TabIndex = 10;
             // 
             // listView2
@@ -712,7 +712,7 @@
             this.listView2.LargeImageList = this.imageList1;
             this.listView2.Location = new System.Drawing.Point(5, 49);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(352, 380);
+            this.listView2.Size = new System.Drawing.Size(352, 394);
             this.listView2.SmallImageList = this.imageList1;
             this.listView2.TabIndex = 0;
             this.listView2.TileSize = new System.Drawing.Size(503, 90);
@@ -758,7 +758,7 @@
             this.customPanel5.Curvature = 10;
             this.customPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customPanel5.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
-            this.customPanel5.Location = new System.Drawing.Point(739, 394);
+            this.customPanel5.Location = new System.Drawing.Point(739, 408);
             this.customPanel5.Name = "customPanel5";
             this.customPanel5.Size = new System.Drawing.Size(374, 43);
             this.customPanel5.TabIndex = 12;

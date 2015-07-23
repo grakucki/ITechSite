@@ -273,27 +273,7 @@ namespace InstrukcjeProdukcyjne
         }
 
 
-        //private string[] GetFiles(string folderName)
-        //{
-        //    string dir = Path.Combine(Path.GetFullPath(DataDir), folderName);
-        //    return Directory.GetFiles(dir);
-        //}
-
-        //private List<MyFileInfo> _FileList = new List<MyFileInfo>();
-
-        //private void ZaładujPliki(FolderType folderType, string detalName)
-        //{
-        //    string folderName = GetFullPath(folderType, detalName);
-        //    //MessageBox.Show(GetFullPath(folderType, detalName));
-        //    listView1.Items.Clear();
-        //    string[] data = GetFiles(folderName);
-        //    foreach (var item in data)
-        //    {
-        //        var d = new MyFileInfo { FileName = Path.GetFileName(item), FullFileName = item };
-        //        var i=listView1.Items.Add(d.FullFileName, d.FileName, d.ExtensionIndex);
-        //        i.Tag = d;
-        //    }
-        //}
+ 
 
 
         private void ZaładujPliki(Resource res, ListView listView)
@@ -307,7 +287,7 @@ namespace InstrukcjeProdukcyjne
             {
                 if (item.Dokument != null)
                 {
-                    var d = new MyFileInfo { FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Tag = item.Dokument };
+                    var d = new MyFileInfo { FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Dok = item.Dokument };
                     var s = string.IsNullOrEmpty(item.Dokument.Description) ? item.Dokument.FileName : item.Dokument.Description;
                     var i = listView.Items.Add(d.FullFileName, s, d.ExtensionIndex);
                     i.SubItems.Add(item.Dokument.CodeName);
@@ -356,7 +336,16 @@ namespace InstrukcjeProdukcyjne
 
         private void OnDokumentShow(MyFileInfo file)
         {
-            MessageBox.Show(file.FileName);
+            try
+            {
+                var dial = new DokumentShowDlg(file, LoginUser);
+                dial.ShowDialog();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 

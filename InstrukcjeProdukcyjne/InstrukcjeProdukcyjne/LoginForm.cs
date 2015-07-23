@@ -34,6 +34,12 @@ namespace InstrukcjeProdukcyjne
             label2.Text = ""; 
             label3.Text = "";
             CardReaderFileDat = "c:/Bedanet/transfer/reader1.dat";
+
+            if (!Directory.Exists(Path.GetFileName(CardReaderFileDat)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(CardReaderFileDat));
+            }
+
             if (!File.Exists(CardReaderFileDat))
             {
                 using (var x = File.CreateText(CardReaderFileDat))
@@ -44,7 +50,8 @@ namespace InstrukcjeProdukcyjne
             }
 
             if (!string.IsNullOrEmpty(Message))
-                labelMessage.Text = Message;
+                label1.Text = Message;
+                //labelMessage.Text = Message;
 
             fileSystemWatcher1.Path = Path.GetDirectoryName(CardReaderFileDat);
             fileSystemWatcher1.Filter = Path.GetFileName(CardReaderFileDat);

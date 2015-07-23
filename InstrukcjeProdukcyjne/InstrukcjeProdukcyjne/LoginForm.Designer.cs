@@ -60,7 +60,7 @@
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.pictureBox1.Image = global::InstrukcjeProdukcyjne.Properties.Resources.Logo;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 233);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 312);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1170, 146);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -71,7 +71,7 @@
             // 
             this.labelMessage.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelMessage.Font = new System.Drawing.Font("Segoe Print", 72F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelMessage.Location = new System.Drawing.Point(233, 49);
+            this.labelMessage.Location = new System.Drawing.Point(233, 143);
             this.labelMessage.Name = "labelMessage";
             this.labelMessage.Size = new System.Drawing.Size(753, 165);
             this.labelMessage.TabIndex = 3;
@@ -93,25 +93,25 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.labelMessage);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1170, 233);
+            this.panel1.Size = new System.Drawing.Size(1170, 312);
             this.panel1.TabIndex = 12;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.buttonCancel);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.label1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 379);
+            this.panel2.Location = new System.Drawing.Point(0, 458);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1170, 456);
+            this.panel2.Size = new System.Drawing.Size(1170, 377);
             this.panel2.TabIndex = 13;
             // 
             // panel3
@@ -129,7 +129,7 @@
             this.panel3.Controls.Add(this.buttonOk);
             this.panel3.Curvature = 10;
             this.panel3.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
-            this.panel3.Location = new System.Drawing.Point(282, 344);
+            this.panel3.Location = new System.Drawing.Point(316, 55);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(627, 113);
             this.panel3.TabIndex = 0;
@@ -206,7 +206,7 @@
             this.buttonCancel.FlatAppearance.BorderSize = 0;
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonCancel.Location = new System.Drawing.Point(938, 280);
+            this.buttonCancel.Location = new System.Drawing.Point(936, 230);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(113, 69);
             this.buttonCancel.TabIndex = 7;
@@ -219,7 +219,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label3.ForeColor = System.Drawing.Color.DarkRed;
-            this.label3.Location = new System.Drawing.Point(194, 315);
+            this.label3.Location = new System.Drawing.Point(201, 274);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 25);
             this.label3.TabIndex = 6;
@@ -230,7 +230,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(194, 280);
+            this.label2.Location = new System.Drawing.Point(201, 239);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 25);
             this.label2.TabIndex = 5;
@@ -240,7 +240,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.Font = new System.Drawing.Font("Segoe Print", 48F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(139, 32);
+            this.label1.Location = new System.Drawing.Point(146, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(930, 245);
             this.label1.TabIndex = 4;
