@@ -256,6 +256,7 @@
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ItechModelEx\Dokument.cs" />
+    <Compile Include="Models\ItechModelEx\InformationPlan.cs" />
     <Compile Include="Models\ItechModelEx\News.cs" />
     <Compile Include="Models\ItechModelEx\Resource.cs" />
     <Compile Include="Models\ItechModelEx\WorkProcess.cs" />
