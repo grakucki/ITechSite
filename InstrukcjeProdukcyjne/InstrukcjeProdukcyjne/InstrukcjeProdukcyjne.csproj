@@ -29,7 +29,7 @@
     <SuiteName>Sitech</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>install.html</WebPage>
-    <ApplicationRevision>29</ApplicationRevision>
+    <ApplicationRevision>30</ApplicationRevision>
     <ApplicationVersion>1.2.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -346,6 +346,8 @@
     <Content Include="image\avi.bmp" />
     <Content Include="image\jpg.bmp" />
     <Content Include="image\Logo.png" />
+    <None Include="image\schemat bitmap dla PDF.png" />
+    <None Include="image\szablon podziału klatek z PLAY.png" />
     <Content Include="image\wmv.bmp" />
     <Content Include="image\pdf.bmp" />
     <Content Include="image\Image1.bmp" />
