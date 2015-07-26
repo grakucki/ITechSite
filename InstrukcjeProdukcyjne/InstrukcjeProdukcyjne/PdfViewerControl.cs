@@ -46,6 +46,8 @@ namespace InstrukcjeProdukcyjne
             OnInitButton(button6);
             OnInitButton(button7);
             OnInitButton(button8);
+            OnInitButton(button10);
+            OnInitButton(button11);
         }
 
         private void OnInitButton(Button b)
@@ -89,42 +91,45 @@ namespace InstrukcjeProdukcyjne
             MessageBox.Show("Pdf Error");
         }
 
+        float _Zoom = 100;
         private void button1_Click(object sender, EventArgs e)
         {
-            Button b = (Button)sender;
-            MessageBox.Show("Action : " + b.Name);
+            // Powiększ
+            _Zoom = Math.Min(_Zoom+20,500);
+            axAcroPDF1.setZoom(_Zoom);
         }
 
+        
         private void button2_Click(object sender, EventArgs e)
         {
-            Button b = (Button)sender;
-            MessageBox.Show("Action : " + b.Name);
+            // pomniejsz
+            _Zoom = Math.Max(_Zoom - 20,20);
+            axAcroPDF1.setZoom(_Zoom);
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Button b = (Button)sender;
-            MessageBox.Show("Action : " + b.Name);
-
+            // strona w dół
+            axAcroPDF1.gotoNextPage();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Button b = (Button)sender;
-            MessageBox.Show("Action : " + b.Name);
-
+            // strona w górę
+            axAcroPDF1.gotoPreviousPage();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            // w górę
             Button b = (Button)sender;
             MessageBox.Show("Action : " + b.Name);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            // w lewo
             Button b = (Button)sender;
             MessageBox.Show("Action : " + b.Name);
 
@@ -132,17 +137,31 @@ namespace InstrukcjeProdukcyjne
 
         private void button7_Click(object sender, EventArgs e)
         {
-
+            // w prawo
             Button b = (Button)sender;
             MessageBox.Show("Action : " + b.Name);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
+            // w dół
             Button b = (Button)sender;
             MessageBox.Show("Action : " + b.Name);
-
         }
+
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            // Cała strona
+            axAcroPDF1.setView("Fit");
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            // Szerokośc strony
+            axAcroPDF1.setView("FitH");
+        }
+
 
         private void CloseOwnerForm()
         {
@@ -162,5 +181,7 @@ namespace InstrukcjeProdukcyjne
         {
             CloseOwnerForm();
         }
+
+       
     }
 }

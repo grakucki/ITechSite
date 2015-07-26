@@ -44,6 +44,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();
             this.customPanel2.SuspendLayout();
             this.customPanel5.SuspendLayout();
@@ -116,6 +118,8 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackgroundImage = global::InstrukcjeProdukcyjne.Properties.Resources.schemat_bitmap_dla_PDF;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panel1.Controls.Add(this.button10);
+            this.panel1.Controls.Add(this.button11);
             this.panel1.Controls.Add(this.button8);
             this.panel1.Controls.Add(this.button7);
             this.panel1.Controls.Add(this.button6);
@@ -136,7 +140,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(103, 111);
             this.button8.TabIndex = 7;
-            this.button8.Text = "button8";
+            this.button8.Text = "Przesuń w dół";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -147,7 +151,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(103, 111);
             this.button7.TabIndex = 6;
-            this.button7.Text = "button7";
+            this.button7.Text = "Przesuń w prawo";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -158,7 +162,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(103, 111);
             this.button6.TabIndex = 5;
-            this.button6.Text = "button6";
+            this.button6.Text = "Przesuń w lewo";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -169,7 +173,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(103, 111);
             this.button5.TabIndex = 4;
-            this.button5.Text = "button5";
+            this.button5.Text = "Przesuń do góry";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -180,7 +184,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(103, 111);
             this.button4.TabIndex = 3;
-            this.button4.Text = "button4";
+            this.button4.Text = "Poprzednia strona";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -191,7 +195,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(103, 111);
             this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
+            this.button3.Text = "Następna strona";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -202,7 +206,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(103, 111);
             this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
+            this.button2.Text = "Zmniejsz";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -215,9 +219,33 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(103, 111);
             this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
+            this.button1.Text = "Zwiększ";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button10
+            // 
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Location = new System.Drawing.Point(3, 113);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(103, 111);
+            this.button10.TabIndex = 9;
+            this.button10.Text = "Szerokość strony";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button11
+            // 
+            this.button11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button11.Location = new System.Drawing.Point(3, 3);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(103, 111);
+            this.button11.TabIndex = 8;
+            this.button11.Text = "Cała strona";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // PdfViewerControl
             // 
@@ -252,6 +280,8 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private CustomPanelControl.CustomPanel customPanel5;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button11;
 
     }
 }
