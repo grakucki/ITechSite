@@ -32,10 +32,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PdfViewerControl));
             this.axAcroPDF1 = new AxAcroPDFLib.AxAcroPDF();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.customPanel2 = new CustomPanelControl.CustomPanel();
             this.customPanel5 = new CustomPanelControl.CustomPanel();
             this.button9 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button11 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
@@ -44,8 +47,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.axAcroPDF1)).BeginInit();
             this.customPanel2.SuspendLayout();
             this.customPanel5.SuspendLayout();
@@ -62,6 +63,11 @@
             this.axAcroPDF1.Size = new System.Drawing.Size(426, 767);
             this.axAcroPDF1.TabIndex = 1;
             this.axAcroPDF1.OnError += new System.EventHandler(this.axAcroPDF1_OnError);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 50;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // customPanel2
             // 
@@ -133,6 +139,30 @@
             this.panel1.Size = new System.Drawing.Size(321, 667);
             this.panel1.TabIndex = 3;
             // 
+            // button10
+            // 
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Location = new System.Drawing.Point(3, 113);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(103, 111);
+            this.button10.TabIndex = 9;
+            this.button10.Text = "Szerokość strony";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // button11
+            // 
+            this.button11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button11.Location = new System.Drawing.Point(3, 3);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(103, 111);
+            this.button11.TabIndex = 8;
+            this.button11.Text = "Cała strona";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // button8
             // 
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -176,6 +206,8 @@
             this.button5.Text = "Przesuń do góry";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button5_MouseDown);
+            this.button5.MouseUp += new System.Windows.Forms.MouseEventHandler(this.button5_MouseUp);
             // 
             // button4
             // 
@@ -223,30 +255,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button10
-            // 
-            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(3, 113);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(103, 111);
-            this.button10.TabIndex = 9;
-            this.button10.Text = "Szerokość strony";
-            this.button10.UseVisualStyleBackColor = true;
-            this.button10.Click += new System.EventHandler(this.button10_Click);
-            // 
-            // button11
-            // 
-            this.button11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Location = new System.Drawing.Point(3, 3);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(103, 111);
-            this.button11.TabIndex = 8;
-            this.button11.Text = "Cała strona";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
-            // 
             // PdfViewerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,6 +290,7 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Timer timer1;
 
     }
 }

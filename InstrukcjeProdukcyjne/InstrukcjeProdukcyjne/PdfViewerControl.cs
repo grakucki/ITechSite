@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Threading;
+using System.Diagnostics;
 
 namespace InstrukcjeProdukcyjne
 {
@@ -73,7 +75,8 @@ namespace InstrukcjeProdukcyjne
             this.axAcroPDF1.Focus();
             this.axAcroPDF1.setShowScrollbars(true);
             this.axAcroPDF1.setShowToolbar(false);
-            this.axAcroPDF1.setPageMode("thumbs");
+            this.axAcroPDF1.setPageMode("bookmarks");
+            axAcroPDF1.setView("Fit");
         }
 
         public void Pause()
@@ -92,20 +95,21 @@ namespace InstrukcjeProdukcyjne
         }
 
         float _Zoom = 100;
+
+
         private void button1_Click(object sender, EventArgs e)
         {
             // Powiększ
-            _Zoom = Math.Min(_Zoom+20,500);
-            axAcroPDF1.setZoom(_Zoom);
+           
+            SendPdfCommand("^{+}");
         }
 
         
         private void button2_Click(object sender, EventArgs e)
         {
             // pomniejsz
-            _Zoom = Math.Max(_Zoom - 20,20);
-            axAcroPDF1.setZoom(_Zoom);
-
+           
+            SendPdfCommand("^{-}");
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -123,30 +127,38 @@ namespace InstrukcjeProdukcyjne
         private void button5_Click(object sender, EventArgs e)
         {
             // w górę
-            Button b = (Button)sender;
-            MessageBox.Show("Action : " + b.Name);
+            SendPdfCommand("{UP}");
         }
+
+        private void button5_MouseDown(object sender, MouseEventArgs e)
+        {
+            //SendPdfCommand_Begin("{UP}");
+        }
+
+        private void button5_MouseUp(object sender, MouseEventArgs e)
+        {
+            //SendPdfCommand_End();
+
+        }
+
 
         private void button6_Click(object sender, EventArgs e)
         {
             // w lewo
-            Button b = (Button)sender;
-            MessageBox.Show("Action : " + b.Name);
+            SendPdfCommand("{LEFT}");
 
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             // w prawo
-            Button b = (Button)sender;
-            MessageBox.Show("Action : " + b.Name);
+            SendPdfCommand("{RIGHT}");
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             // w dół
-            Button b = (Button)sender;
-            MessageBox.Show("Action : " + b.Name);
+            SendPdfCommand("{DOWN}");
         }
 
 
@@ -181,6 +193,50 @@ namespace InstrukcjeProdukcyjne
         {
             CloseOwnerForm();
         }
+
+        string _SendWait = string.Empty;
+        bool _OneShot = true;
+        void SendPdfCommand(string command)
+        {
+            timer1.Interval = 50;
+            _SendWait = command;
+            _OneShot = true;
+            axAcroPDF1.Focus();
+            SendKeys.Send(command);
+            SendKeys.Flush();
+            timer1.Start();
+        }
+
+        void SendPdfCommand_Begin(string command)
+        {
+            timer1.Interval = 200;
+            _SendWait = command;
+            _OneShot = false;
+            axAcroPDF1.Focus();
+            SendKeys.Send(command);
+            SendKeys.Flush();
+            timer1.Start();
+        }
+
+        void SendPdfCommand_End()
+        {
+            _OneShot = true;
+            timer1.Stop();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (_OneShot)
+                timer1.Stop();
+            axAcroPDF1.Focus();
+            SendKeys.SendWait(_SendWait);
+            Debug.WriteLine(_SendWait);
+        }
+
+
+
+
+       
 
        
     }

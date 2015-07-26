@@ -698,6 +698,10 @@ namespace InstrukcjeProdukcyjne
 
         }
 
+        private void listView2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        }
+
     
 
 
