@@ -78,6 +78,11 @@ namespace ITechService
         [OperationContract]
         List<DokumentIdentity> GetDokumentsList(int idR);
 
+
+        /// lista użytkowników i ich prawa dostępu
+        [OperationContract]
+        List<ItechUsers> GetITechUserList();
+
         /// <summary>
         /// Update ustawień stacji roboczej
         /// </summary>

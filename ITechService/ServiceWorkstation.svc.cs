@@ -187,11 +187,40 @@ namespace ITechService
             }
             return o;
         }
+        
+      
 
+        public List<ItechUsers> GetITechUserList()
+        {
+            StringBuilder ret = new StringBuilder();
+            List<ItechUsers> o = null;
+            try
+            {
+
+                using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+                    context.Configuration.ProxyCreationEnabled = false;
+                    o = context.ItechUsers.Include(m=>m.AspNetRoles).OrderBy(m=>m.CardNo).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                ret.AppendLine("Błąd !!!!!!");
+                ret.AppendLine(ExceptionResolver.Resolve(ex));
+                throw new FaultException(ret.ToString());
+            }
+            return o;
+        }
+        
+        
         public DateTime Ping()
         {
             return DateTime.Now;
         }
+
+
+
 
 
         public List<DokumentIdentity> GetDokumentsList(int idR)
@@ -368,5 +397,8 @@ namespace ITechService
             }
             return;
         }
+
+
+       
     }
 }
