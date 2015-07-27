@@ -3,7 +3,7 @@ namespace CustomPanelControl
 
 	[System.Drawing.ToolboxBitmapAttribute(typeof(System.Windows.Forms.Panel))]
 	public class CustomPanel : System.Windows.Forms.Panel
-	{
+	{ 
         // Fields 0; 192; 192 
         private System.Drawing.Color _BackColour1 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
 		private System.Drawing.Color _BackColour2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
