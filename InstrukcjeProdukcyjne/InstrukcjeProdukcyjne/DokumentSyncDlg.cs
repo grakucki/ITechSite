@@ -37,7 +37,6 @@ namespace InstrukcjeProdukcyjne
 
         public void Sync()
         {
-
             if (!backgroundWorker1.IsBusy)
             {
                 textBoxLog.Clear();
@@ -127,7 +126,8 @@ namespace InstrukcjeProdukcyjne
             }
             catch (Exception ex)
             {
-                backgroundWorker1.ReportProgress(0, new ProgressState("Błąd " + ex.Message, true));
+                if (!this.IsDisposed)
+                    backgroundWorker1.ReportProgress(0, new ProgressState("Błąd " + ex.Message, true));
             }
 
         }

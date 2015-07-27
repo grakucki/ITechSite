@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="InstrukcjeProdukcyjne.exe" version="1.2.0.27" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="InstrukcjeProdukcyjne.exe" version="1.2.0.33" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="Icon1.ico" asmv2:publisher="Insofter" co.v1:suiteName="Sitech" asmv2:product="InstrukcjeProdukcyjne" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -51,7 +51,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>NNTeh9RNb7jcfEXg3k6xPEZgb2i73LJ84aA2SLuvnK8=</dsig:DigestValue>
+        <dsig:DigestValue>rFDFryzy5nEPT1CNKeDRoE99i/2r1RdekjIVT6gb+34=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -63,7 +63,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>rQ+vwPRJS9ezBW5eLg8dS0NApHxMqbZQI+5FxVz3hYA=</dsig:DigestValue>
+        <dsig:DigestValue>MvM965ATkMfB0370buDsfostXoI2OC76AX/huHxX3Z4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -92,14 +92,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InstrukcjeProdukcyjne.exe" size="666048">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InstrukcjeProdukcyjne.exe" size="1353664">
       <assemblyIdentity name="InstrukcjeProdukcyjne" version="1.2.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>TBUVmsYTHtxc8c8IPRD06dE988R7xy+4N3kWwOMvEmQ=</dsig:DigestValue>
+        <dsig:DigestValue>C+1sFgA8M00d5d4czUA3d2rVulzWxzi5DsjHgtzgQZY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -111,7 +111,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>bwaOIUfqCRcuuh7KjJKQElOZ17/PBVEjRLI78UHOGSc=</dsig:DigestValue>
+        <dsig:DigestValue>dI4nQCpSK7HQIEIl3Jcx+6CGvCqp5PE6Ud9ywm0K7C0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -123,19 +123,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Sp42KTozrFfDXtaEjBYUfQ6wqXw9x/FtWRhquDms9zA=</dsig:DigestValue>
+        <dsig:DigestValue>GQr4oBSXJf0sR5DQrLxwlxsgeNU2t+X7LtwVywRKPlY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ITechInstrukcjeModel.dll" size="59904">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ITechInstrukcjeModel.dll" size="69632">
       <assemblyIdentity name="ITechInstrukcjeModel" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>vl78Ns+yqG8Qg6Dn1PQj1s2GIzqr2UoZglh0wtvReD8=</dsig:DigestValue>
+        <dsig:DigestValue>gTxU/1gKoWjUjj+U0PEnAQGh9KYlKPbRF+ytWjTniFQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -220,13 +220,13 @@
       <dsig:DigestValue>Q4Erj4XR9+WjntLnEIXC0tCN54P0Htr7A1g8f6iioxQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="InstrukcjeProdukcyjne.exe.config" size="4032">
+  <file name="InstrukcjeProdukcyjne.exe.config" size="4054">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>g7oEWJddGri1nMjA0i88FIJH5YDVJSk0l+DBf9K/txM=</dsig:DigestValue>
+      <dsig:DigestValue>xoZKXo8Zs1TNDcKGtXGgiZnLS8ChJRld+fUtrjVDK3Q=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

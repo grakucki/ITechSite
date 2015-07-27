@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ITechInstrukcjeModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace InstrukcjeProdukcyjne
     {
         public string FileName { get; set; }
         public string FullFileName { get; set; }
-        public object Tag { get; set; }
+        public Dokument Dok { get; set; }
         
         public string Extension
         {

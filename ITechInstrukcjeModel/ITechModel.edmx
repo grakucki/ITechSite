@@ -5,6 +5,13 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ITechModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
         <EntityType Name="Dokument">
           <Key>
             <PropertyRef Name="Id" />
@@ -32,6 +39,24 @@
           <Property Name="IdD" Type="int" Nullable="false" />
           <Property Name="Order" Type="int" />
           <Property Name="Enabled" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItechUsers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="CardNo" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="ItechUsersRoles">
+          <Key>
+            <PropertyRef Name="ItechUserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ItechUserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="ModelsWorkstation">
           <Key>
@@ -85,6 +110,7 @@
           <Property Name="Sterownik_Ip" Type="nvarchar" MaxLength="15" />
           <Property Name="Sterownik_Model" Type="nvarchar" MaxLength="15" />
           <Property Name="Setrownik_DB" Type="int" />
+          <Property Name="AllowIp" Type="nvarchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="WorkstationGroup">
           <Key>
@@ -114,6 +140,30 @@
             </Principal>
             <Dependent Role="InformationPlan">
               <PropertyRef Name="idR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItechUsersRoles_AspNetRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+          <End Role="ItechUsersRoles" Type="Self.ItechUsersRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItechUsersRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItechUsersRoles_ItechUsers">
+          <End Role="ItechUsers" Type="Self.ItechUsers" Multiplicity="1" />
+          <End Role="ItechUsersRoles" Type="Self.ItechUsersRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItechUsers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ItechUsersRoles">
+              <PropertyRef Name="ItechUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -166,8 +216,11 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="ITechModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dokument" EntityType="Self.Dokument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InformationPlan" EntityType="Self.InformationPlan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItechUsers" EntityType="Self.ItechUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItechUsersRoles" EntityType="Self.ItechUsersRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModelsWorkstation" EntityType="Self.ModelsWorkstation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
@@ -181,6 +234,14 @@
           <AssociationSet Name="FK_InformationPlan_Resource" Association="Self.FK_InformationPlan_Resource">
             <End Role="Resource" EntitySet="Resource" />
             <End Role="InformationPlan" EntitySet="InformationPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItechUsersRoles_AspNetRoles" Association="Self.FK_ItechUsersRoles_AspNetRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="ItechUsersRoles" EntitySet="ItechUsersRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItechUsersRoles_ItechUsers" Association="Self.FK_ItechUsersRoles_ItechUsers">
+            <End Role="ItechUsers" EntitySet="ItechUsers" />
+            <End Role="ItechUsersRoles" EntitySet="ItechUsersRoles" />
           </AssociationSet>
           <AssociationSet Name="FK_ModelsWorkstation_Resource" Association="Self.FK_ModelsWorkstation_Resource">
             <End Role="Resource" EntitySet="Resource" />
@@ -279,6 +340,12 @@
             <End Role="Resource" EntitySet="Resource" />
             <End Role="ModelsWorkstation" EntitySet="ModelsWorkstation" />
           </AssociationSet>
+          <EntitySet Name="AspNetRoles" EntityType="ITechModel.AspNetRoles" />
+          <EntitySet Name="ItechUsers" EntityType="ITechModel.ItechUsers" />
+          <AssociationSet Name="ItechUsersRoles" Association="ITechModel.ItechUsersRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="ItechUsers" EntitySet="ItechUsers" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Workstation">
           <Key>
@@ -293,6 +360,7 @@
           <Property Name="Sterownik_Model" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Setrownik_DB" Type="Int32" />
           <NavigationProperty Name="Resource" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Workstation" ToRole="Resource" />
+          <Property Name="AllowIp" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="News">
           <Key>
@@ -409,6 +477,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ItechUsers" Relationship="ITechModel.ItechUsersRoles" FromRole="AspNetRoles" ToRole="ItechUsers" />
+        </EntityType>
+        <EntityType Name="ItechUsers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CardNo" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetRoles" Relationship="ITechModel.ItechUsersRoles" FromRole="ItechUsers" ToRole="AspNetRoles" />
+        </EntityType>
+        <Association Name="ItechUsersRoles">
+          <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="ITechModel.ItechUsers" Role="ItechUsers" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -448,6 +539,7 @@
           <EntitySetMapping Name="Workstation">
             <EntityTypeMapping TypeName="ITechModel.Workstation">
               <MappingFragment StoreEntitySet="Workstation">
+                <ScalarProperty Name="AllowIp" ColumnName="AllowIp" />
                 <ScalarProperty Name="Setrownik_DB" ColumnName="Setrownik_DB" />
                 <ScalarProperty Name="Sterownik_Model" ColumnName="Sterownik_Model" />
                 <ScalarProperty Name="Sterownik_Ip" ColumnName="Sterownik_Ip" />
@@ -511,6 +603,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="ITechModel.AspNetRoles">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItechUsers">
+            <EntityTypeMapping TypeName="ITechModel.ItechUsers">
+              <MappingFragment StoreEntitySet="ItechUsers">
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ItechUsersRoles" TypeName="ITechModel.ItechUsersRoles" StoreEntitySet="ItechUsersRoles">
+            <EndProperty Name="ItechUsers">
+              <ScalarProperty Name="id" ColumnName="ItechUserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

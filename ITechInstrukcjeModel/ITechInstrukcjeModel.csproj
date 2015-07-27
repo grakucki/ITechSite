@@ -57,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnonymousType.cs" />
+    <Compile Include="AspNetRoles.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="DBFile.cs" />
     <Compile Include="Dokument.cs">
@@ -82,6 +85,9 @@
       <DependentUpon>ITechModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="ITechModelEntity.cs" />
+    <Compile Include="ItechUsers.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ModelResolver.cs" />
     <Compile Include="ModelsWorkstation.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>

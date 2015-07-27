@@ -57,6 +57,12 @@
   <wsdl:message name="IServiceWorkstation_GetDokumentsList_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetDokumentsListResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetITechUserList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetITechUserList" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetITechUserList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetITechUserListResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceWorkstation_UpdateWorkstation_InputMessage">
     <wsdl:part name="parameters" element="tns:UpdateWorkstation" />
   </wsdl:message>
@@ -113,6 +119,10 @@
     <wsdl:operation name="GetDokumentsList">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetDokumentsList" message="tns:IServiceWorkstation_GetDokumentsList_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetDokumentsListResponse" message="tns:IServiceWorkstation_GetDokumentsList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetITechUserList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetITechUserList" message="tns:IServiceWorkstation_GetITechUserList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetITechUserListResponse" message="tns:IServiceWorkstation_GetITechUserList_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="UpdateWorkstation">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/UpdateWorkstation" message="tns:IServiceWorkstation_UpdateWorkstation_InputMessage" />
@@ -198,6 +208,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetDokumentsList">
       <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetDokumentsList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetITechUserList">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetITechUserList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

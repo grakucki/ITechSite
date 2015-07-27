@@ -25,6 +25,7 @@ namespace ITechInstrukcjeModel
 
         public string WorkDir { get; set; }
         public List<Resource> Resource_Local { get; set; }
+        public List<ItechUsers> ItechUsers_Local { get; set; }
 
 
         public IQueryable<Resource> ResourceModel
@@ -83,7 +84,21 @@ namespace ITechInstrukcjeModel
         }
 
 
-        public List<Resource> LoadFromXml(string filename)
+        public List<ItechUsers> ItechUsers_LoadFromXml(string filename)
+        {
+            DataContractSerializer dcs = new DataContractSerializer(typeof(List<ItechUsers>), null, Int32.MaxValue, false, false, null, null);
+            FileStream fs = new FileStream(filename, FileMode.Open);
+            XmlDictionaryReader reader = XmlDictionaryReader.CreateTextReader(fs, new XmlDictionaryReaderQuotas());
+
+
+            List<ItechUsers> d = (List<ItechUsers>)dcs.ReadObject(reader);
+            reader.Close();
+            fs.Close();
+
+            return d;
+        }
+
+        public List<Resource> Resource_LoadFromXml(string filename)
         {
 
             DataContractSerializer dcs = new DataContractSerializer(typeof(List<Resource>), null, Int32.MaxValue, false, false, null, new ModelResolver());
@@ -113,7 +128,7 @@ namespace ITechInstrukcjeModel
             }
 
             var resourcesFile = Path.Combine(filename);
-            Resource_Local = LoadFromXml(resourcesFile);
+            Resource_Local = Resource_LoadFromXml(resourcesFile);
             //this.Resource.Local.Clear();
             //this.Resource.AddRange(ResourceList);
 
@@ -129,6 +144,38 @@ namespace ITechInstrukcjeModel
             var q = Resource_Local;
                 SaveToXml(q, Path.Combine(WorkDir, filename ?? "resources.xml"));
         }
+
+
+        /// <summary>
+        /// Load resource from xml file 
+        /// </summary>
+        /// <returns></returns>
+        public List<ItechUsers> ImportItechUsers(string filename)
+        {
+            filename = Path.Combine(WorkDir, filename ?? "ItechUsers.xml");
+            if (!File.Exists(filename))
+            {
+                throw new Exception("Nie odnaleziono plików konfiguracyjnych. Musisz być połaczony z serwerem aby zainicjować aplikację.");
+            }
+
+            var localFile = Path.Combine(filename);
+            ItechUsers_Local = ItechUsers_LoadFromXml(localFile);
+            //this.Resource.Local.Clear();
+            //this.Resource.AddRange(ResourceList);
+
+            return this.ItechUsers_Local.ToList();
+        }
+
+        public void ExportItechUsers(string filename)
+        {
+
+            if (!Directory.Exists(WorkDir))
+                Directory.CreateDirectory(WorkDir);
+
+            var q = ItechUsers_Local;
+            SaveToXml(q, Path.Combine(WorkDir, filename ?? "ItechUsers.xml"));
+        }
+
 
         public string GetFileDocName(int DocId)
         {

@@ -293,7 +293,7 @@ namespace InstrukcjeProdukcyjne
             {
                 if (item.Dokument != null)
                 {
-                    var d = new MyFileInfo { FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Tag = item.Dokument };
+                    var d = new MyFileInfo { FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Dok = item.Dokument };
                     var i = listView1.Items.Add(d.FullFileName, d.FileName, d.ExtensionIndex);
                     i.SubItems.Add(item.Dokument.Description);
                     i.SubItems.Add(item.Dokument.CodeName);

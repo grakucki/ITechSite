@@ -105,4 +105,34 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Workstation" nillable="true" type="tns:Workstation" />
+  <xs:complexType name="ArrayOfItechUsers">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ItechUsers" nillable="true" type="tns:ItechUsers" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfItechUsers" nillable="true" type="tns:ArrayOfItechUsers" />
+  <xs:complexType name="ItechUsers">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AspNetRoles" nillable="true" type="tns:ArrayOfAspNetRoles" />
+      <xs:element minOccurs="0" name="CardNo" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="id" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ItechUsers" nillable="true" type="tns:ItechUsers" />
+  <xs:complexType name="ArrayOfAspNetRoles">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AspNetRoles" nillable="true" type="tns:AspNetRoles" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfAspNetRoles" nillable="true" type="tns:ArrayOfAspNetRoles" />
+  <xs:complexType name="AspNetRoles">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AspNetRoles" nillable="true" type="tns:AspNetRoles" />
 </xs:schema>

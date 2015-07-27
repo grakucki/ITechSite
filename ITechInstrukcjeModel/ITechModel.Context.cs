@@ -33,5 +33,7 @@ namespace ITechInstrukcjeModel
         public virtual DbSet<WorkstationGroup> WorkstationGroup { get; set; }
         public virtual DbSet<SimaticCpuType> SimaticCpuType { get; set; }
         public virtual DbSet<ModelsWorkstation> ModelsWorkstation { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<ItechUsers> ItechUsers { get; set; }
     }
 }

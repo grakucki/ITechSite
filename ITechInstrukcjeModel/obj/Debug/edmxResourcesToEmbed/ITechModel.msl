@@ -34,6 +34,7 @@
     <EntitySetMapping Name="Workstation">
       <EntityTypeMapping TypeName="ITechModel.Workstation">
         <MappingFragment StoreEntitySet="Workstation">
+          <ScalarProperty Name="AllowIp" ColumnName="AllowIp" />
           <ScalarProperty Name="Setrownik_DB" ColumnName="Setrownik_DB" />
           <ScalarProperty Name="Sterownik_Model" ColumnName="Sterownik_Model" />
           <ScalarProperty Name="Sterownik_Ip" ColumnName="Sterownik_Ip" />
@@ -97,5 +98,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="ITechModel.AspNetRoles">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItechUsers">
+      <EntityTypeMapping TypeName="ITechModel.ItechUsers">
+        <MappingFragment StoreEntitySet="ItechUsers">
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ItechUsersRoles" TypeName="ITechModel.ItechUsersRoles" StoreEntitySet="ItechUsersRoles">
+      <EndProperty Name="ItechUsers">
+        <ScalarProperty Name="id" ColumnName="ItechUserId" />
+      </EndProperty>
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

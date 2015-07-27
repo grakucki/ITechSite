@@ -16,9 +16,12 @@
         <AssociationConnector Association="ITechModel.FK_News_Resource" />
         <EntityTypeShape EntityType="ITechModel.SimaticCpuType" Width="1.5" PointX="2.625" PointY="4.5" />
         <AssociationConnector Association="ITechModel.FK_Workstation_Resource" />
-        <EntityTypeShape EntityType="ITechModel.ModelsWorkstation" Width="1.5" PointX="8.625" PointY="3.75" />
+        <EntityTypeShape EntityType="ITechModel.ModelsWorkstation" Width="1.5" PointX="9" PointY="3.75" />
         <AssociationConnector Association="ITechModel.FK_ModelsWorkstation_Resource" />
         <AssociationConnector Association="ITechModel.FK_ModelsWorkstation_Resource1" />
+        <EntityTypeShape EntityType="ITechModel.AspNetRoles" Width="1.5" PointX="1.125" PointY="9.25" />
+        <EntityTypeShape EntityType="ITechModel.ItechUsers" Width="1.5" PointX="3.875" PointY="9.25" />
+        <AssociationConnector Association="ITechModel.ItechUsersRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
