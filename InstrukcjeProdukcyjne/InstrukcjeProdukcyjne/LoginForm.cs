@@ -26,28 +26,32 @@ namespace InstrukcjeProdukcyjne
         public ITechInstrukcjeModel.ITechEntities db = null;
         public string AllowRoles = string.Empty;
 
+
+
+
         private void LoginForm_Load(object sender, EventArgs e)
         {
 
             panel3.Visible = false;
             User = new SitechUser();
-            label2.Text = ""; 
-            label3.Text = "";
-            CardReaderFileDat = "c:/Bedanet/transfer/reader1.dat";
+            LabelClear();
+            CardReaderFileDat = @"C:\Programs\interfaces\reader1.dat";
 
             if (!Directory.Exists(Path.GetFileName(CardReaderFileDat)))
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(CardReaderFileDat));
             }
 
-            if (!File.Exists(CardReaderFileDat))
-            {
-                using (var x = File.CreateText(CardReaderFileDat))
-                {
-                    x.Close();
-                    x.Dispose();
-                }                    
-            }
+            //if (!File.Exists(CardReaderFileDat))
+            //{
+            //    using (var x = File.CreateText(CardReaderFileDat))
+            //    {
+            //        x.Close();
+            //        x.Dispose();
+            //    }                    
+            //}
+
+            CardClearCmd();
 
             if (!string.IsNullOrEmpty(Message))
                 label1.Text = Message;
@@ -57,6 +61,19 @@ namespace InstrukcjeProdukcyjne
             fileSystemWatcher1.Filter = Path.GetFileName(CardReaderFileDat);
             textBoxCarNo.Focus();
             
+        }
+
+        private void LabelClear()
+        {
+            label2.Text = "";
+            label3.Text = "";
+        }
+
+        private void CardClearCmd()
+        {
+            var cmdFile = Path.ChangeExtension(CardReaderFileDat, ".cmd");
+            if (File.Exists(cmdFile))
+                File.Delete(cmdFile);
         }
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -101,12 +118,15 @@ namespace InstrukcjeProdukcyjne
                     {
                         label3.Text = "Brak uprawnień do zalogowania";
                         User = new SitechUser();
+                        TimerGo(false, 5);
+
                     }
                     else
                     {
                         label3.Text = u.UserName;
                         User = new SitechUser { UserName = u.UserName, NrKarty = cardno, IsLogin = true };
-                        timer1.Enabled = true;
+                        TimerGo(true, 1);
+
                     }
 
                 }
@@ -117,16 +137,17 @@ namespace InstrukcjeProdukcyjne
             }
         }
 
+        bool Timer_EndForm = false;
+        DateTime Timer_ActionAt = DateTime.Now;
 
         private void ReadCard()
         {
             try
             {
                 System.Threading.Thread.Sleep(200);
-                var f = File.ReadAllLines(CardReaderFileDat);
+                var f = File.ReadAllText(CardReaderFileDat);
                 {
-                    
-                    var cardno =  string.Join(",", f);
+                    var cardno =  GetCardNo(f);
                     label2.Text = cardno;
 
                     var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.IsInRoles(AllowRoles)).FirstOrDefault();
@@ -137,17 +158,45 @@ namespace InstrukcjeProdukcyjne
                     }
                     else
                     {
+                        // login ok
                         label3.Text = u.UserName;
                         User = new SitechUser { UserName = u.UserName, NrKarty = cardno, IsLogin = true };
-                        timer1.Enabled = true;
+                        TimerGo(true,1);
                     }
-                    
                 }
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                label3.Text = ex.Message;
             }
+
+            try
+            {
+                CardClearCmd();
+            }
+            catch (Exception ex)
+            {
+                label3.Text = ex.Message;
+            }
+
+        }
+
+        private void TimerGo(bool EndfForm, int delay)
+        {
+            Timer_ActionAt = DateTime.Now.AddSeconds(delay);
+            Timer_EndForm = EndfForm;
+            timer1.Enabled = true;
+        }
+
+        private string GetCardNo(string f)
+        {
+            var mask = "0800040029011X99569718";
+            if (f.Length < mask.Length)
+                throw new Exception("Nieprawidłowy format numeru karty");
+
+            return f.Substring(mask.LastIndexOf("X") + 1);
+
         }
 
         private void fileSystemWatcher1_Created(object sender, System.IO.FileSystemEventArgs e)
@@ -178,9 +227,17 @@ namespace InstrukcjeProdukcyjne
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Enabled = false;
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.Close();
+            if (Timer_ActionAt < DateTime.Now)
+            {
+                timer1.Enabled = false;
+                if (Timer_EndForm)
+                {
+                    this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                    this.Close();
+                }
+                else
+                    LabelClear();
+            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)

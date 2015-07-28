@@ -103,7 +103,7 @@ namespace ITechSite.Areas.Testy.Controllers
                 db.SaveChanges();
                 this.test = test;
             }
-            catch (Exception ex)
+            catch (Exception /*ex*/)
             {
                 throw new Exception("Bład nr " + ib.ToString());            
             }

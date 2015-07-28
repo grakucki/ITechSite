@@ -23,7 +23,7 @@ namespace ITechService
         public string TestConnection(int value)
         {
             StringBuilder ret = new StringBuilder();
-            ret.AppendLine("Serwis ... v1.15 Ok");
+            ret.AppendLine("Serwis ... v1.16 Ok");
             try
             {
                 ret.Append("Baza danych ... ");

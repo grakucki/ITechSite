@@ -20,9 +20,10 @@ namespace InstrukcjeProdukcyjne
             //ControlStyles.SupportsTransparentBackColor |
             //ControlStyles.Opaque |
             ControlStyles.UserPaint;
-        private Rectangle m_clickButton;
-        private Color _ButtonBackColor;
-        private static string strcmbo = "";
+
+        //private Rectangle m_clickButton;
+        //private Color _ButtonBackColor;
+        //private static string strcmbo = "";
 
         public TransparentComboBox()
         {

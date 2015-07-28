@@ -528,7 +528,7 @@ namespace InstrukcjeProdukcyjne
                     Work.SetState(ActionControlStatus.ActionControlState.Ok, "");
                 }
             }
-            catch (Exception ex)
+            catch (Exception /*ex*/)
             {
 
             }
@@ -548,7 +548,7 @@ namespace InstrukcjeProdukcyjne
                     LoadNews(CurrentWorkstation.Id);
                 DownloadDocIf();
             }
-            catch (Exception ex)
+            catch (Exception /*ex*/)
             {
             }
         }

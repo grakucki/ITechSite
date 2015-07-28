@@ -94,8 +94,7 @@ namespace InstrukcjeProdukcyjne
             MessageBox.Show("Pdf Error");
         }
 
-        float _Zoom = 100;
-
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
