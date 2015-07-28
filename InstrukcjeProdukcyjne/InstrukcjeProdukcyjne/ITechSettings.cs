@@ -21,9 +21,13 @@ namespace InstrukcjeProdukcyjne
         public string LocalDoc { get; set; }
 
         [DataMember]
+        public string CardReaderFileDat { get; set; }
+
+
+        [DataMember]
         public int? Stanowisko { get; set; }
 
-
+        
         public void ApplyDefaultIfEmpty()
         {
             ApplyDefault(true);
@@ -47,6 +51,9 @@ namespace InstrukcjeProdukcyjne
 
             if (!IfEmpty || String.IsNullOrEmpty(LocalDoc))
                 LocalDoc = @"c:\ProgramData\Itech\Instrukcje";
+
+            if (!IfEmpty || String.IsNullOrEmpty(CardReaderFileDat))
+                CardReaderFileDat = @"C:\Programs\interfaces\reader1.dat";
 
             if (!IfEmpty || (Stanowisko == null))
                 Stanowisko = 0;

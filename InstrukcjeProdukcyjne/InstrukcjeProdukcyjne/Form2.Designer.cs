@@ -388,15 +388,15 @@
             // 
             this.contextMenuStrip1.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
+            this.toolStripMenuItem3,
             this.toolStripSeparator1,
+            this.toolStripMenuItem2,
             this.klawiaturaToolStripMenuItem,
             this.testKompetencjiToolStripMenuItem,
             this.synchronizujPlikiToolStripMenuItem,
-            this.toolStripMenuItem2,
             this.toolStripSeparator2,
             this.oAplikacjiToolStripMenuItem,
-            this.toolStripMenuItem3});
+            this.toolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(348, 366);
             // 
@@ -404,7 +404,7 @@
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(347, 50);
-            this.toolStripMenuItem1.Text = "Zablokuj stację";
+            this.toolStripMenuItem1.Text = "Wyloguj";
             this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
             // toolStripSeparator1

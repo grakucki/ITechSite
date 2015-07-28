@@ -178,6 +178,7 @@
             this.label1.Text = "Aby rozpocząć pracę przyłóż kartę do czynika";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.label1.DoubleClick += new System.EventHandler(this.label1_DoubleClick);
             // 
             // pictureBox1
             // 

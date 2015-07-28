@@ -21,12 +21,10 @@ namespace InstrukcjeProdukcyjne
 
         public SitechUser User { get; set; }
         public String Message { get; set; }
-        public string CardReaderFileDat { get; set; }
+        //public string CardReaderFileDat { get; set; }
 
         public ITechInstrukcjeModel.ITechEntities db = null;
         public string AllowRoles = string.Empty;
-
-
 
 
         private void LoginForm_Load(object sender, EventArgs e)
@@ -35,11 +33,11 @@ namespace InstrukcjeProdukcyjne
             panel3.Visible = false;
             User = new SitechUser();
             LabelClear();
-            CardReaderFileDat = @"C:\Programs\interfaces\reader1.dat";
+            //CardReaderFileDat = @"C:\Programs\interfaces\reader1.dat";
 
-            if (!Directory.Exists(Path.GetFileName(CardReaderFileDat)))
+            if (!Directory.Exists(Path.GetDirectoryName(Properties.Settings.Default.App.CardReaderFileDat)))
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(CardReaderFileDat));
+                Directory.CreateDirectory(Path.GetDirectoryName(Properties.Settings.Default.App.CardReaderFileDat));
             }
 
             //if (!File.Exists(CardReaderFileDat))
@@ -57,8 +55,8 @@ namespace InstrukcjeProdukcyjne
                 label1.Text = Message;
                 //labelMessage.Text = Message;
 
-            fileSystemWatcher1.Path = Path.GetDirectoryName(CardReaderFileDat);
-            fileSystemWatcher1.Filter = Path.GetFileName(CardReaderFileDat);
+            fileSystemWatcher1.Path = Path.GetDirectoryName(Properties.Settings.Default.App.CardReaderFileDat);
+            fileSystemWatcher1.Filter = Path.GetFileName(Properties.Settings.Default.App.CardReaderFileDat);
             textBoxCarNo.Focus();
             
         }
@@ -71,7 +69,7 @@ namespace InstrukcjeProdukcyjne
 
         private void CardClearCmd()
         {
-            var cmdFile = Path.ChangeExtension(CardReaderFileDat, ".cmd");
+            var cmdFile = Path.ChangeExtension(Properties.Settings.Default.App.CardReaderFileDat, ".cmd");
             if (File.Exists(cmdFile))
                 File.Delete(cmdFile);
         }
@@ -105,31 +103,27 @@ namespace InstrukcjeProdukcyjne
         {
             try
             {
-                System.Threading.Thread.Sleep(200);
-                var f = File.ReadAllLines(CardReaderFileDat);
+
+                var cardno = textBoxCarNo.Text;
+                var pass = textBoxPass.Text;
+                label2.Text = cardno;
+
+                var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password==pass && m.IsInRoles(AllowRoles)).FirstOrDefault();
+                if (u == null)
                 {
-
-                    var cardno = textBoxCarNo.Text;
-                    var pass = textBoxPass.Text;
-                    label2.Text = cardno;
-
-                    var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password==pass && m.IsInRoles(AllowRoles)).FirstOrDefault();
-                    if (u == null)
-                    {
-                        label3.Text = "Brak uprawnień do zalogowania";
-                        User = new SitechUser();
-                        TimerGo(false, 5);
-
-                    }
-                    else
-                    {
-                        label3.Text = u.UserName;
-                        User = new SitechUser { UserName = u.UserName, NrKarty = cardno, IsLogin = true };
-                        TimerGo(true, 1);
-
-                    }
+                    label3.Text = "Brak uprawnień do zalogowania";
+                    User = new SitechUser();
+                    TimerGo(false, 5);
 
                 }
+                else
+                {
+                    label3.Text = u.UserName;
+                    User = new SitechUser { UserName = u.UserName, NrKarty = cardno, IsLogin = true };
+                    TimerGo(true, 1);
+
+                }
+
             }
             catch (Exception ex)
             {
@@ -145,7 +139,7 @@ namespace InstrukcjeProdukcyjne
             try
             {
                 System.Threading.Thread.Sleep(200);
-                var f = File.ReadAllText(CardReaderFileDat);
+                var f = File.ReadAllText(Properties.Settings.Default.App.CardReaderFileDat);
                 {
                     var cardno =  GetCardNo(f);
                     label2.Text = cardno;
@@ -243,6 +237,18 @@ namespace InstrukcjeProdukcyjne
         private void button1_Click_1(object sender, EventArgs e)
         {
             VirtualKeyboard.Show();
+        }
+
+        private void label1_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(Properties.Settings.Default.App.CardReaderFileDat);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         

@@ -74,6 +74,7 @@ namespace InstrukcjeProdukcyjne
             var x = Properties.Settings.Default.App;
             textBox1.Text = Properties.Settings.Default.App.ServerDoc;
             textBox2.Text = Properties.Settings.Default.App.LocalDoc;
+            textBox3.Text = Properties.Settings.Default.App.CardReaderFileDat;
             int? id = Properties.Settings.Default.App.Stanowisko;
 
             db.WorkDir = Properties.Settings.Default.App.LocalDoc;

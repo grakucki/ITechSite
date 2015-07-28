@@ -126,7 +126,7 @@ namespace InstrukcjeProdukcyjne
         private void button5_Click(object sender, EventArgs e)
         {
             // w górę
-            SendPdfCommand("{UP}");
+            SendPdfCommand("{PGUP}");
         }
 
         private void button5_MouseDown(object sender, MouseEventArgs e)
@@ -145,7 +145,6 @@ namespace InstrukcjeProdukcyjne
         {
             // w lewo
             SendPdfCommand("{LEFT}");
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -157,7 +156,7 @@ namespace InstrukcjeProdukcyjne
         private void button8_Click(object sender, EventArgs e)
         {
             // w dół
-            SendPdfCommand("{DOWN}");
+            SendPdfCommand("{PGDN}");
         }
 
 
