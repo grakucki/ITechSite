@@ -53,7 +53,7 @@ namespace InstrukcjeProdukcyjne
                 LocalDoc = @"c:\ProgramData\Itech\Instrukcje";
 
             if (!IfEmpty || String.IsNullOrEmpty(CardReaderFileDat))
-                CardReaderFileDat = @"C:\Programs\interfaces\reader1.dat";
+                CardReaderFileDat = @"C:\Programs\ReaderControl\interfaces\reader1.dat";
 
             if (!IfEmpty || (Stanowisko == null))
                 Stanowisko = 0;
@@ -69,6 +69,4 @@ namespace InstrukcjeProdukcyjne
             return Path.Combine(path, "configs", "settings.xml");
         }
     }
-
-
 }
