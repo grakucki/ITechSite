@@ -16,6 +16,7 @@ using ITechInstrukcjeModel;
 using System.ServiceModel;
 using System.Net;
 using System.Threading;
+using System.Drawing.Drawing2D;
 
 namespace InstrukcjeProdukcyjne
 {
@@ -189,6 +190,10 @@ namespace InstrukcjeProdukcyjne
             listView.Columns.Add("Plik", -2, HorizontalAlignment.Left);
             listView.Columns.Add("Opis", -2, HorizontalAlignment.Left);
             listView.Columns.Add("Nazwa kodowa", -2, HorizontalAlignment.Left);
+
+            //listView.Groups.Add(new ListViewGroup("Grupa1", HorizontalAlignment.Left));
+            //listView.Groups.Add(new ListViewGroup("Grupa2", HorizontalAlignment.Left));
+
         }
         private void PrepareListView()
         {
@@ -334,6 +339,7 @@ namespace InstrukcjeProdukcyjne
                 return;
             listView1.BeginUpdate();
             var IP = res.InformationPlan;
+            int p = 0;
             foreach (var item in IP)
             {
                 if (item.Dokument != null)
@@ -343,7 +349,14 @@ namespace InstrukcjeProdukcyjne
                     var i = listView.Items.Add(d.FullFileName, s, d.ExtensionIndex);
                     i.SubItems.Add(item.Dokument.CodeName);
                     i.Tag = d;
+                    //i.Group = listView.Groups[p];
+                    //if (p % 2==0)
+                        //i.BackColor = Color.Red;
+
                 }
+                
+                p = (p+1) % 2;
+                
             }
             listView1.EndUpdate();
         }
@@ -700,6 +713,38 @@ namespace InstrukcjeProdukcyjne
 
         private void listView2_KeyPress(object sender, KeyPressEventArgs e)
         {
+        }
+
+        private void listView1_DrawItem(object sender, DrawListViewItemEventArgs e)
+        {
+
+            //if ((e.State & ListViewItemStates.Selected) != 0)
+            //{
+            //    // Draw the background and focus rectangle for a selected item.
+            //    e.Graphics.FillRectangle(Brushes.Maroon, e.Bounds);
+            //    e.DrawFocusRectangle();
+            //}
+            //else
+            //{
+            //    // Draw the background for an unselected item.
+            //    using (LinearGradientBrush brush =
+            //        new LinearGradientBrush(e.Bounds, Color.Orange,
+            //        Color.Maroon, LinearGradientMode.BackwardDiagonal))
+            //    {
+            //        e.Graphics.FillRectangle(brush, e.Bounds);
+            //    }
+            //}
+
+            //// Draw the item text for views other than the Details view.
+            //if (listView1.View != View.Details)
+            //{
+            //    e.DrawText();
+            //}
+
+            //var p = new Pen(Color.Red, 3);
+            //e.Graphics.DrawRectangle(p, e.Bounds);
+
+            e.DrawDefault = true;
         }
 
     
