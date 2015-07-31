@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ITechSite.CustomResults;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -34,6 +35,7 @@ namespace ITechSite.Models
     public class DokumentMetaData
     {
         [DisplayName("Nazwa pliku")]
+        [Required]
         public string FileName { get; set; }
 
         [DisplayName("Nazwa kodowa")]
@@ -52,7 +54,7 @@ namespace ITechSite.Models
         public string Description { get; set; }
 
         [DisplayName("Aktywny od")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         public System.DateTime ValidDtmOn { get; set; }
 
         [DisplayName("Aktywny do")]
