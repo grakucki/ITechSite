@@ -121,7 +121,7 @@ namespace InstrukcjeProdukcyjne
                 dial.Workstation = GetCurrent().Workstation.FirstOrDefault();
                 if (dial.Workstation==null)
                 {
-                    //dodajemy nowy nbo nie ma jeszcze konfiguracji
+                    //dodajemy nowy bo nie ma jeszcze konfiguracji
                     dial.Workstation = new Workstation();
                     dial.Workstation.idR = GetCurrent().Id;
                     GetCurrent().Workstation = new List<Workstation>();
@@ -240,8 +240,7 @@ namespace InstrukcjeProdukcyjne
             // ustawienia modeli
             try 
 	        {	        
-	            ModelsWorkstationDlg dial = new ModelsWorkstationDlg();
-                dial.idR = GetCurrent().Id;
+	            ModelsWorkstationDlg dial = new ModelsWorkstationDlg(GetCurrent().Workstation.FirstOrDefault());
                 dial.ShowDialog();
 	        }
 	        catch (Exception ex) 

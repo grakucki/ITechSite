@@ -14,14 +14,14 @@
     <framework targetVersion="4.5.1" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="InstrukcjeProdukcyjne.exe.manifest" size="12371">
+    <dependentAssembly dependencyType="install" codebase="InstrukcjeProdukcyjne.exe.manifest" size="13643">
       <assemblyIdentity name="InstrukcjeProdukcyjne.exe" version="1.2.0.40" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>7j0c1h5SfA5GEcxoEZYY50R65bwFRFpd0PAvlTEFG98=</dsig:DigestValue>
+        <dsig:DigestValue>Tg/1M9KrPnOlef+L9zvYHp7MhGLlOQcBjXkYUMTc7zE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

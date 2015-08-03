@@ -39,6 +39,7 @@
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             sterownik_IpLabel = new System.Windows.Forms.Label();
             sterownik_ModelLabel = new System.Windows.Forms.Label();
             Sterownik_DBLabel = new System.Windows.Forms.Label();
@@ -112,7 +113,7 @@
             // 
             this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonOk.Location = new System.Drawing.Point(296, 282);
+            this.buttonOk.Location = new System.Drawing.Point(405, 378);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(116, 65);
             this.buttonOk.TabIndex = 6;
@@ -124,7 +125,7 @@
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonCancel.Location = new System.Drawing.Point(144, 282);
+            this.buttonCancel.Location = new System.Drawing.Point(221, 378);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(109, 65);
             this.buttonCancel.TabIndex = 7;
@@ -142,13 +143,25 @@
             this.comboBox1.Size = new System.Drawing.Size(300, 47);
             this.comboBox1.TabIndex = 8;
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button1.Location = new System.Drawing.Point(392, 260);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(129, 65);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Test połączenia";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // SimaticDlg
             // 
             this.AcceptButton = this.buttonOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
-            this.ClientSize = new System.Drawing.Size(580, 381);
+            this.ClientSize = new System.Drawing.Size(677, 485);
+            this.Controls.Add(this.button1);
             this.Controls.Add(label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.buttonCancel);
@@ -178,5 +191,6 @@
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button1;
     }
 }

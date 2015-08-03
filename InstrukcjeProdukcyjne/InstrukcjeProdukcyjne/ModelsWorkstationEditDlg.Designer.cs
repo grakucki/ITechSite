@@ -32,14 +32,14 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.resourceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.resourceBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resourceBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -68,6 +68,8 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.bindingSource1, "idM", true));
             this.comboBox1.DataSource = this.resourceBindingSource;
             this.comboBox1.DisplayMember = "Name";
@@ -76,19 +78,31 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(240, 222);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(328, 37);
+            this.comboBox1.Size = new System.Drawing.Size(384, 37);
             this.comboBox1.TabIndex = 6;
             this.comboBox1.ValueMember = "Id";
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // bindingSource1
+            // 
+            this.bindingSource1.DataSource = typeof(InstrukcjeProdukcyjne.ServiceWorkstation.ModelWorkstationInfo);
+            // 
+            // resourceBindingSource
+            // 
+            this.resourceBindingSource.DataSource = typeof(ITechInstrukcjeModel.Resource);
             // 
             // textBox1
             // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBox1.Location = new System.Drawing.Point(240, 44);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(328, 35);
+            this.textBox1.Size = new System.Drawing.Size(384, 35);
             this.textBox1.TabIndex = 7;
             this.textBox1.Visible = false;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
             // 
@@ -123,30 +137,28 @@
             // 
             // textBox2
             // 
+            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSource1, "SterownikIndex", true));
             this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBox2.Location = new System.Drawing.Point(240, 168);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(328, 35);
+            this.textBox2.Size = new System.Drawing.Size(384, 35);
             this.textBox2.TabIndex = 10;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button1.Location = new System.Drawing.Point(393, 94);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(175, 68);
+            this.button1.Size = new System.Drawing.Size(231, 68);
             this.button1.TabIndex = 12;
             this.button1.Text = "odczytaj ze sterownika";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // bindingSource1
-            // 
-            this.bindingSource1.DataSource = typeof(InstrukcjeProdukcyjne.ServiceWorkstation.ModelWorkstationInfo);
-            // 
-            // resourceBindingSource
-            // 
-            this.resourceBindingSource.DataSource = typeof(ITechInstrukcjeModel.Resource);
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ModelsWorkstationEditDlg
             // 

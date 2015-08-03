@@ -60,7 +60,7 @@
             this.axAcroPDF1.Location = new System.Drawing.Point(0, 0);
             this.axAcroPDF1.Name = "axAcroPDF1";
             this.axAcroPDF1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axAcroPDF1.OcxState")));
-            this.axAcroPDF1.Size = new System.Drawing.Size(426, 767);
+            this.axAcroPDF1.Size = new System.Drawing.Size(390, 767);
             this.axAcroPDF1.TabIndex = 1;
             this.axAcroPDF1.OnError += new System.EventHandler(this.axAcroPDF1_OnError);
             // 
@@ -80,10 +80,10 @@
             this.customPanel2.Curvature = 10;
             this.customPanel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.customPanel2.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
-            this.customPanel2.Location = new System.Drawing.Point(426, 0);
+            this.customPanel2.Location = new System.Drawing.Point(390, 0);
             this.customPanel2.Name = "customPanel2";
             this.customPanel2.Padding = new System.Windows.Forms.Padding(5);
-            this.customPanel2.Size = new System.Drawing.Size(303, 767);
+            this.customPanel2.Size = new System.Drawing.Size(339, 767);
             this.customPanel2.TabIndex = 2;
             // 
             // customPanel5
@@ -99,7 +99,7 @@
             this.customPanel5.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
             this.customPanel5.Location = new System.Drawing.Point(5, 719);
             this.customPanel5.Name = "customPanel5";
-            this.customPanel5.Size = new System.Drawing.Size(293, 43);
+            this.customPanel5.Size = new System.Drawing.Size(329, 43);
             this.customPanel5.TabIndex = 13;
             // 
             // button9
@@ -113,7 +113,7 @@
             this.button9.ForeColor = System.Drawing.Color.White;
             this.button9.Location = new System.Drawing.Point(0, 0);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(293, 43);
+            this.button9.Size = new System.Drawing.Size(329, 43);
             this.button9.TabIndex = 0;
             this.button9.Text = "Z a m k n i j";
             this.button9.UseVisualStyleBackColor = true;
@@ -122,7 +122,7 @@
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackgroundImage = global::InstrukcjeProdukcyjne.Properties.Resources.schemat_bitmap_dla_PDF;
+            this.panel1.BackgroundImage = global::InstrukcjeProdukcyjne.Properties.Resources.schemat_bitmap_dla_PDF2;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel1.Controls.Add(this.button10);
             this.panel1.Controls.Add(this.button11);
@@ -134,15 +134,15 @@
             this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.button1);
-            this.panel1.Location = new System.Drawing.Point(8, 52);
+            this.panel1.Location = new System.Drawing.Point(5, 46);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(321, 667);
+            this.panel1.Size = new System.Drawing.Size(334, 667);
             this.panel1.TabIndex = 3;
             // 
             // button10
             // 
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button10.Location = new System.Drawing.Point(3, 113);
+            this.button10.Location = new System.Drawing.Point(3, 3);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(103, 111);
             this.button10.TabIndex = 9;
@@ -155,7 +155,7 @@
             this.button11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.button11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button11.Location = new System.Drawing.Point(3, 3);
+            this.button11.Location = new System.Drawing.Point(3, 113);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(103, 111);
             this.button11.TabIndex = 8;

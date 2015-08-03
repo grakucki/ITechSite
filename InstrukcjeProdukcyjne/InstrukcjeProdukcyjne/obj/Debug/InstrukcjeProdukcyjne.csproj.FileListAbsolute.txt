@@ -82,3 +82,5 @@ D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\ob
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.application
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.exe
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.pdb
+D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bin\Debug\ItechSimatic.dll
+D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bin\Debug\S7.Net.dll

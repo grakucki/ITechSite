@@ -34,13 +34,14 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modelNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sterownikIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modelWorkstationInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sterownikIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modelNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.modelWorkstationInfoBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -89,8 +90,8 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
-            this.modelNameDataGridViewTextBoxColumn,
-            this.sterownikIndexDataGridViewTextBoxColumn});
+            this.sterownikIndexDataGridViewTextBoxColumn,
+            this.modelNameDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.modelWorkstationInfoBindingSource;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -106,29 +107,6 @@
             this.dataGridView1.RowTemplate.Height = 40;
             this.dataGridView1.Size = new System.Drawing.Size(821, 397);
             this.dataGridView1.TabIndex = 4;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // modelNameDataGridViewTextBoxColumn
-            // 
-            this.modelNameDataGridViewTextBoxColumn.DataPropertyName = "ModelName";
-            this.modelNameDataGridViewTextBoxColumn.HeaderText = "ModelName";
-            this.modelNameDataGridViewTextBoxColumn.Name = "modelNameDataGridViewTextBoxColumn";
-            this.modelNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.modelNameDataGridViewTextBoxColumn.Width = 300;
-            // 
-            // sterownikIndexDataGridViewTextBoxColumn
-            // 
-            this.sterownikIndexDataGridViewTextBoxColumn.DataPropertyName = "SterownikIndex";
-            this.sterownikIndexDataGridViewTextBoxColumn.HeaderText = "SterownikIndex";
-            this.sterownikIndexDataGridViewTextBoxColumn.Name = "sterownikIndexDataGridViewTextBoxColumn";
-            this.sterownikIndexDataGridViewTextBoxColumn.ReadOnly = true;
-            this.sterownikIndexDataGridViewTextBoxColumn.Width = 300;
             // 
             // modelWorkstationInfoBindingSource
             // 
@@ -167,11 +145,46 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button4.Location = new System.Drawing.Point(601, 12);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(152, 56);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "Odczytaj ze sterownika";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // sterownikIndexDataGridViewTextBoxColumn
+            // 
+            this.sterownikIndexDataGridViewTextBoxColumn.DataPropertyName = "SterownikIndex";
+            this.sterownikIndexDataGridViewTextBoxColumn.HeaderText = "Sterownik Index";
+            this.sterownikIndexDataGridViewTextBoxColumn.Name = "sterownikIndexDataGridViewTextBoxColumn";
+            this.sterownikIndexDataGridViewTextBoxColumn.ReadOnly = true;
+            this.sterownikIndexDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // modelNameDataGridViewTextBoxColumn
+            // 
+            this.modelNameDataGridViewTextBoxColumn.DataPropertyName = "Nazwa modelu";
+            this.modelNameDataGridViewTextBoxColumn.HeaderText = "ModelName";
+            this.modelNameDataGridViewTextBoxColumn.Name = "modelNameDataGridViewTextBoxColumn";
+            this.modelNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.modelNameDataGridViewTextBoxColumn.Width = 500;
+            // 
             // ModelsWorkstationDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(858, 584);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -196,8 +209,9 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.BindingSource modelWorkstationInfoBindingSource;
+        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn modelNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sterownikIndexDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modelNameDataGridViewTextBoxColumn;
     }
 }

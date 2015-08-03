@@ -25,7 +25,10 @@ namespace ITechInstrukcjeModel
         "S7300" ,
         "S7400" ,
         "S71200",
-        "S71500"};
+        "S71500",
+        "Demo",
+        "Brak"};
+        
     }
 
 
