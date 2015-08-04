@@ -41,7 +41,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sterownikIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modelNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ModelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.modelWorkstationInfoBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -51,7 +51,7 @@
             this.buttonCancel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonCancel.Location = new System.Drawing.Point(156, 476);
+            this.buttonCancel.Location = new System.Drawing.Point(170, 476);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(152, 96);
             this.buttonCancel.TabIndex = 3;
@@ -63,7 +63,7 @@
             this.buttonOk.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonOk.Location = new System.Drawing.Point(367, 476);
+            this.buttonOk.Location = new System.Drawing.Point(381, 476);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(147, 96);
             this.buttonOk.TabIndex = 2;
@@ -91,7 +91,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn,
             this.sterownikIndexDataGridViewTextBoxColumn,
-            this.modelNameDataGridViewTextBoxColumn});
+            this.ModelName});
             this.dataGridView1.DataSource = this.modelWorkstationInfoBindingSource;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -105,7 +105,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 40;
-            this.dataGridView1.Size = new System.Drawing.Size(821, 397);
+            this.dataGridView1.Size = new System.Drawing.Size(849, 397);
             this.dataGridView1.TabIndex = 4;
             // 
             // modelWorkstationInfoBindingSource
@@ -171,19 +171,19 @@
             this.sterownikIndexDataGridViewTextBoxColumn.ReadOnly = true;
             this.sterownikIndexDataGridViewTextBoxColumn.Width = 150;
             // 
-            // modelNameDataGridViewTextBoxColumn
+            // ModelName
             // 
-            this.modelNameDataGridViewTextBoxColumn.DataPropertyName = "Nazwa modelu";
-            this.modelNameDataGridViewTextBoxColumn.HeaderText = "ModelName";
-            this.modelNameDataGridViewTextBoxColumn.Name = "modelNameDataGridViewTextBoxColumn";
-            this.modelNameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.modelNameDataGridViewTextBoxColumn.Width = 500;
+            this.ModelName.DataPropertyName = "ModelName";
+            this.ModelName.HeaderText = "ModelName";
+            this.ModelName.Name = "ModelName";
+            this.ModelName.ReadOnly = true;
+            this.ModelName.Width = 550;
             // 
             // ModelsWorkstationDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(858, 584);
+            this.ClientSize = new System.Drawing.Size(886, 584);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -210,8 +210,9 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.BindingSource modelWorkstationInfoBindingSource;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modelNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sterownikIndexDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn modelNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModelName;
     }
 }

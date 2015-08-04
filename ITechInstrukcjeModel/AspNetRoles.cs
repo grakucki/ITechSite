@@ -11,7 +11,6 @@ namespace ITechInstrukcjeModel
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
     
     public partial class AspNetRoles
     {
@@ -23,7 +22,6 @@ namespace ITechInstrukcjeModel
         public string Id { get; set; }
         public string Name { get; set; }
     
-        [IgnoreDataMember]
         public virtual ICollection<ItechUsers> ItechUsers { get; set; }
     }
 }

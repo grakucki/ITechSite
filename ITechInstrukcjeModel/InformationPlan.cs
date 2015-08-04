@@ -11,7 +11,6 @@ namespace ITechInstrukcjeModel
 {
     using System;
     using System.Collections.Generic;
-using System.Runtime.Serialization;
     
     public partial class InformationPlan
     {
@@ -22,7 +21,6 @@ using System.Runtime.Serialization;
         public bool Enabled { get; set; }
     
         public virtual Dokument Dokument { get; set; }
-        [IgnoreDataMember]
         public virtual Resource Resource { get; set; }
     }
 }

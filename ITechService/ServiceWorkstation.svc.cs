@@ -143,9 +143,11 @@ namespace ITechService
 
                     var q = context.Resource.Where(m => m.Id == idR)
                         .Include(m => m.InformationPlan)
-                        .Include(m=>m.InformationPlan.Select(y=>y.Dokument))
-                        .Include(m=>m.Workstation)
-                        .Include(m => m.News);
+                        .Include(m => m.InformationPlan.Select(y => y.Dokument))
+                        .Include(m => m.Workstation)
+                        .Include(m => m.News)
+                        .Include(m => m.ModelsWorkstation);
+
                     o=q.FirstOrDefault();
                 }
             }
@@ -175,7 +177,8 @@ namespace ITechService
                         .Include(m => m.Workstation)
                         .Include(m => m.InformationPlan)
                         .Include(m => m.InformationPlan.Select(y => y.Dokument))
-                        .Include(m => m.News);
+                        .Include(m => m.News)
+                        .Include(m=>m.ModelsWorkstation);
                     o = q.ToList();
                 }
             }
@@ -241,7 +244,6 @@ namespace ITechService
 
 
                     // modele dorobić aby zwracała tylko potrzebne dokumenty dla wszystkich modeli produkowanych na stacji
-
                     var q2 = context.Dokument.Where(m => m.InformationPlan.Any(i => i.Resource.Type == 2 && i.Enabled == true))
                         .Select(m => new DokumentIdentity { id = m.Id, CodeName = m.CodeName, LastWriteTime = m.LastWriteTime, LocalFileName = m.LocalFileName, Size = m.Size ?? 0 });
                     q=q.Union(q2);
