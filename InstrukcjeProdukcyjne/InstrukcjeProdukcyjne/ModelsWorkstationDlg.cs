@@ -1,5 +1,6 @@
 ﻿
 using ITechInstrukcjeModel;
+using ItechSimatic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -160,7 +161,7 @@ namespace InstrukcjeProdukcyjne
         // zwraca listrę modeli na sterowniku
         private List<string> ReadFromSimatic()
         {
-                ItechSimatic.SitechSimaticDevice sitech = new ItechSimatic.SitechSimaticDevice(
+                SitechSimaticDevice sitech = new SitechSimaticDevice(
                    (S7.Net.CpuType)Enum.Parse(typeof(S7.Net.CpuType),  Workstation.Sterownik_Model), 
                     Workstation.Sterownik_Ip, 
                     (ushort) Workstation.Setrownik_DB.GetValueOrDefault(22),

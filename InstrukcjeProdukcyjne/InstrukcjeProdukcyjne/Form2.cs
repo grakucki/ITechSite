@@ -115,6 +115,33 @@ namespace InstrukcjeProdukcyjne
                         return ret;
                 }
             }
+        }
+
+        private void SimaticRead()
+        {
+            try
+            {
+                toolStripStatusLabel2.Text = "Sterownik : ???";
+                Workstation w = this.CurrentWorkstation.Workstation.FirstOrDefault();
+                if (w == null)
+                    return;
+
+                var conn = SitechSimaticDeviceEx.CreateFromWorkstation(w);
+                conn.Fill(false);
+
+                toolStripStatusLabel2.Text = "Sterownik : " + conn.NrModelu.ToString();
+                var modelindex = this.CurrentWorkstation.ModelsWorkstation.Where(m=>m.index==conn.NrModelu.ToString()).FirstOrDefault();
+                if (modelindex!=null)
+                {
+                    // znajdź nazwę modelu
+                    var model = modelindex.Models;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
         }
 
@@ -745,6 +772,11 @@ namespace InstrukcjeProdukcyjne
             //e.Graphics.DrawRectangle(p, e.Bounds);
 
             e.DrawDefault = true;
+        }
+
+        private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+        {
+            SimaticRead();
         }
 
     

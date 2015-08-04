@@ -35,6 +35,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusITechTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.WorkStationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -146,7 +147,8 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.toolStripStatusITechTime});
+            this.toolStripStatusITechTime,
+            this.toolStripStatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(10, 660);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1116, 22);
@@ -156,7 +158,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(1058, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(968, 17);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -167,6 +169,13 @@
             this.toolStripStatusITechTime.Name = "toolStripStatusITechTime";
             this.toolStripStatusITechTime.Size = new System.Drawing.Size(43, 17);
             this.toolStripStatusITechTime.Text = "  00:00 ";
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(59, 17);
+            this.toolStripStatusLabel2.Text = "Sterownik";
+            this.toolStripStatusLabel2.Click += new System.EventHandler(this.toolStripStatusLabel2_Click);
             // 
             // WorkStationBindingSource
             // 
@@ -902,6 +911,7 @@
         private System.Windows.Forms.Label label3;
         private CustomPanelControl.CustomPanel customPanel7;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
     }
 }
 

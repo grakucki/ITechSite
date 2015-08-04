@@ -1,4 +1,5 @@
 ﻿using ITechInstrukcjeModel;
+using ItechSimatic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,7 +37,7 @@ namespace InstrukcjeProdukcyjne
         {
             try
             { 
-                ItechSimatic.SitechSimaticDevice sitech = new ItechSimatic.SitechSimaticDevice(GetSimaticType(), GetIpDevice(), GetDb(), Workstation.AllowIp);
+                SitechSimaticDevice sitech = new SitechSimaticDevice(GetSimaticType(), GetIpDevice(), GetDb(), Workstation.AllowIp);
                 string s;
                 if (sitech.IsAvailable())
                     s = "Połączenia poprawne - sterownik: " + sitech.IdSterownika;
