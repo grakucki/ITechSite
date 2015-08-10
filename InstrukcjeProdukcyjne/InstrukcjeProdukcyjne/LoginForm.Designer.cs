@@ -224,6 +224,7 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(627, 113);
             this.panel3.TabIndex = 0;
+            this.panel3.Visible = false;
             // 
             // textBoxPass
             // 

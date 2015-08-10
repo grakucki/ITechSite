@@ -85,3 +85,10 @@ D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\ob
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bin\Debug\ItechSimatic.dll
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bin\Debug\S7.Net.dll
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.ModelsWorkstationImprtDlg.resources
+D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\CustomPanelControl.CustomPanel.resources
+D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.DokumentShowDlg.resources
+D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.Form2.resources
+D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.ModelsWorkstationImprtDlg.resources
+D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.WaitDlg.resources
+D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bin\Debug\ItechSimatic.dll
+D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bin\Debug\S7.Net.dll

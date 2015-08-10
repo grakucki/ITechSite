@@ -88,6 +88,7 @@
             this.customPanel5 = new CustomPanelControl.CustomPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.timer3 = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WorkStationBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -158,7 +159,7 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(968, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(999, 17);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -805,6 +806,11 @@
             this.panel6.TabIndex = 9;
             this.panel6.Visible = false;
             // 
+            // timer3
+            // 
+            this.timer3.Interval = 5000;
+            this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -815,6 +821,7 @@
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
+            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -912,6 +919,7 @@
         private CustomPanelControl.CustomPanel customPanel7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.Timer timer3;
     }
 }
 

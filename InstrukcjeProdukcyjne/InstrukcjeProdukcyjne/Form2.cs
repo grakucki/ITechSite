@@ -117,11 +117,15 @@ namespace InstrukcjeProdukcyjne
             }
         }
 
+        private string _LastReadModelIndex = "";
         private void SimaticRead()
         {
             try
             {
                 toolStripStatusLabel2.Text = "Sterownik : ???";
+                if (this.CurrentWorkstation == null)
+                    return;
+
                 Workstation w = this.CurrentWorkstation.Workstation.FirstOrDefault();
                 if (w == null)
                     return;
@@ -134,7 +138,21 @@ namespace InstrukcjeProdukcyjne
                 if (modelindex!=null)
                 {
                     // znajdź nazwę modelu
-                    var model = modelindex.Models;
+                    if (modelindex.index !=_LastReadModelIndex)
+                    {
+                        var model = modelindex.idM;
+
+                        if (db.ResourceModel_Local != null)
+                        {
+                            var NewModel = db.ResourceModel_Local.Where(m => m.Id == model).FirstOrDefault();
+                            if (NewModel != null)
+                                CurrentModel = NewModel;
+                        }
+                        _LastReadModelIndex = modelindex.index;
+                    }
+
+
+                    
                 }
 
             }
@@ -201,6 +219,9 @@ namespace InstrukcjeProdukcyjne
             }
             timer1.Enabled = true;
             timer1_Tick(sender, e);
+
+            timer3.Enabled = true;
+            timer3_Tick(sender, e);
             DocSyncDlg.Sync();
         }
 
@@ -783,6 +804,11 @@ namespace InstrukcjeProdukcyjne
         }
 
         private void toolStripStatusLabel2_Click(object sender, EventArgs e)
+        {
+            SimaticRead();
+        }
+
+        private void timer3_Tick(object sender, EventArgs e)
         {
             SimaticRead();
         }
