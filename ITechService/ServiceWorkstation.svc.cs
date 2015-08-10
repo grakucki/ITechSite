@@ -23,7 +23,7 @@ namespace ITechService
         public string TestConnection(int value)
         {
             StringBuilder ret = new StringBuilder();
-            ret.AppendLine("Serwis ... v1.16 Ok");
+            ret.AppendLine("Serwis ... v1.17 Ok");
             try
             {
                 ret.Append("Baza danych ... ");
@@ -178,7 +178,7 @@ namespace ITechService
                         .Include(m => m.InformationPlan)
                         .Include(m => m.InformationPlan.Select(y => y.Dokument))
                         .Include(m => m.News)
-                        .Include(m=>m.ModelsWorkstation);
+                        .Include(m => m.ModelsWorkstation);
                     o = q.ToList();
                 }
             }

@@ -237,15 +237,23 @@ namespace InstrukcjeProdukcyjne
 
             using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
             {
-                if (client.IsOnLine())
+                try
                 {
-                    var t = await client.GetInformationPlainsListAsync(idR.Value);
-                    db.Resource_Local = t.ToList();
-                    db.ExportResources(null);
-                    var i = await client.GetITechUserListAsync();
-                    db.ItechUsers_Local = i.ToList();
-                    db.ExportItechUsers(null);
+                    if (client.IsOnLine())
+                    {
+                        var t = await client.GetInformationPlainsListAsync(idR.Value);
+                        db.Resource_Local = t.ToList();
+                        db.ExportResources(null);
+                        var i = await client.GetITechUserListAsync();
+                        db.ItechUsers_Local = i.ToList();
+                        db.ExportItechUsers(null);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
             }
 
             if (db.Resource_Local == null)

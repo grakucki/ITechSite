@@ -165,6 +165,12 @@
     <Compile Include="ModelsWorkstationEditDlg.Designer.cs">
       <DependentUpon>ModelsWorkstationEditDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModelsWorkstationImprtDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModelsWorkstationImprtDlg.Designer.cs">
+      <DependentUpon>ModelsWorkstationImprtDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="MyFileInfo.cs" />
     <Compile Include="PdfViewerControl.cs">
       <SubType>UserControl</SubType>
@@ -261,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ModelsWorkstationEditDlg.resx">
       <DependentUpon>ModelsWorkstationEditDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModelsWorkstationImprtDlg.resx">
+      <DependentUpon>ModelsWorkstationImprtDlg.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PdfViewerControl.resx">
       <DependentUpon>PdfViewerControl.cs</DependentUpon>

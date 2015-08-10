@@ -97,4 +97,16 @@ namespace ITechInstrukcjeModel
     //    [IgnoreDataMember]
     //    public virtual Resource Resource { get; set; }
     //}
+
+
+     //public partial class ModelsWorkstation
+     //[System.Runtime.Serialization.IgnoreDataMember]
+        //public virtual Resource Workstation { get; set; }
+        //[System.Runtime.Serialization.IgnoreDataMember]
+        //public virtual Resource Models { get; set; }
+
+     //public partial class AspNetRoles
+        //    [System.Runtime.Serialization.IgnoreDataMember]
+        //    public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+
 }

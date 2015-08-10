@@ -21,6 +21,7 @@ namespace ITechInstrukcjeModel
         public bool Enabled { get; set; }
     
         public virtual Dokument Dokument { get; set; }
+                [System.Runtime.Serialization.IgnoreDataMember]
         public virtual Resource Resource { get; set; }
     }
 }

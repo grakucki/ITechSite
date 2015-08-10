@@ -37,7 +37,7 @@ namespace InstrukcjeProdukcyjne
 	        {	        
                 using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
                 {
-                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR).ToList();
+                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR).OrderBy(m=>m.ModelName).ToList();
                 }
 		
 	        }
@@ -54,10 +54,7 @@ namespace InstrukcjeProdukcyjne
 
         }
 
-        private void buttonOk_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         ServiceWorkstation.ModelWorkstationInfo GetCurrent()
         {
@@ -159,7 +156,7 @@ namespace InstrukcjeProdukcyjne
         }
 
         // zwraca listrę modeli na sterowniku
-        private List<string> ReadFromSimatic()
+        private List<string> ReadFromSimatic2()
         {
                 SitechSimaticDevice sitech = new SitechSimaticDevice(
                    (S7.Net.CpuType)Enum.Parse(typeof(S7.Net.CpuType),  Workstation.Sterownik_Model), 
@@ -180,57 +177,122 @@ namespace InstrukcjeProdukcyjne
                 return sitech.Nazwa_Modelu();
         }
 
+
+        // zwraca listrę modeli na sterowniku
+        private List<ServiceWorkstation.ModelWorkstationInfo> ReadFromSimatic()
+        {
+            SitechSimaticDevice sitech = new SitechSimaticDevice(
+               (S7.Net.CpuType)Enum.Parse(typeof(S7.Net.CpuType), Workstation.Sterownik_Model),
+                Workstation.Sterownik_Ip,
+                (ushort)Workstation.Setrownik_DB.GetValueOrDefault(22),
+                Workstation.AllowIp
+                );
+
+            if (!sitech.IsAvailable())
+            {
+                MessageBox.Show("Sterownik nie jest dostępny.");
+                return null;
+            }
+            sitech.FileName = Properties.Settings.Default.App.LocalDoc + @"\simatic.xml";
+            sitech.Fill();
+
+            int nrModelu = sitech.NrModelu;
+
+            List<ServiceWorkstation.ModelWorkstationInfo> ret = new List<ServiceWorkstation.ModelWorkstationInfo>();
+            int cnt = 0;
+            foreach (var item in sitech.Nazwa_Modelu())
+            {
+                
+                if (!string.IsNullOrEmpty(item))
+                {
+                    var x = new ServiceWorkstation.ModelWorkstationInfo();
+                    x.ModelName=item;
+                    x.SterownikIndex=cnt.ToString();
+                    ret.Add(x);
+                }
+                cnt++;
+            }
+
+            return ret.OrderBy(m=>m.ModelName).ToList();
+        }
+        
         private void button4_Click(object sender, EventArgs e)
         {
             try
             {
                 var modelsFromSimatic = ReadFromSimatic();
-                List<ServiceWorkstation.ModelWorkstationInfo> modelsFromDb = (List<ServiceWorkstation.ModelWorkstationInfo>) modelWorkstationInfoBindingSource.DataSource;
-                List<ServiceWorkstation.ModelWorkstationInfo> modelsFromDb2Delete = new List<ServiceWorkstation.ModelWorkstationInfo>(modelsFromDb);
+                List<ServiceWorkstation.ModelWorkstationInfo> modelsFromDb = ((List<ServiceWorkstation.ModelWorkstationInfo>) modelWorkstationInfoBindingSource.DataSource).OrderBy(m=>m.ModelName).ToList();
+                List<ServiceWorkstation.ModelWorkstationInfo> modelsFromDb2Delete = new List<ServiceWorkstation.ModelWorkstationInfo>();
+
  
                 using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
                 {
                     var AllModels = client.GetModels().ToList();
+
+                    // prepare toDeleteList
+                    foreach (var item in modelsFromDb)
+                    {
+                        if (!string.IsNullOrEmpty(item.ModelName))
+                        {
+                            // szukamy czy mamy go już na liście
+                            var modeldb = modelsFromSimatic.FirstOrDefault(m=>m.ModelName== item.ModelName);
+                            if (modeldb == null)
+                                modelsFromDb2Delete.Add(item);
+                        }
+                    }
+                    modelsFromDb2Delete = modelsFromDb2Delete.OrderBy(m => m.ModelName).ToList();
+                    // import dialog
+                    var dImport = new ModelsWorkstationImprtDlg();
+                    dImport.modelsFromDb = modelsFromDb;
+                    dImport.modelsFromSimatic = modelsFromSimatic;
+                    dImport.modelsDelete = modelsFromDb2Delete;
+
+                    if (dImport.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+                        return;
+
+                    // usuwamy
+                    if (modelsFromDb2Delete.Count > 0)
+                    {
+                        if (dImport.NoDeleteModeles == false)
+                        {
+                            foreach (var delmodeldb in modelsFromDb2Delete)
+                            {
+                                client.UpdateModelWorkstationInfo(delmodeldb, true);
+                            }
+                        }
+                    }
+
+
                     int index = 0;
                     foreach (var item in modelsFromSimatic)
                     {
-                        if (!string.IsNullOrEmpty(item))
+                        if (!string.IsNullOrEmpty(item.ModelName))
                         {
                             // szukamy czy mamy go już na liście
-                            var modeldb = modelsFromDb.FirstOrDefault(m=>m.SterownikIndex==index.ToString());
+                            var modeldb = modelsFromDb.FirstOrDefault(m=>m.ModelName==item.ModelName);
                             if (modeldb==null)
                             {
-                                //dodajemy 
+                                // dodajemy 
                                 modeldb = new ServiceWorkstation.ModelWorkstationInfo();
-                                modeldb.SterownikIndex=index.ToString();
-                                modeldb.idW=Workstation.idR;
-                            }
-                            else
-                            {
-                                modelsFromDb2Delete.Remove(modeldb);
                             }
 
                             // update
-                            var model = AllModels.Where(m => m.Name == item).FirstOrDefault();
+                            var model = AllModels.Where(m => m.Name == item.ModelName).FirstOrDefault();
                             if (model == null)
                             {
-                                MessageBox.Show("Nieznana nazwa modelu : ", item);
+                                MessageBox.Show("Nieznana nazwa modelu : " + item.ModelName);
                                 continue;
                             }
-                            if (modeldb.idM != model.Id)
-                            {
-                                modeldb.idM = model.Id;
-                                client.UpdateModelWorkstationInfo(modeldb, false);
-                            }
 
+                            modeldb.SterownikIndex = item.SterownikIndex;
+                            modeldb.idW = Workstation.idR;
+                            modeldb.idM = model.Id;
+                            client.UpdateModelWorkstationInfo(modeldb, false);
                         }
                         index++;  
                     }
-                    foreach (var delmodeldb in modelsFromDb2Delete)
-                    {
-                            client.UpdateModelWorkstationInfo(delmodeldb, true);
-                    }
-                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR).ToList();
+
+                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR).OrderBy(m=>m.ModelName).ToList();
                 }
 
             }
