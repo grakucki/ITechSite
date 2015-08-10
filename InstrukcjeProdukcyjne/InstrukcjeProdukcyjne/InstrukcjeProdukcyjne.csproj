@@ -108,6 +108,7 @@
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </Compile>
     <Compile Include="ActionControlStatus.cs" />
+    <Compile Include="AllowRoles.cs" />
     <Compile Include="ClickOneeHelper.cs" />
     <Compile Include="CornerCurveMode.cs" />
     <Compile Include="CursorWait.cs" />

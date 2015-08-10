@@ -34,6 +34,7 @@ namespace InstrukcjeProdukcyjne
         ITechInstrukcjeModel.ITechEntities db = new ITechInstrukcjeModel.ITechEntities();
 
         private SitechUser LoginUser = null;
+        private ItechUsers LoginUser2 = null;
         private Resource _CurrentWorkstation = null;
         public Resource CurrentWorkstation
         {
@@ -94,12 +95,12 @@ namespace InstrukcjeProdukcyjne
             return true;
         }
 
-        private DialogResult ShowLoginDlg(String message, bool allowCancel)
+        private DialogResult ShowLoginDlg(String message, bool allowCancel, string allowroles)
         {
             LoginForm login = new LoginForm();
             login.Message = message;
             login.db = db;
-            login.AllowRoles = "pracownik,kierownik";
+            login.AllowRoles = allowroles;
 
             while (true)
             {
@@ -111,26 +112,52 @@ namespace InstrukcjeProdukcyjne
                 }
                 if (ret == System.Windows.Forms.DialogResult.OK)
                 {
+                    LoginUser2 = login.User2;
                     if (DoLogin(login.User))
                         return ret;
                 }
             }
         }
 
+        private DialogResult ShowLoginDlg2(String message, bool allowCancel, string allowroles = "pracownik,kierownik")
+        {
+            LoginForm login = new LoginForm();
+            login.Message = message;
+            login.db = db;
+            login.AllowRoles = allowroles;
+
+            while (true)
+            {
+                var ret = login.ShowDialog();
+                if (allowCancel)
+                {
+                    if (ret == System.Windows.Forms.DialogResult.Cancel)
+                        return ret;
+                }
+                if (ret == System.Windows.Forms.DialogResult.OK)
+                {
+                    LoginUser2 = login.User2;
+                    return ret;
+                }
+            }
+        }
         private string _LastReadModelIndex = "";
         private string _LastSimaticError = "";
-
-        private void SimaticRead()
+        AutoResetEvent _TaskSimaticReadRunning = new AutoResetEvent(true);
+        private async Task<Resource> SimaticRead()
         {
+            Resource ret = null;
+            if (!_TaskSimaticReadRunning.WaitOne(0))
+                return null;
             try
             {
                 toolStripStatusLabel2.Text = "Sterownik : ???";
                 if (this.CurrentWorkstation == null)
-                    return;
+                    return null;
 
                 Workstation w = this.CurrentWorkstation.Workstation.FirstOrDefault();
                 if (w == null)
-                    return;
+                    return null;
 
                 var conn = SitechSimaticDeviceEx.CreateFromWorkstation(w);
                 conn.Fill(false);
@@ -148,7 +175,7 @@ namespace InstrukcjeProdukcyjne
                         {
                             var NewModel = db.ResourceModel_Local.Where(m => m.Id == model).FirstOrDefault();
                             if (NewModel != null)
-                                CurrentModel = NewModel;
+                                ret = NewModel;
                         }
                         _LastReadModelIndex = modelindex.index;
                     }
@@ -158,7 +185,8 @@ namespace InstrukcjeProdukcyjne
             {
                _LastSimaticError= ex.Message;
             }
-
+            _TaskSimaticReadRunning.Set();
+            return ret; //CurrentModel
         }
 
         private async void Form1_Load(object sender, EventArgs e)
@@ -202,7 +230,7 @@ namespace InstrukcjeProdukcyjne
 
 
                 waitDlg.Hide();
-                if (ShowLoginDlg("", true) == System.Windows.Forms.DialogResult.Cancel)
+                if (ShowLoginDlg("", true, AllowRoles.All) == System.Windows.Forms.DialogResult.Cancel)
                     this.Close();
                 waitDlg.Show();
 
@@ -491,7 +519,7 @@ namespace InstrukcjeProdukcyjne
         {
             try
             {
-                ShowLoginDlg("Użyj kart aby odblokować", false);
+                ShowLoginDlg("Użyj kart aby odblokować", false, AllowRoles.All);
                 Application.DoEvents();
                 using (var dial = new WaitDlg())
                 {
@@ -504,7 +532,6 @@ namespace InstrukcjeProdukcyjne
             catch (Exception)
             {
                 
-                throw;
             }
         }
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -530,14 +557,30 @@ namespace InstrukcjeProdukcyjne
         }
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
+            if (!AllowAction(AllowRoles.Kierownik, "Aby zmienić ustawienia przyłóż kartę"))
+                return;
+
             ShowSettings();
             // ustawienia
         }
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
+            if (!AllowAction(AllowRoles.Kierownik, "Aby zamknąć przyłóż kartę"))
+                return;
             // zakończ
             this.Close();
+        }
+
+        private bool AllowAction(string allowRoles, string LoginMsg)
+        {
+            var b = LoginUser2.IsInRole(allowRoles);
+            if (b == true)
+                return true;
+            if (ShowLoginDlg(LoginMsg, true, allowRoles)==System.Windows.Forms.DialogResult.OK)
+                return true;
+            return false;
+
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
@@ -802,15 +845,40 @@ namespace InstrukcjeProdukcyjne
 
         private void toolStripStatusLabel2_Click(object sender, EventArgs e)
         {
-            SimaticRead();
+            StartSimaticRead();
         }
 
 
+        private Task<Resource> SimaticReadTask = null;
+        private async void StartSimaticRead()
+        {
+            if ((SimaticReadTask != null) && (SimaticReadTask.IsCompleted == false ||
+                                       SimaticReadTask.Status == TaskStatus.Running ||
+                                       SimaticReadTask.Status == TaskStatus.WaitingToRun ||
+                                       SimaticReadTask.Status == TaskStatus.WaitingForActivation))
+                return;
+            
+            try
+            {
+                SimaticReadTask = Task.Run(() => SimaticRead());
+                
+                SimaticReadTask.ConfigureAwait(false);
+                var x = SimaticReadTask.Result;
+                //var x = await Task.Run(() => SimaticRead());
+                if (x != null)
+                    CurrentModel = x;
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        
         private void timer3_Tick(object sender, EventArgs e)
         {
-           
-                SimaticRead();
-          
+
+            StartSimaticRead();
         }
 
     

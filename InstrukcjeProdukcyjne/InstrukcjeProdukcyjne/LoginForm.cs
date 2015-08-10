@@ -20,6 +20,7 @@ namespace InstrukcjeProdukcyjne
         }
 
         public SitechUser User { get; set; }
+        public ITechInstrukcjeModel.ItechUsers User2 { get; set; }
         public String Message { get; set; }
         //public string CardReaderFileDat { get; set; }
 
@@ -109,9 +110,10 @@ namespace InstrukcjeProdukcyjne
                 label2.Text = cardno;
 
                 var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password==pass && m.IsInRoles(AllowRoles)).FirstOrDefault();
+                User2 = u;
                 if (u == null)
                 {
-                    label3.Text = "Brak uprawnień do zalogowania";
+                    label3.Text = "Brak uprawnień.";
                     User = new SitechUser();
                     TimerGo(false, 5);
 
@@ -121,7 +123,6 @@ namespace InstrukcjeProdukcyjne
                     label3.Text = u.UserName;
                     User = new SitechUser { UserName = u.UserName, NrKarty = cardno, IsLogin = true };
                     TimerGo(true, 1);
-
                 }
 
             }
@@ -145,6 +146,7 @@ namespace InstrukcjeProdukcyjne
                     label2.Text = cardno;
 
                     var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.IsInRoles(AllowRoles)).FirstOrDefault();
+                    User2 = u;
                     if (u == null)
                     {
                         label3.Text = "brak uprawnień do zalogowania";
