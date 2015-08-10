@@ -73,6 +73,17 @@ namespace ITechInstrukcjeModel
      }
 
 
+     public partial class ModelsWorkstation
+     {
+         public string ModelName
+         {
+             get
+             {
+                 var x = this.Models.Name;
+                 return x ;
+             }
+         }
+     }
 
     //public partial class Dokument
     //{

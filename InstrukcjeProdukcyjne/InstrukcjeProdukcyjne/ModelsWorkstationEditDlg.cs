@@ -28,12 +28,19 @@ namespace InstrukcjeProdukcyjne
         /// przypisanie modelu do stanowiska
         /// </summary>
         public ServiceWorkstation.ModelWorkstationInfo ModelWorkstationInfo { get; set; }
-        public Workstation Workstation { get; set; }
+        //public Workstation Workstation { get; set; }
+        public Resource Workstation { get; set; }
 
         private void ModelsWorkstationEditDlg_Load(object sender, EventArgs e)
         {
-            resourceBindingSource.DataSource = Models;
+
+            var workprocess = Workstation.WorkProcess;
+            //resourceBindingSource.DataSource = Models;
+            var x = Models.Where(m => m.WorkProcess == workprocess).ToList();
+            resourceBindingSource.DataSource = x;
             bindingSource1.DataSource = ModelWorkstationInfo;
+
+            textBox1.Text = Workstation.Name;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,12 +48,13 @@ namespace InstrukcjeProdukcyjne
             // odczytujemy aktualny index ze sterwonika oraz model według odytczaneg indexu
             try
             {
-                SitechSimaticDevice sitech = new SitechSimaticDevice(
-                   (S7.Net.CpuType)Enum.Parse(typeof(S7.Net.CpuType),  Workstation.Sterownik_Model), 
-                    Workstation.Sterownik_Ip, 
-                    (ushort) Workstation.Setrownik_DB.GetValueOrDefault(22),
-                    Workstation.AllowIp
-                    );
+                SitechSimaticDevice sitech = SitechSimaticDeviceEx.CreateFromWorkstation(Workstation.Workstation.FirstOrDefault());
+                //SitechSimaticDevice sitech = new SitechSimaticDevice(
+                //   (S7.Net.CpuType)Enum.Parse(typeof(S7.Net.CpuType),  Workstation.Sterownik_Model), 
+                //    Workstation.Sterownik_Ip, 
+                //    (ushort) Workstation.Setrownik_DB.GetValueOrDefault(22),
+                //    Workstation.AllowIp
+                //    );
 
                 if (!sitech.IsAvailable())
                 {
@@ -98,6 +106,19 @@ namespace InstrukcjeProdukcyjne
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            var workprocess = Workstation.WorkProcess;
+            if (checkBox1.Checked)
+                resourceBindingSource.DataSource = Models;
+            else
+            {
+                var x = Models.Where(m => m.WorkProcess == workprocess).ToList();
+                resourceBindingSource.DataSource = x;
+            }
+                
         }
     }
 }

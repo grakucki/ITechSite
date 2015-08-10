@@ -15,14 +15,16 @@ namespace InstrukcjeProdukcyjne
 {
     public partial class ModelsWorkstationDlg : Form
     {
-        public ModelsWorkstationDlg(Workstation workstation)
+        public ModelsWorkstationDlg(Resource workstation)
         {
             InitializeComponent();
-            Workstation = workstation;
+            ResourceWorkstation = workstation;
+            Workstation = workstation.Workstation.FirstOrDefault();
         }
 
         //public int? idR { get; set; }
-        
+
+        public Resource ResourceWorkstation { get; set; }
         public Workstation Workstation { get; set; }
         private void ModelsWorkstationDlg_Load(object sender, EventArgs e)
         {
@@ -82,7 +84,7 @@ namespace InstrukcjeProdukcyjne
                     ModelsWorkstationEditDlg dial = new ModelsWorkstationEditDlg();
                     dial.Models = _Models;
                     dial.ModelWorkstationInfo = n;
-                    dial.Workstation = Workstation;
+                    dial.Workstation = ResourceWorkstation;
                     if (dial.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
                         return;
 
@@ -113,7 +115,7 @@ namespace InstrukcjeProdukcyjne
                     ModelsWorkstationEditDlg dial = new ModelsWorkstationEditDlg();
                     dial.Models = _Models;
                     dial.ModelWorkstationInfo = n;
-                    dial.Workstation = Workstation;
+                    dial.Workstation = ResourceWorkstation;
                     if (dial.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
                         return;
 

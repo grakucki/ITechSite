@@ -40,6 +40,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.resourceBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -101,7 +102,6 @@
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(384, 35);
             this.textBox1.TabIndex = 7;
-            this.textBox1.Visible = false;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label1
@@ -113,7 +113,6 @@
             this.label1.Size = new System.Drawing.Size(185, 29);
             this.label1.TabIndex = 8;
             this.label1.Text = "Stacja robocza";
-            this.label1.Visible = false;
             // 
             // label2
             // 
@@ -160,6 +159,18 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold);
+            this.checkBox1.Location = new System.Drawing.Point(308, 265);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(316, 33);
+            this.checkBox1.TabIndex = 13;
+            this.checkBox1.Text = "Pokaż wszystkie modele";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // ModelsWorkstationEditDlg
             // 
             this.AcceptButton = this.buttonOk;
@@ -167,6 +178,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(665, 480);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox2);
@@ -199,5 +211,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.BindingSource bindingSource1;
         private System.Windows.Forms.BindingSource resourceBindingSource;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

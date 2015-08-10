@@ -178,7 +178,9 @@ namespace ITechService
                         .Include(m => m.InformationPlan)
                         .Include(m => m.InformationPlan.Select(y => y.Dokument))
                         .Include(m => m.News)
-                        .Include(m => m.ModelsWorkstation);
+                        .Include(m => m.ModelsWorkstation)
+                        ;
+                        
                     o = q.ToList();
                 }
             }

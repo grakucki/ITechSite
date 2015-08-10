@@ -240,7 +240,7 @@ namespace InstrukcjeProdukcyjne
             // ustawienia modeli
             try 
 	        {	        
-	            ModelsWorkstationDlg dial = new ModelsWorkstationDlg(GetCurrent().Workstation.FirstOrDefault());
+	            ModelsWorkstationDlg dial = new ModelsWorkstationDlg(GetCurrent());
                 dial.ShowDialog();
 	        }
 	        catch (Exception ex) 

@@ -118,6 +118,8 @@ namespace InstrukcjeProdukcyjne
         }
 
         private string _LastReadModelIndex = "";
+        private string _LastSimaticError = "";
+
         private void SimaticRead()
         {
             try
@@ -150,15 +152,11 @@ namespace InstrukcjeProdukcyjne
                         }
                         _LastReadModelIndex = modelindex.index;
                     }
-
-
-                    
                 }
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+               _LastSimaticError= ex.Message;
             }
 
         }
@@ -250,7 +248,7 @@ namespace InstrukcjeProdukcyjne
             PrepareListView(listView3);
         }
 
-
+        string _SimaticLastMsg = string.Empty;
         async Task LoadResource_Async(int? idR)
         {
             if (!idR.HasValue)
@@ -272,7 +270,7 @@ namespace InstrukcjeProdukcyjne
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                   _SimaticLastMsg= ex.Message;
                 }
                 
             }
@@ -338,9 +336,8 @@ namespace InstrukcjeProdukcyjne
 
         private void ZaładujElementy(Resource res)
         {
-            var data = db.ResourceModel_Local;
+            var data = db.GetResourceModel_Local(res);
             ModelBindingSource.DataSource = data;
-
         }
 
        
@@ -808,9 +805,12 @@ namespace InstrukcjeProdukcyjne
             SimaticRead();
         }
 
+
         private void timer3_Tick(object sender, EventArgs e)
         {
-            SimaticRead();
+           
+                SimaticRead();
+          
         }
 
     

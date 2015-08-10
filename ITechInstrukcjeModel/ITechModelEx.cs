@@ -47,6 +47,21 @@ namespace ITechInstrukcjeModel
 
         }
 
+
+        public List<Resource> GetResourceModel_Local(Resource WorkstatinoResource)
+        {
+            
+            var data2 = WorkstatinoResource.ModelsWorkstation;
+            List<Resource> models = new List<Resource>();
+            foreach (var item in data2)
+            {
+                models.AddRange(ResourceModel_Local.Where(m => m.Id == item.idM).ToList());
+            }
+
+            return models;
+        }
+
+
         public IQueryable<Resource> ResourceWorkstation
         {
             get
