@@ -110,9 +110,80 @@ namespace InstrukcjeProdukcyjne
         }
         #endregion
 
+        public bool CanUpdateClickOne()
+        {
+            return ApplicationDeployment.IsNetworkDeployed;
+        }
+
+        private DialogResult MessageBoxShow(string msg, string caption = "", MessageBoxButtons button = MessageBoxButtons.OK, MessageBoxIcon icon = MessageBoxIcon.None)
+        {
+            if (Silent)
+                return DialogResult.OK;
+
+            UpdateMsg = msg;
+            return MessageBox.Show(msg, caption, button);
+        }
+
+        public bool Silent { get; set; }
+        public String UpdateMsg;
 
 
-        private void InstallUpdateSyncWithInfo()
+        public void InstallUpdateSync()
+        {
+            UpdateCheckInfo info = null;
+            
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+
+                ApplicationDeployment ad = ApplicationDeployment.CurrentDeployment;
+                try
+                {
+
+                    info = ad.CheckForDetailedUpdate();
+
+                }
+                catch (DeploymentDownloadException )
+                {
+                    return;
+                }
+                catch (InvalidDeploymentException )
+                {
+                    return;
+                }
+                catch (InvalidOperationException )
+                {
+                    return;
+                }
+
+                if (info.UpdateAvailable)
+                {
+                    Boolean doUpdate = true;
+
+                    if (!info.IsUpdateRequired)
+                    {
+                    }
+                    else
+                    {
+                    }
+
+                    if (doUpdate)
+                    {
+                        try
+                        {
+                            ad.Update();
+                            Application.Restart();
+                        }
+                        catch (DeploymentDownloadException )
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        public void InstallUpdateSyncWithInfo()
         {
             UpdateCheckInfo info = null;
 
@@ -148,7 +219,7 @@ namespace InstrukcjeProdukcyjne
 
                     if (!info.IsUpdateRequired)
                     {
-                        DialogResult dr = MessageBox.Show("An update is available. Would you like to update the application now?", "Update Available", MessageBoxButtons.OKCancel);
+                        DialogResult dr = MessageBox.Show("Dostępna jest nowsza wersja aplikacji. Czy chcesz ją zainstalować?", "Aktualizacja", MessageBoxButtons.OKCancel);
                         if (!(DialogResult.OK == dr))
                         {
                             doUpdate = false;
@@ -169,12 +240,12 @@ namespace InstrukcjeProdukcyjne
                         try
                         {
                             ad.Update();
-                            MessageBox.Show("The application has been upgraded, and will now restart.");
+                            MessageBox.Show("Aplikacja została zaktualizowana i zostanie uruchomiona poniwnie.");
                             Application.Restart();
                         }
                         catch (DeploymentDownloadException dde)
                         {
-                            MessageBox.Show("Cannot install the latest version of the application. \n\nPlease check your network connection, or try again later. Error: " + dde);
+                            MessageBox.Show("Nie mogę zainstalować tej aktualizacji. \n\nSprawdź połączenie sieciowe lub spróbuj później. Błąd: " + dde);
                             return;
                         }
                     }

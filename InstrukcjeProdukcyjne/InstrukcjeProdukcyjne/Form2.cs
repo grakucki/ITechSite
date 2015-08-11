@@ -191,6 +191,10 @@ namespace InstrukcjeProdukcyjne
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+
+            CheckUpdate();
+
+
             var waitDlg = new WaitDlg();
             waitDlg.Show(this);
             Application.DoEvents();
@@ -249,6 +253,20 @@ namespace InstrukcjeProdukcyjne
             timer3.Enabled = true;
             timer3_Tick(sender, e);
             DocSyncDlg.Sync();
+        }
+
+        private void CheckUpdate()
+        {
+            try
+            {
+                var d = new AboutBox1();
+                d.InstallUpdateSync();
+            }
+            catch (Exception)
+            {
+                
+                
+            }
         }
 
         private void ClearControls()
