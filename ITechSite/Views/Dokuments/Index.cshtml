@@ -5,17 +5,24 @@
     //ITechSite.Models.FindDokumentModel info = ViewBag.FindDokumentModel;
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm("Index", "Dokuments", FormMethod.Get))
 {
     <div>
-        @Html.TextBoxFor(model => model.CodeName)
+        @Html.Label("Szukany dokument", new { htmlAttributes = new { @class = "form-control" } })
+        @Html.TextBoxFor(model => model.CodeName, htmlAttributes: new { @class = "form-control" })
+        <br />
+        @Html.LabelFor(model => model.Kategorie_Id, new { htmlAttributes = new { @class = "form-control" } })
+        @{ SelectList l = ViewBag.Kategoria_Id; }
+        @Html.DropDownList("Kategorie_Id", l, htmlAttributes: new { @class = "form-control" })
+
+        <br />
         <input type="submit" name="FindAction" value="Szukaj" class="btn btn-default" />
     </div>
 }
 <div>
-    @Html.PagedListPager(Model.Dokuments, page => Url.Action("Index", new { page, CodeName = Model.CodeName, FindAction = "page" }))
+    @Html.PagedListPager(Model.Dokuments, page => Url.Action("Index", new { page, CodeName = Model.CodeName,Kategorie_Id=Model.Kategorie_Id,  FindAction = "page" }))
 </div>
 
 <p>
@@ -46,6 +53,9 @@
         </th>
         <th>
             Proces roboczy
+        </th>
+        <th>
+            Kategoria
         </th>
         <th>
             Rozmiar
@@ -83,6 +93,9 @@
             @Html.DisplayFor(modelItem => item.WorkProcess.Name)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Kategorie.name)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Size2)
         </td>
         <td>
@@ -91,7 +104,7 @@
         <td>
             @Html.ActionLink("Pobierz", "Download", new { id = item.Id }) |
             @Html.ActionLink("Pokaż", "Show", new { id = item.Id }) |
-            @Html.ActionLink("Szczegóły", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Szczegóły", "Details", new { id=item.Id })
         </td>
     </tr>
 }

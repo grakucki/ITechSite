@@ -239,6 +239,7 @@
     <Compile Include="Controllers\EnumerableExtensions.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformationPlansController.cs" />
+    <Compile Include="Controllers\ItechUsersController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ResourcesController.cs" />
@@ -256,6 +257,15 @@
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dokument.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FileContent.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InformationPlan.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ItechModelEx\Dokument.cs" />
     <Compile Include="Models\ItechModelEx\InformationPlan.cs" />
     <Compile Include="Models\ItechModelEx\News.cs" />
@@ -268,14 +278,23 @@
     <Compile Include="Models\ItechUsersRoles.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Kategorie.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\News.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ResourceListEx.cs" />
-    <Compile Include="Models\SelectedResources.cs" />
-    <Compile Include="Models\SimaticCpuType.cs">
+    <Compile Include="Models\Resource.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ResourceListEx.cs" />
+    <Compile Include="Models\ResourceType.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SelectedResources.cs" />
     <Content Include="Areas\Testy\Content\fontawesome\css\font-awesome.css" />
     <Content Include="Areas\Testy\Content\fontawesome\css\font-awesome.min.css" />
     <Content Include="Areas\Testy\Content\fontawesome\fonts\fontawesome-webfont.svg" />
@@ -346,19 +365,13 @@
     <Content Include="Models\sql\2015-06-23.sql" />
     <Content Include="Models\sql\2015-07-06 naprawa w istniejących.sql" />
     <Content Include="Models\sql\2015-07-11.sql" />
+    <Compile Include="Models\SimaticCpuType.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UniqueAttribute.cs" />
     <Compile Include="Models\DBFile.cs" />
     <Compile Include="Models\DocumentModels.cs" />
-    <Compile Include="Models\Dokument.cs">
-      <DependentUpon>ITechModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\FileContent.cs">
-      <DependentUpon>ITechModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\InformationPlan.cs">
-      <DependentUpon>ITechModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ITechEntitiesEx.cs" />
     <Compile Include="Models\ITechModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -376,17 +389,8 @@
       <DependentUpon>ITechModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Model.cs">
-      <DependentUpon>ITechModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\OpenSqlFileStream.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Models\Resource.cs">
-      <DependentUpon>ITechModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ResourceType.cs">
-      <DependentUpon>ITechModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\WorkProcess.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
@@ -584,6 +588,7 @@
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\InformationPlans\Index2.cshtml" />
     <Content Include="Views\Testy\Index.cshtml" />
+    <Content Include="Views\ItechUsers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

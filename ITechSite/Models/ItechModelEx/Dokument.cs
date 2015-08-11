@@ -75,6 +75,10 @@ namespace ITechSite.Models
 
         [DisplayName("Proces roboczy")]
         public virtual WorkProcess WorkProcess { get; set; }
+
+        [DisplayName("Kategoria")]
+        public virtual Kategorie Kategorie { get; set; }
+
         //public virtual ICollection<FileContent> FileContent { get; set; }
         //public virtual ICollection<InformationPlan> InformationPlan { get; set; }
     }

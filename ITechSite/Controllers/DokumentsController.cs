@@ -71,16 +71,27 @@ namespace ITechSite.Controllers
                 Session["DokumentCodeName"] = model;
 
 
+            //if (!string.IsNullOrEmpty(model.CodeName))
+            //{
+            //    var query = db.Dokument.Where(m => (m.CodeName.Contains(model.CodeName) || m.FileName.Contains(model.CodeName)));
+            //    query = query.Include(d => d.WorkProcess).Include(d=>d.Kategorie);
+            //    model.Dokuments = query.OrderBy(m => m.CodeName).ToPagedList(model.page ?? 1, 5);
+            //}
+            //else
+            //    model.Dokuments = db.Dokument.Include(d => d.WorkProcess).OrderBy(m=>m.CodeName).ToPagedList(model.page ?? 1, 5);
+
+            var query = db.Dokument.Where(m=>m.Id>0);
+            if (model.Kategorie_Id.HasValue)
+                if (model.Kategorie_Id>=0)
+                    query = query.Where(m => m.Kategoria_Id == model.Kategorie_Id);
+
             if (!string.IsNullOrEmpty(model.CodeName))
-            {
-                var query = db.Dokument.Where(m => (m.CodeName.Contains(model.CodeName) || m.FileName.Contains(model.CodeName)));
-                query = query.Include(d => d.WorkProcess);
-                model.Dokuments = query.OrderBy(m => m.CodeName).ToPagedList(model.page ?? 1, 5);
-            }
-            else
-                model.Dokuments = db.Dokument.Include(d => d.WorkProcess).OrderBy(m=>m.CodeName).ToPagedList(model.page ?? 1, 5);
+                query = query.Where(m => (m.CodeName.Contains(model.CodeName) || m.FileName.Contains(model.CodeName)));
 
+            query = query.Include(d => d.WorkProcess).Include(d => d.Kategorie);
+            model.Dokuments = query.OrderBy(m => m.CodeName).ToPagedList(model.page ?? 1, 5);
 
+            ViewBag.Kategoria_Id = new SelectList(model.KategorieFind(db), "id", "name");
 
             //if (!string.IsNullOrEmpty(model.Find.CodeName))
             //    model.Dokuments = db.Dokument.Where(m => m.CodeName.IndexOf(model.Find.CodeName) >= 0).Include(d => d.WorkProcess);
@@ -110,6 +121,7 @@ namespace ITechSite.Controllers
         {
             ViewBag.FileContent_Id = new SelectList(db.FileContent, "Id", "FileName");
             ViewBag.WorkProcess_Id = new SelectList(db.WorkProcess, "Id", "Name");
+            ViewBag.Kategoria_Id = new SelectList(db.Kategorie, "Id", "name");
             var model = new Dokument();
             model.CodeName = "D001";
             model.ValidDtmOn = DateTime.Now;
@@ -123,7 +135,7 @@ namespace ITechSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FileName,CodeName,Enabled,Description,ValidDtmOn,ValidDtmOff,WorkProcess_Id,File")] Dokument dokument)
+        public ActionResult Create([Bind(Include = "Id,FileName,CodeName,Enabled,Description,ValidDtmOn,ValidDtmOff,WorkProcess_Id,File,Kategoria_Id")] Dokument dokument)
         {
             try
             {
@@ -156,6 +168,7 @@ namespace ITechSite.Controllers
                 }
 
                 ViewBag.WorkProcess_Id = new SelectList(db.WorkProcess, "Id", "Name", dokument.WorkProcess_Id);
+                ViewBag.Kategoria_Id = new SelectList(db.Kategorie, "Id", "name", dokument.Kategoria_Id);
             }
             catch (DbEntityValidationException)
             {
@@ -185,6 +198,8 @@ namespace ITechSite.Controllers
                 return HttpNotFound();
             }
             ViewBag.WorkProcess_Id = new SelectList(db.WorkProcess, "Id", "Name", dokument.WorkProcess_Id);
+            ViewBag.Kategoria_Id = new SelectList(db.Kategorie, "Id", "name", dokument.Kategoria_Id);
+
             return View(dokument);
         }
 
@@ -228,7 +243,7 @@ namespace ITechSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FileName,CodeName,Enabled,Description,ValidDtmOn,ValidDtmOff,WorkProcess_Id,File")] Dokument dokument)
+        public ActionResult Edit([Bind(Include = "Id,FileName,CodeName,Enabled,Description,ValidDtmOn,ValidDtmOff,WorkProcess_Id,File,Kategoria_Id")] Dokument dokument)
         {
             try
             {
@@ -246,6 +261,7 @@ namespace ITechSite.Controllers
                     return RedirectToAction("Index");
                 }
                 ViewBag.WorkProcess_Id = new SelectList(db.WorkProcess, "Id", "Name", dokument.WorkProcess_Id);
+                ViewBag.Kategoria_Id = new SelectList(db.Kategorie, "Id", "name", dokument.Kategoria_Id);
             }
             catch (DbEntityValidationException)
             {

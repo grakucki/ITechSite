@@ -16,7 +16,6 @@ namespace ITechSite.Models
     {
         public Resource()
         {
-            this.Enabled = true;
             this.InformationPlan = new HashSet<InformationPlan>();
             this.Workstation = new HashSet<Workstation>();
         }
@@ -31,9 +30,9 @@ namespace ITechSite.Models
         public string Description { get; set; }
         public string Keywords { get; set; }
     
-        public virtual ResourceType ResourceType { get; set; }
         public virtual ICollection<InformationPlan> InformationPlan { get; set; }
         public virtual News News { get; set; }
+        public virtual ResourceType ResourceType { get; set; }
         public virtual ICollection<Workstation> Workstation { get; set; }
     }
 }

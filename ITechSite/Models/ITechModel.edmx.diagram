@@ -9,26 +9,28 @@
         <EntityTypeShape EntityType="ITechModel.Model" Width="1.5" PointX="11.625" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="9.625" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.WorkProcess" Width="1.5" PointX="0.625" PointY="3.875" />
-        <EntityTypeShape EntityType="ITechModel.Dokument" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="ITechModel.Dokument" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="ITechModel.FK_Dokument_WorkProcess" />
         <EntityTypeShape EntityType="ITechModel.WorkstationGroup" Width="1.5" PointX="11.625" PointY="1.125" />
         <AssociationConnector Association="ITechModel.FK_Workstation_WorkstationGroup" />
         <AssociationConnector Association="ITechModel.FK_FileContent_Dokument1" />
-        <EntityTypeShape EntityType="ITechModel.ResourceType" Width="1.5" PointX="7.25" PointY="5.25" />
-        <EntityTypeShape EntityType="ITechModel.Resource" Width="1.5" PointX="7.5" PointY="1.125" />
-        <AssociationConnector Association="ITechModel.FK_Resource_Type" />
+        <EntityTypeShape EntityType="ITechModel.ResourceType" Width="1.5" PointX="7" PointY="4.625" />
         <EntityTypeShape EntityType="ITechModel.InformationPlan" Width="1.5" PointX="5.375" PointY="0.875" />
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Dokument" />
-        <AssociationConnector Association="ITechModel.FK_InformationPlan_Resource" />
         <EntityTypeShape EntityType="ITechModel.News" Width="1.5" PointX="10.5" PointY="5.375" />
-        <AssociationConnector Association="ITechModel.FK_News_Resource" />
         <EntityTypeShape EntityType="ITechModel.AspNetRoles" Width="1.5" PointX="4.875" PointY="6.5" />
-        <AssociationConnector Association="ITechModel.FK_Workstation_Resource" />
         <EntityTypeShape EntityType="ITechModel.SimaticCpuType" Width="1.5" PointX="7.375" PointY="7.75" />
         <EntityTypeShape EntityType="ITechModel.ItechUsers" Width="1.5" PointX="1" PointY="6.5" />
         <EntityTypeShape EntityType="ITechModel.ItechUsersRoles" Width="1.5" PointX="3" PointY="6.5" />
         <AssociationConnector Association="ITechModel.FK_ItechUsersRoles_AspNetRoles" />
         <AssociationConnector Association="ITechModel.FK_ItechUsersRoles_ItechUsers" />
+        <EntityTypeShape EntityType="ITechModel.Resource" Width="1.5" PointX="7.625" PointY="0.625" />
+        <AssociationConnector Association="ITechModel.FK_InformationPlan_Resource" />
+        <AssociationConnector Association="ITechModel.FK_News_Resource" />
+        <AssociationConnector Association="ITechModel.FK_Resource_Type" />
+        <AssociationConnector Association="ITechModel.FK_Workstation_Resource" />
+        <EntityTypeShape EntityType="ITechModel.Kategorie" Width="1.5" PointX="5.375" PointY="3.5" />
+        <AssociationConnector Association="ITechModel.FK_Dokument_Kategorie" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

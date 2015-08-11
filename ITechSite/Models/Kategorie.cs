@@ -12,12 +12,16 @@ namespace ITechSite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ItechUsersRoles
+    public partial class Kategorie
     {
-        public int ItechUserId { get; set; }
-        public string RoleId { get; set; }
+        public Kategorie()
+        {
+            this.Dokument = new HashSet<Dokument>();
+        }
     
-        public virtual AspNetRoles AspNetRoles { get; set; }
-        public virtual ItechUsers ItechUsers { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+    
+        public virtual ICollection<Dokument> Dokument { get; set; }
     }
 }
