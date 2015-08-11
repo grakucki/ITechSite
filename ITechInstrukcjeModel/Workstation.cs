@@ -24,7 +24,7 @@ namespace ITechInstrukcjeModel
         public Nullable<int> Setrownik_DB { get; set; }
         public string AllowIp { get; set; }
 
-                [System.Runtime.Serialization.IgnoreDataMember]
+        [System.Runtime.Serialization.IgnoreDataMember]
         public virtual Resource Resource { get; set; }
     }
 }

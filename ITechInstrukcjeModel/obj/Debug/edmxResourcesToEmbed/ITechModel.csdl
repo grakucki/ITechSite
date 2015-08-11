@@ -18,6 +18,8 @@
     <NavigationProperty Name="InformationPlan" Relationship="Self.FK_InformationPlan_Dokument" FromRole="Dokument" ToRole="InformationPlan" />
     <Property Name="Size" Type="Int64" annotation:StoreGeneratedPattern="Computed" />
     <Property Name="LocalFileName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Kategoria_Id" Type="Int32" />
+    <NavigationProperty Name="Kategorie" Relationship="ITechModel.FK_Dokument_Kategorie" FromRole="Dokument" ToRole="Kategorie" />
   </EntityType>
   <EntityType Name="InformationPlan">
     <Key>
@@ -81,6 +83,11 @@
     <AssociationSet Name="ItechUsersRoles" Association="ITechModel.ItechUsersRoles">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
       <End Role="ItechUsers" EntitySet="ItechUsers" />
+    </AssociationSet>
+    <EntitySet Name="Kategorie" EntityType="ITechModel.Kategorie" />
+    <AssociationSet Name="FK_Dokument_Kategorie" Association="ITechModel.FK_Dokument_Kategorie">
+      <End Role="Kategorie" EntitySet="Kategorie" />
+      <End Role="Dokument" EntitySet="Dokument" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Workstation">
@@ -231,9 +238,32 @@
     <Property Name="CardNo" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AspNetRoles" Relationship="ITechModel.ItechUsersRoles" FromRole="ItechUsers" ToRole="AspNetRoles" />
+    <Property Name="PasswordFormat" Type="Int32" />
+    <Property Name="LastTestKompetencjiDtm" Type="DateTime" Precision="3" />
+    <Property Name="LastTestKompetencjiResult" Type="Int32" />
   </EntityType>
   <Association Name="ItechUsersRoles">
     <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
     <End Type="ITechModel.ItechUsers" Role="ItechUsers" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Kategorie">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_Dokument_Kategorie" FromRole="Kategorie" ToRole="Dokument" />
+  </EntityType>
+  <Association Name="FK_Dokument_Kategorie">
+    <End Type="ITechModel.Kategorie" Role="Kategorie" Multiplicity="0..1" />
+    <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategorie">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Dokument">
+        <PropertyRef Name="Kategoria_Id" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

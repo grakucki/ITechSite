@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Dokument">
       <EntityTypeMapping TypeName="IsTypeOf(ITechModel.Dokument)">
         <MappingFragment StoreEntitySet="Dokument">
+          <ScalarProperty Name="Kategoria_Id" ColumnName="Kategoria_Id" />
           <ScalarProperty Name="LocalFileName" ColumnName="LocalFileName" />
           <ScalarProperty Name="Size" ColumnName="Size" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -109,6 +110,9 @@
     <EntitySetMapping Name="ItechUsers">
       <EntityTypeMapping TypeName="ITechModel.ItechUsers">
         <MappingFragment StoreEntitySet="ItechUsers">
+          <ScalarProperty Name="LastTestKompetencjiResult" ColumnName="LastTestKompetencjiResult" />
+          <ScalarProperty Name="LastTestKompetencjiDtm" ColumnName="LastTestKompetencjiDtm" />
+          <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="CardNo" ColumnName="CardNo" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -125,5 +129,13 @@
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="Kategorie">
+      <EntityTypeMapping TypeName="ITechModel.Kategorie">
+        <MappingFragment StoreEntitySet="Kategorie">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

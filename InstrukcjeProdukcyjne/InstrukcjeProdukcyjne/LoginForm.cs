@@ -187,7 +187,7 @@ namespace InstrukcjeProdukcyjne
 
         private string GetCardNo(string f)
         {
-            var mask = "0800040029011X99569718";
+            var mask = "0800040029011X99";
             if (f.Length < mask.Length)
                 throw new Exception("Nieprawidłowy format numeru karty");
 

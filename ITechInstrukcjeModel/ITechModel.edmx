@@ -29,6 +29,7 @@
           <Property Name="Keywords" Type="nvarchar(max)" />
           <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
           <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Kategoria_Id" Type="int" />
         </EntityType>
         <EntityType Name="InformationPlan">
           <Key>
@@ -49,6 +50,9 @@
           <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="CardNo" Type="nvarchar" MaxLength="256" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordFormat" Type="int" />
+          <Property Name="LastTestKompetencjiDtm" Type="datetime" />
+          <Property Name="LastTestKompetencjiResult" Type="int" />
         </EntityType>
         <EntityType Name="ItechUsersRoles">
           <Key>
@@ -57,6 +61,13 @@
           </Key>
           <Property Name="ItechUserId" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kategorie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <EntityType Name="ModelsWorkstation">
           <Key>
@@ -119,6 +130,18 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="16" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Dokument_Kategorie">
+          <End Role="Kategorie" Type="Self.Kategorie" Multiplicity="0..1" />
+          <End Role="Dokument" Type="Self.Dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Dokument">
+              <PropertyRef Name="Kategoria_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_InformationPlan_Dokument">
           <End Role="Dokument" Type="Self.Dokument" Multiplicity="1" />
           <End Role="InformationPlan" Type="Self.InformationPlan" Multiplicity="*" />
@@ -221,12 +244,17 @@
           <EntitySet Name="InformationPlan" EntityType="Self.InformationPlan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItechUsers" EntityType="Self.ItechUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItechUsersRoles" EntityType="Self.ItechUsersRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategorie" EntityType="Self.Kategorie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModelsWorkstation" EntityType="Self.ModelsWorkstation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SimaticCpuType" EntityType="Self.SimaticCpuType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkstationGroup" EntityType="Self.WorkstationGroup" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Dokument_Kategorie" Association="Self.FK_Dokument_Kategorie">
+            <End Role="Kategorie" EntitySet="Kategorie" />
+            <End Role="Dokument" EntitySet="Dokument" />
+          </AssociationSet>
           <AssociationSet Name="FK_InformationPlan_Dokument" Association="Self.FK_InformationPlan_Dokument">
             <End Role="Dokument" EntitySet="Dokument" />
             <End Role="InformationPlan" EntitySet="InformationPlan" />
@@ -282,6 +310,8 @@
           <NavigationProperty Name="InformationPlan" Relationship="Self.FK_InformationPlan_Dokument" FromRole="Dokument" ToRole="InformationPlan" />
           <Property Name="Size" Type="Int64" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="LocalFileName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Kategoria_Id" Type="Int32" />
+          <NavigationProperty Name="Kategorie" Relationship="ITechModel.FK_Dokument_Kategorie" FromRole="Dokument" ToRole="Kategorie" />
         </EntityType>
         <EntityType Name="InformationPlan">
           <Key>
@@ -345,6 +375,11 @@
           <AssociationSet Name="ItechUsersRoles" Association="ITechModel.ItechUsersRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="ItechUsers" EntitySet="ItechUsers" />
+          </AssociationSet>
+          <EntitySet Name="Kategorie" EntityType="ITechModel.Kategorie" />
+          <AssociationSet Name="FK_Dokument_Kategorie" Association="ITechModel.FK_Dokument_Kategorie">
+            <End Role="Kategorie" EntitySet="Kategorie" />
+            <End Role="Dokument" EntitySet="Dokument" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Workstation">
@@ -495,10 +530,33 @@
           <Property Name="CardNo" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetRoles" Relationship="ITechModel.ItechUsersRoles" FromRole="ItechUsers" ToRole="AspNetRoles" />
+          <Property Name="PasswordFormat" Type="Int32" />
+          <Property Name="LastTestKompetencjiDtm" Type="DateTime" Precision="3" />
+          <Property Name="LastTestKompetencjiResult" Type="Int32" />
         </EntityType>
         <Association Name="ItechUsersRoles">
           <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="ITechModel.ItechUsers" Role="ItechUsers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Kategorie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_Dokument_Kategorie" FromRole="Kategorie" ToRole="Dokument" />
+        </EntityType>
+        <Association Name="FK_Dokument_Kategorie">
+          <End Type="ITechModel.Kategorie" Role="Kategorie" Multiplicity="0..1" />
+          <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategorie">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Dokument">
+              <PropertyRef Name="Kategoria_Id" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -509,6 +567,7 @@
           <EntitySetMapping Name="Dokument">
             <EntityTypeMapping TypeName="IsTypeOf(ITechModel.Dokument)">
               <MappingFragment StoreEntitySet="Dokument">
+                <ScalarProperty Name="Kategoria_Id" ColumnName="Kategoria_Id" />
                 <ScalarProperty Name="LocalFileName" ColumnName="LocalFileName" />
                 <ScalarProperty Name="Size" ColumnName="Size" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -614,6 +673,9 @@
           <EntitySetMapping Name="ItechUsers">
             <EntityTypeMapping TypeName="ITechModel.ItechUsers">
               <MappingFragment StoreEntitySet="ItechUsers">
+                <ScalarProperty Name="LastTestKompetencjiResult" ColumnName="LastTestKompetencjiResult" />
+                <ScalarProperty Name="LastTestKompetencjiDtm" ColumnName="LastTestKompetencjiDtm" />
+                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="CardNo" ColumnName="CardNo" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -630,6 +692,14 @@
               <ScalarProperty Name="Id" ColumnName="RoleId" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Kategorie">
+            <EntityTypeMapping TypeName="ITechModel.Kategorie">
+              <MappingFragment StoreEntitySet="Kategorie">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

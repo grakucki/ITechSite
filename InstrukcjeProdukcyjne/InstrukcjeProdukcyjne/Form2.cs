@@ -189,24 +189,38 @@ namespace InstrukcjeProdukcyjne
             return ret; //CurrentModel
         }
 
+        public string CalculateMD5Hash(string input)
+        {
+            // step 1, calculate MD5 hash from input
+            System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
+        }
+
+
         private async void Form1_Load(object sender, EventArgs e)
         {
-
-            CheckUpdate();
-
-
             var waitDlg = new WaitDlg();
             waitDlg.Show(this);
             Application.DoEvents();
+            CheckUpdate();
             try
             {
-                var t1=DateTime.Now.AddSeconds(5);
-                var t2 = DateTime.Now;
-                while(t2<t1)
-                {
-                    Application.DoEvents();
-                    t2 = DateTime.Now;
-                }
+                //var t1=DateTime.Now.AddSeconds(5);
+                //var t2 = DateTime.Now;
+                //while(t2<t1)
+                //{
+                //    Application.DoEvents();
+                //    t2 = DateTime.Now;
+                //}
 
                 // ustawiamy aplikację pełnoekranową
                 this.listView1.Focus();

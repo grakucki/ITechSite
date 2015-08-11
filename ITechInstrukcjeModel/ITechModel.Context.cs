@@ -35,5 +35,6 @@ namespace ITechInstrukcjeModel
         public virtual DbSet<ModelsWorkstation> ModelsWorkstation { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<ItechUsers> ItechUsers { get; set; }
+        public virtual DbSet<Kategorie> Kategorie { get; set; }
     }
 }

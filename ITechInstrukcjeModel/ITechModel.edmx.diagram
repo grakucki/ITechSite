@@ -22,6 +22,8 @@
         <EntityTypeShape EntityType="ITechModel.AspNetRoles" Width="1.5" PointX="1.125" PointY="9.25" />
         <EntityTypeShape EntityType="ITechModel.ItechUsers" Width="1.5" PointX="3.875" PointY="9.25" />
         <AssociationConnector Association="ITechModel.ItechUsersRoles" />
+        <EntityTypeShape EntityType="ITechModel.Kategorie" Width="1.5" PointX="0.75" PointY="6.125" />
+        <AssociationConnector Association="ITechModel.FK_Dokument_Kategorie" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

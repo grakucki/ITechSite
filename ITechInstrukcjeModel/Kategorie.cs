@@ -12,15 +12,17 @@ namespace ITechInstrukcjeModel
     using System;
     using System.Collections.Generic;
     
-    public partial class ModelsWorkstation
+    public partial class Kategorie
     {
+        public Kategorie()
+        {
+            this.Dokument = new HashSet<Dokument>();
+        }
+    
         public int id { get; set; }
-        public Nullable<int> idW { get; set; }
-        public Nullable<int> idM { get; set; }
-        public string index { get; set; }
-    [System.Runtime.Serialization.IgnoreDataMember]
-        public virtual Resource Workstation { get; set; }
+        public string name { get; set; }
+
         [System.Runtime.Serialization.IgnoreDataMember]
-        public virtual Resource Models { get; set; }
+        public virtual ICollection<Dokument> Dokument { get; set; }
     }
 }
