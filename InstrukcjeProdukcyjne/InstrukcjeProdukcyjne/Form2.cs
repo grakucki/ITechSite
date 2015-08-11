@@ -452,7 +452,15 @@ namespace InstrukcjeProdukcyjne
                 return;
             listView1.BeginUpdate();
             var IP = res.InformationPlan;
-            int p = 0;
+            var g = IP.Where(m=>m.Dokument.Kategorie != null).Select(m => m.Dokument.Kategorie.name).Distinct();
+            listView.Groups.Clear();
+            foreach (var item in g)
+            {
+                if (item!=null)
+                    listView.Groups.Add(item, item);
+            }
+            listView.Groups.Add("inne", "inne");
+
             foreach (var item in IP)
             {
                 if (item.Dokument != null)
@@ -462,13 +470,13 @@ namespace InstrukcjeProdukcyjne
                     var i = listView.Items.Add(d.FullFileName, s, d.ExtensionIndex);
                     i.SubItems.Add(item.Dokument.CodeName);
                     i.Tag = d;
-                    //i.Group = listView.Groups[p];
-                    //if (p % 2==0)
-                        //i.BackColor = Color.Red;
 
+                    if (item.Dokument.Kategorie != null)
+                        i.Group = listView.Groups[item.Dokument.Kategorie.name];
+                    else
+                        i.Group = listView.Groups["inne"];
                 }
                 
-                p = (p+1) % 2;
                 
             }
             listView1.EndUpdate();
