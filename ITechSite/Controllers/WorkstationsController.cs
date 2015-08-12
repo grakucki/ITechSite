@@ -106,19 +106,30 @@ namespace ITechSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,WorkstationGroup,Factory,Area,idR,Sterownik_Ip,Sterownik_Model,Setrownik_DB, AllowIp")] Workstation workstation)
+        public ActionResult Edit([Bind(Include = "Id,WorkstationGroup,Factory,Area,idR,Sterownik_Ip,Sterownik_Model,Setrownik_DB, AllowIp, Area")] Workstation workstation)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Entry(workstation).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Edit", "Resources", new { id = workstation.idR });
-            }
-            ViewBag.WorkstationGroup = new SelectList(db.WorkstationGroup, "Name", "Name", workstation.WorkstationGroup);
-            ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == workstation.idR), "Id", "Name", workstation.idR);
-            ViewBag.Sterownik_Model = new SelectList(db.SimaticCpuType, "CpuType", "CpuType", workstation.Sterownik_Model);
+                if (ModelState.IsValid)
+                {
+                    if (workstation.Area == null)
+                        workstation.Area = "";
+                    db.Entry(workstation).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Edit", "Resources", new { id = workstation.idR });
+                }
+                ViewBag.WorkstationGroup = new SelectList(db.WorkstationGroup, "Name", "Name", workstation.WorkstationGroup);
+                ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == workstation.idR), "Id", "Name", workstation.idR);
+                ViewBag.Sterownik_Model = new SelectList(db.SimaticCpuType, "CpuType", "CpuType", workstation.Sterownik_Model);
 
-            ViewBag.Ret_idR = workstation.idR;
+                ViewBag.Ret_idR = workstation.idR;
+                return View(workstation);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ExceptionResolver.Resolve(ex));
+            }
             return View(workstation);
         }
 

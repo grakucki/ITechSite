@@ -86,13 +86,72 @@ namespace InstrukcjeProdukcyjne
 
         }
 
-        private bool DoLogin(SitechUser user)
+        private bool DoLogin(SitechUser user, ItechUsers user2)
         {
             LoginUser = null;
             LoginUser = user;
+            LoginUser2 = user2;
+
             labelUserName.Text = LoginUser.UserName;
             labelUserNo.Text = LoginUser.NrKarty;
+
+            
+            // sprawdzamy czy należy wykonać test
+            //SprawdźTestKompetencji(user2);
+            
+            //zapis do sterownika
+            //WriteToSimatic(user.NrKarty, true);
+
             return true;
+        }
+
+       
+
+        private void SprawdźTestKompetencji(ItechUsers user2)
+        {
+            // 1. sprawdzamy kiedy ostatni został wykonany test kompetencji
+            if (CzyNależyWykonacTest(user2))
+                UruchomTest(user2);
+
+        }
+
+        private void UruchomTest(ItechUsers user2)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CzyNależyWykonacTest(ItechUsers user2)
+        {
+            if (user2.LastTestKompetencjiDtm == null)
+                return true;
+            return false;
+        }
+
+        private void WriteToSimatic(string NrEwidencyjny, bool OdblokowanieMaszyny)
+        {
+            try
+            {
+                Task t = new Task(() => WriteToSimatic_Async(NrEwidencyjny, OdblokowanieMaszyny));
+                t.Start();
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void WriteToSimatic_Async(string NrEwidencyjny, bool OdblokowanieMaszyny)
+        {
+            // do sprawdzenia
+                Workstation w = this.CurrentWorkstation.Workstation.FirstOrDefault();
+                if (w == null)
+                    return;
+
+                var conn = SitechSimaticDeviceEx.CreateFromWorkstation(w);
+                conn.Fill(true);
+                conn.NrEwidencyjnyDrukarka = NrEwidencyjny;
+                conn.OdblokowanieMaszyny = OdblokowanieMaszyny;
+                conn.Update();
         }
 
         private DialogResult ShowLoginDlg(String message, bool allowCancel, string allowroles)
@@ -112,14 +171,14 @@ namespace InstrukcjeProdukcyjne
                 }
                 if (ret == System.Windows.Forms.DialogResult.OK)
                 {
-                    LoginUser2 = login.User2;
-                    if (DoLogin(login.User))
+                    if (DoLogin(login.User, login.User2))
                         return ret;
                 }
             }
         }
 
-        private DialogResult ShowLoginDlg2(String message, bool allowCancel, string allowroles = "pracownik,kierownik")
+
+        private DialogResult ShowLoginInpersonateDlg(String message, bool allowCancel, string allowroles = "pracownik,kierownik")
         {
             LoginForm login = new LoginForm();
             login.Message = message;

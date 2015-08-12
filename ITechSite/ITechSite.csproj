@@ -260,6 +260,7 @@
     <Compile Include="Models\Dokument.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ExceptionResolver.cs" />
     <Compile Include="Models\FileContent.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
