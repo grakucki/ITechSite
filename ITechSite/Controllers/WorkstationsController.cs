@@ -123,8 +123,6 @@ namespace ITechSite.Controllers
                 ViewBag.Sterownik_Model = new SelectList(db.SimaticCpuType, "CpuType", "CpuType", workstation.Sterownik_Model);
 
                 ViewBag.Ret_idR = workstation.idR;
-                return View(workstation);
-
             }
             catch (Exception ex)
             {

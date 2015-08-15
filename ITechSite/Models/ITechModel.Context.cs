@@ -40,5 +40,7 @@ namespace ITechSite.Models
         public virtual DbSet<ItechUsersRoles> ItechUsersRoles { get; set; }
         public virtual DbSet<Resource> Resource { get; set; }
         public virtual DbSet<Kategorie> Kategorie { get; set; }
+        public virtual DbSet<Department> Department { get; set; }
+        public virtual DbSet<Factory> Factory { get; set; }
     }
 }

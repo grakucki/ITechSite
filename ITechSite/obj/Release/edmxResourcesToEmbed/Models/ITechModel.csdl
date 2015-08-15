@@ -94,6 +94,16 @@
       <End Role="Kategorie" EntitySet="Kategorie" />
       <End Role="Dokument" EntitySet="Dokument" />
     </AssociationSet>
+    <EntitySet Name="Department" EntityType="ITechModel.Department" />
+    <EntitySet Name="Factory" EntityType="ITechModel.Factory" />
+    <AssociationSet Name="FK_WorkProcess_Department" Association="ITechModel.FK_WorkProcess_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="WorkProcess" EntitySet="WorkProcess" />
+    </AssociationSet>
+    <AssociationSet Name="FactoryDepartment" Association="ITechModel.FactoryDepartment">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Factory" EntitySet="Factory" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="WorkProcess">
     <Key>
@@ -102,6 +112,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_Dokument_WorkProcess" FromRole="WorkProcess" ToRole="Dokument" />
+    <Property Name="DepartamentId" Type="Int32" />
+    <NavigationProperty Name="Department" Relationship="ITechModel.FK_WorkProcess_Department" FromRole="WorkProcess" ToRole="Department" />
   </EntityType>
   <EntityType Name="Dokument">
     <Key>
@@ -293,6 +305,7 @@
     <NavigationProperty Name="News" Relationship="ITechModel.FK_News_Resource" FromRole="Resource" ToRole="News" />
     <NavigationProperty Name="ResourceType" Relationship="ITechModel.FK_Resource_Type" FromRole="Resource" ToRole="ResourceType" />
     <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
+    <Property Name="Factory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_InformationPlan_Resource">
     <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
@@ -361,5 +374,38 @@
         <PropertyRef Name="Kategoria_Id" />
       </Dependent>
     </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="WorkProcess" Relationship="ITechModel.FK_WorkProcess_Department" FromRole="Department" ToRole="WorkProcess" />
+    <NavigationProperty Name="Factory" Relationship="ITechModel.FactoryDepartment" FromRole="Department" ToRole="Factory" />
+  </EntityType>
+  <EntityType Name="Factory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Department" Relationship="ITechModel.FactoryDepartment" FromRole="Factory" ToRole="Department" />
+  </EntityType>
+  <Association Name="FK_WorkProcess_Department">
+    <End Type="ITechModel.Department" Role="Department" Multiplicity="0..1" />
+    <End Type="ITechModel.WorkProcess" Role="WorkProcess" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="WorkProcess">
+        <PropertyRef Name="DepartamentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FactoryDepartment">
+    <End Type="ITechModel.Department" Role="Department" Multiplicity="*" />
+    <End Type="ITechModel.Factory" Role="Factory" Multiplicity="*" />
   </Association>
 </Schema>

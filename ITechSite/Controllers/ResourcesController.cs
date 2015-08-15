@@ -113,10 +113,16 @@ namespace ITechSite.Controllers
         }
 
         // GET: Resources/Create
-        public ActionResult Create()
+        public ActionResult Create(int? type)
         {
             AddViewBag();
-            return View();
+            var r = new Resource();
+            if (type.HasValue)
+                if (type > 0 && type < 3)
+                    r.Type = type.Value;
+                else
+                    r.Type = 1;
+            return View(r);
         }
 
         // POST: Resources/Create
@@ -124,7 +130,7 @@ namespace ITechSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id, Name,Type,LastWriteTime,No,WorkProcess,Enabled,Description,Keywords")] Resource resource)
+        public ActionResult Create([Bind(Include = "Id, Name,Type,LastWriteTime,No,WorkProcess,Enabled,Description,Keywords,Factory")] Resource resource)
         {
             try
             {
@@ -133,10 +139,14 @@ namespace ITechSite.Controllers
                 {
                     resource.LastWriteTime = DateTime.Now;
                     // sprawdzamy czy nazwa już istniej
-
-                    db.Resource.Add(resource);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                    if (db.Resource.Where(m => m.Name == resource.Name).Any())
+                        ModelState.AddModelError("Name", string.Format("Nazwa {0} jest już zajęta", resource.Name));
+                    else
+                    {
+                        db.Resource.Add(resource);
+                        db.SaveChanges();
+                        return RedirectToAction("Index");
+                    }
                 }
             }
             catch (System.Data.Entity.Infrastructure.DbUpdateException ex)
@@ -152,10 +162,17 @@ namespace ITechSite.Controllers
             return View(resource);
         }
 
-        private void AddViewBag()
+        private void AddViewBag(Resource resource=null)
         {
-            ViewBag.WorkProcess = new SelectList(db.WorkProcess, "Name", "Name");
-            ViewBag.Type = new SelectList(db.ResourceType, "Id", "Type");
+
+            var repo = new FactoryRepository();
+            //ViewBag.Type = new SelectList(db.ResourceType, "Id", "Type", resource == null ? 1 : resource.Type);
+            
+            ViewBag.Factory = new SelectList(repo.GetFactoryAll(), "Name", "Name", resource == null ? null : resource.Factory);
+            ViewBag.WorkProcess = new SelectList(
+                repo.GetWorkProcessBy(resource == null ? null : resource.Factory, null),
+            "Name", "Name", resource == null ? null : resource.WorkProcess);
+
         }
 
         // GET: Resources/Edit/5
@@ -171,8 +188,14 @@ namespace ITechSite.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.WorkProcess = new SelectList(db.WorkProcess, "Name", "Name", resource.WorkProcess);
-            ViewBag.Type = new SelectList(db.ResourceType, "Id", "Type", resource.Type);
+
+            AddViewBag(resource);
+            //ViewBag.Factory = new SelectList(repo.GetFactoryAll(), "Name", "Name", resource.Factory);
+            //ViewBag.WorkProcess = new SelectList(repo.GetWorkProcessBy(resource.Factory, null), "Name", "Name", resource.WorkProcess);
+
+            //ViewBag.Factory = new SelectList(db.Factory, "Name", "Name", resource.Factory);
+            //ViewBag.WorkProcess = new SelectList(db.WorkProcess, "Name", "Name", resource.WorkProcess);
+            //ViewBag.Type = new SelectList(db.ResourceType, "Id", "Type", resource.Type);
 
             return View(resource);
         }
@@ -182,13 +205,25 @@ namespace ITechSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Type,No,WorkProcess,Enabled,Description,Keywords")] Resource resource)
+        public ActionResult Edit([Bind(Include = "Id,Name,No,WorkProcess,Enabled,Description,Keywords,Factory")] Resource resource)
         {
             if (ModelState.IsValid)
             {
-                resource.LastWriteTime = DateTime.Now;
-                db.Entry(resource).State = EntityState.Modified;
-                db.SaveChanges();
+                var x = db.Resource.Where(m => m.Id == resource.Id).FirstOrDefault();
+                if (x != null)
+                {
+                    x.LastWriteTime = DateTime.Now;
+                    x.Name = resource.Name;
+                    x.No = resource.No;
+                    x.WorkProcess = resource.WorkProcess;
+                    x.Enabled = resource.Enabled;
+                    x.Description = resource.Description;
+                    x.Keywords = resource.Keywords;
+                    x.Factory = resource.Factory;
+                    db.SaveChanges();
+                }
+               
+                //db.Entry(resource).State = EntityState.Modified;
                 return RedirectToAction("Index");
             }
             AddViewBag();

@@ -11,15 +11,15 @@
 @Html.Partial("_SelectResources")
 <div>
     Zanleziono @Model.Resources.TotalItemCount pozycji. Wyswietlonio stronę @(Model.Resources.PageCount < Model.Resources.PageNumber ? 0 : Model.Resources.PageNumber) z @Model.Resources.PageCount
-    @Html.PagedListPager(Model.Resources, page => Url.Action("index", new { page, Find_ResourceType = @Model.Find_ResourceType, WorkProcess = @Model.WorkProcess, Find_Word = @Model.Find_Word, ReturnUrl = @Model.ReturnUrl, FindAction="Page" }))
+    @Html.PagedListPager(Model.Resources, page => Url.Action("index", new { page, Find_ResourceType = @Model.Find_ResourceType, Find_WorkProcess = @Model.Find_WorkProcess, Find_Word = @Model.Find_Word, ReturnUrl = @Model.ReturnUrl, FindAction="Page" }))
 
+    @*@Html.PagedListPager(Model.Resources, page => Url.Action("Index", new { page }))*@
 
 
 </div>
 
 <p>
-    @Html.ActionLink("Utwórz nowe stanowisko", "Create") |
-    @Html.ActionLink("Utwórz nowy model", "Create", new { Type = "2" })
+    @Html.ActionLink("Utwórz nowy", "Create")
 </p>
 <table class="table">
     <tr>

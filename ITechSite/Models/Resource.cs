@@ -29,6 +29,7 @@ namespace ITechSite.Models
         public bool Enabled { get; set; }
         public string Description { get; set; }
         public string Keywords { get; set; }
+        public string Factory { get; set; }
     
         public virtual ICollection<InformationPlan> InformationPlan { get; set; }
         public virtual News News { get; set; }

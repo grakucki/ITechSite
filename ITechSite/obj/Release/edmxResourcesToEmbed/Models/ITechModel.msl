@@ -38,6 +38,7 @@
     <EntitySetMapping Name="WorkProcess">
       <EntityTypeMapping TypeName="ITechModel.WorkProcess">
         <MappingFragment StoreEntitySet="WorkProcess">
+          <ScalarProperty Name="DepartamentId" ColumnName="DepartamentId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -142,6 +143,7 @@
     <EntitySetMapping Name="Resource">
       <EntityTypeMapping TypeName="ITechModel.Resource">
         <MappingFragment StoreEntitySet="Resource">
+          <ScalarProperty Name="Factory" ColumnName="Factory" />
           <ScalarProperty Name="Keywords" ColumnName="Keywords" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Enabled" ColumnName="Enabled" />
@@ -162,5 +164,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Department">
+      <EntityTypeMapping TypeName="ITechModel.Department">
+        <MappingFragment StoreEntitySet="Department">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Factory">
+      <EntityTypeMapping TypeName="ITechModel.Factory">
+        <MappingFragment StoreEntitySet="Factory">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FactoryDepartment" TypeName="ITechModel.FactoryDepartment" StoreEntitySet="FactoryDepartment">
+      <EndProperty Name="Factory">
+        <ScalarProperty Name="Id" ColumnName="FactoryId" />
+      </EndProperty>
+      <EndProperty Name="Department">
+        <ScalarProperty Name="Id" ColumnName="DepartmentId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

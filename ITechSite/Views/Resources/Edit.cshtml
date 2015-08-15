@@ -4,6 +4,14 @@
     ViewBag.Title = "Zasoby Edycja";
 }
 
+<script type="text/javascript" src="~/Scripts/Itech.js"></script>
+<script type="text/javascript">
+    $(function () {
+        CascadingOption("Factory", "WorkProcess", "@(Url.Action("getworkprocessby","Factory"))", "states-loading-progress");
+        });
+</script>
+
+
 <h2>@ViewBag.Title</h2>
 
 
@@ -28,8 +36,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Type", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
+                @Html.DisplayFor(model => model.ResourceType.Type, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.DropDownList("Type", null, htmlAttributes: new { @class = "form-control" })*@
             </div>
         </div>
 
@@ -48,6 +56,15 @@
                 @Html.ValidationMessageFor(model => model.No, "", new { @class = "text-danger" })
             </div>
         </div>
+        @if(Model.Type!=2)
+        { 
+            <div class="form-group">
+                @Html.LabelFor(model => model.Factory, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Factory", null, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+        }
 
         <div class="form-group">
             @Html.LabelFor(model => model.WorkProcess, htmlAttributes: new { @class = "control-label col-md-2" })

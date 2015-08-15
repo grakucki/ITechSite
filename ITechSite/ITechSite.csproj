@@ -237,6 +237,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DokumentsController.cs" />
     <Compile Include="Controllers\EnumerableExtensions.cs" />
+    <Compile Include="Controllers\FactoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InformationPlansController.cs" />
     <Compile Include="Controllers\ItechUsersController.cs" />
@@ -257,10 +258,19 @@
     <Compile Include="Models\AspNetRoles.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Department.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Dokument.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ExceptionResolver.cs" />
+    <Compile Include="Models\Factory.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Factory\FactoryRepository.cs" />
+    <Compile Include="Models\Factory\IFactoryRepository.cs" />
+    <Compile Include="CustomResults\SelectedListExtensions.cs" />
     <Compile Include="Models\FileContent.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
@@ -513,6 +523,7 @@
     <Content Include="Areas\Testy\Views\Test\Test2.cshtml" />
     <None Include="Properties\PublishProfiles\insofter.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\Itech.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -590,9 +601,12 @@
     <Content Include="Views\InformationPlans\Index2.cshtml" />
     <Content Include="Views\Testy\Index.cshtml" />
     <Content Include="Views\ItechUsers\Index.cshtml" />
+    <Content Include="Views\Shared\Index.cshtml" />
+    <Content Include="Views\Shared\_SelectResources - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Factory\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

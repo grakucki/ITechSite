@@ -12,18 +12,18 @@ namespace ITechSite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class WorkProcess
+    public partial class Department
     {
-        public WorkProcess()
+        public Department()
         {
-            this.Dokument = new HashSet<Dokument>();
+            this.WorkProcess = new HashSet<WorkProcess>();
+            this.Factory = new HashSet<Factory>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
-        public Nullable<int> DepartamentId { get; set; }
     
-        public virtual ICollection<Dokument> Dokument { get; set; }
-        public virtual Department Department { get; set; }
+        public virtual ICollection<WorkProcess> WorkProcess { get; set; }
+        public virtual ICollection<Factory> Factory { get; set; }
     }
 }
