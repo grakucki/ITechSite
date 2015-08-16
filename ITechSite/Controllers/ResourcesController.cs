@@ -205,7 +205,7 @@ namespace ITechSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,No,WorkProcess,Enabled,Description,Keywords,Factory")] Resource resource)
+        public ActionResult Edit([Bind(Include = "Id,Name,No,WorkProcess,Enabled,Description,Keywords,Factory,Type,LastWriteTime")] Resource resource)
         {
             if (ModelState.IsValid)
             {

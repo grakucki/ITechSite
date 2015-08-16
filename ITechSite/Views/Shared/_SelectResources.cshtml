@@ -12,34 +12,53 @@
 
 @using (Html.BeginForm())
 {
-    <div>
+    <div class="form-horizontal">
+
         @if (Model.Allow_ResourceType)
-        { 
-            @Html.LabelFor(model => model.Find_ResourceType, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.DropDownListFor(model => model.Find_ResourceType, Model.AvailableResourceType, htmlAttributes: new { @class = "form-control" })
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Find_ResourceType,  htmlAttributes : new { @class = "control-label col-md-2" } )
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Find_ResourceType, Model.AvailableResourceType, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
         }
-        
-        @Html.LabelFor(model => model.Factory, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.DropDownListFor(model => model.Factory, Model.AvailableFactory, htmlAttributes: new { @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Factory,  htmlAttributes: new { @class = "control-label col-md-2" } )
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Factory, Model.AvailableFactory, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Department,  htmlAttributes : new { @class = "control-label col-md-2" } )
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Department, Model.AvailableDepartment, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WorkProcess, htmlAttributes : new { @class = "control-label col-md-2" } )
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.WorkProcess, Model.AvailableWorkPorcess, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Find_Word, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Find_Word, new { htmlAttributes = new { @class = "form-control", placeholder = "Szukana fraza" } })
+                <input type="submit" name="FindAction" value="Znajdź" class="btn btn-default-big" />
+                <span id="states-loading-progress" style="display: none;">Proszę czekać ...</span>
+            </div>
+        </div>
 
 
-        @Html.LabelFor(model => model.Department, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.DropDownListFor(model => model.Department, Model.AvailableDepartment, htmlAttributes: new { @class = "form-control" })
-
-
-        @Html.LabelFor(model => model.WorkProcess, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.DropDownListFor(model => model.WorkProcess, Model.AvailableWorkPorcess, htmlAttributes: new { @class = "form-control" })
-        
-        @Html.LabelFor(model => model.Find_Word, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.EditorFor(model => model.Find_Word, new { htmlAttributes = new { @class = "form-control", placeholder = "Szukana fraza" } })
 
 
 
-        <input type="submit" name="FindAction" value="Znajdź" class="btn btn-default-big" />
-        <span id="states-loading-progress" style="display: none;">Proszę czekać ...</span>
 
         @Html.HiddenFor(model => model.ReturnUrl)
-           </div>
+    </div>
 }
 @*<div>
     Strona @(Model.Resources.PageCount < Model.Resources.PageNumber ? 0 : Model.Resources.PageNumber) z @Model.Resources.PageCount

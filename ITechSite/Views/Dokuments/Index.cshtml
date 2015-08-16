@@ -9,20 +9,28 @@
 
 @using (Html.BeginForm("Index", "Dokuments", FormMethod.Get))
 {
-    <div>
-        @Html.Label("Szukany dokument", new { htmlAttributes = new { @class = "form-control" } })
-
-        @Html.TextBoxFor(model => model.CodeName, htmlAttributes: new { @class = "form-control" })
-
-        @Html.LabelFor(model => model.Kategorie_Id, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.DropDownList("Kategorie_Id", (SelectList) ViewBag.Kategoria_Id, htmlAttributes: new { @class = "form-control" })
-
-        @Html.LabelFor(model => model.WorkProcess, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.DropDownList("WorkProcess", (SelectList)ViewBag.WorkProcess, htmlAttributes: new { @class = "form-control" })
-
-        <br />
-        <input type="submit" name="FindAction" value="Szukaj" class="btn btn-default-big" />
-    </div>
+    <div class="form-horizontal">
+        <div class="form-group">
+            @*@Html.Label("Szukany dokument", new { htmlAttributes = new { @class = "control-label col-md-2" } })*@
+            @Html.LabelFor(model => model.Dokuments, "Szukany dokument", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CodeName, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Kategorie_Id,  htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Kategorie_Id", (SelectList)ViewBag.Kategoria_Id, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.WorkProcess, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("WorkProcess", (SelectList)ViewBag.WorkProcess, htmlAttributes: new { @class = "form-control" })
+                <input type="submit" name="FindAction" value="Szukaj" class="btn btn-default-big" />
+            </div>
+        </div>
+     </div>
 }
 <div>
     @Html.PagedListPager(Model.Dokuments, page => Url.Action("Index", new { page, CodeName = Model.CodeName,Kategorie_Id=Model.Kategorie_Id,  FindAction = "page" }))

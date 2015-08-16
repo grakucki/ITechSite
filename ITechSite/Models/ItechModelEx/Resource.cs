@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ITechSite.CustomResults;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -31,7 +32,13 @@ namespace ITechSite.Models
         public string No { get; set; }
 
         [DisplayName("Proces roboczy")]
+        [IsNoFilterValue]
         public string WorkProcess { get; set; }
+
+        [DisplayName("Fabryka")]
+        [IsNoFilterValue]
+        public string Factory { get; set; }
+
 
         [DisplayName("Aktywny")]
         public bool Enabled { get; set; }

@@ -248,6 +248,7 @@
     <Compile Include="Controllers\WorkstationsController.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CustomResults\IsNoFilterValueAttribute.cs" />
     <Compile Include="CustomResults\ValidDateTimeStringAttribute.cs" />
     <Compile Include="CustomResults\XmlResult.cs" />
     <Compile Include="CustomResults\SqlFileStreamResult.cs" />

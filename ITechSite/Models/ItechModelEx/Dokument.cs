@@ -62,6 +62,7 @@ namespace ITechSite.Models
         public Nullable<System.DateTime> ValidDtmOff { get; set; }
 
         [DisplayName("Proces roboczy id")]
+        [IsNoFilterValue]
         public Nullable<int> WorkProcess_Id { get; set; }
 
         [DisplayName("Słowa kluczowe")]
@@ -78,6 +79,11 @@ namespace ITechSite.Models
 
         [DisplayName("Kategoria")]
         public virtual Kategorie Kategorie { get; set; }
+
+        [DisplayName("Kategoria")]
+        [IsNoFilterValue]
+        public Nullable<int> Kategoria_Id { get; set; }
+
 
         //public virtual ICollection<FileContent> FileContent { get; set; }
         //public virtual ICollection<InformationPlan> InformationPlan { get; set; }

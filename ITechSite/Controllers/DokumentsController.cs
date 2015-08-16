@@ -138,6 +138,10 @@ namespace ITechSite.Controllers
 
                         return RedirectToAction("Index");
                     }
+                    else
+                    {
+                        ModelState.AddModelError("File", string.Format("Podaj plik."));
+                    }
                 }
 
                 ViewBag.WorkProcess_Id = new SelectList(db.WorkProcess, "Id", "Name", dokument.WorkProcess_Id);
@@ -174,8 +178,8 @@ namespace ITechSite.Controllers
             //ViewBag.Kategoria_Id = new SelectList(db.Kategorie, "Id", "name", dokument.Kategoria_Id);
             var repo = new ITechSite.Models.Repository.DokumentRepository();
 
-            ViewBag.WorkProcess_Id = new SelectList(repo.GetWorkProcessAll(false), "Id", "Name", dokument.WorkProcess_Id);
-            ViewBag.Kategoria_Id = new SelectList(repo.GetKategorie(false), "Id", "name", dokument.Kategoria_Id);
+            ViewBag.WorkProcess_Id = new SelectList(repo.GetWorkProcessAll(true), "Id", "Name", dokument.WorkProcess_Id);
+            ViewBag.Kategoria_Id = new SelectList(repo.GetKategorie(true), "Id", "name", dokument.Kategoria_Id);
 
 
             return View(dokument);
@@ -238,8 +242,13 @@ namespace ITechSite.Controllers
 
                     return RedirectToAction("Index");
                 }
-                ViewBag.WorkProcess_Id = new SelectList(db.WorkProcess, "Id", "Name", dokument.WorkProcess_Id);
-                ViewBag.Kategoria_Id = new SelectList(db.Kategorie, "Id", "name", dokument.Kategoria_Id);
+                //ViewBag.WorkProcess_Id = new SelectList(db.WorkProcess, "Id", "Name", dokument.WorkProcess_Id);
+                //ViewBag.Kategoria_Id = new SelectList(db.Kategorie, "Id", "name", dokument.Kategoria_Id);
+
+                var repo = new ITechSite.Models.Repository.DokumentRepository();
+                ViewBag.WorkProcess_Id = new SelectList(repo.GetWorkProcessAll(true), "Id", "Name", dokument.WorkProcess_Id);
+                ViewBag.Kategoria_Id = new SelectList(repo.GetKategorie(true), "Id", "name", dokument.Kategoria_Id);
+
             }
             catch (DbEntityValidationException)
             {
