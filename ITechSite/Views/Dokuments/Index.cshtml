@@ -11,14 +11,17 @@
 {
     <div>
         @Html.Label("Szukany dokument", new { htmlAttributes = new { @class = "form-control" } })
+
         @Html.TextBoxFor(model => model.CodeName, htmlAttributes: new { @class = "form-control" })
-        <br />
+
         @Html.LabelFor(model => model.Kategorie_Id, new { htmlAttributes = new { @class = "form-control" } })
-        @{ SelectList l = ViewBag.Kategoria_Id; }
-        @Html.DropDownList("Kategorie_Id", l, htmlAttributes: new { @class = "form-control" })
+        @Html.DropDownList("Kategorie_Id", (SelectList) ViewBag.Kategoria_Id, htmlAttributes: new { @class = "form-control" })
+
+        @Html.LabelFor(model => model.WorkProcess, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.DropDownList("WorkProcess", (SelectList)ViewBag.WorkProcess, htmlAttributes: new { @class = "form-control" })
 
         <br />
-        <input type="submit" name="FindAction" value="Szukaj" class="btn btn-default" />
+        <input type="submit" name="FindAction" value="Szukaj" class="btn btn-default-big" />
     </div>
 }
 <div>
@@ -26,7 +29,7 @@
 </div>
 
 <p>
-    @Html.ActionLink("Nowy dokument", "Create")
+    @Html.ActionLink("Dodaj nowy dokument", "Create")
 </p>
 <table class="table">
     <tr>

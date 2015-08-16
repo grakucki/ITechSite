@@ -268,8 +268,10 @@
     <Compile Include="Models\Factory.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Factory\FactoryRepository.cs" />
-    <Compile Include="Models\Factory\IFactoryRepository.cs" />
+    <Compile Include="Models\Repository\DokumentRepository.cs" />
+    <Compile Include="Models\Repository\FactoryRepository.cs" />
+    <Compile Include="Models\Repository\FilterExtansion.cs" />
+    <Compile Include="Models\Repository\IFactoryRepository.cs" />
     <Compile Include="CustomResults\SelectedListExtensions.cs" />
     <Compile Include="Models\FileContent.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>

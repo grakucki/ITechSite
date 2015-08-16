@@ -63,6 +63,8 @@ namespace ITechSite.Controllers
                 try
                 {
                     workstation.Area = "";
+                    workstation.Factory = "";
+                    workstation.WorkstationGroup = "";
                     db.Workstation.Add(workstation);
                     db.SaveChanges();
                     return RedirectToAction("Edit", "Resources", new { idR = workstation.idR });
@@ -114,6 +116,9 @@ namespace ITechSite.Controllers
                 {
                     if (workstation.Area == null)
                         workstation.Area = "";
+                    workstation.Factory = "";
+                    workstation.WorkstationGroup = "";
+
                     db.Entry(workstation).State = EntityState.Modified;
                     db.SaveChanges();
                     return RedirectToAction("Edit", "Resources", new { id = workstation.idR });

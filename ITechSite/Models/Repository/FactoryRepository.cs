@@ -12,7 +12,12 @@ namespace ITechSite.Models
 
         public FactoryRepository()
         {
-            _dataContex = new ITechEntities();
+            _dataContex = new ITechEntities(0);
+        }
+
+        public FactoryRepository(ITechEntities dataContex)
+        {
+            _dataContex = dataContex;
         }
 
         public IList<Factory> GetFactoryAll(bool AddEmpty = true)
@@ -25,19 +30,11 @@ namespace ITechSite.Models
 
         }
 
-        public bool IsEmptyFiltr(string filtr)
-        {
-            if (string.IsNullOrEmpty(filtr))
-                return true;
-            if (filtr=="*")
-                return true;
-            return false;
-
-        }
+       
 
         public IList<Department> GetDepartmentByFactoryName(string factoryName, bool AddEmpty = true)
         {
-            if (IsEmptyFiltr(factoryName))
+            if (Repository.FilterExtansion.IsEmpty(factoryName,"*"))
                 return GetDepartmentAll(AddEmpty);
 
             
@@ -72,12 +69,12 @@ namespace ITechSite.Models
         public IList<WorkProcess> GetWorkProcessBy(string factoryName, string department, bool AddEmpty=true)
         {
             var query = _dataContex.WorkProcess.AsQueryable();
-            if (!IsEmptyFiltr(factoryName))
+            if (!Repository.FilterExtansion.IsEmpty(factoryName,"*"))
             {
                 query= query.Where(m => m.Department.Factory.Any(n => n.Name == factoryName));
             }
 
-            if (!IsEmptyFiltr(department))
+            if (!Repository.FilterExtansion.IsEmpty(department,"*"))
             {
                 query = query.Where(m => m.Department.Name == department);
             }

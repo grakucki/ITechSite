@@ -14,6 +14,6 @@ namespace ITechSite.Models
         IList<WorkProcess> GetWorkProcessAll(bool AddEmpty = true);
         IList<WorkProcess> GetWorkProcessBy(string factoryName, string department, bool AddEmpty=true);
         IList<ResourceType> GetResourceTypeAll(bool AddEmpty = false);
-        bool IsEmptyFiltr(string filtr);
+
     }
 }

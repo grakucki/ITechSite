@@ -21,7 +21,13 @@ input,
 select,
 textarea {
     max-width: 280px;
-}
+}.btn-default
+
+
+ .btn-default-big {
+    width:300px;
+}.btn
+
 
 .text-OneLine
 {

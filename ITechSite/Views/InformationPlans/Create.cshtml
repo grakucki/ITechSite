@@ -1,4 +1,5 @@
-﻿@model ITechSite.Models.InformationPlan
+﻿@*@model ITechSite.Models.InformationPlan*@
+@model ITechSite.Models.InformationPlanModels
 
 @{
     ViewBag.Title = "Utwórz Plan inforamcyjny";
@@ -15,35 +16,61 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
+
             @Html.LabelFor(model => model.idR, "Stanowisko/Model", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("idR", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.idR, "", new { @class = "text-danger" })
-            </div>
+                <p>@Html.DisplayFor(m => m.Resource.WorkProcess)</p>
+                <p>@Html.DisplayFor(m => m.Resource.Description)</p>
+           </div>
         </div>
+
+
+        <hr />
+        <div class="form-group">
+            @Html.LabelFor(model => model.CodeName, "Szukaj dokumentu", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CodeName, htmlAttributes: new { @class = "form-control" })
+            </div>
+            @Html.LabelFor(model => model.Kategorie_Id,  htmlAttributes : new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("Kategorie_Id", (SelectList)ViewBag.Kategoria_Id, htmlAttributes: new { @class = "form-control" })
+            </div>
+            @Html.LabelFor(model => model.WorkProcess,  htmlAttributes : new { @class = "control-label col-md-2" } )
+            <div class="col-md-10">
+                @Html.DropDownList("WorkProcess", (SelectList)ViewBag.WorkProcess, htmlAttributes: new { @class = "form-control" })
+                <input type="submit" name="FindAction" value="Szukaj" class="btn btn-default" style=" width : 300px " />
+            </div>
+       </div>
+            
 
         <div class="form-group">
             @Html.LabelFor(model => model.IdD, "Dokument", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("IdD", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ListBox("IdD", null, htmlAttributes: new { @class = "form-control" })
+                @*@Html.DropDownList("IdD", null, htmlAttributes: new { @class = "form-control" })*@
                 @Html.ValidationMessageFor(model => model.IdD, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Order, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Order, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Order, "", new { @class = "text-danger" })
-            </div>
+        <div>
+            @*@Html.PagedListPager(Model.Dokuments, page => Url.Action("Index", new { page, CodeName = Model.CodeName, Kategorie_Id = Model.Kategorie_Id, FindAction = "page" }))*@
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Dodaj" class="btn btn-default" />
+            <div class="form-group" hidden="hidden">
+                @Html.LabelFor(model => model.Order, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Order, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Order, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Dodaj" class="btn btn-default" />
+                </div>
             </div>
         </div>
-    </div>
 }
 
 <div>

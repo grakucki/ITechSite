@@ -11,12 +11,12 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Factory)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Area)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Sterownik_Ip)
         </th>
@@ -40,12 +40,12 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Factory)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Area)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Sterownik_Ip)
         </td>

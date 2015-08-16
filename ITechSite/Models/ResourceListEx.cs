@@ -74,21 +74,21 @@ namespace ITechSite.Models
           var Resources2 = context.Resource.AsEnumerable();
 
 
-          if (!_repository.IsEmptyFiltr(Find_ResourceType))
+          if (!Models.Repository.FilterExtansion.IsEmpty(Find_ResourceType))
                   Resources2 = Resources2.Where(m => m.ResourceType.Type == Find_ResourceType);
 
-          if (!_repository.IsEmptyFiltr(Factory))
+          if (!Models.Repository.FilterExtansion.IsEmpty(Factory))
                   Resources2 = Resources2.Where(m => m.Factory == Factory);
 
-          if (!_repository.IsEmptyFiltr(Department))
+          if (!Models.Repository.FilterExtansion.IsEmpty(Department))
               Resources2 = Resources2.Join(context.WorkProcess, c => c.WorkProcess, d => d.Name, (c, m) => new { c, m })
                   .Where(m => m.m.Department.Name == Department).Select(m => m.c);
 
-          if (!_repository.IsEmptyFiltr(WorkProcess))
+          if (!Models.Repository.FilterExtansion.IsEmpty(WorkProcess))
               Resources2 = Resources2.Where(m => m.WorkProcess == WorkProcess);
 
 
-          if (!_repository.IsEmptyFiltr(Find_Word))
+          if (!Models.Repository.FilterExtansion.IsEmpty(Find_Word))
                   Resources2= Resources2.Where(m=>m.Name.IndexOf(Find_Word) >= 0);
 
 

@@ -39,18 +39,20 @@ namespace ITechSite.Models
          public string CodeName { get; set; }
          [DisplayName("Kategoria")]
          public int? Kategorie_Id { get; set; }
+         [DisplayName("Proces roboczy")]
+         public int? WorkProcess { get; set; }
          public string FindAction { get; set; }
          public int? page { get; set; }
 
          public PagedList.IPagedList<Dokument> Dokuments { get; set; }
 
-         public List<Kategorie> KategorieFind(ITechEntities context)
-         {
-             var kat = new List<Kategorie>();
-             kat.Add(new Kategorie { id = -1, name = "*" });
-             kat.AddRange(context.Kategorie.OrderBy(m => m.name));
-             return kat;
-         }
+         //public List<Kategorie> KategorieFind(ITechEntities context)
+         //{
+         //    var kat = new List<Kategorie>();
+         //    kat.Add(new Kategorie { id = -1, name = "*" });
+         //    kat.AddRange(context.Kategorie.OrderBy(m => m.name));
+         //    return kat;
+         //}
     }
 
 }
