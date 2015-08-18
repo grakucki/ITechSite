@@ -1,0 +1,71 @@
+﻿<UserControl x:Name="userControl" x:Class="InstrukcjeProdukcyjne.GroupListView2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid x:Name="grid" Margin="10">
+        <ListView Name="lvUsers" HorizontalAlignment="Left"
+                  Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" Background="{x:Null}" >
+
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="lvUsers_MouseDoubleClick"></EventSetter>
+                    <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Control.VerticalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="{Binding ColumnsCnt, ElementName=userControl}"  Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" MinWidth="500"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border CornerRadius="6" BorderBrush="Gray" BorderThickness="3" DockPanel.Dock="Left" 
+                            Height="100" Background="{Binding PanelColor, ElementName=userControl}" Margin="3">
+                        <DockPanel  LastChildFill = "True">
+                            <Image Source="{Binding ItemIcon}" DockPanel.Dock ="Left"  Width="80" Height="80" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True" Grid.IsSharedSizeScope="True" >
+                                <!--<Image.Source>
+                                    <BitmapImage UriSource="{Binding ItemIcon}"></BitmapImage>
+                                </Image.Source>-->
+                            </Image>
+
+                            <Label Content="{Binding ItemText2}" Foreground="Gray" DockPanel.Dock = "Bottom" />
+                            <DockPanel  LastChildFill = "True">
+                                <TextBlock Name="TextBoxItem" Text="{Binding ItemText}"  TextWrapping="WrapWithOverflow" 
+                                           MaxHeight="75" FontSize="20" Padding="2" FontFamily="Microsoft Sans Serif"/>
+                            </DockPanel>
+                        </DockPanel >
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            <ListView.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="True">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal" >
+                                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="48" VerticalAlignment="Center" />
+                                                    <TextBlock Text="{Binding ItemCount}" FontSize="22" Foreground="Green" FontWeight="Bold" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Bottom" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </ListView.GroupStyle>
+        </ListView>
+    </Grid>
+</UserControl>
+

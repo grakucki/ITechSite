@@ -1,10 +1,13 @@
 ﻿using ITechInstrukcjeModel;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace InstrukcjeProdukcyjne
 {
@@ -12,13 +15,18 @@ namespace InstrukcjeProdukcyjne
     {
         public string FileName { get; set; }
         public string FullFileName { get; set; }
+        public string ItemText { get; set; }
+        public string ItemText2 { get; set; }
+        public ImageSource ItemIcon { get; set; }
+        public string GroupBy { get; set; }
+
         public Dokument Dok { get; set; }
         
         public string Extension
         {
             get
             {
-                return Path.GetExtension(FullFileName);
+                return Path.GetExtension(FullFileName).ToLower();
             }
         }
         
@@ -32,6 +40,51 @@ namespace InstrukcjeProdukcyjne
                 return Math.Max(0, Array.IndexOf(extab, ex));
                 //
             }
+        }
+    }
+
+    public class MyFileInfoEx
+    {
+        public ImageSource AviBmp { get; set; }
+        public ImageSource PdfBmp { get; set; }
+        public ImageSource AnyBmp { get; set; }
+        public string AviExt { get; set; }
+        public string PdfExt { get; set; }
+
+
+        public MyFileInfoEx()
+        {
+            AviBmp = BitmapToImageSource(Properties.Resources.ikonaAvi);
+            PdfBmp = BitmapToImageSource(Properties.Resources.ikonaPDF);
+            AnyBmp = BitmapToImageSource(Properties.Resources.ikonaPDF);
+            AviExt = ".mp4,.avi,wmv";
+            PdfExt =".pdf";
+        }
+
+
+        public static ImageSource BitmapToImageSource(Bitmap img)
+        {
+
+            MemoryStream ms = new MemoryStream();
+            img.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            ms.Position = 0;
+            BitmapImage bi = new BitmapImage();
+            bi.BeginInit();
+            bi.StreamSource = ms;
+            bi.EndInit();
+
+            return bi;
+        }
+
+        public ImageSource GetBitmapForFileExt(string extension)
+        {
+            if (AviExt.IndexOf(extension) >= 0)
+                return AviBmp;
+
+            if (PdfExt.IndexOf(extension) >= 0)
+                return PdfBmp;
+
+            return AnyBmp;
         }
     }
 }

@@ -23,13 +23,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://10.48.120.49/app/</InstallUrl>
+    <InstallUrl>http://www.insofter.pl/itech/app/</InstallUrl>
     <ProductName>InstrukcjeProdukcyjne</ProductName>
     <PublisherName>Insofter</PublisherName>
     <SuiteName>Sitech</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>install.html</WebPage>
-    <ApplicationRevision>51</ApplicationRevision>
+    <ApplicationRevision>52</ApplicationRevision>
     <ApplicationVersion>2.5.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -81,6 +81,8 @@
     <Reference Include="ItechSimatic">
       <HintPath>..\..\bin\ItechSimatic.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="S7.Net">
       <HintPath>..\..\bin\S7.Net.dll</HintPath>
     </Reference>
@@ -91,6 +93,7 @@
     <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -99,6 +102,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AboutBox1.cs">
@@ -127,11 +133,20 @@
     <Compile Include="DokumentSyncDlg.Designer.cs">
       <DependentUpon>DokumentSyncDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form3.Designer.cs">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GroupListView2.xaml.cs">
+      <DependentUpon>GroupListView2.xaml</DependentUpon>
     </Compile>
     <Compile Include="ITechSettings.cs" />
     <Compile Include="Form1.cs">
@@ -251,6 +266,9 @@
     <EmbeddedResource Include="DokumentSyncDlg.resx">
       <DependentUpon>DokumentSyncDlg.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form3.resx">
+      <DependentUpon>Form3.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
@@ -361,6 +379,10 @@
     <Content Include="Icon1.ico" />
     <Content Include="image\Icon1.ico" />
     <Content Include="image\avi.bmp" />
+    <None Include="Resources\ikonaAvi.png" />
+    <None Include="Resources\ikonaPDF.png" />
+    <Resource Include="image\ikonaAvi.png" />
+    <Resource Include="image\ikonaAny.png" />
     <Content Include="image\jpg.bmp" />
     <Content Include="image\Logo.png" />
     <None Include="image\schemat bitmap dla PDF.png" />
@@ -462,6 +484,12 @@
       <IncludeHash>True</IncludeHash>
       <FileType>File</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="GroupListView2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -20,9 +20,9 @@ using System.Drawing.Drawing2D;
 
 namespace InstrukcjeProdukcyjne
 {
-    public partial class Form2 : Form
+    public partial class Form3 : Form
     {
-        public Form2()
+        public Form3()
         {
             InitializeComponent();
         }
@@ -267,7 +267,6 @@ namespace InstrukcjeProdukcyjne
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            
             var waitDlg = new WaitDlg();
             waitDlg.Show(this);
             Application.DoEvents();
@@ -283,7 +282,7 @@ namespace InstrukcjeProdukcyjne
                 //}
 
                 // ustawiamy aplikację pełnoekranową
-                this.groupListViewWorkstation.Focus();
+                this.listView1.Focus();
                 ClearControls();
                 GoFullscreen(true);
                 PrepareListView();
@@ -362,15 +361,10 @@ namespace InstrukcjeProdukcyjne
         }
         private void PrepareListView()
         {
-            groupListViewWorkstation.ColumnsCnt = 1;
-            groupListViewWorkstation.OnMouseDoubleClick+=groupListViewWorkstation_OnMouseDoubleClick;
-            groupListViewModels.OnMouseDoubleClick += groupListViewWorkstation_OnMouseDoubleClick;
-
-            //PrepareListView(listView1);
-            //PrepareListView(listView2);
-            //PrepareListView(listView3);
+            PrepareListView(listView1);
+            PrepareListView(listView2);
+            PrepareListView(listView3);
         }
-
 
         string _SimaticLastMsg = string.Empty;
         async Task LoadResource_Async(int? idR)
@@ -470,23 +464,23 @@ namespace InstrukcjeProdukcyjne
             var x = ModelBindingSource.Current;
             if (x == null)
             {
-                ZaładujPliki2(null, null);
+                ZaładujPliki(null, listView2);
                 return;
             }
 
             Resource NewModel = (Resource)x;
-            ZaładujPliki2(NewModel, null);
+            ZaładujPliki(NewModel, listView2);
         }
 
-        //private void OnModelChanged(Resource newModel)
-        //{
-        //    if (newModel == null)
-        //    {
-        //        ZaładujPliki2(null, null);
-        //        return;
-        //    }
-        //    ZaładujPliki(newModel, null);
-        //}
+        private void OnModelChanged(Resource newModel)
+        {
+            if (newModel == null)
+            {
+                ZaładujPliki(null, listView2);
+                return;
+            }
+            ZaładujPliki(newModel, listView2);
+        }
 
         private string GetFullPath(FolderType folderType, string DetalName)
         {
@@ -502,21 +496,18 @@ namespace InstrukcjeProdukcyjne
 
         private void ZaładujPliki()
         {
-            ZaładujPliki2(CurrentWorkstation, groupListViewWorkstation);
-            ZaładujPliki2(CurrentModel, groupListViewModels);
+            ZaładujPliki(CurrentWorkstation, listView1);
+            ZaładujPliki(CurrentModel, listView2);
         }
  
 
 
-        private void ZaładujPliki3(Resource res, ListView listView)
+        private void ZaładujPliki(Resource res, ListView listView)
         {
-            if (listView == null)
-                return;
-
             listView.Items.Clear();
             if (res == null)
                 return;
-            listView.BeginUpdate();
+            listView1.BeginUpdate();
             var IP = res.InformationPlan;
             var g = IP.Where(m=>m.Dokument.Kategorie != null).Select(m => m.Dokument.Kategorie.name).Distinct();
             listView.Groups.Clear();
@@ -533,9 +524,6 @@ namespace InstrukcjeProdukcyjne
                 {
                     var d = new MyFileInfo { FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Dok = item.Dokument };
                     var s = string.IsNullOrEmpty(item.Dokument.Description) ? item.Dokument.FileName : item.Dokument.Description;
-                    d.ItemText = s;
-                    d.ItemText2 = d.Dok.CodeName;
-
                     var i = listView.Items.Add(d.FullFileName, s, d.ExtensionIndex);
                     i.SubItems.Add(item.Dokument.CodeName);
                     i.Tag = d;
@@ -548,44 +536,7 @@ namespace InstrukcjeProdukcyjne
                 
                 
             }
-            
-            listView.EndUpdate();
-        }
-        //groupListView21
-
-        private void ZaładujPliki2(Resource res, GroupListView2 listView)
-        {
-            if (listView == null)
-                return;
-            listView.Items.Clear();
-
-            if (res == null)
-                return;
-            var IP = res.InformationPlan;
-            var g = IP.Where(m => m.Dokument.Kategorie != null).Select(m => m.Dokument.Kategorie.name).Distinct();
-
-
-            var my = new List<Object>();
-            MyFileInfoEx fe = new MyFileInfoEx();
-            foreach (var item in IP)
-            {
-                if (item.Dokument != null)
-                {
-                    var d = new MyFileInfo { FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Dok = item.Dokument };
-                    var s = string.IsNullOrEmpty(item.Dokument.Description) ? item.Dokument.FileName : item.Dokument.Description;
-
-                    d.ItemText = s;
-                    d.ItemText2 = d.Dok.CodeName;
-                    d.ItemIcon = fe.GetBitmapForFileExt(d.Extension);
-                    if (item.Dokument.Kategorie != null)
-                        d.GroupBy = item.Dokument.Kategorie.name;
-                    else
-                        d.GroupBy = "inne";
-                    my.Add(d);
-                }
-            }
-
-            listView.DataSource = my;
+            listView1.EndUpdate();
         }
 
         private void listView2_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -619,30 +570,6 @@ namespace InstrukcjeProdukcyjne
                 MessageBox.Show(ex.Message);
             }
         }
-
-
-        void groupListViewWorkstation_OnMouseDoubleClick(object sender, object e)
-        {
-            try
-            {
-                if (e == null)
-                    return;
-
-                var mfi = (MyFileInfo)e;
-                if (mfi != null)
-                {
-                    if (File.Exists(mfi.FullFileName))
-                        OnDokumentShow(mfi);
-                    else
-                        MessageBox.Show("Nie odnaleziono pliku." + mfi.FileName);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {

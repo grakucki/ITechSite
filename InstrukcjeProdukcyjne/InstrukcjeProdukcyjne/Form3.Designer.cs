@@ -1,6 +1,6 @@
 ﻿namespace InstrukcjeProdukcyjne
 {
-    partial class Form2
+    partial class Form3
     {
         /// <summary>
         /// Required designer variable.
@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
+            this.listView1 = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -70,8 +71,6 @@
             this.buttonCzytnik = new System.Windows.Forms.Button();
             this.imageListCzytnik = new System.Windows.Forms.ImageList(this.components);
             this.customPanel2 = new CustomPanelControl.CustomPanel();
-            this.elementHost2 = new System.Windows.Forms.Integration.ElementHost();
-            this.groupListViewWorkstation = new InstrukcjeProdukcyjne.GroupListView2();
             this.customPanel8 = new CustomPanelControl.CustomPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -83,15 +82,13 @@
             this.customPanel6 = new CustomPanelControl.CustomPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.customPanel3 = new CustomPanelControl.CustomPanel();
-            this.elementHost1 = new System.Windows.Forms.Integration.ElementHost();
-            this.groupListViewModels = new InstrukcjeProdukcyjne.GroupListView2();
+            this.listView2 = new System.Windows.Forms.ListView();
             this.customPanel7 = new CustomPanelControl.CustomPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.customPanel5 = new CustomPanelControl.CustomPanel();
             this.button2 = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
             this.timer3 = new System.Windows.Forms.Timer(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WorkStationBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -114,6 +111,27 @@
             this.customPanel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // listView1
+            // 
+            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.listView1.FullRowSelect = true;
+            this.listView1.LargeImageList = this.imageList1;
+            this.listView1.Location = new System.Drawing.Point(5, 49);
+            this.listView1.Name = "listView1";
+            this.listView1.OwnerDraw = true;
+            this.listView1.Size = new System.Drawing.Size(352, 416);
+            this.listView1.SmallImageList = this.imageList1;
+            this.listView1.TabIndex = 1;
+            this.listView1.TileSize = new System.Drawing.Size(503, 90);
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Tile;
+            this.listView1.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.listView1_DrawItem);
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
             // 
             // imageList1
             // 
@@ -547,7 +565,7 @@
             this.customPanel2.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.customPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.customPanel2.BorderWidth = 3;
-            this.customPanel2.Controls.Add(this.elementHost2);
+            this.customPanel2.Controls.Add(this.listView1);
             this.customPanel2.Controls.Add(this.customPanel8);
             this.customPanel2.Curvature = 10;
             this.customPanel2.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
@@ -557,16 +575,6 @@
             this.tableLayoutPanel2.SetRowSpan(this.customPanel2, 2);
             this.customPanel2.Size = new System.Drawing.Size(362, 470);
             this.customPanel2.TabIndex = 0;
-            // 
-            // elementHost2
-            // 
-            this.elementHost2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.elementHost2.Location = new System.Drawing.Point(5, 49);
-            this.elementHost2.Name = "elementHost2";
-            this.elementHost2.Size = new System.Drawing.Size(352, 416);
-            this.elementHost2.TabIndex = 4;
-            this.elementHost2.Text = "elementHost2";
-            this.elementHost2.Child = this.groupListViewWorkstation;
             // 
             // customPanel8
             // 
@@ -698,7 +706,7 @@
             this.customPanel3.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.customPanel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.customPanel3.BorderWidth = 3;
-            this.customPanel3.Controls.Add(this.elementHost1);
+            this.customPanel3.Controls.Add(this.listView2);
             this.customPanel3.Controls.Add(this.customPanel7);
             this.customPanel3.Curvature = 10;
             this.customPanel3.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
@@ -709,16 +717,25 @@
             this.customPanel3.Size = new System.Drawing.Size(733, 470);
             this.customPanel3.TabIndex = 10;
             // 
-            // elementHost1
+            // listView2
             // 
-            this.elementHost1.BackColor = System.Drawing.Color.Transparent;
-            this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.elementHost1.Location = new System.Drawing.Point(5, 49);
-            this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(723, 416);
-            this.elementHost1.TabIndex = 3;
-            this.elementHost1.Text = "elementHost1";
-            this.elementHost1.Child = this.groupListViewModels;
+            this.listView2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.listView2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.listView2.FullRowSelect = true;
+            this.listView2.GridLines = true;
+            this.listView2.LargeImageList = this.imageList1;
+            this.listView2.Location = new System.Drawing.Point(5, 49);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(723, 416);
+            this.listView2.SmallImageList = this.imageList1;
+            this.listView2.TabIndex = 0;
+            this.listView2.TileSize = new System.Drawing.Size(503, 90);
+            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.View = System.Windows.Forms.View.Tile;
+            this.listView2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.listView2_KeyPress);
+            this.listView2.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView2_MouseDoubleClick);
             // 
             // customPanel7
             // 
@@ -844,6 +861,7 @@
 
         #endregion
 
+        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Panel panel1;
@@ -890,6 +908,7 @@
         private CustomPanelControl.CustomPanel customPanel4;
         private System.Windows.Forms.ListView listView3;
         private CustomPanelControl.CustomPanel customPanel3;
+        private System.Windows.Forms.ListView listView2;
         private CustomPanelControl.CustomPanel customPanel5;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Panel panel6;
@@ -901,11 +920,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.Timer timer3;
-        private System.Windows.Forms.Integration.ElementHost elementHost1;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
-        private GroupListView2 groupListViewModels;
-        private System.Windows.Forms.Integration.ElementHost elementHost2;
-        private GroupListView2 groupListViewWorkstation;
     }
 }
 

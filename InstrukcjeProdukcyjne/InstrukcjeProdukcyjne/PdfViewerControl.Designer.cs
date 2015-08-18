@@ -71,8 +71,8 @@
             // 
             // customPanel2
             // 
-            this.customPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.customPanel2.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.customPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(236)))), ((int)(((byte)(233)))));
+            this.customPanel2.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(236)))), ((int)(((byte)(233)))));
             this.customPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.customPanel2.BorderWidth = 3;
             this.customPanel2.Controls.Add(this.customPanel5);
