@@ -100,9 +100,15 @@ namespace InstrukcjeProdukcyjne
             //SprawdźTestKompetencji(user2);
             
             //zapis do sterownika
-            //WriteToSimatic(user.NrKarty, true);
+            SimaticWriteAsync(user.NrKarty, true);
 
             return true;
+        }
+
+        private void DoLogOut()
+        {
+            
+            SimaticWriteAsync(string.Empty, false);
         }
 
        
@@ -127,33 +133,7 @@ namespace InstrukcjeProdukcyjne
             return false;
         }
 
-        private void WriteToSimatic(string NrEwidencyjny, bool OdblokowanieMaszyny)
-        {
-            try
-            {
-                Task t = new Task(() => WriteToSimatic_Async(NrEwidencyjny, OdblokowanieMaszyny));
-                t.Start();
-
-            }
-            catch (Exception)
-            {
-            }
-        }
-
-        private void WriteToSimatic_Async(string NrEwidencyjny, bool OdblokowanieMaszyny)
-        {
-            // do sprawdzenia
-                Workstation w = this.CurrentWorkstation.Workstation.FirstOrDefault();
-                if (w == null)
-                    return;
-
-                var conn = SitechSimaticDeviceEx.CreateFromWorkstation(w);
-                conn.Fill(true);
-                conn.NrEwidencyjnyDrukarka = NrEwidencyjny;
-                conn.OdblokowanieMaszyny = OdblokowanieMaszyny;
-                conn.Update();
-        }
-
+       
         private DialogResult ShowLoginDlg(String message, bool allowCancel, string allowroles)
         {
             LoginForm login = new LoginForm();
@@ -200,10 +180,46 @@ namespace InstrukcjeProdukcyjne
                 }
             }
         }
+
+
+        private int BlockThread(int sec)
+        {
+            DateTime d = DateTime.Now.AddSeconds(sec);
+            DateTime x = DateTime.Now;
+            while (DateTime.Now < d)
+            {
+                x = DateTime.Now;
+            }
+            return x.Second;
+        }
+
+
+
+
+        private void SimaticWrite(string NrEwidencyjnyDrukarka, bool OdblokowanieStan)
+        {
+            try
+            {
+                Workstation w = this.CurrentWorkstation.Workstation.FirstOrDefault();
+                if (w == null)
+                    return;
+
+                var conn = SitechSimaticDeviceEx.CreateFromWorkstation(w);
+                if (conn.CpuType == S7.Net.CpuType.Demo)
+                    conn.Fill(true);
+                conn.NrEwidencyjnyDrukarka = NrEwidencyjnyDrukarka;
+                conn.OdblokowanieMaszyny = true; // OdblokowanieStan;
+                conn.Update();
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         private string _LastReadModelIndex = "";
         private string _LastSimaticError = "";
         AutoResetEvent _TaskSimaticReadRunning = new AutoResetEvent(true);
-        private async Task<Resource> SimaticRead()
+        private Resource SimaticRead()
         {
             Resource ret = null;
             if (!_TaskSimaticReadRunning.WaitOne(0))
@@ -220,6 +236,7 @@ namespace InstrukcjeProdukcyjne
 
                 var conn = SitechSimaticDeviceEx.CreateFromWorkstation(w);
                 conn.Fill(false);
+                //BlockThread(5);
 
                 toolStripStatusLabel2.Text = "Sterownik : " + conn.NrModelu.ToString();
                 var modelindex = this.CurrentWorkstation.ModelsWorkstation.Where(m=>m.index==conn.NrModelu.ToString()).FirstOrDefault();
@@ -282,9 +299,10 @@ namespace InstrukcjeProdukcyjne
                 //    t2 = DateTime.Now;
                 //}
 
-                // ustawiamy aplikację pełnoekranową
+                
                 this.groupListViewWorkstation.Focus();
                 ClearControls();
+                // ustawiamy aplikację pełnoekranową
                 GoFullscreen(true);
                 PrepareListView();
 
@@ -309,6 +327,7 @@ namespace InstrukcjeProdukcyjne
                 waitDlg.Hide();
                 if (ShowLoginDlg("", true, AllowRoles.All) == System.Windows.Forms.DialogResult.Cancel)
                     this.Close();
+                
                 waitDlg.Show();
 
                 ZaładujPliki();
@@ -363,8 +382,8 @@ namespace InstrukcjeProdukcyjne
         private void PrepareListView()
         {
             groupListViewWorkstation.ColumnsCnt = 1;
-            groupListViewWorkstation.OnMouseDoubleClick+=groupListViewWorkstation_OnMouseDoubleClick;
-            groupListViewModels.OnMouseDoubleClick += groupListViewWorkstation_OnMouseDoubleClick;
+            groupListViewWorkstation.OnMouseDoubleClickItem+=groupListViewWorkstation_OnMouseDoubleClick;
+            groupListViewModels.OnMouseDoubleClickItem += groupListViewWorkstation_OnMouseDoubleClick;
 
             //PrepareListView(listView1);
             //PrepareListView(listView2);
@@ -689,6 +708,7 @@ namespace InstrukcjeProdukcyjne
         {
             try
             {
+                DoLogOut();
                 ShowLoginDlg("Użyj kart aby odblokować", false, AllowRoles.All);
                 Application.DoEvents();
                 using (var dial = new WaitDlg())
@@ -749,7 +769,7 @@ namespace InstrukcjeProdukcyjne
             var b = LoginUser2.IsInRole(allowRoles);
             if (b == true)
                 return true;
-            if (ShowLoginDlg(LoginMsg, true, allowRoles)==System.Windows.Forms.DialogResult.OK)
+            if (ShowLoginInpersonateDlg(LoginMsg, true, allowRoles)==System.Windows.Forms.DialogResult.OK)
                 return true;
             return false;
 
@@ -1017,26 +1037,17 @@ namespace InstrukcjeProdukcyjne
 
         private void toolStripStatusLabel2_Click(object sender, EventArgs e)
         {
-            StartSimaticRead();
+            SimaticReadAsync();
         }
 
 
-        private Task<Resource> SimaticReadTask = null;
-        private async void StartSimaticRead()
+
+        private async void SimaticReadAsync()
         {
-            if ((SimaticReadTask != null) && (SimaticReadTask.IsCompleted == false ||
-                                       SimaticReadTask.Status == TaskStatus.Running ||
-                                       SimaticReadTask.Status == TaskStatus.WaitingToRun ||
-                                       SimaticReadTask.Status == TaskStatus.WaitingForActivation))
-                return;
-            
             try
             {
-                SimaticReadTask = Task.Run(() => SimaticRead());
+               var x= await Task.Run(() => SimaticRead());
                 
-                SimaticReadTask.ConfigureAwait(false);
-                var x = SimaticReadTask.Result;
-                //var x = await Task.Run(() => SimaticRead());
                 if (x != null)
                     CurrentModel = x;
 
@@ -1046,11 +1057,37 @@ namespace InstrukcjeProdukcyjne
 
             }
         }
+
+        private async void SimaticWriteAsync(string NrEwidencyjnyDrukarka, bool OdblokowanieStan)
+        {
+            try
+            {
+                await Task.Run(() => SimaticWrite(NrEwidencyjnyDrukarka, OdblokowanieStan));
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+
+        
         
         private void timer3_Tick(object sender, EventArgs e)
         {
+            SimaticReadAsync();
+        }
 
-            StartSimaticRead();
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                DoLogOut();
+            }
+            catch (Exception)
+            {
+                
+            }
         }
 
     

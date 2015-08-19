@@ -961,7 +961,7 @@ namespace InstrukcjeProdukcyjne
             {
                 SimaticReadTask = Task.Run(() => SimaticRead());
                 
-                SimaticReadTask.ConfigureAwait(false);
+                //SimaticReadTask.ConfigureAwait(false);
                 var x = SimaticReadTask.Result;
                 //var x = await Task.Run(() => SimaticRead());
                 if (x != null)

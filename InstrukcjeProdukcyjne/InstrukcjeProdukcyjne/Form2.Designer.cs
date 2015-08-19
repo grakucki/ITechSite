@@ -393,7 +393,7 @@
             this.oAplikacjiToolStripMenuItem,
             this.toolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(348, 366);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(348, 388);
             // 
             // toolStripMenuItem3
             // 
@@ -811,6 +811,7 @@
             this.Name = "Form2";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "ITech - Sitech";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.statusStrip1.ResumeLayout(false);

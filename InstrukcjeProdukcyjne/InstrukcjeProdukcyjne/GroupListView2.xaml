@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid x:Name="grid" Margin="10">
+    <Grid x:Name="grid" >
         <ListView Name="lvUsers" HorizontalAlignment="Left"
                   Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" Background="{x:Null}" >
 
@@ -18,7 +18,7 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid Columns="{Binding ColumnsCnt, ElementName=userControl}"  Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" MinWidth="500"/>
+                    <UniformGrid Columns="{Binding ColumnsCnt, ElementName=userControl}"  Margin="-5" Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" MinWidth="500"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
@@ -27,15 +27,12 @@
                             Height="100" Background="{Binding PanelColor, ElementName=userControl}" Margin="3">
                         <DockPanel  LastChildFill = "True">
                             <Image Source="{Binding ItemIcon}" DockPanel.Dock ="Left"  Width="80" Height="80" HorizontalAlignment="Left" VerticalAlignment="Center" UseLayoutRounding="True" Grid.IsSharedSizeScope="True" >
-                                <!--<Image.Source>
-                                    <BitmapImage UriSource="{Binding ItemIcon}"></BitmapImage>
-                                </Image.Source>-->
                             </Image>
 
-                            <Label Content="{Binding ItemText2}" Foreground="Gray" DockPanel.Dock = "Bottom" />
+                            <Label Content="{Binding ItemText2}" DockPanel.Dock = "Bottom" />
                             <DockPanel  LastChildFill = "True">
                                 <TextBlock Name="TextBoxItem" Text="{Binding ItemText}"  TextWrapping="WrapWithOverflow" 
-                                           MaxHeight="75" FontSize="20" Padding="2" FontFamily="Microsoft Sans Serif"/>
+                                           MaxHeight="75" FontSize="20" Padding="3" FontFamily="Microsoft Sans Serif"/>
                             </DockPanel>
                         </DockPanel >
                     </Border>

@@ -85,7 +85,7 @@ namespace InstrukcjeProdukcyjne
 
         public delegate  void ChangedEventHandler (object sender, object e);
 
-        public event  ChangedEventHandler OnMouseDoubleClick;
+        public event  ChangedEventHandler OnMouseDoubleClickItem;
 
 
         private void lvUsers_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -94,8 +94,8 @@ namespace InstrukcjeProdukcyjne
             
             if (x != null)
             {
-                if (OnMouseDoubleClick!=null)
-                    OnMouseDoubleClick(sender, x);
+                if (OnMouseDoubleClickItem!=null)
+                    OnMouseDoubleClickItem(sender, x);
                 //User u = (User)x;
                 //MessageBox.Show(u.Name);
             }
