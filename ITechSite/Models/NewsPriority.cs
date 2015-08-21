@@ -12,15 +12,17 @@ namespace ITechSite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class News
+    public partial class NewsPriority
     {
-        public int id { get; set; }
-        public string News1 { get; set; }
-        public Nullable<System.DateTime> ValidEnd { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public int NewsPriorityId { get; set; }
+        public NewsPriority()
+        {
+            this.News = new HashSet<News>();
+        }
     
-        public virtual Resource Resource { get; set; }
-        public virtual NewsPriority NewsPriority { get; set; }
+        public int id { get; set; }
+        public string Name { get; set; }
+        public string CssName { get; set; }
+    
+        public virtual ICollection<News> News { get; set; }
     }
 }

@@ -396,7 +396,7 @@ namespace InstrukcjeProdukcyjne
         {
             if (!idR.HasValue)
                 return;
-#if !DEBUG
+#if !DEBUGE
             using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
             {
                 try

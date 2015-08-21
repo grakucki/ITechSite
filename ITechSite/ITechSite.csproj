@@ -269,23 +269,12 @@
     <Compile Include="Models\Factory.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Repository\DokumentRepository.cs" />
-    <Compile Include="Models\Repository\FactoryRepository.cs" />
-    <Compile Include="Models\Repository\FilterExtansion.cs" />
-    <Compile Include="Models\Repository\IFactoryRepository.cs" />
-    <Compile Include="CustomResults\SelectedListExtensions.cs" />
     <Compile Include="Models\FileContent.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\InformationPlan.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ItechModelEx\Dokument.cs" />
-    <Compile Include="Models\ItechModelEx\InformationPlan.cs" />
-    <Compile Include="Models\ItechModelEx\News.cs" />
-    <Compile Include="Models\ItechModelEx\Resource.cs" />
-    <Compile Include="Models\ItechModelEx\WorkProcess.cs" />
-    <Compile Include="Models\ItechModelEx\ResourceType.cs" />
     <Compile Include="Models\ItechUsers.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
@@ -298,9 +287,26 @@
     <Compile Include="Models\Model.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModelsWorkstation.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\News.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NewsPriority.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Repository\DokumentRepository.cs" />
+    <Compile Include="Models\Repository\FactoryRepository.cs" />
+    <Compile Include="Models\Repository\FilterExtansion.cs" />
+    <Compile Include="Models\Repository\IFactoryRepository.cs" />
+    <Compile Include="CustomResults\SelectedListExtensions.cs" />
+    <Compile Include="Models\ItechModelEx\Dokument.cs" />
+    <Compile Include="Models\ItechModelEx\InformationPlan.cs" />
+    <Compile Include="Models\ItechModelEx\News.cs" />
+    <Compile Include="Models\ItechModelEx\Resource.cs" />
+    <Compile Include="Models\ItechModelEx\WorkProcess.cs" />
+    <Compile Include="Models\ItechModelEx\ResourceType.cs" />
     <Compile Include="Models\Resource.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
@@ -375,7 +381,6 @@
     <Content Include="Content\images\operatorzy.jpg" />
     <Content Include="Content\images\right.png" />
     <Content Include="Content\images\Testy.jpg" />
-    <Content Include="HtmlPage1.html" />
     <Content Include="Models\sql\2015-06-23.sql" />
     <Content Include="Models\sql\2015-07-06 naprawa w istniejących.sql" />
     <Content Include="Models\sql\2015-07-11.sql" />
@@ -435,6 +440,7 @@
     <Content Include="Models\sql\2015-06-30_3.sql" />
     <Content Include="Models\sql\2015-06-30_4.sql" />
     <Content Include="Models\sql\2015-06-30_5.sql" />
+    <Content Include="Models\sql\2015-07-21.sql" />
     <Content Include="Models\sql\2015-07-14 pytania.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

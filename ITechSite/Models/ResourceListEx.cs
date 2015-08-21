@@ -80,9 +80,9 @@ namespace ITechSite.Models
           if (!Models.Repository.FilterExtansion.IsEmpty(Factory))
                   Resources2 = Resources2.Where(m => m.Factory == Factory);
 
-          if (!Models.Repository.FilterExtansion.IsEmpty(Department))
-              Resources2 = Resources2.Join(context.WorkProcess, c => c.WorkProcess, d => d.Name, (c, m) => new { c, m })
-                  .Where(m => m.m.Department.Name == Department).Select(m => m.c);
+          //if (!Models.Repository.FilterExtansion.IsEmpty(Department))
+          //    Resources2 = Resources2.Join(context.WorkProcess, c => c.WorkProcess, d => d.Name, (c, m) => new { c, m })
+          //        .Where(m => m.m.Department.Name == Department).Select(m => m.c);
 
           if (!Models.Repository.FilterExtansion.IsEmpty(WorkProcess))
               Resources2 = Resources2.Where(m => m.WorkProcess == WorkProcess);

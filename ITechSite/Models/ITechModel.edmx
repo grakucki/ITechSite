@@ -35,8 +35,8 @@
           <Property Name="WorkProcess_Id" Type="int" />
           <Property Name="Keywords" Type="nvarchar(max)" />
           <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
-          <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
           <Property Name="Kategoria_Id" Type="int" />
+          <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
         </EntityType>
         <EntityType Name="Factory">
           <Key>
@@ -52,6 +52,14 @@
           </Key>
           <Property Name="FactoryId" Type="int" Nullable="false" />
           <Property Name="DepartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FactoryWorkProcess">
+          <Key>
+            <PropertyRef Name="FactoryId" />
+            <PropertyRef Name="WorkProcessId" />
+          </Key>
+          <Property Name="FactoryId" Type="int" Nullable="false" />
+          <Property Name="WorkProcessId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="FileContent">
           <Key>
@@ -70,6 +78,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idR" Type="int" Nullable="false" />
           <Property Name="IdD" Type="int" Nullable="false" />
+          <Property Name="IdM" Type="int" />
           <Property Name="Order" Type="int" />
           <Property Name="Enabled" Type="bit" Nullable="false" />
         </EntityType>
@@ -93,6 +102,7 @@
           </Key>
           <Property Name="ItechUserId" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="WorkstationId" Type="int" />
         </EntityType>
         <EntityType Name="Kategorie">
           <Key>
@@ -108,6 +118,15 @@
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Car" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="ModelsWorkstation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idW" Type="int" />
+          <Property Name="idM" Type="int" />
+          <Property Name="index" Type="nvarchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="News">
           <Key>
             <PropertyRef Name="id" />
@@ -116,6 +135,15 @@
           <Property Name="News" Type="nvarchar(max)" Nullable="false" />
           <Property Name="ValidEnd" Type="datetime" />
           <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="NewsPriorityId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsPriority">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CssName" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Resource">
           <Key>
@@ -152,7 +180,6 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DepartamentId" Type="int" />
           <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Workstation">
@@ -160,7 +187,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="idR" Type="int" Nullable="false" />
+          <Property Name="idR" Type="int" />
           <Property Name="WorkstationGroup" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="Factory" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Area" Type="nvarchar(max)" Nullable="false" />
@@ -188,6 +215,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Dokument_WorkProcess">
+          <End Role="WorkProcess" Type="Self.WorkProcess" Multiplicity="0..1" />
+          <End Role="Dokument" Type="Self.Dokument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkProcess">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Dokument">
+              <PropertyRef Name="WorkProcess_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FactoryDepartment_Department">
           <End Role="Department" Type="Self.Department" Multiplicity="1" />
           <End Role="FactoryDepartment" Type="Self.FactoryDepartment" Multiplicity="*" />
@@ -209,6 +248,30 @@
             </Principal>
             <Dependent Role="FactoryDepartment">
               <PropertyRef Name="FactoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FactoryWorkProcess_Factory">
+          <End Role="Factory" Type="Self.Factory" Multiplicity="1" />
+          <End Role="FactoryWorkProcess" Type="Self.FactoryWorkProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FactoryWorkProcess">
+              <PropertyRef Name="FactoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FactoryWorkProcess_WorkProcess">
+          <End Role="WorkProcess" Type="Self.WorkProcess" Multiplicity="1" />
+          <End Role="FactoryWorkProcess" Type="Self.FactoryWorkProcess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkProcess">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FactoryWorkProcess">
+              <PropertyRef Name="WorkProcessId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -272,6 +335,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ModelsWorkstation_Resource">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="0..1" />
+          <End Role="ModelsWorkstation" Type="Self.ModelsWorkstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModelsWorkstation">
+              <PropertyRef Name="idW" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModelsWorkstation_Resource1">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="0..1" />
+          <End Role="ModelsWorkstation" Type="Self.ModelsWorkstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModelsWorkstation">
+              <PropertyRef Name="idM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_NewsPriority">
+          <End Role="NewsPriority" Type="Self.NewsPriority" Multiplicity="1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsPriority">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="NewsPriorityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_News_Resource">
           <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
           <End Role="News" Type="Self.News" Multiplicity="0..1" />
@@ -296,20 +395,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_WorkProcess_Department">
-          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
-          <End Role="WorkProcess" Type="Self.WorkProcess" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Department">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="WorkProcess">
-              <PropertyRef Name="DepartamentId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Workstation_Resource">
-          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="Resource" Type="Self.Resource" Multiplicity="0..1" />
           <End Role="Workstation" Type="Self.Workstation" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Resource">
@@ -326,13 +413,16 @@
           <EntitySet Name="Dokument" EntityType="Self.Dokument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Factory" EntityType="Self.Factory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FactoryDepartment" EntityType="Self.FactoryDepartment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FactoryWorkProcess" EntityType="Self.FactoryWorkProcess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FileContent" EntityType="Self.FileContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InformationPlan" EntityType="Self.InformationPlan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItechUsers" EntityType="Self.ItechUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItechUsersRoles" EntityType="Self.ItechUsersRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kategorie" EntityType="Self.Kategorie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModelsWorkstation" EntityType="Self.ModelsWorkstation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsPriority" EntityType="Self.NewsPriority" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResourceType" EntityType="Self.ResourceType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SimaticCpuType" EntityType="Self.SimaticCpuType" Schema="dbo" store:Type="Tables" />
@@ -343,6 +433,10 @@
             <End Role="Kategorie" EntitySet="Kategorie" />
             <End Role="Dokument" EntitySet="Dokument" />
           </AssociationSet>
+          <AssociationSet Name="FK_Dokument_WorkProcess" Association="Self.FK_Dokument_WorkProcess">
+            <End Role="WorkProcess" EntitySet="WorkProcess" />
+            <End Role="Dokument" EntitySet="Dokument" />
+          </AssociationSet>
           <AssociationSet Name="FK_FactoryDepartment_Department" Association="Self.FK_FactoryDepartment_Department">
             <End Role="Department" EntitySet="Department" />
             <End Role="FactoryDepartment" EntitySet="FactoryDepartment" />
@@ -350,6 +444,14 @@
           <AssociationSet Name="FK_FactoryDepartment_Factory" Association="Self.FK_FactoryDepartment_Factory">
             <End Role="Factory" EntitySet="Factory" />
             <End Role="FactoryDepartment" EntitySet="FactoryDepartment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FactoryWorkProcess_Factory" Association="Self.FK_FactoryWorkProcess_Factory">
+            <End Role="Factory" EntitySet="Factory" />
+            <End Role="FactoryWorkProcess" EntitySet="FactoryWorkProcess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FactoryWorkProcess_WorkProcess" Association="Self.FK_FactoryWorkProcess_WorkProcess">
+            <End Role="WorkProcess" EntitySet="WorkProcess" />
+            <End Role="FactoryWorkProcess" EntitySet="FactoryWorkProcess" />
           </AssociationSet>
           <AssociationSet Name="FK_FileContent_Dokument1" Association="Self.FK_FileContent_Dokument1">
             <End Role="Dokument" EntitySet="Dokument" />
@@ -371,6 +473,18 @@
             <End Role="ItechUsers" EntitySet="ItechUsers" />
             <End Role="ItechUsersRoles" EntitySet="ItechUsersRoles" />
           </AssociationSet>
+          <AssociationSet Name="FK_ModelsWorkstation_Resource" Association="Self.FK_ModelsWorkstation_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ModelsWorkstation" EntitySet="ModelsWorkstation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelsWorkstation_Resource1" Association="Self.FK_ModelsWorkstation_Resource1">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ModelsWorkstation" EntitySet="ModelsWorkstation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_NewsPriority" Association="Self.FK_News_NewsPriority">
+            <End Role="NewsPriority" EntitySet="NewsPriority" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
           <AssociationSet Name="FK_News_Resource" Association="Self.FK_News_Resource">
             <End Role="Resource" EntitySet="Resource" />
             <End Role="News" EntitySet="News" />
@@ -378,10 +492,6 @@
           <AssociationSet Name="FK_Resource_Type" Association="Self.FK_Resource_Type">
             <End Role="ResourceType" EntitySet="ResourceType" />
             <End Role="Resource" EntitySet="Resource" />
-          </AssociationSet>
-          <AssociationSet Name="FK_WorkProcess_Department" Association="Self.FK_WorkProcess_Department">
-            <End Role="Department" EntitySet="Department" />
-            <End Role="WorkProcess" EntitySet="WorkProcess" />
           </AssociationSet>
           <AssociationSet Name="FK_Workstation_Resource" Association="Self.FK_Workstation_Resource">
             <End Role="Resource" EntitySet="Resource" />
@@ -419,7 +529,7 @@
           <Property Name="Factory" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Area" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="WorkstationGroup1" Relationship="ITechModel.FK_Workstation_WorkstationGroup" FromRole="Workstation" ToRole="WorkstationGroup" />
-          <Property Name="idR" Type="Int32" Nullable="false" />
+          <Property Name="idR" Type="Int32" />
           <Property Name="Sterownik_Ip" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Sterownik_Model" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
           <Property Name="Setrownik_DB" Type="Int32" />
@@ -430,12 +540,7 @@
           <EntitySet Name="FileContent" EntityType="Self.FileContent" />
           <EntitySet Name="Model" EntityType="Self.Model" />
           <EntitySet Name="Workstation" EntityType="Self.Workstation" />
-          <EntitySet Name="WorkProcess" EntityType="ITechModel.WorkProcess" />
           <EntitySet Name="Dokument" EntityType="ITechModel.Dokument" />
-          <AssociationSet Name="FK_Dokument_WorkProcess" Association="ITechModel.FK_Dokument_WorkProcess">
-            <End Role="WorkProcess" EntitySet="WorkProcess" />
-            <End Role="Dokument" EntitySet="Dokument" />
-          </AssociationSet>
           <EntitySet Name="WorkstationGroup" EntityType="ITechModel.WorkstationGroup" />
           <AssociationSet Name="FK_Workstation_WorkstationGroup" Association="ITechModel.FK_Workstation_WorkstationGroup">
             <End Role="WorkstationGroup" EntitySet="WorkstationGroup" />
@@ -464,10 +569,25 @@
             <End Role="ItechUsers" EntitySet="ItechUsers" />
             <End Role="ItechUsersRoles" EntitySet="ItechUsersRoles" />
           </AssociationSet>
+          <EntitySet Name="Kategorie" EntityType="ITechModel.Kategorie" />
+          <AssociationSet Name="FK_Dokument_Kategorie" Association="ITechModel.FK_Dokument_Kategorie">
+            <End Role="Kategorie" EntitySet="Kategorie" />
+            <End Role="Dokument" EntitySet="Dokument" />
+          </AssociationSet>
+          <EntitySet Name="Department" EntityType="ITechModel.Department" />
+          <EntitySet Name="ModelsWorkstation" EntityType="ITechModel.ModelsWorkstation" />
           <EntitySet Name="Resource" EntityType="ITechModel.Resource" />
           <AssociationSet Name="FK_InformationPlan_Resource" Association="ITechModel.FK_InformationPlan_Resource">
             <End Role="Resource" EntitySet="Resource" />
             <End Role="InformationPlan" EntitySet="InformationPlan" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelsWorkstation_Resource" Association="ITechModel.FK_ModelsWorkstation_Resource">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ModelsWorkstation" EntitySet="ModelsWorkstation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelsWorkstation_Resource1" Association="ITechModel.FK_ModelsWorkstation_Resource1">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ModelsWorkstation" EntitySet="ModelsWorkstation" />
           </AssociationSet>
           <AssociationSet Name="FK_News_Resource" Association="ITechModel.FK_News_Resource">
             <End Role="Resource" EntitySet="Resource" />
@@ -481,32 +601,26 @@
             <End Role="Resource" EntitySet="Resource" />
             <End Role="Workstation" EntitySet="Workstation" />
           </AssociationSet>
-          <EntitySet Name="Kategorie" EntityType="ITechModel.Kategorie" />
-          <AssociationSet Name="FK_Dokument_Kategorie" Association="ITechModel.FK_Dokument_Kategorie">
-            <End Role="Kategorie" EntitySet="Kategorie" />
-            <End Role="Dokument" EntitySet="Dokument" />
-          </AssociationSet>
-          <EntitySet Name="Department" EntityType="ITechModel.Department" />
           <EntitySet Name="Factory" EntityType="ITechModel.Factory" />
-          <AssociationSet Name="FK_WorkProcess_Department" Association="ITechModel.FK_WorkProcess_Department">
-            <End Role="Department" EntitySet="Department" />
+          <EntitySet Name="WorkProcess" EntityType="ITechModel.WorkProcess" />
+          <AssociationSet Name="FK_Dokument_WorkProcess" Association="ITechModel.FK_Dokument_WorkProcess">
             <End Role="WorkProcess" EntitySet="WorkProcess" />
+            <End Role="Dokument" EntitySet="Dokument" />
           </AssociationSet>
           <AssociationSet Name="FactoryDepartment" Association="ITechModel.FactoryDepartment">
             <End Role="Department" EntitySet="Department" />
             <End Role="Factory" EntitySet="Factory" />
           </AssociationSet>
+          <AssociationSet Name="FactoryWorkProcess" Association="ITechModel.FactoryWorkProcess">
+            <End Role="Factory" EntitySet="Factory" />
+            <End Role="WorkProcess" EntitySet="WorkProcess" />
+          </AssociationSet>
+          <EntitySet Name="NewsPriority" EntityType="ITechModel.NewsPriority" />
+          <AssociationSet Name="FK_News_NewsPriority" Association="ITechModel.FK_News_NewsPriority">
+            <End Role="NewsPriority" EntitySet="NewsPriority" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="WorkProcess">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_Dokument_WorkProcess" FromRole="WorkProcess" ToRole="Dokument" />
-          <Property Name="DepartamentId" Type="Int32" />
-          <NavigationProperty Name="Department" Relationship="ITechModel.FK_WorkProcess_Department" FromRole="WorkProcess" ToRole="Department" />
-        </EntityType>
         <EntityType Name="Dokument">
           <Key>
             <PropertyRef Name="Id" />
@@ -521,7 +635,6 @@
           <Property Name="ValidDtmOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ValidDtmOff" Type="DateTime" Precision="3" />
           <Property Name="WorkProcess_Id" Type="Int32" />
-          <NavigationProperty Name="WorkProcess" Relationship="ITechModel.FK_Dokument_WorkProcess" FromRole="Dokument" ToRole="WorkProcess" />
           <NavigationProperty Name="FileContent" Relationship="ITechModel.FK_FileContent_Dokument1" FromRole="Dokument" ToRole="FileContent" />
           <NavigationProperty Name="InformationPlan" Relationship="ITechModel.FK_InformationPlan_Dokument" FromRole="Dokument" ToRole="InformationPlan" />
           <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -529,19 +642,8 @@
           <Property Name="LocalFileName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="Kategoria_Id" Type="Int32" />
           <NavigationProperty Name="Kategorie" Relationship="ITechModel.FK_Dokument_Kategorie" FromRole="Dokument" ToRole="Kategorie" />
+          <NavigationProperty Name="WorkProcess" Relationship="ITechModel.FK_Dokument_WorkProcess" FromRole="Dokument" ToRole="WorkProcess" />
         </EntityType>
-        <Association Name="FK_Dokument_WorkProcess">
-          <End Type="ITechModel.WorkProcess" Role="WorkProcess" Multiplicity="0..1" />
-          <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="WorkProcess">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Dokument">
-              <PropertyRef Name="WorkProcess_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="WorkstationGroup">
           <Key>
             <PropertyRef Name="Name" />
@@ -592,6 +694,7 @@
           <Property Name="Order" Type="Int32" />
           <Property Name="Enabled" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_InformationPlan_Dokument" FromRole="InformationPlan" ToRole="Dokument" />
+          <Property Name="IdM" Type="Int32" />
           <NavigationProperty Name="Resource" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="InformationPlan" ToRole="Resource" />
         </EntityType>
         <Association Name="FK_InformationPlan_Dokument">
@@ -615,6 +718,8 @@
           <Property Name="ValidEnd" Type="DateTime" Precision="3" Nullable="true" />
           <Property Name="CreatedAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Resource" Relationship="ITechModel.FK_News_Resource" FromRole="News" ToRole="Resource" />
+          <Property Name="NewsPriorityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NewsPriority" Relationship="ITechModel.FK_News_NewsPriority" FromRole="News" ToRole="NewsPriority" />
         </EntityType>
         <EntityType Name="AspNetRoles">
           <Key>
@@ -642,9 +747,6 @@
           <Property Name="CardNo" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ItechUsersRoles" Relationship="ITechModel.FK_ItechUsersRoles_ItechUsers" FromRole="ItechUsers" ToRole="ItechUsersRoles" />
-          <Property Name="PasswordFormat" Type="Int32" />
-          <Property Name="LastTestKompetencjiDtm" Type="DateTime" Precision="3" />
-          <Property Name="LastTestKompetencjiResult" Type="Int32" />
         </EntityType>
         <EntityType Name="ItechUsersRoles">
           <Key>
@@ -655,6 +757,7 @@
           <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetRoles" Relationship="ITechModel.FK_ItechUsersRoles_AspNetRoles" FromRole="ItechUsersRoles" ToRole="AspNetRoles" />
           <NavigationProperty Name="ItechUsers" Relationship="ITechModel.FK_ItechUsersRoles_ItechUsers" FromRole="ItechUsersRoles" ToRole="ItechUsers" />
+          <Property Name="WorkstationId" Type="Int32" />
         </EntityType>
         <Association Name="FK_ItechUsersRoles_AspNetRoles">
           <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
@@ -677,73 +780,6 @@
             </Principal>
             <Dependent Role="ItechUsersRoles">
               <PropertyRef Name="ItechUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="Resource">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
-          <Property Name="Type" Type="Int32" Nullable="false" />
-          <Property Name="LastWriteTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="No" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="WorkProcess" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Enabled" Type="Boolean" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="InformationPlan" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="Resource" ToRole="InformationPlan" />
-          <NavigationProperty Name="News" Relationship="ITechModel.FK_News_Resource" FromRole="Resource" ToRole="News" />
-          <NavigationProperty Name="ResourceType" Relationship="ITechModel.FK_Resource_Type" FromRole="Resource" ToRole="ResourceType" />
-          <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
-          <Property Name="Factory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <Association Name="FK_InformationPlan_Resource">
-          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
-          <End Type="ITechModel.InformationPlan" Role="InformationPlan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Resource">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="InformationPlan">
-              <PropertyRef Name="idR" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_News_Resource">
-          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
-          <End Type="ITechModel.News" Role="News" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Resource">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="News">
-              <PropertyRef Name="id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Resource_Type">
-          <End Type="ITechModel.ResourceType" Role="ResourceType" Multiplicity="1" />
-          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ResourceType">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Resource">
-              <PropertyRef Name="Type" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Workstation_Resource">
-          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
-          <End Type="ITechModel.Workstation" Role="Workstation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Resource">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Workstation">
-              <PropertyRef Name="idR" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -773,9 +809,112 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="WorkProcess" Relationship="ITechModel.FK_WorkProcess_Department" FromRole="Department" ToRole="WorkProcess" />
           <NavigationProperty Name="Factory" Relationship="ITechModel.FactoryDepartment" FromRole="Department" ToRole="Factory" />
         </EntityType>
+        <EntityType Name="ModelsWorkstation">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idW" Type="Int32" />
+          <Property Name="idM" Type="Int32" />
+          <Property Name="index" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Resource" Relationship="ITechModel.FK_ModelsWorkstation_Resource" FromRole="ModelsWorkstation" ToRole="Resource" />
+          <NavigationProperty Name="Resource1" Relationship="ITechModel.FK_ModelsWorkstation_Resource1" FromRole="ModelsWorkstation" ToRole="Resource" />
+          </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="LastWriteTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="No" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="WorkProcess" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Factory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InformationPlan" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="Resource" ToRole="InformationPlan" />
+          <NavigationProperty Name="ModelsWorkstation" Relationship="ITechModel.FK_ModelsWorkstation_Resource" FromRole="Resource" ToRole="ModelsWorkstation" />
+          <NavigationProperty Name="ModelsWorkstation1" Relationship="ITechModel.FK_ModelsWorkstation_Resource1" FromRole="Resource" ToRole="ModelsWorkstation" />
+          <NavigationProperty Name="News" Relationship="ITechModel.FK_News_Resource" FromRole="Resource" ToRole="News" />
+          <NavigationProperty Name="ResourceType" Relationship="ITechModel.FK_Resource_Type" FromRole="Resource" ToRole="ResourceType" />
+          <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
+        </EntityType>
+        <Association Name="FK_InformationPlan_Resource">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="ITechModel.InformationPlan" Role="InformationPlan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InformationPlan">
+              <PropertyRef Name="idR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModelsWorkstation_Resource">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="0..1" />
+          <End Type="ITechModel.ModelsWorkstation" Role="ModelsWorkstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModelsWorkstation">
+              <PropertyRef Name="idW" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModelsWorkstation_Resource1">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="0..1" />
+          <End Type="ITechModel.ModelsWorkstation" Role="ModelsWorkstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModelsWorkstation">
+              <PropertyRef Name="idM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_Resource">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
+          <End Type="ITechModel.News" Role="News" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Resource_Type">
+          <End Type="ITechModel.ResourceType" Role="ResourceType" Multiplicity="1" />
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResourceType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Resource">
+              <PropertyRef Name="Type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workstation_Resource">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="0..1" />
+          <End Type="ITechModel.Workstation" Role="Workstation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workstation">
+              <PropertyRef Name="idR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="Factory">
           <Key>
             <PropertyRef Name="Id" />
@@ -783,22 +922,57 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Department" Relationship="ITechModel.FactoryDepartment" FromRole="Factory" ToRole="Department" />
+          <NavigationProperty Name="WorkProcess" Relationship="ITechModel.FactoryWorkProcess" FromRole="Factory" ToRole="WorkProcess" />
         </EntityType>
-        <Association Name="FK_WorkProcess_Department">
-          <End Type="ITechModel.Department" Role="Department" Multiplicity="0..1" />
-          <End Type="ITechModel.WorkProcess" Role="WorkProcess" Multiplicity="*" />
+        <EntityType Name="WorkProcess">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_Dokument_WorkProcess" FromRole="WorkProcess" ToRole="Dokument" />
+          <NavigationProperty Name="Factory" Relationship="ITechModel.FactoryWorkProcess" FromRole="WorkProcess" ToRole="Factory" />
+        </EntityType>
+        <Association Name="FK_Dokument_WorkProcess">
+          <End Type="ITechModel.WorkProcess" Role="WorkProcess" Multiplicity="0..1" />
+          <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Department">
+            <Principal Role="WorkProcess">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="WorkProcess">
-              <PropertyRef Name="DepartamentId" />
+            <Dependent Role="Dokument">
+              <PropertyRef Name="WorkProcess_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FactoryDepartment">
           <End Type="ITechModel.Department" Role="Department" Multiplicity="*" />
           <End Type="ITechModel.Factory" Role="Factory" Multiplicity="*" />
+        </Association>
+        <Association Name="FactoryWorkProcess">
+          <End Type="ITechModel.Factory" Role="Factory" Multiplicity="*" />
+          <End Type="ITechModel.WorkProcess" Role="WorkProcess" Multiplicity="*" />
+        </Association>
+        <EntityType Name="NewsPriority">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CssName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="News" Relationship="ITechModel.FK_News_NewsPriority" FromRole="NewsPriority" ToRole="News" />
+        </EntityType>
+        <Association Name="FK_News_NewsPriority">
+          <End Type="ITechModel.NewsPriority" Role="NewsPriority" Multiplicity="1" />
+          <End Type="ITechModel.News" Role="News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsPriority">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="NewsPriorityId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -837,15 +1011,6 @@
                 <ScalarProperty Name="WorkstationGroup" ColumnName="WorkstationGroup" />
                 <ScalarProperty Name="Factory" ColumnName="Factory" />
                 <ScalarProperty Name="Area" ColumnName="Area" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="WorkProcess">
-            <EntityTypeMapping TypeName="ITechModel.WorkProcess">
-              <MappingFragment StoreEntitySet="WorkProcess">
-                <ScalarProperty Name="DepartamentId" ColumnName="DepartamentId" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -888,6 +1053,7 @@
           <EntitySetMapping Name="InformationPlan">
             <EntityTypeMapping TypeName="ITechModel.InformationPlan">
               <MappingFragment StoreEntitySet="InformationPlan">
+                <ScalarProperty Name="IdM" ColumnName="IdM" />
                 <ScalarProperty Name="Enabled" ColumnName="Enabled" />
                 <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="IdD" ColumnName="IdD" />
@@ -899,6 +1065,7 @@
           <EntitySetMapping Name="News">
             <EntityTypeMapping TypeName="ITechModel.News">
               <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="NewsPriorityId" ColumnName="NewsPriorityId" />
                 <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
                 <ScalarProperty Name="ValidEnd" ColumnName="ValidEnd" />
                 <ScalarProperty Name="News1" ColumnName="News" />
@@ -926,9 +1093,6 @@
           <EntitySetMapping Name="ItechUsers">
             <EntityTypeMapping TypeName="ITechModel.ItechUsers">
               <MappingFragment StoreEntitySet="ItechUsers">
-                <ScalarProperty Name="LastTestKompetencjiResult" ColumnName="LastTestKompetencjiResult" />
-                <ScalarProperty Name="LastTestKompetencjiDtm" ColumnName="LastTestKompetencjiDtm" />
-                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="CardNo" ColumnName="CardNo" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -940,24 +1104,9 @@
           <EntitySetMapping Name="ItechUsersRoles">
             <EntityTypeMapping TypeName="ITechModel.ItechUsersRoles">
               <MappingFragment StoreEntitySet="ItechUsersRoles">
+                <ScalarProperty Name="WorkstationId" ColumnName="WorkstationId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="ItechUserId" ColumnName="ItechUserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Resource">
-            <EntityTypeMapping TypeName="ITechModel.Resource">
-              <MappingFragment StoreEntitySet="Resource">
-                <ScalarProperty Name="Factory" ColumnName="Factory" />
-                <ScalarProperty Name="Keywords" ColumnName="Keywords" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
-                <ScalarProperty Name="WorkProcess" ColumnName="WorkProcess" />
-                <ScalarProperty Name="No" ColumnName="No" />
-                <ScalarProperty Name="LastWriteTime" ColumnName="LastWriteTime" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -977,9 +1126,43 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ModelsWorkstation">
+            <EntityTypeMapping TypeName="ITechModel.ModelsWorkstation">
+              <MappingFragment StoreEntitySet="ModelsWorkstation">
+                <ScalarProperty Name="index" ColumnName="index" />
+                <ScalarProperty Name="idM" ColumnName="idM" />
+                <ScalarProperty Name="idW" ColumnName="idW" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resource">
+            <EntityTypeMapping TypeName="ITechModel.Resource">
+              <MappingFragment StoreEntitySet="Resource">
+                <ScalarProperty Name="Factory" ColumnName="Factory" />
+                <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="WorkProcess" ColumnName="WorkProcess" />
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="LastWriteTime" ColumnName="LastWriteTime" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Factory">
             <EntityTypeMapping TypeName="ITechModel.Factory">
               <MappingFragment StoreEntitySet="Factory">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkProcess">
+            <EntityTypeMapping TypeName="ITechModel.WorkProcess">
+              <MappingFragment StoreEntitySet="WorkProcess">
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -993,6 +1176,23 @@
               <ScalarProperty Name="Id" ColumnName="DepartmentId" />
             </EndProperty>
           </AssociationSetMapping>
+          <AssociationSetMapping Name="FactoryWorkProcess" TypeName="ITechModel.FactoryWorkProcess" StoreEntitySet="FactoryWorkProcess">
+            <EndProperty Name="WorkProcess">
+              <ScalarProperty Name="Id" ColumnName="WorkProcessId" />
+            </EndProperty>
+            <EndProperty Name="Factory">
+              <ScalarProperty Name="Id" ColumnName="FactoryId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="NewsPriority">
+            <EntityTypeMapping TypeName="ITechModel.NewsPriority">
+              <MappingFragment StoreEntitySet="NewsPriority">
+                <ScalarProperty Name="CssName" ColumnName="CssName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

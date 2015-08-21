@@ -12,15 +12,14 @@ namespace ITechSite.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class News
+    public partial class ModelsWorkstation
     {
         public int id { get; set; }
-        public string News1 { get; set; }
-        public Nullable<System.DateTime> ValidEnd { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public int NewsPriorityId { get; set; }
+        public Nullable<int> idW { get; set; }
+        public Nullable<int> idM { get; set; }
+        public string index { get; set; }
     
         public virtual Resource Resource { get; set; }
-        public virtual NewsPriority NewsPriority { get; set; }
+        public virtual Resource Resource1 { get; set; }
     }
 }

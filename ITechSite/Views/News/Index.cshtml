@@ -15,11 +15,13 @@
     public string GetRowCss(ITechSite.Models.SelectedResources R)
     {
         if (R.Resource.News == null)
-            return "text-Red";
-        else if (R.Resource.News.ValidEnd.HasValue && R.Resource.News.ValidEnd.Value<DateTime.Now)
-            return "text-Red";
+            return "";
+        else if (R.Resource.News.ValidEnd.HasValue && R.Resource.News.ValidEnd.Value < DateTime.Now)
+            return "";
         else
-            return "text-green";
+            return R.Resource.News.NewsPriority.CssName;
+//            return "text-green";
+//        return "text-Red";
     }
 }
 
@@ -35,7 +37,7 @@
 <script>
     $(function() {
     $(":checkbox").prop("checked", true)
-        }
+        });
 </script>
 
 
@@ -48,11 +50,15 @@
 
                 <p>
                     @Html.Label("Treść wiadomości")
-                    @Html.TextBox("NewNews", null, new { @class = "text-OneLine text-Yelow" })
+                    @Html.TextBox("NewNews", null, new { @class = "text-News" })
                 </p>
                 <p>
+                    @Html.Label("Priorytet")
+                    @Html.DropDownList("priority", null, htmlAttributes: new { @class = "form-control" })
+
                     @Html.Label("Ważna do")
-                    @Html.TextBox("ValidEnd", null, new {  @type = "Date" })
+                    @Html.TextBox("ValidEnd", null, new {  @type = "Date", @class = "form-control"})
+                    <br />
                     <input type="submit" name="Send.Action" value="Wyślij" class="btn btn-default" />
                 </p>
             </div>

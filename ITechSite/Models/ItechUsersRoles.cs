@@ -16,6 +16,7 @@ namespace ITechSite.Models
     {
         public int ItechUserId { get; set; }
         public string RoleId { get; set; }
+        public Nullable<int> WorkstationId { get; set; }
     
         public virtual AspNetRoles AspNetRoles { get; set; }
         public virtual ItechUsers ItechUsers { get; set; }

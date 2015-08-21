@@ -27,10 +27,7 @@ namespace ITechSite.Models
             if (AddEmpty)
                 l.Insert(0, new Factory { Name = "*", Id = 0 });
             return l;
-
         }
-
-       
 
         public IList<Department> GetDepartmentByFactoryName(string factoryName, bool AddEmpty = true)
         {
@@ -71,13 +68,13 @@ namespace ITechSite.Models
             var query = _dataContex.WorkProcess.AsQueryable();
             if (!Repository.FilterExtansion.IsEmpty(factoryName,"*"))
             {
-                query= query.Where(m => m.Department.Factory.Any(n => n.Name == factoryName));
+                query= query.Where(m => m.Factory.Any(n=>n.Name == factoryName));
             }
 
-            if (!Repository.FilterExtansion.IsEmpty(department,"*"))
-            {
-                query = query.Where(m => m.Department.Name == department);
-            }
+            //if (!Repository.FilterExtansion.IsEmpty(department,"*"))
+            //{
+            //    query = query.Where(m => m.Department.Name == department);
+            //}
             var l = query.ToList<WorkProcess>();
             if (AddEmpty)
                 l.Insert(0, new WorkProcess { Name = "*", Id = 0 });

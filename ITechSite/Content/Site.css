@@ -29,10 +29,18 @@ textarea {
 }.btn-default
 
 
-.text-OneLine
+.text-oneline
 {
+    background-color: yellow;
     max-width: 100%;
-    width: 100%;
+    width: 100%
+}
+
+.text-News
+{
+    background-color: yellow;
+     max-width: 100%;
+     width: 100%
 }
 
 .text-Yelow
@@ -40,12 +48,17 @@ textarea {
     background-color: yellow;
 }
 
+.text-Orange
+{
+    background-color: orange;
+}
+
 .text-Red
 {
     background-color: lightpink;
 }
 
-.text-green
+.text-Green
 {
     background-color: lightgreen;
 }
