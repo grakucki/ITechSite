@@ -144,3 +144,21 @@ INSERT [dbo].[NewsPriority] ([id], [Name], [CssName]) VALUES (3, N'ważny', N'te
 GO
 SET IDENTITY_INSERT [dbo].[NewsPriority] OFF
 GO
+
+
+USE [ITech]
+GO
+INSERT [dbo].[FactoryWorkProcess] ([FactoryId], [WorkProcessId]) VALUES (1, 1)
+GO
+INSERT [dbo].[FactoryWorkProcess] ([FactoryId], [WorkProcessId]) VALUES (1, 2)
+GO
+INSERT [dbo].[FactoryWorkProcess] ([FactoryId], [WorkProcessId]) VALUES (1, 3)
+GO
+INSERT [dbo].[FactoryWorkProcess] ([FactoryId], [WorkProcessId]) VALUES (1, 4)
+GO
+INSERT [dbo].[FactoryWorkProcess] ([FactoryId], [WorkProcessId]) VALUES (1, 5)
+GO
+INSERT [dbo].[FactoryWorkProcess] ([FactoryId], [WorkProcessId]) VALUES (2, 6)
+GO
+INSERT [dbo].[FactoryWorkProcess] ([FactoryId], [WorkProcessId]) VALUES (2, 7)
+GO
