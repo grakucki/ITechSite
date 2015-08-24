@@ -21,13 +21,21 @@ input,
 select,
 textarea {
     max-width: 280px;
-}.btn-default
+}/*.btn-default*/
 
 
  .btn-default-big {
     width: 280px;
-}.btn-default
+}/*.btn-default*/
 
+ /*select[multiple],*/
+ .form-fullH
+ {
+    max-height: 80vh;
+    min-height : 60vh;
+    height : 80vh;
+
+ }
 
 .text-oneline
 {

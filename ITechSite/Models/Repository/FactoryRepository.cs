@@ -90,5 +90,117 @@ namespace ITechSite.Models
                 l.Insert(0, new ResourceType {  Type = "*", id = 0 });
             return l;
         }
+
+
+        public List<Resource> GetWorkstationBy(string factoryName, string department, string WorkProcess, string Find_Word, bool AddEmpty = false)
+        {
+            var Resources2 = _dataContex.Resource.AsEnumerable();
+
+             Resources2 = Resources2.Where(m => m.ResourceType.id == 1);
+
+             if (!Models.Repository.FilterExtansion.IsEmpty(factoryName))
+                 Resources2 = Resources2.Where(m => m.Factory == factoryName);
+
+            //if (!Models.Repository.FilterExtansion.IsEmpty(Department))
+            //    Resources2 = Resources2.Join(context.WorkProcess, c => c.WorkProcess, d => d.Name, (c, m) => new { c, m })
+            //        .Where(m => m.m.Department.Name == Department).Select(m => m.c);
+
+             if (!Models.Repository.FilterExtansion.IsEmpty(WorkProcess))
+                Resources2 = Resources2.Where(m => m.WorkProcess == WorkProcess);
+
+
+            if (!Models.Repository.FilterExtansion.IsEmpty(Find_Word))
+                Resources2 = Resources2.Where(m => m.Name.IndexOf(Find_Word) >= 0);
+
+
+            var l = Resources2.OrderBy(m=>m.Name).ToList();
+            if (AddEmpty)
+                l.Insert(0, new Resource {  Id=0, Name = "*" });
+            return l;
+        }
+
+
+        /// <summary>
+        ///  Jeśli poadamy workstation to dołączana jest lista modeli należąca do workstation
+        /// </summary>
+        /// <param name="factoryName"></param>
+        /// <param name="department"></param>
+        /// <param name="WorkProcess"></param>
+        /// <param name="Find_ResourceType"></param>
+        /// <param name="Find_Word"></param>
+        /// <param name="Workstation"></param>
+        /// <param name="AddEmpty"></param>
+        /// <returns></returns>
+        public List<Resource> GetResourcesBy(string factoryName, string department, string WorkProcess, string Find_ResourceType, string Find_Word, int? Workstation, bool AddEmpty = false)
+        {
+            var Resources2 = _dataContex.Resource.AsEnumerable();
+
+            if (!Models.Repository.FilterExtansion.IsEmpty(Find_ResourceType))
+                Resources2 = Resources2.Where(m => m.ResourceType.Type == Find_ResourceType);
+
+            if (!Models.Repository.FilterExtansion.IsEmpty(factoryName))
+                Resources2 = Resources2.Where(m => m.Factory == factoryName);
+
+            if (!Models.Repository.FilterExtansion.IsEmpty(WorkProcess))
+                Resources2 = Resources2.Where(m => m.WorkProcess == WorkProcess);
+
+            if (!Models.Repository.FilterExtansion.IsEmpty(Workstation))
+                Resources2 = Resources2.Where(m => m.Id == Workstation.Value);
+
+
+            //if (!Models.Repository.FilterExtansion.IsEmpty(Department))
+            //    Resources2 = Resources2.Join(context.WorkProcess, c => c.WorkProcess, d => d.Name, (c, m) => new { c, m })
+            //        .Where(m => m.m.Department.Name == Department).Select(m => m.c);
+
+
+            if (!Models.Repository.FilterExtansion.IsEmpty(Find_Word))
+                Resources2 = Resources2.Where(m => m.Name.IndexOf(Find_Word) >= 0);
+
+
+            var l = Resources2.OrderBy(m => m.Name).ToList(); 
+            
+            if (!Models.Repository.FilterExtansion.IsEmpty(Workstation))
+            {
+                var models = _dataContex.Resource.Where(m => m.Enabled == true && m.Type == 2 && m.ModelsWorkstationModel.Any(n => n.idW == Workstation.Value)).OrderBy(m=>m.Name).ToList();
+                l.AddRange(models);
+            }
+
+
+            
+            if (AddEmpty)
+                l.Insert(0, new Resource { Id = 0, Name = "*" });
+            return l;
+        }
+
+
+        public List<Resource> GetResourcesBy(string factoryName, string department, string WorkProcess, string Find_ResourceType, string Find_Word, bool AddEmpty = false)
+        {
+            var Resources2 = _dataContex.Resource.AsEnumerable();
+
+            if (!Models.Repository.FilterExtansion.IsEmpty(Find_ResourceType))
+                Resources2 = Resources2.Where(m => m.ResourceType.Type == Find_ResourceType);
+
+            if (!Models.Repository.FilterExtansion.IsEmpty(factoryName))
+                Resources2 = Resources2.Where(m => m.Factory == factoryName);
+
+            //if (!Models.Repository.FilterExtansion.IsEmpty(Department))
+            //    Resources2 = Resources2.Join(context.WorkProcess, c => c.WorkProcess, d => d.Name, (c, m) => new { c, m })
+            //        .Where(m => m.m.Department.Name == Department).Select(m => m.c);
+
+            if (!Models.Repository.FilterExtansion.IsEmpty(WorkProcess))
+                Resources2 = Resources2.Where(m => m.WorkProcess == WorkProcess);
+
+
+            if (!Models.Repository.FilterExtansion.IsEmpty(Find_Word))
+                Resources2 = Resources2.Where(m => m.Name.IndexOf(Find_Word) >= 0);
+
+
+            var l = Resources2.OrderBy(m => m.Name).ToList();
+            if (AddEmpty)
+                l.Insert(0, new Resource { Id = 0, Name = "*" });
+            return l;
+        }
+
+
     }
 }

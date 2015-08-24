@@ -23,5 +23,6 @@ namespace ITechSite.Models
     
         public virtual Dokument Dokument { get; set; }
         public virtual Resource Resource { get; set; }
+        public virtual Resource ResourceModel { get; set; }
     }
 }

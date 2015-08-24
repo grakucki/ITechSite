@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace ITechSite.Models
 {
@@ -31,11 +32,16 @@ namespace ITechSite.Models
 
     public class InformationPlanModels: InformationPlan
     {
+        [DisplayName("Nazwa kodowa")]
         public string CodeName { get; set; }
         [DisplayName("Kategoria")]
         public int? Kategorie_Id { get; set; }
         [DisplayName("Proces roboczy")]
-        public int? WorkProcess { get; set; }
+        public string WorkProcess { get; set; }
+
+        [DisplayName("Proces roboczy")]
+        public IList<SelectListItem> AvalibleWorkProcess { get; set; }
+
         public string FindAction { get; set; }
         public int? page { get; set; }
 

@@ -1,0 +1,76 @@
+﻿
+@*@model IEnumerable<ITechSite.Models.Resource>*@
+@model ITechSite.Models.ResourceListFind
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Plan informacyjny";
+}
+
+<h2>Dodaj dokumenty do stanowiska lub modelu</h2>
+
+@Html.Partial("_SelectWrokstationsModels")
+<div>
+    Zanleziono @Model.Resources.TotalItemCount pozycji. Wyswietlonio stronę @(Model.Resources.PageCount < Model.Resources.PageNumber ? 0 : Model.Resources.PageNumber) z @Model.Resources.PageCount
+    @Html.PagedListPager(Model.Resources, page => Url.Action("index", new { page, Find_ResourceType = @Model.Find_ResourceType, WorkProcess = @Model.WorkProcess, Find_Word = @Model.Find_Word, ReturnUrl = @Model.ReturnUrl, FindAction = "Page" }))
+</div>
+
+<p>
+    
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nazwa")
+        </th>
+        <th>
+            @Html.DisplayName("Numer")
+        </th>
+        <th>
+            @Html.DisplayName("Proces roboczy")
+            @*@Html.DisplayNameFor(model => model.Resources.WorkProcess)*@
+        </th>
+        <th>
+            @Html.DisplayName("Aktywny")
+            @*@Html.DisplayNameFor(model => model.Resources.Enabled)*@
+        </th>
+        <th>
+            @Html.DisplayName("Typ")
+            @*@Html.DisplayNameFor(model => model.Resources.ResourceType.Type)*@
+        </th>
+        <th>
+            @Html.DisplayName("Opis")
+            @*@Html.DisplayNameFor(model => model.Resources.Description)*@
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Resources)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.No)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkProcess)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Enabled)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ResourceType.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.ActionLink("Dokumenty", "Create", new { idM = item.Id, idR = Model.Workstation })
+                @Html.ActionLink("Szczegóły", "Index", new { idM = item.Id, idR = Model.Workstation })
+            </td>
+        </tr>
+    }
+
+</table>

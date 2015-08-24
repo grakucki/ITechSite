@@ -105,26 +105,43 @@ namespace ITechSite.Controllers
         }
 
         // GET: InformationPlans/Create
-        public ActionResult Create(int? IdR)
+            /// <summary>
+            /// 
+            /// </summary>
+            /// <param name="IdR">statnowisko</param>
+            /// <param name="IdM">model</param>
+            /// <returns></returns>
+        public ActionResult Create(int? IdR, int? IdM)
         {
             var informationPlan = new InformationPlanModels();
+
+            if (IdM.HasValue)
+                informationPlan.IdM = IdM.Value;
+
+
             if (IdR.HasValue)
+            {
+                if (IdR == 0)
+                    IdR = IdM;
                 informationPlan.idR = IdR.Value;
+
+            }
+
+
 
             
 
             ViewBag.IdD = new SelectList(db.Dokument, "Id", "FileName");
             informationPlan.Resource = db.Resource.Where(m => m.Id == IdR.Value).FirstOrDefault();
-            ViewBag.idR = new SelectList(db.Resource.Where(m=>m.Id==IdR.Value), "Id", "Name", IdR);
-
-            
-            
+            informationPlan.ResourceModel = db.Resource.Where(m => m.Id == IdM.Value).FirstOrDefault();
+            ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == IdR.Value), "Id", "Name", IdR);
+            ViewBag.idM = new SelectList(db.Resource.Where(m => m.Id == IdM.Value), "Id", "Name", IdM);
 
             var repo = new ITechSite.Models.Repository.DokumentRepository();
-//            var query = repo.GetDokuments(model.Kategorie_Id, model.WorkProcess, model.CodeName);
-//            model.Dokuments = query.OrderBy(m => m.CodeName).ToPagedList(model.page ?? 1, 10);
             ViewBag.Kategoria_Id = new SelectList(repo.GetKategorie(), "id", "name");
-            ViewBag.WorkProcess = new SelectList(repo.GetWorkProcessAll(), "id", "name");
+
+            informationPlan.WorkProcess = informationPlan.Resource.WorkProcess;
+            informationPlan.AvalibleWorkProcess = repo.GetWorkProcessAll().ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Name });
 
             return View(informationPlan);
         }
@@ -135,7 +152,7 @@ namespace ITechSite.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 //        public ActionResult Create([Bind(Include = "IdR,IdD,Order")] InformationPlan informationPlan)
-        public ActionResult Create([Bind(Include = "IdR,IdD,Order,FindAction,CodeName,WorkProcess,Kategorie_Id")] InformationPlanModels informationPlan)
+        public ActionResult Create([Bind(Include = "IdR,IdD,IdM,Order,FindAction,CodeName,WorkProcess,Kategorie_Id")] InformationPlanModels informationPlan)
         {
             if (ModelState.IsValid)
             {
@@ -147,33 +164,43 @@ namespace ITechSite.Controllers
                         InformationPlan ip = new InformationPlan();
                         ip.IdD = informationPlan.IdD;
                         ip.idR = informationPlan.idR;
+                        if (informationPlan.idR != informationPlan.IdM)
+                            ip.IdM = informationPlan.IdM;
+                        else
+                            ip.IdM = null;
                         ip.Order = informationPlan.Order;
                         db.InformationPlan.Add(ip);
                         db.SaveChanges();
-                        return RedirectToAction("Index");
+                        //return RedirectToAction("Index");
                     }
                     else
                     {
-                        ModelState.AddModelError("IdD", string.Format("Wybierz dokument dod dodania"));
+                        ModelState.AddModelError("IdD", string.Format("Wybierz dokument do dodania"));
 
                     }
                 }
             }
+            int? IdR = informationPlan.idR;
+            int? IdM = informationPlan.IdM;
 
-            //ViewBag.IdD = new SelectList(db.Dokument, "Id", "FileName", informationPlan.IdD);
-            //ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == informationPlan.idR), "Id", "Name", informationPlan.idR);
-            //return View(informationPlan);
 
-            var IdR = informationPlan.idR;
-            informationPlan.Resource = db.Resource.Where(m => m.Id == IdR).FirstOrDefault();
-            ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == IdR), "Id", "Name", IdR);
+            ViewBag.IdD = new SelectList(db.Dokument, "Id", "FileName");
+
+             zrobić filtorwanie dokumentów
+
+            informationPlan.Resource = db.Resource.Where(m => m.Id == IdR.Value).FirstOrDefault();
+            informationPlan.ResourceModel = db.Resource.Where(m => m.Id == IdM.Value).FirstOrDefault();
+
+
+            ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == IdR.Value), "Id", "Name", IdR);
+            ViewBag.idM = new SelectList(db.Resource.Where(m => m.Id == IdM.Value), "Id", "Name", IdM);
 
             var repo = new ITechSite.Models.Repository.DokumentRepository();
-            
-//            ViewBag.IdD = new SelectList(db.Dokument, "Id", "FileName");
-            ViewBag.IdD = new SelectList(repo.GetDokuments(informationPlan.Kategorie_Id, informationPlan.WorkProcess, informationPlan.CodeName), "Id", "FileName");
             ViewBag.Kategoria_Id = new SelectList(repo.GetKategorie(), "id", "name");
-            ViewBag.WorkProcess = new SelectList(repo.GetWorkProcessAll(), "id", "name");
+
+            //informationPlan.WorkProcess = informationPlan.Resource.WorkProcess;
+            informationPlan.AvalibleWorkProcess = repo.GetWorkProcessAll().ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Name });
+
 
             return View(informationPlan);
         }
@@ -213,6 +240,33 @@ namespace ITechSite.Controllers
             ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == informationPlan.idR), "Id", "Name", informationPlan.idR);
             ViewBag.Ret_idR = informationPlan.idR;
             return View(informationPlan);
+        }
+
+
+        private ResourceListFind GetOrDefault()
+        {
+            var rf = (ResourceListFind)Session["ResourceListFind"];
+            if (rf != null)
+                return rf;
+            return new ResourceListFind();
+        }
+
+        private void SetDefault(ResourceListFind rlf)
+        {
+            Session["ResourceListFind"] = rlf;
+        }
+
+        public ActionResult Edit2(ResourceListFind rf)
+        {
+            if (rf == null)
+                rf = GetOrDefault();
+            else
+                if (rf.FindAction == null)
+                    rf = GetOrDefault();
+                else
+                    SetDefault(rf);
+            rf.Fill(db);
+            return View(rf);
         }
 
         // GET: InformationPlans/Delete/5

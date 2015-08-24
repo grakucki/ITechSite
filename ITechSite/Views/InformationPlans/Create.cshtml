@@ -2,79 +2,113 @@
 @model ITechSite.Models.InformationPlanModels
 
 @{
-    ViewBag.Title = "Utwórz Plan inforamcyjny";
+    ViewBag.Title = "Utwórz Plan informacyjny";
 }
 
-<h2>Dodaj dokument do planu Inforamcyjnego</h2>
+<h2>Dodaj dokument do planu inforamcyjnego</h2>
+<hr />
 
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-
-            @Html.LabelFor(model => model.idR, "Stanowisko/Model", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("idR", null, htmlAttributes: new { @class = "form-control" })
-                <p>@Html.DisplayFor(m => m.Resource.WorkProcess)</p>
-                <p>@Html.DisplayFor(m => m.Resource.Description)</p>
-           </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-horizontal">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.IdM, Model.Resource.ResourceType.Type, htmlAttributes: new { @class = "" }):
+               <label style="font-size: larger">@Model.Resource.Name</label>
+               @Html.DisplayFor(m => m.Resource.WorkProcess) @Html.DisplayFor(m => m.Resource.Description)
+            </div>
+            @if (Model.ResourceModel != null)
+            {
+                if (Model.ResourceModel.ResourceType.id == 2)
+                {
+                    <div class="form-group col-md-6">
+                        @Html.LabelFor(model => model.IdM, Model.ResourceModel.ResourceType.Type, htmlAttributes: new { @class = "" }):
+                            <label style="font-size: larger ">@Model.ResourceModel.Name</label>
+                            @Html.DisplayFor(m => m.ResourceModel.Description)
+                    </div>
+                }
+            }
         </div>
+    </div>
+</div>
+    <hr />
+<div class="row">
+    <div class="col-md-5">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.Hidden("idR", null, htmlAttributes: new { @class = "form-control" })
+
+                @if (Model.ResourceModel != null)
+                {
+                    if (Model.ResourceModel.ResourceType.id == 2)
+                    {
+                        @Html.Hidden("idM", null, htmlAttributes: new { @class = "form-control" })
+                    }
+                }
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CodeName, "Szukaj dokumentu", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.CodeName, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Kategorie_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("Kategorie_Id", (SelectList)ViewBag.Kategoria_Id, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.WorkProcess, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.WorkProcess, Model.AvalibleWorkProcess, htmlAttributes: new { @class = "form-control" })
+                        <input type="submit" name="FindAction" value="Szukaj" class="btn btn-default" style=" width : 300px " />
+                    </div>
+                </div>
 
 
-        <hr />
-        <div class="form-group">
-            @Html.LabelFor(model => model.CodeName, "Szukaj dokumentu", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.CodeName, htmlAttributes: new { @class = "form-control" })
-            </div>
-            @Html.LabelFor(model => model.Kategorie_Id,  htmlAttributes : new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Kategorie_Id", (SelectList)ViewBag.Kategoria_Id, htmlAttributes: new { @class = "form-control" })
-            </div>
-            @Html.LabelFor(model => model.WorkProcess,  htmlAttributes : new { @class = "control-label col-md-2" } )
-            <div class="col-md-10">
-                @Html.DropDownList("WorkProcess", (SelectList)ViewBag.WorkProcess, htmlAttributes: new { @class = "form-control" })
-                <input type="submit" name="FindAction" value="Szukaj" class="btn btn-default" style=" width : 300px " />
-            </div>
-       </div>
-            
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdD, "Dokument", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.ListBox("IdD", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IdD, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdD, "Dokument", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.ListBox("IdD", null, htmlAttributes: new { @class = "form-control" })
-                @*@Html.DropDownList("IdD", null, htmlAttributes: new { @class = "form-control" })*@
-                @Html.ValidationMessageFor(model => model.IdD, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group" hidden="hidden">
+                    @Html.LabelFor(model => model.Order, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Order, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Order, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div>
-            @*@Html.PagedListPager(Model.Dokuments, page => Url.Action("Index", new { page, CodeName = Model.CodeName, Kategorie_Id = Model.Kategorie_Id, FindAction = "page" }))*@
-        </div>
-
-            <div class="form-group" hidden="hidden">
-                @Html.LabelFor(model => model.Order, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Order, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Order, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Dodaj" class="btn btn-default" />
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Dodaj" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
-}
+        }
+    </div>
+    <div class="col-md-4">
+        @Html.LabelFor(model => model.IdD, "Dostępne dokumenty", htmlAttributes: new { @class = "control-label" })
+        <br />
+        @Html.ListBox("IdD", null, htmlAttributes: new { @class = "form-fullH form-control" })
+    </div>
+    <div class="col-md-3">
+        @Html.LabelFor(model => model.IdD, "Aktualny plan", htmlAttributes: new { @class = "control-label" })
+        <br />
+        @Html.ListBox("IdD", null, htmlAttributes: new { @class = "form-fullH form-control" })
+    </div>
+</div>
 
 <div>
-    @Html.ActionLink("Powrót", "Edit", "Resources", new { id = ViewBag.Ret_idR }, null)
+    @Html.ActionLink("Powrót", "Edit2")
+    @*@Html.ActionLink("Powrót", null, null, null, new { href = Request.UrlReferrer })*@
+
 </div>
 
 @section Scripts {

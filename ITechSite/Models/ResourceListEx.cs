@@ -22,6 +22,10 @@ namespace ITechSite.Models
         [DisplayName("Projekt")]
         public string Department { get; set; }
 
+        [DisplayName("Stanowiska")]
+        public int? Workstation { get; set; }
+
+
 
 
         /// <summary>
@@ -43,6 +47,8 @@ namespace ITechSite.Models
         public IList<SelectListItem> AvailableDepartment { get; set; }
         public IList<SelectListItem> AvailableWorkPorcess { get; set; }
         public IList<SelectListItem> AvailableResourceType { get; set; }
+        
+        public IList<SelectListItem> AvailableWorkstation { get; set; }
 
         //public List<WorkProcess> WorkProcess { get; set; }
         //public List<ResourceType> ResourceType { get; set; }
@@ -53,17 +59,17 @@ namespace ITechSite.Models
           Allow_ResourceType=true;
       }
 
-       
+     
 
       public void Fill(ITechEntities context)
       {
-          IFactoryRepository _repository = new FactoryRepository();
+          FactoryRepository _repository = new FactoryRepository();
 
           AvailableResourceType = _repository.GetResourceTypeAll().ToSelectedList(m => new SelectListItem { Text = m.Type, Value = m.Type });
           AvailableFactory = _repository.GetFactoryAll().ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Name });
           AvailableDepartment = _repository.GetDepartmentByFactoryName(Factory).ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Name });
           AvailableWorkPorcess = _repository.GetWorkProcessBy(Factory, Department).ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Name });
-          
+          AvailableWorkstation = _repository.GetWorkstationBy(Factory, Department, WorkProcess, string.Empty, true).ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Id.ToString() });
 
           //var Resources2 = context.Resource
           //    .Where(i =>
@@ -71,28 +77,27 @@ namespace ITechSite.Models
           //        && (Find_WorkProcess == null || Find_WorkProcess == "*" || i.WorkProcess == Find_WorkProcess)
           //        && (Find_ResourceType == null || Find_ResourceType == "*" || i.ResourceType.Type == Find_ResourceType)
           //     ).OrderBy(i => i.Name);
-          var Resources2 = context.Resource.AsEnumerable();
+          //var Resources2 = context.Resource.AsEnumerable();
 
 
-          if (!Models.Repository.FilterExtansion.IsEmpty(Find_ResourceType))
-                  Resources2 = Resources2.Where(m => m.ResourceType.Type == Find_ResourceType);
+          //if (!Models.Repository.FilterExtansion.IsEmpty(Find_ResourceType))
+          //        Resources2 = Resources2.Where(m => m.ResourceType.Type == Find_ResourceType);
 
-          if (!Models.Repository.FilterExtansion.IsEmpty(Factory))
-                  Resources2 = Resources2.Where(m => m.Factory == Factory);
+          //if (!Models.Repository.FilterExtansion.IsEmpty(Factory))
+          //        Resources2 = Resources2.Where(m => m.Factory == Factory);
 
-          //if (!Models.Repository.FilterExtansion.IsEmpty(Department))
-          //    Resources2 = Resources2.Join(context.WorkProcess, c => c.WorkProcess, d => d.Name, (c, m) => new { c, m })
-          //        .Where(m => m.m.Department.Name == Department).Select(m => m.c);
+          ////if (!Models.Repository.FilterExtansion.IsEmpty(Department))
+          ////    Resources2 = Resources2.Join(context.WorkProcess, c => c.WorkProcess, d => d.Name, (c, m) => new { c, m })
+          ////        .Where(m => m.m.Department.Name == Department).Select(m => m.c);
 
-          if (!Models.Repository.FilterExtansion.IsEmpty(WorkProcess))
-              Resources2 = Resources2.Where(m => m.WorkProcess == WorkProcess);
-
-
-          if (!Models.Repository.FilterExtansion.IsEmpty(Find_Word))
-                  Resources2= Resources2.Where(m=>m.Name.IndexOf(Find_Word) >= 0);
+          //if (!Models.Repository.FilterExtansion.IsEmpty(WorkProcess))
+          //    Resources2 = Resources2.Where(m => m.WorkProcess == WorkProcess);
 
 
-          Resources2 = Resources2.OrderBy(m => m.Name);
+          //if (!Models.Repository.FilterExtansion.IsEmpty(Find_Word))
+          //        Resources2= Resources2.Where(m=>m.Name.IndexOf(Find_Word) >= 0);
+
+          var Resources2 = _repository.GetResourcesBy(Factory, Department, WorkProcess, Find_ResourceType,Find_Word, Workstation, false);
           Resources = Resources2.ToPagedList(page ?? 1, 10);
       }
 

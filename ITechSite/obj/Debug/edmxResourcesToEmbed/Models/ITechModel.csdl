@@ -118,6 +118,10 @@
       <End Role="NewsPriority" EntitySet="NewsPriority" />
       <End Role="News" EntitySet="News" />
     </AssociationSet>
+    <AssociationSet Name="FK_InformationPlan_Resource1" Association="ITechModel.FK_InformationPlan_Resource1">
+      <End Role="Resource" EntitySet="Resource" />
+      <End Role="InformationPlan" EntitySet="InformationPlan" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Dokument">
     <Key>
@@ -194,6 +198,7 @@
     <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_InformationPlan_Dokument" FromRole="InformationPlan" ToRole="Dokument" />
     <Property Name="IdM" Type="Int32" />
     <NavigationProperty Name="Resource" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="InformationPlan" ToRole="Resource" />
+    <NavigationProperty Name="ResourceModel" Relationship="ITechModel.FK_InformationPlan_Resource1" FromRole="InformationPlan" ToRole="Resource" />
   </EntityType>
   <Association Name="FK_InformationPlan_Dokument">
     <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="1" />
@@ -317,8 +322,8 @@
     <Property Name="idW" Type="Int32" />
     <Property Name="idM" Type="Int32" />
     <Property Name="index" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Resource" Relationship="ITechModel.FK_ModelsWorkstation_Resource" FromRole="ModelsWorkstation" ToRole="Resource" />
-    <NavigationProperty Name="Resource1" Relationship="ITechModel.FK_ModelsWorkstation_Resource1" FromRole="ModelsWorkstation" ToRole="Resource" />
+    <NavigationProperty Name="ResourceWorkstation" Relationship="ITechModel.FK_ModelsWorkstation_Resource" FromRole="ModelsWorkstation" ToRole="Resource" />
+    <NavigationProperty Name="ResourceModel" Relationship="ITechModel.FK_ModelsWorkstation_Resource1" FromRole="ModelsWorkstation" ToRole="Resource" />
   </EntityType>
   <EntityType Name="Resource">
     <Key>
@@ -335,11 +340,12 @@
     <Property Name="Keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Factory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="InformationPlan" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="Resource" ToRole="InformationPlan" />
-    <NavigationProperty Name="ModelsWorkstation" Relationship="ITechModel.FK_ModelsWorkstation_Resource" FromRole="Resource" ToRole="ModelsWorkstation" />
-    <NavigationProperty Name="ModelsWorkstation1" Relationship="ITechModel.FK_ModelsWorkstation_Resource1" FromRole="Resource" ToRole="ModelsWorkstation" />
+    <NavigationProperty Name="ModelsWorkstationWorkStation" Relationship="ITechModel.FK_ModelsWorkstation_Resource" FromRole="Resource" ToRole="ModelsWorkstation" />
+    <NavigationProperty Name="ModelsWorkstationModel" Relationship="ITechModel.FK_ModelsWorkstation_Resource1" FromRole="Resource" ToRole="ModelsWorkstation" />
     <NavigationProperty Name="News" Relationship="ITechModel.FK_News_Resource" FromRole="Resource" ToRole="News" />
     <NavigationProperty Name="ResourceType" Relationship="ITechModel.FK_Resource_Type" FromRole="Resource" ToRole="ResourceType" />
     <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
+    <NavigationProperty Name="InformationPlanModel" Relationship="ITechModel.FK_InformationPlan_Resource1" FromRole="Resource" ToRole="InformationPlan" />
   </EntityType>
   <Association Name="FK_InformationPlan_Resource">
     <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
@@ -469,6 +475,18 @@
       </Principal>
       <Dependent Role="News">
         <PropertyRef Name="NewsPriorityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_InformationPlan_Resource1">
+    <End Type="ITechModel.Resource" Role="Resource" Multiplicity="0..1" />
+    <End Type="ITechModel.InformationPlan" Role="InformationPlan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformationPlan">
+        <PropertyRef Name="IdM" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -15,7 +15,7 @@ namespace ITechSite.Controllers
             return View();
         }
 
-        private IFactoryRepository _repository;
+        private FactoryRepository _repository;
 
         public FactoryController()
             : this(new FactoryRepository())
@@ -23,7 +23,7 @@ namespace ITechSite.Controllers
         }
 
 
-        public FactoryController(IFactoryRepository repository)
+        public FactoryController(FactoryRepository repository)
         {
             _repository = repository;
         }
@@ -67,6 +67,20 @@ namespace ITechSite.Controllers
                           }
                           ).ToList();
             return Json(result, JsonRequestBehavior.AllowGet);
-        } 
+        }
+
+        public ActionResult getworkstationby(string Factory, string workprocess)
+        {
+
+            var dep = _repository.GetWorkstationBy(Factory,null, workprocess,null, true);
+            var result = (from s in dep
+                          select new
+                          {
+                              id = s.Id,
+                              name = s.Name
+                          }
+                          ).ToList();
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }

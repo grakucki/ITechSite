@@ -612,6 +612,9 @@
     <Content Include="Views\ItechUsers\Index.cshtml" />
     <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\Shared\_SelectResources - Copy.cshtml" />
+    <Content Include="Views\InformationPlans\Edit2.cshtml" />
+    <Content Include="Views\Resources\Models.cshtml" />
+    <Content Include="Views\Shared\_SelectWrokstationsModels.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

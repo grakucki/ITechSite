@@ -11,7 +11,7 @@
 @Html.Partial("_SelectResources")
 <div>
     Zanleziono @Model.Resources.TotalItemCount pozycji. Wyswietlonio stronę @(Model.Resources.PageCount < Model.Resources.PageNumber ? 0 : Model.Resources.PageNumber) z @Model.Resources.PageCount
-    @Html.PagedListPager(Model.Resources, page => Url.Action("index", new { page, Find_ResourceType = @Model.Find_ResourceType, WorkProcess = @Model.WorkProcess, Find_Word = @Model.Find_Word, ReturnUrl = @Model.ReturnUrl, FindAction="Page" }))
+    @Html.PagedListPager(Model.Resources, page => Url.Action("index", new { page, Find_ResourceType = @Model.Find_ResourceType, WorkProcess = @Model.WorkProcess, Factory = @Model.Factory, Department = @Model.Department, Find_Word = @Model.Find_Word, ReturnUrl = @Model.ReturnUrl, FindAction = "Page" }))
 
 
 
@@ -27,22 +27,22 @@
            @Html.DisplayName("Nazwa")
         </th>
         <th>
-            @Html.DisplayName("No")
+            @Html.DisplayName("Numer")
         </th>
         <th>
-            @Html.DisplayName("WorkProcess")
+            @Html.DisplayName("Proces Roboczy")
             @*@Html.DisplayNameFor(model => model.Resources.WorkProcess)*@
         </th>
         <th>
-            @Html.DisplayName("Enabled")
+            @Html.DisplayName("Aktywny")
             @*@Html.DisplayNameFor(model => model.Resources.Enabled)*@
         </th>
         <th>
-            @Html.DisplayName("Type")
+            @Html.DisplayName("Typ")
             @*@Html.DisplayNameFor(model => model.Resources.ResourceType.Type)*@
         </th>
          <th>
-             @Html.DisplayName("Description")
+             @Html.DisplayName("Opis")
             @*@Html.DisplayNameFor(model => model.Resources.Description)*@
         </th>       
         <th></th>

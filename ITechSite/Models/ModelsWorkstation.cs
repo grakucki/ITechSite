@@ -19,7 +19,7 @@ namespace ITechSite.Models
         public Nullable<int> idM { get; set; }
         public string index { get; set; }
     
-        public virtual Resource Resource { get; set; }
-        public virtual Resource Resource1 { get; set; }
+        public virtual Resource ResourceWorkstation { get; set; }
+        public virtual Resource ResourceModel { get; set; }
     }
 }

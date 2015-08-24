@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ITechSite.Models.Resource>
+
+@{
+    ViewBag.Title = "Models";
+}
+
+<h2>Modele na stanowisku @ViewBag.Workstation.Name</h2>
+
+<table class="table">
+    <tr>
+        <th>Akcja</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @if (!item.ModelsWorkstationModel.Any(m => m.idW == @ViewBag.Workstation.Id))
+            {
+                @Html.ActionLink("Dodaj", "WorkstationModelsUpdate", new { idM = item.Id, idW = @ViewBag.Workstation.Id });
+            }
+            else
+            {
+                @Html.ActionLink("Usuń", "WorkstationModelsUpdate", new { idM = item.Id, idW = @ViewBag.Workstation.Id, remove = true });
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+    </tr>
+}
+
+</table>
