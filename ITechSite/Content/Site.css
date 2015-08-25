@@ -32,8 +32,8 @@ textarea {
  .form-fullH
  {
     max-height: 80vh;
-    min-height : 60vh;
-    height : 80vh;
+    min-height : 40vh;
+    height : 40vh;
 
  }
 
@@ -69,4 +69,15 @@ textarea {
 .text-Green
 {
     background-color: lightgreen;
+}
+
+
+.file-content
+{
+    border : solid;
+    border-width : 1px;
+    padding: 5px;
+    background-color: lightgoldenrodyellow;
+    border-radius: 10px;
+
 }

@@ -5,16 +5,12 @@
     ViewBag.Title = "Utwórz Plan informacyjny";
 }
 
-<h2>Dodaj dokument do planu inforamcyjnego</h2>
-<hr />
-
-<div class="row">
-    <div class="col-md-12">
-        <div class="form-horizontal">
+<h4>Dodaj dokument do planu informacyjnego</h4>
+<div class="row file-content">
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.IdM, Model.Resource.ResourceType.Type, htmlAttributes: new { @class = "" }):
-               <label style="font-size: larger">@Model.Resource.Name</label>
-               @Html.DisplayFor(m => m.Resource.WorkProcess) @Html.DisplayFor(m => m.Resource.Description)
+                <label style="font-size: larger">@Model.Resource.Name</label><br />
+                @Html.DisplayFor(m => m.Resource.WorkProcess) @Html.DisplayFor(m => m.Resource.Description)
             </div>
             @if (Model.ResourceModel != null)
             {
@@ -22,21 +18,34 @@
                 {
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.IdM, Model.ResourceModel.ResourceType.Type, htmlAttributes: new { @class = "" }):
-                            <label style="font-size: larger ">@Model.ResourceModel.Name</label>
-                            @Html.DisplayFor(m => m.ResourceModel.Description)
+                        <label style="font-size: larger ">@Model.ResourceModel.Name</label>
+                        @Html.DisplayFor(m => m.ResourceModel.Description)
                     </div>
                 }
             }
+</div>
+Aktualna lista plików:
+<div class="row">
+    @foreach (var item in Model.IncludeDoc)
+    {
+        <div class="col-md-3">
+            <div class="file-content">
+                @Html.Label("", item.Dokument.FileName, htmlAttributes: new { @class = "control-label" })<br />
+                @item.Dokument.Description
+                <div>
+                    @Html.ActionLink("usuń", "Delete", new { id = item.id })
+                </div>
+            </div>
         </div>
-    </div>
+    }
 </div>
     <hr />
+@using (Html.BeginForm())
+        {
+    @Html.AntiForgeryToken()
+
 <div class="row">
     <div class="col-md-5">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.Hidden("idR", null, htmlAttributes: new { @class = "form-control" })
@@ -69,13 +78,13 @@
                 </div>
 
 
-                <div class="form-group">
+                @*<div class="form-group">
                     @Html.LabelFor(model => model.IdD, "Dokument", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.ListBox("IdD", null, htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.IdD, "", new { @class = "text-danger" })
                     </div>
-                </div>
+                </div>*@
 
                 <div class="form-group" hidden="hidden">
                     @Html.LabelFor(model => model.Order, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -85,26 +94,17 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Dodaj" class="btn btn-default" />
-                    </div>
-                </div>
+                
             </div>
-        }
     </div>
     <div class="col-md-4">
+        <input type="submit" value="Dodaj dokument do planu" class="btn btn-default" style=" width : 300px" />
         @Html.LabelFor(model => model.IdD, "Dostępne dokumenty", htmlAttributes: new { @class = "control-label" })
         <br />
         @Html.ListBox("IdD", null, htmlAttributes: new { @class = "form-fullH form-control" })
     </div>
-    <div class="col-md-3">
-        @Html.LabelFor(model => model.IdD, "Aktualny plan", htmlAttributes: new { @class = "control-label" })
-        <br />
-        @Html.ListBox("IdD", null, htmlAttributes: new { @class = "form-fullH form-control" })
-    </div>
 </div>
-
+        }
 <div>
     @Html.ActionLink("Powrót", "Edit2")
     @*@Html.ActionLink("Powrót", null, null, null, new { href = Request.UrlReferrer })*@

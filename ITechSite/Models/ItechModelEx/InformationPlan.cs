@@ -39,12 +39,17 @@ namespace ITechSite.Models
         [DisplayName("Proces roboczy")]
         public string WorkProcess { get; set; }
 
+
         [DisplayName("Proces roboczy")]
         public IList<SelectListItem> AvalibleWorkProcess { get; set; }
+
 
         public string FindAction { get; set; }
         public int? page { get; set; }
 
         public PagedList.IPagedList<Dokument> Dokuments { get; set; }
+
+        [DisplayName("Dołączone dokumenty")]
+        public IList<InformationPlan> IncludeDoc { get; set; }
     }
 }

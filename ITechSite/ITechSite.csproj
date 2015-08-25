@@ -387,6 +387,7 @@
     <Compile Include="Models\SimaticCpuType.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Content Include="Models\sql\2015-08-25.sql" />
     <Compile Include="Models\UniqueAttribute.cs" />
     <Compile Include="Models\DBFile.cs" />
     <Compile Include="Models\DocumentModels.cs" />

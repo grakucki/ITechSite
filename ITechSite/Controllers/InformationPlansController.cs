@@ -104,6 +104,27 @@ namespace ITechSite.Controllers
             return View(informationPlan);
         }
 
+
+
+        private void Create_FillData(InformationPlanModels ipm)
+        {
+            var IdR = ipm.idR;
+            var IdM = ipm.IdM;
+            ipm.Resource = db.Resource.Where(m => m.Id == IdR).FirstOrDefault();
+            ipm.ResourceModel = db.Resource.Where(m => m.Id == IdM.Value).FirstOrDefault();
+            ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == IdR), "Id", "Name", IdR);
+            ViewBag.idM = new SelectList(db.Resource.Where(m => m.Id == IdM), "Id", "Name", IdM);
+
+            var repo = new ITechSite.Models.Repository.DokumentRepository();
+            ViewBag.Kategoria_Id = new SelectList(repo.GetKategorie(), "id", "name", ipm.Kategorie_Id);
+            if (string.IsNullOrEmpty(ipm.WorkProcess))
+                ipm.WorkProcess = ipm.Resource.WorkProcess;
+            ipm.AvalibleWorkProcess = repo.GetWorkProcessAll().ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Name });
+            ipm.IncludeDoc = repo.IncludeInformationPlainDoc(IdR, IdM);
+            var docs = repo.GetAvalibleDoc(IdR, IdM, ipm.WorkProcess, ipm.CodeName, ipm.Kategorie_Id);
+            ViewBag.IdD = new SelectList(docs, "Id", "FileName");
+        }
+
         // GET: InformationPlans/Create
             /// <summary>
             /// 
@@ -111,37 +132,21 @@ namespace ITechSite.Controllers
             /// <param name="IdR">statnowisko</param>
             /// <param name="IdM">model</param>
             /// <returns></returns>
-        public ActionResult Create(int? IdR, int? IdM)
+        public ActionResult Create(int IdR, int? IdM)
         {
             var informationPlan = new InformationPlanModels();
+            informationPlan.idR = IdR;
+            informationPlan.IdM = IdM;
 
-            if (IdM.HasValue)
-                informationPlan.IdM = IdM.Value;
+            if (!informationPlan.IdM.HasValue)
+                informationPlan.IdM = informationPlan.idR;
 
-
-            if (IdR.HasValue)
-            {
-                if (IdR == 0)
-                    IdR = IdM;
-                informationPlan.idR = IdR.Value;
-
-            }
+            if (informationPlan.idR == 0)
+                informationPlan.idR = informationPlan.IdM.Value;
 
 
 
-            
-
-            ViewBag.IdD = new SelectList(db.Dokument, "Id", "FileName");
-            informationPlan.Resource = db.Resource.Where(m => m.Id == IdR.Value).FirstOrDefault();
-            informationPlan.ResourceModel = db.Resource.Where(m => m.Id == IdM.Value).FirstOrDefault();
-            ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == IdR.Value), "Id", "Name", IdR);
-            ViewBag.idM = new SelectList(db.Resource.Where(m => m.Id == IdM.Value), "Id", "Name", IdM);
-
-            var repo = new ITechSite.Models.Repository.DokumentRepository();
-            ViewBag.Kategoria_Id = new SelectList(repo.GetKategorie(), "id", "name");
-
-            informationPlan.WorkProcess = informationPlan.Resource.WorkProcess;
-            informationPlan.AvalibleWorkProcess = repo.GetWorkProcessAll().ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Name });
+            Create_FillData(informationPlan);
 
             return View(informationPlan);
         }
@@ -154,20 +159,27 @@ namespace ITechSite.Controllers
 //        public ActionResult Create([Bind(Include = "IdR,IdD,Order")] InformationPlan informationPlan)
         public ActionResult Create([Bind(Include = "IdR,IdD,IdM,Order,FindAction,CodeName,WorkProcess,Kategorie_Id")] InformationPlanModels informationPlan)
         {
+            if (!informationPlan.IdM.HasValue)
+                informationPlan.IdM = informationPlan.idR;
+
+            if (informationPlan.idR == 0)
+                informationPlan.idR = informationPlan.IdM.Value;
+
             if (ModelState.IsValid)
             {
+
                 if (string.IsNullOrEmpty(informationPlan.FindAction))
                 {
                     if (informationPlan.IdD != 0)
                     {
                         informationPlan.Enabled = true;
                         InformationPlan ip = new InformationPlan();
+
                         ip.IdD = informationPlan.IdD;
+                        ip.IdM = informationPlan.IdM;
                         ip.idR = informationPlan.idR;
-                        if (informationPlan.idR != informationPlan.IdM)
-                            ip.IdM = informationPlan.IdM;
-                        else
-                            ip.IdM = null;
+
+
                         ip.Order = informationPlan.Order;
                         db.InformationPlan.Add(ip);
                         db.SaveChanges();
@@ -180,28 +192,7 @@ namespace ITechSite.Controllers
                     }
                 }
             }
-            int? IdR = informationPlan.idR;
-            int? IdM = informationPlan.IdM;
-
-
-            ViewBag.IdD = new SelectList(db.Dokument, "Id", "FileName");
-
-             zrobić filtorwanie dokumentów
-
-            informationPlan.Resource = db.Resource.Where(m => m.Id == IdR.Value).FirstOrDefault();
-            informationPlan.ResourceModel = db.Resource.Where(m => m.Id == IdM.Value).FirstOrDefault();
-
-
-            ViewBag.idR = new SelectList(db.Resource.Where(m => m.Id == IdR.Value), "Id", "Name", IdR);
-            ViewBag.idM = new SelectList(db.Resource.Where(m => m.Id == IdM.Value), "Id", "Name", IdM);
-
-            var repo = new ITechSite.Models.Repository.DokumentRepository();
-            ViewBag.Kategoria_Id = new SelectList(repo.GetKategorie(), "id", "name");
-
-            //informationPlan.WorkProcess = informationPlan.Resource.WorkProcess;
-            informationPlan.AvalibleWorkProcess = repo.GetWorkProcessAll().ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Name });
-
-
+            Create_FillData(informationPlan);
             return View(informationPlan);
         }
 
@@ -281,19 +272,21 @@ namespace ITechSite.Controllers
             {
                 return HttpNotFound();
             }
-            return View(informationPlan);
+            db.InformationPlan.Remove(informationPlan);
+            db.SaveChanges();
+            return RedirectToAction("Create", new { IdR= informationPlan.idR, IdM=informationPlan.IdM });
         }
 
         // POST: InformationPlans/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            InformationPlan informationPlan = db.InformationPlan.Find(id);
-            db.InformationPlan.Remove(informationPlan);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    InformationPlan informationPlan = db.InformationPlan.Find(id);
+        //    db.InformationPlan.Remove(informationPlan);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

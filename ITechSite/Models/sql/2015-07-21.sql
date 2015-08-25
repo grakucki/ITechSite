@@ -162,3 +162,43 @@ INSERT [dbo].[FactoryWorkProcess] ([FactoryId], [WorkProcessId]) VALUES (2, 6)
 GO
 INSERT [dbo].[FactoryWorkProcess] ([FactoryId], [WorkProcessId]) VALUES (2, 7)
 GO
+
+
+/****** Script for SelectTopNRows command from SSMS  ******/
+
+
+ 
+USE [ITech]
+GO
+
+SET IDENTITY_INSERT [dbo].[Kategorie] ON 
+
+GO
+UPDATE [dbo].[Kategorie] set [name]=N'BHP' where [id]=1 ;
+if @@ROWCOUNT=0
+INSERT [dbo].[Kategorie] ([id], [name]) VALUES (1, N'BHP')
+GO
+UPDATE [dbo].[Kategorie] set [name]=N'QS' where [id]=2 ;
+if @@ROWCOUNT=0
+INSERT [dbo].[Kategorie] ([id], [name]) VALUES (2, N'QS')
+GO
+UPDATE [dbo].[Kategorie] set [name]=N'FG' where [id]= 3;
+if @@ROWCOUNT=0
+INSERT [dbo].[Kategorie] ([id], [name]) VALUES (3, N'FG')
+GO
+UPDATE [dbo].[Kategorie] set [name]=N'PL' where [id]=4 ;
+if @@ROWCOUNT=0
+INSERT [dbo].[Kategorie] ([id], [name]) VALUES (4, N'PL')
+GO
+UPDATE [dbo].[Kategorie] set [name]=N'UR' where [id]=5 ;
+if @@ROWCOUNT=0
+INSERT [dbo].[Kategorie] ([id], [name]) VALUES (5, N'UR')
+GO
+UPDATE [dbo].[Kategorie] set [name]=N'DK' where [id]=6 ;
+if @@ROWCOUNT=0
+INSERT [dbo].[Kategorie] ([id], [name]) VALUES (6, N'DK')
+GO
+SET IDENTITY_INSERT [dbo].[Kategorie] OFF
+GO
+
+
