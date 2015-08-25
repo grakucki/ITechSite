@@ -670,6 +670,7 @@ namespace InstrukcjeProdukcyjne
                 {
                     dial.Show();
                     await LoadResource_Async(Properties.Settings.Default.App.Stanowisko);
+                    ZaładujPliki();
                     DocSyncDlg.Sync();
                 }
 
