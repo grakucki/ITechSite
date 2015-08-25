@@ -23,6 +23,16 @@ namespace InstrukcjeProdukcyjne
 
         }
 
+        public void Stop()
+        {
+            if (this.Controls.Count > 0)
+            {
+                IMediaViewer mv = (IMediaViewer)this.Controls[0];
+                if (mv!=null)
+                    mv.Stop();
+            }
+        }
+
         public void ShowDokument(string fileName)
         {
             if (this.Controls.Count > 0)

@@ -85,39 +85,45 @@ namespace ITechInstrukcjeModel
          }
      }
 
+     //public partial class AspNetRoles
+     //    [System.Runtime.Serialization.IgnoreDataMember]
+     //    public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+
+
     //public partial class Dokument
     //{
-    //    [IgnoreDataMember]
+     //   [System.Runtime.Serialization.IgnoreDataMember]
     //    public ICollection<InformationPlan> InformationPlan { get; set; }
     //}
 
     //public partial class InformationPlan
     //{
-    //    //[IgnoreDataMember]
+     //   [System.Runtime.Serialization.IgnoreDataMember]
     //    //public virtual Resource Resource { get; set; }
     //}
 
+     //public partial class Kategorie
+     //{
+     //    [System.Runtime.Serialization.IgnoreDataMember]
+     //    public virtual ICollection<Dokument> Dokument { get; set; }
+     //}
+
+     //public partial class ModelsWorkstation
+     //[System.Runtime.Serialization.IgnoreDataMember]
+     //public virtual Resource Workstation { get; set; }
+     //[System.Runtime.Serialization.IgnoreDataMember]
+     //public virtual Resource Models { get; set; }
+
+
     //public partial class News
     //{
-    //    [IgnoreDataMember]
+     //    [System.Runtime.Serialization.IgnoreDataMember]
     //    public virtual Resource Resource { get; set; }
     //}
 
     //public partial class Workstation
     //{
-    //    [IgnoreDataMember]
+     //    [System.Runtime.Serialization.IgnoreDataMember]
     //    public virtual Resource Resource { get; set; }
     //}
-
-
-     //public partial class ModelsWorkstation
-     //[System.Runtime.Serialization.IgnoreDataMember]
-        //public virtual Resource Workstation { get; set; }
-        //[System.Runtime.Serialization.IgnoreDataMember]
-        //public virtual Resource Models { get; set; }
-
-     //public partial class AspNetRoles
-        //    [System.Runtime.Serialization.IgnoreDataMember]
-        //    public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
-
 }

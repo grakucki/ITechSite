@@ -34,9 +34,9 @@ namespace InstrukcjeProdukcyjne
         private void ModelsWorkstationEditDlg_Load(object sender, EventArgs e)
         {
 
-            var workprocess = Workstation.WorkProcess;
+            var idr= Workstation.Id;
             //resourceBindingSource.DataSource = Models;
-            var x = Models.Where(m => m.WorkProcess == workprocess).ToList();
+            var x = Models.ToList();
             resourceBindingSource.DataSource = x;
             bindingSource1.DataSource = ModelWorkstationInfo;
 
@@ -110,12 +110,12 @@ namespace InstrukcjeProdukcyjne
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            var workprocess = Workstation.WorkProcess;
+            var idr = Workstation.Id;
             if (checkBox1.Checked)
                 resourceBindingSource.DataSource = Models;
             else
             {
-                var x = Models.Where(m => m.WorkProcess == workprocess).ToList();
+                var x = Models.Where(m => m.ModelsWorkstation.Any(n => n.idW == idr)).ToList();
                 resourceBindingSource.DataSource = x;
             }
                 

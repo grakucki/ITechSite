@@ -15,7 +15,7 @@ namespace ITechInstrukcjeModel
     public partial class Workstation
     {
         public int Id { get; set; }
-        public int idR { get; set; }
+        public Nullable<int> idR { get; set; }
         public string WorkstationGroup { get; set; }
         public string Factory { get; set; }
         public string Area { get; set; }

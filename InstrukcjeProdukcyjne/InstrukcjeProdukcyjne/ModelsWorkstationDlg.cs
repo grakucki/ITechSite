@@ -30,7 +30,7 @@ namespace InstrukcjeProdukcyjne
         {
             if (Workstation==null)
             {
-                MessageBox.Show("Nie skonfigurowano poprawnie stacji roboczje. Ustawa porawne właściwości i spróbuj poniwnie");
+                MessageBox.Show("Nie skonfigurowano poprawnie komunikacji stacji roboczje ze sterwonikiem. Ustawa porawne właściwości i spróbuj poniwnie");
                 this.Close();
                 return;
             }
@@ -39,7 +39,7 @@ namespace InstrukcjeProdukcyjne
 	        {	        
                 using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
                 {
-                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR).OrderBy(m=>m.ModelName).ToList();
+                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR.Value).OrderBy(m=>m.ModelName).ToList();
                 }
 		
 	        }
@@ -90,7 +90,7 @@ namespace InstrukcjeProdukcyjne
 
                     //zapis do bazy
                     client.UpdateModelWorkstationInfo(n, false);
-                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR).ToList();
+                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR.Value).ToList();
 
                 }
             }
@@ -121,7 +121,7 @@ namespace InstrukcjeProdukcyjne
 
                     //zapis do bazy
                     client.UpdateModelWorkstationInfo(n, false);
-                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR).ToList();
+                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR.Value).ToList();
                 }
             }
             catch (Exception ex)
@@ -147,7 +147,7 @@ namespace InstrukcjeProdukcyjne
                 {
                     //zapis do bazy
                     client.UpdateModelWorkstationInfo(n, true);
-                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR).ToList();
+                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR.Value).ToList();
 
                 }
             }
@@ -294,7 +294,7 @@ namespace InstrukcjeProdukcyjne
                         index++;  
                     }
 
-                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR).OrderBy(m=>m.ModelName).ToList();
+                    modelWorkstationInfoBindingSource.DataSource = client.GetModelWorkstationInfo(Workstation.idR.Value).OrderBy(m=>m.ModelName).ToList();
                 }
 
             }

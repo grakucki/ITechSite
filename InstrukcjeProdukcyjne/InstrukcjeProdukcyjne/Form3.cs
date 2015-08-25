@@ -508,7 +508,7 @@ namespace InstrukcjeProdukcyjne
             if (res == null)
                 return;
             listView1.BeginUpdate();
-            var IP = res.InformationPlan;
+            var IP = res.InformationPlanWorkstation;
             var g = IP.Where(m=>m.Dokument.Kategorie != null).Select(m => m.Dokument.Kategorie.name).Distinct();
             listView.Groups.Clear();
             foreach (var item in g)

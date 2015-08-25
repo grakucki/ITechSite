@@ -168,6 +168,13 @@ namespace ITechSite.Controllers
             else
                 r.Type = 1;
             r.Enabled = true;
+            
+            // jeśli model to nie ustawiamy 
+            if (r.Type == 2)
+            {
+                r.Factory = ".";
+                r.WorkProcess = ".";
+            }
             return View(r);
         }
 
@@ -189,6 +196,11 @@ namespace ITechSite.Controllers
                         ModelState.AddModelError("Name", string.Format("Nazwa {0} jest już zajęta", resource.Name));
                     else
                     {
+                        if (resource.Type == 2)
+                        {
+                            resource.Factory = "";
+                            resource.WorkProcess = "";
+                        }
                         db.Resource.Add(resource);
                         db.SaveChanges();
                         return RedirectToAction("Index");

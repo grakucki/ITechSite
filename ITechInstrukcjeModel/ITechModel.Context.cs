@@ -27,7 +27,6 @@ namespace ITechInstrukcjeModel
     
         public virtual DbSet<Dokument> Dokument { get; set; }
         public virtual DbSet<InformationPlan> InformationPlan { get; set; }
-        public virtual DbSet<Workstation> Workstation { get; set; }
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Resource> Resource { get; set; }
         public virtual DbSet<WorkstationGroup> WorkstationGroup { get; set; }
@@ -36,5 +35,7 @@ namespace ITechInstrukcjeModel
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<ItechUsers> ItechUsers { get; set; }
         public virtual DbSet<Kategorie> Kategorie { get; set; }
+        public virtual DbSet<NewsPriority> NewsPriority { get; set; }
+        public virtual DbSet<Workstation> Workstation { get; set; }
     }
 }

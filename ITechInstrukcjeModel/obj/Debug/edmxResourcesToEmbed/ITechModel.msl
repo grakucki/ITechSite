@@ -24,6 +24,7 @@
     <EntitySetMapping Name="InformationPlan">
       <EntityTypeMapping TypeName="ITechModel.InformationPlan">
         <MappingFragment StoreEntitySet="InformationPlan">
+          <ScalarProperty Name="IdM" ColumnName="IdM" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="idR" ColumnName="idR" />
           <ScalarProperty Name="IdD" ColumnName="IdD" />
@@ -32,24 +33,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Workstation">
-      <EntityTypeMapping TypeName="ITechModel.Workstation">
-        <MappingFragment StoreEntitySet="Workstation">
-          <ScalarProperty Name="AllowIp" ColumnName="AllowIp" />
-          <ScalarProperty Name="Setrownik_DB" ColumnName="Setrownik_DB" />
-          <ScalarProperty Name="Sterownik_Model" ColumnName="Sterownik_Model" />
-          <ScalarProperty Name="Sterownik_Ip" ColumnName="Sterownik_Ip" />
-          <ScalarProperty Name="Area" ColumnName="Area" />
-          <ScalarProperty Name="Factory" ColumnName="Factory" />
-          <ScalarProperty Name="WorkstationGroup" ColumnName="WorkstationGroup" />
-          <ScalarProperty Name="idR" ColumnName="idR" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="News">
       <EntityTypeMapping TypeName="ITechModel.News">
         <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="NewsPriorityId" ColumnName="NewsPriorityId" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="ValidEnd" ColumnName="ValidEnd" />
           <ScalarProperty Name="News1" ColumnName="News" />
@@ -60,6 +47,7 @@
     <EntitySetMapping Name="Resource">
       <EntityTypeMapping TypeName="ITechModel.Resource">
         <MappingFragment StoreEntitySet="Resource">
+          <ScalarProperty Name="Factory" ColumnName="Factory" />
           <ScalarProperty Name="Keywords" ColumnName="Keywords" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Enabled" ColumnName="Enabled" />
@@ -134,6 +122,30 @@
         <MappingFragment StoreEntitySet="Kategorie">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NewsPriority">
+      <EntityTypeMapping TypeName="ITechModel.NewsPriority">
+        <MappingFragment StoreEntitySet="NewsPriority">
+          <ScalarProperty Name="CssName" ColumnName="CssName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Workstation">
+      <EntityTypeMapping TypeName="ITechModel.Workstation">
+        <MappingFragment StoreEntitySet="Workstation">
+          <ScalarProperty Name="AllowIp" ColumnName="AllowIp" />
+          <ScalarProperty Name="Setrownik_DB" ColumnName="Setrownik_DB" />
+          <ScalarProperty Name="Sterownik_Model" ColumnName="Sterownik_Model" />
+          <ScalarProperty Name="Sterownik_Ip" ColumnName="Sterownik_Ip" />
+          <ScalarProperty Name="Area" ColumnName="Area" />
+          <ScalarProperty Name="Factory" ColumnName="Factory" />
+          <ScalarProperty Name="WorkstationGroup" ColumnName="WorkstationGroup" />
+          <ScalarProperty Name="idR" ColumnName="idR" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

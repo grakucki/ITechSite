@@ -174,7 +174,7 @@ namespace ITechSite.Controllers
                     {
                         informationPlan.Enabled = true;
                         InformationPlan ip = new InformationPlan();
-
+                        ip.Enabled = informationPlan.Enabled;
                         ip.IdD = informationPlan.IdD;
                         ip.IdM = informationPlan.IdM;
                         ip.idR = informationPlan.idR;
@@ -272,9 +272,12 @@ namespace ITechSite.Controllers
             {
                 return HttpNotFound();
             }
+            var idr = informationPlan.idR;
+            var idm = informationPlan.IdM;
+
             db.InformationPlan.Remove(informationPlan);
             db.SaveChanges();
-            return RedirectToAction("Create", new { IdR= informationPlan.idR, IdM=informationPlan.IdM });
+            return RedirectToAction("Create", new { IdR= idr, IdM=idm });
         }
 
         // POST: InformationPlans/Delete/5

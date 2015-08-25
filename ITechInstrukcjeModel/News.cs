@@ -18,7 +18,10 @@ namespace ITechInstrukcjeModel
         public string News1 { get; set; }
         public Nullable<System.DateTime> ValidEnd { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
-    [System.Runtime.Serialization.IgnoreDataMember]
+        public int NewsPriorityId { get; set; }
+
+        [System.Runtime.Serialization.IgnoreDataMember]
         public virtual Resource Resource { get; set; }
+        public virtual NewsPriority NewsPriority { get; set; }
     }
 }

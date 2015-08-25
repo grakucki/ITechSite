@@ -494,7 +494,7 @@ namespace InstrukcjeProdukcyjne
             }
 
             Resource NewModel = (Resource)x;
-            ZaładujPliki2(NewModel, null);
+            ZaładujPliki2(NewModel, groupListViewModels);
         }
 
         //private void OnModelChanged(Resource newModel)
@@ -527,51 +527,6 @@ namespace InstrukcjeProdukcyjne
  
 
 
-        private void ZaładujPliki3(Resource res, ListView listView)
-        {
-            if (listView == null)
-                return;
-
-            listView.Items.Clear();
-            if (res == null)
-                return;
-            listView.BeginUpdate();
-            var IP = res.InformationPlan;
-            var g = IP.Where(m=>m.Dokument.Kategorie != null).Select(m => m.Dokument.Kategorie.name).Distinct();
-            listView.Groups.Clear();
-            foreach (var item in g)
-            {
-                if (item!=null)
-                    listView.Groups.Add(item, item);
-            }
-            listView.Groups.Add("inne", "inne");
-
-            foreach (var item in IP)
-            {
-                if (item.Dokument != null)
-                {
-                    var d = new MyFileInfo { FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Dok = item.Dokument };
-                    var s = string.IsNullOrEmpty(item.Dokument.Description) ? item.Dokument.FileName : item.Dokument.Description;
-                    d.ItemText = s;
-                    d.ItemText2 = d.Dok.CodeName;
-
-                    var i = listView.Items.Add(d.FullFileName, s, d.ExtensionIndex);
-                    i.SubItems.Add(item.Dokument.CodeName);
-                    i.Tag = d;
-
-                    if (item.Dokument.Kategorie != null)
-                        i.Group = listView.Groups[item.Dokument.Kategorie.name];
-                    else
-                        i.Group = listView.Groups["inne"];
-                }
-                
-                
-            }
-            
-            listView.EndUpdate();
-        }
-        //groupListView21
-
         private void ZaładujPliki2(Resource res, GroupListView2 listView)
         {
             if (listView == null)
@@ -580,7 +535,7 @@ namespace InstrukcjeProdukcyjne
 
             if (res == null)
                 return;
-            var IP = res.InformationPlan;
+            var IP = res.InformationPlanModel;
             var g = IP.Where(m => m.Dokument.Kategorie != null).Select(m => m.Dokument.Kategorie.name).Distinct();
 
 

@@ -82,6 +82,7 @@ namespace InstrukcjeProdukcyjne
 
         private void CloseOwnerForm()
         {
+            Stop();
             var p = this.Parent;
             while (p != null)
             {
@@ -131,6 +132,11 @@ namespace InstrukcjeProdukcyjne
         private void button5_Click(object sender, EventArgs e)
         {
             axWindowsMediaPlayer1.Ctlcontrols.stop();
+        }
+
+        private void customPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
