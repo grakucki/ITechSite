@@ -382,7 +382,7 @@
     <Content Include="Content\images\right.png" />
     <Content Include="Content\images\Testy.jpg" />
     <Content Include="Models\sql\2015-06-23.sql" />
-    <Content Include="Models\sql\2015-07-06 naprawa w istniejących.sql" />
+    <Content Include="Models\sql\2015-07-06 naprawa w istniejacych.sql" />
     <Content Include="Models\sql\2015-07-11.sql" />
     <Compile Include="Models\SimaticCpuType.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>

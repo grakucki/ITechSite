@@ -238,7 +238,7 @@ namespace InstrukcjeProdukcyjne
                 conn.Fill(false);
                 //BlockThread(5);
 
-                toolStripStatusLabel2.Text = "Sterownik : " + conn.NrModelu.ToString();
+                toolStripStatusLabel2.Text = "Sterownik : '" + conn.NrModelu.ToString()+"'";
                 var modelindex = this.CurrentWorkstation.ModelsWorkstation.Where(m=>m.index==conn.NrModelu.ToString()).FirstOrDefault();
                 if (modelindex!=null)
                 {
@@ -255,7 +255,11 @@ namespace InstrukcjeProdukcyjne
                         }
                         _LastReadModelIndex = modelindex.index;
                     }
+                    _LastSimaticError = " Ok";
                 }
+                else
+                _LastSimaticError = " Ok. Nieznany index modelu.";
+
             }
             catch (Exception ex)
             {
@@ -712,11 +716,10 @@ namespace InstrukcjeProdukcyjne
 
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
-#if !DEBUG
+
             if (!AllowAction(AllowRoles.Kierownik, "Aby zamknąć przyłóż kartę"))
                 return;
             // zakończ
-#endif
             this.Close();
         }
 
@@ -993,7 +996,9 @@ namespace InstrukcjeProdukcyjne
 
         private void toolStripStatusLabel2_Click(object sender, EventArgs e)
         {
+            _LastReadModelIndex = "";
             SimaticReadAsync();
+            MessageBox.Show("Komunikacja siamtic" + _LastSimaticError);
         }
 
 
