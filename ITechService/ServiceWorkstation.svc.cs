@@ -23,7 +23,7 @@ namespace ITechService
         public string TestConnection(int value)
         {
             StringBuilder ret = new StringBuilder();
-            ret.AppendLine("Serwis ... v2.19 Ok");
+            ret.AppendLine("Serwis ... v3.19 Ok");
             try
             {
                 ret.Append("Baza danych ... ");
@@ -116,7 +116,7 @@ namespace ITechService
                 {
                     context.Configuration.LazyLoadingEnabled = false;
                     context.Configuration.ProxyCreationEnabled = false;
-                    o = context.ResourceWorkstation.Include(m=>m.Workstation).OrderBy(m=>m.Name).ToList();
+                    o = context.Resource.Where(m=>m.Enabled==true).Include(m=>m.Workstation).OrderBy(m=>m.Name).ToList();
                 }
             }
             catch (Exception ex)
@@ -128,9 +128,13 @@ namespace ITechService
             return o;
         }
 
+        /// <summary>
+        /// pobiera plan informacyjny dla konkretnego stanowiska bez modeli
+        /// </summary>
+        /// <param name="idR"></param>
+        /// <returns></returns>
         public Resource GetInformationPlain(int idR)
         {
-
             StringBuilder ret = new StringBuilder();
             Resource o = null;
             try
@@ -142,9 +146,9 @@ namespace ITechService
                     context.Configuration.ProxyCreationEnabled = false;
 
                     var q = context.Resource.Where(m => m.Id == idR)
-                        .Include(m => m.InformationPlan)
-                        .Include(m => m.InformationPlan.Select(y => y.Dokument))
-                        .Include(m => m.InformationPlan.Select(y => y.Dokument).Select(z=>z.Kategorie))
+                        .Include(m => m.InformationPlanWorkstation)
+                        .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument))
+                        .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument).Select(z => z.Kategorie))
                         .Include(m => m.Workstation)
                         .Include(m => m.News)
                         .Include(m => m.ModelsWorkstation);
@@ -162,6 +166,11 @@ namespace ITechService
         }
 
 
+        /// <summary>
+        /// pobiera listę zasobów z planami informacyjnymi dla stanowiska i wszystkich modeli przynależnych do stanowiska
+        /// </summary>
+        /// <param name="idR"></param>
+        /// <returns></returns>
         public List<Resource> GetInformationPlainsList(int idR)
         {
             StringBuilder ret = new StringBuilder();
@@ -174,16 +183,24 @@ namespace ITechService
                     context.Configuration.LazyLoadingEnabled = false;
                     context.Configuration.ProxyCreationEnabled = false;
 
-                    var q = context.Resource.Where(m => m.Enabled)
+                    var q = context.Resource.Where(m => m.Enabled && m.Id==idR)
                         .Include(m => m.Workstation)
-                        .Include(m => m.InformationPlan)
-                        .Include(m => m.InformationPlan.Select(y => y.Dokument))
-                        .Include(m => m.InformationPlan.Select(y => y.Dokument).Select(z => z.Kategorie))
+                        .Include(m => m.InformationPlanWorkstation)
+                        .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument))
+                        .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument).Select(z => z.Kategorie))
                         .Include(m => m.News)
                         .Include(m => m.ModelsWorkstation)
                         ;
-                        
                     o = q.ToList();
+                    q = context.Resource.Where(m=>m.ModelsWorkstationModel.Any(n=>n.idW==idR))
+                        .Include(m => m.Workstation)
+                        .Include(m => m.InformationPlanWorkstation)
+                        .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument))
+                        .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument).Select(z => z.Kategorie))
+                        .Include(m => m.News)
+                        .Include(m => m.ModelsWorkstation)
+                        ;
+                    o.AddRange(q.ToList());
                 }
             }
             catch (Exception ex)
@@ -229,7 +246,11 @@ namespace ITechService
 
 
 
-
+        /// <summary>
+        /// lista dokumentów które są dostępne na stacji roboczej na potrzeby ściagania na stacje robocze
+        /// </summary>
+        /// <param name="idR"></param>
+        /// <returns></returns>
         public List<DokumentIdentity> GetDokumentsList(int idR)
         {
             StringBuilder ret = new StringBuilder();
@@ -242,15 +263,16 @@ namespace ITechService
                     context.Configuration.LazyLoadingEnabled = false;
                     context.Configuration.ProxyCreationEnabled = false;
 
-                    // stacja robocza
+                    //// stacja robocza
                     var q = context.Dokument.Where(m => m.InformationPlan.Any(i => i.idR == idR && i.Enabled == true))
                         .Select(m=>new DokumentIdentity { id=m.Id, CodeName = m.CodeName, LastWriteTime=m.LastWriteTime, LocalFileName=m.LocalFileName, Size=m.Size ?? 0});
 
 
-                    // modele dorobić aby zwracała tylko potrzebne dokumenty dla wszystkich modeli produkowanych na stacji
-                    var q2 = context.Dokument.Where(m => m.InformationPlan.Any(i => i.Resource.Type == 2 && i.Enabled == true))
-                        .Select(m => new DokumentIdentity { id = m.Id, CodeName = m.CodeName, LastWriteTime = m.LastWriteTime, LocalFileName = m.LocalFileName, Size = m.Size ?? 0 });
-                    q=q.Union(q2);
+                    //// modele dorobić aby zwracała tylko potrzebne dokumenty dla wszystkich modeli produkowanych na stacji
+                    //var q2 = context.Dokument.Where(m => m.InformationPlan.Any(i => i.Resource.Type == 2 && i.Enabled == true))
+                    //    .Select(m => new DokumentIdentity { id = m.Id, CodeName = m.CodeName, LastWriteTime = m.LastWriteTime, LocalFileName = m.LocalFileName, Size = m.Size ?? 0 });
+                    //q=q.Union(q2);
+                    
                     if (q != null)
                         o = q.ToList();
                 }
@@ -317,7 +339,7 @@ namespace ITechService
                 {
                     context.Configuration.LazyLoadingEnabled = false;
                     context.Configuration.ProxyCreationEnabled = false;
-                    o = context.ModelsWorkstation.Select(
+                    o = context.ModelsWorkstation.Where(m=>m.idW==idR).Select(
                         m=>new ModelWorkstationInfo
                         {
                              id = m.id,

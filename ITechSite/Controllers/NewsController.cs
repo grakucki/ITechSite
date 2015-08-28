@@ -14,10 +14,14 @@ namespace ITechSite.Models
 
         // GET: News
         [HttpGet]
-        public ActionResult Index(string NewNews, DateTime? ValidEnd, string filter)
+        public ActionResult Index(string NewNews, DateTime? ValidEnd, string filter, int? priority)
         {
+            if (!priority.HasValue)
+                priority = 1;
+
             //var workstation = db.Resource.Where(m => m.Type == 1 && m.Enabled == true).OrderBy(m => m.Name).Select(new SelectedResources { Resource = m });
             var news = (from n in db.Resource where n.Type == 1 && n.Enabled == true orderby n.Name select new SelectedResources { Resource = n }).ToList();
+
             //if (actionChk!=null)
             //{
             //    foreach (var item in news)
@@ -28,14 +32,19 @@ namespace ITechSite.Models
             //            item.Selected2 = true;
             //    }
             //}
+
+            @ViewBag.priority = new SelectList(db.NewsPriority, "id", "Name", priority);
             return View(news);
         }
 
         [HttpPost]
-        public ActionResult Index(string NewNews, DateTime? ValidEnd, string[] actionChk)
+        public ActionResult Index(string NewNews, DateTime? ValidEnd, string[] actionChk, int? priority)
         {
             //var workstation = db.Resource.Where(m => m.Type == 1 && m.Enabled == true).OrderBy(m => m.Name).Select(new SelectedResources { Resource = m });
             // zapisujemy do bazy
+            if (!priority.HasValue)
+                priority = 1;
+
             if (actionChk == null)
             {
                 ModelState.AddModelError("Error", "Zaznacz stanowiska na które chcesz wysłać komunikat.");
@@ -47,7 +56,7 @@ namespace ITechSite.Models
                     int idr = 0;
                     if (int.TryParse(item, out idr))
                     {
-                        InsertNews(NewNews, ValidEnd, idr);
+                        InsertNews(NewNews, ValidEnd, idr, priority);
                     }
                 }
             }
@@ -75,9 +84,11 @@ namespace ITechSite.Models
                 }
 
             }
+            @ViewBag.priority = new SelectList(db.NewsPriority, "id", "Name", priority);
+
             return View(news);
         }
-        private void InsertNews(string msg, DateTime? ValidEnd, int idR)
+        private void InsertNews(string msg, DateTime? ValidEnd, int idR, int? priority)
         {
             var q = db.Resource.Find(idR);
             if (q.News == null)
@@ -86,6 +97,7 @@ namespace ITechSite.Models
             }
             q.News.News1 = msg;
             q.News.ValidEnd = ValidEnd;
+            q.News.NewsPriorityId = priority.Value;
             
         }
 

@@ -147,7 +147,7 @@ namespace ITechInstrukcjeModel
             //this.Resource.Local.Clear();
             //this.Resource.AddRange(ResourceList);
 
-            return this.Resource.ToList();
+            return this.Resource_Local.ToList();
         }
 
         public void ExportResources(string filename)

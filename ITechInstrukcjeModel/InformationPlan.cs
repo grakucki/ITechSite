@@ -19,9 +19,12 @@ namespace ITechInstrukcjeModel
         public int IdD { get; set; }
         public Nullable<int> Order { get; set; }
         public bool Enabled { get; set; }
+        public Nullable<int> IdM { get; set; }
     
         public virtual Dokument Dokument { get; set; }
         [System.Runtime.Serialization.IgnoreDataMember]
-        public virtual Resource Resource { get; set; }
+        public virtual Resource ResourceWorkstation { get; set; }
+        [System.Runtime.Serialization.IgnoreDataMember]
+        public virtual Resource ResourceModel { get; set; }
     }
 }

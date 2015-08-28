@@ -393,7 +393,7 @@
             this.oAplikacjiToolStripMenuItem,
             this.toolStripMenuItem1});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(348, 388);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(348, 366);
             // 
             // toolStripMenuItem3
             // 

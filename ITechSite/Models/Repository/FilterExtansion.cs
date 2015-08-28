@@ -17,9 +17,11 @@ namespace ITechSite.Models.Repository
         {
                if (string.IsNullOrEmpty(filter))
                     return true;
-                if (filter=="*")
-                    return true;
-                return false;
+               if (filter == "*")
+                   return true;
+               if (filter == "0")
+                   return true;
+               return false;
         }
 
         /// <summary>

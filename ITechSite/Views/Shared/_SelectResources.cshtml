@@ -14,7 +14,7 @@
 {
     <div class="form-horizontal">
 
-
+       
         <div class="form-group">
             @Html.LabelFor(model => model.Factory,  htmlAttributes: new { @class = "control-label col-md-2" } )
             <div class="col-md-10">
@@ -36,7 +36,6 @@
             </div>
         </div>
 
-
         @if (Model.Allow_ResourceType)
         {
             <div class="form-group">
@@ -46,7 +45,8 @@
                 </div>
             </div>
         }
-        
+
+
         <div class="form-group">
             @Html.LabelFor(model => model.Find_Word, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -55,11 +55,6 @@
                 <span id="states-loading-progress" style="display: none;">Proszę czekać ...</span>
             </div>
         </div>
-
-
-
-
-
 
         @Html.HiddenFor(model => model.ReturnUrl)
     </div>

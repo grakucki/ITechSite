@@ -24,9 +24,6 @@ namespace ITechSite.Models
         public string UserName { get; set; }
         public string CardNo { get; set; }
         public string Password { get; set; }
-        public Nullable<int> PasswordFormat { get; set; }
-        public Nullable<System.DateTime> LastTestKompetencjiDtm { get; set; }
-        public Nullable<int> LastTestKompetencjiResult { get; set; }
     
         public virtual ICollection<ItechUsersRoles> ItechUsersRoles { get; set; }
     }

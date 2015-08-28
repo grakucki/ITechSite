@@ -62,10 +62,16 @@ namespace InstrukcjeProdukcyjne
              {
                  this.textBoxLog.Invoke(new OutMessageDelegate(OutMessage), new object[] { msg });
              }
-
-            textBoxLog.AppendText(msg.Msg);
-            if (msg.NewLine)
-                textBoxLog.AppendText(Environment.NewLine);
+             try
+             {
+                 textBoxLog.AppendText(msg.Msg);
+                 if (msg.NewLine)
+                     textBoxLog.AppendText(Environment.NewLine);
+             }
+             catch (Exception)
+             {
+                 
+             }
         }
 
 

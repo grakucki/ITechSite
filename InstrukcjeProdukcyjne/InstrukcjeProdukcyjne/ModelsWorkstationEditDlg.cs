@@ -34,50 +34,61 @@ namespace InstrukcjeProdukcyjne
         private void ModelsWorkstationEditDlg_Load(object sender, EventArgs e)
         {
 
-            var workprocess = Workstation.WorkProcess;
+            var idr= Workstation.Id;
             //resourceBindingSource.DataSource = Models;
-            var x = Models.Where(m => m.WorkProcess == workprocess).ToList();
+            var x = Models.ToList();
             resourceBindingSource.DataSource = x;
             bindingSource1.DataSource = ModelWorkstationInfo;
 
             textBox1.Text = Workstation.Name;
         }
 
+
+
         private void button1_Click(object sender, EventArgs e)
         {
-            // odczytujemy aktualny index ze sterwonika oraz model według odytczaneg indexu
+            // odczytujemy aktualny index ze sterwonika oraz model według odczytanego indexu
+            int step = 0;
             try
             {
+                step = 1;
                 SitechSimaticDevice sitech = SitechSimaticDeviceEx.CreateFromWorkstation(Workstation.Workstation.FirstOrDefault());
-                //SitechSimaticDevice sitech = new SitechSimaticDevice(
-                //   (S7.Net.CpuType)Enum.Parse(typeof(S7.Net.CpuType),  Workstation.Sterownik_Model), 
-                //    Workstation.Sterownik_Ip, 
-                //    (ushort) Workstation.Setrownik_DB.GetValueOrDefault(22),
-                //    Workstation.AllowIp
-                //    );
 
+                step = 2;
                 if (!sitech.IsAvailable())
                 {
                     MessageBox.Show("Sterownik nie jest dostępny.");
                     return;
                 }
+                step = 3;
+
                 sitech.FileName = Properties.Settings.Default.App.LocalDoc + @"\simatic.xml";
-                sitech.Fill();
+                step = 4;
+                sitech.Fill(false);
+                step = 5;
+
                 int nrModelu = sitech.NrModelu;
+                ModelWorkstationInfo.SterownikIndex = nrModelu.ToString();
+                step = 6;
+
                 string nazwaModelu = string.Empty;
                 if (nrModelu < sitech.Nazwa_Modelu().Count)
                     nazwaModelu = sitech.Nazwa_Modelu()[nrModelu];
+                
 
-                ModelWorkstationInfo.SterownikIndex = nrModelu.ToString();
+                step = 7;
 
                 int i= comboBox1.FindStringExact(nazwaModelu);
                 if (i >= 0)
                 {
-                    
-                    
+
+                    step = 8;
+
                     //textBox2.Text = nrModelu.ToString(
                     comboBox1.SelectedIndex = i;
                     //ModelWorkstationInfo.ModelName = nazwaModelu;
+                    step = 9;
+
                     bindingSource1.EndEdit();
 
                 }
@@ -88,7 +99,7 @@ namespace InstrukcjeProdukcyjne
 
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(step + ":"+ ex.Message);
             }
 
         }
@@ -110,12 +121,12 @@ namespace InstrukcjeProdukcyjne
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            var workprocess = Workstation.WorkProcess;
+            var idr = Workstation.Id;
             if (checkBox1.Checked)
                 resourceBindingSource.DataSource = Models;
             else
             {
-                var x = Models.Where(m => m.WorkProcess == workprocess).ToList();
+                var x = Models.Where(m => m.ModelsWorkstation.Any(n => n.idW == idr)).ToList();
                 resourceBindingSource.DataSource = x;
             }
                 

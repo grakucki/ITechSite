@@ -23,8 +23,8 @@
     <Property Name="WorkProcess_Id" Type="int" />
     <Property Name="Keywords" Type="nvarchar(max)" />
     <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
-    <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
     <Property Name="Kategoria_Id" Type="int" />
+    <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
   </EntityType>
   <EntityType Name="InformationPlan">
     <Key>
@@ -33,6 +33,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idR" Type="int" Nullable="false" />
     <Property Name="IdD" Type="int" Nullable="false" />
+    <Property Name="IdM" Type="int" />
     <Property Name="Order" Type="int" />
     <Property Name="Enabled" Type="bit" Nullable="false" />
   </EntityType>
@@ -56,6 +57,7 @@
     </Key>
     <Property Name="ItechUserId" Type="int" Nullable="false" />
     <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="WorkstationId" Type="int" />
   </EntityType>
   <EntityType Name="Kategorie">
     <Key>
@@ -81,6 +83,15 @@
     <Property Name="News" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ValidEnd" Type="datetime" />
     <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="NewsPriorityId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="NewsPriority">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CssName" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Resource">
     <Key>
@@ -95,6 +106,7 @@
     <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="Keywords" Type="nvarchar(max)" />
+    <Property Name="Factory" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="SimaticCpuType">
     <Key>
@@ -109,7 +121,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="idR" Type="int" Nullable="false" />
+    <Property Name="idR" Type="int" />
     <Property Name="WorkstationGroup" Type="nvarchar" MaxLength="16" Nullable="false" />
     <Property Name="Factory" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Area" Type="nvarchar(max)" Nullable="false" />
@@ -161,6 +173,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_InformationPlan_Resource1">
+    <End Role="Resource" Type="Self.Resource" Multiplicity="0..1" />
+    <End Role="InformationPlan" Type="Self.InformationPlan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="InformationPlan">
+        <PropertyRef Name="IdM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ItechUsersRoles_AspNetRoles">
     <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
     <End Role="ItechUsersRoles" Type="Self.ItechUsersRoles" Multiplicity="*" />
@@ -209,6 +233,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_News_NewsPriority">
+    <End Role="NewsPriority" Type="Self.NewsPriority" Multiplicity="1" />
+    <End Role="News" Type="Self.News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewsPriority">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="NewsPriorityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_News_Resource">
     <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
     <End Role="News" Type="Self.News" Multiplicity="0..1" />
@@ -222,7 +258,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Workstation_Resource">
-    <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+    <End Role="Resource" Type="Self.Resource" Multiplicity="0..1" />
     <End Role="Workstation" Type="Self.Workstation" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Resource">
@@ -242,6 +278,7 @@
     <EntitySet Name="Kategorie" EntityType="Self.Kategorie" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ModelsWorkstation" EntityType="Self.ModelsWorkstation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NewsPriority" EntityType="Self.NewsPriority" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SimaticCpuType" EntityType="Self.SimaticCpuType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />
@@ -255,6 +292,10 @@
       <End Role="InformationPlan" EntitySet="InformationPlan" />
     </AssociationSet>
     <AssociationSet Name="FK_InformationPlan_Resource" Association="Self.FK_InformationPlan_Resource">
+      <End Role="Resource" EntitySet="Resource" />
+      <End Role="InformationPlan" EntitySet="InformationPlan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_InformationPlan_Resource1" Association="Self.FK_InformationPlan_Resource1">
       <End Role="Resource" EntitySet="Resource" />
       <End Role="InformationPlan" EntitySet="InformationPlan" />
     </AssociationSet>
@@ -273,6 +314,10 @@
     <AssociationSet Name="FK_ModelsWorkstation_Resource1" Association="Self.FK_ModelsWorkstation_Resource1">
       <End Role="Resource" EntitySet="Resource" />
       <End Role="ModelsWorkstation" EntitySet="ModelsWorkstation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_News_NewsPriority" Association="Self.FK_News_NewsPriority">
+      <End Role="NewsPriority" EntitySet="NewsPriority" />
+      <End Role="News" EntitySet="News" />
     </AssociationSet>
     <AssociationSet Name="FK_News_Resource" Association="Self.FK_News_Resource">
       <End Role="Resource" EntitySet="Resource" />

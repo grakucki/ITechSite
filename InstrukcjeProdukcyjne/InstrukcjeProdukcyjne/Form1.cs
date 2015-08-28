@@ -288,7 +288,7 @@ namespace InstrukcjeProdukcyjne
             if (res == null)
                 return;
 
-            var IP = res.InformationPlan;
+            var IP = res.InformationPlanWorkstation;
             foreach (var item in IP)
             {
                 if (item.Dokument != null)

@@ -98,6 +98,9 @@
     <Compile Include="News.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="NewsPriority.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="OpenSqlFileStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ITechModelEx.cs" />

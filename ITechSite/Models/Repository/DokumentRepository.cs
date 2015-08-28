@@ -56,5 +56,40 @@ namespace ITechSite.Models.Repository
             return l;
         }
 
+        public IList<InformationPlan> IncludeInformationPlainDoc(int? idW, int? idM)
+        {
+            var query = _dataContex.InformationPlan.AsQueryable();
+            if (idM.HasValue)
+                query = query.Where(m => m.idR == idW && m.IdM==idM);
+            else
+                query = query.Where(m => m.idR == idW);
+            return query.OrderBy(m=>m.Dokument.FileName).ToList();
+        }
+
+
+        public IList<Dokument> GetAvalibleDoc(int IdR, int? IdM, string WorkProcess, string filter, int? kategoriaId)
+        {
+            var query = _dataContex.Dokument.AsQueryable();
+
+            query = query.Where(m => m.Enabled == true);
+
+            if (!Models.Repository.FilterExtansion.IsEmpty(kategoriaId))
+                query = query.Where(m => m.Kategoria_Id == kategoriaId);
+
+            if (!Models.Repository.FilterExtansion.IsEmpty(WorkProcess))
+            {
+                var x = _dataContex.WorkProcess.Where(m => m.Name == WorkProcess).FirstOrDefault();
+                if (x!=null)
+                    query = query.Where(m => m.WorkProcess_Id == x.Id);
+            }
+
+            if (!Models.Repository.FilterExtansion.IsEmpty(filter))
+                query = query.Where(m => (m.CodeName.Contains(filter) || m.FileName.Contains(filter) || m.Description.Contains(filter) || m.Keywords.Contains(filter)));
+
+            query = query.Where(m => !m.InformationPlan.Any(n => n.idR == IdR && n.IdM == IdM));
+            query = query.Include(d => d.WorkProcess).Include(d => d.Kategorie);
+
+            return query.OrderBy(m=>m.FileName).ToList();
+        }
     }
 }

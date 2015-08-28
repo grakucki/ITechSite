@@ -35,15 +35,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="WorkProcess">
-      <EntityTypeMapping TypeName="ITechModel.WorkProcess">
-        <MappingFragment StoreEntitySet="WorkProcess">
-          <ScalarProperty Name="DepartamentId" ColumnName="DepartamentId" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Dokument">
       <EntityTypeMapping TypeName="ITechModel.Dokument">
         <MappingFragment StoreEntitySet="Dokument">
@@ -83,6 +74,7 @@
     <EntitySetMapping Name="InformationPlan">
       <EntityTypeMapping TypeName="ITechModel.InformationPlan">
         <MappingFragment StoreEntitySet="InformationPlan">
+          <ScalarProperty Name="IdM" ColumnName="IdM" />
           <ScalarProperty Name="Enabled" ColumnName="Enabled" />
           <ScalarProperty Name="Order" ColumnName="Order" />
           <ScalarProperty Name="IdD" ColumnName="IdD" />
@@ -94,6 +86,7 @@
     <EntitySetMapping Name="News">
       <EntityTypeMapping TypeName="ITechModel.News">
         <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="NewsPriorityId" ColumnName="NewsPriorityId" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="ValidEnd" ColumnName="ValidEnd" />
           <ScalarProperty Name="News1" ColumnName="News" />
@@ -121,9 +114,6 @@
     <EntitySetMapping Name="ItechUsers">
       <EntityTypeMapping TypeName="ITechModel.ItechUsers">
         <MappingFragment StoreEntitySet="ItechUsers">
-          <ScalarProperty Name="LastTestKompetencjiResult" ColumnName="LastTestKompetencjiResult" />
-          <ScalarProperty Name="LastTestKompetencjiDtm" ColumnName="LastTestKompetencjiDtm" />
-          <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="CardNo" ColumnName="CardNo" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -135,24 +125,9 @@
     <EntitySetMapping Name="ItechUsersRoles">
       <EntityTypeMapping TypeName="ITechModel.ItechUsersRoles">
         <MappingFragment StoreEntitySet="ItechUsersRoles">
+          <ScalarProperty Name="WorkstationId" ColumnName="WorkstationId" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
           <ScalarProperty Name="ItechUserId" ColumnName="ItechUserId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Resource">
-      <EntityTypeMapping TypeName="ITechModel.Resource">
-        <MappingFragment StoreEntitySet="Resource">
-          <ScalarProperty Name="Factory" ColumnName="Factory" />
-          <ScalarProperty Name="Keywords" ColumnName="Keywords" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
-          <ScalarProperty Name="WorkProcess" ColumnName="WorkProcess" />
-          <ScalarProperty Name="No" ColumnName="No" />
-          <ScalarProperty Name="LastWriteTime" ColumnName="LastWriteTime" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -172,9 +147,43 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ModelsWorkstation">
+      <EntityTypeMapping TypeName="ITechModel.ModelsWorkstation">
+        <MappingFragment StoreEntitySet="ModelsWorkstation">
+          <ScalarProperty Name="index" ColumnName="index" />
+          <ScalarProperty Name="idM" ColumnName="idM" />
+          <ScalarProperty Name="idW" ColumnName="idW" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resource">
+      <EntityTypeMapping TypeName="ITechModel.Resource">
+        <MappingFragment StoreEntitySet="Resource">
+          <ScalarProperty Name="Factory" ColumnName="Factory" />
+          <ScalarProperty Name="Keywords" ColumnName="Keywords" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="WorkProcess" ColumnName="WorkProcess" />
+          <ScalarProperty Name="No" ColumnName="No" />
+          <ScalarProperty Name="LastWriteTime" ColumnName="LastWriteTime" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Factory">
       <EntityTypeMapping TypeName="ITechModel.Factory">
         <MappingFragment StoreEntitySet="Factory">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkProcess">
+      <EntityTypeMapping TypeName="ITechModel.WorkProcess">
+        <MappingFragment StoreEntitySet="WorkProcess">
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -188,5 +197,22 @@
         <ScalarProperty Name="Id" ColumnName="DepartmentId" />
       </EndProperty>
     </AssociationSetMapping>
+    <AssociationSetMapping Name="FactoryWorkProcess" TypeName="ITechModel.FactoryWorkProcess" StoreEntitySet="FactoryWorkProcess">
+      <EndProperty Name="WorkProcess">
+        <ScalarProperty Name="Id" ColumnName="WorkProcessId" />
+      </EndProperty>
+      <EndProperty Name="Factory">
+        <ScalarProperty Name="Id" ColumnName="FactoryId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="NewsPriority">
+      <EntityTypeMapping TypeName="ITechModel.NewsPriority">
+        <MappingFragment StoreEntitySet="NewsPriority">
+          <ScalarProperty Name="CssName" ColumnName="CssName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

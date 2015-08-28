@@ -112,6 +112,49 @@ namespace ITechSite.Controllers
             return View(resource);
         }
 
+        public ActionResult Models(int? idR)
+        {
+            @ViewBag.WorkstationName = "";
+           var w = db.Resource.Where(m=>m.Id==idR).FirstOrDefault();
+           if (w != null)
+               @ViewBag.Workstation = w;
+            return View(db.Resource.Where(m => m.Enabled == true && m.Type == 2).OrderBy(m=>m.Name).ToList());
+        }
+
+        public ActionResult WorkstationModelsUpdate(int? idW, int? idM, bool remove=false)
+        {
+            try
+            {
+                var mod = db.ModelsWorkstation.Where(m => m.idM == idM.Value & m.idW == idW.Value).FirstOrDefault();
+                if (remove)
+                {   
+                    // usuwamy model z workstation
+                    if (mod != null)
+                    {
+                        db.ModelsWorkstation.Remove(mod);
+                        db.SaveChanges();
+                    }
+                }
+                else
+                {
+                    // dodajemy model do workstation
+                    if (mod == null)
+                    {
+                        mod = new ModelsWorkstation { idW = idW.Value, idM = idM.Value, index = "" };
+                        db.ModelsWorkstation.Add(mod);
+                        db.SaveChanges();
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+                
+            }
+
+            return RedirectToAction("Models", new { idR = idW });
+        }
+
         // GET: Resources/Create
         public ActionResult Create(int? type)
         {
@@ -122,6 +165,16 @@ namespace ITechSite.Controllers
                     r.Type = type.Value;
                 else
                     r.Type = 1;
+            else
+                r.Type = 1;
+            r.Enabled = true;
+            
+            // jeśli model to nie ustawiamy 
+            if (r.Type == 2)
+            {
+                r.Factory = ".";
+                r.WorkProcess = ".";
+            }
             return View(r);
         }
 
@@ -143,6 +196,11 @@ namespace ITechSite.Controllers
                         ModelState.AddModelError("Name", string.Format("Nazwa {0} jest już zajęta", resource.Name));
                     else
                     {
+                        if (resource.Type == 2)
+                        {
+                            resource.Factory = "";
+                            resource.WorkProcess = "";
+                        }
                         db.Resource.Add(resource);
                         db.SaveChanges();
                         return RedirectToAction("Index");

@@ -73,6 +73,7 @@
             this.customPanel2.Padding = new System.Windows.Forms.Padding(5);
             this.customPanel2.Size = new System.Drawing.Size(338, 801);
             this.customPanel2.TabIndex = 1;
+            this.customPanel2.Paint += new System.Windows.Forms.PaintEventHandler(this.customPanel2_Paint);
             // 
             // customPanel5
             // 

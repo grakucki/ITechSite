@@ -16,10 +16,11 @@ namespace ITechInstrukcjeModel
     {
         public Resource()
         {
-            this.InformationPlan = new HashSet<InformationPlan>();
-            this.Workstation = new HashSet<Workstation>();
+            this.InformationPlanWorkstation = new HashSet<InformationPlan>();
             this.ModelsWorkstation = new HashSet<ModelsWorkstation>();
-            this.ModelsWorkstation1 = new HashSet<ModelsWorkstation>();
+            this.ModelsWorkstationModel = new HashSet<ModelsWorkstation>();
+            this.InformationPlanModel = new HashSet<InformationPlan>();
+            this.Workstation = new HashSet<Workstation>();
         }
     
         public int Id { get; set; }
@@ -31,11 +32,13 @@ namespace ITechInstrukcjeModel
         public bool Enabled { get; set; }
         public string Description { get; set; }
         public string Keywords { get; set; }
+        public string Factory { get; set; }
     
-        public virtual ICollection<InformationPlan> InformationPlan { get; set; }
+        public virtual ICollection<InformationPlan> InformationPlanWorkstation { get; set; }
         public virtual News News { get; set; }
-        public virtual ICollection<Workstation> Workstation { get; set; }
         public virtual ICollection<ModelsWorkstation> ModelsWorkstation { get; set; }
-        public virtual ICollection<ModelsWorkstation> ModelsWorkstation1 { get; set; }
+        public virtual ICollection<ModelsWorkstation> ModelsWorkstationModel { get; set; }
+        public virtual ICollection<InformationPlan> InformationPlanModel { get; set; }
+        public virtual ICollection<Workstation> Workstation { get; set; }
     }
 }

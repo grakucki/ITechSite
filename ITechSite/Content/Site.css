@@ -21,18 +21,34 @@ input,
 select,
 textarea {
     max-width: 280px;
-}.btn-default
+}/*.btn-default*/
 
 
  .btn-default-big {
     width: 280px;
-}.btn-default
+}/*.btn-default*/
 
+ /*select[multiple],*/
+ .form-fullH
+ {
+    max-height: 80vh;
+    min-height : 40vh;
+    height : 40vh;
 
-.text-OneLine
+ }
+
+.text-oneline
 {
+    background-color: yellow;
     max-width: 100%;
-    width: 100%;
+    width: 100%
+}
+
+.text-News
+{
+    background-color: yellow;
+     max-width: 100%;
+     width: 100%
 }
 
 .text-Yelow
@@ -40,12 +56,28 @@ textarea {
     background-color: yellow;
 }
 
+.text-Orange
+{
+    background-color: orange;
+}
+
 .text-Red
 {
     background-color: lightpink;
 }
 
-.text-green
+.text-Green
 {
     background-color: lightgreen;
+}
+
+
+.file-content
+{
+    border : solid;
+    border-width : 1px;
+    padding: 5px;
+    background-color: lightgoldenrodyellow;
+    border-radius: 10px;
+
 }

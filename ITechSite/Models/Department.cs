@@ -16,14 +16,12 @@ namespace ITechSite.Models
     {
         public Department()
         {
-            this.WorkProcess = new HashSet<WorkProcess>();
             this.Factory = new HashSet<Factory>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<WorkProcess> WorkProcess { get; set; }
         public virtual ICollection<Factory> Factory { get; set; }
     }
 }

@@ -269,23 +269,12 @@
     <Compile Include="Models\Factory.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Repository\DokumentRepository.cs" />
-    <Compile Include="Models\Repository\FactoryRepository.cs" />
-    <Compile Include="Models\Repository\FilterExtansion.cs" />
-    <Compile Include="Models\Repository\IFactoryRepository.cs" />
-    <Compile Include="CustomResults\SelectedListExtensions.cs" />
     <Compile Include="Models\FileContent.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\InformationPlan.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ItechModelEx\Dokument.cs" />
-    <Compile Include="Models\ItechModelEx\InformationPlan.cs" />
-    <Compile Include="Models\ItechModelEx\News.cs" />
-    <Compile Include="Models\ItechModelEx\Resource.cs" />
-    <Compile Include="Models\ItechModelEx\WorkProcess.cs" />
-    <Compile Include="Models\ItechModelEx\ResourceType.cs" />
     <Compile Include="Models\ItechUsers.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
@@ -298,9 +287,26 @@
     <Compile Include="Models\Model.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ModelsWorkstation.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\News.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NewsPriority.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Repository\DokumentRepository.cs" />
+    <Compile Include="Models\Repository\FactoryRepository.cs" />
+    <Compile Include="Models\Repository\FilterExtansion.cs" />
+    <Compile Include="Models\Repository\IFactoryRepository.cs" />
+    <Compile Include="CustomResults\SelectedListExtensions.cs" />
+    <Compile Include="Models\ItechModelEx\Dokument.cs" />
+    <Compile Include="Models\ItechModelEx\InformationPlan.cs" />
+    <Compile Include="Models\ItechModelEx\News.cs" />
+    <Compile Include="Models\ItechModelEx\Resource.cs" />
+    <Compile Include="Models\ItechModelEx\WorkProcess.cs" />
+    <Compile Include="Models\ItechModelEx\ResourceType.cs" />
     <Compile Include="Models\Resource.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
@@ -375,13 +381,13 @@
     <Content Include="Content\images\operatorzy.jpg" />
     <Content Include="Content\images\right.png" />
     <Content Include="Content\images\Testy.jpg" />
-    <Content Include="HtmlPage1.html" />
     <Content Include="Models\sql\2015-06-23.sql" />
-    <Content Include="Models\sql\2015-07-06 naprawa w istniejących.sql" />
+    <Content Include="Models\sql\2015-07-06 naprawa w istniejacych.sql" />
     <Content Include="Models\sql\2015-07-11.sql" />
     <Compile Include="Models\SimaticCpuType.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Content Include="Models\sql\2015-08-25.sql" />
     <Compile Include="Models\UniqueAttribute.cs" />
     <Compile Include="Models\DBFile.cs" />
     <Compile Include="Models\DocumentModels.cs" />
@@ -435,6 +441,7 @@
     <Content Include="Models\sql\2015-06-30_3.sql" />
     <Content Include="Models\sql\2015-06-30_4.sql" />
     <Content Include="Models\sql\2015-06-30_5.sql" />
+    <Content Include="Models\sql\2015-08-21.sql" />
     <Content Include="Models\sql\2015-07-14 pytania.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -606,6 +613,9 @@
     <Content Include="Views\ItechUsers\Index.cshtml" />
     <Content Include="Views\Shared\Index.cshtml" />
     <Content Include="Views\Shared\_SelectResources - Copy.cshtml" />
+    <Content Include="Views\InformationPlans\Edit2.cshtml" />
+    <Content Include="Views\Resources\Models.cshtml" />
+    <Content Include="Views\Shared\_SelectWrokstationsModels.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

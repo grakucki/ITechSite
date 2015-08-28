@@ -18,7 +18,9 @@ namespace ITechSite.Models
         public string News1 { get; set; }
         public Nullable<System.DateTime> ValidEnd { get; set; }
         public Nullable<System.DateTime> CreatedAt { get; set; }
+        public int NewsPriorityId { get; set; }
     
         public virtual Resource Resource { get; set; }
+        public virtual NewsPriority NewsPriority { get; set; }
     }
 }

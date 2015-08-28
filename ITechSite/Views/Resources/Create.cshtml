@@ -26,7 +26,6 @@ else
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        @*<h4>Zasoby - stanowiska i modele</h4>*@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -37,12 +36,7 @@ else
             </div>
         </div>
 
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Type", null, htmlAttributes: new { @class = "form-control" })
-            </div>
-        </div>*@
+        @Html.HiddenFor(model => model.Type)
 
         <div class="form-group">
             @Html.LabelFor(model => model.No, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -58,21 +52,24 @@ else
                 @Html.LabelFor(model => model.Factory, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownList("Factory", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Factory, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.WorkProcess, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("WorkProcess",null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.WorkProcess, "", new { @class = "text-danger" })
                 </div>
             </div>
         }
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.WorkProcess, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.EditorFor(model => model.WorkProcess, new { htmlAttributes = new { @class = "form-control" } })*@
-                
-                @Html.DropDownList("WorkProcess",null, htmlAttributes: new { @class = "form-control" })
-                
-                @*@Html.ValidationMessageFor(model => model.WorkProcess, "", new { @class = "text-danger" })*@
-            </div>
-        </div>
-
+        else
+        {
+            @Html.HiddenFor(model => model.WorkProcess);
+            @Html.HiddenFor(model => model.Factory);
+        }
+        
         <div class="form-group">
             @Html.LabelFor(model => model.Enabled, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
