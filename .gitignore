@@ -14,3 +14,8 @@ ITechSite/bin/ITechSite.dll
 Deploy/ITechSite.deploy.cmd
 *.pdb
 *.pdb
+*.suo
+*.pdb
+*.exe
+*.pdb
+*.dll
