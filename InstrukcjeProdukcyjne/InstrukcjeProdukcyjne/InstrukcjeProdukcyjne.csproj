@@ -13,7 +13,7 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>D:\projekty\automotive\app\</PublishUrl>
+    <PublishUrl>D:\projekty\automotive\publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -29,8 +29,8 @@
     <SuiteName>Sitech</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>install.html</WebPage>
-    <ApplicationRevision>62</ApplicationRevision>
-    <ApplicationVersion>3.1.0.%2a</ApplicationVersion>
+    <ApplicationRevision>53</ApplicationRevision>
+    <ApplicationVersion>2.5.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>

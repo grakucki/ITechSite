@@ -13,3 +13,9 @@ ITechSite/bin/ITechSite.dll
 ITechSite.v12.suo
 *.user
 ITechSite.v12.suo
+*.application
+InstrukcjeProdukcyjne/InstrukcjeProdukcyjne/bin/Debug/InstrukcjeProdukcyjne.application
+*.exe
+ITechSite.v12.suo
+*.dll
+ITechSite/bin/ITechSite.dll.config
