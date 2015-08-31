@@ -10,3 +10,6 @@ Deploy/ITechSite.zip
 ITechSite/bin/ITechSite.dll
 *.pdb
 ITechSite/bin/ITechSite.dll
+ITechSite.v12.suo
+*.user
+ITechSite.v12.suo
