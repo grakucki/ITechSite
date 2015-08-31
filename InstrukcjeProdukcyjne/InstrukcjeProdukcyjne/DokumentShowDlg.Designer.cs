@@ -47,17 +47,17 @@
             this.panel1.Controls.Add(this.customPanel1);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(994, 61);
+            this.panel1.Size = new System.Drawing.Size(974, 61);
             this.panel1.TabIndex = 10;
             // 
             // mediaViewerControl1
             // 
             this.mediaViewerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.mediaViewerControl1.Location = new System.Drawing.Point(0, 61);
+            this.mediaViewerControl1.Location = new System.Drawing.Point(10, 71);
             this.mediaViewerControl1.Name = "mediaViewerControl1";
-            this.mediaViewerControl1.Size = new System.Drawing.Size(994, 433);
+            this.mediaViewerControl1.Size = new System.Drawing.Size(974, 413);
             this.mediaViewerControl1.TabIndex = 9;
             // 
             // customPanel1
@@ -75,13 +75,13 @@
             this.customPanel1.Location = new System.Drawing.Point(271, 3);
             this.customPanel1.Name = "customPanel1";
             this.customPanel1.Padding = new System.Windows.Forms.Padding(5);
-            this.customPanel1.Size = new System.Drawing.Size(720, 57);
+            this.customPanel1.Size = new System.Drawing.Size(700, 57);
             this.customPanel1.TabIndex = 10;
             // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.Location = new System.Drawing.Point(569, 5);
+            this.label1.Location = new System.Drawing.Point(549, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(149, 47);
             this.label1.TabIndex = 1;
@@ -97,7 +97,7 @@
             this.KomunikatLabel.Location = new System.Drawing.Point(5, 5);
             this.KomunikatLabel.Margin = new System.Windows.Forms.Padding(3);
             this.KomunikatLabel.Name = "KomunikatLabel";
-            this.KomunikatLabel.Size = new System.Drawing.Size(710, 47);
+            this.KomunikatLabel.Size = new System.Drawing.Size(690, 47);
             this.KomunikatLabel.TabIndex = 0;
             this.KomunikatLabel.Text = "O dokumencie";
             this.KomunikatLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -156,10 +156,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(116)))), ((int)(((byte)(9)))));
             this.ClientSize = new System.Drawing.Size(994, 494);
             this.Controls.Add(this.mediaViewerControl1);
             this.Controls.Add(this.panel1);
             this.Name = "DokumentShowDlg";
+            this.Padding = new System.Windows.Forms.Padding(10);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "DokumentShowDlg";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

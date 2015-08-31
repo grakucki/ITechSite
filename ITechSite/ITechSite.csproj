@@ -278,9 +278,6 @@
     <Compile Include="Models\ItechUsers.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ItechUsersRoles.cs">
-      <DependentUpon>ITechModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Kategorie.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
@@ -296,6 +293,7 @@
     <Compile Include="Models\NewsPriority.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Repository\ItechUsersRepository.cs" />
     <Compile Include="Models\Repository\DokumentRepository.cs" />
     <Compile Include="Models\Repository\FactoryRepository.cs" />
     <Compile Include="Models\Repository\FilterExtansion.cs" />
@@ -377,9 +375,12 @@
     <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Areas\Testy\Readme.html" />
     <Content Include="Content\images\end.png" />
+    <Content Include="Content\images\end2.png" />
     <Content Include="Content\images\left.png" />
+    <Content Include="Content\images\left2.png" />
     <Content Include="Content\images\operatorzy.jpg" />
     <Content Include="Content\images\right.png" />
+    <Content Include="Content\images\right2.png" />
     <Content Include="Content\images\Testy.jpg" />
     <Content Include="Models\sql\2015-06-23.sql" />
     <Content Include="Models\sql\2015-07-06 naprawa w istniejacych.sql" />
@@ -388,6 +389,7 @@
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
     <Content Include="Models\sql\2015-08-25.sql" />
+    <Content Include="Models\sql\2015-08-31.sql" />
     <Compile Include="Models\UniqueAttribute.cs" />
     <Compile Include="Models\DBFile.cs" />
     <Compile Include="Models\DocumentModels.cs" />
@@ -531,6 +533,7 @@
     <Content Include="Areas\Testy\Views\Shared\_NaviBar.cshtml" />
     <Content Include="Areas\Testy\Views\Shared\_TestyLayout.cshtml" />
     <Content Include="Areas\Testy\Views\Test\Test2.cshtml" />
+    <Content Include="Content\images\right2.pdn" />
     <None Include="Properties\PublishProfiles\insofter.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Itech.js" />
@@ -616,6 +619,9 @@
     <Content Include="Views\InformationPlans\Edit2.cshtml" />
     <Content Include="Views\Resources\Models.cshtml" />
     <Content Include="Views\Shared\_SelectWrokstationsModels.cshtml" />
+    <Content Include="Views\ItechUsers\_UsersLayout.cshtml" />
+    <Content Include="Views\ItechUsers\Import.cshtml" />
+    <Content Include="Views\ItechUsers\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Import";
+    Layout = "_UsersLayout.cshtml";
+}
+
+<h3>Import listy użytkowników z pliku csv</h3>
+
+
+@using (Html.BeginForm("Index", "ItechUsers", FormMethod.Get))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <div class="col-md-10">
+                Plik z listą użytkowników  <br />
+                <input name="FileName" class="form-control" />
+                <input type="file" name="File" id="File" value="" class="btn btn-default" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" name="ImportUsers" value="Importuj" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+            document.querySelector("[name=File]").addEventListener("change", function (e) {
+                var name = document.querySelector("[name=FileName]");
+                //if (name.value === "")
+                name.value = this.value.substr(this.value.lastIndexOf("\\") + 1);
+            });
+</script>
+<div>
+    <h3> format pliku</h3>
+    <code>
+        Nazwisko; Imię; Nr identyfikacyjny; Nr karty; Profil dostepu; Opis \n
+        <br />Kowalski; Jan; 456; 23423423; Kierownictwo; Produkcja-kierownictwo
+
+        <br />Pierwsza linia jest nagłówkiem i jest ignorowana
+    </code>
+</div>
+
+

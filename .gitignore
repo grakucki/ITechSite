@@ -19,3 +19,5 @@ Deploy/ITechSite.deploy.cmd
 *.exe
 *.pdb
 *.dll
+InstrukcjeProdukcyjne/InstrukcjeProdukcyjne/bin/Debug/InstrukcjeProdukcyjne.application
+*.exe

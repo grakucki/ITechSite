@@ -93,14 +93,14 @@ namespace InstrukcjeProdukcyjne
             LoginUser2 = user2;
 
             labelUserName.Text = LoginUser.UserName;
-            labelUserNo.Text = LoginUser.NrKarty;
+            labelUserNo.Text = user2.UserId + "(" + LoginUser.NrKarty + ")";
 
             
             // sprawdzamy czy należy wykonać test
             //SprawdźTestKompetencji(user2);
             
             //zapis do sterownika
-            SimaticWriteAsync(user.NrKarty, true);
+            SimaticWriteAsync(user2.UserId, true);
 
             return true;
         }

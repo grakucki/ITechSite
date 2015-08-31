@@ -89,6 +89,10 @@
     <Property Name="PasswordFormat" Type="int" />
     <Property Name="LastTestKompetencjiDtm" Type="datetime" />
     <Property Name="LastTestKompetencjiResult" Type="int" />
+    <Property Name="Frozen" Type="bit" Nullable="false" />
+    <Property Name="Desc" Type="nvarchar(max)" />
+    <Property Name="AccessProfile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ItechUsersRoles">
     <Key>
@@ -97,7 +101,6 @@
     </Key>
     <Property Name="ItechUserId" Type="int" Nullable="false" />
     <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="WorkstationId" Type="int" />
   </EntityType>
   <EntityType Name="Kategorie">
     <Key>

@@ -94,6 +94,10 @@
           <Property Name="PasswordFormat" Type="int" />
           <Property Name="LastTestKompetencjiDtm" Type="datetime" />
           <Property Name="LastTestKompetencjiResult" Type="int" />
+          <Property Name="Frozen" Type="bit" Nullable="false" />
+          <Property Name="Desc" Type="nvarchar(max)" />
+          <Property Name="AccessProfile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ItechUsersRoles">
           <Key>
@@ -102,7 +106,6 @@
           </Key>
           <Property Name="ItechUserId" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="WorkstationId" Type="int" />
         </EntityType>
         <EntityType Name="Kategorie">
           <Key>
@@ -575,16 +578,6 @@
           <EntitySet Name="News" EntityType="ITechModel.News" />
           <EntitySet Name="AspNetRoles" EntityType="ITechModel.AspNetRoles" />
           <EntitySet Name="SimaticCpuType" EntityType="ITechModel.SimaticCpuType" />
-          <EntitySet Name="ItechUsers" EntityType="ITechModel.ItechUsers" />
-          <EntitySet Name="ItechUsersRoles" EntityType="ITechModel.ItechUsersRoles" />
-          <AssociationSet Name="FK_ItechUsersRoles_AspNetRoles" Association="ITechModel.FK_ItechUsersRoles_AspNetRoles">
-            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-            <End Role="ItechUsersRoles" EntitySet="ItechUsersRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ItechUsersRoles_ItechUsers" Association="ITechModel.FK_ItechUsersRoles_ItechUsers">
-            <End Role="ItechUsers" EntitySet="ItechUsers" />
-            <End Role="ItechUsersRoles" EntitySet="ItechUsersRoles" />
-          </AssociationSet>
           <EntitySet Name="Kategorie" EntityType="ITechModel.Kategorie" />
           <AssociationSet Name="FK_Dokument_Kategorie" Association="ITechModel.FK_Dokument_Kategorie">
             <End Role="Kategorie" EntitySet="Kategorie" />
@@ -639,6 +632,11 @@
           <AssociationSet Name="FK_InformationPlan_Resource1" Association="ITechModel.FK_InformationPlan_Resource1">
             <End Role="Resource" EntitySet="Resource" />
             <End Role="InformationPlan" EntitySet="InformationPlan" />
+          </AssociationSet>
+          <EntitySet Name="ItechUsers" EntityType="ITechModel.ItechUsers" />
+          <AssociationSet Name="ItechUsersRoles" Association="ITechModel.ItechUsersRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="ItechUsers" EntitySet="ItechUsers" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Dokument">
@@ -748,7 +746,7 @@
           </Key>
           <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ItechUsersRoles" Relationship="ITechModel.FK_ItechUsersRoles_AspNetRoles" FromRole="AspNetRoles" ToRole="ItechUsersRoles" />
+          <NavigationProperty Name="ItechUsers" Relationship="ITechModel.ItechUsersRoles" FromRole="AspNetRoles" ToRole="ItechUsers" />
         </EntityType>
         <EntityType Name="SimaticCpuType">
           <Key>
@@ -758,52 +756,6 @@
           <Property Name="CpuType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Enabled" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="ItechUsers">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="CardNo" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ItechUsersRoles" Relationship="ITechModel.FK_ItechUsersRoles_ItechUsers" FromRole="ItechUsers" ToRole="ItechUsersRoles" />
-        </EntityType>
-        <EntityType Name="ItechUsersRoles">
-          <Key>
-            <PropertyRef Name="ItechUserId" />
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="ItechUserId" Type="Int32" Nullable="false" />
-          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="AspNetRoles" Relationship="ITechModel.FK_ItechUsersRoles_AspNetRoles" FromRole="ItechUsersRoles" ToRole="AspNetRoles" />
-          <NavigationProperty Name="ItechUsers" Relationship="ITechModel.FK_ItechUsersRoles_ItechUsers" FromRole="ItechUsersRoles" ToRole="ItechUsers" />
-          <Property Name="WorkstationId" Type="Int32" />
-        </EntityType>
-        <Association Name="FK_ItechUsersRoles_AspNetRoles">
-          <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="1" />
-          <End Type="ITechModel.ItechUsersRoles" Role="ItechUsersRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetRoles">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ItechUsersRoles">
-              <PropertyRef Name="RoleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ItechUsersRoles_ItechUsers">
-          <End Type="ITechModel.ItechUsers" Role="ItechUsers" Multiplicity="1" />
-          <End Type="ITechModel.ItechUsersRoles" Role="ItechUsersRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ItechUsers">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="ItechUsersRoles">
-              <PropertyRef Name="ItechUserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Kategorie">
           <Key>
             <PropertyRef Name="id" />
@@ -1008,6 +960,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ItechUsers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="CardNo" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordFormat" Type="Int32" />
+          <Property Name="LastTestKompetencjiDtm" Type="DateTime" Precision="3" />
+          <Property Name="LastTestKompetencjiResult" Type="Int32" />
+          <Property Name="Frozen" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetRoles" Relationship="ITechModel.ItechUsersRoles" FromRole="ItechUsers" ToRole="AspNetRoles" />
+          <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccessProfile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="ItechUsersRoles">
+          <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+          <End Type="ITechModel.ItechUsers" Role="ItechUsers" Multiplicity="*" />
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1124,26 +1098,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ItechUsers">
-            <EntityTypeMapping TypeName="ITechModel.ItechUsers">
-              <MappingFragment StoreEntitySet="ItechUsers">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ItechUsersRoles">
-            <EntityTypeMapping TypeName="ITechModel.ItechUsersRoles">
-              <MappingFragment StoreEntitySet="ItechUsersRoles">
-                <ScalarProperty Name="WorkstationId" ColumnName="WorkstationId" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-                <ScalarProperty Name="ItechUserId" ColumnName="ItechUserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Kategorie">
             <EntityTypeMapping TypeName="ITechModel.Kategorie">
               <MappingFragment StoreEntitySet="Kategorie">
@@ -1227,6 +1181,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ItechUsers">
+            <EntityTypeMapping TypeName="ITechModel.ItechUsers">
+              <MappingFragment StoreEntitySet="ItechUsers">
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="AccessProfile" ColumnName="AccessProfile" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="Frozen" ColumnName="Frozen" />
+                <ScalarProperty Name="LastTestKompetencjiResult" ColumnName="LastTestKompetencjiResult" />
+                <ScalarProperty Name="LastTestKompetencjiDtm" ColumnName="LastTestKompetencjiDtm" />
+                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ItechUsersRoles" TypeName="ITechModel.ItechUsersRoles" StoreEntitySet="ItechUsersRoles">
+            <EndProperty Name="ItechUsers">
+              <ScalarProperty Name="id" ColumnName="ItechUserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

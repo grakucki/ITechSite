@@ -35,8 +35,6 @@ namespace ITechSite.Models
         public virtual DbSet<News> News { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<SimaticCpuType> SimaticCpuType { get; set; }
-        public virtual DbSet<ItechUsers> ItechUsers { get; set; }
-        public virtual DbSet<ItechUsersRoles> ItechUsersRoles { get; set; }
         public virtual DbSet<Kategorie> Kategorie { get; set; }
         public virtual DbSet<Department> Department { get; set; }
         public virtual DbSet<ModelsWorkstation> ModelsWorkstation { get; set; }
@@ -44,5 +42,6 @@ namespace ITechSite.Models
         public virtual DbSet<Factory> Factory { get; set; }
         public virtual DbSet<WorkProcess> WorkProcess { get; set; }
         public virtual DbSet<NewsPriority> NewsPriority { get; set; }
+        public virtual DbSet<ItechUsers> ItechUsers { get; set; }
     }
 }

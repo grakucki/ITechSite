@@ -1,37 +1,95 @@
-﻿
+﻿@model ITechSite.Models.Repository.ItechUserIndexModel
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Użytkownicy";
+    Layout = "_UsersLayout.cshtml";
 }
 
-<h2>Użytkownicy</h2>
+<h3>Lista użytkowników </h3>
 
-<h3>Lista użytkowników importowana z pliku csv</h3>
-
-@using (Html.BeginForm("Index", "ItechUsers", FormMethod.Get))
+@using (Html.BeginForm("Index", "ItechUsers", FormMethod.Post))
 {
     <div class="form-horizontal">
         <div class="form-group">
+            @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                Plik z listą użytkowników  <br />
-                <input name="FileName" class="form-control" />
-                <input type="file" name="File" id="File" value="" class="btn btn-default"  />
+                @Html.TextBoxFor(model => model.UserName, htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.IdentityNo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="submit" name="ImportUsers" value="Importuj" class="btn btn-default" />
+                @Html.TextBoxFor(model => model.IdentityNo, htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" name="FindUsers" value="Find" class="btn btn-default" />
+            </div>
+        </div>
+
+        <div>
+            @*@if (@Model.Users!=null)
+            {*@
+                Zanleziono @Model.Users.TotalItemCount pozycji. Wyswietlonio stronę @(Model.Users.PageCount < Model.Users.PageNumber ? 0 : Model.Users.PageNumber) z @Model.Users.PageCount
+                @Html.PagedListPager(Model.Users, page => Url.Action("index", new { page, UserName = @Model.UserName, IdentityNo = @Model.IdentityNo }))
+        </div>
+
     </div>
 }
 
-        <script>
-            document.querySelector("[name=File]").addEventListener("change", function (e) {
-                var name = document.querySelector("[name=FileName]");
-                //if (name.value === "")
-                name.value = this.value.substr(this.value.lastIndexOf("\\") + 1);
-            });
-        </script>
+<div>
+@if (Model.Users != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Użytkownik")
+            </th>
+            <th>
+                @Html.DisplayName("Id")
+            </th>
+            <th>
+                @Html.DisplayName("Nr karty")
+            </th>
+            <th>
+                @Html.DisplayName("Poziom")
+            </th>
+            <th>
+                @Html.DisplayName("Opis")
+            </th>
+            <th></th>
+        </tr>
 
-
+        @foreach (var item in Model.Users)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccessProfile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desc)
+                </td>
+                <td>
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.id }) 
+                    @* | @Html.ActionLink("Szczegóły", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.id })*@
+                </td>
+            </tr>
+        }
+</table>
+}
+</div>

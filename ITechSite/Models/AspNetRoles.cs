@@ -16,12 +16,12 @@ namespace ITechSite.Models
     {
         public AspNetRoles()
         {
-            this.ItechUsersRoles = new HashSet<ItechUsersRoles>();
+            this.ItechUsers = new HashSet<ItechUsers>();
         }
     
         public string Id { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<ItechUsersRoles> ItechUsersRoles { get; set; }
+        public virtual ICollection<ItechUsers> ItechUsers { get; set; }
     }
 }

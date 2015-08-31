@@ -92,14 +92,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InstrukcjeProdukcyjne.exe" size="2030016">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InstrukcjeProdukcyjne.exe" size="2026432">
       <assemblyIdentity name="InstrukcjeProdukcyjne" version="3.1.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+<<<<<<< HEAD
         <dsig:DigestValue>MG/xFSy2rDy7sr8ajOg9pp8kptMwh4hS/4jK8hjnER4=</dsig:DigestValue>
+=======
+<<<<<<< HEAD
+        <dsig:DigestValue>mwuinhGZxJvWZefjhjNcgEZGKnOEQop/+iFBKIiDdDE=</dsig:DigestValue>
+=======
+<<<<<<< HEAD
+        <dsig:DigestValue>w8419AT54MZXCkOyRFRgd1P9ZCwQlSwUhX8NTxTCNZQ=</dsig:DigestValue>
+=======
+        <dsig:DigestValue>ZqKZJawdoTOTwUnaxF/c9CdU25ITQHWqrVPiutX0F5g=</dsig:DigestValue>
+>>>>>>> origin/master
+>>>>>>> origin/master
+>>>>>>> origin/master
       </hash>
     </dependentAssembly>
   </dependency>
