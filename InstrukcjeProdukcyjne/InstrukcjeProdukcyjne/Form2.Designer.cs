@@ -226,13 +226,13 @@
             // 
             this.labelUserNo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelUserNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
+            this.labelUserNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelUserNo.Location = new System.Drawing.Point(89, 2);
             this.labelUserNo.Name = "labelUserNo";
             this.labelUserNo.Size = new System.Drawing.Size(173, 23);
             this.labelUserNo.TabIndex = 10;
             this.labelUserNo.Text = "labelUserNo";
-            this.labelUserNo.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelUserNo.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // label4
             // 
@@ -798,7 +798,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(152)))), ((int)(((byte)(9)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(116)))), ((int)(((byte)(9)))));
             this.ClientSize = new System.Drawing.Size(1136, 692);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.panel6);

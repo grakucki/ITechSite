@@ -22,7 +22,6 @@
             word-break: normal;
             border-color: #ccc;
             color: #333;
-            background-color: #fff;
         }
 
         .tg th {
@@ -33,15 +32,19 @@
             word-break: normal;
             border-color: #ccc;
             background-color: #f0f0f0;
+            vertical-align: central;
         }
 
+    .radioLabel {
+        
+        }
 
     .radioLabel input[name=chb] {
-        display: none; /* comment this line to see the radio buttons */
+        /*display: none;*/ /* comment this line to see the radio buttons */
     }
 
     .radioLabel label {
-        display: flex;
+        display: block;
         height: 120px;
         padding: 5px 10px;
     }
@@ -52,7 +55,8 @@
     }
 
     .radioLabel input[type="radio"]:checked + label {
-        background-color: rgb(200, 230, 201);
+        background-color:rgb(237, 116, 9);
+        border-radius:10px;
     }
 
     .inner-table table {
@@ -61,7 +65,6 @@
     }
 
     .tg td.inner-table {
-
         padding: 0;
     }
 </style>
@@ -95,7 +98,7 @@
                 <td class="tg-031e">
                     @if (Model.test.getPreviousQuestionId(Model.question.id) != 0)
                     {
-                        <a href="@Url.Action("Test", "Test", new { @questionId = Model.test.getPreviousQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="prev2"><img src="~/Content/images/left.png" /></a>
+                        <a href="@Url.Action("Test", "Test", new { @questionId = Model.test.getPreviousQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="prev2"><img src="~/Content/images/left2.png" /></a>
                     }
                 </td>
                 <td class="inner-table">
@@ -117,11 +120,11 @@
                 <td class="tg-031e">
                     @if (Model.test.getNextQuestionId(Model.question.id) != 0)
                     {
-                        <a href="@Url.Action("Test", "Test", new { @questionId = Model.test.getNextQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="next2"><img src="~/Content/images/right.png" /></a>
+                        <a href="@Url.Action("Test", "Test", new { @questionId = Model.test.getNextQuestionId(Model.question.id), @accessionNumber = Model.test.accessionNumber })" id="next2"><img src="~/Content/images/right2.png" /></a>
                     }
                     else
                     {
-                        <a href="@Url.Action("EndTest", new{ @accessionNumber = Model.test.accessionNumber })" id="end2"><img src="~/Content/images/end.png" /></a>
+                        <a href="@Url.Action("EndTest", new{ @accessionNumber = Model.test.accessionNumber })" id="end2"><img src="~/Content/images/end2.png" /></a>
                     }
                 </td>
             </tr>
@@ -131,6 +134,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
+        @*var x = Url.Action("LogTest", "Test", new {questionId=@Model.question.id&testId=@Model.test.id} );*@
         @if(@Model.question != null)
         {
             <text>
@@ -157,14 +161,14 @@
         {
             <text>
         $('input[value="@ViewBag.userAnswer"]').attr('checked', 'checked');
-        $('input[value="@ViewBag.userAnswer"]').parent().css('background-color', '#C8E6C9');
+        //$('input[value="@ViewBag.userAnswer"]').parent().css('background-color', 'rgba(41, 121, 255, 1)');
         </text>
         }
-
+        
         $('.test-radio').change(function () {
             if ($(this).attr('checked')) {
                 $('.answer').css('background-color', 'rgba(0, 0, 0, 0.1)');
-                $(this).parent().css('background-color', '#C8E6C9');
+                //$(this).parent().css('background-color', 'rgba(41, 121, 255, 1)');
             }
         });
 
@@ -172,5 +176,5 @@
         //    $(this).find('.test-radio').prop('checked', true);
         //    //console.log('click');
         //});
-    });
+        });
 </script>

@@ -1,0 +1,18 @@
+﻿@{
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="navbar-collapse collapse">
+    
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Użytkownicy :", "")</li>
+        <li>@Html.ActionLink("Zarządzaj", "Index", "ItechUsers", new { area = "" }, null)</li>
+            <li>@Html.ActionLink("Importuj", "Import", "ItechUsers", new { area = "" }, null)</li>
+    </ul>
+</div>
+    <div>
+        @RenderBody()
+    </div>
+

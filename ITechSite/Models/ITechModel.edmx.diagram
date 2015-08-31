@@ -17,11 +17,7 @@
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Dokument" ManuallyRouted="false" >
         </AssociationConnector>
         <EntityTypeShape EntityType="ITechModel.News" Width="1.5" PointX="17.875" PointY="0.5" />
-        <EntityTypeShape EntityType="ITechModel.AspNetRoles" Width="1.5" PointX="8.875" PointY="6.375" />
-        <EntityTypeShape EntityType="ITechModel.ItechUsers" Width="1.5" PointX="5" PointY="6.375" />
-        <EntityTypeShape EntityType="ITechModel.ItechUsersRoles" Width="1.5" PointX="7" PointY="6.375" />
-        <AssociationConnector Association="ITechModel.FK_ItechUsersRoles_AspNetRoles" />
-        <AssociationConnector Association="ITechModel.FK_ItechUsersRoles_ItechUsers" />
+        <EntityTypeShape EntityType="ITechModel.AspNetRoles" Width="1.5" PointX="9.625" PointY="7.5" />
         <EntityTypeShape EntityType="ITechModel.Kategorie" Width="1.5" PointX="8.875" PointY="4.75" />
         <AssociationConnector Association="ITechModel.FK_Dokument_Kategorie" />
         <EntityTypeShape EntityType="ITechModel.Department" Width="1.5" PointX="2.5" PointY="4.875" />
@@ -42,6 +38,8 @@
         <EntityTypeShape EntityType="ITechModel.NewsPriority" Width="1.5" PointX="20" PointY="0.5" />
         <AssociationConnector Association="ITechModel.FK_News_NewsPriority" />
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Resource1" />
+        <EntityTypeShape EntityType="ITechModel.ItechUsers" Width="1.5" PointX="4.875" PointY="6.25" />
+        <AssociationConnector Association="ITechModel.ItechUsersRoles" />
         </Diagram>
       <Diagram DiagramId="3054951c8206400f9fa79692752eb712" Name="Diagram2" />
       <Diagram DiagramId="112f2905862845bcb4f4f1b35f51eb8a" Name="Diagram3" >

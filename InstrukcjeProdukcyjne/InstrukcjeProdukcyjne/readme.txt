@@ -7,4 +7,14 @@ dla sitech http://10.48.120.49/app/
 dla insofter http://www.insofter.pl/itech/app/
 lokalnie D:\projekty\automotive\publish
 
+kolor pomarańczowy sitech
+237; 116; 9 (ED7401)
+
+kolor szary 
+220; 220; 220
+
+
+
+
+
 

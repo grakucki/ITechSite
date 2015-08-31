@@ -27,6 +27,8 @@ namespace InstrukcjeProdukcyjne
         {
             TestRes = false;
             splitContainer1.Panel2Collapsed = true;
+            this.FullScreen(true);
+
             if (AccessionNumber == Guid.Empty)
                 AccessionNumber = Guid.NewGuid();
             TestUri = Properties.Settings.Default.App.ServerTestKompetencjiAddress;
@@ -67,6 +69,11 @@ namespace InstrukcjeProdukcyjne
         }
 
         private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void zamknijToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }

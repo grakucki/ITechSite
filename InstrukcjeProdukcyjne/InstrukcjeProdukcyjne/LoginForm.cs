@@ -239,6 +239,7 @@ namespace InstrukcjeProdukcyjne
         private void button1_Click_1(object sender, EventArgs e)
         {
             VirtualKeyboard.Show();
+            textBoxPass.Focus();
         }
 
         private void label1_DoubleClick(object sender, EventArgs e)

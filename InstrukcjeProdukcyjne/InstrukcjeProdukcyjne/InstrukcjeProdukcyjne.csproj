@@ -121,6 +121,7 @@
     <Compile Include="CustomPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DialogExtension.cs" />
     <Compile Include="DokumentShowDlg.cs">
       <SubType>Form</SubType>
     </Compile>
