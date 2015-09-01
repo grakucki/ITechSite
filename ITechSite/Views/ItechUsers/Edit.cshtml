@@ -58,7 +58,7 @@
         </div>*@
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LastTestKompetencjiDtm, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.LastTestKompetencjiDtm, "Test kompetencji", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LastTestKompetencjiDtm, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LastTestKompetencjiDtm, "", new { @class = "text-danger" })
@@ -66,7 +66,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.LastTestKompetencjiResult, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.LastTestKompetencjiResult, "Wynik testu", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.LastTestKompetencjiResult, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.LastTestKompetencjiResult, "", new { @class = "text-danger" })
@@ -103,7 +103,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AccessProfile, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AccessProfile, "Profil dostępu", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.AccessProfile, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.AccessProfile, "", new { @class = "text-danger" })
@@ -112,7 +112,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Zapisz" class="btn btn-default" />
             </div>
         </div>
     </div>

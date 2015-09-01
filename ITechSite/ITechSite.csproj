@@ -445,6 +445,7 @@
     <Content Include="Models\sql\2015-06-30_5.sql" />
     <Content Include="Models\sql\2015-08-21.sql" />
     <Content Include="Models\sql\2015-07-14 pytania.sql" />
+    <Content Include="Models\sql\2015-09-01.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\ITechModel.edmx">
@@ -622,6 +623,7 @@
     <Content Include="Views\ItechUsers\_UsersLayout.cshtml" />
     <Content Include="Views\ItechUsers\Import.cshtml" />
     <Content Include="Views\ItechUsers\Edit.cshtml" />
+    <Content Include="Views\Resources\CreateVersionModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

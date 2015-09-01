@@ -21,6 +21,8 @@ namespace ITechSite.Models
             this.ModelsWorkstationModel = new HashSet<ModelsWorkstation>();
             this.Workstation = new HashSet<Workstation>();
             this.InformationPlanModel = new HashSet<InformationPlan>();
+            this.ResourceModelChild = new HashSet<Resource>();
+            this.ResourceModelParent = new HashSet<Resource>();
         }
     
         public int Id { get; set; }
@@ -41,5 +43,7 @@ namespace ITechSite.Models
         public virtual ResourceType ResourceType { get; set; }
         public virtual ICollection<Workstation> Workstation { get; set; }
         public virtual ICollection<InformationPlan> InformationPlanModel { get; set; }
+        public virtual ICollection<Resource> ResourceModelChild { get; set; }
+        public virtual ICollection<Resource> ResourceModelParent { get; set; }
     }
 }

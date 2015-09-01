@@ -7,12 +7,12 @@
       <Diagram DiagramId="f7b5d33c4c714c9ba3dbfd9400f38094" Name="Diagram1" ZoomLevel="111">
         <EntityTypeShape EntityType="ITechModel.FileContent" Width="1.5" PointX="4" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.Model" Width="1.5" PointX="15.625" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="13.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="13.75" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.Dokument" Width="1.5" PointX="6.5" PointY="0.75" />
         <EntityTypeShape EntityType="ITechModel.WorkstationGroup" Width="1.5" PointX="16" PointY="0.875" />
         <AssociationConnector Association="ITechModel.FK_Workstation_WorkstationGroup" />
         <AssociationConnector Association="ITechModel.FK_FileContent_Dokument1" />
-        <EntityTypeShape EntityType="ITechModel.ResourceType" Width="1.5" PointX="10.875" PointY="5.375" />
+        <EntityTypeShape EntityType="ITechModel.ResourceType" Width="1.5" PointX="10.875" PointY="6" />
         <EntityTypeShape EntityType="ITechModel.InformationPlan" Width="1.5" PointX="8.875" PointY="0.75" />
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Dokument" ManuallyRouted="false" >
         </AssociationConnector>
@@ -21,7 +21,7 @@
         <EntityTypeShape EntityType="ITechModel.Kategorie" Width="1.5" PointX="8.875" PointY="4.75" />
         <AssociationConnector Association="ITechModel.FK_Dokument_Kategorie" />
         <EntityTypeShape EntityType="ITechModel.Department" Width="1.5" PointX="2.5" PointY="4.875" />
-        <EntityTypeShape EntityType="ITechModel.ModelsWorkstation" Width="1.5" PointX="15.75" PointY="5.25" />
+        <EntityTypeShape EntityType="ITechModel.ModelsWorkstation" Width="1.5" PointX="16.125" PointY="5.125" />
         <EntityTypeShape EntityType="ITechModel.Resource" Width="1.5" PointX="11.375" PointY="0.625" />
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Resource" />
         <AssociationConnector Association="ITechModel.FK_ModelsWorkstation_Resource" />
@@ -40,6 +40,7 @@
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Resource1" />
         <EntityTypeShape EntityType="ITechModel.ItechUsers" Width="1.5" PointX="4.875" PointY="6.25" />
         <AssociationConnector Association="ITechModel.ItechUsersRoles" />
+        <AssociationConnector Association="ITechModel.ModelsVersionModels" />
         </Diagram>
       <Diagram DiagramId="3054951c8206400f9fa79692752eb712" Name="Diagram2" />
       <Diagram DiagramId="112f2905862845bcb4f4f1b35f51eb8a" Name="Diagram3" >

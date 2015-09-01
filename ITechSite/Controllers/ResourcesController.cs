@@ -155,13 +155,31 @@ namespace ITechSite.Controllers
             return RedirectToAction("Models", new { idR = idW });
         }
 
+        public ActionResult CreateVersionModel(int? type, int? Parent)
+        {
+            @ViewBag.Parent = Parent;
+            return Create(type);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateVersionModel([Bind(Include = "Id, Name,Type,LastWriteTime,No,Enabled,Description,Keywords")] Resource resource, int? Parent)
+        {
+            @ViewBag.Parent = Parent;
+            var RParent = db.Resource.Find(Parent);
+            if (RParent == null)
+                return HttpNotFound();
+            resource.ResourceModelParent.Add(RParent);
+            return Create(resource);
+        }
+
         // GET: Resources/Create
         public ActionResult Create(int? type)
         {
             AddViewBag();
             var r = new Resource();
             if (type.HasValue)
-                if (type > 0 && type < 3)
+                if (type > 0 && type < 4)
                     r.Type = type.Value;
                 else
                     r.Type = 1;
@@ -170,7 +188,7 @@ namespace ITechSite.Controllers
             r.Enabled = true;
             
             // jeśli model to nie ustawiamy 
-            if (r.Type == 2)
+            if (r.Type > 1)
             {
                 r.Factory = ".";
                 r.WorkProcess = ".";
@@ -196,9 +214,9 @@ namespace ITechSite.Controllers
                         ModelState.AddModelError("Name", string.Format("Nazwa {0} jest już zajęta", resource.Name));
                     else
                     {
-                        if (resource.Type == 2)
+                        if (resource.Type != 1)
                         {
-                            resource.Factory = "";
+                            resource.Factory = null;
                             resource.WorkProcess = "";
                         }
                         db.Resource.Add(resource);
@@ -273,7 +291,7 @@ namespace ITechSite.Controllers
                     x.LastWriteTime = DateTime.Now;
                     x.Name = resource.Name;
                     x.No = resource.No;
-                    x.WorkProcess = resource.WorkProcess;
+                    x.WorkProcess = resource.WorkProcess ?? "";
                     x.Enabled = resource.Enabled;
                     x.Description = resource.Description;
                     x.Keywords = resource.Keywords;

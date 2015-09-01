@@ -11,7 +11,8 @@ namespace ITechSite.CustomResults
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
             if (value == null)
-                return new ValidationResult("Wybierz poprawną wartość.");
+                return ValidationResult.Success;
+                //return new ValidationResult("Wybierz poprawną wartość.");
 
             if (value.GetType() == typeof(int))
             {

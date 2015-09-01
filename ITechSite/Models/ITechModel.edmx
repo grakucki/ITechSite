@@ -35,8 +35,8 @@
           <Property Name="WorkProcess_Id" Type="int" />
           <Property Name="Keywords" Type="nvarchar(max)" />
           <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
-          <Property Name="Kategoria_Id" Type="int" />
           <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Kategoria_Id" Type="int" />
         </EntityType>
         <EntityType Name="Factory">
           <Key>
@@ -95,9 +95,9 @@
           <Property Name="LastTestKompetencjiDtm" Type="datetime" />
           <Property Name="LastTestKompetencjiResult" Type="int" />
           <Property Name="Frozen" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
           <Property Name="Desc" Type="nvarchar(max)" />
           <Property Name="AccessProfile" Type="nvarchar" MaxLength="50" />
-          <Property Name="Enabled" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ItechUsersRoles">
           <Key>
@@ -120,6 +120,14 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Car" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModelsVersionModels">
+          <Key>
+            <PropertyRef Name="IdM" />
+            <PropertyRef Name="IdVM" />
+          </Key>
+          <Property Name="IdM" Type="int" Nullable="false" />
+          <Property Name="IdVM" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ModelsWorkstation">
           <Key>
@@ -350,6 +358,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ModelsVersionModels_Resource_Model">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="ModelsVersionModels" Type="Self.ModelsVersionModels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModelsVersionModels">
+              <PropertyRef Name="IdM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModelsVersionModels_Resource_Version">
+          <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+          <End Role="ModelsVersionModels" Type="Self.ModelsVersionModels" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resource">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModelsVersionModels">
+              <PropertyRef Name="IdVM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ModelsWorkstation_Resource">
           <End Role="Resource" Type="Self.Resource" Multiplicity="0..1" />
           <End Role="ModelsWorkstation" Type="Self.ModelsWorkstation" Multiplicity="*" />
@@ -435,6 +467,7 @@
           <EntitySet Name="ItechUsersRoles" EntityType="Self.ItechUsersRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kategorie" EntityType="Self.Kategorie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModelsVersionModels" EntityType="Self.ModelsVersionModels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModelsWorkstation" EntityType="Self.ModelsWorkstation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsPriority" EntityType="Self.NewsPriority" Schema="dbo" store:Type="Tables" />
@@ -491,6 +524,14 @@
           <AssociationSet Name="FK_ItechUsersRoles_ItechUsers" Association="Self.FK_ItechUsersRoles_ItechUsers">
             <End Role="ItechUsers" EntitySet="ItechUsers" />
             <End Role="ItechUsersRoles" EntitySet="ItechUsersRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelsVersionModels_Resource_Model" Association="Self.FK_ModelsVersionModels_Resource_Model">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ModelsVersionModels" EntitySet="ModelsVersionModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelsVersionModels_Resource_Version" Association="Self.FK_ModelsVersionModels_Resource_Version">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="ModelsVersionModels" EntitySet="ModelsVersionModels" />
           </AssociationSet>
           <AssociationSet Name="FK_ModelsWorkstation_Resource" Association="Self.FK_ModelsWorkstation_Resource">
             <End Role="Resource" EntitySet="Resource" />
@@ -637,6 +678,10 @@
           <AssociationSet Name="ItechUsersRoles" Association="ITechModel.ItechUsersRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="ItechUsers" EntitySet="ItechUsers" />
+          </AssociationSet>
+          <AssociationSet Name="ModelsVersionModels" Association="ITechModel.ModelsVersionModels">
+            <End Role="Resource" EntitySet="Resource" />
+            <End Role="Resource1" EntitySet="Resource" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Dokument">
@@ -816,6 +861,8 @@
           <NavigationProperty Name="ResourceType" Relationship="ITechModel.FK_Resource_Type" FromRole="Resource" ToRole="ResourceType" />
           <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
           <NavigationProperty Name="InformationPlanModel" Relationship="ITechModel.FK_InformationPlan_Resource1" FromRole="Resource" ToRole="InformationPlan" />
+          <NavigationProperty Name="ResourceModelChild" Relationship="ITechModel.ModelsVersionModels" FromRole="Resource" ToRole="Resource1" />
+          <NavigationProperty Name="ResourceModelParent" Relationship="ITechModel.ModelsVersionModels" FromRole="Resource1" ToRole="Resource" />
         </EntityType>
         <Association Name="FK_InformationPlan_Resource">
           <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
@@ -981,6 +1028,10 @@
         <Association Name="ItechUsersRoles">
           <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
           <End Type="ITechModel.ItechUsers" Role="ItechUsers" Multiplicity="*" />
+        </Association>
+        <Association Name="ModelsVersionModels">
+          <End Type="ITechModel.Resource" Role="Resource" Multiplicity="*" />
+          <End Type="ITechModel.Resource" Role="Resource1" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -1205,6 +1256,14 @@
             </EndProperty>
             <EndProperty Name="AspNetRoles">
               <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ModelsVersionModels" TypeName="ITechModel.ModelsVersionModels" StoreEntitySet="ModelsVersionModels">
+            <EndProperty Name="Resource1">
+              <ScalarProperty Name="Id" ColumnName="IdVM" />
+            </EndProperty>
+            <EndProperty Name="Resource">
+              <ScalarProperty Name="Id" ColumnName="IdM" />
             </EndProperty>
           </AssociationSetMapping>
           </EntityContainerMapping>

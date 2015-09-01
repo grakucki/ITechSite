@@ -14,7 +14,7 @@
             </div>
             @if (Model.ResourceModel != null)
             {
-                if (Model.ResourceModel.ResourceType.id == 2)
+                if (Model.ResourceModel.ResourceType.id != 1)
                 {
                     <div class="form-group col-md-6">
                         @Html.LabelFor(model => model.IdM, Model.ResourceModel.ResourceType.Type, htmlAttributes: new { @class = "" }):

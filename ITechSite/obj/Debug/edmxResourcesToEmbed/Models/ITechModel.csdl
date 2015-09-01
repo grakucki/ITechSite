@@ -117,6 +117,10 @@
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
       <End Role="ItechUsers" EntitySet="ItechUsers" />
     </AssociationSet>
+    <AssociationSet Name="ModelsVersionModels" Association="ITechModel.ModelsVersionModels">
+      <End Role="Resource" EntitySet="Resource" />
+      <End Role="Resource1" EntitySet="Resource" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Dokument">
     <Key>
@@ -295,6 +299,8 @@
     <NavigationProperty Name="ResourceType" Relationship="ITechModel.FK_Resource_Type" FromRole="Resource" ToRole="ResourceType" />
     <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
     <NavigationProperty Name="InformationPlanModel" Relationship="ITechModel.FK_InformationPlan_Resource1" FromRole="Resource" ToRole="InformationPlan" />
+    <NavigationProperty Name="ResourceModelChild" Relationship="ITechModel.ModelsVersionModels" FromRole="Resource" ToRole="Resource1" />
+    <NavigationProperty Name="ResourceModelParent" Relationship="ITechModel.ModelsVersionModels" FromRole="Resource1" ToRole="Resource" />
   </EntityType>
   <Association Name="FK_InformationPlan_Resource">
     <End Type="ITechModel.Resource" Role="Resource" Multiplicity="1" />
@@ -460,5 +466,9 @@
   <Association Name="ItechUsersRoles">
     <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
     <End Type="ITechModel.ItechUsers" Role="ItechUsers" Multiplicity="*" />
+  </Association>
+  <Association Name="ModelsVersionModels">
+    <End Type="ITechModel.Resource" Role="Resource" Multiplicity="*" />
+    <End Type="ITechModel.Resource" Role="Resource1" Multiplicity="*" />
   </Association>
 </Schema>

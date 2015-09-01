@@ -161,8 +161,21 @@ namespace ITechSite.Models
             
             if (!Models.Repository.FilterExtansion.IsEmpty(Workstation))
             {
+
+                // dodajemy modele
                 var models = _dataContex.Resource.Where(m => m.Enabled == true && m.Type == 2 && m.ModelsWorkstationModel.Any(n => n.idW == Workstation.Value)).OrderBy(m=>m.Name).ToList();
                 l.AddRange(models);
+
+                // dodajemy wersje modeli
+
+                foreach (var item in models)
+                {
+                    var vm = _dataContex.Resource.Where(m => 
+                        m.Enabled == true
+                        && m.ResourceModelParent.Any(n=>n.Id==item.Id)
+                        ).OrderBy(m => m.Name).ToList();
+                    l.AddRange(vm);
+                }
             }
 
 

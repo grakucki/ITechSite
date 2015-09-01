@@ -23,6 +23,13 @@ textarea {
     max-width: 280px;
 }/*.btn-default*/
 
+ .form-label
+ {
+     font-weight: normal;
+     padding-top: 7px;
+     margin-top: 0;
+     margin-bottom: 0;
+ }
 
  .btn-default-big {
     width: 280px;

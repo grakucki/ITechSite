@@ -17,6 +17,49 @@ GO
 ALTER TABLE dbo.ItechUsers ADD
 	Enabled bit NOT NULL CONSTRAINT DF_ItechUsers_Enabled DEFAULT 1
 GO
+ALTER TABLE dbo.ItechUsers ADD
+	[Desc] nvarchar(max)
+GO
+ALTER TABLE dbo.ItechUsers ADD
+	[AccessProfile] [nvarchar](50)
+
+GO
+
 ALTER TABLE dbo.ItechUsers SET (LOCK_ESCALATION = TABLE)
 GO
+
+ALTER TABLE [dbo].[Dokument]  WITH CHECK ADD  CONSTRAINT [FK_Dokument_WorkProcess] FOREIGN KEY([WorkProcess_Id])
+REFERENCES [dbo].[WorkProcess] ([Id])
+GO
+ALTER TABLE [dbo].[Dokument] CHECK CONSTRAINT [FK_Dokument_WorkProcess]
+GO
+
+
+
+
+ALTER TABLE [dbo].[News]  WITH CHECK ADD  CONSTRAINT [FK_News_NewsPriority] FOREIGN KEY([NewsPriorityId])
+REFERENCES [dbo].[NewsPriority] ([id])
+GO
+ALTER TABLE [dbo].[News] CHECK CONSTRAINT [FK_News_NewsPriority]
+GO
+
+
+
+
+ALTER TABLE dbo.FactoryWorkProcess
+	DROP CONSTRAINT FK_FactoryWorkProcess_WorkProcess
+
+ALTER TABLE [dbo].[FactoryWorkProcess]  WITH CHECK ADD  CONSTRAINT [FK_FactoryWorkProcess_WorkProcess] FOREIGN KEY([WorkProcessId])
+REFERENCES [dbo].[WorkProcess] ([Id])
+GO
+
+
+
+ALTER TABLE dbo.WorkProcess
+	DROP CONSTRAINT FK_WorkProcess_Department
+GO
+ALTER TABLE dbo.WorkProcess
+	DROP COLUMN DepartamentId
+GO
+
 COMMIT
