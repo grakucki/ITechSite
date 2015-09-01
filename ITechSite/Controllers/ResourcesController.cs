@@ -170,7 +170,10 @@ namespace ITechSite.Controllers
             if (RParent == null)
                 return HttpNotFound();
             resource.ResourceModelParent.Add(RParent);
-            return Create(resource);
+
+            if (_Create(resource))
+                return RedirectToAction("Edit", new { id=Parent});
+            return View(resource);
         }
 
         // GET: Resources/Create
@@ -196,16 +199,11 @@ namespace ITechSite.Controllers
             return View(r);
         }
 
-        // POST: Resources/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id, Name,Type,LastWriteTime,No,WorkProcess,Enabled,Description,Keywords,Factory")] Resource resource)
+
+        private bool _Create(Resource resource)
         {
             try
             {
-
                 if (ModelState.IsValid)
                 {
                     resource.LastWriteTime = DateTime.Now;
@@ -221,7 +219,7 @@ namespace ITechSite.Controllers
                         }
                         db.Resource.Add(resource);
                         db.SaveChanges();
-                        return RedirectToAction("Index");
+                        return true;
                     }
                 }
             }
@@ -235,6 +233,18 @@ namespace ITechSite.Controllers
             }
 
             AddViewBag();
+            return false;
+        }
+
+        // POST: Resources/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id, Name,Type,LastWriteTime,No,WorkProcess,Enabled,Description,Keywords,Factory")] Resource resource)
+        {
+            if (_Create(resource))
+                return RedirectToAction("Index");
             return View(resource);
         }
 
