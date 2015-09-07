@@ -32,7 +32,7 @@ namespace ITechInstrukcjeModel
         {
             get
             {
-                return this.Resource.Where(m => m.Type == 2 && m.Enabled);
+                return this.Resource.Where(m => m.Type >= 2 && m.Enabled);
             }
 
         }
@@ -42,7 +42,7 @@ namespace ITechInstrukcjeModel
             get
             {
                 //return this.Resource.Local.Where(m => m.Type == 2).ToList();
-                return Resource_Local.Where(m => m.Type == 2).ToList();
+                return Resource_Local.Where(m => m.Type >= 2).ToList();
             }
 
         }

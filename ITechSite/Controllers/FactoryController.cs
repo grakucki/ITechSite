@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace ITechSite.Controllers
 {
+    [Authorize]
     public class FactoryController : Controller
     {
         // GET: Factory

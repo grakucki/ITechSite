@@ -624,6 +624,8 @@
     <Content Include="Views\ItechUsers\Import.cshtml" />
     <Content Include="Views\ItechUsers\Edit.cshtml" />
     <Content Include="Views\Resources\CreateVersionModel.cshtml" />
+    <Content Include="Views\ItechUsers\Accounts.cshtml" />
+    <Content Include="Views\ItechUsers\EditAccount.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

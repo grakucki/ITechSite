@@ -142,9 +142,9 @@
         
     
     <div class="form-group">
-        @Html.Label("Wersje modeli", htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.Label("Warianty", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-12">
-            Liczba wersji modelu :  @Model.ResourceModelChild.Count
+            Liczba wariantów :  @Model.ResourceModelChild.Count
             @Html.ActionLink("Dodaj nowy", "CreateVersionModel", new { Parent = Model.Id, Type = 3 }, new { htmlAttributes = new { @class = "btn btn-default" } })
             <br />
             <div class="">
@@ -152,8 +152,8 @@
                     @foreach (var item in Model.ResourceModelChild)
                     {
                         <tr>
-                            <td>@Html.Label(item.Name, htmlAttributes: new { @class = "control-label" })</td>
-                            <td>@Html.Label(item.Description, htmlAttributes: new { @class = "form-label" })</td>
+                            <td>@Html.Label("", item.Name, htmlAttributes: new { @class = "control-label" })</td>
+                            <td>@Html.Label("", item.Description, htmlAttributes: new { @class = "form-label" })</td>
                             @*@Html.ActionLink("Edytuj", "EditVersonModel", new { idR = item.Id }, new { htmlAttributes = new { @class = "btn btn-default" } })*@
                             @*@Html.ActionLink("Usuń", "DeleteVersonModel", new { idR = item.Id }, new { htmlAttributes = new { @class = "btn btn-default" } })*@
                         </tr>

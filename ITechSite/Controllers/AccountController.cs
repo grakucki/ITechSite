@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ITechSite.Models;
+using ITechSite.Models.Repository;
+using System.Net;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ITechSite.Controllers
 {
@@ -422,6 +425,8 @@ namespace ITechSite.Controllers
 
             base.Dispose(disposing);
         }
+
+       
 
         #region Helpers
         // Used for XSRF protection when adding external logins

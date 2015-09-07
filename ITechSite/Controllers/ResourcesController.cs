@@ -11,7 +11,7 @@ using PagedList;
 
 namespace ITechSite.Controllers
 {
-    [Authorize]
+    [Authorize(Roles="admin")]
     public class ResourcesController : Controller
     {
         private ITechEntities db = new ITechEntities(0);
@@ -217,6 +217,11 @@ namespace ITechSite.Controllers
                             resource.Factory = null;
                             resource.WorkProcess = "";
                         }
+                        if (resource.Description == null)
+                            resource.Description = string.Empty;
+                        if (resource.Keywords == null)
+                            resource.Keywords = string.Empty;
+
                         db.Resource.Add(resource);
                         db.SaveChanges();
                         return true;

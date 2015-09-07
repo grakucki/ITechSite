@@ -10,6 +10,7 @@ using ITechSite.Models;
 using System.Data.Entity.Validation;
 using System.IO;
 using PagedList;
+using System.Web.Security;
 
 namespace ITechSite.Models.Repository
 {
@@ -39,7 +40,8 @@ namespace ITechSite.Models.Repository
                 x = x.OrderBy(m => m.CardNo);
             return x;
         }
-
+        
+        
         public ItechUsers GetUser(int id)
         {
             var x = _dataContex.ItechUsers.Find(id);
@@ -62,4 +64,25 @@ namespace ITechSite.Models.Repository
         public string UserName { get; set; }
         public string IdentityNo { get; set; }
     }
+
+
+    public class AccountIndexModel
+    {
+        public List<ApplicationUser> Users { get; set; }
+        public int? page { get; set; }
+        public string UserName { get; set; }
+        public string IdentityNo { get; set; }
+    }
+
+
+    
+    public class AccountEditModel
+    {
+        public ApplicationUser User { get; set; }
+        // lista  roli w który user jest zarejestrowany
+        public string[] UserRoles { get; set; }
+        // lista dostępnych roli w który user nie jest zarejestrowany
+        public List<string> AllowRoles { get; set; }
+    }
+
 }

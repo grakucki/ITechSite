@@ -1,0 +1,61 @@
+﻿@model ITechSite.Models.Repository.AccountIndexModel
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Konta";
+    Layout = "_UsersLayout.cshtml";
+}
+
+<h3>Lista użytkowników </h3>
+
+@*@using (Html.BeginForm("Accounts", "ItechUsers", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            @Html.LabelFor(model => model.UserName,"Nazwisko i imię",  htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.UserName, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" name="FindUsers" value="Find" class="btn btn-default" />
+            </div>
+        </div>
+
+        <div>
+                Zanleziono @Model.Users.TotalItemCount pozycji. Wyswietlonio stronę @(Model.Users.PageCount < Model.Users.PageNumber ? 0 : Model.Users.PageNumber) z @Model.Users.PageCount
+                @Html.PagedListPager(Model.Users, page => Url.Action("index", new { page, UserName = @Model.UserName, IdentityNo = @Model.IdentityNo }))
+        </div>
+
+    </div>
+}*@
+
+<div>
+@if (Model.Users != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Użytkownik")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Users)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edytuj", "EditAccount", new { UserName = item.UserName }) 
+                    @* | @Html.ActionLink("Szczegóły", "Details", new { id = item.id }) |
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.id })*@
+                </td>
+            </tr>
+        }
+</table>
+}
+</div>

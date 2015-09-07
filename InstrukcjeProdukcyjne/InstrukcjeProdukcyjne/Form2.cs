@@ -208,7 +208,7 @@ namespace InstrukcjeProdukcyjne
                 if (conn.CpuType == S7.Net.CpuType.Demo)
                     conn.Fill(true);
                 conn.NrEwidencyjnyDrukarka = NrEwidencyjnyDrukarka;
-                conn.OdblokowanieMaszyny = true; // OdblokowanieStan;
+                conn.OdblokowanieMaszyny =  OdblokowanieStan;
                 conn.Update();
             }
             catch (Exception)

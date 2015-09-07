@@ -33,6 +33,7 @@ namespace ITechSite.Models
         }
 
 
+
         //public ApplicationDbContext()
         //    : base("DefaultConnection", throwIfV1Schema: false)
         //{
@@ -43,5 +44,6 @@ namespace ITechSite.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }
