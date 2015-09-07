@@ -20,6 +20,8 @@ kolor pomarańczowy sitech
 kolor szary 
 220; 220; 220
 
+!07
+
 
 
 
