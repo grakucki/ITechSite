@@ -111,26 +111,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ItechUsers">
-      <EntityTypeMapping TypeName="ITechModel.ItechUsers">
-        <MappingFragment StoreEntitySet="ItechUsers">
-          <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="CardNo" ColumnName="CardNo" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ItechUsersRoles">
-      <EntityTypeMapping TypeName="ITechModel.ItechUsersRoles">
-        <MappingFragment StoreEntitySet="ItechUsersRoles">
-          <ScalarProperty Name="WorkstationId" ColumnName="WorkstationId" />
-          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-          <ScalarProperty Name="ItechUserId" ColumnName="ItechUserId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Kategorie">
       <EntityTypeMapping TypeName="ITechModel.Kategorie">
         <MappingFragment StoreEntitySet="Kategorie">
@@ -214,5 +194,39 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ItechUsers">
+      <EntityTypeMapping TypeName="ITechModel.ItechUsers">
+        <MappingFragment StoreEntitySet="ItechUsers">
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="AccessProfile" ColumnName="AccessProfile" />
+          <ScalarProperty Name="Desc" ColumnName="Desc" />
+          <ScalarProperty Name="Frozen" ColumnName="Frozen" />
+          <ScalarProperty Name="LastTestKompetencjiResult" ColumnName="LastTestKompetencjiResult" />
+          <ScalarProperty Name="LastTestKompetencjiDtm" ColumnName="LastTestKompetencjiDtm" />
+          <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ItechUsersRoles" TypeName="ITechModel.ItechUsersRoles" StoreEntitySet="ItechUsersRoles">
+      <EndProperty Name="ItechUsers">
+        <ScalarProperty Name="id" ColumnName="ItechUserId" />
+      </EndProperty>
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ModelsVersionModels" TypeName="ITechModel.ModelsVersionModels" StoreEntitySet="ModelsVersionModels">
+      <EndProperty Name="Resource1">
+        <ScalarProperty Name="Id" ColumnName="IdVM" />
+      </EndProperty>
+      <EndProperty Name="Resource">
+        <ScalarProperty Name="Id" ColumnName="IdM" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -12,7 +12,7 @@
 @Html.Partial("_SelectWrokstationsModels")
 <div>
     Zanleziono @Model.Resources.TotalItemCount pozycji. Wyswietlonio stronę @(Model.Resources.PageCount < Model.Resources.PageNumber ? 0 : Model.Resources.PageNumber) z @Model.Resources.PageCount
-    @Html.PagedListPager(Model.Resources, page => Url.Action("index", new { page, Find_ResourceType = @Model.Find_ResourceType, WorkProcess = @Model.WorkProcess, Find_Word = @Model.Find_Word, ReturnUrl = @Model.ReturnUrl, FindAction = "Page" }))
+    @Html.PagedListPager(Model.Resources, page => Url.Action("Edit2", new { page, Find_ResourceType = @Model.Find_ResourceType,Workstation=@Model.Workstation, WorkProcess = @Model.WorkProcess, Find_Word = @Model.Find_Word, ReturnUrl = @Model.ReturnUrl, FindAction = "Page" }))
 </div>
 
 <p>
