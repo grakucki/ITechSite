@@ -20,6 +20,9 @@ kolor pomarańczowy sitech
 kolor szary 
 220; 220; 220
 
+pomarańczowy orange;
+czerwony # #BC0B0B
+zielony #06B211
 !07
 
 
