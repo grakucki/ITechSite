@@ -109,13 +109,17 @@ namespace ITechSite.Controllers
 
                 var userStore = new UserStore<ApplicationUser>(context);
                 var userManager = new UserManager<ApplicationUser>(userStore);
+                userManager.UserValidator = new UserValidator<ApplicationUser>(userManager) { AllowOnlyAlphanumericUserNames = false };
 
                 var u = userManager.FindByName(UserName);
                 if (u == null)
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
                 if (Act == "Add")
-                    userManager.AddToRole(u.Id, RoleName);
+                {
+                    var x = userManager.AddToRole(u.Id, RoleName);
+                    var rs = x.ToString();
+                }
                 if (Act == "Remove")
                     userManager.RemoveFromRole(u.Id, RoleName);
 
