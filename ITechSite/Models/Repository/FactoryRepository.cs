@@ -168,14 +168,14 @@ namespace ITechSite.Models
 
                 // dodajemy wersje modeli
 
-                foreach (var item in models)
-                {
-                    var vm = _dataContex.Resource.Where(m => 
-                        m.Enabled == true
-                        && m.ResourceModelParent.Any(n=>n.Id==item.Id)
-                        ).OrderBy(m => m.Name).ToList();
-                    l.AddRange(vm);
-                }
+                //foreach (var item in models)
+                //{
+                //    var vm = _dataContex.Resource.Where(m => 
+                //        m.Enabled == true
+                //        && m.ResourceModelParent.Any(n=>n.Id==item.Id)
+                //        ).OrderBy(m => m.Name).ToList();
+                //    l.AddRange(vm);
+                //}
             }
 
 
@@ -192,6 +192,7 @@ namespace ITechSite.Models
 
             if (!Models.Repository.FilterExtansion.IsEmpty(Find_ResourceType))
                 Resources2 = Resources2.Where(m => m.ResourceType.Type == Find_ResourceType);
+
 
             if (!Models.Repository.FilterExtansion.IsEmpty(factoryName))
                 Resources2 = Resources2.Where(m => m.Factory == factoryName);

@@ -9,7 +9,7 @@
 <div>
     <hr />
    
-    @if (Model.FileType == ".pdf")
+    @*@if (Model.FileType == ".pdf")
     {
         <b>pdf not suported</b>
     }
@@ -20,11 +20,7 @@
     @if (Model.FileType == ".mp4")
     {
         @Microsoft.Web.Helpers.Video.MediaPlayer("http://localhost:49429/Dokuments/show/" + @Model.Id)
-        @*<br />
-        @Microsoft.Web.Helpers.Video.Silverlight("http://localhost:49429/Dokuments/show/"+@Model.Id, "300", "200")
-        <br />
-        @Microsoft.Web.Helpers.Video.Flash("http://localhost:49429/Dokuments/show/"+@Model.Id, "300", "200")*@
-    }
+    }*@
 
 
     @*<video width="320" height="240" controls>
@@ -154,7 +150,7 @@
 </div>
 <p>
     @Html.ActionLink("Pobierz", "Download", new { id = Model.Id }) |
-    @Html.ActionLink("Pokaż", "Show", new { id = Model.Id }) |
+    @Html.ActionLink("Pokaż", "Show", new { id = Model.Id }, new { target = "_blank" }) |
     @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Powrót do listy", "Index")
 </p>

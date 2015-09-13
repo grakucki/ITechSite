@@ -19,8 +19,9 @@ namespace ITechSite.Models
         [DisplayName("Wiadomość")]
         public string News1 { get; set; }
         [DisplayName("Ważna do")]
+        [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> ValidEnd { get; set; }
-        [DisplayName("Utworzona przez")]
+        [DisplayName("Utworzona")]
         public Nullable<System.DateTime> CreatedAt { get; set; }
     }
 }

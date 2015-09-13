@@ -24,15 +24,20 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     @if (User.Identity.IsAuthenticated)
-                    { 
-                        <li>@Html.ActionLink("Dokumenty", "Index", "Dokuments", new { area = "" }, null)</li>
-                        <li>@Html.ActionLink("Zasoby", "Index", "Resources", new { area = "" }, null)</li>
+                    {
+                        <li>@Html.ActionLink("Baza dokumentów", "Index", "Dokuments", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Zarządzanie produkcją", "Index", "Resources", new { area = "" }, null)</li>
                         <li>@Html.ActionLink("Wiadomości", "Index", "News", new { area = "" }, null)</li>
                         <li>@Html.ActionLink("Testy", "Index", "TestEditor", new { area = "Testy" }, null)</li>
-                        <li>@Html.ActionLink("Plan informacyjny", "Edit2", "InformationPlans", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("Przypisanie instrukcji", "Edit2", "InformationPlans", new { area = "" }, null)</li>
+    @*<li>@Html.ActionLink("Dokumenty", "Index", "Dokuments", new { area = "" }, null)</li>
+    <li>@Html.ActionLink("Zasoby", "Index", "Resources", new { area = "" }, null)</li>
+    <li>@Html.ActionLink("Wiadomości", "Index", "News", new { area = "" }, null)</li>
+    <li>@Html.ActionLink("Testy", "Index", "TestEditor", new { area = "Testy" }, null)</li>
+    <li>@Html.ActionLink("Plan informacyjny", "Edit2", "InformationPlans", new { area = "" }, null)</li>*@
                     }
                     @*<li>@Html.ActionLink("O stronie", "About", "Home", new { area = "" }, null)</li>*@
-                    <li>@Html.ActionLink("Kontakt", "Contact", "Home", new { area = "" }, null)</li>
+                    
                     
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -43,7 +48,10 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - ITech Site</p>
+            <p>
+                &copy; @DateTime.Now.Year - Panel administracyjny instrukcji multimedialnych.
+                @Html.ActionLink("Kontakt", "Contact", "Home", new { area = "" }, null)
+            </p>
         </footer>
     </div>
 

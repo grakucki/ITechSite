@@ -71,56 +71,10 @@ namespace ITechSite.Models
           AvailableWorkPorcess = _repository.GetWorkProcessBy(Factory, Department).ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Name });
           AvailableWorkstation = _repository.GetWorkstationBy(Factory, Department, WorkProcess, string.Empty, true).ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Id.ToString() });
 
-          //var Resources2 = context.Resource
-          //    .Where(i =>
-          //        (i.Name.IndexOf(Find_Word) >= 0 || i.Description.IndexOf(Find_Word) >= 0 || Find_Word == null)
-          //        && (Find_WorkProcess == null || Find_WorkProcess == "*" || i.WorkProcess == Find_WorkProcess)
-          //        && (Find_ResourceType == null || Find_ResourceType == "*" || i.ResourceType.Type == Find_ResourceType)
-          //     ).OrderBy(i => i.Name);
-          //var Resources2 = context.Resource.AsEnumerable();
-
-
-          //if (!Models.Repository.FilterExtansion.IsEmpty(Find_ResourceType))
-          //        Resources2 = Resources2.Where(m => m.ResourceType.Type == Find_ResourceType);
-
-          //if (!Models.Repository.FilterExtansion.IsEmpty(Factory))
-          //        Resources2 = Resources2.Where(m => m.Factory == Factory);
-
-          ////if (!Models.Repository.FilterExtansion.IsEmpty(Department))
-          ////    Resources2 = Resources2.Join(context.WorkProcess, c => c.WorkProcess, d => d.Name, (c, m) => new { c, m })
-          ////        .Where(m => m.m.Department.Name == Department).Select(m => m.c);
-
-          //if (!Models.Repository.FilterExtansion.IsEmpty(WorkProcess))
-          //    Resources2 = Resources2.Where(m => m.WorkProcess == WorkProcess);
-
-
-          //if (!Models.Repository.FilterExtansion.IsEmpty(Find_Word))
-          //        Resources2= Resources2.Where(m=>m.Name.IndexOf(Find_Word) >= 0);
+          
 
           var Resources2 = _repository.GetResourcesBy(Factory, Department, WorkProcess, Find_ResourceType,Find_Word, Workstation, false);
-          Resources = Resources2.ToPagedList(page ?? 1, 10);
+          Resources = Resources2.ToPagedList(page ?? 1, 50);
       }
-
-        //public void Fill2(ITechEntities context)
-        //{
-        //    WorkProcess = new List<Models.WorkProcess>();
-        //    WorkProcess.Add(new WorkProcess { Id = -1, Name = "*" });
-        //    WorkProcess.AddRange(context.WorkProcess.OrderBy(m => m.Name));
-
-        //    ResourceType = new List<Models.ResourceType>();
-        //    //ResourceType.Add(new ResourceType { id = -1, Type = "*" });
-        //    ResourceType.AddRange(context.ResourceType.OrderBy(m => m.Type));
-
-
-        //    var Resources2 = context.Resource
-        //        .Where(i =>
-        //            (i.Name.IndexOf(Find_Word) >= 0 || i.Description.IndexOf(Find_Word) >= 0 || Find_Word == null)
-        //            && (Find_WorkProcess == null || Find_WorkProcess == "*" || i.WorkProcess == Find_WorkProcess)
-        //            && (Find_ResourceType == null || Find_ResourceType == "*" || i.ResourceType.Type == Find_ResourceType)
-        //         ).OrderBy(i => i.Name);
-
-        //    Resources = Resources2.ToPagedList(page ?? 1 , 10);
-        //}
-
     }
 }

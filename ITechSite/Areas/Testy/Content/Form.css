@@ -94,15 +94,25 @@ input[type="submit"]{
 
 .btn.btn-action200{
     width: 200px;
-    padding: 8px;
-    background-color: #2979FF;
+    padding: 13px;
+    /*background-color: #2979FF;*/
     border-radius: 4px;
     font-size: 13px;
-    color: #ffffff;
+    color: white; 
+}
+
+ul.nav.navbar-nav.navbar {
+    background-color: #2979FF;
 }
 
 .btn.btn-action200:hover{
     opacity: 0.8;
+    background-color: #0b16db;
+}
+
+
+li.active {
+    background-color: #0b16db;
 }
 
 .btn.btn-action200 span{

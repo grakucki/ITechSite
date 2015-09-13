@@ -2,11 +2,13 @@
 
 @{
     ViewBag.Title = "Wiadomości";
-    
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        //<link rel="stylesheet" href="/resources/demos/style.css">
+
+    @*<link href="~/Scripts/themes/base/jquery.ui.all.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/ui/jquery.ui.core.js"></script>
+    <script src="~/Scripts/ui/jquery.ui.widget.js"></script>
+    <script src="~/Scripts/ui/jquery.ui.datepicker.js"></script>*@
+
 }
 
 
@@ -20,117 +22,139 @@
             return "";
         else
             return R.Resource.News.NewsPriority.CssName;
-//            return "text-green";
-//        return "text-Red";
+        //            return "text-green";
+        //        return "text-Red";
     }
 }
 
 
 <h2>Wiadomości</h2>
 
- <script>
-     $(function() {
-    $ ("#ValidEnd").datepicker();
-  });
-  </script>
 
-<script>
-    $(function() {
-    $(":checkbox").prop("checked", true)
-        });
+@*<p>Date: <input type="text" id="datepicker"></p>
+
+<script type="text/javascript">
+    $(function () {
+        $("#datepicker").datepicker();
+    });
+</script>*@
+
+@*<script>
+    $(function () {
+        $("#ValidEnd").datepicker();
+    });
 </script>
 
+<script>
+    $(function () {
+        $(":checkbox").prop("checked", true)
+    });
+</script>*@
 
-    @using (Html.BeginForm())
-    {
-            <div>
-                <p>
-                 @Html.ValidationMessage("Error", new { @class = "text-danger" })
-                </p>
 
-                <p>
-                    @Html.Label("Treść wiadomości")
-                    @Html.TextBox("NewNews", null, new { @class = "text-News" })
-                </p>
-                <p>
-                    @Html.Label("Priorytet")
-                    @Html.DropDownList("priority", null, htmlAttributes: new { @class = "form-control" })
-
-                    @Html.Label("Ważna do")
-                    @Html.TextBox("ValidEnd", null, new {  @type = "Date", @class = "form-control"})
-                    <br />
-                    <input type="submit" name="Send.Action" value="Wyślij" class="btn btn-default" />
-                </p>
-            </div>
-        
-<table class="table">
-    <tr>
-        <th>
-            Wybierz
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Resource.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Resource.No)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Resource.WorkProcess)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Resource.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Resource.News.News1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Resource.News.ValidEnd)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (ITechSite.Models.SelectedResources item in Model)
+@using (Html.BeginForm())
 {
-    //var rowcss = "text-Red"; 
-    var rowcss = GetRowCss(item);
-    <tr class="@rowcss">
-                <td>
-                @*@Html.CheckBox("actionChk", @item.Selected2, new { value = @item.Resource.Id})*@
+    <div>
+        <p>
+            @Html.ValidationMessage("Error", new { @class = "text-danger" })
+        </p>
 
-                @if (item.Selected2)
-            {
-                    <input type="checkbox" name="actionChk" value="@item.Resource.Id" checked />   }
-            else
-            {
-                    <input type="checkbox" name="actionChk" value="@item.Resource.Id" />  }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resource.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resource.No)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resource.WorkProcess)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resource.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resource.News.News1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resource.News.ValidEnd)
-            </td>
+        <p>
+            @Html.Label("Treść wiadomości")
+            @Html.TextBox("NewNews", null, new { @class = "text-News" })
+        </p>
+        <p>
+            @Html.Label("Priorytet")
+            @Html.DropDownList("priority", null, htmlAttributes: new { @class = "form-control" })
 
-            <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-            </td>
+            @Html.Label("Ważna do")
+            @Html.TextBox("ValidEnd", null, new { @type = "Date", @class = "form-control" })
+
+    <br />
+    <input type="submit" name="Send.Action" value="Wyślij" class="btn btn-default" />
+    </p>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                Wybierz
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resource.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resource.No)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resource.WorkProcess)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resource.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resource.News.News1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Resource.News.ValidEnd)
+            </th>
+            <th></th>
         </tr>
-}
+
+        @foreach (ITechSite.Models.SelectedResources item in Model)
+        {
+            //var rowcss = "text-Red";
+            var rowcss = GetRowCss(item);
+            <tr class="@rowcss">
+                <td>
+                    @*@Html.CheckBox("actionChk", @item.Selected2, new { value = @item.Resource.Id})*@
+
+                    @if (item.Selected2)
+                    {
+                        <input type="checkbox" name="actionChk" value="@item.Resource.Id" checked />   }
+                    else
+                    {
+                        <input type="checkbox" name="actionChk" value="@item.Resource.Id" />  }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resource.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resource.No)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resource.WorkProcess)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resource.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Resource.News.News1)
+                </td>
+
+                @if (item.Resource.News != null && item.Resource.News.ValidEnd.HasValue && item.Resource.News.ValidEnd.Value < DateTime.Now)
+                {
+                    <td style="color:white; background-color:darkgray; text-decoration:line-through">
+                        @Html.DisplayFor(modelItem => item.Resource.News.ValidEnd)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Resource.News.ValidEnd)
+                    </td>
+                }
 
 
-</table>
+
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
+                </td>
+            </tr>
+        }
+
+
+    </table>
 }

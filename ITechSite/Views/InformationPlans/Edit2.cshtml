@@ -21,6 +21,10 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayName("Typ")
+            @*@Html.DisplayNameFor(model => model.Resources.ResourceType.Type)*@
+        </th>
+        <th>
             @Html.DisplayName("Nazwa")
         </th>
         <th>
@@ -35,19 +39,31 @@
             @*@Html.DisplayNameFor(model => model.Resources.Enabled)*@
         </th>
         <th>
-            @Html.DisplayName("Typ")
-            @*@Html.DisplayNameFor(model => model.Resources.ResourceType.Type)*@
-        </th>
-        <th>
             @Html.DisplayName("Opis")
             @*@Html.DisplayNameFor(model => model.Resources.Description)*@
         </th>
         <th></th>
     </tr>
 
-    @foreach (var item in Model.Resources)
+    @foreach (var item in Model.Resources.OrderBy(m=>m.Name))
     {
         <tr>
+            <td>
+                @{switch (item.ResourceType.id)
+                {
+                    case 1:
+                        <img src="~/Content/images/Res1.png" alt="@item.ResourceType.Type" title="@item.ResourceType.Type" />
+                        break;
+                    case 2:
+                        <img src="~/Content/images/Res2.png" alt="@item.ResourceType.Type" title="@item.ResourceType.Type" />
+                        break;
+                    case 3:
+                        <img src="~/Content/images/Res3.png" alt="@item.ResourceType.Type" title="@item.ResourceType.Type" />
+                        break;
+                    default:
+                        break;
+                }}
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -61,16 +77,42 @@
                 @Html.DisplayFor(modelItem => item.Enabled)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ResourceType.Type)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
                 @Html.ActionLink("Dokumenty", "Create", new { idM = item.Id, idR = Model.Workstation })
-              
             </td>
+            
         </tr>
+        if (item.ResourceType.id == 2)
+        {
+            foreach (var itemWersje in item.ResourceModelChild)
+            {
+                <tr>
+                    <td>
+                        <img src="~/Content/images/Res3.png" alt="@itemWersje.ResourceType.Type" title="@itemWersje.ResourceType.Type" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => itemWersje.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => itemWersje.No)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => itemWersje.WorkProcess)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => itemWersje.Enabled)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => itemWersje.Description)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Dokumenty", "Create", new { idM = itemWersje.Id, idR = Model.Workstation })
+                    </td>
+                </tr>
+            }
+        }
     }
 
 </table>

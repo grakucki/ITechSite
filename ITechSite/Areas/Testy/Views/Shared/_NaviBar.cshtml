@@ -1,17 +1,24 @@
 ﻿
-<div>
+<div class="container">
     @{string s = ViewContext.RouteData.Values["action"].ToString();}
     <br />
-                                                                                               
 
+    <ul class="nav navbar-nav navbar">
+        @if (s == "Index")
+        {
+            <li>@Html.ActionLink("Dodaj nowe pytanie", "Create", null, new { @class = "btn btn-action200 btn-actionGreen" })</li>
+        }
+        @if (s == "Categories")
+        {
+            <li>@Html.ActionLink("Dodaj nowe Kategorię", "CreateCategory", null, new { @class = "btn btn-action200 btn-actionGreen" })</li>
+        }
 
-@if (s == "Index")
-{  @Html.ActionLink("Dodaj nowe pytanie", "Create", null, new { @class = "btn btn-action200 btn-actionGreen" })}
-    
-@if (s =="Categories")
-{  @Html.ActionLink("Dodaj nowe Kategorię", "CreateCategory", null, new { @class = "btn btn-action200 btn-actionGreen" })}
-
-    @Html.ActionLink("Zarządzaj Pytaniami", "Index", null, new { @class = "btn btn-action200" })
-    @Html.ActionLink("Zarządzaj kategoriami", "Categories", null, new { @class = "btn btn-action200" })
-    @Html.ActionLink("Zarządzaj stanowiskami", "Resources", null, new { @class = "btn btn-action200" })
+        <li @if (s == "Index") { <text> class="active" </text>  }>
+            @Html.ActionLink("Zarządzaj Pytaniami", "Index", null, new { @class = "btn btn-action200" })
+        </li>
+        <li @if(s =="Categories" ){ <text> class="active" </text> }>
+            @Html.ActionLink("Zarządzaj kategoriami", "Categories", null, new { @class = "btn btn-action200" })</li>
+        <li @if(s =="Resources" ){ <text> class="active" </text> }>
+            @Html.ActionLink("Zarządzaj stanowiskami", "Resources", null, new { @class = "btn btn-action200" })</li>
+    </ul>
 </div>
