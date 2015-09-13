@@ -13,12 +13,6 @@ using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using System.Collections.Generic;
 
 namespace ITechSite.Controllers
 {
@@ -26,7 +20,9 @@ namespace ITechSite.Controllers
     public class ItechUsersController : Controller
     {
         // GET: ItechUsers
-        
+
+        //********* pracownicy **************************************************************************
+#region pracownicy
 
         public ActionResult Index(ItechUserIndexModel userModel)
         {
@@ -43,6 +39,76 @@ namespace ITechSite.Controllers
             return View(userModel);
         }
 
+
+
+        [HttpGet]
+        public ActionResult Create()
+        {
+            var u = new ItechUsers();
+            u.Enabled = true;
+            return View(u);
+        }
+
+        [HttpPost]
+        public ActionResult Create(ItechUsers user)
+        {
+            if (ModelState.IsValid)
+            {
+                var r = new ItechUsersRepository();
+                r.CreateUser(user);
+
+                // dodaj usera do grupy pracowników
+                int id =user.id;
+                return RedirectToAction("Edit", new { id = id });
+            }
+            return View();
+        }
+
+
+        [HttpGet]
+        public ActionResult Edit(int? id)
+        {
+            if (!id.HasValue)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var r = new ItechUsersRepository();
+            var u = r.GetUser(id.Value);
+            if (u == null)
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            @ViewBag.AllRoles = r.GetAllRoles();
+            return View(u);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ItechUsers user)
+        {
+            if (!ModelState.IsValid)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var r = new ItechUsersRepository();
+            r.Update(user);
+
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult EditRole(int id, string[] SelectedRoles)
+        {
+            var r = new ItechUsersRepository();
+            r.ChangeRoles(id, SelectedRoles);
+            return RedirectToAction("Edit", new {id =id });
+        }
+
+        // GET: ItechUsers
+        public ActionResult Import()
+        {
+            return View();
+        }
+#endregion
+
+        //***** konta serwisu www ***********************************************************************
+        #region Accounts
 
         public ActionResult Accounts(ITechSite.Models.Repository.AccountIndexModel userModel)
         {
@@ -85,8 +151,8 @@ namespace ITechSite.Controllers
                 if (u == null)
                     return new HttpStatusCodeResult(HttpStatusCode.NotFound);
                 r.User = u;
-                r.UserRoles = userManager.GetRoles(u.Id).OrderBy(m=>m).ToArray();
-                
+                r.UserRoles = userManager.GetRoles(u.Id).OrderBy(m => m).ToArray();
+
 
                 var roleStore = new Microsoft.AspNet.Identity.EntityFramework.RoleStore<IdentityRole>(context);
                 var roleManager = new RoleManager<IdentityRole>(roleStore);
@@ -97,7 +163,7 @@ namespace ITechSite.Controllers
                     if (!userManager.IsInRole(u.Id, item.Name))
                         r.AllowRoles.Add(item.Name);
                 }
-                
+
             }
             return View(r);
         }
@@ -126,46 +192,6 @@ namespace ITechSite.Controllers
             }
             return RedirectToAction("EditAccount", new { UserName = UserName });
         }
-
-       
-
-        [HttpGet]
-        public ActionResult Edit(int? id)
-        {
-            if (!id.HasValue)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            var r = new ItechUsersRepository();
-            var u = r.GetUser(id.Value);
-            if (u==null)
-                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
-
-            return View(u);
-        }
-
-        [HttpPost]
-        public ActionResult Edit(ItechUsers user)
-        {
-            if (!ModelState.IsValid)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-
-            var r = new ItechUsersRepository();
-            r.Update(user);
-
-
-            return RedirectToAction("Index");
-        }
-
-
-
-
-
-
-        // GET: ItechUsers
-        public ActionResult Import()
-        {
-            return View();
-        }
-
     }
+        #endregion
 }

@@ -84,7 +84,17 @@ textarea {
     border : solid;
     border-width : 1px;
     padding: 5px;
-    background-color: lightgoldenrodyellow;
+    background-color: darkgrey;
+    border-radius: 10px;
+
+}
+
+.form-content
+{
+    border : solid;
+    border-width : 1px;
+    padding: 5px;
+    background-color: #2979FF;
     border-radius: 10px;
 
 }

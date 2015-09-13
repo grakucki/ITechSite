@@ -78,6 +78,7 @@ namespace ITechSite.Models
         public virtual WorkProcess WorkProcess { get; set; }
 
         [DisplayName("Kategoria")]
+        [IsNoFilterValue]
         public virtual Kategorie Kategorie { get; set; }
 
         [DisplayName("Kategoria")]

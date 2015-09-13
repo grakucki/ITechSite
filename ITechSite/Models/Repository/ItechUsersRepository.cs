@@ -40,8 +40,18 @@ namespace ITechSite.Models.Repository
                 x = x.OrderBy(m => m.CardNo);
             return x;
         }
-        
-        
+
+        public ItechUsers CreateUser(ItechUsers User)
+        {
+            var r = _dataContex.AspNetRoles.Where(m=>m.Name.Equals("pracownik")).FirstOrDefault();
+            var x = _dataContex.ItechUsers.Add(User);
+
+            if (r!=null)
+                User.AspNetRoles.Add(r);
+            _dataContex.SaveChanges();
+            return x;
+        }
+
         public ItechUsers GetUser(int id)
         {
             var x = _dataContex.ItechUsers.Find(id);
@@ -54,6 +64,26 @@ namespace ITechSite.Models.Repository
             _dataContex.SaveChanges();
         }
 
+
+        public List<SelectedItem> GetAllRoles()
+        {
+            return _dataContex.AspNetRoles.Select(m => new SelectedItem{ Id = m.Id, Name = m.Name }).ToList();
+        }
+
+        internal void ChangeRoles(int id, string[] SelectedRoles)
+        {
+            var u = GetUser(id);
+            u.AspNetRoles.Clear();
+            foreach (var item in SelectedRoles)
+            {
+                var r = _dataContex.AspNetRoles.Find(item);
+                if (r!=null)
+                {
+                    u.AspNetRoles.Add(r);
+                }
+            }
+            _dataContex.SaveChanges();
+        }
     }
 
     public class ItechUserIndexModel
@@ -84,5 +114,11 @@ namespace ITechSite.Models.Repository
         // lista dostępnych roli w który user nie jest zarejestrowany
         public List<string> AllowRoles { get; set; }
     }
+
+     public class SelectedItem
+     {
+         public string Id { get; set; }
+         public string Name { get; set; }
+     }
 
 }

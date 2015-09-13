@@ -275,6 +275,7 @@
     <Compile Include="Models\InformationPlan.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ItechModelEx\ItechUsers.cs" />
     <Compile Include="Models\ItechUsers.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
@@ -446,6 +447,7 @@
     <Content Include="Models\sql\2015-08-21.sql" />
     <Content Include="Models\sql\2015-07-14 pytania.sql" />
     <Content Include="Models\sql\2015-09-01.sql" />
+    <Content Include="Scripts\bootstrap-dialog.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\ITechModel.edmx">
@@ -626,6 +628,9 @@
     <Content Include="Views\Resources\CreateVersionModel.cshtml" />
     <Content Include="Views\ItechUsers\Accounts.cshtml" />
     <Content Include="Views\ItechUsers\EditAccount.cshtml" />
+    <Content Include="Views\ItechUsers\Create.cshtml" />
+    <Content Include="Views\ItechUsers\_EditRolesPartial.cshtml" />
+    <Content Include="Views\ItechUsers\ShowRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

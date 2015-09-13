@@ -2,27 +2,45 @@
 @model ITechSite.Models.InformationPlanModels
 
 @{
-    ViewBag.Title = "Utwórz Plan informacyjny";
+    ViewBag.Title = "Dodaj dokumenty";
 }
 
-<h4>Dodaj dokument do planu informacyjnego</h4>
-<div class="row file-content">
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.IdM, Model.Resource.ResourceType.Type, htmlAttributes: new { @class = "" }):
-                <label style="font-size: larger">@Model.Resource.Name</label><br />
-                @Html.DisplayFor(m => m.Resource.WorkProcess) @Html.DisplayFor(m => m.Resource.Description)
+<div class="row form-content">
+    @if (Model.ResourceModel != null)
+    {
+        if (Model.ResourceModel.Type == 1)
+        {
+            <h4>Dodaj dokumenty do stanowiska</h4>
+        }
+        else if (Model.ResourceModel.Type == 2)
+        {
+            <h4>Dodaj dokumenty do modelu</h4>
+        }
+        else if (Model.ResourceModel.Type == 3)
+        {
+            <h4>Dodaj dokument do wariantu modelu</h4>
+        }
+        else
+        {
+            <h4>Dodaj dokument do planu informacyjnego</h4>
+        }
+    }
+    <div class="form-group">
+        @Html.LabelFor(model => model.IdM, Model.Resource.ResourceType.Type, htmlAttributes: new { @class = "" }):
+        <label style="font-size: larger">@Model.Resource.Name</label>
+        @Html.DisplayFor(m => m.Resource.WorkProcess) @Html.DisplayFor(m => m.Resource.Description)
+    </div>
+    @if (Model.ResourceModel != null)
+    {
+        if (Model.ResourceModel.ResourceType.id != 1)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdM, Model.ResourceModel.ResourceType.Type, htmlAttributes: new { @class = "" }):
+                <label style="font-size: larger ">@Model.ResourceModel.Name</label>
+                @Html.DisplayFor(m => m.ResourceModel.Description)
             </div>
-            @if (Model.ResourceModel != null)
-            {
-                if (Model.ResourceModel.ResourceType.id != 1)
-                {
-                    <div class="form-group col-md-6">
-                        @Html.LabelFor(model => model.IdM, Model.ResourceModel.ResourceType.Type, htmlAttributes: new { @class = "" }):
-                        <label style="font-size: larger ">@Model.ResourceModel.Name</label>
-                        @Html.DisplayFor(m => m.ResourceModel.Description)
-                    </div>
-                }
-            }
+        }
+    }
 </div>
 Aktualna lista plików:
 <div class="row">
