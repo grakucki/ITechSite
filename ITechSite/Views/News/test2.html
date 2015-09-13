@@ -1,8 +1,11 @@
 ﻿
-@{
-    ViewBag.Title = "Test";
-
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery UI Datepicker - Display month &amp; year menus</title>
     <link href="../../Scripts/themes/base/jquery.ui.all.css" rel="stylesheet" />
+    <script src="../../Scripts/jquery-1.10.2.js"></script>
     <script src="../../Scripts/ui/jquery.ui.core.js"></script>
     <script src="../../Scripts/ui/jquery.ui.widget.js"></script>
     <script src="../../Scripts/ui/jquery.ui.datepicker.js"></script>
@@ -17,9 +20,13 @@
             });
         });
     </script>
-    
-}
+</head>
+<body>
 
-<h2>Test</h2>
+    <p>Date: <input type="text" id="datepicker"></p>
 
-<p> Data: <input typ="text" id="datepicker">   </ p>
+    <div class="demo-description">
+        <p>Show month and year dropdowns in place of the static month/year header to facilitate navigation through large timeframes.  Add the boolean <code>changeMonth</code> and <code>changeYear</code> options.</p>
+    </div>
+</body>
+</html>

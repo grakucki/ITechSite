@@ -3,12 +3,20 @@
 @{
     ViewBag.Title = "Wiadomości";
 
-    @*<link href="~/Scripts/themes/base/jquery.ui.all.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery-1.10.2.js"></script>
-    <script src="~/Scripts/ui/jquery.ui.core.js"></script>
-    <script src="~/Scripts/ui/jquery.ui.widget.js"></script>
-    <script src="~/Scripts/ui/jquery.ui.datepicker.js"></script>*@
+    <link href="../../Scripts/themes/base/jquery.ui.all.css" rel="stylesheet" />
+    <script src="../../Scripts/ui/jquery.ui.core.js"></script>
+    <script src="../../Scripts/ui/jquery.ui.widget.js"></script>
+    <script src="../../Scripts/ui/jquery.ui.datepicker.js"></script>
 
+    <script>
+    $(function () {
+        $("#ValidEnd").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd",
+        });
+    });
+    </script>
 }
 
 
@@ -31,13 +39,6 @@
 <h2>Wiadomości</h2>
 
 
-@*<p>Date: <input type="text" id="datepicker"></p>
-
-<script type="text/javascript">
-    $(function () {
-        $("#datepicker").datepicker();
-    });
-</script>*@
 
 @*<script>
     $(function () {
