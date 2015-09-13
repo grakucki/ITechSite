@@ -113,5 +113,10 @@ namespace ITechSite.Models
             return View();
         }
         
+        public ActionResult Test()
+        {
+            return View();
+        }
+        
     }
 }

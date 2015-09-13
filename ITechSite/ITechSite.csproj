@@ -915,6 +915,7 @@
     <Content Include="Views\ItechUsers\_EditRolesPartial.cshtml" />
     <Content Include="Views\ItechUsers\ShowRoles.cshtml" />
     <Content Include="Scripts\ui\.jshintrc" />
+    <Content Include="Views\News\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
