@@ -50,7 +50,7 @@
             this.panel5 = new CustomPanelControl.CustomPanel();
             this.elementyComboBox = new System.Windows.Forms.ComboBox();
             this.ModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.customPanel1 = new CustomPanelControl.CustomPanel();
+            this.NewsCustomPanel = new CustomPanelControl.CustomPanel();
             this.KomunikatLabel = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -101,7 +101,7 @@
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ModelBindingSource)).BeginInit();
-            this.customPanel1.SuspendLayout();
+            this.NewsCustomPanel.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.customPanel2.SuspendLayout();
@@ -183,7 +183,7 @@
             this.tableLayoutPanel3.Controls.Add(this.panel3, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.panel4, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.panel5, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.customPanel1, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.NewsCustomPanel, 1, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -349,22 +349,22 @@
             this.ModelBindingSource.DataSource = typeof(ITechInstrukcjeModel.Resource);
             this.ModelBindingSource.PositionChanged += new System.EventHandler(this.ModelBindingSource_PositionChanged);
             // 
-            // customPanel1
+            // NewsCustomPanel
             // 
-            this.customPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.customPanel1.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.customPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.customPanel1.BorderWidth = 3;
-            this.tableLayoutPanel3.SetColumnSpan(this.customPanel1, 2);
-            this.customPanel1.Controls.Add(this.KomunikatLabel);
-            this.customPanel1.Curvature = 10;
-            this.customPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customPanel1.GradientMode = CustomPanelControl.LinearGradientMode.BackwardDiagonal;
-            this.customPanel1.Location = new System.Drawing.Point(271, 3);
-            this.customPanel1.Name = "customPanel1";
-            this.customPanel1.Padding = new System.Windows.Forms.Padding(5);
-            this.customPanel1.Size = new System.Drawing.Size(842, 57);
-            this.customPanel1.TabIndex = 9;
+            this.NewsCustomPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.NewsCustomPanel.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.NewsCustomPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.NewsCustomPanel.BorderWidth = 3;
+            this.tableLayoutPanel3.SetColumnSpan(this.NewsCustomPanel, 2);
+            this.NewsCustomPanel.Controls.Add(this.KomunikatLabel);
+            this.NewsCustomPanel.Curvature = 10;
+            this.NewsCustomPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.NewsCustomPanel.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
+            this.NewsCustomPanel.Location = new System.Drawing.Point(271, 3);
+            this.NewsCustomPanel.Name = "NewsCustomPanel";
+            this.NewsCustomPanel.Padding = new System.Windows.Forms.Padding(5);
+            this.NewsCustomPanel.Size = new System.Drawing.Size(842, 57);
+            this.NewsCustomPanel.TabIndex = 9;
             // 
             // KomunikatLabel
             // 
@@ -378,6 +378,7 @@
             this.KomunikatLabel.TabIndex = 0;
             this.KomunikatLabel.Text = "Komunikat stanowisko ......";
             this.KomunikatLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.KomunikatLabel.DoubleClick += new System.EventHandler(this.KomunikatLabel_DoubleClick);
             // 
             // contextMenuStrip1
             // 
@@ -826,7 +827,7 @@
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ModelBindingSource)).EndInit();
-            this.customPanel1.ResumeLayout(false);
+            this.NewsCustomPanel.ResumeLayout(false);
             this.contextMenuStrip1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.customPanel2.ResumeLayout(false);
@@ -884,7 +885,7 @@
         private CustomPanelControl.CustomPanel panel5;
         private System.Windows.Forms.Label labelTime;
         private System.Windows.Forms.Timer timer2;
-        private CustomPanelControl.CustomPanel customPanel1;
+        private CustomPanelControl.CustomPanel NewsCustomPanel;
         private System.Windows.Forms.Label label2;
         private CustomPanelControl.CustomPanel customPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;

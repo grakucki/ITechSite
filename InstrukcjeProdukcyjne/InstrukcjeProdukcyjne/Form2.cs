@@ -758,6 +758,21 @@ namespace InstrukcjeProdukcyjne
             VirtualKeyboard.Show();
         }
 
+
+        NewsCssColection NewsCss = new NewsCssColection();
+
+        void DisplayNews(string news, int CssId)
+        {
+            KomunikatLabel.Text = news;
+            var css = NewsCss.GetCss(CssId);
+            NewsCustomPanel.BackColor = css.BackgroundColor;
+            NewsCustomPanel.BackColor2 = css.BackgroundColor;
+            NewsCustomPanel.GradientMode = CustomPanelControl.LinearGradientMode.None;
+            NewsCustomPanel.Refresh();
+
+            KomunikatLabel.ForeColor = css.Color;
+        }
+
         public DateTime _LastReadNews { get; set; }
         AutoResetEvent _TaskNewsIsRunning = new AutoResetEvent(true);
         private async void LoadNews(int idR)
@@ -777,13 +792,9 @@ namespace InstrukcjeProdukcyjne
                         toolStripStatusITechTime.Text = (d.ToShortTimeString());
                         News news = await client.GetNewsAsync(idR);
                         if (news != null)
-                        {
-                            KomunikatLabel.Text = news.News1;
-                        }
+                            DisplayNews(news.News1, (news.NewsPriorityId));
                         else
-                        {
-                            KomunikatLabel.Text = "";
-                        }
+                            DisplayNews("",0);
                     }
                     Work.SetState(ActionControlStatus.ActionControlState.Ok, "");
                 }
@@ -846,6 +857,12 @@ namespace InstrukcjeProdukcyjne
                     //DocSyncDlg.Show(this);
 
                 }
+        }
+
+
+        private void KomunikatLabel_DoubleClick(object sender, EventArgs e)
+        {
+            OnSeverClick();
         }
 
         private void OnSeverClick()
@@ -1051,8 +1068,7 @@ namespace InstrukcjeProdukcyjne
             }
         }
 
-    
-
+        
 
     }
 }

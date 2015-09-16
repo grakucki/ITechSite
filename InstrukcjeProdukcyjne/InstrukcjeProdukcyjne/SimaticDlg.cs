@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -94,6 +95,23 @@ namespace InstrukcjeProdukcyjne
                 
             }
             return ret;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try 
+	        {	        
+                FormTestConnectionItech2 dial = new FormTestConnectionItech2();
+                dial.DB = GetDb();
+                dial.IpSterownika = GetIpDevice();
+                dial.CpuType = GetSimaticType();
+                dial.FileName = Path.Combine(Properties.Settings.Default.App.LocalDoc,"simatic.xml");
+                dial.ShowDialog();
+	        }
+	        catch (Exception ex)
+	        {
+                MessageBox.Show(ex.Message);
+	        }
         }
     }
 }

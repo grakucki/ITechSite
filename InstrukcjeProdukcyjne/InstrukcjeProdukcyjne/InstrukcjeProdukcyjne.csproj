@@ -189,6 +189,7 @@
       <DependentUpon>ModelsWorkstationImprtDlg.cs</DependentUpon>
     </Compile>
     <Compile Include="MyFileInfo.cs" />
+    <Compile Include="NewsCss.cs" />
     <Compile Include="PdfViewerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

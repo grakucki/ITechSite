@@ -108,6 +108,13 @@ namespace InstrukcjeProdukcyjne
                 var cardno = textBoxCarNo.Text;
                 var pass = textBoxPass.Text;
                 label2.Text = cardno;
+                if (string.IsNullOrEmpty(pass))
+                {
+                    label3.Text = "Podaj hasło.";
+                    User = new SitechUser();
+                    TimerGo(false, 5);
+                    return;
+                }
 
                 var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password==pass && m.IsInRoles(AllowRoles)).FirstOrDefault();
                 User2 = u;

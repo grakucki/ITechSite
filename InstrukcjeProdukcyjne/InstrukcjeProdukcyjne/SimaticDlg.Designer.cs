@@ -40,6 +40,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             sterownik_IpLabel = new System.Windows.Forms.Label();
             sterownik_ModelLabel = new System.Windows.Forms.Label();
             Sterownik_DBLabel = new System.Windows.Forms.Label();
@@ -154,6 +155,17 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button2.Location = new System.Drawing.Point(221, 260);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(129, 65);
+            this.button2.TabIndex = 11;
+            this.button2.Text = "Test danych";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // SimaticDlg
             // 
             this.AcceptButton = this.buttonOk;
@@ -161,6 +173,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(677, 485);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(label1);
             this.Controls.Add(this.comboBox1);
@@ -192,5 +205,6 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
