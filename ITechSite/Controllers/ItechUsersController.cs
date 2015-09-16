@@ -48,7 +48,7 @@ namespace ITechSite.Controllers
             u.Enabled = true;
             return View(u);
         }
-
+         
         [HttpPost]
         public ActionResult Create(ItechUsers user)
         {
@@ -172,7 +172,7 @@ namespace ITechSite.Controllers
                 var rr = roleManager.Roles.OrderBy(m => m.Name).ToList(); ;
                 r.AllowRoles = new List<string>();
                 foreach (var item in rr)
-                {
+                { 
                     if (!userManager.IsInRole(u.Id, item.Name))
                         r.AllowRoles.Add(item.Name);
                 }
@@ -197,7 +197,7 @@ namespace ITechSite.Controllers
                 if (Act == "Add")
                 {
                     var x = userManager.AddToRole(u.Id, RoleName);
-                    var rs = x.ToString();
+                    var rs = x.ToString(); 
                 }
                 if (Act == "Remove")
                     userManager.RemoveFromRole(u.Id, RoleName);

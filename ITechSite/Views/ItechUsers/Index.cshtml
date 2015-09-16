@@ -1,5 +1,6 @@
 ﻿@model ITechSite.Models.Repository.ItechUserIndexModel
 @using PagedList.Mvc;
+@using System.Web.Mvc.Ajax;
 @{
     ViewBag.Title = "Użytkownicy";
     Layout = "_UsersLayout.cshtml";
@@ -43,7 +44,14 @@
 }
 
 <div>
-@Html.ActionLink("Dodaj nowego pracownika", "Create")
+@*@Html.ActionLink("Dodaj nowego pracownika", "Create")*@
+
+
+    @{
+        var link = Html.ActionLink("{0}", "Create").ToString();
+        var url = string.Format(link, "<span class='glyphicon glyphicon-plus'></span><span class='glyphicon glyphicon-user'></span> Dodaj nowego pracownika");
+    }
+    @Html.Raw(url)
 
 @if (Model.Users != null)
 {
