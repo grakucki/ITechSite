@@ -77,3 +77,35 @@ function CascadingOption2(cScr, cScr2, cDes, onAction, onProgress) {
         });
     });
 }
+
+function OptionChangeCss(cScr) {
+    $(document.getElementById(cScr)).change( function () {
+        OnOptionChangeCss(cScr)}
+    );
+    OnOptionChangeCss(cScr)
+}
+
+function OnOptionChangeCss(cScr) {
+    var a = $(':selected').text();
+    var b = $(':selected').val();
+    var c = $(':selected').attr("class");
+    $("#" + cScr).removeClass();
+    $("#" + cScr).addClass("form-control " + c);
+    $("#" + "NewNews").removeClass();
+    $("#" + "NewNews").addClass("form-control text-News "+ c);
+    console.debug(c);
+}
+
+
+function InitModal() {
+    $('.someclass').on('click', function () {
+        var itemid = $(this).attr('id');
+        $(".modal-content2").load("../ShowRoles?id=" + itemid, function( response, status, xhr ) {
+            if (status == "error") {
+                var msg = "Sorry but there was an error: ";
+                $("#error").html(msg + xhr.status + " " + xhr.statusText);
+            }
+        });
+    });
+
+};

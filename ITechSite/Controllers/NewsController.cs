@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ITechSite.Custom;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -34,6 +35,10 @@ namespace ITechSite.Models
             //}
 
             @ViewBag.priority = new SelectList(db.NewsPriority, "id", "Name", priority);
+
+            var x = db.NewsPriority.ToList().Select(m => new ITechSite.Custom.ExtendedSelectListItem { Text = m.Name, Value = m.id.ToString(), htmlAttributes=new { @class = m.CssName } }).ToList();
+            @ViewBag.priority2 = x;
+
             return View(news);
         }
 
@@ -85,6 +90,8 @@ namespace ITechSite.Models
 
             }
             @ViewBag.priority = new SelectList(db.NewsPriority, "id", "Name", priority);
+            var x = db.NewsPriority.ToList().Select(m => new ITechSite.Custom.ExtendedSelectListItem { Text = m.Name, Value = m.id.ToString(), htmlAttributes = new { @class = m.CssName }, Selected = priority.Value==m.id }).ToList();
+            @ViewBag.priority2 = x;
 
             return View(news);
         }

@@ -105,6 +105,19 @@ namespace ITechSite.Controllers
         {
             return View();
         }
+
+        public ActionResult ShowRoles(int? id)
+        {
+            if (!id.HasValue)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            var r = new ItechUsersRepository();
+            var u = r.GetUser(id.Value);
+            if (u == null)
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            @ViewBag.AllRoles = r.GetAllRoles();
+            return View(u);
+        }
 #endregion
 
         //***** konta serwisu www ***********************************************************************

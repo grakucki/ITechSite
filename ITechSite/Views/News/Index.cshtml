@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<ITechSite.Models.SelectedResources>
-
+@using ITechSite.Custom
 @{
     ViewBag.Title = "Wiadomości";
 
@@ -17,6 +17,14 @@
         });
     });
     </script>
+
+    <script type="text/javascript" src="~/Scripts/Itech.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            OptionChangeCss("priority");
+        });
+    </script>
+    
 }
 
 
@@ -40,17 +48,13 @@
 
 
 
-@*<script>
-    $(function () {
-        $("#ValidEnd").datepicker();
-    });
-</script>
 
 <script>
-    $(function () {
-        $(":checkbox").prop("checked", true)
-    });
-</script>*@
+    function checkboxSelAll() {
+        var b = document.getElementById('actionChkSel').checked;
+        $('[name="actionChk"]').prop("checked", b);
+    };
+</script>
 
 
 @using (Html.BeginForm())
@@ -62,14 +66,27 @@
 
         <p>
             @Html.Label("Treść wiadomości")
-            @Html.TextBox("NewNews", null, new { @class = "text-News" })
+            @Html.TextBox("NewNews", null, new { @class = "form-control text-News" })
         </p>
         <p>
-            @Html.Label("Priorytet")
-            @Html.DropDownList("priority", null, htmlAttributes: new { @class = "form-control" })
+            @Html.Label("priority","Priorytet")
+            @*@Html.DropDownList("priority1", null, htmlAttributes: new { @class = "form-control" })*@
+
+
+            @*<select id="package" class="form-control">
+                <option value="1" class="text-Green">Pozytywne</option>
+                <option value="2" class="text-Red">Neutralny</option>
+                <option value="3" class="text-Orange">Ważny</option>
+            </select>
+            <br />*@
+            
+            @*@Html.DropDownList("priority", x, "-select-")*@
+            @Html.ExtendedDropDownListFor("priority", (IEnumerable<ITechSite.Custom.ExtendedSelectListItem>)@ViewBag.priority2, null, new { @class = "form-control" })
+
+           <br />
 
             @Html.Label("Ważna do")
-            @Html.TextBox("ValidEnd", null, new { @type = "Date", @class = "form-control" })
+            @Html.TextBox("ValidEnd", null, new { @type = "Date", @class = "form-control"})
 
     <br />
     <input type="submit" name="Send.Action" value="Wyślij" class="btn btn-default" />
@@ -79,9 +96,8 @@
     <table class="table">
         <tr>
             <th>
-                Wybierz
-            </th>
-            <th>
+                <input type="checkbox" name="actionChkSel" id="actionChkSel" onchange="checkboxSelAll()" /> 
+          
                 @Html.DisplayNameFor(model => model.Resource.Name)
             </th>
             <th>
@@ -112,13 +128,13 @@
 
                     @if (item.Selected2)
                     {
-                        <input type="checkbox" name="actionChk" value="@item.Resource.Id" checked />   }
+                        <input type="checkbox" name="actionChk" id="actionChk_@item.Resource.Id" value="@item.Resource.Id" checked />   }
                     else
                     {
-                        <input type="checkbox" name="actionChk" value="@item.Resource.Id" />  }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Resource.Name)
+                        <input type="checkbox" name="actionChk" id="actionChk_@item.Resource.Id"  value="@item.Resource.Id" />  }
+                @*</td>
+                <td>*@
+                    @Html.Label("actionChk_"+@item.Resource.Id, item.Resource.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Resource.No)

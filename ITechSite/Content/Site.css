@@ -19,7 +19,8 @@
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
-textarea {
+textarea,
+button {
     max-width: 280px;
 }/*.btn-default*/
 
@@ -71,6 +72,7 @@ textarea {
 .text-Red
 {
     background-color: #BC0B0B;
+    color: lightgray;
 }
 
 .text-Green

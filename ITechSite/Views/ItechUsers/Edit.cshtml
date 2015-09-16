@@ -83,7 +83,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Desc, "Opis", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Desc, new { htmlAttributes = new { @class = "form-control"})
                 @Html.ValidationMessageFor(model => model.Desc, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -102,7 +102,10 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Zapisz" class="btn btn-default" />
+                <button type="submit" class="btn btn-primary btn-block">
+                    <span class="glyphicon glyphicon-save"></span> Zapisz
+                </button>
+                @*<input type="submit" value="Zapisz" class="btn btn-primary btn-block"/>*@
             </div>
         </div>
         <hr />
@@ -129,13 +132,14 @@
 }
 
 <div class="form-group">
-    @Html.Label("", "              Grupy robocze", htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.Label("", "Grupy robocze", htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="col-md-10">
         @{string g = string.Empty; }
         @foreach (var item in Model.AspNetRoles)
         {
             g = g + item.Name + "; ";
         }
+
         @Html.Label("", g, htmlAttributes: new { @class = "form-label" })
         
     </div>

@@ -74,12 +74,15 @@ namespace ITechSite.Models.Repository
         {
             var u = GetUser(id);
             u.AspNetRoles.Clear();
-            foreach (var item in SelectedRoles)
+            if (SelectedRoles!=null)
             {
-                var r = _dataContex.AspNetRoles.Find(item);
-                if (r!=null)
+                foreach (var item in SelectedRoles)
                 {
-                    u.AspNetRoles.Add(r);
+                    var r = _dataContex.AspNetRoles.Find(item);
+                    if (r != null)
+                    {
+                        u.AspNetRoles.Add(r);
+                    }
                 }
             }
             _dataContex.SaveChanges();

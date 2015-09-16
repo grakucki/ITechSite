@@ -50,7 +50,7 @@ namespace ITechSite.Models
         [DisplayName("Typ pliku")]
         public string FileType { get; set; }
 
-        [DisplayName("Opis")]
+        [DisplayName("Nazwa wyświetlana")]
         public string Description { get; set; }
 
         [DisplayName("Aktywny od")]

@@ -252,6 +252,7 @@
     <Compile Include="CustomResults\ValidDateTimeStringAttribute.cs" />
     <Compile Include="CustomResults\XmlResult.cs" />
     <Compile Include="CustomResults\SqlFileStreamResult.cs" />
+    <Compile Include="Custom\ExtendedSelectListItem.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

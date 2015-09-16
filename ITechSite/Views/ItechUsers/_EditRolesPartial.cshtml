@@ -1,14 +1,32 @@
 ﻿@model ITechSite.Models.ItechUsers
 
+
+<script type="text/javascript" src="~/Scripts/Itech.js"></script>
+<script type="text/javascript">
+    $(function () {
+        InitModal();
+    });
+</script>
+
+
+
+<button type="button" data-toggle="modal" data-target="#myModal2" id="@Model.id" class="btn btn-success btn-block someclass">Zmień grupy robocze</button>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content2">Proszę czekać ... CONTENT</div>
+    </div>
+</div>
+
+
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+@*<button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">
     Zmień grupy robocze
-</button>
+</button>*@
 
 
 
 <!-- Modal -->
-@using (Html.BeginForm("EditRole", "ItechUsers"))
+@*@using (Html.BeginForm("EditRole", "ItechUsers"))
 {
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
@@ -44,4 +62,4 @@
         </div>
     </div>
 </div>
-}
+}*@
