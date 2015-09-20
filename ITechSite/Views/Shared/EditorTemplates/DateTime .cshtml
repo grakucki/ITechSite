@@ -1,0 +1,13 @@
+﻿@inherits System.Web.Mvc.WebViewPage<System.DateTime>
+
+<script type='text/javascript'>
+    $(document).ready(function() {
+        $(".datePicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd",
+        });
+    });
+</script>
+
+@Html.TextBox("", (Model.ToShortDateString()), new { @class = "datePicker form-control ala" })

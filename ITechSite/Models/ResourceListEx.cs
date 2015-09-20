@@ -71,8 +71,9 @@ namespace ITechSite.Models
           AvailableWorkPorcess = _repository.GetWorkProcessBy(Factory, Department).ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Name });
           AvailableWorkstation = _repository.GetWorkstationBy(Factory, Department, WorkProcess, string.Empty, true).ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Id.ToString() });
 
-          
 
+
+          Find_ResourceType = "Stanowisko";
           var Resources2 = _repository.GetResourcesBy(Factory, Department, WorkProcess, Find_ResourceType,Find_Word, Workstation, false);
           Resources = Resources2.ToPagedList(page ?? 1, 50);
       }

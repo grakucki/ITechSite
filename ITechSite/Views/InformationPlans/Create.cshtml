@@ -6,71 +6,81 @@
 }
 
 <div class="row form-content">
+    @{ViewBag.Title = "Dodaj dokumenty do stanowiska";}
     @if (Model.ResourceModel != null)
     {
-        if (Model.ResourceModel.Type == 1)
+        if (Model.ResourceModel.Type == 2)
         {
-            <h4>Dodaj dokumenty do stanowiska</h4>
-        }
-        else if (Model.ResourceModel.Type == 2)
-        {
-            <h4>Dodaj dokumenty do modelu</h4>
+            ViewBag.Title = "Dodaj dokumenty do modelu";
         }
         else if (Model.ResourceModel.Type == 3)
         {
-            <h4>Dodaj dokument do wariantu modelu</h4>
+            ViewBag.Title = "Dodaj dokument do wariantu modelu";
         }
         else
         {
-            <h4>Dodaj dokument do planu informacyjnego</h4>
+            ViewBag.Title = "Dodaj dokument do planu informacyjnego";
         }
     }
-    <div class="form-group">
-        @Html.LabelFor(model => model.IdM, Model.Resource.ResourceType.Type, htmlAttributes: new { @class = "" }):
-        <label style="font-size: larger">@Model.Resource.Name</label>
-        @Html.DisplayFor(m => m.Resource.WorkProcess) @Html.DisplayFor(m => m.Resource.Description)
+    <div class="col-md-4">
+        <h3>@ViewBag.Title</h3>
     </div>
-    @if (Model.ResourceModel != null)
-    {
-        if (Model.ResourceModel.ResourceType.id != 1)
+    <div class="col-md-8">
+        <div class="form-group ">
+            @Html.LabelFor(model => model.IdM, Model.Resource.ResourceType.Type, htmlAttributes: new { @class = "control-label" }):
+            <label style="font-size: xx-large">@Model.Resource.Name</label>
+            @Html.DisplayFor(m => m.Resource.WorkProcess) @Html.DisplayFor(m => m.Resource.Description)
+        </div>
+        @if (Model.ResourceModel != null)
         {
-            <div class="form-group">
-                @Html.LabelFor(model => model.IdM, Model.ResourceModel.ResourceType.Type, htmlAttributes: new { @class = "" }):
-                <label style="font-size: larger ">@Model.ResourceModel.Name</label>
-                @Html.DisplayFor(m => m.ResourceModel.Description)
-            </div>
+            if (Model.ResourceModel.ResourceType.id != 1)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdM, Model.ResourceModel.ResourceType.Type, htmlAttributes: new { @class = "" }):
+                    <label style="font-size: xx-large ">@Model.ResourceModel.Name</label>
+                    @Html.DisplayFor(m => m.ResourceModel.Description)
+                </div>
+            }
         }
-    }
-</div>
+    </div>
+    </div>
 Aktualna lista plików:
 <div class="row">
     @foreach (var item in Model.IncludeDoc)
     {
         <div class="col-md-3">
             <div class="file-content">
-                @Html.Label("", item.Dokument.FileName, htmlAttributes: new { @class = "control-label" })<br />
-                @item.Dokument.Description
-                <div>
-                    @Html.ActionLink("usuń", "Delete", new { id = item.id })
+                <div class="pull-right">
+                    @Html.ActionLinkGlyphicon("", "Delete", new { id = item.id }, "glyphicon-trash")
+                    @*@Html.ActionLink("usuń", "Delete", new { id = item.id })*@
                 </div>
+                <div class="pull-left">
+                    @Html.ActionLinkGlyphicon("", "Show", "Dokuments", new { id = item.IdD }, new { target = "_blank" }, "glyphicon-picture")<br />
+                    
+                    @*@Html.ActionLink("usuń", "Delete", new { id = item.id })*@
+                </div>
+
+                @Html.Label("", item.Dokument.FileName, htmlAttributes: new { @class = "control-label" })<br />
+                @item.Dokument.Description<br />
+                @Html.Label("", item.Dokument.Kategoria_Id.ToString(), htmlAttributes: new { @class = "text-success" })
             </div>
         </div>
     }
 </div>
     <hr />
-@using (Html.BeginForm())
-        {
-    @Html.AntiForgeryToken()
-
 <div class="row">
-    <div class="col-md-5">
+    @using (Html.BeginForm(null, null, FormMethod.Post, new {id="AddDocForm"}))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-5">
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.Hidden("idR", null, htmlAttributes: new { @class = "form-control" })
 
                 @if (Model.ResourceModel != null)
                 {
-                    if (Model.ResourceModel.ResourceType.id == 2)
+                    if (Model.ResourceModel.ResourceType.id > 1)
                     {
                         @Html.Hidden("idM", null, htmlAttributes: new { @class = "form-control" })
                     }
@@ -84,25 +94,27 @@ Aktualna lista plików:
                 <div class="form-group">
                     @Html.LabelFor(model => model.Kategorie_Id, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("Kategorie_Id", (SelectList)ViewBag.Kategoria_Id, htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownList("Kategorie_Id", (SelectList)ViewBag.Kategoria_Id, "*", new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.WorkProcess, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.DropDownListFor(model => model.WorkProcess, Model.AvalibleWorkProcess, htmlAttributes: new { @class = "form-control" })
-                        <input type="submit" name="FindAction" value="Szukaj" class="btn btn-default" style=" width : 300px " />
+                        <button type="submit" name="FindAction" value="Szukaj" class="btn btn-default btn-block">
+                            @Html.SpanGlyphicon("", "glyphicon-search") Szukaj
+                        </button>
+                        @*<input type="submit" name="FindAction" value="Szukaj" class="btn btn-default btn-block"/>*@
                     </div>
                 </div>
 
-
                 @*<div class="form-group">
-                    @Html.LabelFor(model => model.IdD, "Dokument", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.ListBox("IdD", null, htmlAttributes: new { @class = "form-control" })
-                        @Html.ValidationMessageFor(model => model.IdD, "", new { @class = "text-danger" })
-                    </div>
-                </div>*@
+                        @Html.LabelFor(model => model.IdD, "Dokument", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.ListBox("IdD", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.IdD, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
 
                 <div class="form-group" hidden="hidden">
                     @Html.LabelFor(model => model.Order, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -112,23 +124,35 @@ Aktualna lista plików:
                     </div>
                 </div>
 
-                
+
             </div>
-    </div>
-    <div class="col-md-4">
-        <input type="submit" value="Dodaj dokument do planu" class="btn btn-default" style=" width : 300px" />
-        @Html.LabelFor(model => model.IdD, "Dostępne dokumenty", htmlAttributes: new { @class = "control-label" })
-        <br />
-        @Html.ListBox("IdD", null, htmlAttributes: new { @class = "form-fullH form-control" })
+        </div>
+        <div class="col-md-4">
+            @using ITechSite.Custom
+            <button type="submit" value="AddDoc" name="FindAction" class="btn btn-success btn-block">
+                @Html.SpanGlyphicon("", "glyphicon-file")@Html.SpanGlyphicon("", "glyphicon-send") Wyślij dokument
+            </button>
+
+            @*<input type="submit" value="Dodaj dokument do planu" class="btn btn-success btn-block" />*@
+            @Html.LabelFor(model => model.IdD, "Dostępne dokumenty", htmlAttributes: new { @class = "control-label" })
+            <br />
+            @Html.ListBox("IdD", null, htmlAttributes: new { @class = "form-fullH form-control" })
+        </div>
+    }
+
+    <div class="col-md-3">
+            @Html.Label("File", "Dodaj z pliku", htmlAttributes: new { @class = "control-label col-md-2" })
+                @*<input type="file" name="File" id="File" value="" class="btn btn-primary">*@
+                @Html.Partial("_DropZonePartial")
     </div>
 </div>
-        }
-<div>
-    @Html.ActionLink("Powrót", "Edit2")
-    @*@Html.ActionLink("Powrót", null, null, null, new { href = Request.UrlReferrer })*@
+    <div>
+        <hr />
+        @Html.ActionLink("Powrót", "Edit2")
+        @*@Html.ActionLink("Powrót", null, null, null, new { href = Request.UrlReferrer })*@
 
-</div>
+    </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

@@ -22,6 +22,42 @@ namespace ITechSite.Models.Repository
             _dataContex = new ITechEntities(0);
         }
 
+        public DokumentRepository(ITechEntities dataContex)
+        {
+            _dataContex = dataContex;
+        }
+
+        public int? CreateDoc(Dokument dokument)
+        {
+            if (_dataContex == null)
+                return null;
+
+            dokument.LastWriteTime = DateTime.Now;
+            dokument.FileType = Path.GetExtension(dokument.FileName);
+            if (dokument.File != null)
+            {
+                long i = dokument.File.Length;
+                var fc = new FileContent();
+                fc.CodeName = dokument.CodeName;
+                byte[] c = { 0 };
+                fc.Content = c;
+                fc.FileID = Guid.NewGuid();
+                dokument.FileContent.Add(fc);
+
+                _dataContex.Dokument.Add(dokument.GetDokument());
+                _dataContex.SaveChanges();
+
+                // zapisz plik
+                FileData uploadData = new FileData();
+                uploadData.Name = dokument.CodeName;
+                uploadData.File = dokument.File;
+                var fileRepository = new DBFile();
+                fileRepository.Save(uploadData, fc.FileID);
+                return dokument.Id;
+            }
+            return null;
+        }
+
         public List<Kategorie> GetKategorie(bool AddEmpty = true)
         {
             var kat = new List<Kategorie>();
@@ -59,7 +95,7 @@ namespace ITechSite.Models.Repository
         public IList<InformationPlan> IncludeInformationPlainDoc(int? idW, int? idM)
         {
             var query = _dataContex.InformationPlan.AsQueryable();
-            if (idM.HasValue)
+            if (idM.HasValue && idM!=0)
                 query = query.Where(m => m.idR == idW && m.IdM==idM);
             else
                 query = query.Where(m => m.idR == idW);
@@ -70,6 +106,7 @@ namespace ITechSite.Models.Repository
         public IList<Dokument> GetAvalibleDoc(int IdR, int? IdM, string WorkProcess, string filter, int? kategoriaId)
         {
             var query = _dataContex.Dokument.AsQueryable();
+  
 
             query = query.Where(m => m.Enabled == true);
 

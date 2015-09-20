@@ -11,6 +11,7 @@ using System.Web.Routing;
 using System.IO;
 using System.Xml;
 using System.Runtime.Serialization;
+using ITechSite.Models.Repository;
 
 namespace ITechSite.Controllers
 {
@@ -116,7 +117,10 @@ namespace ITechSite.Controllers
             ViewBag.idM = new SelectList(db.Resource.Where(m => m.Id == IdM), "Id", "Name", IdM);
 
             var repo = new ITechSite.Models.Repository.DokumentRepository();
-            ViewBag.Kategoria_Id = new SelectList(repo.GetKategorie(), "id", "name", ipm.Kategorie_Id);
+            ViewBag.Kategoria_Id = new SelectList(repo.GetKategorie(false), "id", "name", ipm.Kategorie_Id);
+            ViewBag.WorkProcess = new SelectList(repo.GetWorkProcessAll(false), "Name", "Name", ipm.WorkProcess);
+
+
             if (string.IsNullOrEmpty(ipm.WorkProcess))
                 ipm.WorkProcess = ipm.Resource.WorkProcess;
             ipm.AvalibleWorkProcess = repo.GetWorkProcessAll().ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Name });
@@ -137,15 +141,7 @@ namespace ITechSite.Controllers
             var informationPlan = new InformationPlanModels();
             informationPlan.idR = IdR;
             informationPlan.IdM = IdM;
-
-            if (!informationPlan.IdM.HasValue)
-                informationPlan.IdM = informationPlan.idR;
-
-            if (informationPlan.idR == 0)
-                informationPlan.idR = informationPlan.IdM.Value;
-
-
-
+            
             Create_FillData(informationPlan);
 
             return View(informationPlan);
@@ -159,16 +155,11 @@ namespace ITechSite.Controllers
 //        public ActionResult Create([Bind(Include = "IdR,IdD,Order")] InformationPlan informationPlan)
         public ActionResult Create([Bind(Include = "IdR,IdD,IdM,Order,FindAction,CodeName,WorkProcess,Kategorie_Id")] InformationPlanModels informationPlan)
         {
-            if (!informationPlan.IdM.HasValue)
-                informationPlan.IdM = informationPlan.idR;
-
-            if (informationPlan.idR == 0)
-                informationPlan.idR = informationPlan.IdM.Value;
 
             if (ModelState.IsValid)
             {
 
-                if (string.IsNullOrEmpty(informationPlan.FindAction))
+                if (!string.IsNullOrEmpty(informationPlan.FindAction) && informationPlan.FindAction=="AddDoc")
                 {
                     if (informationPlan.IdD != 0)
                     {
@@ -178,8 +169,6 @@ namespace ITechSite.Controllers
                         ip.IdD = informationPlan.IdD;
                         ip.IdM = informationPlan.IdM;
                         ip.idR = informationPlan.idR;
-
-
                         ip.Order = informationPlan.Order;
                         db.InformationPlan.Add(ip);
                         db.SaveChanges();
@@ -277,7 +266,7 @@ namespace ITechSite.Controllers
 
             db.InformationPlan.Remove(informationPlan);
             db.SaveChanges();
-            return RedirectToAction("Create", new { IdR= idr, IdM=idm });
+            return RedirectToAction("Create", new { IdR= idr });
         }
 
         // POST: InformationPlans/Delete/5
@@ -290,6 +279,126 @@ namespace ITechSite.Controllers
         //    db.SaveChanges();
         //    return RedirectToAction("Index");
         //}
+
+
+
+          
+        private bool JoinInsforamtionPlain(Nullable<int>IdR,Nullable<int> IdD,Nullable<int> IdM)
+        {
+              if (IdR != null)
+                if (IdD != null)
+                {
+                    var exist = db.InformationPlan.Where(m => m.IdD == IdD.Value && m.idR == IdR.Value && m.IdM == IdM).Any();
+                    if (!exist)
+                    {
+                        InformationPlan ip = new InformationPlan();
+                        ip.Enabled = true;
+                        ip.Order = 0;
+                        ip.idR = IdR.Value;
+                        ip.IdD = IdD.Value;
+                        ip.IdM = IdM;
+
+
+                        db.InformationPlan.Add(ip);
+                        db.SaveChanges();
+                    }
+                    return true;
+                }
+              return false;
+
+        }
+
+
+        private int? FindDocByName(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+                return null;
+
+            var idd = db.Dokument.Where(m => m.FileName == fileName).FirstOrDefault();
+            if (idd == null)
+                return null;
+            return idd.Id;
+        }
+
+
+        public ActionResult FileExist(string FileName, Nullable<int>IdR,Nullable<int> IdM)
+        {
+            string fName = FileName;
+            bool isExists = true;
+
+            int? IdD = FindDocByName(FileName);
+
+            if (IdD!=null)
+                JoinInsforamtionPlain(IdR, IdD, IdM);
+            else
+                isExists = false;
+                       
+            return Json(new { FileExist = isExists });
+        }
+
+     
+
+
+        public ActionResult SaveUploadedFile(string FileName, string Desc, int Kategorie_Id, string WorkProcess, string Nrinstrukcji, string Keywords, Nullable<int>IdR,Nullable<int> IdM)
+        {
+            bool isSavedSuccessfully = true;
+            string fName = "";
+            // Zapisz plik
+            try
+            {
+                if (Request.Files.Count > 1)
+                    throw new Exception("Można przesłać tylko 1 plik.");
+
+                foreach (string item in Request.Files)
+                {
+                    HttpPostedFileBase Httpfile = Request.Files[item];
+                    //Save file content goes here
+                    if (Httpfile != null && Httpfile.ContentLength > 0)
+                    {
+                        Dokument doc = new Dokument();
+                        doc.FileName = Httpfile.FileName;
+                        doc.Description = Desc;
+                        doc.Kategoria_Id = Kategorie_Id;
+                        doc.WorkProcess =  db.WorkProcess.Where(m=>m.Name==WorkProcess).First();
+                        doc.CodeName = Nrinstrukcji;
+                        doc.Keywords = Keywords;
+                        doc.ValidDtmOn = DateTime.Now.Date;
+                        doc.ValidDtmOff = null;
+                        doc.Enabled = true;
+
+                        doc.File= Httpfile.InputStream;
+                        var rep = new DokumentRepository(db);
+                        var idd = rep.CreateDoc(doc);
+                        JoinInsforamtionPlain(IdR, idd, IdM);
+                    }
+                    break;
+                }
+            }
+            catch (Exception ex)
+            {
+                //Response.StatusCode = 500;
+                //Response.StatusDescription = ex.Message;
+                isSavedSuccessfully = false; 
+                
+                Response.StatusCode = 400;
+                Response.ContentType = "text/plain";
+                return Content(ex.Message);
+            }
+
+
+            if (isSavedSuccessfully)
+            {
+                return Json(new { Message = fName });
+            }
+            else
+            {
+                //return Json(new { Message = "Error in saving file" });
+                //return Json(new { error = "File could not be saved.", Message = "fName" });
+                Response.StatusCode = 400;
+                Response.ContentType = "text/plain";
+                return Content("File could not be saved.");
+            }
+        }
 
         protected override void Dispose(bool disposing)
         {

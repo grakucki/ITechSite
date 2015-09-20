@@ -2,16 +2,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@{
+    string thisAction = ViewContext.RouteData.Values["action"].ToString();
+}
 
-<div class="navbar-collapse collapse">
+<nav class="navbar nav-tabs">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Użytkownicy :</a>
+        </div>
+        <div>
+            <ul class="nav nav-pills">
+                <li class="@(thisAction == "Index" ? "active" : "")">@Html.ActionLink("Operatorzy", "Index", "ItechUsers", new { area = "" }, null)</li>
+                <li class="@(thisAction == "Import" ? "active" : "")">@Html.ActionLink("Import Operatorów", "Import", "ItechUsers", new { area = "" }, null)</li>
+                <li class="@(thisAction == "Accounts" ? "active" : "")">@Html.ActionLink("Konta panelu administracyjnego", "Accounts", "ItechUsers", new { area = "" }, null)</li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+@*<div class="navbar-collapse collapse">
     
     <ul class="nav navbar-nav">
-        <li>@Html.ActionLink("Użytkownicy :", "")</li>
-        <li>@Html.ActionLink("Zarządzaj", "Index", "ItechUsers", new { area = "" }, null)</li>
-        <li>@Html.ActionLink("Importuj", "Import", "ItechUsers", new { area = "" }, null)</li>
-        <li>@Html.ActionLink("Konta", "Accounts", "ItechUsers", new { area = "" }, null)</li>
+        <li class="active">@Html.ActionLink("Użytkownicy :", "")</li>
+        <li>@Html.ActionLink("Operatorzy", "Index", "ItechUsers", new { area = "" }, null)</li>
+        <li>@Html.ActionLink("Import Operatorów", "Import", "ItechUsers", new { area = "" }, null)</li>
+        <li>@Html.ActionLink("Konta panelu", "Accounts", "ItechUsers", new { area = "" }, null)</li>
     </ul>
-</div>
+</div>*@
     <div>
         @RenderBody()
     </div>

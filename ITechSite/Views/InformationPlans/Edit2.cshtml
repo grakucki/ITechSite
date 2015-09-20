@@ -80,7 +80,15 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.ActionLink("Dokumenty", "Create", new { idM = item.Id, idR = Model.Workstation })
+                @if (item.ResourceType.id == 1)
+                {
+                    @Html.ActionLink("Dokumenty", "Create", new { idR = item.Id })
+                }
+                else
+                { 
+                    @Html.ActionLink("Dokumenty", "Create", new { idM = item.Id, idR = Model.Workstation })
+                }
+                    @*@Html.ActionLink("Dokumenty", "Create", new { idM = item.Id, idR = Model.Workstation })*@
             </td>
             
         </tr>

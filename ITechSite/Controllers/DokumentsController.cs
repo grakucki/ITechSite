@@ -270,6 +270,9 @@ namespace ITechSite.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Dokument dokument = db.Dokument.Find(id);
+            if (dokument.InformationPlan.Count() > 0)
+                ViewBag.DontDelete = "Nie można usunąć tego dokumentu. Jest on używany w prezentacjach. Usuń dokument z prezentacji i spróbuj ponownie";
+
             if (dokument == null)
             {
                 return HttpNotFound();
@@ -284,6 +287,11 @@ namespace ITechSite.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Dokument dokument = db.Dokument.Find(id);
+            var doks = dokument.FileContent.ToList();
+            foreach (var item in doks)
+            {
+                db.FileContent.Remove(item);
+            }
             db.Dokument.Remove(dokument);
             db.SaveChanges();
             return RedirectToAction("Index");

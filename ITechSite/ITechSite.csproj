@@ -252,6 +252,7 @@
     <Compile Include="CustomResults\ValidDateTimeStringAttribute.cs" />
     <Compile Include="CustomResults\XmlResult.cs" />
     <Compile Include="CustomResults\SqlFileStreamResult.cs" />
+    <Compile Include="Custom\NestedActionLink.cs" />
     <Compile Include="Custom\ExtendedSelectListItem.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -543,6 +544,15 @@
     <Content Include="Content\images\right2.pdn" />
     <None Include="Properties\PublishProfiles\insofter.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\build.js" />
+    <Content Include="Scripts\dropzone\basic.css" />
+    <Content Include="Scripts\dropzone\basic.min.css" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="Scripts\dropzone\dropzone.css" />
+    <Content Include="Scripts\dropzone\dropzone.js" />
+    <Content Include="Scripts\dropzone\dropzone.min.css" />
+    <Content Include="Scripts\dropzone\dropzone.min.js" />
     <Content Include="Scripts\Itech.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -918,6 +928,10 @@
     <Content Include="Views\ItechUsers\ShowRoles.cshtml" />
     <Content Include="Scripts\ui\.jshintrc" />
     <Content Include="Views\News\Test.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\EmailAddress.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\form-label.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime .cshtml" />
+    <Content Include="Views\InformationPlans\_DropZonePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -3,27 +3,13 @@
 @{
     ViewBag.Title = "Wiadomości";
 
-    <link href="~/Scripts/themes/base/jquery.ui.all.css" rel="stylesheet" />
-    <script src="~/Scripts/ui/jquery.ui.core.js"></script>
-    <script src="~/Scripts/ui/jquery.ui.widget.js"></script>
-    <script src="~/Scripts/ui/jquery.ui.datepicker.js"></script>
-
-    <script>
-    $(function () {
-        $("#ValidEnd").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            dateFormat: "yy-mm-dd",
-        });
-    });
-    </script>
-
-    <script type="text/javascript" src="~/Scripts/Itech.js"></script>
-    <script type="text/javascript">
-        $(function () {
+    
+    @*<script type="text/javascript">
+        $(document).ready((function () {
             OptionChangeCss("priority");
-        });
-    </script>
+            AddDatePicker("#ValidEnd")
+        }));
+    </script>*@
     
 }
 
@@ -56,122 +42,152 @@
     };
 </script>
 
-
-@using (Html.BeginForm())
-{
-    <div>
+<div class="container">
+    @using (Html.BeginForm())
+    {
         <p>
             @Html.ValidationMessage("Error", new { @class = "text-danger" })
         </p>
 
         <p>
             @Html.Label("Treść wiadomości")
-            @Html.TextBox("NewNews", null, new { @class = "form-control text-News" })
+            @Html.TextBox("NewNews", null, new { @class = "form-control text-News", placeholder="Tekst wiadomości"})
         </p>
-        <p>
-            @Html.Label("priority","Priorytet")
-            @*@Html.DropDownList("priority1", null, htmlAttributes: new { @class = "form-control" })*@
 
+        <div class="form-inline">
+            <div class="form-group">
+                @Html.Label("priority", "Priorytet")
+                @Html.ExtendedDropDownListFor("priority", (IEnumerable<ITechSite.Custom.ExtendedSelectListItem>)@ViewBag.priority2, null, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Ważna do")
+                @Html.TextBox("ValidEnd", null, new { @type = "Date", @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <button type="submit" name="Send.Action" value="Wyślij" class="btn btn-primary btn-lg">
+                    <span class="glyphicon glyphicon-send"></span> Wyślij
+                </button>
+            </div>
+            @*<hr />
+            <div class="form-group">
+                @Html.Label("Nazwa ")
+                @Html.TextBox("Nazwa", null, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.Label("Proces")
+                @Html.DropDownList("priority", null, "Wszystkie", new { @class = "form-control" } )
+            </div>
+            <div class="form-group">
+                <button type="submit" name="Send.Find" value="Szukaj" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-search"></span> Szukaj
+                </button>
+            </div>*@
+        </div>
+        <hr />
+        @*<div>
+            <p>
+                @Html.ValidationMessage("Error", new { @class = "text-danger" })
+            </p>
 
-            @*<select id="package" class="form-control">
-                <option value="1" class="text-Green">Pozytywne</option>
-                <option value="2" class="text-Red">Neutralny</option>
-                <option value="3" class="text-Orange">Ważny</option>
-            </select>
-            <br />*@
-            
-            @*@Html.DropDownList("priority", x, "-select-")*@
-            @Html.ExtendedDropDownListFor("priority", (IEnumerable<ITechSite.Custom.ExtendedSelectListItem>)@ViewBag.priority2, null, new { @class = "form-control" })
+            <p>
+                @Html.Label("Treść wiadomości")
+                @Html.TextBox("NewNews", null, new { @class = "form-control text-News" })
+            </p>
+            <p>
+                @Html.Label("priority", "Priorytet")
+                @Html.ExtendedDropDownListFor("priority", (IEnumerable<ITechSite.Custom.ExtendedSelectListItem>)@ViewBag.priority2, null, new { @class = "form-control" })
+            </p>
+            <p>
+                @Html.Label("Ważna do")
+                @Html.TextBox("ValidEnd", null, new { @type = "Date", @class = "form-control" })
+            </p>
+            <p>
+                <button type="submit" name="Send.Action" value="Wyślij" class="btn btn-default btn-block">
+                    <span class="glyphicon glyphicon-send"></span> Wyślij
+                </button>
+            </p>
+        </div>*@
 
-           <br />
+        <table class="table">
+            <tr>
+                <th>
+                    <input type="checkbox" name="actionChkSel" id="actionChkSel" onchange="checkboxSelAll()" />
 
-            @Html.Label("Ważna do")
-            @Html.TextBox("ValidEnd", null, new { @type = "Date", @class = "form-control"})
+                    @Html.DisplayNameFor(model => model.Resource.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Resource.No)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Resource.WorkProcess)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Resource.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Resource.News.News1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Resource.News.ValidEnd)
+                </th>
+                <th></th>
+            </tr>
 
-    <br />
-    <input type="submit" name="Send.Action" value="Wyślij" class="btn btn-default" />
-    </p>
-    </div>
+            @foreach (ITechSite.Models.SelectedResources item in Model)
+            {
+                //var rowcss = "text-Red";
+                var rowcss = GetRowCss(item);
+                <tr class="@rowcss">
+                    <td>
+                        @*@Html.CheckBox("actionChk", @item.Selected2, new { value = @item.Resource.Id})*@
 
-    <table class="table">
-        <tr>
-            <th>
-                <input type="checkbox" name="actionChkSel" id="actionChkSel" onchange="checkboxSelAll()" /> 
-          
-                @Html.DisplayNameFor(model => model.Resource.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resource.No)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resource.WorkProcess)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resource.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resource.News.News1)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resource.News.ValidEnd)
-            </th>
-            <th></th>
-        </tr>
+                        @if (item.Selected2)
+                        {
+                            <input type="checkbox" name="actionChk" id="actionChk_@item.Resource.Id" value="@item.Resource.Id" checked />   }
+                        else
+                        {
+                            <input type="checkbox" name="actionChk" id="actionChk_@item.Resource.Id" value="@item.Resource.Id" />  }
+                        @*</td>
+                            <td>*@
+                        @Html.Label("actionChk_" + @item.Resource.Id, item.Resource.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Resource.No)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Resource.WorkProcess)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Resource.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Resource.News.News1)
+                    </td>
 
-        @foreach (ITechSite.Models.SelectedResources item in Model)
-        {
-            //var rowcss = "text-Red";
-            var rowcss = GetRowCss(item);
-            <tr class="@rowcss">
-                <td>
-                    @*@Html.CheckBox("actionChk", @item.Selected2, new { value = @item.Resource.Id})*@
-
-                    @if (item.Selected2)
+                    @if (item.Resource.News != null && item.Resource.News.ValidEnd.HasValue && item.Resource.News.ValidEnd.Value < DateTime.Now)
                     {
-                        <input type="checkbox" name="actionChk" id="actionChk_@item.Resource.Id" value="@item.Resource.Id" checked />   }
+                        <td style="color:white; background-color:darkgray; text-decoration:line-through">
+                            @Html.DisplayFor(modelItem => item.Resource.News.ValidEnd)
+                        </td>
+                    }
                     else
                     {
-                        <input type="checkbox" name="actionChk" id="actionChk_@item.Resource.Id"  value="@item.Resource.Id" />  }
-                @*</td>
-                <td>*@
-                    @Html.Label("actionChk_"+@item.Resource.Id, item.Resource.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Resource.No)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Resource.WorkProcess)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Resource.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Resource.News.News1)
-                </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Resource.News.ValidEnd)
+                        </td>
+                    }
 
-                @if (item.Resource.News != null && item.Resource.News.ValidEnd.HasValue && item.Resource.News.ValidEnd.Value < DateTime.Now)
-                {
-                    <td style="color:white; background-color:darkgray; text-decoration:line-through">
-                        @Html.DisplayFor(modelItem => item.Resource.News.ValidEnd)
-                    </td>
-                }
-                else
-                {
+
+
                     <td>
-                        @Html.DisplayFor(modelItem => item.Resource.News.ValidEnd)
+                        @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
                     </td>
-                }
+                </tr>
+            }
 
 
-
-                <td>
-                    @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-                </td>
-            </tr>
-        }
-
-
-    </table>
-}
+        </table>
+    }
+</div>

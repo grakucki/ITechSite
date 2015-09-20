@@ -109,3 +109,9 @@ function InitModal() {
     });
 
 };
+
+function AddDatePicker(control)
+{
+    $(control).datepicker({ changeMonth: true, changeYear: true, dateFormat: "yy-mm-dd" });
+    //$("#ValidEnd").datepicker({ changeMonth: true, changeYear: true, dateFormat: "yy-mm-dd" });
+};

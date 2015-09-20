@@ -36,9 +36,10 @@ namespace ITechSite.Models
     {
         [DisplayName("Nazwa pliku")]
         [Required]
+        [Unique]
         public string FileName { get; set; }
 
-        [DisplayName("Nazwa kodowa")]
+        [DisplayName("Numer instrukcji")]
         public string CodeName { get; set; }
 
         [DisplayName("Zmodyfikowany")]
@@ -61,7 +62,7 @@ namespace ITechSite.Models
         [DataType(DataType.Date)]
         public Nullable<System.DateTime> ValidDtmOff { get; set; }
 
-        [DisplayName("Proces roboczy id")]
+        [DisplayName("Proces roboczy")]
         [IsNoFilterValue]
         public Nullable<int> WorkProcess_Id { get; set; }
 

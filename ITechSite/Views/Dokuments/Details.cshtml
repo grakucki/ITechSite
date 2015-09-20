@@ -130,16 +130,24 @@
             </dt>
 
             <dd>
-                <table>
+                <table class="table table-hover">
                     @if (Model.InformationPlan.FirstOrDefault() != null)
                     {
-                        foreach (var item in Model.InformationPlan.OrderBy(m=>m.Order))
+                        <tr>
+                            <th>Stanowisko</th>
+                            <th>Typ</th>
+                            <th>Opis</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        foreach (var item in Model.InformationPlan.OrderBy(m => m.Order))
                         {
                             <tr>
                                 <td>@Html.DisplayFor(modelItem => item.Resource.Name)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Resource.ResourceType.Type)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Resource.Enabled)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Resource.Description)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ResourceModel.Name)</td>
+
                                 <td>@Html.ActionLink("Szczegóły", "Details", "Resources", new { id = item.idR }, null)</td>
                             </tr>
                         }
@@ -149,8 +157,11 @@
 </dl>
 </div>
 <p>
-    @Html.ActionLink("Pobierz", "Download", new { id = Model.Id }) |
-    @Html.ActionLink("Pokaż", "Show", new { id = Model.Id }, new { target = "_blank" }) |
-    @Html.ActionLink("Edytuj", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Powrót do listy", "Index")
+    @using ITechSite.Custom
+    @Html.ActionLinkGlyphicon("Pobierz", "Download", new { id = Model.Id }, "glyphicon-download-alt") |
+    @Html.ActionLinkGlyphicon("Pokaż", "Show", null, new { id = Model.Id }, new { target = "_blank" }, "glyphicon-picture") |
+    @Html.ActionLinkGlyphicon("Edytuj", "Edit", new { id = Model.Id }, "glyphicon-edit") |
+    @Html.ActionLinkGlyphicon("Powrót do listy", "Index", null, "glyphicon-list-alt")
+
+  
 </p>

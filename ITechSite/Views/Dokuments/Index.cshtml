@@ -27,7 +27,10 @@
             @Html.LabelFor(model => model.WorkProcess, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("WorkProcess", (SelectList)ViewBag.WorkProcess, htmlAttributes: new { @class = "form-control" })
-                <input type="submit" name="FindAction" value="Szukaj" class="btn btn-default-big" />
+                @*<input type="submit" name="FindAction" value="Szukaj" class="btn btn-default-big" />*@
+                <button type="submit" name="FindAction" value="Szukaj" class="btn btn-default btn-block">
+                    <span class="glyphicon glyphicon-search"></span> Szukaj
+                </button>
             </div>
         </div>
      </div>
@@ -58,9 +61,7 @@
         </th>
         <th>
             Data aktywności początek
-        </th>
-        <th>
-            Data aktywności koniec
+            /koniec
         </th>
         <th>
             Proces roboczy
@@ -96,8 +97,7 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.ValidDtmOn)
-        </td>
-        <td>
+            /<br />
             @Html.DisplayFor(modelItem => item.ValidDtmOff)
         </td>
         <td>
@@ -112,10 +112,16 @@
         <td>
             @Html.DisplayFor(modelItem => item.LocalFileName)
         </td>
-        <td>
-            @Html.ActionLink("Pobierz", "Download", new { id = item.Id }) |
-            @Html.ActionLink("Pokaż", "Show", new { id = item.Id }, new { target = "_blank" }) |
-            @Html.ActionLink("Szczegóły", "Details", new { id=item.Id })
+        <td class="col-md-1">
+            @using ITechSite.Custom
+            @Html.ActionLinkGlyphicon("Pobierz", "Download", new { id = item.Id }, "glyphicon-download-alt") <br />
+            @Html.ActionLinkGlyphicon("Pokaż", "Show", null, new { id = item.Id }, new { target = "_blank" }, "glyphicon-picture")<br />
+            @Html.ActionLinkGlyphicon("Szczegóły", "Details", new { id = item.Id}, "glyphicon-list-alt")
+           
+            @*<span style=" white-space: nowrap">
+                @Html.ActionLinkNoEncode(@Html.SpanGlyphiconString("", "glyphicon-list-alt") +
+          "Szczegóły", "Details", new { id = item.Id })
+            </span>*@
         </td>
     </tr>
 }

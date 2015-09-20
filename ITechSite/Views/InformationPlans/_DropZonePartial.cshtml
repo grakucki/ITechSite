@@ -1,0 +1,129 @@
+﻿
+
+<script src="~/Scripts/build.js"></script>
+<script>
+    //var Dropzone = require("enyo-dropzone");
+    //Dropzone.autoDiscover = false;hjk
+</script>
+
+
+<form id="my-dropzone" class="dropzone form-control btn-success">
+    <strong>Aby dodać przeciągni dokument z komputera tutaj.</strong>
+    <h1><i class="glyphicon glyphicon-upload"></i></h1>
+</form>
+
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Dodaj nowy plik.</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Label("FileName", "Plik", new { @class = "label-control" })
+                @Html.TextBox("FileName", null, new { @class = "form-control" })
+
+                @Html.Label("Desc", "Nazwa wyświetlana", new { @class = "label-control" })
+                @Html.TextBox("Desc", "", new { @class = "form-control" })
+
+                @Html.Label("Kategorie_Id2", "Kategorie_Id", new { @class = "label-control" })
+                @Html.DropDownList("Kategorie_Id2", (SelectList)ViewBag.Kategoria_Id, htmlAttributes: new { @class = "form-control" })
+
+                @Html.Label("WorkProcess2", "WorkProcess", new { @class = "label-control" })
+                @Html.DropDownList("WorkProcess2", (SelectList)ViewBag.WorkProcess, new { @class = "form-control" })
+                
+
+                @Html.Label("CodeName2", "Nrinstrukcji", new { @class = "label-control" })
+                @Html.TextBox("CodeName2", "", new { @class = "form-control" })
+
+                @Html.Label("Keywords", "Keywords", new { @class = "label-control" })
+                @Html.TextBox("Keywords", "", new { @class = "form-control" })
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary start" data-dismiss="modal" id="SendFile">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Wyślij</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        // Now that the DOM is fully loaded, create the dropzone, and setup the
+        // event listeners
+        Dropzone.autoDiscover = false;
+        var myDropzone = new Dropzone("#my-dropzone", { url: "SaveUploadedFile" });
+        myDropzone.options.addRemoveLinks = false;
+        myDropzone.options.autoProcessQueue = true;
+        myDropzone.autoQueue = false;
+        myDropzone.options.dictDefaultMessage = "???";
+        myDropzone.options.accept = (function (file, done) {
+            //$("#FileFromDisk").val(file.name);
+            var IdR = $("#idR").val();
+            var IdM = null;
+            if ($("#idM")!=null)
+                IdM = $("#idM").val();
+
+            var url = '@Url.Action("FileExist", "InformationPlans", new { FileName = "file.name", IdR="file.IdR", IdM="file.IdM" })';
+            url = url.replace("file.name", file.name);
+            url = url.replace("file.IdR", IdR);
+            url = url.replace("file.IdM", IdM);
+            url = url.replace("&amp;", "&");
+                ;
+            $.post(url,
+                function (result) {
+                    if (result.FileExist) {
+                        //alert("Plik już istnieje");
+                        //plik jest już na serwerze
+                        file.status = Dropzone.SUCCESS;
+                        myDropzone.emit("success", file, "okc", null);
+                        myDropzone.emit("complete", file);
+                        $("#AddDocForm").submit();
+                    }
+                    else {
+                        //alert("Dodaj nowy plik");
+                        $("#FileName").val(file.name);
+                        $("#Desc").val(file.name);
+                        $("#myModal2").modal();
+                        file.accepted = true;
+                        ///done();
+                    };
+                });
+        });
+
+
+        myDropzone.on("complete", function (file) {
+            $("#AddDocForm").submit();
+            //alert(file.name);
+        });
+
+        myDropzone.on("sending", function (file, xhr, formData) {
+            // Will send the filesize along with the file as POST data.
+            formData.append("FileName", file.name);
+            formData.append("Desc", $("#Desc").val());
+            formData.append("Kategorie_Id", $("#Kategorie_Id2").val());
+            formData.append("WorkProcess", $("#WorkProcess2").val());
+            formData.append("Nrinstrukcji", $("#CodeName2").val());
+            formData.append("Keywords", $("#Keywords").val());
+
+            var IdR = $("#idR").val();
+            formData.append("IdR", IdR);
+            if ($("#idM") != null) {
+                IdM = $("#idM").val();
+                formData.append("IdM", IdM);
+            }
+
+            //formData.append("IdR", $("#Keywords").val());
+            //formData.append("IdM", $("#Keywords").val());
+        });
+
+        document.querySelector(".start").onclick = function () {
+            //alert("Wysyłam");
+            myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
+        };
+
+    })
+
+</script>

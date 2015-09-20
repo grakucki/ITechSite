@@ -6,7 +6,6 @@
     Layout = "_UsersLayout.cshtml";
 }
 
-<h3>Lista użytkowników </h3>
 
 @using (Html.BeginForm("Index", "ItechUsers", FormMethod.Post))
 {
@@ -28,8 +27,14 @@
 
 
         <div class="form-group">
+            @Html.Label(" ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="submit" name="FindUsers" value="Find" class="btn btn-default" />
+                @*<input type="submit" name="FindUsers" value="Szukaj" class="btn btn-default-big" />*@
+                
+                <button type="submit" name="FindUsers" class="btn btn-default btn-block">
+                    <span class="glyphicon glyphicon-search"></span> Szukaj
+                </button>
+
             </div>
         </div>
 
