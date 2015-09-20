@@ -75,10 +75,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/25/2015 21:43:00</publishTime>
     </File>
     <File Include="bin/ITechInstrukcjeModel.dll">
-      <publishTime>08/11/2015 23:20:38</publishTime>
+      <publishTime>09/07/2015 23:01:21</publishTime>
     </File>
     <File Include="bin/ITechService.dll">
-      <publishTime>08/19/2015 22:07:10</publishTime>
+      <publishTime>09/07/2015 23:01:22</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.Data.Edm.resources.dll">
       <publishTime>06/25/2015 21:43:03</publishTime>
@@ -180,7 +180,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/24/2015 13:03:56</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>08/11/2015 22:54:58</publishTime>
+      <publishTime>09/07/2015 23:01:23</publishTime>
     </File>
   </ItemGroup>
 </Project>
