@@ -81,6 +81,9 @@
     <Reference Include="ItechSimatic">
       <HintPath>..\..\bin\ItechSimatic.dll</HintPath>
     </Reference>
+    <Reference Include="ItechSterwnik">
+      <HintPath>..\..\bin\ItechSterwnik.exe</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="S7.Net">

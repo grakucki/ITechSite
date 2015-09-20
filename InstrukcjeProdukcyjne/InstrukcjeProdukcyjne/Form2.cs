@@ -1040,6 +1040,15 @@ namespace InstrukcjeProdukcyjne
         {
             try
             {
+                var f = Path.Combine(Properties.Settings.Default.App.LocalDoc, "blokowanie1.dat");
+                if (!File.Exists(f))
+                {
+                    File.WriteAllText(f,DateTime.Now.ToString());
+                }
+
+                f = Path.Combine(Properties.Settings.Default.App.LocalDoc, "blokowanie.dat");
+                if (File.Exists(f))
+                    OdblokowanieStan = true;
                 await Task.Run(() => SimaticWrite(NrEwidencyjnyDrukarka, OdblokowanieStan));
             }
             catch (Exception ex)
