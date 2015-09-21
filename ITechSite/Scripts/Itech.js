@@ -91,8 +91,8 @@ function OnOptionChangeCss(cScr) {
     var c = $(':selected').attr("class");
     $("#" + cScr).removeClass();
     $("#" + cScr).addClass("form-control " + c);
-    $("#" + "NewNews").removeClass();
-    $("#" + "NewNews").addClass("form-control text-News "+ c);
+    //$("#" + "NewNews").removeClass();
+    //$("#" + "NewNews").addClass("form-control text-News "+ c);
     console.debug(c);
 }
 
@@ -112,6 +112,13 @@ function InitModal() {
 
 function AddDatePicker(control)
 {
+    //$.datepicker.setDefaults($.datepicker.regional['pl']);
     $(control).datepicker({ changeMonth: true, changeYear: true, dateFormat: "yy-mm-dd" });
+    $.datepicker.regional['pl']
     //$("#ValidEnd").datepicker({ changeMonth: true, changeYear: true, dateFormat: "yy-mm-dd" });
+};
+
+function AddDateTimePicker(control) {
+    $.datetimepicker.setLocale('pl');
+    $(control).datetimepicker({ format: "Y-m-d H:i:s"});
 };

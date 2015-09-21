@@ -545,6 +545,9 @@
     <None Include="Properties\PublishProfiles\insofter.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\build.js" />
+    <Content Include="Scripts\datetimepicker\jquery.datetimepicker.css" />
+    <Content Include="Scripts\datetimepicker\jquery.datetimepicker.js" />
+    <Content Include="Scripts\datetimepicker\jquery.js" />
     <Content Include="Scripts\dropzone\basic.css" />
     <Content Include="Scripts\dropzone\basic.min.css" />
     <Content Include="Scripts\dropzone\dropzone-amd-module.js" />

@@ -11,13 +11,13 @@ namespace ITechSite
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jquery.ui").Include(
-                        "~/Scripts/ui/jquery.ui.core.js",
-                        "~/Scripts/ui/jquery.ui.widget.js",
-                        "~/Scripts/ui/jquery.ui.datepicker.js",
-                        "~/Scripts/Itech.js"));
-
-            //<link href="~/Scripts/themes/base/jquery.ui.all.css" rel="stylesheet" />
+            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
+                        "~/Scripts/ui/jquery.ui.core.js"
+                        ,"~/Scripts/ui/jquery.ui.widget.js"
+                        ,"~/Scripts/ui/jquery.ui.datepicker.js"
+                        ,"~/Scripts/Itech.js"
+                        ));
+            
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -35,8 +35,7 @@ namespace ITechSite
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Scripts/themes/base/jquery.ui.all.css"));
-
-
+            
 
             bundles.Add(new ScriptBundle("~/bundles/dropzonescripts").Include(
                      "~/Scripts/dropzone/dropzone.js"));

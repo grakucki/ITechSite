@@ -3,13 +3,17 @@
 @{
     ViewBag.Title = "Wiadomości";
 
+
+    @*<script src="~/Scripts/ui/i18n/jquery.ui.datepicker-pl.js"></script>*@
+    <link href="~/Scripts/datetimepicker/jquery.datetimepicker.css" rel="stylesheet" />
+    <script src="~/Scripts/datetimepicker/jquery.datetimepicker.js"></script>
     
-    @*<script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready((function () {
             OptionChangeCss("priority");
-            AddDatePicker("#ValidEnd")
+            AddDateTimePicker("#ValidEnd");
         }));
-    </script>*@
+    </script>
     
 }
 
@@ -40,6 +44,13 @@
         var b = document.getElementById('actionChkSel').checked;
         $('[name="actionChk"]').prop("checked", b);
     };
+
+    function ApplyNews(n,p,d) {
+        $("#NewNews").val(n)
+        $("#priority").val(p)
+        $("#ValidEnd").val(d)
+        OnOptionChangeCss("priority")
+    };
 </script>
 
 <div class="container">
@@ -61,57 +72,20 @@
             </div>
             <div class="form-group">
                 @Html.Label("Ważna do")
-                @Html.TextBox("ValidEnd", null, new { @type = "Date", @class = "form-control" })
+                @Html.TextBox("ValidEnd", null, new { @type = "DateTime", @class = "form-control"  })
             </div>
             <div class="form-group">
                 <button type="submit" name="Send.Action" value="Wyślij" class="btn btn-primary btn-lg">
                     <span class="glyphicon glyphicon-send"></span> Wyślij
                 </button>
             </div>
-            @*<hr />
-            <div class="form-group">
-                @Html.Label("Nazwa ")
-                @Html.TextBox("Nazwa", null, new { @class = "form-control" })
-            </div>
-            <div class="form-group">
-                @Html.Label("Proces")
-                @Html.DropDownList("priority", null, "Wszystkie", new { @class = "form-control" } )
-            </div>
-            <div class="form-group">
-                <button type="submit" name="Send.Find" value="Szukaj" class="btn btn-default btn-lg">
-                    <span class="glyphicon glyphicon-search"></span> Szukaj
-                </button>
-            </div>*@
         </div>
         <hr />
-        @*<div>
-            <p>
-                @Html.ValidationMessage("Error", new { @class = "text-danger" })
-            </p>
-
-            <p>
-                @Html.Label("Treść wiadomości")
-                @Html.TextBox("NewNews", null, new { @class = "form-control text-News" })
-            </p>
-            <p>
-                @Html.Label("priority", "Priorytet")
-                @Html.ExtendedDropDownListFor("priority", (IEnumerable<ITechSite.Custom.ExtendedSelectListItem>)@ViewBag.priority2, null, new { @class = "form-control" })
-            </p>
-            <p>
-                @Html.Label("Ważna do")
-                @Html.TextBox("ValidEnd", null, new { @type = "Date", @class = "form-control" })
-            </p>
-            <p>
-                <button type="submit" name="Send.Action" value="Wyślij" class="btn btn-default btn-block">
-                    <span class="glyphicon glyphicon-send"></span> Wyślij
-                </button>
-            </p>
-        </div>*@
 
         <table class="table">
             <tr>
                 <th>
-                    <input type="checkbox" name="actionChkSel" id="actionChkSel" onchange="checkboxSelAll()" />
+                    <input type="checkbox" name="actionChkSel" id="actionChkSel" title="Zaznacz/odznacz wsytkie wiadomości"  onchange="checkboxSelAll()" />
 
                     @Html.DisplayNameFor(model => model.Resource.Name)
                 </th>
@@ -173,13 +147,20 @@
                     else
                     {
                         <td>
-                            @Html.DisplayFor(modelItem => item.Resource.News.ValidEnd)
+                              @Html.DisplayFor(modelItem => item.Resource.News.ValidEnd)
                         </td>
                     }
 
 
 
                     <td>
+                       @if (item.Resource.News != null)
+                       {
+                        <a href="#" title="Użyj tą wiadomość jako szablon" onclick="javascript:ApplyNews('@item.Resource.News.News1',@item.Resource.News.NewsPriorityId, '@item.Resource.News.ValidEnd')">
+                            <span class="glyphicon glyphicon-arrow-up"></span>
+                        </a>
+                       }
+
                         @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
                             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
                             @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
