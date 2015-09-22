@@ -37,6 +37,11 @@ button {
     width:  auto;
   }
 
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
  .btn-default-big {
     width: 280px;
 }/*.btn-default*/

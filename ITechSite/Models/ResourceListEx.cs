@@ -9,6 +9,7 @@ using PagedList;
 
 namespace ITechSite.Models
 {
+
     public class ResourceListFind
     {
         [DisplayName("Szukaj frazy")]
@@ -24,8 +25,6 @@ namespace ITechSite.Models
 
         [DisplayName("Stanowiska")]
         public int? Workstation { get; set; }
-
-
 
 
         /// <summary>
@@ -53,14 +52,47 @@ namespace ITechSite.Models
         //public List<ResourceType> ResourceType { get; set; }
 
 
-      public ResourceListFind()
+        private static ResourceListFind GetOrDefault()
+        {
+            var rf = (ResourceListFind)HttpContext.Current.Session["ResourceListFind"];
+            if (rf != null)
+                return rf;
+            return new ResourceListFind();
+        }
+
+        public void SetAsDefault()
+        {
+            HttpContext.Current.Session["ResourceListFind"] = this;
+        }
+
+
+        public static ResourceListFind From(ResourceListFind rf)
+        {
+            if (rf == null)
+                rf = GetOrDefault();
+            else
+                if (rf.FindAction == null)
+                    rf = GetOrDefault();
+
+            return rf;
+        }
+      
+        public ResourceListFind()
       {
           Allow_ResourceType=true;
       }
 
-     
 
-      public void Fill(ITechEntities context)
+        public List<Resource> GetWorkstation(ITechEntities context)
+        {
+            FactoryRepository _repository = new FactoryRepository(context);
+            if (string.IsNullOrEmpty(Find_ResourceType))
+                Find_ResourceType = "Stanowisko";
+            var Resources2 = _repository.GetResourcesBy(Factory, Department, WorkProcess, Find_ResourceType, Find_Word, true, false);
+            return Resources2;
+        }
+
+       public ResourceListFind Fill(ITechEntities context)
       {
           FactoryRepository _repository = new FactoryRepository();
 
@@ -75,6 +107,7 @@ namespace ITechSite.Models
             Find_ResourceType = "Stanowisko";
           var Resources2 = _repository.GetResourcesBy(Factory, Department, WorkProcess, Find_ResourceType,Find_Word, Workstation, false);
           Resources = Resources2.ToPagedList(page ?? 1, 50);
+          return this;
       }
     }
 }

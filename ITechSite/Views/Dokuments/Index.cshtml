@@ -1,42 +1,51 @@
 ﻿@model ITechSite.Models.IndexDokumentModel
 @using PagedList.Mvc;
 @{
-    ViewBag.Title = "Dokumenty";
+    ViewBag.Title = "Baza dokumentów";
     //ITechSite.Models.FindDokumentModel info = ViewBag.FindDokumentModel;
 }
 
-<h2>@ViewBag.Title</h2>
+<div class="content alert alert-warning">
+    <div class="row ">
+        <div class="col-md-9">
+            <h2>@ViewBag.Title</h2>
+            @using (Html.BeginForm("Index", "Dokuments", FormMethod.Get))
+            {
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        @*@Html.Label("Szukany dokument", new { htmlAttributes = new { @class = "control-label col-md-2" } })*@
+                        @Html.LabelFor(model => model.Dokuments, "Szukany dokument", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.CodeName, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Kategorie_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("Kategorie_Id", (SelectList)ViewBag.Kategoria_Id, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.WorkProcess, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("WorkProcess", (SelectList)ViewBag.WorkProcess, htmlAttributes: new { @class = "form-control" })
+                            @*<input type="submit" name="FindAction" value="Szukaj" class="btn btn-default-big" />*@
+                            <button type="submit" name="FindAction" value="Szukaj" class="btn btn-default btn-block">
+                                <span class="glyphicon glyphicon-search"></span> Szukaj
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-md-3">
+            <img src='@Url.Content(@"~/Content/Images/Dokumenty.jpg")'>
+        </div>
+    </div>
 
-@using (Html.BeginForm("Index", "Dokuments", FormMethod.Get))
-{
-    <div class="form-horizontal">
-        <div class="form-group">
-            @*@Html.Label("Szukany dokument", new { htmlAttributes = new { @class = "control-label col-md-2" } })*@
-            @Html.LabelFor(model => model.Dokuments, "Szukany dokument", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.CodeName, htmlAttributes: new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.Kategorie_Id,  htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("Kategorie_Id", (SelectList)ViewBag.Kategoria_Id, htmlAttributes: new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.WorkProcess, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("WorkProcess", (SelectList)ViewBag.WorkProcess, htmlAttributes: new { @class = "form-control" })
-                @*<input type="submit" name="FindAction" value="Szukaj" class="btn btn-default-big" />*@
-                <button type="submit" name="FindAction" value="Szukaj" class="btn btn-default btn-block">
-                    <span class="glyphicon glyphicon-search"></span> Szukaj
-                </button>
-            </div>
-        </div>
-     </div>
-}
-<div>
-    @Html.PagedListPager(Model.Dokuments, page => Url.Action("Index", new { page, CodeName = Model.CodeName,Kategorie_Id=Model.Kategorie_Id,  FindAction = "page" }))
+    <div>
+        @Html.PagedListPager(Model.Dokuments, page => Url.Action("Index", new { page, CodeName = Model.CodeName, Kategorie_Id = Model.Kategorie_Id, FindAction = "page" }))
+    </div>
 </div>
 
 <p>
@@ -49,9 +58,6 @@
         </th>
         <th>
             Nazwa kodowa
-        </th>
-        <th>
-            Zmodyfikowany
         </th>
         <th>
             Aktywny
@@ -70,24 +76,27 @@
             Kategoria
         </th>
         <th>
-            Rozmiar
+            Zmodyfikowany
         </th>
         <th>
-            Lokalna nazwa pliku
+            Rozmiar
         </th>
+        @*<th>
+            Lokalna nazwa pliku
+        </th>*@
         <th></th>
     </tr>
 
 @foreach (var item in Model.Dokuments) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.FileName)
+@*            @Html.DisplayFor(modelItem => item.FileName)*@
+            @using ITechSite.Custom
+            @Html.ActionLinkGlyphicon(item.FileName, "Show", null, new { id = item.Id }, new { target = "_blank" }, "glyphicon-picture")<br />
+
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CodeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastWriteTime)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Enabled)
@@ -107,17 +116,20 @@
             @Html.DisplayFor(modelItem => item.Kategorie.name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Size2)
+            @Html.DisplayFor(modelItem => item.LastWriteTime)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.LocalFileName)
+            @Html.DisplayFor(modelItem => item.Size2)
         </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.LocalFileName)
+        </td>*@
         <td class="col-md-1">
             @using ITechSite.Custom
             @Html.ActionLinkGlyphicon("Pobierz", "Download", new { id = item.Id }, "glyphicon-download-alt") <br />
-            @Html.ActionLinkGlyphicon("Pokaż", "Show", null, new { id = item.Id }, new { target = "_blank" }, "glyphicon-picture")<br />
+            @*@Html.ActionLinkGlyphicon("Pokaż", "Show", null, new { id = item.Id }, new { target = "_blank" }, "glyphicon-picture")<br />*@
             @Html.ActionLinkGlyphicon("Szczegóły", "Details", new { id = item.Id}, "glyphicon-list-alt")
-           
+
             @*<span style=" white-space: nowrap">
                 @Html.ActionLinkNoEncode(@Html.SpanGlyphiconString("", "glyphicon-list-alt") +
           "Szczegóły", "Details", new { id = item.Id })

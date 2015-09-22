@@ -186,7 +186,7 @@ namespace ITechSite.Models
         }
 
 
-        public List<Resource> GetResourcesBy(string factoryName, string department, string WorkProcess, string Find_ResourceType, string Find_Word, bool AddEmpty = false)
+        public List<Resource> GetResourcesBy(string factoryName, string department, string WorkProcess, string Find_ResourceType, string Find_Word, bool? Enabled, bool AddEmpty)
         {
             var Resources2 = _dataContex.Resource.AsEnumerable();
 
@@ -207,6 +207,9 @@ namespace ITechSite.Models
 
             if (!Models.Repository.FilterExtansion.IsEmpty(Find_Word))
                 Resources2 = Resources2.Where(m => m.Name.IndexOf(Find_Word) >= 0);
+
+            if (Enabled!=null)
+                Resources2 = Resources2.Where(m => m.Enabled==Enabled);
 
 
             var l = Resources2.OrderBy(m => m.Name).ToList();

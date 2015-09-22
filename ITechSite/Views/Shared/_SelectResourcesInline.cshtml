@@ -1,0 +1,60 @@
+﻿@model ITechSite.Models.ResourceListFind
+@using PagedList.Mvc;
+
+@*<script type="text/javascript" src="~/Scripts/Itech.js"></script>*@
+<script type="text/javascript">
+    $(function () {
+        CascadingOption("Factory", "Department", "@(Url.Action("GetDepartmentsByFactoryId","Factory"))", "states-loading-progress");
+        CascadingOption2("Factory", "Department", "WorkProcess", "@(Url.Action("getworkprocessby","Factory"))", "states-loading-progress");
+        CascadingOption2("Department", "Factory", "WorkProcess", "@(Url.Action("getworkprocessby","Factory"))", "states-loading-progress");
+        });
+</script>
+
+@*@using (Html.BeginForm())
+    {*@
+    <div class ="form-inline">
+        <div class="form-group ">
+            <button type="submit" name="FindAction" value="Szukaj" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span> <br />Filtruj stanowiska
+            </button>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Factory, htmlAttributes: new { @class = "control-label" })<br />
+            @Html.DropDownListFor(model => model.Factory, Model.AvailableFactory, htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Department, htmlAttributes: new { @class = "control-label" })<br />
+            @Html.DropDownListFor(model => model.Department, Model.AvailableDepartment, htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.WorkProcess, htmlAttributes: new { @class = "control-label" })<br />
+            @Html.DropDownListFor(model => model.WorkProcess, Model.AvailableWorkPorcess, htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        @if (Model.Allow_ResourceType)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Find_ResourceType, htmlAttributes: new { @class = "control-label" })<br />
+                @Html.DropDownListFor(model => model.Find_ResourceType, Model.AvailableResourceType, htmlAttributes: new { @class = "form-control" })
+            </div>
+        }
+
+
+        <div class="form-group">
+            <script src="~/Scripts/clearsearch.js"></script>
+
+            @Html.LabelFor(model => model.Find_Word, htmlAttributes: new { @class = "control-label" })<br />
+            @Html.EditorFor(model => model.Find_Word, new { htmlAttributes = new { @class = "form-control clearable", placeholder = "Szukana fraza", type = "search" } })
+ 
+            <script type="text/javascript">
+                $('.clearable').clearSearch();
+            </script>
+        </div>
+
+        @Html.HiddenFor(model => model.ReturnUrl)
+    </div>
+@*  }*@

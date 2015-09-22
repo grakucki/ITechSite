@@ -79,21 +79,24 @@ function CascadingOption2(cScr, cScr2, cDes, onAction, onProgress) {
 }
 
 function OptionChangeCss(cScr) {
-    $(document.getElementById(cScr)).change( function () {
-        OnOptionChangeCss(cScr)}
+    //$(document.getElementById(cScr)).change(function () {
+    $(cScr).change(function () {
+            OnOptionChangeCss(cScr)
+        }
     );
     OnOptionChangeCss(cScr)
 }
 
 function OnOptionChangeCss(cScr) {
-    var a = $(':selected').text();
-    var b = $(':selected').val();
-    var c = $(':selected').attr("class");
-    $("#" + cScr).removeClass();
-    $("#" + cScr).addClass("form-control " + c);
+    //var a = $(cScr+' :selected').text();
+    //var b = $(cScr+' :selected').val();
+    
+    var c = $(cScr+ " option:selected").attr("class");
+    $(cScr).removeClass();
+    $(cScr).addClass("form-control " + c);
     //$("#" + "NewNews").removeClass();
     //$("#" + "NewNews").addClass("form-control text-News "+ c);
-    console.debug(c);
+    //console.debug(c);
 }
 
 

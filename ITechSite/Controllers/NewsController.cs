@@ -15,83 +15,94 @@ namespace ITechSite.Models
 
         // GET: News
         [HttpGet]
-        public ActionResult Index(string NewNews, DateTime? ValidEnd, string filter, int? priority)
+        public ActionResult Index(string NewNews, DateTime? ValidEnd, string filter, int? priority, ResourceListFind rf)
         {
+
             if (!priority.HasValue)
                 priority = 1;
 
-            //var workstation = db.Resource.Where(m => m.Type == 1 && m.Enabled == true).OrderBy(m => m.Name).Select(new SelectedResources { Resource = m });
-            var news = (from n in db.Resource where n.Type == 1 && n.Enabled == true orderby n.Name select new SelectedResources { Resource = n }).ToList();
+            var r = ResourceListFind.From(rf);
+            r.Allow_ResourceType = false;
+            r.Fill(db);
+            ViewBag.FindResources = r;
 
-            //if (actionChk!=null)
-            //{
-            //    foreach (var item in news)
-            //    {
-            //        var i = Array.IndexOf(actionChk, item.Resource.Id.ToString());
+            var news = r.GetWorkstation(db).Select(m => new SelectedResources { Resource = m, Selected2=true }).ToList();
 
-            //        if (i >= 0)
-            //            item.Selected2 = true;
-            //    }
-            //}
+            //var news = (from n in db.Resource where n.Type == 1 && n.Enabled == true orderby n.Name select new SelectedResources { Resource = n }).ToList();
 
             @ViewBag.priority = new SelectList(db.NewsPriority, "id", "Name", priority);
 
             var x = db.NewsPriority.ToList().Select(m => new ITechSite.Custom.ExtendedSelectListItem { Text = m.Name, Value = m.id.ToString(), htmlAttributes=new { @class = m.CssName } }).ToList();
             @ViewBag.priority2 = x;
 
+            ViewBag.FindResources = r;
+
             return View(news);
         }
 
         [HttpPost]
-        public ActionResult Index(string NewNews, DateTime? ValidEnd, string[] actionChk, int? priority)
+        public ActionResult Index(string NewNews, DateTime? ValidEnd, string[] actionChk, int? priority, ResourceListFind rf)
         {
-            //var workstation = db.Resource.Where(m => m.Type == 1 && m.Enabled == true).OrderBy(m => m.Name).Select(new SelectedResources { Resource = m });
-            // zapisujemy do bazy
             if (!priority.HasValue)
                 priority = 1;
 
-            if (actionChk == null)
+
+            var r = ResourceListFind.From(rf);
+           
+            if (r.FindAction == "Send")
             {
-                ModelState.AddModelError("Error", "Zaznacz stanowiska na które chcesz wysłać komunikat.");
-            }
-            else
-            {
-                foreach (var item in actionChk)
+                if (actionChk == null)
                 {
-                    int idr = 0;
-                    if (int.TryParse(item, out idr))
+                    ModelState.AddModelError("Error", "Zaznacz stanowiska na które chcesz wysłać komunikat.");
+                }
+                else
+                {
+                    foreach (var item in actionChk)
                     {
-                        InsertNews(NewNews, ValidEnd, idr, priority);
+                        int idr = 0;
+                        if (int.TryParse(item, out idr))
+                        {
+                            InsertNews(NewNews, ValidEnd, idr, priority);
+                        }
+                    }
+                    try
+                    {
+                        db.SaveChanges();
+
+                    }
+                    catch (Exception /*ex*/)
+                    {
+
                     }
                 }
             }
+            r.SetAsDefault();
+            r.Allow_ResourceType = false;
+            r.Fill(db);
+            ViewBag.FindResources = r;
 
-            var news = (from n in db.Resource where n.Type == 1 && n.Enabled == true orderby n.Name select new SelectedResources { Resource = n }).ToList();
-            if (actionChk != null)
+            var news = r.GetWorkstation(db).Select(m => new SelectedResources { Resource = m}).ToList();
+            //var news = (from n in db.Resource 
+            //            where n.Type == 1 && n.Enabled == true 
+            //            orderby n.Name select new SelectedResources { Resource = n }).ToList();
+
+            foreach (var item in news)
             {
-                foreach (var item in news)
+                if (r.FindAction != "Szukaj")
                 {
-                    var i = Array.IndexOf(actionChk, item.Resource.Id.ToString());
-
-                    if (i >= 0)
-                    {
-                        item.Selected2 = true;
-                    }
+                    if (actionChk != null)
+                        if (Array.IndexOf(actionChk, item.Resource.Id.ToString()) >= 0)
+                            item.Selected2 = true;
                 }
-                try
-                {
-                    db.SaveChanges();
-
-                }
-                catch (Exception /*ex*/)
-                {
-
-                }
-
+                else
+                    item.Selected2 = true;
             }
+            
+            
             @ViewBag.priority = new SelectList(db.NewsPriority, "id", "Name", priority);
             var x = db.NewsPriority.ToList().Select(m => new ITechSite.Custom.ExtendedSelectListItem { Text = m.Name, Value = m.id.ToString(), htmlAttributes = new { @class = m.CssName }, Selected = priority.Value==m.id }).ToList();
             @ViewBag.priority2 = x;
+
 
             return View(news);
         }

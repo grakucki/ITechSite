@@ -545,6 +545,7 @@
     <None Include="Properties\PublishProfiles\insofter.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\build.js" />
+    <Content Include="Scripts\clearsearch.js" />
     <Content Include="Scripts\datetimepicker\jquery.datetimepicker.css" />
     <Content Include="Scripts\datetimepicker\jquery.datetimepicker.js" />
     <Content Include="Scripts\datetimepicker\jquery.js" />
@@ -916,7 +917,6 @@
     <Content Include="Views\Testy\Index.cshtml" />
     <Content Include="Views\ItechUsers\Index.cshtml" />
     <Content Include="Views\Shared\Index.cshtml" />
-    <Content Include="Views\Shared\_SelectResources - Copy.cshtml" />
     <Content Include="Views\InformationPlans\Edit2.cshtml" />
     <Content Include="Views\Resources\Models.cshtml" />
     <Content Include="Views\Shared\_SelectWrokstationsModels.cshtml" />
@@ -935,6 +935,7 @@
     <Content Include="Views\Shared\DisplayTemplates\form-label.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime .cshtml" />
     <Content Include="Views\InformationPlans\_DropZonePartial.cshtml" />
+    <Content Include="Views\Shared\_SelectResourcesInline.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

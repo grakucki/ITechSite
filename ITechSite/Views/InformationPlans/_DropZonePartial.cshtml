@@ -3,7 +3,7 @@
 <script src="~/Scripts/build.js"></script>
 <script>
     //var Dropzone = require("enyo-dropzone");
-    //Dropzone.autoDiscover = false;hjk
+    //Dropzone.autoDiscover = false;
 </script>
 
 
@@ -26,17 +26,17 @@
                 @Html.Label("Desc", "Nazwa wyświetlana", new { @class = "label-control" })
                 @Html.TextBox("Desc", "", new { @class = "form-control" })
 
-                @Html.Label("Kategorie_Id2", "Kategorie_Id", new { @class = "label-control" })
-                @Html.DropDownList("Kategorie_Id2", (SelectList)ViewBag.Kategoria_Id, htmlAttributes: new { @class = "form-control" })
+                @Html.Label("Kategorie_Id2", "Kategoria", new { @class = "label-control" })
+                @Html.DropDownList("Kategorie_Id2", (SelectList)ViewBag.KategoriaList, htmlAttributes: new { @class = "form-control" })
 
-                @Html.Label("WorkProcess2", "WorkProcess", new { @class = "label-control" })
-                @Html.DropDownList("WorkProcess2", (SelectList)ViewBag.WorkProcess, new { @class = "form-control" })
+                @Html.Label("WorkProcess2", "Proces roboczy", new { @class = "label-control" })
+                @Html.DropDownList("WorkProcess2", (SelectList)ViewBag.WorkProcessList, new { @class = "form-control" })
                 
 
-                @Html.Label("CodeName2", "Nrinstrukcji", new { @class = "label-control" })
+                @Html.Label("CodeName2", "Nr instrukcji", new { @class = "label-control" })
                 @Html.TextBox("CodeName2", "", new { @class = "form-control" })
 
-                @Html.Label("Keywords", "Keywords", new { @class = "label-control" })
+                @Html.Label("Keywords", "Słowa kluczowe", new { @class = "label-control" })
                 @Html.TextBox("Keywords", "", new { @class = "form-control" })
             </div>
             <div class="modal-footer">

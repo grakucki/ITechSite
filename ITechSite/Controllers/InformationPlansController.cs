@@ -117,13 +117,13 @@ namespace ITechSite.Controllers
             ViewBag.idM = new SelectList(db.Resource.Where(m => m.Id == IdM), "Id", "Name", IdM);
 
             var repo = new ITechSite.Models.Repository.DokumentRepository();
-            ViewBag.Kategoria_Id = new SelectList(repo.GetKategorie(false), "id", "name", ipm.Kategorie_Id);
-            ViewBag.WorkProcess = new SelectList(repo.GetWorkProcessAll(false), "Name", "Name", ipm.WorkProcess);
-
-
             if (string.IsNullOrEmpty(ipm.WorkProcess))
                 ipm.WorkProcess = ipm.Resource.WorkProcess;
-            ipm.AvalibleWorkProcess = repo.GetWorkProcessAll().ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Name });
+            ViewBag.KategoriaList = new SelectList(repo.GetKategorie(false), "id", "name", ipm.Kategorie_Id);
+            ViewBag.WorkProcessList = new SelectList(repo.GetWorkProcessAll(false), "Name", "Name", ipm.WorkProcess);
+
+
+            //ipm.AvalibleWorkProcess = repo.GetWorkProcessAll().ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Name });
             ipm.IncludeDoc = repo.IncludeInformationPlainDoc(IdR, IdM);
             var docs = repo.GetAvalibleDoc(IdR, IdM, ipm.WorkProcess, ipm.CodeName, ipm.Kategorie_Id);
             ViewBag.IdD = new SelectList(docs, "Id", "FileName");

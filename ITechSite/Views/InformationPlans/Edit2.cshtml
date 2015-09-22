@@ -7,14 +7,26 @@
     ViewBag.Title = "Plan informacyjny";
 }
 
-<h2>Dodaj dokumenty do stanowiska lub modelu</h2>
 
-@Html.Partial("_SelectWrokstationsModels")
-<div>
-    Zanleziono @Model.Resources.TotalItemCount pozycji. Wyswietlonio stronę @(Model.Resources.PageCount < Model.Resources.PageNumber ? 0 : Model.Resources.PageNumber) z @Model.Resources.PageCount
-    @Html.PagedListPager(Model.Resources, page => Url.Action("Edit2", new { page, Find_ResourceType = @Model.Find_ResourceType,Workstation=@Model.Workstation, WorkProcess = @Model.WorkProcess, Find_Word = @Model.Find_Word, ReturnUrl = @Model.ReturnUrl, FindAction = "Page" }))
+
+<div class="content alert alert-success">
+    <div class="row ">
+        <div class="col-md-9">
+            <h2>Dodaj dokumenty do stanowiska lub modelu</h2>
+            @Html.Partial("_SelectWrokstationsModels")
+        </div>
+        <div class="col-md-3">
+            <img src='@Url.Content(@"~/Content/Images/Plan.jpg")' />        
+        </div>
+    </div>
 </div>
-
+@if (@Model.Resources.PageCount>1)
+{ 
+    <div>
+        @*Zanleziono @Model.Resources.TotalItemCount pozycji. Wyswietlonio stronę @(Model.Resources.PageCount < Model.Resources.PageNumber ? 0 : Model.Resources.PageNumber) z @Model.Resources.PageCount*@
+        @Html.PagedListPager(Model.Resources, page => Url.Action("Edit2", new { page, Find_ResourceType = @Model.Find_ResourceType,Workstation=@Model.Workstation, WorkProcess = @Model.WorkProcess, Find_Word = @Model.Find_Word, ReturnUrl = @Model.ReturnUrl, FindAction = "Page" }))
+    </div>
+}
 <p>
     
 </p>
