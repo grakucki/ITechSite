@@ -38,8 +38,9 @@
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu inverse">
-                                <li><a href="#">Testy</a></li>
-                                <li><a href="#">Kategorie</a></li>
+                                <li><a href="@Url.Action("Index", "ItechUsers", new { area = "" })">Operatorzy</a></li>
+                                <li><a href="#">Testów</a></li>
+                                <li><a href="@Url.Action("Categories", "TestEditor", new { area = "Testy" })">Kategorie</a></li>
                                 <li><a href="#">Projekty</a></li>
                                 <li><a href="#">Procesy robocze</a></li>
                             </ul>
