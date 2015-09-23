@@ -109,14 +109,16 @@ namespace ITechSite.Models
         private void InsertNews(string msg, DateTime? ValidEnd, int idR, int? priority)
         {
             var q = db.Resource.Find(idR);
-            if (q.News == null)
+            if (q != null)
             {
-                q.News = new News();
+                if (q.News == null)
+                {
+                    q.News = new News();
+                }
+                q.News.News1 = msg;
+                q.News.ValidEnd = ValidEnd;
+                q.News.NewsPriorityId = priority.Value;
             }
-            q.News.News1 = msg;
-            q.News.ValidEnd = ValidEnd;
-            q.News.NewsPriorityId = priority.Value;
-            
         }
 
         // GET: News/Details/5

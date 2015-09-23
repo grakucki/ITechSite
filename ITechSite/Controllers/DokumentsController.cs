@@ -329,5 +329,38 @@ namespace ITechSite.Controllers
             return new SqlFileStreamResult(new DBFile().Get(query), "", MimeMapping.GetMimeMapping(dokument.FileName));
         }
 
+        [HttpGet]
+        public ActionResult Join(int idd)
+        {
+            JoinDoc doc = new JoinDoc();
+
+            doc.Doc = db.Dokument.Find(idd);
+            var rlf = new ResourceListFind();
+            rlf.Allow_ResourceType = false;
+            ViewBag.FindResources = rlf.Fill(db);
+
+            doc.AvalibleWorkstation = rlf.GetWorkstation(db);
+            doc.AvalibleModels = db.Resource.Where(m => m.Type == 2).ToList();
+
+            return View(doc);
+        }
+
+        [HttpPost]
+        public ActionResult Join(int idd, ResourceListFind rf)
+        {
+            JoinDoc doc = new JoinDoc();
+
+            doc.Doc = db.Dokument.Find(idd);
+            var rlf = ResourceListFind.From(rf);
+           
+            rlf.Allow_ResourceType = false;
+            ViewBag.FindResources = rlf.Fill(db);
+
+            doc.AvalibleWorkstation = rlf.GetWorkstation(db);
+            doc.AvalibleModels = db.Resource.Where(m => m.Type == 2).ToList();
+
+            return View(doc);
+        }
+
     }
 }

@@ -117,8 +117,8 @@ namespace ITechSite.Controllers
             ViewBag.idM = new SelectList(db.Resource.Where(m => m.Id == IdM), "Id", "Name", IdM);
 
             var repo = new ITechSite.Models.Repository.DokumentRepository();
-            if (string.IsNullOrEmpty(ipm.WorkProcess))
-                ipm.WorkProcess = ipm.Resource.WorkProcess;
+            
+
             ViewBag.KategoriaList = new SelectList(repo.GetKategorie(false), "id", "name", ipm.Kategorie_Id);
             ViewBag.WorkProcessList = new SelectList(repo.GetWorkProcessAll(false), "Name", "Name", ipm.WorkProcess);
 
@@ -141,7 +141,14 @@ namespace ITechSite.Controllers
             var informationPlan = new InformationPlanModels();
             informationPlan.idR = IdR;
             informationPlan.IdM = IdM;
-            
+
+            if (string.IsNullOrEmpty(informationPlan.WorkProcess))
+            {
+                var r = db.Resource.Find(IdR);
+                if (r!=null)
+                    informationPlan.WorkProcess = r.WorkProcess;
+            }
+
             Create_FillData(informationPlan);
 
             return View(informationPlan);

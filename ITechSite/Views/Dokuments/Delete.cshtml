@@ -84,14 +84,17 @@
 
         <div class="form-actions no-color">
             @if (string.IsNullOrEmpty(@ViewBag.DontDelete) == true)
-            { 
-                <input type="submit" value="Delete" class="btn btn-default" /> 
+            {
+                <button type="submit" class="btn btn-danger btn-block">
+                    <span class="glyphicon glyphicon-trash"></span> Kasuj
+                </button>
+                @*<input type="submit" value="Delete" class="btn btn-default" />*@ 
             }
             else
             {
                    <h2>@ViewBag.DontDelete</h2>
             }
-            @Html.ActionLink("Powrót do listy", "Index")
+            @Html.ActionLink("Anuluj", "Index", null, new { @class = "btn btn-success" })
         </div>
     }
 </div>

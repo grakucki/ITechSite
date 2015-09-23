@@ -138,15 +138,18 @@ namespace ITechSite.Models
             if (!Models.Repository.FilterExtansion.IsEmpty(Find_ResourceType))
                 Resources2 = Resources2.Where(m => m.ResourceType.Type == Find_ResourceType);
 
-            if (!Models.Repository.FilterExtansion.IsEmpty(factoryName))
-                Resources2 = Resources2.Where(m => m.Factory == factoryName);
+            if (!Models.Repository.FilterExtansion.IsEmpty(Find_ResourceType) && Find_ResourceType=="Stanowisko")
+            {
+                if (!Models.Repository.FilterExtansion.IsEmpty(factoryName))
+                    Resources2 = Resources2.Where(m => m.Factory == factoryName);
 
-            if (!Models.Repository.FilterExtansion.IsEmpty(WorkProcess))
-                Resources2 = Resources2.Where(m => m.WorkProcess == WorkProcess);
+                if (!Models.Repository.FilterExtansion.IsEmpty(WorkProcess))
+                    Resources2 = Resources2.Where(m => m.WorkProcess == WorkProcess);
 
-            if (!Models.Repository.FilterExtansion.IsEmpty(Workstation))
-                Resources2 = Resources2.Where(m => m.Id == Workstation.Value);
-
+                if (!Models.Repository.FilterExtansion.IsEmpty(Workstation))
+                    Resources2 = Resources2.Where(m => m.Id == Workstation.Value);
+           }
+    
 
             //if (!Models.Repository.FilterExtansion.IsEmpty(Department))
             //    Resources2 = Resources2.Join(context.WorkProcess, c => c.WorkProcess, d => d.Name, (c, m) => new { c, m })
@@ -188,6 +191,8 @@ namespace ITechSite.Models
 
         public List<Resource> GetResourcesBy(string factoryName, string department, string WorkProcess, string Find_ResourceType, string Find_Word, bool? Enabled, bool AddEmpty)
         {
+           
+
             var Resources2 = _dataContex.Resource.AsEnumerable();
 
             if (!Models.Repository.FilterExtansion.IsEmpty(Find_ResourceType))

@@ -35,6 +35,10 @@
     <table class="table">
         <tr>
             <th>
+                @Html.DisplayName("Typ")
+                @*@Html.DisplayNameFor(model => model.Resources.ResourceType.Type)*@
+            </th>
+            <th>
                 @Html.DisplayName("Nazwa")
             </th>
             <th>
@@ -48,10 +52,7 @@
                 @Html.DisplayName("Aktywny")
                 @*@Html.DisplayNameFor(model => model.Resources.Enabled)*@
             </th>
-            <th>
-                @Html.DisplayName("Typ")
-                @*@Html.DisplayNameFor(model => model.Resources.ResourceType.Type)*@
-            </th>
+            
             <th>
                 @Html.DisplayName("Opis")
                 @*@Html.DisplayNameFor(model => model.Resources.Description)*@
@@ -62,6 +63,9 @@
         @foreach (var item in Model.Resources)
         {
             <tr>
+                <td>
+                    @Html.Partial("_ResourceType2Image", item)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -80,9 +84,6 @@
                 @*<td>
                         @Html.DisplayFor(modelItem => item.Workstation.WorkstationGroup)
                     </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.ResourceType.Type)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>

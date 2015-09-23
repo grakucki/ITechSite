@@ -1,0 +1,23 @@
+﻿@model ITechSite.Models.Resource
+
+
+@if (Model != null)
+{
+    string image;
+    switch (Model.ResourceType.id)
+    {
+        case 1:
+            image = "Res1.png";
+            break;
+        case 2:
+            image = "Res2.png";
+            break;
+        case 3:
+            image = "Res3.png";
+            break;
+        default:
+            image = "";
+            break;
+    }
+    <img src="~/Content/images/@image" alt="@Model.ResourceType.Type" title="@Model.ResourceType.Type" />
+}

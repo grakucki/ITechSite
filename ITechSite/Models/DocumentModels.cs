@@ -55,4 +55,13 @@ namespace ITechSite.Models
          //}
     }
 
+    public class JoinDoc
+    {
+        public Dokument Doc { get; set; }
+        public IList<Resource> AvalibleWorkstation { get; set; }
+        public IList<Resource> AvalibleModels { get; set; }
+        public ResourceListFind ResourceListFind { get; set; }
+
+    }
+
 }

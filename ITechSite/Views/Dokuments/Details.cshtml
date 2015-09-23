@@ -9,27 +9,6 @@
 <div>
     <hr />
    
-    @*@if (Model.FileType == ".pdf")
-    {
-        <b>pdf not suported</b>
-    }
-    @if (Model.FileType == ".jpg")
-    {
-        <img src="http://localhost:49429/Dokuments/show/@Model.Id" alt="Image" />
-    }
-    @if (Model.FileType == ".mp4")
-    {
-        @Microsoft.Web.Helpers.Video.MediaPlayer("http://localhost:49429/Dokuments/show/" + @Model.Id)
-    }*@
-
-
-    @*<video width="320" height="240" controls>
-        <source src="http://localhost:49429/Dokuments/show/@Model.Id" typ="video/mp4">
-        <source src="http://localhost:49429/Dokuments/show/@Model.Id" typ="video/wmv">
-        Twoja przeglądarka nie robi ' t obsługuje elementu video
-    </video>*@
-    
-
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.FileName)
@@ -126,16 +105,15 @@
                 @Html.DisplayFor(model => model.LocalFileName)
             </dd>
             <dt>
-                Plan informacyjny
+                Przypięty do
             </dt>
-
             <dd>
                 <table class="table table-hover">
                     @if (Model.InformationPlan.FirstOrDefault() != null)
                     {
                         <tr>
-                            <th>Stanowisko</th>
                             <th>Typ</th>
+                            <th>Stanowisko</th>
                             <th>Opis</th>
                             <th></th>
                             <th></th>
@@ -143,16 +121,28 @@
                         foreach (var item in Model.InformationPlan.OrderBy(m => m.Order))
                         {
                             <tr>
+                                <td>
+                                    @Html.Partial("~/Views/Resources/_ResourceType2Image.cshtml", item.Resource)
+                                </td>
                                 <td>@Html.DisplayFor(modelItem => item.Resource.Name)</td>
-                                <td>@Html.DisplayFor(modelItem => item.Resource.ResourceType.Type)</td>
                                 <td>@Html.DisplayFor(modelItem => item.Resource.Description)</td>
-                                <td>@Html.DisplayFor(modelItem => item.ResourceModel.Name)</td>
+                                <td>
+                                @if(item.ResourceModel!=null)
+                                {
+                                    @Html.Partial("~/Views/Resources/_ResourceType2Image.cshtml", item.ResourceModel)
+                                }
+                                    @Html.DisplayFor(modelItem => item.ResourceModel.Name)</td>
 
                                 <td>@Html.ActionLink("Szczegóły", "Details", "Resources", new { id = item.idR }, null)</td>
                             </tr>
                         }
                     }
+                    else
+                    {
+                        <p>Dokument nie jest jeszcze używany</p>
+                    }
                 </table>
+                @Html.ActionLinkGlyphicon("Przypnij do stanowiska / modelu/ wersji", "Join", null, new { idd = Model.Id }, new { @class = "btn btn-success" }, "glyphicon-paperclip")
             </dd>
 </dl>
 </div>

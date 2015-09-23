@@ -1,14 +1,25 @@
 ﻿@model ITechSite.Models.Resource
 
 @{
-    ViewBag.Title = "Zasób-usuwanie.";
+    ViewBag.Title = "Kasowanie.";
+    if(Model!=null)
+    {
+        if (Model.ResourceType != null)
+        {
+            ViewBag.Title = "Kasowanie " + Model.ResourceType.Type;
+        }
+    }      
 }
 
-<h2>Zasób-usuwanie</h2>
+<h2>@ViewBag.Title</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Czy jesteś pewien, że chsesz usunąć?</h3>
+@if (string.IsNullOrEmpty(@ViewBag.DontDelete) == true)
+{
+    <h3>@ViewBag.DontDelete</h3>
+}
+
 <div>
-    <h4>Resource</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -80,9 +91,20 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Skasuj" class="btn btn-default" /> |
-            @Html.ActionLink("Powrót do listy", "Index")
-        </div>
+    <div class="form-actions no-color">
+        @if (string.IsNullOrEmpty(@ViewBag.DontDelete) == true)
+        {
+            <button type="submit" class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash"></span> Kasuj
+            </button>
+        }
+        else
+        {
+            <h2>@ViewBag.DontDelete</h2>
+        }
+
+        @Html.ActionLink("Anuluj", "Edit", null,  new { id= Model.Id }, new {@class= "btn btn-success"})
+    </div>
+        
     }
 </div>

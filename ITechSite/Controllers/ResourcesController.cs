@@ -338,7 +338,25 @@ namespace ITechSite.Controllers
             {
                 return HttpNotFound();
             }
+            // sprawdzenie czy zasób można usunąć
+            @ViewBag.DontDelete = CanDelete(resource);
+            
             return View(resource);
+        }
+
+        private string CanDelete(Resource resource)
+        {
+            string msg = string.Empty;
+            if (resource.InformationPlan.Count() > 0)
+                msg = "InformationPlan, ";
+            if (resource.InformationPlanModel.Count() > 0)
+                msg = "InformationPlanModel, ";
+
+            if (!string.IsNullOrEmpty(msg))
+            {
+                msg = "Nie mogę usunąć ponieważ obiekt jest w użyciu przez " + msg;
+            }
+            return msg;
         }
 
         // POST: Resources/Delete/5
@@ -347,6 +365,11 @@ namespace ITechSite.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Resource resource = db.Resource.Find(id);
+
+            // usuwamy news
+            if (resource.News!=null)
+                db.News.Remove(resource.News);
+
             db.Resource.Remove(resource);
             db.SaveChanges();
             return RedirectToAction("Index");
