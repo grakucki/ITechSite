@@ -38,6 +38,8 @@
     <EntitySetMapping Name="Dokument">
       <EntityTypeMapping TypeName="ITechModel.Dokument">
         <MappingFragment StoreEntitySet="Dokument">
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
           <ScalarProperty Name="Kategoria_Id" ColumnName="Kategoria_Id" />
           <ScalarProperty Name="LocalFileName" ColumnName="LocalFileName" />
           <ScalarProperty Name="Size" ColumnName="Size" />
@@ -228,5 +230,14 @@
         <ScalarProperty Name="Id" ColumnName="IdM" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="TestSettings">
+      <EntityTypeMapping TypeName="ITechModel.TestSettings">
+        <MappingFragment StoreEntitySet="TestSettings">
+          <ScalarProperty Name="Test_BlokOnValid" ColumnName="Test_BlokOnValid" />
+          <ScalarProperty Name="Test_PeriodDay" ColumnName="Test_PeriodDay" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

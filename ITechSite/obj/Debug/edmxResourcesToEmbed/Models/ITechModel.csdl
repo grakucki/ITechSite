@@ -121,6 +121,7 @@
       <End Role="Resource" EntitySet="Resource" />
       <End Role="Resource1" EntitySet="Resource" />
     </AssociationSet>
+    <EntitySet Name="TestSettings" EntityType="ITechModel.TestSettings" />
   </EntityContainer>
   <EntityType Name="Dokument">
     <Key>
@@ -144,6 +145,8 @@
     <Property Name="Kategoria_Id" Type="Int32" />
     <NavigationProperty Name="Kategorie" Relationship="ITechModel.FK_Dokument_Kategorie" FromRole="Dokument" ToRole="Kategorie" />
     <NavigationProperty Name="WorkProcess" Relationship="ITechModel.FK_Dokument_WorkProcess" FromRole="Dokument" ToRole="WorkProcess" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OwnerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="WorkstationGroup">
     <Key>
@@ -471,4 +474,12 @@
     <End Type="ITechModel.Resource" Role="Resource" Multiplicity="*" />
     <End Type="ITechModel.Resource" Role="Resource1" Multiplicity="*" />
   </Association>
+  <EntityType Name="TestSettings">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Test_PeriodDay" Type="Int32" Nullable="false" />
+    <Property Name="Test_BlokOnValid" Type="Boolean" Nullable="false" />
+  </EntityType>
 </Schema>

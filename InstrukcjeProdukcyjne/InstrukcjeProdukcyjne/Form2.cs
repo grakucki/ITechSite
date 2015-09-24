@@ -1047,8 +1047,9 @@ namespace InstrukcjeProdukcyjne
                 }
 
                 f = Path.Combine(Properties.Settings.Default.App.LocalDoc, "blokowanie.dat");
-                if (File.Exists(f))
+                if (!File.Exists(f))
                     OdblokowanieStan = true;
+
                 await Task.Run(() => SimaticWrite(NrEwidencyjnyDrukarka, OdblokowanieStan));
             }
             catch (Exception ex)

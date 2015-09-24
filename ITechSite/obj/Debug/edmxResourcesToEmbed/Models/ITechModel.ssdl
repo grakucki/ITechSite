@@ -32,6 +32,8 @@
     <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
     <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
     <Property Name="Kategoria_Id" Type="int" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="OwnerId" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="Factory">
     <Key>
@@ -180,6 +182,14 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CpuType" Type="nvarchar" MaxLength="50" />
     <Property Name="Enabled" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TestSettings">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Test_PeriodDay" Type="int" Nullable="false" />
+    <Property Name="Test_BlokOnValid" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="WorkProcess">
     <Key>
@@ -469,6 +479,7 @@
     <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ResourceType" EntityType="Self.ResourceType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SimaticCpuType" EntityType="Self.SimaticCpuType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TestSettings" EntityType="Self.TestSettings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorkProcess" EntityType="Self.WorkProcess" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorkstationGroup" EntityType="Self.WorkstationGroup" Schema="dbo" store:Type="Tables" />
