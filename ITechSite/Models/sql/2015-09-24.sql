@@ -22,7 +22,10 @@ COMMIT
 USE [ITech]
 GO
 
-/****** Object:  Table [dbo].[TestSettings]    Script Date: 2015-09-24 20:53:12 ******/
+USE [ITech]
+GO
+
+/****** Object:  Table [dbo].[TestSettings]    Script Date: 2015-09-24 21:19:15 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -31,8 +34,8 @@ GO
 
 CREATE TABLE [dbo].[TestSettings](
 	[id] [int] NOT NULL,
-	[Test_PeriodDay] [int] NOT NULL,
-	[Test_BlokOnWalit] [int] NOT NULL,
+	[Test_PeriodDay] [int] NOT NULL CONSTRAINT [DF_Table_1_TestPeriodDay]  DEFAULT ((30)),
+	[Test_BlokOnValid] [bit] NOT NULL CONSTRAINT [DF_TestSettings_Test_BlokOnWalit]  DEFAULT ((0)),
  CONSTRAINT [PK_TestSettings] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -41,9 +44,4 @@ CREATE TABLE [dbo].[TestSettings](
 
 GO
 
-ALTER TABLE [dbo].[TestSettings] ADD  CONSTRAINT [DF_Table_1_TestPeriodDay]  DEFAULT ((30)) FOR [Test_PeriodDay]
-GO
-
-ALTER TABLE [dbo].[TestSettings] ADD  CONSTRAINT [DF_TestSettings_Test_BlokOnWalit]  DEFAULT ((0)) FOR [Test_BlokOnWalit]
-GO
 

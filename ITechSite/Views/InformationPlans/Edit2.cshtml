@@ -61,7 +61,8 @@
     {
         <tr>
             <td>
-                @{switch (item.ResourceType.id)
+                @Html.Partial("~/Views/Resources/_ResourceType2Image.cshtml", @item)
+                @*@{switch (item.ResourceType.id)
                 {
                     case 1:
                         <img src="~/Content/images/Res1.png" alt="@item.ResourceType.Type" title="@item.ResourceType.Type" />
@@ -74,7 +75,7 @@
                         break;
                     default:
                         break;
-                }}
+                }}*@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -110,7 +111,7 @@
             {
                 <tr>
                     <td>
-                        <img src="~/Content/images/Res3.png" alt="@itemWersje.ResourceType.Type" title="@itemWersje.ResourceType.Type" />
+                        @Html.Partial("~/Views/Resources/_ResourceType2Image.cshtml", @itemWersje)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => itemWersje.Name)
