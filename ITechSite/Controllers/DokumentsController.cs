@@ -18,32 +18,7 @@ namespace ITechSite.Controllers
     {
         private ITechEntities db = new ITechEntities(0);
 
-        // GET: Dokuments
-       // public ActionResult Index()
-       // {
-       //     //var dokument = db.Dokument.Include(d => d.FileContent).Include(d => d.WorkProcess);
-       //     var dokument = db.Dokument.Include(d => d.WorkProcess);
-       //     return View(dokument.ToList());
-       //}
-
-
-        //public ActionResult Index(string CodeName)
-        //{
-        //    //FindDokumentModel Find = Find1.Find;
-        //    //var dokument = db.Dokument.Include(d => d.FileContent).Include(d => d.WorkProcess);
-        //    IndexDokumentModel model = new IndexDokumentModel();
-        //    model.CodeName = CodeName;
-
-        //    if (CodeName==null)
-        //        model.CodeName= (string) Session["DokumentCodeName"];
-        //    else
-        //        Session["DokumentCodeName"]=model.CodeName;
-        //    if (!string.IsNullOrEmpty(model.CodeName))
-        //        model.Dokuments = db.Dokument.Where(m => m.CodeName.IndexOf(model.CodeName) >= 0).Include(d => d.WorkProcess);
-        //    else
-        //        model.Dokuments = db.Dokument.Include(d => d.WorkProcess);
-        //    return View(model);
-        //}
+       
         public ActionResult Find(IndexDokumentModel model)
         {
             return RedirectToAction("index");
@@ -116,6 +91,9 @@ namespace ITechSite.Controllers
                 {
                     dokument.LastWriteTime = DateTime.Now;
                     dokument.FileType = Path.GetExtension(dokument.FileName);
+                    dokument.CreateTime = DateTime.Now;
+                    dokument.OwnerId =User.Identity.Name;
+
                     if (dokument.File != null)
                     {
                         long i = dokument.File.Length;
@@ -136,7 +114,7 @@ namespace ITechSite.Controllers
                         var fileRepository = new DBFile();
                         fileRepository.Save(uploadData, fc.FileID);
 
-                        return RedirectToAction("Index");
+                        return RedirectToAction("Details", new { id = dokument.Id});
                     }
                     else
                     {
@@ -332,34 +310,161 @@ namespace ITechSite.Controllers
         [HttpGet]
         public ActionResult Join(int idd)
         {
-            JoinDoc doc = new JoinDoc();
+            JoinDoc joinDoc = new JoinDoc();
 
-            doc.Doc = db.Dokument.Find(idd);
+            joinDoc.Doc = db.Dokument.Find(idd);
             var rlf = new ResourceListFind();
             rlf.Allow_ResourceType = false;
             ViewBag.FindResources = rlf.Fill(db);
 
-            doc.AvalibleWorkstation = rlf.GetWorkstation(db);
-            doc.AvalibleModels = db.Resource.Where(m => m.Type == 2).ToList();
+            joinDoc.WorkstationList = rlf.GetWorkstations(db);
+            // w get nie wyświelamy listy modeli
 
-            return View(doc);
+            var ModelsList = rlf.GetModelsByWorkstations(db, null, null).ToList();
+            joinDoc.AvalibleModels = ModelsList.ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Id.ToString() });
+
+            if (joinDoc.ModelId != null)
+                joinDoc.ModelsList = ModelsList.Where(m => m.Id == joinDoc.ModelId).OrderBy(m => m.Name).ToList();
+
+            return View(joinDoc);
+        }
+
+        public bool JoinCheckValues(int? ModelId, int[] WorkstationsCheck, int[] ModelsCheck)
+        {
+            if (WorkstationsCheck==null)
+                ModelState.AddModelError("", "Zaznacz stanowiska");
+
+            if (ModelId.HasValue)
+                if (ModelsCheck == null)
+                    ModelState.AddModelError("", "Zaznacz modele lub warianty");
+
+            if (!ModelId.HasValue && ModelsCheck!=null)
+                ModelState.AddModelError("", "Zdecuduj się czy jest to dokument stanowiskowy czy modelowy?");
+
+
+            var allErrors = ModelState.Values.SelectMany(v => v.Errors).FirstOrDefault();
+            if (allErrors == null)
+                return true;
+            return false;
+        }
+
+        public ActionResult offjoin(int id)
+        {
+            var d = db.InformationPlan.Find(id);
+            if (d==null)
+                return RedirectToAction("Index");
+
+            db.InformationPlan.Remove(d);
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { id = d.IdD });
         }
 
         [HttpPost]
-        public ActionResult Join(int idd, ResourceListFind rf)
+        public ActionResult Join(int idd, int? ModelId, int[] WorkstationsCheck, int[] ModelsCheck, ResourceListFind rf)
         {
-            JoinDoc doc = new JoinDoc();
+             
+            if (rf!=null)
+            {
+                if (rf.FindAction == "Cancel")
+                {
+                    return RedirectToAction("Details", new { id = idd });
+                }
+                if (rf.FindAction=="AddDoc")
+                {
+                    if (JoinCheckValues(ModelId, WorkstationsCheck, ModelsCheck))
+                    {
+                        if (JoinDocAction(idd, WorkstationsCheck, ModelsCheck))
+                            return RedirectToAction("Details", new { id = idd });
+                    }
+                }
+            }
 
-            doc.Doc = db.Dokument.Find(idd);
+            JoinDoc joinDoc = new JoinDoc();
+            joinDoc.Doc = db.Dokument.Find(idd);
+            joinDoc.ModelId = ModelId;
+            joinDoc.WorkstationsCheck = WorkstationsCheck;
+            joinDoc.ModelsCheck = ModelsCheck;
             var rlf = ResourceListFind.From(rf);
            
             rlf.Allow_ResourceType = false;
             ViewBag.FindResources = rlf.Fill(db);
 
-            doc.AvalibleWorkstation = rlf.GetWorkstation(db);
-            doc.AvalibleModels = db.Resource.Where(m => m.Type == 2).ToList();
+            joinDoc.WorkstationList = rlf.GetWorkstations(db);
 
-            return View(doc);
+            var ModelsList = rlf.GetModelsByWorkstations(db, null, null).ToList();
+            joinDoc.AvalibleModels = ModelsList.ToSelectedList(m => new SelectListItem { Text = m.Name, Value = m.Id.ToString() });
+
+            if (joinDoc.ModelId!=null)
+                joinDoc.ModelsList = ModelsList.Where(m => m.Id == joinDoc.ModelId).OrderBy(m => m.Name).ToList();
+
+
+            return View(joinDoc);
+        }
+
+
+        private bool JoinDocAction(int idd, int[] WorkstationsCheck, int[] ModelsCheck)
+        {
+            bool ret = true;
+            try
+            {
+                foreach (var idw in WorkstationsCheck)
+                {
+                    if (ModelsCheck != null)
+                    {
+                        // instrukcje stanopwisko i model
+                        foreach (var idm in ModelsCheck)
+                            JoinInforamtionPlain(idw, idd, idm);
+                    }
+                    else
+                    {
+                        // instrukcje stanowiskowe
+                        JoinInforamtionPlain(idw, idd, null);
+                    }
+                }
+                db.SaveChanges();
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Błąd podczas zapisu " + ex.Message);
+                ret = false;
+            }
+            return ret;
+        }
+
+        private bool JoinInforamtionPlain(Nullable<int> IdR, Nullable<int> IdD, Nullable<int> IdM)
+        {
+            if (IdR != null)
+                if (IdD != null)
+                {
+                    if (db.Resource.Find(IdR) == null)
+                        return false;
+                    if (IdM.HasValue)
+                        if (db.Resource.Find(IdM) == null)
+                            return false;
+                    if (db.Dokument.Find(IdD) == null)
+                        return false;
+
+                    // czy taki plan już istnieje
+                    var exist = db.InformationPlan.Where(m => m.IdD == IdD.Value && m.idR == IdR.Value && m.IdM == IdM).Any();
+                    if (!exist)
+                    {
+                        InformationPlan ip = new InformationPlan();
+                        ip.Enabled = true;
+                        ip.Order = 0;
+                        ip.idR = IdR.Value;
+                        ip.IdD = IdD.Value;
+                        ip.IdM = IdM;
+
+
+                        db.InformationPlan.Add(ip);
+                    }
+                    return true;
+                }
+            return false;
+
         }
 
     }

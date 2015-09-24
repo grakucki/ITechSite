@@ -55,6 +55,7 @@ namespace ITechSite.Controllers
                     rf = GetOrDefault();
                 else
                     SetDefault(rf);
+            rf.Allow_ResourceType = true;
             rf.Fill(db);
             return View(rf);
         }

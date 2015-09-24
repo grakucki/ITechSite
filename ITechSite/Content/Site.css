@@ -117,9 +117,13 @@ button {
 }
 
 
-.form-Pink{
+.form-Gray{
     color: black;
     background-color: #CCCCCC;
 }
 
 
+.form-Orange{
+    color:  #ED7401;
+    background-color: #effa67;
+}

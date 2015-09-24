@@ -26,7 +26,7 @@ namespace ITechSite.Models
             r.Fill(db);
             ViewBag.FindResources = r;
 
-            var news = r.GetWorkstation(db).Select(m => new SelectedResources { Resource = m, Selected2=true }).ToList();
+            var news = r.GetWorkstations(db).Select(m => new SelectedResources { Resource = m, Selected2=true }).ToList();
 
             //var news = (from n in db.Resource where n.Type == 1 && n.Enabled == true orderby n.Name select new SelectedResources { Resource = n }).ToList();
 
@@ -81,7 +81,7 @@ namespace ITechSite.Models
             r.Fill(db);
             ViewBag.FindResources = r;
 
-            var news = r.GetWorkstation(db).Select(m => new SelectedResources { Resource = m}).ToList();
+            var news = r.GetWorkstations(db).Select(m => new SelectedResources { Resource = m}).ToList();
             //var news = (from n in db.Resource 
             //            where n.Type == 1 && n.Enabled == true 
             //            orderby n.Name select new SelectedResources { Resource = n }).ToList();

@@ -131,9 +131,12 @@
                                 {
                                     @Html.Partial("~/Views/Resources/_ResourceType2Image.cshtml", item.ResourceModel)
                                 }
-                                    @Html.DisplayFor(modelItem => item.ResourceModel.Name)</td>
+                                @Html.DisplayFor(modelItem => item.ResourceModel.Name)</td>
 
-                                <td>@Html.ActionLink("Szczegóły", "Details", "Resources", new { id = item.idR }, null)</td>
+                                @*<td>@Html.ActionLink("Usuń", "DeleteJoin", new { id = item.id }, null)</td>*@
+                                <td><a data-toggle="modal" data-target="#myModal" id="@item.id"
+                                   msg="@item.Resource.Name @if (item.ResourceModel != null) { <p></p> @item.ResourceModel.Name}"
+                                    class="someclass">Odłącz</a></td>
                             </tr>
                         }
                     }
@@ -142,6 +145,44 @@
                         <p>Dokument nie jest jeszcze używany</p>
                     }
                 </table>
+
+                <script>
+                    function InitModal2() {
+                        $('.someclass').on('click', function () {
+                            var itemid = $(this).attr('id');
+                            var itemmsg = $(this).attr('msg');
+                            var h = $(".buttonoffjoin").attr("href") + "/" + itemid;
+                            $(".buttonoffjoin").prop("href", h);
+                            $(".modal-text").html(itemmsg);
+                        });
+                    };
+                    $(function () {
+                        InitModal2();
+                    });
+                </script>
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Potwierdź odłączenie dokumentu z</h4>
+                            </div>
+                            <div class="modal-body">
+                                <h2>
+                                    <span class="modal-text"></span>
+                                </h2>
+                            </div>
+                            <div class="modal-footer">
+                                @using ITechSite.Custom
+                                @Html.ActionLinkGlyphicon(" Odłącz", "offjoin", null, new { @class = "btn btn-danger buttonoffjoin" }, "glyphicon-trash")
+                                @*<button type="button" class="btn btn-danger" data-dismiss="modal">Usuń</button>*@
+                                <button type="button" class="btn btn-default " data-dismiss="modal">Anuluj</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 @Html.ActionLinkGlyphicon("Przypnij do stanowiska / modelu/ wersji", "Join", null, new { idd = Model.Id }, new { @class = "btn btn-success" }, "glyphicon-paperclip")
             </dd>
 </dl>

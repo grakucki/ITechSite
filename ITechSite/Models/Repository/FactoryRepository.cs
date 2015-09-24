@@ -168,17 +168,6 @@ namespace ITechSite.Models
                 // dodajemy modele
                 var models = _dataContex.Resource.Where(m => m.Enabled == true && m.Type == 2 && m.ModelsWorkstationModel.Any(n => n.idW == Workstation.Value)).OrderBy(m=>m.Name).ToList();
                 l.AddRange(models);
-
-                // dodajemy wersje modeli
-
-                //foreach (var item in models)
-                //{
-                //    var vm = _dataContex.Resource.Where(m => 
-                //        m.Enabled == true
-                //        && m.ResourceModelParent.Any(n=>n.Id==item.Id)
-                //        ).OrderBy(m => m.Name).ToList();
-                //    l.AddRange(vm);
-                //}
             }
 
 
@@ -198,17 +187,15 @@ namespace ITechSite.Models
             if (!Models.Repository.FilterExtansion.IsEmpty(Find_ResourceType))
                 Resources2 = Resources2.Where(m => m.ResourceType.Type == Find_ResourceType);
 
+            if (!Models.Repository.FilterExtansion.IsEmpty(Find_ResourceType) && Find_ResourceType == "Stanowisko")
+            {
+                if (!Models.Repository.FilterExtansion.IsEmpty(factoryName))
+                    Resources2 = Resources2.Where(m => m.Factory == factoryName);
 
-            if (!Models.Repository.FilterExtansion.IsEmpty(factoryName))
-                Resources2 = Resources2.Where(m => m.Factory == factoryName);
 
-            //if (!Models.Repository.FilterExtansion.IsEmpty(Department))
-            //    Resources2 = Resources2.Join(context.WorkProcess, c => c.WorkProcess, d => d.Name, (c, m) => new { c, m })
-            //        .Where(m => m.m.Department.Name == Department).Select(m => m.c);
-
-            if (!Models.Repository.FilterExtansion.IsEmpty(WorkProcess))
-                Resources2 = Resources2.Where(m => m.WorkProcess == WorkProcess);
-
+                if (!Models.Repository.FilterExtansion.IsEmpty(WorkProcess))
+                    Resources2 = Resources2.Where(m => m.WorkProcess == WorkProcess);
+            }
 
             if (!Models.Repository.FilterExtansion.IsEmpty(Find_Word))
                 Resources2 = Resources2.Where(m => m.Name.IndexOf(Find_Word) >= 0);

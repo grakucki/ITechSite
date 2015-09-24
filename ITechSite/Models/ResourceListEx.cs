@@ -83,13 +83,48 @@ namespace ITechSite.Models
       }
 
 
-        public List<Resource> GetWorkstation(ITechEntities context)
+        
+        /// <summary>
+        /// Zwraca listę stanowisk spełniające określone kryteria
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public List<Resource> GetWorkstations(ITechEntities context)
         {
             FactoryRepository _repository = new FactoryRepository(context);
-            if (string.IsNullOrEmpty(Find_ResourceType))
-                Find_ResourceType = "Stanowisko";
-            var Resources2 = _repository.GetResourcesBy(Factory, Department, WorkProcess, Find_ResourceType, Find_Word, true, false);
+            var Resources2 = _repository.GetResourcesBy(Factory, Department, WorkProcess, "Stanowisko", Find_Word, true, false);
             return Resources2;
+        }
+
+        /// <summary>
+        /// Zwraca listę Modeli przypisanych do stanowisk spełniających określone kryteria
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public List<Resource> GetModelsByWorkstations(ITechEntities context, string ModelFilter, int? ModelId)
+        {
+            FactoryRepository _repository = new FactoryRepository(context);
+            //lista stanowisk
+            var Resources2 = _repository.GetResourcesBy(Factory, Department, WorkProcess, "Stanowisko", Find_Word, true, false);
+            // z listy pobrać modele
+
+            var IDW = Resources2.Select(m => m.Id).ToList();
+            var mod = from r in context.Resource join m in context.ModelsWorkstation on r.Id equals  m.idM where  r.ResourceType.id==2 && m.idW.HasValue && IDW.Contains(m.idW.Value) 
+                          && (string.IsNullOrEmpty(ModelFilter) || r.Name.Contains(ModelFilter))
+                          && (ModelId == null || r.Id == ModelId) 
+                      select r;
+
+            var models = mod.Distinct().OrderBy(m => m.Name).ToList();
+            //var models = new List<Resource>();
+            //foreach (var item in Resources2)
+            //{
+            //    models.AddRange(item.ModelsWorkstationWorkStation.Select(m=>m.ResourceModel));
+            //    // dodać distinct
+            //}
+            //models = models.Distinct().ToList();
+            
+            //var models = context.Resource.Where(m => m.Enabled == true && m.Type == 2 && m.ModelsWorkstationModel.Any(n => n.idW == Workstation.Value)).OrderBy(m => m.Name).ToList();
+            return models;
         }
 
        public ResourceListFind Fill(ITechEntities context)

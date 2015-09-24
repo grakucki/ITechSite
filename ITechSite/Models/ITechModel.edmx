@@ -37,6 +37,8 @@
           <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
           <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
           <Property Name="Kategoria_Id" Type="int" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="OwnerId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Factory">
           <Key>
@@ -706,6 +708,8 @@
           <Property Name="Kategoria_Id" Type="Int32" />
           <NavigationProperty Name="Kategorie" Relationship="ITechModel.FK_Dokument_Kategorie" FromRole="Dokument" ToRole="Kategorie" />
           <NavigationProperty Name="WorkProcess" Relationship="ITechModel.FK_Dokument_WorkProcess" FromRole="Dokument" ToRole="WorkProcess" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OwnerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="WorkstationGroup">
           <Key>
@@ -1076,6 +1080,8 @@
           <EntitySetMapping Name="Dokument">
             <EntityTypeMapping TypeName="ITechModel.Dokument">
               <MappingFragment StoreEntitySet="Dokument">
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="Kategoria_Id" ColumnName="Kategoria_Id" />
                 <ScalarProperty Name="LocalFileName" ColumnName="LocalFileName" />
                 <ScalarProperty Name="Size" ColumnName="Size" />

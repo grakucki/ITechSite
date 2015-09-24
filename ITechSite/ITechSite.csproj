@@ -278,6 +278,7 @@
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ItechModelEx\ItechUsers.cs" />
+    <Compile Include="Models\ItechModelEx\Workstation.cs" />
     <Compile Include="Models\ItechUsers.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
@@ -396,6 +397,7 @@
     </Compile>
     <Content Include="Models\sql\2015-08-25.sql" />
     <Content Include="Models\sql\2015-08-31.sql" />
+    <Content Include="Models\sql\2015-09-24.sql" />
     <Compile Include="Models\UniqueAttribute.cs" />
     <Compile Include="Models\DBFile.cs" />
     <Compile Include="Models\DocumentModels.cs" />
