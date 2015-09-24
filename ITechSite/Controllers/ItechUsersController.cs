@@ -16,7 +16,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ITechSite.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class ItechUsersController : Controller
     {
         // GET: ItechUsers

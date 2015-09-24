@@ -385,9 +385,13 @@
     <Content Include="Content\images\end2.png" />
     <Content Include="Content\images\left.png" />
     <Content Include="Content\images\left2.png" />
+    <Content Include="Content\images\News.gif" />
     <Content Include="Content\images\operatorzy.jpg" />
+    <Content Include="Content\images\Res1.gif" />
     <Content Include="Content\images\Res1.png" />
+    <Content Include="Content\images\Res2.gif" />
     <Content Include="Content\images\Res2.png" />
+    <Content Include="Content\images\Res3.gif" />
     <Content Include="Content\images\Res3.png" />
     <Content Include="Content\images\right.png" />
     <Content Include="Content\images\right2.png" />

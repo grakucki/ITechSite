@@ -10,6 +10,7 @@ using ITechSite.Models;
 
 namespace ITechSite.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class TestSettingsController : Controller
     {
         private ITechEntities db = new ITechEntities();
