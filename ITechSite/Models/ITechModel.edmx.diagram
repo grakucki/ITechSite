@@ -41,6 +41,7 @@
         <EntityTypeShape EntityType="ITechModel.ItechUsers" Width="1.5" PointX="4.875" PointY="6.25" />
         <AssociationConnector Association="ITechModel.ItechUsersRoles" />
         <AssociationConnector Association="ITechModel.ModelsVersionModels" />
+        <EntityTypeShape EntityType="ITechModel.TestSettings" Width="1.5" PointX="0.75" PointY="7.75" />
         </Diagram>
       <Diagram DiagramId="3054951c8206400f9fa79692752eb712" Name="Diagram2" />
       <Diagram DiagramId="112f2905862845bcb4f4f1b35f51eb8a" Name="Diagram3" >

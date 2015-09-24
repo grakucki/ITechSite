@@ -16,6 +16,7 @@ namespace ITechSite.Models
     class WorkProcessMetaData
     {
          [DisplayName("Proces roboczy")]
+        [Unique]
         public string Name { get; set; }
     }
 }

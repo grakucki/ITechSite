@@ -1,0 +1,32 @@
+﻿@model ITechSite.Models.TestSettings
+
+@{
+    ViewBag.Title = "Ustawień";
+}
+
+<h2>Ustawienia Testów</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Test_PeriodDay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Test_PeriodDay)
+        </dd>
+        <hr />
+        <dt>
+            @Html.DisplayNameFor(model => model.Test_BlokOnValid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Test_BlokOnValid)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edycja", "Edit", new { id = Model.id }) 
+</p>

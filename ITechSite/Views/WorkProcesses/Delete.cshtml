@@ -1,0 +1,32 @@
+﻿@model ITechSite.Models.WorkProcess
+
+@{
+    ViewBag.Title = "Usuń proces roboczy";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<h3>Czy napewno chcesz usunąć proces roboczy?</h3>
+<div>
+    <h4>Proces roboczy</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Usuń proces roboczy" class="btn btn-default" /> |
+            @Html.ActionLink("Powrót do listy", "Index")
+        </div>
+    }
+</div>

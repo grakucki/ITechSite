@@ -43,5 +43,6 @@ namespace ITechSite.Models
         public virtual DbSet<WorkProcess> WorkProcess { get; set; }
         public virtual DbSet<NewsPriority> NewsPriority { get; set; }
         public virtual DbSet<ItechUsers> ItechUsers { get; set; }
+        public virtual DbSet<TestSettings> TestSettings { get; set; }
     }
 }

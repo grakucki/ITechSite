@@ -37,12 +37,13 @@
                                 Ustawienia
                                 <span class="caret"></span>
                             </a>
+                            
                             <ul class="dropdown-menu inverse">
                                 <li><a href="@Url.Action("Index", "ItechUsers", new { area = "" })">Operatorzy</a></li>
-                                <li><a href="#">Testów</a></li>
+                                <li>@Html.ActionLink("Testów", "Index", "TestSettings", new { area = "" }, null)</li>
                                 <li><a href="@Url.Action("Categories", "TestEditor", new { area = "Testy" })">Kategorie</a></li>
-                                <li><a href="#">Projekty</a></li>
-                                <li><a href="#">Procesy robocze</a></li>
+                                @*<li><a href="#">Projekty</a></li>*@
+                                <li>@Html.ActionLink("Procesy robocze", "Index", "WorkProcesses", new { area = "" }, null)</li>
                             </ul>
                         </li>
                     }

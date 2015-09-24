@@ -244,7 +244,9 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ResourcesController.cs" />
+    <Compile Include="Controllers\TestSettingsController.cs" />
     <Compile Include="Controllers\TestyController.cs" />
+    <Compile Include="Controllers\WorkProcessesController.cs" />
     <Compile Include="Controllers\WorkstationsController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -278,6 +280,7 @@
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ItechModelEx\ItechUsers.cs" />
+    <Compile Include="Models\ItechModelEx\TestSettings.cs" />
     <Compile Include="Models\ItechModelEx\Workstation.cs" />
     <Compile Include="Models\ItechUsers.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
@@ -398,6 +401,9 @@
     <Content Include="Models\sql\2015-08-25.sql" />
     <Content Include="Models\sql\2015-08-31.sql" />
     <Content Include="Models\sql\2015-09-24.sql" />
+    <Compile Include="Models\TestSettings.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UniqueAttribute.cs" />
     <Compile Include="Models\DBFile.cs" />
     <Compile Include="Models\DocumentModels.cs" />
@@ -940,6 +946,16 @@
     <Content Include="Views\Shared\_SelectResourcesInline.cshtml" />
     <Content Include="Views\Resources\_ResourceType2Image.cshtml" />
     <Content Include="Views\Dokuments\Join.cshtml" />
+    <Content Include="Views\WorkProcesses\Create.cshtml" />
+    <Content Include="Views\WorkProcesses\Delete.cshtml" />
+    <Content Include="Views\WorkProcesses\Details.cshtml" />
+    <Content Include="Views\WorkProcesses\Edit.cshtml" />
+    <Content Include="Views\WorkProcesses\Index.cshtml" />
+    <Content Include="Views\TestSettings\Create.cshtml" />
+    <Content Include="Views\TestSettings\Delete.cshtml" />
+    <Content Include="Views\TestSettings\Details.cshtml" />
+    <Content Include="Views\TestSettings\Edit.cshtml" />
+    <Content Include="Views\TestSettings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
