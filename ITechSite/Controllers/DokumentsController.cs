@@ -209,16 +209,20 @@ namespace ITechSite.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
                     dokument.LastWriteTime = DateTime.Now;
                     dokument.FileType = Path.GetExtension(dokument.FileName);
+
+                    //TryUpdateModel(dokument, "",  new  string []  {"FileName,CodeName,Enabled,Description,ValidDtmOn,ValidDtmOff,WorkProcess_Id,Kategoria_Id,Keywords"});
+                    
                     db.Entry(dokument).State = EntityState.Modified;
+                    db.Entry(dokument).Property("CreateTime").IsModified = false;
+                    db.Entry(dokument).Property("OwnerId").IsModified = false;
 
                     db.SaveChanges();
 
                     SaveFileContent(dokument);
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Details", new { Id = dokument.Id });
                 }
                 //ViewBag.WorkProcess_Id = new SelectList(db.WorkProcess, "Id", "Name", dokument.WorkProcess_Id);
                 //ViewBag.Kategoria_Id = new SelectList(db.Kategorie, "Id", "name", dokument.Kategoria_Id);

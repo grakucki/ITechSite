@@ -381,12 +381,18 @@
     <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Areas\Testy\Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Areas\Testy\Readme.html" />
+    <Content Include="Content\images\any.png" />
+    <Content Include="Content\images\Avi.png" />
+    <Content Include="Content\images\Dokumenty.jpg" />
     <Content Include="Content\images\end.png" />
     <Content Include="Content\images\end2.png" />
+    <Content Include="Content\images\jpg.png" />
+    <Content Include="Content\images\Komunikaty.jpg" />
     <Content Include="Content\images\left.png" />
     <Content Include="Content\images\left2.png" />
     <Content Include="Content\images\News.gif" />
     <Content Include="Content\images\operatorzy.jpg" />
+    <Content Include="Content\images\PDF.png" />
     <Content Include="Content\images\Res1.gif" />
     <Content Include="Content\images\Res1.png" />
     <Content Include="Content\images\Res2.gif" />
@@ -445,9 +451,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\images\Dokumenty.jpg" />
     <Content Include="Content\images\Header.jpg" />
-    <Content Include="Content\images\Komunikaty.jpg" />
     <Content Include="Content\images\Plan.jpg" />
     <Content Include="Content\images\Zasoby.jpg" />
     <Content Include="Content\PagedList.css" />
@@ -554,6 +558,7 @@
     <Content Include="Areas\Testy\Views\Shared\_TestyLayout.cshtml" />
     <Content Include="Areas\Testy\Views\Test\Test2.cshtml" />
     <Content Include="Content\images\right2.pdn" />
+    <Content Include="Content\images\News.pdn" />
     <None Include="Properties\PublishProfiles\insofter.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\build.js" />
@@ -960,6 +965,7 @@
     <Content Include="Views\TestSettings\Details.cshtml" />
     <Content Include="Views\TestSettings\Edit.cshtml" />
     <Content Include="Views\TestSettings\Index.cshtml" />
+    <Content Include="Views\InformationPlans\_DocPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

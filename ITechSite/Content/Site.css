@@ -52,7 +52,7 @@ button {
     max-height: 80vh;
     min-height : 40vh;
     height : 40vh;
-
+    max-width: 100%;
  }
 
 .text-oneline
@@ -95,10 +95,19 @@ button {
 {
     border : solid;
     border-width : 1px;
-    padding: 5px;
+    padding: 3px;
     background-color: darkgrey;
     border-radius: 10px;
+    width:360px;
+    margin: 2px;
+    color: black;
+    min-height:110px;
+}
 
+
+.file-content img{
+    float: left;
+    margin: 3px;
 }
 
 .form-content

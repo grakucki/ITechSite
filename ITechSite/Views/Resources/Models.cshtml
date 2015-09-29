@@ -5,8 +5,11 @@
 }
 
 <h2>Modele na stanowisku @ViewBag.Workstation.Name</h2>
-
-<table class="table">
+<div class="alert alert-warning">
+    Lista modeli które produkowane są na stanowisku @ViewBag.Workstation.Name<br />
+    Zaznacz modele które są produkowane na tym stanowisku aby móc dodawać do nich dokumenty.
+</div>
+<table class="table table-hover">
     <tr>
         <th>Akcja</th>
         <th>
@@ -21,16 +24,27 @@
 
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+@foreach (var item in Model)
+{
+    var rem=item.ModelsWorkstationModel.Any(m => m.idW == @ViewBag.Workstation.Id);
+      var remcss = "alert-danger";
+      if (rem==true)
+      {
+          remcss = "alert-success";
+          }
+     
+    <tr class="alert @remcss">
         <td>
-            @if (!item.ModelsWorkstationModel.Any(m => m.idW == @ViewBag.Workstation.Id))
+            @using ITechSite.Custom;
+            @if (!rem)
             {
-                @Html.ActionLink("Dodaj", "WorkstationModelsUpdate", new { idM = item.Id, idW = @ViewBag.Workstation.Id });
+                @Html.SpanGlyphicon("", "glyphicon-remove-circle");
+                @Html.ActionLink(" Dodaj", "WorkstationModelsUpdate", new { idM = item.Id, idW = @ViewBag.Workstation.Id });
             }
             else
             {
-                @Html.ActionLink("Usuń", "WorkstationModelsUpdate", new { idM = item.Id, idW = @ViewBag.Workstation.Id, remove = true });
+                @Html.SpanGlyphicon("", "glyphicon-ok-circle");
+                @Html.ActionLink(" Usuń", "WorkstationModelsUpdate", new { idM = item.Id, idW = @ViewBag.Workstation.Id, remove = true });
             }
         </td>
         <td>
@@ -46,3 +60,8 @@
 }
 
 </table>
+
+
+<div>
+    @Html.ActionLink("Powrót do listy", "Edit", "Resources", new { id = @ViewBag.Workstation.Id }, null)
+</div>

@@ -25,7 +25,18 @@
             <dd>
                 @Html.DisplayFor(model => model.LastWriteTime)
             </dd>
-
+            <dt>
+                Utworzony
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.CreateTime)
+            </dd>
+            <dt>
+                Właściciel
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.OwnerId)
+            </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.WorkProcess.Name)
             </dt>
@@ -93,7 +104,6 @@
             <dt>
                 Rozmiar
             </dt>
-
             <dd>
                 @Html.DisplayFor(model => model.Size2)
             </dd>

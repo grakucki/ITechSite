@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
+@using ITechSite.Custom
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -9,7 +10,10 @@
         <li>
             @Html.ActionLink("Witaj " + User.Identity.GetUserName() + "!", "Index", "Manage", new { area = "" }, htmlAttributes: new { title = "Manage" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
+        @*<li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>*@
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">
+            @Html.SpanGlyphicon("", "glyphicon-off")
+            </a></li>
     </ul>
     }
 }

@@ -1,0 +1,37 @@
+﻿@model ITechSite.Models.InformationPlan
+@using ITechSite.Custom
+
+<div class="form-group file-content">
+        @{var fileicon = "any.png";
+           switch(Model.Dokument.FileType.ToLower())
+           {
+               case ".jpg": 
+                   fileicon = "jpg.png";
+                   break;
+               case ".mp4":
+                   fileicon = "avi.png";
+                   break;
+               case ".pdf":
+                   fileicon = "pdf.png";
+                   break;
+           }
+          }
+        <div class="pull-right ">
+            @Html.ActionLinkGlyphicon("", "Delete", new { id = Model.id }, "glyphicon-trash")
+        </div>
+        <a href="@Url.Action("Show", "Dokuments", new { id = Model.IdD })" target="_blank">
+            <img src="~/Content/images/@fileicon" class="" />
+        </a>
+
+        @Html.Label("", Model.Dokument.FileName, htmlAttributes: new { @class = "control-label" })<br />
+        <p class="text">@Model.Dokument.Description</p>
+
+        @*<label class="control-label text-danger">@{ if (Model.Dokument.Kategorie != null) {@Model.Dokument.Kategorie.name};}</label>*@
+    
+        <p class ="control-label text-info">
+            <strong>@{ if (Model.Dokument.Kategorie != null)
+             {@Model.Dokument.Kategorie.name};} </strong>
+            <small><em> @Model.Dokument.OwnerId</em></small>
+        </p>
+
+</div>

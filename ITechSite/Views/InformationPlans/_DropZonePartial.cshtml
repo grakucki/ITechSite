@@ -9,7 +9,7 @@
 
 <form id="my-dropzone" class="dropzone form-control btn-success">
     <strong>Aby dodać przeciągni dokument z komputera tutaj.</strong>
-    <h1><i class="glyphicon glyphicon-upload"></i></h1>
+    <i class="lead glyphicon glyphicon-upload"></i>
 </form>
 
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -123,7 +123,7 @@
             //alert("Wysyłam");
             myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
         };
-
+        document.querySelector("#my-dropzone").style.height="110px"
     })
 
 </script>

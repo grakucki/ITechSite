@@ -7,7 +7,7 @@
       <Diagram DiagramId="f7b5d33c4c714c9ba3dbfd9400f38094" Name="Diagram1" ZoomLevel="111">
         <EntityTypeShape EntityType="ITechModel.FileContent" Width="1.5" PointX="4" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.Model" Width="1.5" PointX="16" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="13.625" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.Dokument" Width="1.5" PointX="6.5" PointY="0.75" />
         <EntityTypeShape EntityType="ITechModel.WorkstationGroup" Width="1.5" PointX="16" PointY="0.875" />
         <AssociationConnector Association="ITechModel.FK_Workstation_WorkstationGroup" />
