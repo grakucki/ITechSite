@@ -372,6 +372,8 @@ namespace ITechSite.Controllers
                         doc.ValidDtmOn = DateTime.Now.Date;
                         doc.ValidDtmOff = null;
                         doc.Enabled = true;
+                        doc.CreateTime = DateTime.Now;
+                        doc.OwnerId = User.Identity.Name;
 
                         doc.File= Httpfile.InputStream;
                         var rep = new DokumentRepository(db);

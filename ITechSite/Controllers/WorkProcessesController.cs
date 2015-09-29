@@ -13,7 +13,7 @@ namespace ITechSite.Controllers
     [Authorize(Roles = "admin")]
     public class WorkProcessesController : Controller
     {
-        private ITechEntities db = new ITechEntities();
+        private ITechEntities db = new ITechEntities(0);
 
         // GET: WorkProcesses
         public ActionResult Index()
