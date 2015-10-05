@@ -27,6 +27,9 @@ namespace InstrukcjeProdukcyjne
         [DataMember]
         public int? Stanowisko { get; set; }
 
+        [DataMember]
+        public bool? PozwalajNaBlokowanieStanowiska { get; set; }
+
         
         public void ApplyDefaultIfEmpty()
         {
@@ -57,6 +60,9 @@ namespace InstrukcjeProdukcyjne
 
             if (!IfEmpty || (Stanowisko == null))
                 Stanowisko = 0;
+
+            if (!IfEmpty || (PozwalajNaBlokowanieStanowiska == null))
+                PozwalajNaBlokowanieStanowiska = false;
         }
 
         public void ApplyDefault()

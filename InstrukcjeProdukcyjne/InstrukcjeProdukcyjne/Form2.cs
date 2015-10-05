@@ -697,6 +697,7 @@ namespace InstrukcjeProdukcyjne
                 if (dial.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     await LoadResource_Async(Properties.Settings.Default.App.Stanowisko);
+                    DisplaySimaticState();
                 }
             }
             catch (Exception ex)
@@ -705,6 +706,12 @@ namespace InstrukcjeProdukcyjne
             }
 
         }
+
+        private void DisplaySimaticState()
+        {
+            SimaticWriteAsync(LoginUser2.UserId, true);
+        }
+
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             if (!AllowAction(AllowRoles.Kierownik, "Aby zmienić ustawienia przyłóż kartę"))
@@ -1040,21 +1047,40 @@ namespace InstrukcjeProdukcyjne
         {
             try
             {
-                var f = Path.Combine(Properties.Settings.Default.App.LocalDoc, "blokowanie1.dat");
-                if (!File.Exists(f))
+                toolStripStatusLabel2.ToolTipText = ">>>";
+                toolStripStatusLabel2.BackColor = Color.OrangeRed;
+
+                if (!Properties.Settings.Default.App.PozwalajNaBlokowanieStanowiska.Value)
                 {
-                    File.WriteAllText(f,DateTime.Now.ToString());
+                    OdblokowanieStan = true;
+                }
+                await Task.Run(() => SimaticWrite(NrEwidencyjnyDrukarka, OdblokowanieStan));
+
+                if (!Properties.Settings.Default.App.PozwalajNaBlokowanieStanowiska.Value)
+                {
+                    toolStripStatusLabel2.ToolTipText = "Praca bez blokady";
+                    toolStripStatusLabel2.BackColor = Color.Blue;
+                }
+                else
+                {
+                    if (OdblokowanieStan)
+                    {
+                        toolStripStatusLabel2.ToolTipText = "Odblokowane"; 
+                        toolStripStatusLabel2.BackColor = Color.Green;
+                    }
+                    else
+                    {
+                        toolStripStatusLabel2.ToolTipText = "Zablokowane";
+                        toolStripStatusLabel2.BackColor = Color.Red;
+                    }
                 }
 
-                f = Path.Combine(Properties.Settings.Default.App.LocalDoc, "blokowanie.dat");
-                if (!File.Exists(f))
-                    OdblokowanieStan = true;
 
-                await Task.Run(() => SimaticWrite(NrEwidencyjnyDrukarka, OdblokowanieStan));
+                    
             }
             catch (Exception ex)
             {
-
+                toolStripStatusLabel2.ToolTipText = ex.Message;
             }
         }
 

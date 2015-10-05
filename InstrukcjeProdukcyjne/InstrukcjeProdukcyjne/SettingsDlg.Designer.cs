@@ -43,6 +43,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             nameLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.resourceBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -61,7 +62,7 @@
             // 
             this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.buttonOk.Location = new System.Drawing.Point(366, 423);
+            this.buttonOk.Location = new System.Drawing.Point(364, 469);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(93, 63);
             this.buttonOk.TabIndex = 0;
@@ -73,7 +74,7 @@
             // 
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold);
-            this.buttonCancel.Location = new System.Drawing.Point(193, 423);
+            this.buttonCancel.Location = new System.Drawing.Point(191, 469);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(93, 63);
             this.buttonCancel.TabIndex = 1;
@@ -134,7 +135,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button1.Location = new System.Drawing.Point(366, 301);
+            this.button1.Location = new System.Drawing.Point(364, 347);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(147, 94);
             this.button1.TabIndex = 9;
@@ -156,7 +157,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button3.Location = new System.Drawing.Point(530, 301);
+            this.button3.Location = new System.Drawing.Point(528, 347);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(147, 94);
             this.button3.TabIndex = 11;
@@ -183,11 +184,23 @@
             this.textBox3.Size = new System.Drawing.Size(453, 31);
             this.textBox3.TabIndex = 12;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.checkBox1.Location = new System.Drawing.Point(221, 267);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(382, 29);
+            this.checkBox1.TabIndex = 14;
+            this.checkBox1.Text = "Pozwalaj Na Blokowanie Stanowiska";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // SettingsDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(705, 506);
+            this.ClientSize = new System.Drawing.Size(705, 544);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.button3);
@@ -229,5 +242,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

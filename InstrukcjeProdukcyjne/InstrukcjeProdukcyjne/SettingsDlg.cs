@@ -88,6 +88,8 @@ namespace InstrukcjeProdukcyjne
                 w = workstations.Where(m => m.Id == id).FirstOrDefault();
             WorkstationComboBox.SelectedItem = w;
 
+            checkBox1.Checked = Properties.Settings.Default.App.PozwalajNaBlokowanieStanowiska.Value;
+
         }
 
         private void SaveSettings()
@@ -99,7 +101,7 @@ namespace InstrukcjeProdukcyjne
             Properties.Settings.Default.App.ServerDoc = textBox1.Text;
             Properties.Settings.Default.App.LocalDoc = textBox2.Text;
             var w = (Resource) WorkstationComboBox.SelectedItem;
-
+            Properties.Settings.Default.App.PozwalajNaBlokowanieStanowiska = checkBox1.Checked;
             if (w != null)
                 Properties.Settings.Default.App.Stanowisko = w.Id;
             else
