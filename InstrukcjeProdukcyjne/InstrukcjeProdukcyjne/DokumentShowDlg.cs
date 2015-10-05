@@ -41,20 +41,31 @@ namespace InstrukcjeProdukcyjne
 
         private void DokumentShowDlg_Load(object sender, EventArgs e)
         {
-             GoFullscreen(true);
-            if (User != null)
+            try
             {
-                labelUserName.Text = User.UserName;
-                labelUserNo.Text = User.NrKarty;
+
+                GoFullscreen(true);
+
+                if (User != null)
+                {
+                    labelUserName.Text = User.UserName;
+                    labelUserNo.Text = User.NrKarty;
+                }
+                if (File != null)
+                {
+                    KomunikatLabel.Text = File.Dok.Description;
+                    mediaViewerControl1.ShowDokument(File.FullFileName);
+                }
+                else
+                {
+                    MessageBox.Show("Nie określono dokumentu");
+                    this.Close();
+
+                }
             }
-            if (File != null)
+            catch (Exception ex)
             {
-                KomunikatLabel.Text = File.Dok.Description;
-                mediaViewerControl1.ShowDokument(File.FullFileName);
-            }
-            else
-            {
-                MessageBox.Show("Nie określono dokumentu");
+                MessageBox.Show(ex.Message);
                 this.Close();
             }
         }

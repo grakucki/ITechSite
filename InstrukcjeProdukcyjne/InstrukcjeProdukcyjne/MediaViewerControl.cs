@@ -62,8 +62,10 @@ namespace InstrukcjeProdukcyjne
                         newmv = new PictureViewerControl();
                     }
 
-            if (newmv==null)
+            if (newmv == null)
+            {
                 throw new Exception("Pliki " + Path.GetExtension(fileName) + " nie są obsługiwane");
+            }
 
 
             Control c = (Control)newmv;

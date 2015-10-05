@@ -539,7 +539,13 @@ namespace InstrukcjeProdukcyjne
 
             if (res == null)
                 return;
-            var IP = res.InformationPlanModel;
+            //var IP = res.InformationPlanModel;
+            ICollection<InformationPlan> IP = null;
+            if (res.Type==1)
+                IP = res.InformationPlanWorkstation.Where(m => m.IdM == null || m.IdM == res.Id).ToList();
+            else
+                IP = res.InformationPlanModel;
+
             var g = IP.Where(m => m.Dokument.Kategorie != null).Select(m => m.Dokument.Kategorie.name).Distinct();
 
 
@@ -732,12 +738,17 @@ namespace InstrukcjeProdukcyjne
 
         private bool AllowAction(string allowRoles, string LoginMsg)
         {
+            if (LoginUser2 == null)
+            {
+                return true;
+            }
             var b = LoginUser2.IsInRole(allowRoles);
             if (b == true)
                 return true;
             if (ShowLoginInpersonateDlg(LoginMsg, true, allowRoles)==System.Windows.Forms.DialogResult.OK)
                 return true;
             return false;
+
 
         }
 
@@ -989,31 +1000,8 @@ namespace InstrukcjeProdukcyjne
         private void listView1_DrawItem(object sender, DrawListViewItemEventArgs e)
         {
 
-            //if ((e.State & ListViewItemStates.Selected) != 0)
-            //{
-            //    // Draw the background and focus rectangle for a selected item.
-            //    e.Graphics.FillRectangle(Brushes.Maroon, e.Bounds);
-            //    e.DrawFocusRectangle();
-            //}
-            //else
-            //{
-            //    // Draw the background for an unselected item.
-            //    using (LinearGradientBrush brush =
-            //        new LinearGradientBrush(e.Bounds, Color.Orange,
-            //        Color.Maroon, LinearGradientMode.BackwardDiagonal))
-            //    {
-            //        e.Graphics.FillRectangle(brush, e.Bounds);
-            //    }
-            //}
+           
 
-            //// Draw the item text for views other than the Details view.
-            //if (listView1.View != View.Details)
-            //{
-            //    e.DrawText();
-            //}
-
-            //var p = new Pen(Color.Red, 3);
-            //e.Graphics.DrawRectangle(p, e.Bounds);
 
             e.DrawDefault = true;
         }
