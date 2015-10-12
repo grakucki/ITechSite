@@ -28,6 +28,7 @@ namespace ITechSite.Models
         public int FormAction { get; set; }
         public string MsgOk { get; set; }
         public string MsgError { get; set; }
+        public List<string> ErrorItem { get; set; }
 
         // FormAction=0 podaj plik i validacja
         // FormAction=1 plik poprawny czy zapisać

@@ -60,9 +60,25 @@
 <div class="alert-info">
     <h3>@Model.MsgOk</h3>
 </div>
-<div class="alert-danger">
-    <h3>@Model.MsgError</h3>
-</div>
+
+@if (!string.IsNullOrEmpty(@Model.MsgError))
+{ 
+    <div class="panel panel-danger">
+        <div class="panel-heading"><h3>@Model.MsgError</h3></div>
+        <div class="panel-body">
+            @if (Model.ErrorItem != null)
+            {
+                <ul>
+                    @foreach (var item in Model.ErrorItem)
+                    {
+                        <li class="text-danger">@item</li>
+                    }
+                </ul>
+
+            }
+        </div>
+    </div>
+}
 
 
 @if (step == 0)

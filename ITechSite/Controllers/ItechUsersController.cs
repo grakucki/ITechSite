@@ -135,7 +135,8 @@ namespace ITechSite.Controllers
                 {
                     ModelState.AddModelError("File", "Podaj plik");
                     ImportFile.MsgError = "Podaj plik.";
-
+                    ViewBag.step = step;
+                    return View(ImportFile);
                 }
            }
 
@@ -158,7 +159,7 @@ namespace ITechSite.Controllers
                 switch (step)
                 {
                     case 0:
-                        if (FileIsValid(data))
+                        if (FileIsValid(data, ImportFile))
                         {
                             step = 1;
                             ImportFile.MsgOk = "Plik poprawny kliknij zapisz aby wrowadzić zmiany.";
@@ -181,11 +182,17 @@ namespace ITechSite.Controllers
             return View(ImportFile);
         }
 
-        private bool FileIsValid(string data)
+        private bool FileIsValid(string data, ItechUsersImport ImportFile)
         {
             if (data.Length > 500)
                 return true;
 
+            ImportFile.ErrorItem = new List<string>();
+            ImportFile.ErrorItem.Add("Błąd nr 1");
+            ImportFile.ErrorItem.Add("Błąd nr 2");
+            ImportFile.ErrorItem.Add("Błąd nr 3");
+            ImportFile.ErrorItem.Add("Błąd nr 4");
+            ImportFile.ErrorItem.Add("Błąd nr 5");
             return false;
         }
 
