@@ -13,6 +13,7 @@ using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.IO;
 
 namespace ITechSite.Controllers
 {
@@ -101,10 +102,93 @@ namespace ITechSite.Controllers
         }
 
         // GET: ItechUsers
+        [HttpGet]
         public ActionResult Import()
         {
-            return View();
+            Session["ItechUsersImport"] = null;
+            var d = new ItechUsersImport();
+            ViewBag.step = 0;
+
+            return View(d);
         }
+        
+
+
+        [HttpPost]
+        public ActionResult Import(ItechUsersImport ImportFile, int? step)
+        {
+
+            if (!step.HasValue)
+                step=0;
+
+            if (step == 0)
+            {
+                if (ImportFile.File != null)
+                {
+                    using (StreamReader sr = new StreamReader(ImportFile.File.InputStream))
+                    {
+                        string f = sr.ReadToEnd();
+                        Session["ItechUsersImport"] = f;
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("File", "Podaj plik");
+                    ImportFile.MsgError = "Podaj plik.";
+
+                }
+           }
+
+            if (step==2)
+                return RedirectToAction("Index");
+
+
+
+
+            string data = (string)Session["ItechUsersImport"];
+            if (string.IsNullOrEmpty(data))
+            {
+                ImportFile.FileName = "";
+                step=0;
+                ModelState.AddModelError("File", "Podaj poprawny plik");
+                ImportFile.MsgError = "Podaj poprawny plik.";
+            }
+            else
+            {
+                switch (step)
+                {
+                    case 0:
+                        if (FileIsValid(data))
+                        {
+                            step = 1;
+                            ImportFile.MsgOk = "Plik poprawny kliknij zapisz aby wrowadzić zmiany.";
+                        }
+                        else
+                            ImportFile.MsgError = "Popraw błędy i wczytaj plik ponownie.";
+                        break;
+                    case 1:
+                        Session["ItechUsersImport"] = null;
+                        ImportFile.MsgOk = "Zmiany wprowadzono pomyślnie.";
+                        step = 2;
+                        break;
+                    case 2:
+                        return RedirectToAction("Index");
+                    default:
+                        return RedirectToAction("Index");
+                }
+            }
+            ViewBag.step = step;
+            return View(ImportFile);
+        }
+
+        private bool FileIsValid(string data)
+        {
+            if (data.Length > 500)
+                return true;
+
+            return false;
+        }
+
 
         public ActionResult ShowRoles(int? id)
         {

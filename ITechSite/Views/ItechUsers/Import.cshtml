@@ -1,48 +1,80 @@
-﻿@{
+﻿@model ITechSite.Models.ItechUsersImport
+@{
     ViewBag.Title = "Import";
     Layout = "_UsersLayout.cshtml";
 }
 
 <h3>Import listy użytkowników z pliku csv</h3>
 
+@{int step = ViewBag.step;}
+@using (Html.BeginForm("Import", "ItechUsers", FormMethod.Post, new { enctype = "multipart/form-data" }))
 
-@using (Html.BeginForm("Index", "ItechUsers", FormMethod.Get))
 {
     <div class="form-horizontal">
         <div class="form-group">
             <div class="col-md-10">
                 Plik z listą użytkowników  <br />
-                <input name="FileName" class="form-control" />
-                <input type="file" name="File" id="File" value="" class="btn btn-default" />
+                @Html.EditorFor(model => model.FileName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
+                
+                <input hidden name="step" id="step" value="@step" />
+                @if (step == 0)
+                {
+
+                    @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+                    <input type="file" name="File" id="File" class="btn btn-default" />
+                    <script>
+                    document.querySelector("[name=File]").addEventListener("change", function (e) {
+                        var name = document.querySelector("[name=FileName]");
+                        //if (name.value === "")
+                        name.value = this.value.substr(this.value.lastIndexOf("\\") + 1);
+                    });
+                </script>
+                }
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-10">
-                @*<input type="submit" name="ImportUsers" value="Importuj" class="btn btn-default" />*@
-                <button type="submit" name="ImportUsers" class="btn btn-default btn-block">
-                    <span class="glyphicon glyphicon-import"></span> Importuj
+                <button type="submit" name="ImportUsers" class="btn btn-primary btn-block">
+                    @if (step == 0)
+                    {
+                       <span class="glyphicon glyphicon-import"></span><span>Importuj</span>
+                    }
+                    else if (step == 1)
+                    {
+                        <span class="glyphicon glyphicon-save"></span><span>Zapisz</span>
+                    }
+                    else
+                    {
+                        <span class="glyphicon glyphicon-ok"></span><span>Ok</span>
+                    }
+
                 </button>
             </div>
         </div>
     </div>
 }
 
-<script>
-            document.querySelector("[name=File]").addEventListener("change", function (e) {
-                var name = document.querySelector("[name=FileName]");
-                //if (name.value === "")
-                name.value = this.value.substr(this.value.lastIndexOf("\\") + 1);
-            });
-</script>
-<div>
-    <h3> format pliku</h3>
-    <code>
+
+<div class="alert-info">
+    <h3>@Model.MsgOk</h3>
+</div>
+<div class="alert-danger">
+    <h3>@Model.MsgError</h3>
+</div>
+
+
+@if (step == 0)
+{
+    <div class="alert-warning">
+        <h3> format pliku</h3>
+
         Nazwisko; Imię; Nr identyfikacyjny; Nr karty; Profil dostepu; Opis \n
         <br />Kowalski; Jan; 456; 23423423; Kierownictwo; Produkcja-kierownictwo
 
         <br />Pierwsza linia jest nagłówkiem i jest ignorowana
-    </code>
-</div>
-
+        <br />Kodowanie UTF8
+    </div>
+}
 
