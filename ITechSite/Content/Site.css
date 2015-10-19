@@ -138,5 +138,13 @@ button {
 }
 
 .Zoom_2 {
-    zoom:2;
+        /*zoom:2;*/
+     /* All browsers except webkit*/
+      transform: scale(2);
+
+      /* Webkit browsers*/
+      -webkit-transform: scale(2);
+
+       margin:20px;
+       padding:5px;
 }
