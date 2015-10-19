@@ -300,6 +300,9 @@
     <Compile Include="Models\NewsPriority.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Repository\ItechUsersImport\ImportUser.cs" />
+    <Compile Include="Models\Repository\ItechUsersImport\SitechUser.cs" />
+    <Compile Include="Models\Repository\ItechUsersImport\StreamEx.cs" />
     <Compile Include="Models\Repository\ItechUsersRepository.cs" />
     <Compile Include="Models\Repository\DokumentRepository.cs" />
     <Compile Include="Models\Repository\FactoryRepository.cs" />
@@ -411,6 +414,7 @@
     <Content Include="Models\sql\2015-08-25.sql" />
     <Content Include="Models\sql\2015-08-31.sql" />
     <Content Include="Models\sql\2015-09-24.sql" />
+    <Content Include="Models\sql\2015-10-19.sql" />
     <Compile Include="Models\TestSettings.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>

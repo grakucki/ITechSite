@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.IO;
+using ITechSite.Models.Repository.ItechUsersImport;
 
 namespace ITechSite.Controllers
 {
@@ -165,12 +166,15 @@ namespace ITechSite.Controllers
                             ImportFile.MsgOk = "Plik poprawny kliknij zapisz aby wrowadzić zmiany.";
                         }
                         else
-                            ImportFile.MsgError = "Popraw błędy i wczytaj plik ponownie.";
+                            ImportFile.MsgError = "Popraw błędy w pliku i wczytaj plik ponownie.";
                         break;
                     case 1:
-                        Session["ItechUsersImport"] = null;
-                        ImportFile.MsgOk = "Zmiany wprowadzono pomyślnie.";
-                        step = 2;
+                        if (FilSaveChanges(data, ImportFile))
+                        {
+                            Session["ItechUsersImport"] = null;
+                            ImportFile.MsgOk = "Zmiany wprowadzono pomyślnie.";
+                            step = 2;
+                        }
                         break;
                     case 2:
                         return RedirectToAction("Index");
@@ -182,18 +186,35 @@ namespace ITechSite.Controllers
             return View(ImportFile);
         }
 
+        private bool FilSaveChanges(string data, ItechUsersImport ImportFile)
+        {
+            ImportUser users = new ImportUser();
+            if (!users.Prepare(data))
+            {
+                ImportFile.ErrorItem = users.ErrorList;
+                ImportFile.StatusList = users.StatusList;
+                ImportFile.MsgError = "Zapis zakończony niepowodzeniem.";
+                return false;
+            }
+
+            var ret= users.SaveChanges();
+            ImportFile.ErrorItem = users.ErrorList;
+            ImportFile.StatusList = users.StatusList;
+
+
+            
+            return ret;
+        }
+
         private bool FileIsValid(string data, ItechUsersImport ImportFile)
         {
-            if (data.Length > 500)
-                return true;
 
-            ImportFile.ErrorItem = new List<string>();
-            ImportFile.ErrorItem.Add("Błąd nr 1");
-            ImportFile.ErrorItem.Add("Błąd nr 2");
-            ImportFile.ErrorItem.Add("Błąd nr 3");
-            ImportFile.ErrorItem.Add("Błąd nr 4");
-            ImportFile.ErrorItem.Add("Błąd nr 5");
-            return false;
+            ImportUser users = new ImportUser();
+            var ret = users.Prepare(data);
+
+            ImportFile.ErrorItem = users.ErrorList;
+            ImportFile.StatusList = users.StatusList;
+            return ret;
         }
 
 

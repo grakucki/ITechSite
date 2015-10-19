@@ -97,6 +97,12 @@
         </div>
     </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastTestKompetencjiResult, "Wymuś wykonanie testu przy najnajbliższym logowaniu", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.CheckBoxFor(m => m.ForceTestKompetencji, new { @class = "form-label Zoom_2" })
+            </div>
+        </div>
 
         
         <div class="form-group">
@@ -111,20 +117,27 @@
         
         <div>
             <div class="form-group">
-                @Html.LabelFor(model => model.LastTestKompetencjiDtm, "Test kompetencji", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.LastTestKompetencjiDtm, "Ostatni test wykonano", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.Label("", Model.LastTestKompetencjiDtm.ToString(), htmlAttributes: new { @class = "form-label" })
-                    @Html.ValidationMessageFor(model => model.LastTestKompetencjiDtm, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.LastTestKompetencjiResult, "Wynik testu", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.LastTestKompetencjiResult, "Ostatni poprawny test wykonano", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.Label("", Model.LastTestKompetencjiResult.ToString(), htmlAttributes: new { @class = "form-label" })
-                    @Html.ValidationMessageFor(model => model.LastTestKompetencjiResult, "", new { @class = "text-danger" })
+                    @Html.Label("", Model.LastTestKompetencjiDtmSucces.ToString(), htmlAttributes: new { @class = "form-label" })
                 </div>
             </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LastTestKompetencjiResult, "Wynik ostatniego testu", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Label("", Model.LastTestKompetencjiResult.ToString(), htmlAttributes: new { @class = "form-label" })
+                </div>
+            </div>
+
         </div>
         
     </div>
@@ -139,8 +152,7 @@
             g = g + item.Name + "; ";
         }
 
-        @Html.Label("", g, htmlAttributes: new { @class = "form-label" })
-
+        @Html.Label("", g, htmlAttributes: new { @class = "form-label"})
    </div>
 </div> 
 

@@ -11,6 +11,7 @@ using System.Data.Entity.Validation;
 using System.IO;
 using PagedList;
 using System.Web.Security;
+using ITechSite.Models.Repository.ItechUsersImport;
 
 namespace ITechSite.Models.Repository
 {
@@ -31,8 +32,11 @@ namespace ITechSite.Models.Repository
                 x = x.Where(m=>m.UserName.Contains(userName));
             else
                 order = "id";
+
             if (!string.IsNullOrEmpty(identityNo))
-                x = x.Where(m => m.CardNo.Contains(identityNo));
+            {
+                x = x.Where(m => m.CardNo.Contains(identityNo) || m.UserId.Contains(identityNo));
+            }
 
             if (order == "name")
                 x = x.OrderBy(m => m.UserName);
@@ -69,6 +73,7 @@ namespace ITechSite.Models.Repository
         {
             return _dataContex.AspNetRoles.Select(m => new SelectedItem{ Id = m.Id, Name = m.Name }).ToList();
         }
+
 
         internal void ChangeRoles(int id, string[] SelectedRoles)
         {

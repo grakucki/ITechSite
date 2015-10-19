@@ -40,6 +40,7 @@ namespace ITechSite.Models
         public string FileName { get; set; }
 
         [DisplayName("Numer instrukcji")]
+        [Required]
         public string CodeName { get; set; }
 
         [DisplayName("Zmodyfikowany")]

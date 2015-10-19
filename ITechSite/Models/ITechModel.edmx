@@ -35,8 +35,8 @@
           <Property Name="WorkProcess_Id" Type="int" />
           <Property Name="Keywords" Type="nvarchar(max)" />
           <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
-          <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
           <Property Name="Kategoria_Id" Type="int" />
+          <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="OwnerId" Type="nvarchar" MaxLength="128" />
         </EntityType>
@@ -97,9 +97,11 @@
           <Property Name="LastTestKompetencjiDtm" Type="datetime" />
           <Property Name="LastTestKompetencjiResult" Type="int" />
           <Property Name="Frozen" Type="bit" Nullable="false" />
-          <Property Name="Enabled" Type="bit" Nullable="false" />
           <Property Name="Desc" Type="nvarchar(max)" />
           <Property Name="AccessProfile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="LastTestKompetencjiDtmSucces" Type="datetime" />
+          <Property Name="ForceTestKompetencji" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ItechUsersRoles">
           <Key>
@@ -1038,6 +1040,8 @@
           <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AccessProfile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="LastTestKompetencjiDtmSucces" Type="DateTime" Precision="3" />
+          <Property Name="ForceTestKompetencji" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="ItechUsersRoles">
           <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
@@ -1259,6 +1263,8 @@
           <EntitySetMapping Name="ItechUsers">
             <EntityTypeMapping TypeName="ITechModel.ItechUsers">
               <MappingFragment StoreEntitySet="ItechUsers">
+                <ScalarProperty Name="ForceTestKompetencji" ColumnName="ForceTestKompetencji" />
+                <ScalarProperty Name="LastTestKompetencjiDtmSucces" ColumnName="LastTestKompetencjiDtmSucces" />
                 <ScalarProperty Name="Enabled" ColumnName="Enabled" />
                 <ScalarProperty Name="AccessProfile" ColumnName="AccessProfile" />
                 <ScalarProperty Name="Desc" ColumnName="Desc" />
