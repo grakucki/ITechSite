@@ -80,7 +80,7 @@ namespace ITechSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Test_PeriodDay,Test_BlokOnWalit")] TestSettings testSettings)
+        public ActionResult Edit([Bind(Include = "id,Test_PeriodDay,Test_BlokOnValid")] TestSettings testSettings)
         {
             if (ModelState.IsValid)
             {
@@ -113,7 +113,7 @@ namespace ITechSite.Controllers
         {
             TestSettings testSettings = db.TestSettings.Find(id);
             db.TestSettings.Remove(testSettings);
-            db.SaveChanges();
+            //db.SaveChanges();
             return RedirectToAction("Index");
         }
 

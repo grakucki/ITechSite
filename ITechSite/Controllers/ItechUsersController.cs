@@ -248,7 +248,12 @@ namespace ITechSite.Controllers
                 {
                     var userStore = new UserStore<ApplicationUser>(context);
                     var userManager = new UserManager<ApplicationUser>(userStore);
-                    var users = userManager.Users.OrderBy(m => m.UserName);
+
+                    var users = userManager.Users.AsQueryable();
+                    if (!string.IsNullOrEmpty(userModel.UserName))
+                        users = users.Where(m => m.UserName.Contains(userModel.UserName));
+
+                    users = users.OrderBy(m => m.UserName);
 
                     userModel.Users = users.ToList();
                 }
@@ -256,6 +261,9 @@ namespace ITechSite.Controllers
             return View(userModel);
         }
 
+        //http://blogs.msmvps.com/craigber/?p=41
+        //https://chuyves.wordpress.com/2012/04/05/jquery-dialog-validation-mvc/
+        //https://select2.github.io/examples.html
 
         public ActionResult EditAccount(string UserName)
         {
