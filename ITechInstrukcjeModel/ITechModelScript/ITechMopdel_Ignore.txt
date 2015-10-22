@@ -1,0 +1,43 @@
+﻿AspNetRoles 
+        [System.Runtime.Serialization.IgnoreDataMember]
+        public virtual ICollection<ItechUsers> ItechUsers { get; set; }
+
+Dokument
+        [System.Runtime.Serialization.IgnoreDataMember]
+        public virtual ICollection<InformationPlan> InformationPlan { get; set; }
+
+InformationPlan
+        [System.Runtime.Serialization.IgnoreDataMember]
+        public virtual Resource ResourceWorkstation { get; set; }
+        [System.Runtime.Serialization.IgnoreDataMember]
+        public virtual Resource ResourceModel { get; set; }
+
+ITechModel
+
+ItechUsers
+
+Kategorie
+         [System.Runtime.Serialization.IgnoreDataMember]
+        public virtual ICollection<Dokument> Dokument { get; set; }
+
+ModelsWorkstation
+        [System.Runtime.Serialization.IgnoreDataMember]
+        public virtual Resource Workstation { get; set; }
+        [System.Runtime.Serialization.IgnoreDataMember]
+        public virtual Resource Models { get; set; }
+
+News
+        [System.Runtime.Serialization.IgnoreDataMember]
+        public virtual Resource Resource { get; set; }
+
+NewsPriority
+
+Resource
+
+SimaticCpuType
+
+Workstation
+        [System.Runtime.Serialization.IgnoreDataMember]
+        public virtual Resource Resource { get; set; }
+
+WorkstationGroup

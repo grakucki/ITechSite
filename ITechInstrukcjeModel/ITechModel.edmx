@@ -30,6 +30,8 @@
           <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
           <Property Name="Kategoria_Id" Type="int" />
           <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="CreateTime" Type="datetime" Nullable="false" />
+          <Property Name="OwnerId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="InformationPlan">
           <Key>
@@ -54,6 +56,12 @@
           <Property Name="PasswordFormat" Type="int" />
           <Property Name="LastTestKompetencjiDtm" Type="datetime" />
           <Property Name="LastTestKompetencjiResult" Type="int" />
+          <Property Name="Frozen" Type="bit" Nullable="false" />
+          <Property Name="Desc" Type="nvarchar(max)" />
+          <Property Name="AccessProfile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="LastTestKompetencjiDtmSucces" Type="datetime" />
+          <Property Name="ForceTestKompetencji" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ItechUsersRoles">
           <Key>
@@ -62,7 +70,6 @@
           </Key>
           <Property Name="ItechUserId" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="WorkstationId" Type="int" />
         </EntityType>
         <EntityType Name="Kategorie">
           <Key>
@@ -357,6 +364,8 @@
           <Property Name="LocalFileName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
           <Property Name="Kategoria_Id" Type="Int32" />
           <NavigationProperty Name="Kategorie" Relationship="ITechModel.FK_Dokument_Kategorie" FromRole="Dokument" ToRole="Kategorie" />
+          <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OwnerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="InformationPlan">
           <Key>
@@ -566,6 +575,12 @@
           <Property Name="PasswordFormat" Type="Int32" />
           <Property Name="LastTestKompetencjiDtm" Type="DateTime" Precision="3" />
           <Property Name="LastTestKompetencjiResult" Type="Int32" />
+          <Property Name="Frozen" Type="Boolean" Nullable="false" />
+          <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccessProfile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="LastTestKompetencjiDtmSucces" Type="DateTime" Precision="3" />
+          <Property Name="ForceTestKompetencji" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="ItechUsersRoles">
           <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
@@ -660,6 +675,8 @@
           <EntitySetMapping Name="Dokument">
             <EntityTypeMapping TypeName="IsTypeOf(ITechModel.Dokument)">
               <MappingFragment StoreEntitySet="Dokument">
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="Kategoria_Id" ColumnName="Kategoria_Id" />
                 <ScalarProperty Name="LocalFileName" ColumnName="LocalFileName" />
                 <ScalarProperty Name="Size" ColumnName="Size" />
@@ -754,6 +771,12 @@
           <EntitySetMapping Name="ItechUsers">
             <EntityTypeMapping TypeName="ITechModel.ItechUsers">
               <MappingFragment StoreEntitySet="ItechUsers">
+                <ScalarProperty Name="ForceTestKompetencji" ColumnName="ForceTestKompetencji" />
+                <ScalarProperty Name="LastTestKompetencjiDtmSucces" ColumnName="LastTestKompetencjiDtmSucces" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="AccessProfile" ColumnName="AccessProfile" />
+                <ScalarProperty Name="Desc" ColumnName="Desc" />
+                <ScalarProperty Name="Frozen" ColumnName="Frozen" />
                 <ScalarProperty Name="LastTestKompetencjiResult" ColumnName="LastTestKompetencjiResult" />
                 <ScalarProperty Name="LastTestKompetencjiDtm" ColumnName="LastTestKompetencjiDtm" />
                 <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />

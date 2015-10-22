@@ -18,10 +18,16 @@ namespace ITechInstrukcjeModel
         public Nullable<int> idW { get; set; }
         public Nullable<int> idM { get; set; }
         public string index { get; set; }
-
+    
         [System.Runtime.Serialization.IgnoreDataMember]
-        public virtual Resource Workstation { get; set; }
+	public virtual Resource Workstation { get; set; }
         [System.Runtime.Serialization.IgnoreDataMember]
-        public virtual Resource Models { get; set; }
+	public virtual Resource Models { get; set; }
     }
 }
+
+
+
+
+
+

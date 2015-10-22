@@ -27,6 +27,12 @@ namespace ITechInstrukcjeModel
         public Nullable<int> PasswordFormat { get; set; }
         public Nullable<System.DateTime> LastTestKompetencjiDtm { get; set; }
         public Nullable<int> LastTestKompetencjiResult { get; set; }
+        public bool Frozen { get; set; }
+        public string Desc { get; set; }
+        public string AccessProfile { get; set; }
+        public bool Enabled { get; set; }
+        public Nullable<System.DateTime> LastTestKompetencjiDtmSucces { get; set; }
+        public bool ForceTestKompetencji { get; set; }
     
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
     }

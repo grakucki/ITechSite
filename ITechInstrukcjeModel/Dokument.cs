@@ -33,9 +33,14 @@ namespace ITechInstrukcjeModel
         public Nullable<long> Size { get; set; }
         public string LocalFileName { get; set; }
         public Nullable<int> Kategoria_Id { get; set; }
-
+        public System.DateTime CreateTime { get; set; }
+        public string OwnerId { get; set; }
+    
         [System.Runtime.Serialization.IgnoreDataMember]
-        public virtual ICollection<InformationPlan> InformationPlan { get; set; }
+	public virtual ICollection<InformationPlan> InformationPlan { get; set; }
         public virtual Kategorie Kategorie { get; set; }
     }
 }
+
+
+
