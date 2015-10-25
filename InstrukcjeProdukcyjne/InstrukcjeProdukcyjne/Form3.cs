@@ -968,7 +968,7 @@ namespace InstrukcjeProdukcyjne
                     CurrentModel = x;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

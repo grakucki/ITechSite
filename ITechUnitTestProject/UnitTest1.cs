@@ -7,7 +7,8 @@ namespace ITechUnitTestProject
     [TestClass]
     public class UnitTest1
     {
-
+       
+        
         public string Size2(long? i)
         {
                 if (!i.HasValue)
@@ -44,8 +45,16 @@ namespace ITechUnitTestProject
         public void Dokument_List_test()
         {
             var d = new ITechService.ServiceWorkstation();
-            d.GetDokumentsList(10);
+            //d.GetDokumentsList(10);
         }
 
+
+        [TestMethod]
+        public void Testlast()
+        {
+            string i = "alamakota";
+            string s= i.Substring(i.Length - 6, 6);
+            Assert.AreEqual(s,"makota");
+        }
     }
 }

@@ -100,13 +100,14 @@ namespace InstrukcjeProdukcyjne
         private void button2_Click(object sender, EventArgs e)
         {
             try 
-	        {	        
-                FormTestConnectionItech2 dial = new FormTestConnectionItech2();
-                dial.DB = GetDb();
-                dial.IpSterownika = GetIpDevice();
-                dial.CpuType = GetSimaticType();
-                dial.FileName = Path.Combine(Properties.Settings.Default.App.LocalDoc,"simatic.xml");
-                dial.ShowDialog();
+	        {	
+                //TODO: Odkomentować po dodaniu nowej biblioteki.
+                //FormTestConnectionItech2 dial = new FormTestConnectionItech2();
+                //dial.DB = GetDb();
+                //dial.IpSterownika = GetIpDevice();
+                //dial.CpuType = GetSimaticType();
+                //dial.FileName = Path.Combine(Properties.Settings.Default.App.LocalDoc,"simatic.xml");
+                //dial.ShowDialog();
 	        }
 	        catch (Exception ex)
 	        {

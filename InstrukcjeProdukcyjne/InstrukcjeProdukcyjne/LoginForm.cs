@@ -195,10 +195,13 @@ namespace InstrukcjeProdukcyjne
         private string GetCardNo(string f)
         {
             var mask = "0800040029011X99";
-            if (f.Length < mask.Length)
-                throw new Exception("Nieprawidłowy format numeru karty");
+            // na życzenie sitech odczytujemy tylko 6 ostatnich numerów karty
+            var l = f.Length;
+            if (l < mask.Length)
+                throw new Exception("Nieprawidłowy format numeru karty. Za mało znaków.");
 
-            return f.Substring(mask.LastIndexOf("X") + 1);
+//            return f.Substring(mask.LastIndexOf("X") + 1);
+            return f.Substring(l - 6, 6);
 
         }
 
