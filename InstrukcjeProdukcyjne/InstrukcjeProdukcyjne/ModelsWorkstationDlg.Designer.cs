@@ -33,14 +33,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonOk = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ModelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sterownikIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modelWorkstationInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ModelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sterownikIndexDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.modelWorkstationInfoBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -94,6 +94,30 @@
             this.dataGridView1.Size = new System.Drawing.Size(849, 397);
             this.dataGridView1.TabIndex = 4;
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // ModelName
+            // 
+            this.ModelName.DataPropertyName = "ModelName";
+            this.ModelName.HeaderText = "ModelName";
+            this.ModelName.Name = "ModelName";
+            this.ModelName.ReadOnly = true;
+            this.ModelName.Width = 550;
+            // 
+            // sterownikIndexDataGridViewTextBoxColumn
+            // 
+            this.sterownikIndexDataGridViewTextBoxColumn.DataPropertyName = "SterownikIndex";
+            this.sterownikIndexDataGridViewTextBoxColumn.HeaderText = "Sterownik Index";
+            this.sterownikIndexDataGridViewTextBoxColumn.Name = "sterownikIndexDataGridViewTextBoxColumn";
+            this.sterownikIndexDataGridViewTextBoxColumn.ReadOnly = true;
+            this.sterownikIndexDataGridViewTextBoxColumn.Width = 150;
+            // 
             // modelWorkstationInfoBindingSource
             // 
             this.modelWorkstationInfoBindingSource.DataSource = typeof(InstrukcjeProdukcyjne.ServiceWorkstation.ModelWorkstationInfo);
@@ -140,31 +164,8 @@
             this.button4.TabIndex = 8;
             this.button4.Text = "Odczytaj ze sterownika";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // ModelName
-            // 
-            this.ModelName.DataPropertyName = "ModelName";
-            this.ModelName.HeaderText = "ModelName";
-            this.ModelName.Name = "ModelName";
-            this.ModelName.ReadOnly = true;
-            this.ModelName.Width = 550;
-            // 
-            // sterownikIndexDataGridViewTextBoxColumn
-            // 
-            this.sterownikIndexDataGridViewTextBoxColumn.DataPropertyName = "SterownikIndex";
-            this.sterownikIndexDataGridViewTextBoxColumn.HeaderText = "Sterownik Index";
-            this.sterownikIndexDataGridViewTextBoxColumn.Name = "sterownikIndexDataGridViewTextBoxColumn";
-            this.sterownikIndexDataGridViewTextBoxColumn.ReadOnly = true;
-            this.sterownikIndexDataGridViewTextBoxColumn.Width = 150;
             // 
             // ModelsWorkstationDlg
             // 
