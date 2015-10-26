@@ -22,5 +22,6 @@ namespace CustomPanelControl
 		BottomRight_TopRight_BottomLeft = 14,
 		All = 15
 
+
 	}
 }
