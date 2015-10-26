@@ -17,5 +17,6 @@ namespace ITechSite.Models
         public int id { get; set; }
         public int Test_PeriodDay { get; set; }
         public bool Test_BlokOnValid { get; set; }
+        public bool Test_Run { get; set; }
     }
 }

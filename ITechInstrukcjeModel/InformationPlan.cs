@@ -30,7 +30,3 @@ namespace ITechInstrukcjeModel
 }
 
 
-
-
-
-

@@ -16,4 +16,14 @@ ALTER TABLE dbo.ItechUsers ADD
 GO
 ALTER TABLE dbo.ItechUsers SET (LOCK_ESCALATION = TABLE)
 GO
+
+
+
+ALTER TABLE dbo.TestSettings ADD
+	Test_Run bit NOT NULL CONSTRAINT DF_Test_Run DEFAULT 0
+GO
+
 COMMIT
+
+
+

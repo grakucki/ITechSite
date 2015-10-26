@@ -114,6 +114,20 @@ namespace ITechService
         [OperationContract]
         void UpdateModelWorkstationInfo(ModelWorkstationInfo modelWorkstationInfo, bool Remove = false);
 
+
+        /// <summary>
+        /// Czy należy wykonać test kompetencji
+        /// </summary>
+        /// <param name="modelWorkstationInfo"></param>
+        [OperationContract]
+        bool RunTestKompetencji(string SitechUserId);
+
+        /// <summary>
+        /// Zapisanie wyniku testu
+        /// </summary>
+        /// <param name="modelWorkstationInfo"></param>
+        [OperationContract]
+        void UpdateTestKompetencji(string SitechUserId, int? TestResult);
     }
 
 

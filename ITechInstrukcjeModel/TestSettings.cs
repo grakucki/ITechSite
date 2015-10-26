@@ -12,17 +12,11 @@ namespace ITechInstrukcjeModel
     using System;
     using System.Collections.Generic;
     
-    public partial class News
+    public partial class TestSettings
     {
         public int id { get; set; }
-        public string News1 { get; set; }
-        public Nullable<System.DateTime> ValidEnd { get; set; }
-        public Nullable<System.DateTime> CreatedAt { get; set; }
-        public int NewsPriorityId { get; set; }
-    
-        [System.Runtime.Serialization.IgnoreDataMember]
-	public virtual Resource Resource { get; set; }
-        public virtual NewsPriority NewsPriority { get; set; }
+        public int Test_PeriodDay { get; set; }
+        public bool Test_BlokOnValid { get; set; }
+        public bool Test_Run { get; set; }
     }
 }
-

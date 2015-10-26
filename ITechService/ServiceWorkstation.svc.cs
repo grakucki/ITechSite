@@ -23,7 +23,7 @@ namespace ITechService
         public string TestConnection(int value)
         {
             StringBuilder ret = new StringBuilder();
-            ret.AppendLine("Serwis ... v3.19 Ok");
+            ret.AppendLine("Serwis ... v3.A26 Ok");
             try
             {
                 ret.Append("Baza danych ... ");
@@ -425,6 +425,78 @@ namespace ITechService
             }
             return;
         }
+
+    
+    public bool RunTestKompetencji(string SitechUserId)
+    {
+        bool ret = false;
+        try
+        {
+            using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
+            {
+                // czy globalna flaga jest właczona
+                var set = context.TestSettings.FirstOrDefault();
+                if (set==null)
+                    return false;
+
+                if (!set.Test_Run)
+                    return false;
+
+                var u = context.ItechUsers.Where(m => m.UserId == SitechUserId).FirstOrDefault();
+                if (u == null)
+                    return false;
+
+                // sprawdzamy czy user musi wykonać test
+                if (u.ForceTestKompetencji)
+                    return true;
+                
+                // sprawdzamy czy nadszedł czas na wykonaie testu
+                if (!u.LastTestKompetencjiDtm.HasValue)
+                    return true;
+
+                if (u.LastTestKompetencjiDtm.Value.AddDays(set.Test_PeriodDay)<DateTime.Now)
+                    return true;
+            }
+        }
+        catch (Exception ex)
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine("Błąd !!!!!!");
+            str.AppendLine(ExceptionResolver.Resolve(ex));
+            throw new FaultException(ret.ToString());
+        }
+        return false;
+    }
+
+    public void UpdateTestKompetencji(string SitechUserId, int? TestResult)
+    {
+        bool ret = false;
+        try
+        {
+            using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
+            {
+
+                var u = context.ItechUsers.Where(m => m.UserId == SitechUserId).FirstOrDefault();
+                if (u == null)
+                    return;
+                int? SuccessTestResult = 1;
+                u.ForceTestKompetencji=false;
+                u.LastTestKompetencjiDtm=DateTime.Now;
+                u.LastTestKompetencjiResult=TestResult;
+                if (TestResult == SuccessTestResult)
+                    u.LastTestKompetencjiDtmSucces = u.LastTestKompetencjiDtm;
+                context.SaveChanges();
+            }
+        }
+        catch (Exception ex)
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine("Błąd !!!!!!");
+            str.AppendLine(ExceptionResolver.Resolve(ex));
+            throw new FaultException(ret.ToString());
+        }
+    }
+
 
 
        

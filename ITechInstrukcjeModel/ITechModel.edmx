@@ -128,6 +128,15 @@
           <Property Name="CpuType" Type="nvarchar" MaxLength="50" />
           <Property Name="Enabled" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="TestSettings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Test_PeriodDay" Type="int" Nullable="false" />
+          <Property Name="Test_BlokOnValid" Type="bit" Nullable="false" />
+          <Property Name="Test_Run" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Workstation">
           <Key>
             <PropertyRef Name="Id" />
@@ -293,6 +302,7 @@
           <EntitySet Name="NewsPriority" EntityType="Self.NewsPriority" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SimaticCpuType" EntityType="Self.SimaticCpuType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TestSettings" EntityType="Self.TestSettings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkstationGroup" EntityType="Self.WorkstationGroup" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Dokument_Kategorie" Association="Self.FK_Dokument_Kategorie">
@@ -446,6 +456,7 @@
             <End Role="Resource" EntitySet="Resource" />
             <End Role="Workstation" EntitySet="Workstation" />
           </AssociationSet>
+          <EntitySet Name="TestSettings" EntityType="ITechModel.TestSettings" />
           </EntityContainer>
         <EntityType Name="News">
           <Key>
@@ -666,6 +677,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TestSettings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Test_PeriodDay" Type="Int32" Nullable="false" />
+          <Property Name="Test_BlokOnValid" Type="Boolean" Nullable="false" />
+          <Property Name="Test_Run" Type="Boolean" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -825,6 +845,16 @@
                 <ScalarProperty Name="WorkstationGroup" ColumnName="WorkstationGroup" />
                 <ScalarProperty Name="idR" ColumnName="idR" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestSettings">
+            <EntityTypeMapping TypeName="ITechModel.TestSettings">
+              <MappingFragment StoreEntitySet="TestSettings">
+                <ScalarProperty Name="Test_Run" ColumnName="Test_Run" />
+                <ScalarProperty Name="Test_BlokOnValid" ColumnName="Test_BlokOnValid" />
+                <ScalarProperty Name="Test_PeriodDay" ColumnName="Test_PeriodDay" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

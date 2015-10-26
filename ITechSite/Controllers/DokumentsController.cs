@@ -269,13 +269,22 @@ namespace ITechSite.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Dokument dokument = db.Dokument.Find(id);
-            var doks = dokument.FileContent.ToList();
-            foreach (var item in doks)
+            try
             {
-                db.FileContent.Remove(item);
+                var doks = dokument.FileContent.ToList();
+                foreach (var item in doks)
+                {
+                    db.FileContent.Remove(item);
+                }
+                db.Dokument.Remove(dokument);
+                db.SaveChanges();
             }
-            db.Dokument.Remove(dokument);
-            db.SaveChanges();
+            catch (Exception ex)
+            {
+                ViewBag.DontDelete = "Nie można usunąć tego dokumentu. Jest on używany. Usuń dokument z prezentacji i spróbuj ponownie";
+                return View(dokument);
+
+            }
             return RedirectToAction("Index");
         }
 

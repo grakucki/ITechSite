@@ -29,7 +29,7 @@ namespace ITechSite.Models.Repository
             var x = _dataContex.ItechUsers.AsQueryable();
             var order = "name";
             if (!string.IsNullOrEmpty(userName))
-                x = x.Where(m=>m.UserName.Contains(userName));
+                x = x.Where(m => m.UserName.Contains(userName));
             else
                 order = "id";
 
@@ -47,10 +47,10 @@ namespace ITechSite.Models.Repository
 
         public ItechUsers CreateUser(ItechUsers User)
         {
-            var r = _dataContex.AspNetRoles.Where(m=>m.Name.Equals("pracownik")).FirstOrDefault();
+            var r = _dataContex.AspNetRoles.Where(m => m.Name.Equals("pracownik")).FirstOrDefault();
             var x = _dataContex.ItechUsers.Add(User);
 
-            if (r!=null)
+            if (r != null)
                 User.AspNetRoles.Add(r);
             _dataContex.SaveChanges();
             return x;
@@ -64,14 +64,27 @@ namespace ITechSite.Models.Repository
 
         public void Update(ItechUsers user)
         {
-            _dataContex.Entry(user).State = EntityState.Modified;
+            //_dataContex.Entry(user).State = EntityState.Modified;
+            var u = _dataContex.ItechUsers.Find(user.id);
+            if (u == null)
+                return;
+            u.UserId = user.UserId;
+            u.UserName = user.UserName;
+            u.CardNo = user.CardNo;
+            if (!string.IsNullOrEmpty(user.Password))
+                u.Password = user.Password;
+            u.Frozen = user.Frozen;
+            u.Enabled = user.Enabled;
+            u.Desc = user.UserId;
+            u.AccessProfile = user.AccessProfile;
+            u.ForceTestKompetencji = user.ForceTestKompetencji;
             _dataContex.SaveChanges();
         }
 
 
         public List<SelectedItem> GetAllRoles()
         {
-            return _dataContex.AspNetRoles.Select(m => new SelectedItem{ Id = m.Id, Name = m.Name }).ToList();
+            return _dataContex.AspNetRoles.Select(m => new SelectedItem { Id = m.Id, Name = m.Name }).ToList();
         }
 
 
@@ -79,7 +92,7 @@ namespace ITechSite.Models.Repository
         {
             var u = GetUser(id);
             u.AspNetRoles.Clear();
-            if (SelectedRoles!=null)
+            if (SelectedRoles != null)
             {
                 foreach (var item in SelectedRoles)
                 {
@@ -96,8 +109,8 @@ namespace ITechSite.Models.Repository
 
     public class ItechUserIndexModel
     {
-      
-        public IPagedList<ItechUsers> Users{ get; set; }
+
+        public IPagedList<ItechUsers> Users { get; set; }
         public int? page { get; set; }
         public string UserName { get; set; }
         public string IdentityNo { get; set; }
@@ -113,7 +126,7 @@ namespace ITechSite.Models.Repository
     }
 
 
-    
+
     public class AccountEditModel
     {
         public ApplicationUser User { get; set; }
@@ -123,10 +136,10 @@ namespace ITechSite.Models.Repository
         public List<string> AllowRoles { get; set; }
     }
 
-     public class SelectedItem
-     {
-         public string Id { get; set; }
-         public string Name { get; set; }
-     }
-
+    public class SelectedItem
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+    }
 }
+

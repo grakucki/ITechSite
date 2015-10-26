@@ -23,6 +23,7 @@ namespace ITechSite.Controllers
             {
                 s = new TestSettings();
                 s.Test_BlokOnValid = false;
+                s.Test_Run = false;
                 s.Test_PeriodDay = 30;
                 db.TestSettings.Add(s);
                 db.SaveChanges();
@@ -52,7 +53,7 @@ namespace ITechSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,Test_PeriodDay,Test_BlokOnWalit")] TestSettings testSettings)
+        public ActionResult Create([Bind(Include = "id,Test_Run, Test_PeriodDay,Test_BlokOnWalit")] TestSettings testSettings)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +81,7 @@ namespace ITechSite.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,Test_PeriodDay,Test_BlokOnValid")] TestSettings testSettings)
+        public ActionResult Edit([Bind(Include = "id, Test_Run,Test_PeriodDay,Test_BlokOnValid")] TestSettings testSettings)
         {
             if (ModelState.IsValid)
             {

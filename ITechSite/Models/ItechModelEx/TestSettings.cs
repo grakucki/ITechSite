@@ -20,5 +20,7 @@ namespace ITechSite.Models
         public int Test_PeriodDay { get; set; }
         [DisplayName("Blokuj maszynę gdy test niezdany")]
         public int Test_BlokOnValid { get; set; }
+        [DisplayName("Wywołuj test automatycznie")]
+        public bool Test_Run { get; set; }
     }
 }

@@ -101,13 +101,12 @@ namespace InstrukcjeProdukcyjne
         {
             try 
 	        {	
-                //TODO: Odkomentować po dodaniu nowej biblioteki.
-                //FormTestConnectionItech2 dial = new FormTestConnectionItech2();
-                //dial.DB = GetDb();
-                //dial.IpSterownika = GetIpDevice();
-                //dial.CpuType = GetSimaticType();
-                //dial.FileName = Path.Combine(Properties.Settings.Default.App.LocalDoc,"simatic.xml");
-                //dial.ShowDialog();
+                FormTestConnectionItech2 dial = new FormTestConnectionItech2();
+                dial.DB = GetDb();
+                dial.IpSterownika = GetIpDevice();
+                dial.CpuType = GetSimaticType();
+                dial.FileName = Path.Combine(Properties.Settings.Default.App.LocalDoc,"simatic.xml");
+                dial.ShowDialog();
 	        }
 	        catch (Exception ex)
 	        {

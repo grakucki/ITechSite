@@ -349,6 +349,8 @@ namespace InstrukcjeProdukcyjne
             timer3.Enabled = true;
             timer3_Tick(sender, e);
             DocSyncDlg.Sync();
+
+            ShowTestKompetencji();
         }
 
         private void CheckUpdate()
@@ -395,7 +397,52 @@ namespace InstrukcjeProdukcyjne
         }
 
 
-        string _SimaticLastMsg = string.Empty;
+        void SaveErrorStatusSerwer(string msg, string filename)
+        {
+            var fullfilename = Path.Combine(Settings.Default.App.LocalDoc, filename);
+            try 
+	        {
+                using (var f = File.CreateText(fullfilename))
+                {
+                    f.WriteLine("Status serwera pliku : " + DateTime.Now);
+                    f.WriteLine("adress: " + Settings.Default.App.ServerDoc);
+                    f.WriteLine("====================");
+                    f.Write(msg);
+                }
+        	}
+	        catch (Exception)
+	        {
+	        }
+        }
+
+        void SaveError(string msg, string filename)
+        {
+            var fullfilename = Path.Combine(Settings.Default.App.LocalDoc, filename);
+            try
+            {
+                using (var f = File.CreateText(fullfilename))
+                {
+                    f.Write(msg);
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        void SetSerwerStatus(string msg, string longmsg)
+        {
+            toolStripStatusLabelSerwer.Text = "Serwer : " + msg;
+            _SerwerLastMsg = longmsg;
+            if (!string.IsNullOrEmpty(longmsg))
+                SaveErrorStatusSerwer(longmsg, "serwerstatus.txt");
+        }
+
+        string _SimaticLastMsg = string.Empty; 
+        string _SerwerLastMsg = string.Empty;
+        bool _RunTestKompetencji = false;
+
+
         async Task LoadResource_Async(int? idR)
         {
             if (!idR.HasValue)
@@ -405,6 +452,7 @@ namespace InstrukcjeProdukcyjne
             {
                 try
                 {
+                    SetSerwerStatus("łączę",null);
                     if (client.IsOnLine())
                     {
                         var t = await client.GetInformationPlainsListAsync(idR.Value);
@@ -413,11 +461,15 @@ namespace InstrukcjeProdukcyjne
                         var i = await client.GetITechUserListAsync();
                         db.ItechUsers_Local = i.ToList();
                         db.ExportItechUsers(null);
+
+                        SetSerwerStatus("Ok", "Połaczony");
                     }
+                    else
+                        SetSerwerStatus("Rozłączony", "Rozłączony");
                 }
                 catch (Exception ex)
                 {
-                   _SimaticLastMsg= ex.Message;
+                    SetSerwerStatus("Błąd", ex.Message);
                 }
             }
 #endif
@@ -682,6 +734,7 @@ namespace InstrukcjeProdukcyjne
                     await LoadResource_Async(Properties.Settings.Default.App.Stanowisko);
                     ZaładujPliki();
                     DocSyncDlg.Sync();
+                    ShowTestKompetencji();
                 }
 
             }
@@ -938,12 +991,40 @@ namespace InstrukcjeProdukcyjne
             //testy
         }
 
+        private void ShowTestKompetencji()
+        {
+            try
+            {
+
+                using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+                {
+                    _RunTestKompetencji = client.RunTestKompetencji(LoginUser2.UserId);
+
+                    if (!_RunTestKompetencji)
+                        return;
+                    _RunTestKompetencji = false;
+                    var dial = new TestKompetencjiDlg();
+                    dial.UserId = LoginUser2.UserId;
+                    dial.ShowDialog();
+
+                    //dial.TestRes;
+                    client.UpdateTestKompetencjiAsync(LoginUser2.UserId, dial.TestRes? 1:0);
+                }
+            }
+            catch (Exception ex)
+            {
+                SaveError(ex.Message, "TestKompetencji.txt");
+            }
+            return;
+        }
+
+
         private void testKompetencjiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
                 var dial = new TestKompetencjiDlg();
-                dial.UserId=7;
+                dial.UserId = LoginUser2.UserId;
                 dial.ShowDialog();
             }
             catch (Exception ex)
@@ -999,10 +1080,6 @@ namespace InstrukcjeProdukcyjne
 
         private void listView1_DrawItem(object sender, DrawListViewItemEventArgs e)
         {
-
-           
-
-
             e.DrawDefault = true;
         }
 

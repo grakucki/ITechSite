@@ -87,6 +87,18 @@
   <wsdl:message name="IServiceWorkstation_UpdateModelWorkstationInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateModelWorkstationInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_RunTestKompetencji_InputMessage">
+    <wsdl:part name="parameters" element="tns:RunTestKompetencji" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_RunTestKompetencji_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RunTestKompetencjiResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_UpdateTestKompetencji_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTestKompetencji" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_UpdateTestKompetencji_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTestKompetencjiResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceWorkstation">
     <wsdl:operation name="Ping">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/Ping" message="tns:IServiceWorkstation_Ping_InputMessage" />
@@ -139,6 +151,14 @@
     <wsdl:operation name="UpdateModelWorkstationInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/UpdateModelWorkstationInfo" message="tns:IServiceWorkstation_UpdateModelWorkstationInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/UpdateModelWorkstationInfoResponse" message="tns:IServiceWorkstation_UpdateModelWorkstationInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RunTestKompetencji">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/RunTestKompetencji" message="tns:IServiceWorkstation_RunTestKompetencji_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/RunTestKompetencjiResponse" message="tns:IServiceWorkstation_RunTestKompetencji_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTestKompetencji">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencji" message="tns:IServiceWorkstation_UpdateTestKompetencji_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencjiResponse" message="tns:IServiceWorkstation_UpdateTestKompetencji_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceWorkstation" type="tns:IServiceWorkstation">
@@ -253,6 +273,24 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateModelWorkstationInfo">
       <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/UpdateModelWorkstationInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RunTestKompetencji">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/RunTestKompetencji" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTestKompetencji">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencji" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

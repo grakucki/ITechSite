@@ -856,7 +856,7 @@ namespace InstrukcjeProdukcyjne
             try
             {
                 var dial = new TestKompetencjiDlg();
-                dial.UserId=7;
+                dial.UserId=LoginUser2.UserId;
                 dial.ShowDialog();
             }
             catch (Exception ex)

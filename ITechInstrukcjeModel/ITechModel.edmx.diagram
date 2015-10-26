@@ -27,6 +27,7 @@
         <AssociationConnector Association="ITechModel.FK_News_NewsPriority" />
         <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="7.75" PointY="0.75" />
         <AssociationConnector Association="ITechModel.FK_Workstation_Resource" />
+        <EntityTypeShape EntityType="ITechModel.TestSettings" Width="1.5" PointX="5.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

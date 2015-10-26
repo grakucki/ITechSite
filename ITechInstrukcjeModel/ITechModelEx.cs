@@ -157,7 +157,7 @@ namespace ITechInstrukcjeModel
                 Directory.CreateDirectory(WorkDir);
 
             var q = Resource_Local;
-                SaveToXml(q, Path.Combine(WorkDir, filename ?? "resources.xml"));
+            SaveToXml(q, Path.Combine(WorkDir, filename ?? "resources.xml"));
         }
 
 

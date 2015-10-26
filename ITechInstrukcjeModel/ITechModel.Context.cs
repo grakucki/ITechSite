@@ -37,5 +37,6 @@ namespace ITechInstrukcjeModel
         public virtual DbSet<Kategorie> Kategorie { get; set; }
         public virtual DbSet<NewsPriority> NewsPriority { get; set; }
         public virtual DbSet<Workstation> Workstation { get; set; }
+        public virtual DbSet<TestSettings> TestSettings { get; set; }
     }
 }

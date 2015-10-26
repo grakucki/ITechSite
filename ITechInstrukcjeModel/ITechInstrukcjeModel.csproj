@@ -110,6 +110,9 @@
     <Compile Include="SimaticCpuType.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TestSettings.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UstawieniaSterwnika.cs" />
     <Compile Include="Workstation.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>

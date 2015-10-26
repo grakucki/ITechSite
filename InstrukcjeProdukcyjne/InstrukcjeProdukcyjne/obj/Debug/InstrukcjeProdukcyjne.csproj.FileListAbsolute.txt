@@ -105,3 +105,4 @@ D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj
 D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.application
 D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.exe
 D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.pdb
+D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bin\Debug\ItechSterwnik.exe

@@ -172,4 +172,31 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="RunTestKompetencji">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SitechUserId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RunTestKompetencjiResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="RunTestKompetencjiResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateTestKompetencji">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SitechUserId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="TestResult" nillable="true" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UpdateTestKompetencjiResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -20,6 +20,8 @@
     <Property Name="LocalFileName" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
     <Property Name="Kategoria_Id" Type="Int32" />
     <NavigationProperty Name="Kategorie" Relationship="ITechModel.FK_Dokument_Kategorie" FromRole="Dokument" ToRole="Kategorie" />
+    <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="OwnerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="InformationPlan">
     <Key>
@@ -100,6 +102,7 @@
       <End Role="Resource" EntitySet="Resource" />
       <End Role="Workstation" EntitySet="Workstation" />
     </AssociationSet>
+    <EntitySet Name="TestSettings" EntityType="ITechModel.TestSettings" />
   </EntityContainer>
   <EntityType Name="News">
     <Key>
@@ -229,6 +232,12 @@
     <Property Name="PasswordFormat" Type="Int32" />
     <Property Name="LastTestKompetencjiDtm" Type="DateTime" Precision="3" />
     <Property Name="LastTestKompetencjiResult" Type="Int32" />
+    <Property Name="Frozen" Type="Boolean" Nullable="false" />
+    <Property Name="Desc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AccessProfile" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Enabled" Type="Boolean" Nullable="false" />
+    <Property Name="LastTestKompetencjiDtmSucces" Type="DateTime" Precision="3" />
+    <Property Name="ForceTestKompetencji" Type="Boolean" Nullable="false" />
   </EntityType>
   <Association Name="ItechUsersRoles">
     <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
@@ -314,4 +323,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="TestSettings">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="Test_PeriodDay" Type="Int32" Nullable="false" />
+    <Property Name="Test_BlokOnValid" Type="Boolean" Nullable="false" />
+    <Property Name="Test_Run" Type="Boolean" Nullable="false" />
+  </EntityType>
 </Schema>

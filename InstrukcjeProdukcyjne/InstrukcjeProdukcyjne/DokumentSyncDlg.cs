@@ -133,7 +133,7 @@ namespace InstrukcjeProdukcyjne
             catch (Exception ex)
             {
                 if (!this.IsDisposed)
-                    if (this.Handle!=null)
+                    //if (this.Handle!=null)
                         backgroundWorker1.ReportProgress(0, new ProgressState("Błąd " + ex.Message, true));
             }
 

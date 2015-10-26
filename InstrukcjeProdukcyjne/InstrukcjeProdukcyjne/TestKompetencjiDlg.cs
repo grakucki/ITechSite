@@ -19,7 +19,7 @@ namespace InstrukcjeProdukcyjne
         }
 
         public string TestUri { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public Guid AccessionNumber { get; set; }
         public bool TestRes { get; set; }
 
@@ -32,7 +32,7 @@ namespace InstrukcjeProdukcyjne
             if (AccessionNumber == Guid.Empty)
                 AccessionNumber = Guid.NewGuid();
             TestUri = Properties.Settings.Default.App.ServerTestKompetencjiAddress;
-            TestUri += string.Format(@"?resourceId={0}&accessionNumber={1}@user_id={2}",
+            TestUri += string.Format(@"?resourceId={0}&accessionNumber={1}&user_id={2}",
                 Properties.Settings.Default.App.Stanowisko,
                 AccessionNumber.ToString(),
                 UserId);
@@ -52,15 +52,16 @@ namespace InstrukcjeProdukcyjne
         {
             // if find in url "EndViewAcction=true" to zamykamy okno i sprawdzamy czy test został zdany
             string u = e.Url.ToString().ToLower();
-            if (u.IndexOf("EndTest".ToLower()) < 0)
+            if (u.IndexOf("endtest".ToLower()) < 0)
                 return;
-
 
             TestRes = false;
             WebClient web = new WebClient();
-            string response = web.DownloadString(e.Url);
+            var addr = e.Url.ToString().ToLower().Replace("/endtest", "/getTestResult");
+            string response = web.DownloadString(addr).ToLower();
             if (response.IndexOf("<state>zdany</state>") >= 0)
                 TestRes = true;
+            
 
             splitContainer1.Panel2Collapsed = false;
             if (TestRes)

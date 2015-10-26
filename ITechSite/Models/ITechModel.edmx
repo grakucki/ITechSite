@@ -197,6 +197,7 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="Test_PeriodDay" Type="int" Nullable="false" />
           <Property Name="Test_BlokOnValid" Type="bit" Nullable="false" />
+          <Property Name="Test_Run" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="WorkProcess">
           <Key>
@@ -1058,6 +1059,7 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="Test_PeriodDay" Type="Int32" Nullable="false" />
           <Property Name="Test_BlokOnValid" Type="Boolean" Nullable="false" />
+          <Property Name="Test_Run" Type="Boolean" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1299,6 +1301,7 @@
           <EntitySetMapping Name="TestSettings">
             <EntityTypeMapping TypeName="ITechModel.TestSettings">
               <MappingFragment StoreEntitySet="TestSettings">
+                <ScalarProperty Name="Test_Run" ColumnName="Test_Run" />
                 <ScalarProperty Name="Test_BlokOnValid" ColumnName="Test_BlokOnValid" />
                 <ScalarProperty Name="Test_PeriodDay" ColumnName="Test_PeriodDay" />
                 <ScalarProperty Name="id" ColumnName="id" />

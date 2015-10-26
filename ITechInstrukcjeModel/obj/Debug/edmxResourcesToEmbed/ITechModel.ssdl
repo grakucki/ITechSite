@@ -25,6 +25,8 @@
     <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
     <Property Name="Kategoria_Id" Type="int" />
     <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="CreateTime" Type="datetime" Nullable="false" />
+    <Property Name="OwnerId" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="InformationPlan">
     <Key>
@@ -49,6 +51,12 @@
     <Property Name="PasswordFormat" Type="int" />
     <Property Name="LastTestKompetencjiDtm" Type="datetime" />
     <Property Name="LastTestKompetencjiResult" Type="int" />
+    <Property Name="Frozen" Type="bit" Nullable="false" />
+    <Property Name="Desc" Type="nvarchar(max)" />
+    <Property Name="AccessProfile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
+    <Property Name="LastTestKompetencjiDtmSucces" Type="datetime" />
+    <Property Name="ForceTestKompetencji" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ItechUsersRoles">
     <Key>
@@ -57,7 +65,6 @@
     </Key>
     <Property Name="ItechUserId" Type="int" Nullable="false" />
     <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="WorkstationId" Type="int" />
   </EntityType>
   <EntityType Name="Kategorie">
     <Key>
@@ -115,6 +122,15 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CpuType" Type="nvarchar" MaxLength="50" />
     <Property Name="Enabled" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TestSettings">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="Test_PeriodDay" Type="int" Nullable="false" />
+    <Property Name="Test_BlokOnValid" Type="bit" Nullable="false" />
+    <Property Name="Test_Run" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Workstation">
     <Key>
@@ -281,6 +297,7 @@
     <EntitySet Name="NewsPriority" EntityType="Self.NewsPriority" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SimaticCpuType" EntityType="Self.SimaticCpuType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TestSettings" EntityType="Self.TestSettings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorkstationGroup" EntityType="Self.WorkstationGroup" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Dokument_Kategorie" Association="Self.FK_Dokument_Kategorie">

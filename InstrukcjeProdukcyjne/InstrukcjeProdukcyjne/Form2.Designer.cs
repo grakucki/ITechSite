@@ -33,6 +33,7 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelSerwer = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusITechTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.WorkStationBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -130,6 +131,7 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
+            this.toolStripStatusLabelSerwer,
             this.toolStripStatusITechTime,
             this.toolStripStatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(10, 660);
@@ -141,10 +143,16 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(999, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(951, 17);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // toolStripStatusLabelSerwer
+            // 
+            this.toolStripStatusLabelSerwer.Name = "toolStripStatusLabelSerwer";
+            this.toolStripStatusLabelSerwer.Size = new System.Drawing.Size(48, 17);
+            this.toolStripStatusLabelSerwer.Text = "Serwer :";
             // 
             // toolStripStatusITechTime
             // 
@@ -908,6 +916,7 @@
         private GroupListView2 groupListViewModels;
         private System.Windows.Forms.Integration.ElementHost elementHost2;
         private GroupListView2 groupListViewWorkstation;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSerwer;
     }
 }
 

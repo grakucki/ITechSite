@@ -159,6 +159,8 @@ namespace ITechSite.Models.Repository.ItechUsersImport
             user.Imię = ss[1].TrimEnd();
             user.Nr_identyfikacyjny = ss[2].Trim();
             user.Nr_karty = ss[3].Trim();
+
+            // na życzenie sitech odczytujemy tylko 6 ostatnich numerów karty
             if (user.Nr_karty.Length > 6)
                 user.Nr_karty = user.Nr_karty.Substring(user.Nr_karty.Length-6, 6);
             if (ss.Count() > 4)

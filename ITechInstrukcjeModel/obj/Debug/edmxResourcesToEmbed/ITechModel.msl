@@ -4,6 +4,8 @@
     <EntitySetMapping Name="Dokument">
       <EntityTypeMapping TypeName="IsTypeOf(ITechModel.Dokument)">
         <MappingFragment StoreEntitySet="Dokument">
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
           <ScalarProperty Name="Kategoria_Id" ColumnName="Kategoria_Id" />
           <ScalarProperty Name="LocalFileName" ColumnName="LocalFileName" />
           <ScalarProperty Name="Size" ColumnName="Size" />
@@ -98,6 +100,12 @@
     <EntitySetMapping Name="ItechUsers">
       <EntityTypeMapping TypeName="ITechModel.ItechUsers">
         <MappingFragment StoreEntitySet="ItechUsers">
+          <ScalarProperty Name="ForceTestKompetencji" ColumnName="ForceTestKompetencji" />
+          <ScalarProperty Name="LastTestKompetencjiDtmSucces" ColumnName="LastTestKompetencjiDtmSucces" />
+          <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+          <ScalarProperty Name="AccessProfile" ColumnName="AccessProfile" />
+          <ScalarProperty Name="Desc" ColumnName="Desc" />
+          <ScalarProperty Name="Frozen" ColumnName="Frozen" />
           <ScalarProperty Name="LastTestKompetencjiResult" ColumnName="LastTestKompetencjiResult" />
           <ScalarProperty Name="LastTestKompetencjiDtm" ColumnName="LastTestKompetencjiDtm" />
           <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
@@ -146,6 +154,16 @@
           <ScalarProperty Name="WorkstationGroup" ColumnName="WorkstationGroup" />
           <ScalarProperty Name="idR" ColumnName="idR" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestSettings">
+      <EntityTypeMapping TypeName="ITechModel.TestSettings">
+        <MappingFragment StoreEntitySet="TestSettings">
+          <ScalarProperty Name="Test_Run" ColumnName="Test_Run" />
+          <ScalarProperty Name="Test_BlokOnValid" ColumnName="Test_BlokOnValid" />
+          <ScalarProperty Name="Test_PeriodDay" ColumnName="Test_PeriodDay" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
