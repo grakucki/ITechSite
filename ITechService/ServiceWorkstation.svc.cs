@@ -116,7 +116,7 @@ namespace ITechService
                 {
                     context.Configuration.LazyLoadingEnabled = false;
                     context.Configuration.ProxyCreationEnabled = false;
-                    o = context.Resource.Where(m=>m.Enabled==true).Include(m=>m.Workstation).OrderBy(m=>m.Name).ToList();
+                    o = context.Resource.Where(m=>m.Enabled==true & m.Type==1).Include(m=>m.Workstation).OrderBy(m=>m.Name).ToList();
                 }
             }
             catch (Exception ex)

@@ -199,6 +199,8 @@
     <EntitySetMapping Name="ItechUsers">
       <EntityTypeMapping TypeName="ITechModel.ItechUsers">
         <MappingFragment StoreEntitySet="ItechUsers">
+          <ScalarProperty Name="ForceTestKompetencji" ColumnName="ForceTestKompetencji" />
+          <ScalarProperty Name="LastTestKompetencjiDtmSucces" ColumnName="LastTestKompetencjiDtmSucces" />
           <ScalarProperty Name="Enabled" ColumnName="Enabled" />
           <ScalarProperty Name="AccessProfile" ColumnName="AccessProfile" />
           <ScalarProperty Name="Desc" ColumnName="Desc" />
@@ -233,6 +235,7 @@
     <EntitySetMapping Name="TestSettings">
       <EntityTypeMapping TypeName="ITechModel.TestSettings">
         <MappingFragment StoreEntitySet="TestSettings">
+          <ScalarProperty Name="Test_Run" ColumnName="Test_Run" />
           <ScalarProperty Name="Test_BlokOnValid" ColumnName="Test_BlokOnValid" />
           <ScalarProperty Name="Test_PeriodDay" ColumnName="Test_PeriodDay" />
           <ScalarProperty Name="id" ColumnName="id" />
