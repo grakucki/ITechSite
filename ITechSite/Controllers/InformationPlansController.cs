@@ -106,6 +106,24 @@ namespace ITechSite.Controllers
         }
 
 
+        // GET: InformationPlans/Details/5
+        public ActionResult ShowDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            InformationPlan informationPlan = db.InformationPlan.Find(id);
+            if (informationPlan == null)
+            {
+                return HttpNotFound();
+            }
+            //System.Threading.Thread.Sleep(1000);
+            ViewBag.idR = informationPlan.idR;
+            return PartialView(informationPlan);
+        }
+
+
 
         private void Create_FillData(InformationPlanModels ipm)
         {
@@ -177,6 +195,8 @@ namespace ITechSite.Controllers
                         ip.IdM = informationPlan.IdM;
                         ip.idR = informationPlan.idR;
                         ip.Order = informationPlan.Order;
+                        ip.OwnerId = User.Identity.Name;
+                        ip.CreateTime = DateTime.Now;
                         db.InformationPlan.Add(ip);
                         db.SaveChanges();
                         //return RedirectToAction("Index");
@@ -374,6 +394,10 @@ namespace ITechSite.Controllers
                         doc.Enabled = true;
                         doc.CreateTime = DateTime.Now;
                         doc.OwnerId = User.Identity.Name;
+
+                        doc.LastWriteTime = DateTime.Now;
+                        doc.LastWriteUserId = User.Identity.Name;
+
 
                         doc.File= Httpfile.InputStream;
                         var rep = new DokumentRepository(db);

@@ -1,0 +1,112 @@
+﻿@model ITechSite.Models.InformationPlan
+
+
+<div> 
+    <div class="form-horizontal">
+        <table class="table table-hover table-condensesd">
+            <tr>
+                <th class="text-Right">@Model.Resource.ResourceType.Type.ToString()</th>
+                <td>@Html.DisplayFor(model => model.Resource.Name)</td>
+            </tr>
+            <tr>
+                @if (@Model.ResourceModel != null)
+                {
+                    <th class="text-Right">
+                        @Model.ResourceModel.ResourceType.Type.ToString()
+                    </th>
+
+                    <td>
+                        @Html.DisplayFor(model => model.ResourceModel.Name)
+                    </td>
+                }
+            </tr>
+
+            @if (@Model.Dokument != null)
+            {
+                <tr>
+                    <th class="text-Right">
+                        nr dokumentu
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Dokument.CodeName)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-Right">
+                        Plik dokumentu
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Dokument.FileName)
+                    </td>
+                </tr>
+                <tr>
+
+                    <th class="text-Right">
+                        Opis pliku
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Dokument.Description)
+                    </td>
+                </tr>
+                <tr>
+
+                    <th class="text-Right">
+                        Aktywny
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Dokument.Enabled)
+                    </td>
+                </tr>
+                <tr>
+
+                    <th class="text-Right">
+                        Właściciel dokumentu
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Dokument.OwnerId)
+                    </td>
+                </tr>
+                <tr>
+
+                    <th class="text-Right">
+                        Utworzony
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Dokument.CreateTime)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-Right">
+                        Ostatnio zmodyfikowany przez
+                    </th>
+                    <td>
+                        @Html.DisplayFor(model => model.Dokument.LastWriteUserId)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="text-Right">Ostatnio zmodyfikowany</th>
+                    <td>
+                        @Html.DisplayFor(model => model.Dokument.LastWriteTime)
+                    </td>
+                </tr>
+            }
+            
+            <tr>
+                <th class="text-Right">do planu dodany przez</th>
+                <td>@Html.DisplayFor(model => model.OwnerId)</td>
+            </tr>
+            <tr>
+                <th class="text-Right">dnia</th>
+                <td>@Html.DisplayFor(model => model.CreateTime)</td>
+            </tr>
+            <tr>
+                <th><div title="Odłącz dokument z listy plików">
+                        @using ITechSite.Custom
+                        @Html.ActionLinkGlyphicon(" Usuń plik z planu", "Delete", "InformationPlans", new { id = Model.id }, new { @class = "btn btn-danger" }, "glyphicon-trash")
+                    </div>
+                </th>
+                <td> </td>
+            </tr>
+        </table>
+    </div>
+</div>

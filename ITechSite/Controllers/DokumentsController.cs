@@ -93,6 +93,8 @@ namespace ITechSite.Controllers
                     dokument.FileType = Path.GetExtension(dokument.FileName);
                     dokument.CreateTime = DateTime.Now;
                     dokument.OwnerId =User.Identity.Name;
+                    dokument.LastWriteTime = DateTime.Now;
+                    dokument.LastWriteUserId = User.Identity.Name;
 
                     if (dokument.File != null)
                     {
@@ -213,10 +215,14 @@ namespace ITechSite.Controllers
                     dokument.FileType = Path.GetExtension(dokument.FileName);
 
                     //TryUpdateModel(dokument, "",  new  string []  {"FileName,CodeName,Enabled,Description,ValidDtmOn,ValidDtmOff,WorkProcess_Id,Kategoria_Id,Keywords"});
-                    
+
+                    dokument.LastWriteTime = DateTime.Now;
+                    dokument.LastWriteUserId = User.Identity.Name;
+
                     db.Entry(dokument).State = EntityState.Modified;
                     db.Entry(dokument).Property("CreateTime").IsModified = false;
                     db.Entry(dokument).Property("OwnerId").IsModified = false;
+
 
                     db.SaveChanges();
 

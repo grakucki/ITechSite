@@ -19,24 +19,89 @@
         <dd>
             @Html.DisplayFor(model => model.Resource.Name)
         </dd>
+
+        @if (@Model.ResourceModel!=null)
+        { 
+            <dt>
+                @Model.ResourceModel.ResourceType.Type.ToString()
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ResourceModel.Name)
+            </dd>
+        }
+
+        <dt>
+            do planu dodany przez
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OwnerId)
+        </dd>
+        <dt>
+            dnia
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CreateTime)
+        </dd>
+        <dt>.
+        </dt>
+        <dd>.
+        </dd>
+        
+        @if(@Model.Dokument!=null)
+        {
+        <dt>
+            nr dokumentu
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dokument.CodeName)
+        </dd>
         <dt>
             Plik dokumentu
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Dokument.CodeName)
             @Html.DisplayFor(model => model.Dokument.FileName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Order)
+            Opis pliku
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.Order)
+            @Html.DisplayFor(model => model.Dokument.Description)
         </dd>
-
+        <dt>
+            Aktywny
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dokument.Enabled)
+        </dd>
+        <dt>
+            Właściciel dokumentu
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dokument.OwnerId)
+        </dd>
+        <dt>
+            Utworzony 
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dokument.CreateTime)
+        </dd>
+        <dt>
+            Ostatnio zmodyfikowany przez
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dokument.LastWriteUserId)
+        </dd>
+        <dt>
+            Ostatnio zmodyfikowany
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Dokument.LastWriteTime)
+        </dd>
+        }
     </dl>
 </div>
+
 <p>
     @Html.ActionLink("Edycja", "Edit", new { id = Model.id}) |
     @Html.ActionLink("Powrót", "Edit", "Resources", new { id = ViewBag.Ret_idR }, null)

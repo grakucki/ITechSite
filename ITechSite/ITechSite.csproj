@@ -415,6 +415,7 @@
     <Content Include="Models\sql\2015-08-31.sql" />
     <Content Include="Models\sql\2015-09-24.sql" />
     <Content Include="Models\sql\2015-10-19.sql" />
+    <Content Include="Models\sql\2015-10-30.sql" />
     <Compile Include="Models\TestSettings.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
@@ -971,6 +972,8 @@
     <Content Include="Views\TestSettings\Index.cshtml" />
     <Content Include="Views\InformationPlans\_DocPartial.cshtml" />
     <Content Include="Views\ItechUsers\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\InformationPlans\_DocDetailsModal.cshtml" />
+    <Content Include="Views\InformationPlans\ShowDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
