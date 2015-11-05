@@ -371,7 +371,9 @@ namespace ITechService
                 {
                     context.Configuration.LazyLoadingEnabled = false;
                     context.Configuration.ProxyCreationEnabled = false;
-                    o = context.ResourceModel.OrderBy(m => m.Name).ToList();
+                    //o = context.ResourceModel.OrderBy(m => m.Name).ToList();
+                    o = context.ResourceModelsOnly.OrderBy(m => m.Name).ToList();
+                    o = context.ResourceModelsOnly.Include(m => m.Resource1).OrderBy(m => m.Name).ToList();
                 }
             }
             catch (Exception ex)

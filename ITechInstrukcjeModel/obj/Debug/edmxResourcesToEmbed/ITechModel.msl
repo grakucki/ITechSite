@@ -167,5 +167,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="ModelsVersionModels" TypeName="ITechModel.ModelsVersionModels" StoreEntitySet="ModelsVersionModels">
+      <EndProperty Name="Resource1">
+        <ScalarProperty Name="Id" ColumnName="IdVM" />
+      </EndProperty>
+      <EndProperty Name="Resource">
+        <ScalarProperty Name="Id" ColumnName="IdM" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

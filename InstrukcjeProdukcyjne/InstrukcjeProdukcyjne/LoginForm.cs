@@ -59,7 +59,27 @@ namespace InstrukcjeProdukcyjne
             fileSystemWatcher1.Path = Path.GetDirectoryName(Properties.Settings.Default.App.CardReaderFileDat);
             fileSystemWatcher1.Filter = Path.GetFileName(Properties.Settings.Default.App.CardReaderFileDat);
             textBoxCarNo.Focus();
+
+            AutoLogin();
             
+        }
+
+        private void AutoLogin()
+        {
+           // automatyczne logowanie jeśli plik "autologin istnieje
+            // pierwsza linia numer karty - to co zapisuje czytnik
+            try 
+	        {
+                var AutoFileName = Path.Combine(Properties.Settings.Default.App.LocalDoc, "auto.dat");
+                if (File.Exists(AutoFileName))
+                {
+                    File.Copy(AutoFileName, Properties.Settings.Default.App.CardReaderFileDat, true);
+                }
+	        }
+	        catch (Exception)
+	        {
+		     
+	        }
         }
 
         private void LabelClear()

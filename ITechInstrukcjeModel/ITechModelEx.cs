@@ -28,13 +28,24 @@ namespace ITechInstrukcjeModel
         public List<ItechUsers> ItechUsers_Local { get; set; }
 
 
+        /// <summary>
+        /// lista modeli oraz podpięte do nich warianty
+        /// </summary>
+        public IQueryable<Resource> ResourceModelsOnly
+        {
+            get
+            {
+                return this.Resource.Where(m => m.Type == 2 && m.Enabled);
+            }
+        }
+
+
         public IQueryable<Resource> ResourceModel
         {
             get
             {
                 return this.Resource.Where(m => m.Type >= 2 && m.Enabled);
             }
-
         }
 
         public List<Resource> ResourceModel_Local

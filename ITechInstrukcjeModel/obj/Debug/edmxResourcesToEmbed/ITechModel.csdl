@@ -103,6 +103,10 @@
       <End Role="Workstation" EntitySet="Workstation" />
     </AssociationSet>
     <EntitySet Name="TestSettings" EntityType="ITechModel.TestSettings" />
+    <AssociationSet Name="ModelsVersionModels" Association="ITechModel.ModelsVersionModels">
+      <End Role="Resource" EntitySet="Resource" />
+      <End Role="Resource1" EntitySet="Resource" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="News">
     <Key>
@@ -136,6 +140,8 @@
     <Property Name="Factory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="InformationPlanModel" Relationship="ITechModel.FK_InformationPlan_Resource1" FromRole="Resource" ToRole="InformationPlan" />
     <NavigationProperty Name="Workstation" Relationship="ITechModel.FK_Workstation_Resource" FromRole="Resource" ToRole="Workstation" />
+    <NavigationProperty Name="Resource1" Relationship="ITechModel.ModelsVersionModels" FromRole="Resource" ToRole="Resource1" />
+    <NavigationProperty Name="Resource2" Relationship="ITechModel.ModelsVersionModels" FromRole="Resource1" ToRole="Resource" />
   </EntityType>
   <EntityType Name="WorkstationGroup">
     <Key>
@@ -332,4 +338,8 @@
     <Property Name="Test_BlokOnValid" Type="Boolean" Nullable="false" />
     <Property Name="Test_Run" Type="Boolean" Nullable="false" />
   </EntityType>
+  <Association Name="ModelsVersionModels">
+    <End Type="ITechModel.Resource" Role="Resource" Multiplicity="*" />
+    <End Type="ITechModel.Resource" Role="Resource1" Multiplicity="*" />
+  </Association>
 </Schema>

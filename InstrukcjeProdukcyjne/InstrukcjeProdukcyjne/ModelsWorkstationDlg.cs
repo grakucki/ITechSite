@@ -303,5 +303,10 @@ namespace InstrukcjeProdukcyjne
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            button2_Click(sender, e);
+        }
     }
 }

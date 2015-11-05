@@ -21,6 +21,8 @@ namespace ITechInstrukcjeModel
             this.ModelsWorkstationModel = new HashSet<ModelsWorkstation>();
             this.InformationPlanModel = new HashSet<InformationPlan>();
             this.Workstation = new HashSet<Workstation>();
+            this.Resource1 = new HashSet<Resource>();
+            this.Resource2 = new HashSet<Resource>();
         }
     
         public int Id { get; set; }
@@ -40,5 +42,8 @@ namespace ITechInstrukcjeModel
         public virtual ICollection<ModelsWorkstation> ModelsWorkstationModel { get; set; }
         public virtual ICollection<InformationPlan> InformationPlanModel { get; set; }
         public virtual ICollection<Workstation> Workstation { get; set; }
+        public virtual ICollection<Resource> Resource1 { get; set; }
+                [System.Runtime.Serialization.IgnoreDataMember]
+        public virtual ICollection<Resource> Resource2 { get; set; }
     }
 }

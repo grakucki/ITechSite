@@ -73,6 +73,14 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="64" Nullable="false" />
   </EntityType>
+  <EntityType Name="ModelsVersionModels">
+    <Key>
+      <PropertyRef Name="IdM" />
+      <PropertyRef Name="IdVM" />
+    </Key>
+    <Property Name="IdM" Type="int" Nullable="false" />
+    <Property Name="IdVM" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="ModelsWorkstation">
     <Key>
       <PropertyRef Name="id" />
@@ -225,6 +233,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ModelsVersionModels_Resource_Model">
+    <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+    <End Role="ModelsVersionModels" Type="Self.ModelsVersionModels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ModelsVersionModels">
+        <PropertyRef Name="IdM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModelsVersionModels_Resource_Version">
+    <End Role="Resource" Type="Self.Resource" Multiplicity="1" />
+    <End Role="ModelsVersionModels" Type="Self.ModelsVersionModels" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Resource">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ModelsVersionModels">
+        <PropertyRef Name="IdVM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ModelsWorkstation_Resource">
     <End Role="Resource" Type="Self.Resource" Multiplicity="0..1" />
     <End Role="ModelsWorkstation" Type="Self.ModelsWorkstation" Multiplicity="*" />
@@ -292,6 +324,7 @@
     <EntitySet Name="ItechUsers" EntityType="Self.ItechUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ItechUsersRoles" EntityType="Self.ItechUsersRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Kategorie" EntityType="Self.Kategorie" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ModelsVersionModels" EntityType="Self.ModelsVersionModels" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ModelsWorkstation" EntityType="Self.ModelsWorkstation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NewsPriority" EntityType="Self.NewsPriority" Schema="dbo" store:Type="Tables" />
@@ -323,6 +356,14 @@
     <AssociationSet Name="FK_ItechUsersRoles_ItechUsers" Association="Self.FK_ItechUsersRoles_ItechUsers">
       <End Role="ItechUsers" EntitySet="ItechUsers" />
       <End Role="ItechUsersRoles" EntitySet="ItechUsersRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ModelsVersionModels_Resource_Model" Association="Self.FK_ModelsVersionModels_Resource_Model">
+      <End Role="Resource" EntitySet="Resource" />
+      <End Role="ModelsVersionModels" EntitySet="ModelsVersionModels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ModelsVersionModels_Resource_Version" Association="Self.FK_ModelsVersionModels_Resource_Version">
+      <End Role="Resource" EntitySet="Resource" />
+      <End Role="ModelsVersionModels" EntitySet="ModelsVersionModels" />
     </AssociationSet>
     <AssociationSet Name="FK_ModelsWorkstation_Resource" Association="Self.FK_ModelsWorkstation_Resource">
       <End Role="Resource" EntitySet="Resource" />

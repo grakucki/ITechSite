@@ -29,12 +29,23 @@ namespace InstrukcjeProdukcyjne
             {
 
                 LoadSettings();
-
+                AutoComplete();
                 
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AutoComplete()
+        {
+            var AutoCompleteFilename = Path.Combine(Properties.Settings.Default.LocalDir, @"configs\AutoCompleteServer.txt");
+            if (File.Exists(AutoCompleteFilename))
+            {
+                var d = File.ReadAllLines(AutoCompleteFilename);
+                textBoxSerwer.AutoCompleteCustomSource = new AutoCompleteStringCollection();
+                textBoxSerwer.AutoCompleteCustomSource.AddRange(d);
             }
         }
 
@@ -72,7 +83,7 @@ namespace InstrukcjeProdukcyjne
             //    textBox1.Text= File.ReadAllText(file);
             //}
             var x = Properties.Settings.Default.App;
-            textBox1.Text = Properties.Settings.Default.App.ServerDoc;
+            textBoxSerwer.Text = Properties.Settings.Default.App.ServerDoc;
             textBox2.Text = Properties.Settings.Default.App.LocalDoc;
             textBox3.Text = Properties.Settings.Default.App.CardReaderFileDat;
             int? id = Properties.Settings.Default.App.Stanowisko;
@@ -96,9 +107,9 @@ namespace InstrukcjeProdukcyjne
         {
             //var path = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData).ToString();
 
-            var s= textBox1.Text;
+            var s= textBoxSerwer.Text;
             //File.WriteAllText(Path.Combine(path, "setings.xml"), s);
-            Properties.Settings.Default.App.ServerDoc = textBox1.Text;
+            Properties.Settings.Default.App.ServerDoc = textBoxSerwer.Text;
             Properties.Settings.Default.App.LocalDoc = textBox2.Text;
             var w = (Resource) WorkstationComboBox.SelectedItem;
             Properties.Settings.Default.App.PozwalajNaBlokowanieStanowiska = checkBox1.Checked;
@@ -134,7 +145,7 @@ namespace InstrukcjeProdukcyjne
 
 
 
-                var addr = textBox1.Text;
+                var addr = textBoxSerwer.Text;
                 //http://localhost:53854/ServiceWorkstation.svc
 
 
@@ -186,8 +197,8 @@ namespace InstrukcjeProdukcyjne
         private List<Resource> GetWorsktationList()
         {
             ServiceWorkstation.ServiceWorkstationClientEx client = null;
-            var addr = textBox1.Text;
-            if (string.IsNullOrEmpty(textBox1.Text))
+            var addr = textBoxSerwer.Text;
+            if (string.IsNullOrEmpty(textBoxSerwer.Text))
                 throw new Exception("Podaj adres serwera");
 
              List<Resource> s =null;
@@ -203,7 +214,7 @@ namespace InstrukcjeProdukcyjne
         private void button2_Click(object sender, EventArgs e)
         {
             // test połaczenia
-            var addr = textBox1.Text;
+            var addr = textBoxSerwer.Text;
             //http://localhost:53854/ServiceWorkstation.svc
 
 
