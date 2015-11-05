@@ -148,3 +148,8 @@ button {
        margin:20px;
        padding:5px;
 }
+
+.text-Right{
+    text-align:right;
+    padding-right:10px;
+}

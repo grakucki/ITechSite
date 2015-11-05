@@ -35,10 +35,11 @@
           <Property Name="WorkProcess_Id" Type="int" />
           <Property Name="Keywords" Type="nvarchar(max)" />
           <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
-          <Property Name="Kategoria_Id" Type="int" />
           <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="Kategoria_Id" Type="int" />
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="OwnerId" Type="nvarchar" MaxLength="128" />
+          <Property Name="LastWriteUserId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="Factory">
           <Key>
@@ -83,6 +84,8 @@
           <Property Name="IdM" Type="int" />
           <Property Name="Order" Type="int" />
           <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="OwnerId" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="ItechUsers">
           <Key>
@@ -97,9 +100,9 @@
           <Property Name="LastTestKompetencjiDtm" Type="datetime" />
           <Property Name="LastTestKompetencjiResult" Type="int" />
           <Property Name="Frozen" Type="bit" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
           <Property Name="Desc" Type="nvarchar(max)" />
           <Property Name="AccessProfile" Type="nvarchar" MaxLength="50" />
-          <Property Name="Enabled" Type="bit" Nullable="false" />
           <Property Name="LastTestKompetencjiDtmSucces" Type="datetime" />
           <Property Name="ForceTestKompetencji" Type="bit" Nullable="false" />
         </EntityType>
@@ -723,6 +726,7 @@
           <NavigationProperty Name="WorkProcess" Relationship="ITechModel.FK_Dokument_WorkProcess" FromRole="Dokument" ToRole="WorkProcess" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="OwnerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="LastWriteUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="WorkstationGroup">
           <Key>
@@ -777,6 +781,8 @@
           <Property Name="IdM" Type="Int32" />
           <NavigationProperty Name="Resource" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="InformationPlan" ToRole="Resource" />
           <NavigationProperty Name="ResourceModel" Relationship="ITechModel.FK_InformationPlan_Resource1" FromRole="InformationPlan" ToRole="Resource" />
+          <Property Name="OwnerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_InformationPlan_Dokument">
           <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="1" />
@@ -1104,6 +1110,7 @@
           <EntitySetMapping Name="Dokument">
             <EntityTypeMapping TypeName="ITechModel.Dokument">
               <MappingFragment StoreEntitySet="Dokument">
+                <ScalarProperty Name="LastWriteUserId" ColumnName="LastWriteUserId" />
                 <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="Kategoria_Id" ColumnName="Kategoria_Id" />
@@ -1142,6 +1149,8 @@
           <EntitySetMapping Name="InformationPlan">
             <EntityTypeMapping TypeName="ITechModel.InformationPlan">
               <MappingFragment StoreEntitySet="InformationPlan">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
                 <ScalarProperty Name="IdM" ColumnName="IdM" />
                 <ScalarProperty Name="Enabled" ColumnName="Enabled" />
                 <ScalarProperty Name="Order" ColumnName="Order" />

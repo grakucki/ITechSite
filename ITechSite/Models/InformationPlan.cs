@@ -20,6 +20,8 @@ namespace ITechSite.Models
         public Nullable<int> Order { get; set; }
         public bool Enabled { get; set; }
         public Nullable<int> IdM { get; set; }
+        public string OwnerId { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
     
         public virtual Dokument Dokument { get; set; }
         public virtual Resource Resource { get; set; }

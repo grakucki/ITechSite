@@ -17,7 +17,7 @@
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Dokument" ManuallyRouted="false" >
         </AssociationConnector>
         <EntityTypeShape EntityType="ITechModel.News" Width="1.5" PointX="17.875" PointY="0.5" />
-        <EntityTypeShape EntityType="ITechModel.AspNetRoles" Width="1.5" PointX="8.75" PointY="8.125" />
+        <EntityTypeShape EntityType="ITechModel.AspNetRoles" Width="1.5" PointX="9" PointY="6.875" />
         <EntityTypeShape EntityType="ITechModel.Kategorie" Width="1.5" PointX="8.875" PointY="4.75" />
         <AssociationConnector Association="ITechModel.FK_Dokument_Kategorie" />
         <EntityTypeShape EntityType="ITechModel.Department" Width="1.5" PointX="2.5" PointY="4.875" />

@@ -1,0 +1,50 @@
+﻿<script>
+
+    function InitModaly() {
+        $('.showModal').on('click', function () {
+            var itemid = $(this).attr('id');
+            $("#error").html("bcbv");
+            $("#error").addClass("hidden");
+            $(".modal-body-view").html("proszę czekać ...");
+            $(".modal-body-view").load("./ShowDetails?id=" + itemid, function (response, status, xhr) {
+                if (status == "error") {
+                    var msg = "Sorry but there was an error: ";
+                    $("#error").html(msg + xhr.status + " " + xhr.statusText);
+                    $("#error").removeClass("hidden");
+                    $(".modal-body-view").html("");
+                }
+            });
+        });
+    };
+
+
+    $(function () {
+        InitModaly();
+    });
+</script>
+
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg container">
+        <div class="modal-content panela panel-infao">
+            <div class="modal-header panel-heading7">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Szczegóły planu.</h4>
+            </div>
+            <div class="modal-body panel-boddy">
+                <div id="error" class="btn btn-danger btn-block"></div>
+                <div class="modal-body-view">
+
+                </div>
+            </div>
+            <div class="modal-footer panel-footer">
+                <button type="submit" class="btn btn-primary start" data-dismiss="modal" id="SendFile">
+                    <i class="glyphicon glyphicon-remove"></i>
+                    <span>Zamknij</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div> 

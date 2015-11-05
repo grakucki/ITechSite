@@ -105,6 +105,7 @@ namespace ITechSite.Models.Repository
 
         public IList<Dokument> GetAvalibleDoc(int IdR, int? IdM, string WorkProcess, string filter, int? kategoriaId)
         {
+            
             var query = _dataContex.Dokument.AsQueryable();
   
 

@@ -36,6 +36,7 @@ namespace ITechSite.Models
         public Nullable<int> Kategoria_Id { get; set; }
         public System.DateTime CreateTime { get; set; }
         public string OwnerId { get; set; }
+        public string LastWriteUserId { get; set; }
     
         public virtual ICollection<FileContent> FileContent { get; set; }
         public virtual ICollection<InformationPlan> InformationPlan { get; set; }
