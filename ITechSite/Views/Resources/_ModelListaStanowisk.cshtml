@@ -1,0 +1,27 @@
+﻿@model ITechSite.Models.Resource
+
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h4>dopięty do stanowisk <span class="badge">@Model.ModelsWorkstationModel.Count()</span></h4>
+    </div>
+    <div class="panel-body">
+        <div class="form-inline">
+            <div>
+                @foreach (var item in Model.ModelsWorkstationModel)
+                {
+                    <div class="form-group">
+                        <div class="alert alert-success">
+                            <h4>
+                                @Html.Partial("_ResourceType2Image", item.ResourceWorkstation)
+                            @item.ResourceWorkstation.Name
+                        </h4>
+                        &nbsp;@item.ResourceWorkstation.Description
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

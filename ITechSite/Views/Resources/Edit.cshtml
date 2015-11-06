@@ -123,67 +123,79 @@
     <div class="form-group">
         @Html.Label("Ustawienia Stanowiska", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.ActionLink("Edytuj", "Workstation", new { idR = Model.Id }, new { htmlAttributes = new { @class = "btn btn-default" } })
+            @Html.ActionLink("Edytuj", "Workstation", new { idR = Model.Id }, new { @class = "btn btn-success" })
         </div>
     </div>
 
 
-    <div class="form-group">
-        @Html.Label("Lista modeli na stanowisku", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.ActionLink("Edytuj", "Models", new { idR = Model.Id }, new { htmlAttributes = new { @class = "btn btn-default" } })
-        </div>
-    </div>
 }
 @if (Model.Type == 2)
 {
     // dla modelu
     
-        
-    
     <div class="form-group">
         @Html.Label("Warianty", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-12">
             Liczba wariantów :  @Model.ResourceModelChild.Count
-            @Html.ActionLink("Dodaj nowy", "CreateVersionModel", new { Parent = Model.Id, Type = 3 }, new { htmlAttributes = new { @class = "btn btn-default" } })
+            @Html.ActionLink("Dodaj nowy wariant", "CreateVersionModel", new { Parent = Model.Id, Type = 3 }, new { htmlAttributes = new { @class = "btn btn-default" } })
             <br />
-            <div class="">
-                <table>
-                    @foreach (var item in Model.ResourceModelChild)
-                    {
-                        <tr>
-                            <td>@Html.Label("", item.Name, htmlAttributes: new { @class = "control-label" })</td>
-                            <td>@Html.Label("", item.Description, htmlAttributes: new { @class = "form-label" })</td>
-                            @*@Html.ActionLink("Edytuj", "EditVersonModel", new { idR = item.Id }, new { htmlAttributes = new { @class = "btn btn-default" } })*@
-                            @*@Html.ActionLink("Usuń", "DeleteVersonModel", new { idR = item.Id }, new { htmlAttributes = new { @class = "btn btn-default" } })*@
-                        </tr>
-                    }
-                </table>
-            </div>
-        </div>
-    </div>
-}
-
-        <div class="form-group">
-            <label class="control-label col-md-2">Kasowanie</label>
             <div class="col-md-10">
-                @using ITechSite.Custom
-                @Html.ActionLinkGlyphicon(" Kasuj " +@Model.Name, "delete", null, new { id = Model.Id }, new { @class = "btn btn-danger" }, "glyphicon-trash")
-
+                <table class="table table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nazwa</th>
+                            <th>Opis</th>
+                        </tr>
+                    </thead>
+                        @foreach (var item in Model.ResourceModelChild)
+                        {
+                            <tr>
+                                <td>@Html.Label("", item.Name, htmlAttributes: new { @class = "control-label" })</td>
+                                <td>@Html.Label("", item.Description, htmlAttributes: new { @class = "form-label" })</td>
+                                @*<td>@Html.ActionLink("Edytuj", "EditVersonModel", new { idR = item.Id }, new { htmlAttributes = new { @class = "btn btn-default" } })</td>*@
+                            </tr>
+                            }
+    </table>
+                </div>
             </div>
         </div>
+    }
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" class="btn btn-primary btn-block">
-                    <span class="glyphicon glyphicon-floppy-disk"></span> Zapisz
-                </button>
+            <div class="form-group">
+                <label class="control-label col-md-2">Kasowanie</label>
+                <div class="col-md-10">
+                    @using ITechSite.Custom
+                    @Html.ActionLinkGlyphicon(" Kasuj " +@Model.ResourceType.Type + " " +@Model.Name, "delete", null, new { id = Model.Id }, new { @class = "btn btn-danger" }, "glyphicon-trash")
 
-                @*<input type="submit" value="Zapisz" class="btn btn-default" />*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        <span class="glyphicon glyphicon-floppy-disk"></span> Zapisz
+                    </button>
+
+                    @*<input type="submit" value="Zapisz" class="btn btn-default" />*@
             </div>
         </div>
     </div>
 }
+@if (Model.ResourceType.id==1)
+{ 
+            @Html.Partial("_StanowiskoListaModeli", Model, new ViewDataDictionary { { "Editable", true } })
+}
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h4>Lista dokumentów</h4>
+    </div>
+    <div class="panel-body">
+        @Html.Partial("_ResourceDokumentList", Model)
+    </div>
+</div>
+
 
 <div>
     @Html.ActionLink("Powrót do listy", "Index")

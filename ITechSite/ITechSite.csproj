@@ -974,6 +974,10 @@
     <Content Include="Views\ItechUsers\_ChangePasswordPartial.cshtml" />
     <Content Include="Views\InformationPlans\_DocDetailsModal.cshtml" />
     <Content Include="Views\InformationPlans\ShowDetails.cshtml" />
+    <Content Include="Views\Resources\_ModelListaStanowisk.cshtml" />
+    <Content Include="Views\Resources\_ResourceDokumentList.cshtml" />
+    <Content Include="Views\Resources\_StanowiskoListaModeli.cshtml" />
+    <Content Include="Views\Resources\_ModelListaWariantów.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

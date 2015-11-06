@@ -254,7 +254,10 @@ namespace ITechSite.Controllers
         {
             var rf = (ResourceListFind)Session["ResourceListFind"];
             if (rf != null)
+            {
+                rf.Find_ResourceType = string.Empty;
                 return rf;
+            }
             return new ResourceListFind();
         }
 

@@ -1,0 +1,67 @@
+﻿@model ITechSite.Models.Resource
+
+@{
+    ICollection<ITechSite.Models.InformationPlan> dokumenty = null;
+}
+@if (Model.ResourceType.id == 1)
+{
+    @****************** dla stanowisk **********************@
+    //dokumenty.AddRange( Model.InformationPlan);
+    dokumenty = Model.InformationPlan;
+
+}
+else
+{
+    @****************** dla modeli wariantów **********************@
+    dokumenty=Model.InformationPlanModel;
+
+}
+
+@if (dokumenty.FirstOrDefault() != null)
+{
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Stanowisko/model/wariant</th>
+                <th>plik</th>
+                <th>nr</th>
+                <th></th>
+                <th></th>
+                <th>opis</th>
+                <th>rozmiar</th>
+                <th>dodał do planu</th>
+            </tr>
+        </thead>
+        @foreach (var item in dokumenty.OrderBy(m=>m.Dokument.FileName))
+        {
+            <tr>
+                
+                @if (  Model.ResourceType.id != 1 || item.ResourceModel == null)
+                {
+                    <td>
+                        @Html.Partial("_ResourceType2Image", item.Resource)
+                        @item.Resource.Name
+                    </td>
+                }
+                else
+                {
+                    <td>@Html.Partial("_ResourceType2Image", item.ResourceModel)
+                    @item.ResourceModel.Name</td>
+                }
+
+                <td>@Html.DisplayFor(modelItem => item.Dokument.FileName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Dokument.CodeName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Dokument.Kategorie.name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Dokument.Enabled)</td>
+                <td>@Html.DisplayFor(modelItem => item.Dokument.Description)</td>
+                <td>@Html.DisplayFor(modelItem => item.Dokument.Size2)</td>
+                <td>@Html.DisplayFor(modelItem => item.OwnerId)</td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="alert alert-danger">Nie dodano jeszcze dokumentów.</div>
+}
+

@@ -1,29 +1,24 @@
 ﻿@model ITechSite.Models.Resource
 
 @{
-    ViewBag.Title = "Zasób Szczegóły";
+    ViewBag.Title = "Szczegóły " + Model.ResourceType.Type + " : "+ Model.Name;
 }
 
-<h2>Szczegóły zasobu</h2>
-
+<div class="alert alert-info">
+    <h2>@ViewBag.Title</h2>
+</div>
 <div>
     <hr />
     <dl class="dl-horizontal">
+
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayFor(model => model.ResourceType.Type)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Name)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastWriteTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastWriteTime)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.No)
@@ -64,54 +59,55 @@
         <dd>
             @Html.DisplayFor(model => model.Keywords)
         </dd>
-
         <dt>
-            @Html.DisplayNameFor(model => model.ResourceType.Type)
+            @Html.DisplayNameFor(model => model.LastWriteTime)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ResourceType.Type)
+            @Html.DisplayFor(model => model.LastWriteTime)
         </dd>
-            @*<dt>
-                @Html.Label("Plan informacyjny")
+
+
+
+        
+
+
+        @if (Model.ResourceType.id == 1)
+        {
+            <dt>
+                @Html.Label("Ustawienia Stanowiska")
             </dt>
             <dd>
-                @Html.ActionLink("Pokaż", "Details", "InformationPlans", new { idR = Model.Id }, new { htmlAttributes = new { @class = "btn btn-default" } })
-            </dd>*@
-            @if (Model.ResourceType.id == 1)
-            {
-<dt>
-            @Html.Label("Ustawienia Stanowiska")
-        </dt>
-        <dd>
-            @Html.ActionLink("Pokaż", "Details", "Workstations", new { idR = Model.Id }, new { htmlAttributes = new { @class = "btn btn-default" } })
-        </dd>
-    <dt>
-        Pliki
-    </dt>
-    <dd>
-        <table>
-            @if (Model.InformationPlan.FirstOrDefault() != null)
-            {
-                foreach (var item in Model.InformationPlan)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.Dokument.FileName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Dokument.CodeName)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Dokument.Kategorie.name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Dokument.Enabled)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Dokument.Description)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Dokument.Size2)</td>
-                        <td>@Html.ActionLink("Szczegóły", "Details", "Dokuments", new { id = item.IdD }, null)</td>
-                        <td>@Html.ActionLink("Pokaż", "Show", "Dokuments", new { id = item.IdD }, null)</td>
-                    </tr>
-                }
-            }
-        </table>
-    </dd>
+                @Html.ActionLink("Pokaż", "Details", "Workstations", new { idR = Model.Id }, new { @class = "btn btn-success" })
+            </dd>
+        }
 
-            }
-</dl>
+    </dl>
+    @if (Model.ResourceType.id == 2)
+    {
+
+                @Html.Partial("_ModelListaWariantów", Model)
+            @Html.Partial("_ModelListaStanowisk", Model)
+    }
+
+
+    @if (Model.ResourceType.id == 1)
+    {
+        @Html.Partial("_StanowiskoListaModeli", Model)
+    }
+
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <h4>Dokumenty</h4>
+        </div>
+        <div class="panel-body">
+            @Html.Partial("_ResourceDokumentList", Model)
+        </div>
+    </div>
+          
+
+
+
 </div>
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |*@

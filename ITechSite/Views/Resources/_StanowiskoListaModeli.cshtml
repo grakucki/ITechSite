@@ -1,0 +1,32 @@
+﻿@model ITechSite.Models.Resource
+
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h4>Lista modeli na stanowisku <span class="badge">@Model.ModelsWorkstationWorkStation.Count()</span> 
+        @if(ViewData["Editable"]!=null)
+        { 
+            @Html.ActionLink("Edytuj", "Models", new { idR = Model.Id }, new { @class = "btn btn-success" })
+        }
+        </h4>
+    </div>
+    <div class="panel-body">
+        <div class="form-inline">
+            <div>
+                @foreach (var item in Model.ModelsWorkstationWorkStation)
+                {
+                    <div class="form-group">
+                        <div class="alert alert-success">
+                            <h4>
+                                @Html.Partial("_ResourceType2Image", item.ResourceModel)
+                            @item.ResourceModel.Name
+                        </h4>
+                        &nbsp;@item.ResourceModel.Description
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
