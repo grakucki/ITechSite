@@ -1,24 +1,24 @@
 ﻿@model ITechSite.Models.InformationPlan
 @using ITechSite.Custom
 
-<div class="form-group file-content">
+    <div class="form-group file-content">
         @{var fileicon = "any.png";
-           switch(Model.Dokument.FileType.ToLower())
-           {
-               case ".jpg": 
-                   fileicon = "jpg.png";
-                   break;
-               case ".mp4":
-               case ".avi":
-               case ".wmv":
-               case ".m2t":
-                   fileicon = "avi.png";
-                   break;
-               case ".pdf":
-                   fileicon = "pdf.png";
-                   break;
-           }
-          }
+        switch (Model.Dokument.FileType.ToLower())
+        {
+            case ".jpg":
+                fileicon = "jpg.png";
+                break;
+            case ".mp4":
+            case ".avi":
+            case ".wmv":
+            case ".m2t":
+                fileicon = "avi.png";
+                break;
+            case ".pdf":
+                fileicon = "pdf.png";
+                break;
+        }
+        }
         <a href="@Url.Action("Show", "Dokuments", new { id = Model.IdD })" target="_blank">
             <img src="~/Content/images/@fileicon" class="" />
         </a>
@@ -27,9 +27,12 @@
         @Html.Label("", Model.Dokument.FileName, htmlAttributes: new { @class = "control-label" })<br />
         <p class="text">@Model.Dokument.Description</p>
 
-        <p class ="control-label text-info">
-            <strong>@{ if (Model.Dokument.Kategorie != null) {@Model.Dokument.Kategorie.name};} </strong>
-            <small title="Właściciel dokumentu."><em> @Model.Dokument.OwnerId</em></small>
-        </p>
+        <p class="control-label text-info">
+            <strong>
+                @{ if (Model.Dokument.Kategorie != null)
+                 {@Model.Dokument.Kategorie.name};}
+        </strong>
+        <small title="Właściciel dokumentu."><em> @Model.Dokument.OwnerId</em></small>
+    </p>
 
 </div>

@@ -30,10 +30,11 @@
     <Property Name="WorkProcess_Id" Type="int" />
     <Property Name="Keywords" Type="nvarchar(max)" />
     <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
-    <Property Name="Kategoria_Id" Type="int" />
     <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
+    <Property Name="Kategoria_Id" Type="int" />
     <Property Name="CreateTime" Type="datetime" Nullable="false" />
     <Property Name="OwnerId" Type="nvarchar" MaxLength="128" />
+    <Property Name="LastWriteUserId" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="Factory">
     <Key>
@@ -78,6 +79,8 @@
     <Property Name="IdM" Type="int" />
     <Property Name="Order" Type="int" />
     <Property Name="Enabled" Type="bit" Nullable="false" />
+    <Property Name="OwnerId" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateTime" Type="datetime" />
   </EntityType>
   <EntityType Name="ItechUsers">
     <Key>
@@ -92,9 +95,9 @@
     <Property Name="LastTestKompetencjiDtm" Type="datetime" />
     <Property Name="LastTestKompetencjiResult" Type="int" />
     <Property Name="Frozen" Type="bit" Nullable="false" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="Desc" Type="nvarchar(max)" />
     <Property Name="AccessProfile" Type="nvarchar" MaxLength="50" />
-    <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="LastTestKompetencjiDtmSucces" Type="datetime" />
     <Property Name="ForceTestKompetencji" Type="bit" Nullable="false" />
   </EntityType>

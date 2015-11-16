@@ -1,10 +1,6 @@
 ﻿
-
 <script src="~/Scripts/build.js"></script>
-<script>
-    //var Dropzone = require("enyo-dropzone");
-    //Dropzone.autoDiscover = false;
-</script>
+
 
 
 <form id="my-dropzone" class="dropzone form-control btn-success">
@@ -14,33 +10,42 @@
 
 <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        <div class="modal-content">
+        <div class="modal-content content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Dodaj nowy plik.</h4>
             </div>
             <div class="modal-body">
-                @Html.Label("FileName", "Plik", new { @class = "label-control" })
-                @Html.TextBox("FileName", null, new { @class = "form-control" })
+                <div class=" ">
+                    <div class="row">
+                        @Html.Label("FileName", "Plik", new { @class = "label-control text-right col-sm-3" })
+                        @Html.TextBox("FileName", null, new { @class = "form-control" })
+                    </div>
+                    <div class="row">
+                        @Html.Label("Desc", "Nazwa wyświetlana", new { @class = "label-control text-right col-sm-3" })
+                        @Html.TextBox("Desc", "", new { @class = "form-control" })
+                    </div>
+                    <div class="row">
+                        @Html.Label("Kategorie_Id2", "Kategoria", new { @class = "label-control text-right col-sm-3" })
+                        @Html.DropDownList("Kategorie_Id2", (SelectList)ViewBag.KategoriaList, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="row">
+                        @Html.Label("WorkProcess2", "Proces roboczy", new { @class = "label-control text-right col-sm-3" })
+                        @Html.DropDownList("WorkProcess2", (SelectList)ViewBag.WorkProcessList, new { @class = "form-control" })
+                    </div>
+                    <div class="row">
+                        @Html.Label("CodeName2", "Nr instrukcji", new { @class = "label-control text-right col-sm-3" })
+                        @Html.TextBox("CodeName2", "", new { @class = "form-control" })
+                    </div>
+                    <div class="row">
 
-                @Html.Label("Desc", "Nazwa wyświetlana", new { @class = "label-control" })
-                @Html.TextBox("Desc", "", new { @class = "form-control" })
-
-                @Html.Label("Kategorie_Id2", "Kategoria", new { @class = "label-control" })
-                @Html.DropDownList("Kategorie_Id2", (SelectList)ViewBag.KategoriaList, htmlAttributes: new { @class = "form-control" })
-
-                @Html.Label("WorkProcess2", "Proces roboczy", new { @class = "label-control" })
-                @Html.DropDownList("WorkProcess2", (SelectList)ViewBag.WorkProcessList, new { @class = "form-control" })
-                
-
-                @Html.Label("CodeName2", "Nr instrukcji", new { @class = "label-control" })
-                @Html.TextBox("CodeName2", "", new { @class = "form-control" })
-
-                @Html.Label("Keywords", "Słowa kluczowe", new { @class = "label-control" })
-                @Html.TextBox("Keywords", "", new { @class = "form-control" })
+                        @Html.Label("Keywords", "Słowa kluczowe", new { @class = "label-control text-right col-sm-3" })
+                        @Html.TextBox("Keywords", "", new { @class = "form-control" })
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary start" data-dismiss="modal" id="SendFile">
+                <button type="submit" class="btn btn-primary startUpload" data-dismiss="modal" id="SendFile">
                     <i class="glyphicon glyphicon-upload"></i>
                     <span>Wyślij</span>
                 </button>
@@ -50,7 +55,14 @@
 </div>
 
 <script>
-    $(function () {
+
+    $(document).ready(function () {
+        // Show the Modal on load
+        // $("#myModal2").modal("show");
+
+    //});
+
+    //$(function () {
         // Now that the DOM is fully loaded, create the dropzone, and setup the
         // event listeners
         Dropzone.autoDiscover = false;
@@ -119,7 +131,7 @@
             //formData.append("IdM", $("#Keywords").val());
         });
 
-        document.querySelector(".start").onclick = function () {
+        document.querySelector(".startUpload").onclick = function () {
             //alert("Wysyłam");
             myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED));
         };

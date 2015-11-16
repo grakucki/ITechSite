@@ -147,6 +147,7 @@
     <NavigationProperty Name="WorkProcess" Relationship="ITechModel.FK_Dokument_WorkProcess" FromRole="Dokument" ToRole="WorkProcess" />
     <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="OwnerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="LastWriteUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="WorkstationGroup">
     <Key>
@@ -201,6 +202,8 @@
     <Property Name="IdM" Type="Int32" />
     <NavigationProperty Name="Resource" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="InformationPlan" ToRole="Resource" />
     <NavigationProperty Name="ResourceModel" Relationship="ITechModel.FK_InformationPlan_Resource1" FromRole="InformationPlan" ToRole="Resource" />
+    <Property Name="OwnerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK_InformationPlan_Dokument">
     <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="1" />

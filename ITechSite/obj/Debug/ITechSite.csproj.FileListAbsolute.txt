@@ -116,7 +116,6 @@ D:\projekty2\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.Twitter.
 D:\projekty2\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\projekty2\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.dll
 D:\projekty2\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.pdb
-D:\projekty2\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.csprojResolveAssemblyReference.cache
 D:\projekty\automotive\ITechSite\ITechSite\bin\ITechSite.dll.config
 D:\projekty\automotive\ITechSite\ITechSite\bin\ITechSite.dll
 D:\projekty\automotive\ITechSite\ITechSite\bin\ITechSite.pdb
@@ -181,3 +180,4 @@ D:\projekty\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.Microsoft
 D:\projekty\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.dll
 D:\projekty\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.pdb
 D:\projekty\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.csprojResolveAssemblyReference.cache
+D:\projekty2\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.csprojResolveAssemblyReference.cache

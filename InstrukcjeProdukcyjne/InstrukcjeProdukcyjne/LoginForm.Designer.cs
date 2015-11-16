@@ -36,6 +36,7 @@
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.customPanel1 = new CustomPanelControl.CustomPanel();
+            this.customPanel2 = new CustomPanelControl.CustomPanel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -50,9 +51,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.labelMessage = new System.Windows.Forms.Label();
+            this.labelSterownik3 = new System.Windows.Forms.Label();
+            this.labelSterownik4 = new System.Windows.Forms.Label();
+            this.labelSterownik2 = new System.Windows.Forms.Label();
+            this.labelSterownik1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.customPanel1.SuspendLayout();
+            this.customPanel2.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -110,6 +116,7 @@
             this.customPanel1.BackColor = System.Drawing.Color.Gainsboro;
             this.customPanel1.BackColor2 = System.Drawing.Color.Gainsboro;
             this.customPanel1.BorderWidth = 3;
+            this.customPanel1.Controls.Add(this.customPanel2);
             this.customPanel1.Controls.Add(this.panel2);
             this.customPanel1.Controls.Add(this.pictureBox1);
             this.customPanel1.Controls.Add(this.panel1);
@@ -121,6 +128,22 @@
             this.customPanel1.Padding = new System.Windows.Forms.Padding(3);
             this.customPanel1.Size = new System.Drawing.Size(1150, 815);
             this.customPanel1.TabIndex = 14;
+            // 
+            // customPanel2
+            // 
+            this.customPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.customPanel2.BackColor = System.Drawing.Color.Gray;
+            this.customPanel2.BackColor2 = System.Drawing.Color.Gray;
+            this.customPanel2.BorderWidth = 3;
+            this.customPanel2.Controls.Add(this.labelSterownik1);
+            this.customPanel2.Controls.Add(this.labelSterownik2);
+            this.customPanel2.Controls.Add(this.labelSterownik4);
+            this.customPanel2.Controls.Add(this.labelSterownik3);
+            this.customPanel2.Curvature = 10;
+            this.customPanel2.Location = new System.Drawing.Point(728, 321);
+            this.customPanel2.Name = "customPanel2";
+            this.customPanel2.Size = new System.Drawing.Size(410, 134);
+            this.customPanel2.TabIndex = 8;
             // 
             // panel2
             // 
@@ -290,6 +313,42 @@
             this.labelMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelMessage.Click += new System.EventHandler(this.labelMessage_Click);
             // 
+            // labelSterownik3
+            // 
+            this.labelSterownik3.Location = new System.Drawing.Point(40, 90);
+            this.labelSterownik3.Name = "labelSterownik3";
+            this.labelSterownik3.Size = new System.Drawing.Size(359, 17);
+            this.labelSterownik3.TabIndex = 0;
+            this.labelSterownik3.Text = "Sterownik zablokowany";
+            this.labelSterownik3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelSterownik4
+            // 
+            this.labelSterownik4.Location = new System.Drawing.Point(40, 71);
+            this.labelSterownik4.Name = "labelSterownik4";
+            this.labelSterownik4.Size = new System.Drawing.Size(359, 17);
+            this.labelSterownik4.TabIndex = 1;
+            this.labelSterownik4.Text = "Sterownik odblokowany kluczem";
+            this.labelSterownik4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelSterownik2
+            // 
+            this.labelSterownik2.Location = new System.Drawing.Point(40, 51);
+            this.labelSterownik2.Name = "labelSterownik2";
+            this.labelSterownik2.Size = new System.Drawing.Size(359, 17);
+            this.labelSterownik2.TabIndex = 2;
+            this.labelSterownik2.Text = "Sterownik brak połaczenia";
+            this.labelSterownik2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelSterownik1
+            // 
+            this.labelSterownik1.Location = new System.Drawing.Point(40, 25);
+            this.labelSterownik1.Name = "labelSterownik1";
+            this.labelSterownik1.Size = new System.Drawing.Size(359, 17);
+            this.labelSterownik1.TabIndex = 3;
+            this.labelSterownik1.Text = "Sterownik - nieobsługiwany";
+            this.labelSterownik1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // LoginForm
             // 
             this.AcceptButton = this.buttonOk;
@@ -316,6 +375,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.customPanel1.ResumeLayout(false);
+            this.customPanel2.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -348,5 +408,10 @@
         private System.Windows.Forms.Label label4;
         private CustomPanelControl.CustomPanel customPanel1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private CustomPanelControl.CustomPanel customPanel2;
+        private System.Windows.Forms.Label labelSterownik1;
+        private System.Windows.Forms.Label labelSterownik2;
+        private System.Windows.Forms.Label labelSterownik4;
+        private System.Windows.Forms.Label labelSterownik3;
     }
 }

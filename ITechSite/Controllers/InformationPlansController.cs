@@ -327,6 +327,8 @@ namespace ITechSite.Controllers
                         ip.idR = IdR.Value;
                         ip.IdD = IdD.Value;
                         ip.IdM = IdM;
+                        ip.CreateTime = DateTime.Now;
+                        ip.OwnerId = User.Identity.Name;
 
 
                         db.InformationPlan.Add(ip);
@@ -418,7 +420,8 @@ namespace ITechSite.Controllers
                 
                 Response.StatusCode = 400;
                 Response.ContentType = "text/plain";
-                return Content(ex.Message);
+                var s = ExceptionResolver.Resolve(ex);
+                return Content(s);
             }
 
 

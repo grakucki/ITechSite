@@ -34,6 +34,8 @@ namespace ITechSite.Models.Repository
 
             dokument.LastWriteTime = DateTime.Now;
             dokument.FileType = Path.GetExtension(dokument.FileName);
+            if (string.IsNullOrEmpty(dokument.CodeName))
+                dokument.CodeName = "D000";
             if (dokument.File != null)
             {
                 long i = dokument.File.Length;

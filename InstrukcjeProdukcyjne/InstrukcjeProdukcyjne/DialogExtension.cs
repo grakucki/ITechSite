@@ -19,8 +19,9 @@ namespace InstrukcjeProdukcyjne
             }
             else
             {
-                dial.WindowState = FormWindowState.Maximized;
+                dial.TopMost = true;
                 dial.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+                dial.WindowState = FormWindowState.Maximized;
             }
 
         }
