@@ -8,8 +8,10 @@ namespace InstrukcjeProdukcyjne
 {
     public class AllowRoles
     {
-        public static string All = "pracownik,kierownik";
-        public static string Kierownik = "pracownik,kierownik";
-        //public static string Kierownik = "kierownik";
+        public static string All = "pracownik,kierownik, admin";
+        public static string Kierownik = "kierownik";
+
+        public static string RoleCanLogon = "pracownik,kierownik,admin";
+        public static string RoleCanAppExit = "kierownik, admin";
     }
 }

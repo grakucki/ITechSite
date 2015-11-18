@@ -159,7 +159,7 @@ namespace InstrukcjeProdukcyjne
             LoginForm login = new LoginForm();
             login.Message = message;
             login.db = db;
-            login.AllowRoles = allowroles;
+            login.AllowRoles2 = allowroles;
 
             while (true)
             {
@@ -183,7 +183,7 @@ namespace InstrukcjeProdukcyjne
             LoginForm login = new LoginForm();
             login.Message = message;
             login.db = db;
-            login.AllowRoles = allowroles;
+            login.AllowRoles2 = allowroles;
 
             while (true)
             {

@@ -140,7 +140,7 @@ namespace InstrukcjeProdukcyjne
             LoginForm login = new LoginForm();
             login.Message = message;
             login.db = db;
-            login.AllowRoles = allowroles;
+            login.AllowRoles2 = allowroles;
             try
             {
                 _LoginForm = login;
@@ -180,7 +180,7 @@ namespace InstrukcjeProdukcyjne
             LoginForm login = new LoginForm();
             login.Message = message;
             login.db = db;
-            login.AllowRoles = allowroles;
+            login.AllowRoles2 = allowroles;
             try
             {
                 _LoginForm = login;

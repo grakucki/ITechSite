@@ -25,7 +25,7 @@ namespace InstrukcjeProdukcyjne
         //public string CardReaderFileDat { get; set; }
 
         public ITechInstrukcjeModel.ITechEntities db = null;
-        public string AllowRoles = string.Empty;
+        public string AllowRoles2 = string.Empty;
 
 
         private void LoginForm_Load(object sender, EventArgs e)
@@ -139,6 +139,23 @@ namespace InstrukcjeProdukcyjne
             ManualLogin();
         }
 
+
+        private bool CanLogon(ITechInstrukcjeModel.ItechUsers user)
+        {
+            if (user==null)
+                return false;
+
+            return user.IsInRoles(AllowRoles.RoleCanLogon);
+        }
+
+        private bool CanAppExit(ITechInstrukcjeModel.ItechUsers user)
+        {
+            if (user == null)
+                return false;
+
+            return user.IsInRoles(AllowRoles.RoleCanAppExit);
+        }
+
         private void ManualLogin()
         {
             try
@@ -155,7 +172,7 @@ namespace InstrukcjeProdukcyjne
                     return;
                 }
 
-                var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password==pass && m.IsInRoles(AllowRoles)).FirstOrDefault();
+                var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password==pass && m.IsInRoles(AllowRoles2)).FirstOrDefault();
                 User2 = u;
                 if (u == null)
                 {
@@ -191,7 +208,7 @@ namespace InstrukcjeProdukcyjne
                     var cardno =  GetCardNo(f);
                     label2.Text = cardno;
 
-                    var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.IsInRoles(AllowRoles)).FirstOrDefault();
+                    var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.IsInRoles(AllowRoles2)).FirstOrDefault();
                     User2 = u;
                     if (u == null)
                     {
