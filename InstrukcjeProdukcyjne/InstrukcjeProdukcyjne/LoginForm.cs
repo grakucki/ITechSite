@@ -30,7 +30,7 @@ namespace InstrukcjeProdukcyjne
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-
+            this.FullScreen(true);
             panel3.Visible = false;
             User = new SitechUser();
             LabelClear();
@@ -124,6 +124,8 @@ namespace InstrukcjeProdukcyjne
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            this.FullScreen(true);
+
             if (this.DialogResult!= System.Windows.Forms.DialogResult.Cancel)
                 if (!User.IsLogin)
                 {
@@ -276,6 +278,9 @@ namespace InstrukcjeProdukcyjne
                 if (Timer_EndForm)
                 {
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
+                    if (AppCloseRadioButton.Checked == true)
+                        Application.Exit();
+
                     this.Close();
                 }
                 else
@@ -320,6 +325,21 @@ namespace InstrukcjeProdukcyjne
                 }
 
             }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rb = (RadioButton) sender;
+            if (rb.Checked==true)
+                buttonOk.Text = "Zamknij aplikację";
+
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton rb = (RadioButton)sender;
+            if (rb.Checked == true)
+                buttonOk.Text = "Zaloguj";
         }
 
         

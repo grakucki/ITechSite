@@ -217,6 +217,7 @@
     <Compile Include="PlanInformacyjny.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SafeInvoke.cs" />
     <Compile Include="Service References\ServiceDokument\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

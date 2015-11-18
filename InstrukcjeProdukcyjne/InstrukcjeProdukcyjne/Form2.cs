@@ -72,17 +72,18 @@ namespace InstrukcjeProdukcyjne
 
         private void GoFullscreen(bool fullscreen)
         {
-            if (fullscreen)
-            {
-                this.WindowState = FormWindowState.Normal;
-                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-                this.Bounds = Screen.PrimaryScreen.Bounds;
-            }
-            else
-            {
-                this.WindowState = FormWindowState.Maximized;
-                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-            }
+            this.FullScreen(fullscreen);
+        //    //if (fullscreen)
+        //    //{
+        //    //    this.WindowState = FormWindowState.Normal;
+        //    //    this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+        //    //    this.Bounds = Screen.PrimaryScreen.Bounds;
+        //    //}
+        //    //else
+        //    //{
+        //    //    this.WindowState = FormWindowState.Maximized;
+        //    //    this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+        //    //}
 
         }
 
@@ -180,20 +181,33 @@ namespace InstrukcjeProdukcyjne
             login.Message = message;
             login.db = db;
             login.AllowRoles = allowroles;
-
-            while (true)
+            try
             {
-                var ret = login.ShowDialog();
-                if (allowCancel)
+                _LoginForm = login;
+                _LoginForm.SetStanowiskoStatus(LastStanowiskoStatus);
+
+                while (true)
                 {
-                    if (ret == System.Windows.Forms.DialogResult.Cancel)
-                        return ret;
+                    var ret = login.ShowDialog();
+                    if (allowCancel)
+                    {
+                        if (ret == System.Windows.Forms.DialogResult.Cancel)
+                        {
+                            _LoginForm = null;
+                            return ret;
+                        }
+                    }
+                    if (ret == System.Windows.Forms.DialogResult.OK)
+                    {
+                        LoginUser2 = login.User2;
+                        _LoginForm = null;
+                         return ret;
+                    }
                 }
-                if (ret == System.Windows.Forms.DialogResult.OK)
-                {
-                    LoginUser2 = login.User2;
-                    return ret;
-                }
+             }
+            finally
+            {
+                _LoginForm = null;
             }
         }
 
@@ -247,17 +261,30 @@ namespace InstrukcjeProdukcyjne
 
                 
                 OdblokowanieToolStripStatusLabel.Text = value.Message;
-                this.Invoke( new MethodInvoker( () =>
-                {
-                    if (value.Code < 0)
-                        OdblokowanieToolStripStatusLabel.BackColor = Color.Red;
-                    else
-                        OdblokowanieToolStripStatusLabel.BackColor = Color.Green;
-                    if (_LoginForm != null)
-                        _LoginForm.SetStanowiskoStatus(value);
-                }
+                var a = new Action(new MethodInvoker( () =>
+                    {
+                        if (value.Code < 0)
+                            OdblokowanieToolStripStatusLabel.BackColor = Color.Red;
+                        else
+                            OdblokowanieToolStripStatusLabel.BackColor = Color.Green;
+                        if (_LoginForm != null)
+                            _LoginForm.SetStanowiskoStatus(value);
+                    }
+                    ));
+                
+                this.SafeInvoke(a, true);
 
-                ));
+                //if (this.IsHandleCreated== true)
+                //    this.Invoke( new MethodInvoker( () =>
+                //    {
+                //        if (value.Code < 0)
+                //            OdblokowanieToolStripStatusLabel.BackColor = Color.Red;
+                //        else
+                //            OdblokowanieToolStripStatusLabel.BackColor = Color.Green;
+                //        if (_LoginForm != null)
+                //            _LoginForm.SetStanowiskoStatus(value);
+                //    }
+                //));
 
 
             }
@@ -399,6 +426,7 @@ namespace InstrukcjeProdukcyjne
                 await LoadResource_Async(Settings.Default.App.Stanowisko);
 
                 waitDlg.Hide();
+                timer3.Enabled = true;
                 if (ShowLoginDlg("", true, AllowRoles.All) == System.Windows.Forms.DialogResult.Cancel)
                     this.Close();
                 

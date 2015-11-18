@@ -46,6 +46,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new CustomPanelControl.CustomPanel();
+            this.LoginRadioButton2 = new System.Windows.Forms.RadioButton();
+            this.AppCloseRadioButton = new System.Windows.Forms.RadioButton();
             this.textBoxPass = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.textBoxCarNo = new System.Windows.Forms.TextBox();
@@ -93,7 +95,7 @@
             this.buttonOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.buttonOk.Location = new System.Drawing.Point(511, 21);
             this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(113, 76);
+            this.buttonOk.Size = new System.Drawing.Size(113, 114);
             this.buttonOk.TabIndex = 2;
             this.buttonOk.Text = "Zaloguj";
             this.buttonOk.UseVisualStyleBackColor = true;
@@ -106,7 +108,7 @@
             this.buttonCancel.FlatAppearance.BorderSize = 0;
             this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.buttonCancel.Location = new System.Drawing.Point(936, 76);
+            this.buttonCancel.Location = new System.Drawing.Point(958, 39);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(113, 76);
             this.buttonCancel.TabIndex = 7;
@@ -234,6 +236,8 @@
             this.panel3.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(116)))), ((int)(((byte)(9)))));
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.BorderWidth = 3;
+            this.panel3.Controls.Add(this.LoginRadioButton2);
+            this.panel3.Controls.Add(this.AppCloseRadioButton);
             this.panel3.Controls.Add(this.textBoxPass);
             this.panel3.Controls.Add(this.label5);
             this.panel3.Controls.Add(this.textBoxCarNo);
@@ -242,11 +246,37 @@
             this.panel3.Controls.Add(this.buttonOk);
             this.panel3.Curvature = 10;
             this.panel3.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
-            this.panel3.Location = new System.Drawing.Point(303, 55);
+            this.panel3.Location = new System.Drawing.Point(303, 17);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(627, 113);
+            this.panel3.Size = new System.Drawing.Size(627, 157);
             this.panel3.TabIndex = 0;
             this.panel3.Visible = false;
+            // 
+            // LoginRadioButton2
+            // 
+            this.LoginRadioButton2.AutoSize = true;
+            this.LoginRadioButton2.Checked = true;
+            this.LoginRadioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
+            this.LoginRadioButton2.Location = new System.Drawing.Point(363, 117);
+            this.LoginRadioButton2.Name = "LoginRadioButton2";
+            this.LoginRadioButton2.Size = new System.Drawing.Size(101, 29);
+            this.LoginRadioButton2.TabIndex = 6;
+            this.LoginRadioButton2.TabStop = true;
+            this.LoginRadioButton2.Text = "Zaloguj";
+            this.LoginRadioButton2.UseVisualStyleBackColor = true;
+            this.LoginRadioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            // 
+            // AppCloseRadioButton
+            // 
+            this.AppCloseRadioButton.AutoSize = true;
+            this.AppCloseRadioButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
+            this.AppCloseRadioButton.Location = new System.Drawing.Point(161, 117);
+            this.AppCloseRadioButton.Name = "AppCloseRadioButton";
+            this.AppCloseRadioButton.Size = new System.Drawing.Size(196, 29);
+            this.AppCloseRadioButton.TabIndex = 5;
+            this.AppCloseRadioButton.Text = "Zamknij aplikację";
+            this.AppCloseRadioButton.UseVisualStyleBackColor = true;
+            this.AppCloseRadioButton.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // textBoxPass
             // 
@@ -370,5 +400,7 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label labelSterownik;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.RadioButton LoginRadioButton2;
+        private System.Windows.Forms.RadioButton AppCloseRadioButton;
     }
 }
