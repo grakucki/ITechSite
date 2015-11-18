@@ -33,8 +33,9 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabelSerwer = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusITechTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelSerwer = new System.Windows.Forms.ToolStripStatusLabel();
+            this.OdblokowanieToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.WorkStationBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
@@ -131,8 +132,9 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.toolStripStatusLabelSerwer,
             this.toolStripStatusITechTime,
+            this.toolStripStatusLabelSerwer,
+            this.OdblokowanieToolStripStatusLabel,
             this.toolStripStatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(10, 660);
             this.statusStrip1.Name = "statusStrip1";
@@ -143,16 +145,10 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(951, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(929, 17);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // toolStripStatusLabelSerwer
-            // 
-            this.toolStripStatusLabelSerwer.Name = "toolStripStatusLabelSerwer";
-            this.toolStripStatusLabelSerwer.Size = new System.Drawing.Size(48, 17);
-            this.toolStripStatusLabelSerwer.Text = "Serwer :";
             // 
             // toolStripStatusITechTime
             // 
@@ -160,6 +156,18 @@
             this.toolStripStatusITechTime.Name = "toolStripStatusITechTime";
             this.toolStripStatusITechTime.Size = new System.Drawing.Size(43, 17);
             this.toolStripStatusITechTime.Text = "  00:00 ";
+            // 
+            // toolStripStatusLabelSerwer
+            // 
+            this.toolStripStatusLabelSerwer.Name = "toolStripStatusLabelSerwer";
+            this.toolStripStatusLabelSerwer.Size = new System.Drawing.Size(48, 17);
+            this.toolStripStatusLabelSerwer.Text = "Serwer :";
+            // 
+            // OdblokowanieToolStripStatusLabel
+            // 
+            this.OdblokowanieToolStripStatusLabel.Name = "OdblokowanieToolStripStatusLabel";
+            this.OdblokowanieToolStripStatusLabel.Size = new System.Drawing.Size(22, 17);
+            this.OdblokowanieToolStripStatusLabel.Text = "???";
             // 
             // toolStripStatusLabel2
             // 
@@ -917,6 +925,7 @@
         private System.Windows.Forms.Integration.ElementHost elementHost2;
         private GroupListView2 groupListViewWorkstation;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelSerwer;
+        private System.Windows.Forms.ToolStripStatusLabel OdblokowanieToolStripStatusLabel;
     }
 }
 

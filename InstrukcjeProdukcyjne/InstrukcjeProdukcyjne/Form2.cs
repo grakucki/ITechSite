@@ -140,20 +140,36 @@ namespace InstrukcjeProdukcyjne
             login.Message = message;
             login.db = db;
             login.AllowRoles = allowroles;
-
-            while (true)
+            try
             {
-                var ret = login.ShowDialog();
-                if (allowCancel)
+                _LoginForm = login;
+                _LoginForm.SetStanowiskoStatus(LastStanowiskoStatus);
+
+
+                while (true)
                 {
-                    if (ret == System.Windows.Forms.DialogResult.Cancel)
-                        return ret;
+                    var ret = login.ShowDialog();
+                    if (allowCancel)
+                    {
+                        if (ret == System.Windows.Forms.DialogResult.Cancel)
+                        {
+                            _LoginForm = null;
+                            return ret;
+                        }
+                 }
+                    if (ret == System.Windows.Forms.DialogResult.OK)
+                    {
+                        if (DoLogin(login.User, login.User2))
+                        {
+                            _LoginForm = null;
+                            return ret;
+                        }
+                    }
                 }
-                if (ret == System.Windows.Forms.DialogResult.OK)
-                {
-                    if (DoLogin(login.User, login.User2))
-                        return ret;
-                }
+            }
+            finally
+            {
+                _LoginForm = null;
             }
         }
 
@@ -218,7 +234,38 @@ namespace InstrukcjeProdukcyjne
 
         private string _LastReadModelIndex = "";
         private string _LastSimaticError = "";
+
+        private StatusMessage _LastStanowiskoStatus = null;
+        private LoginForm _LoginForm = null;
+
+        public StatusMessage LastStanowiskoStatus
+        {
+            get { return _LastStanowiskoStatus; }
+            set
+            {
+                _LastStanowiskoStatus = value;
+
+                
+                OdblokowanieToolStripStatusLabel.Text = value.Message;
+                this.Invoke( new MethodInvoker( () =>
+                {
+                    if (value.Code < 0)
+                        OdblokowanieToolStripStatusLabel.BackColor = Color.Red;
+                    else
+                        OdblokowanieToolStripStatusLabel.BackColor = Color.Green;
+                    if (_LoginForm != null)
+                        _LoginForm.SetStanowiskoStatus(value);
+                }
+
+                ));
+
+
+            }
+        }
+
+
         AutoResetEvent _TaskSimaticReadRunning = new AutoResetEvent(true);
+
         private Resource SimaticRead()
         {
             Resource ret = null;
@@ -236,8 +283,9 @@ namespace InstrukcjeProdukcyjne
 
                 var conn = SitechSimaticDeviceEx.CreateFromWorkstation(w);
                 conn.Fill(false);
-                //BlockThread(5);
+                SimaticStatusMsg(conn);
 
+                //BlockThread(5);
                 toolStripStatusLabel2.Text = "Sterownik : '" + conn.NrModelu.ToString()+"'";
                 var modelindex = this.CurrentWorkstation.ModelsWorkstation.Where(m=>m.index==conn.NrModelu.ToString()).FirstOrDefault();
                 if (modelindex!=null)
@@ -264,9 +312,31 @@ namespace InstrukcjeProdukcyjne
             catch (Exception ex)
             {
                _LastSimaticError= ex.Message;
+               SimaticStatusMsg(null);
             }
             _TaskSimaticReadRunning.Set();
             return ret; //CurrentModel
+        }
+
+
+        // generuje komunikat o stanie sterownika, zablokowany, odblokowany, klucz
+        private void SimaticStatusMsg(ItechSimatic.SitechSimaticDevice conn)
+        {
+
+            if (conn==null)
+            {
+                LastStanowiskoStatus = new StatusMessage(0, "???");
+                return;
+            }
+            if (conn.OdblokowanieKlucz)
+            {
+                LastStanowiskoStatus = new StatusMessage(1, "Stanowisko odblokowane kluczem.");
+                return;
+            }
+            if (conn.OdblokowanieStan)
+                LastStanowiskoStatus = new StatusMessage(2, "Stanowisko odblokowane.");
+            else
+                LastStanowiskoStatus = new StatusMessage(-1, "Stanowisko zablokowane");
         }
 
         public string CalculateMD5Hash(string input)
@@ -1087,7 +1157,7 @@ namespace InstrukcjeProdukcyjne
         {
             _LastReadModelIndex = "";
             SimaticReadAsync();
-            MessageBox.Show("Komunikacja siamtic" + _LastSimaticError);
+            MessageBox.Show("Komunikacja Simatic" + _LastSimaticError);
         }
 
 

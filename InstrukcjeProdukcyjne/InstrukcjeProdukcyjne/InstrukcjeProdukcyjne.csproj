@@ -243,6 +243,7 @@
     </Compile>
     <Compile Include="SitechUser.cs" />
     <Compile Include="StartupApp.cs" />
+    <Compile Include="StatusMessage.cs" />
     <Compile Include="TestKompetencjiDlg.cs">
       <SubType>Form</SubType>
     </Compile>

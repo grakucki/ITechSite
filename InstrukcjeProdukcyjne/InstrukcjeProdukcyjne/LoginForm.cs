@@ -64,6 +64,23 @@ namespace InstrukcjeProdukcyjne
             
         }
 
+        public StatusMessage StatusStanowiska { get; set; }
+
+
+        public void SetStanowiskoStatus(StatusMessage msg)
+        {
+            StatusStanowiska = msg;
+            if (msg == null)
+            {
+                labelSterownik.Text = string.Empty;
+                return;
+            }
+            labelSterownik.Text= msg.Message;
+            
+            if (msg.Code>=0)
+                pictureBox1.BackColor = Color.Gainsboro;
+        }
+
         private void AutoLogin()
         {
            // automatyczne logowanie jeśli plik "autologin istnieje
@@ -281,6 +298,27 @@ namespace InstrukcjeProdukcyjne
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (StatusStanowiska == null)
+                return;
+
+            if (StatusStanowiska.Code<0)
+            {
+                if (pictureBox1.BackColor == Color.Red)
+                {
+                    pictureBox1.BackColor = Color.Gainsboro;
+                    labelSterownik.BackColor = Color.Gainsboro;
+                }
+                else
+                {
+                    pictureBox1.BackColor = Color.Red;
+                    labelSterownik.BackColor = Color.Red;
+                }
+
             }
         }
 
