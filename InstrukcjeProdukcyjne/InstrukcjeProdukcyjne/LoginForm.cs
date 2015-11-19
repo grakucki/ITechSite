@@ -12,8 +12,16 @@ using System.Windows.Forms;
 
 namespace InstrukcjeProdukcyjne
 {
+
     public partial class LoginForm : Form
     {
+        public enum LoginDlgAction
+        {
+            None,
+            Logon,
+            AppClose
+        }
+
         public LoginForm()
         {
             InitializeComponent();
@@ -21,12 +29,13 @@ namespace InstrukcjeProdukcyjne
 
         public SitechUser User { get; set; }
         public ITechInstrukcjeModel.ItechUsers User2 { get; set; }
+        private LoginDlgAction DlgAction { get; set; }
+
         public String Message { get; set; }
         //public string CardReaderFileDat { get; set; }
 
         public ITechInstrukcjeModel.ITechEntities db = null;
-        public string AllowRoles2 = string.Empty;
-
+        public string AllowRoles2 = AllowRoles.RoleCanLogon;
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
@@ -172,7 +181,73 @@ namespace InstrukcjeProdukcyjne
                     return;
                 }
 
-                var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password==pass && m.IsInRoles(AllowRoles2)).FirstOrDefault();
+                var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password==pass).FirstOrDefault();
+                RunAction(u);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void RunAction(ITechInstrukcjeModel.ItechUsers user)
+        {
+            User2 = user;
+            DlgAction = GetAction();
+            string roletocheck = GetActionRole();
+
+
+            if (user == null || !user.IsInRoles(roletocheck))
+            {
+                label3.Text = "Brak uprawnień.";
+                User = new SitechUser();
+                TimerGo(false, 5);
+
+            }
+            else
+            {
+                label3.Text = user.UserName;
+                User = new SitechUser { UserName = user.UserName, NrKarty = user.CardNo, IsLogin = true };
+                TimerGo(true, 1);
+            }
+        }
+
+        private LoginDlgAction GetAction()
+        {
+            LoginDlgAction ret = LoginDlgAction.None;
+            string roletocheck = AllowRoles.RoleCanLogon;
+            if (AppCloseRadioButton.Checked)
+                ret = LoginDlgAction.AppClose;
+            else
+                ret = LoginDlgAction.Logon;
+            return ret;
+        }
+
+        private string GetActionRole()
+        {
+            string roletocheck = AllowRoles2;
+            if (AppCloseRadioButton.Checked)
+                roletocheck = AllowRoles.RoleCanAppExit;
+            return roletocheck;
+        }
+
+        private void ManualLogin_old()
+        {
+            try
+            {
+
+                var cardno = textBoxCarNo.Text;
+                var pass = textBoxPass.Text;
+                label2.Text = cardno;
+                if (string.IsNullOrEmpty(pass))
+                {
+                    label3.Text = "Podaj hasło.";
+                    User = new SitechUser();
+                    TimerGo(false, 5);
+                    return;
+                }
+
+                var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password == pass && m.IsInRoles(AllowRoles2)).FirstOrDefault();
                 User2 = u;
                 if (u == null)
                 {
@@ -194,7 +269,6 @@ namespace InstrukcjeProdukcyjne
                 MessageBox.Show(ex.Message);
             }
         }
-
         bool Timer_EndForm = false;
         DateTime Timer_ActionAt = DateTime.Now;
 
@@ -206,6 +280,37 @@ namespace InstrukcjeProdukcyjne
                 var f = File.ReadAllText(Properties.Settings.Default.App.CardReaderFileDat);
                 {
                     var cardno =  GetCardNo(f);
+                    label2.Text = cardno;
+
+                    var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno).FirstOrDefault();
+                    RunAction(u);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                label3.Text = ex.Message;
+            }
+
+            try
+            {
+                CardClearCmd();
+            }
+            catch (Exception ex)
+            {
+                label3.Text = ex.Message;
+            }
+
+        }
+
+        private void ReadCard_old()
+        {
+            try
+            {
+                System.Threading.Thread.Sleep(200);
+                var f = File.ReadAllText(Properties.Settings.Default.App.CardReaderFileDat);
+                {
+                    var cardno = GetCardNo(f);
                     label2.Text = cardno;
 
                     var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.IsInRoles(AllowRoles2)).FirstOrDefault();
@@ -220,7 +325,7 @@ namespace InstrukcjeProdukcyjne
                         // login ok
                         label3.Text = u.UserName;
                         User = new SitechUser { UserName = u.UserName, NrKarty = cardno, IsLogin = true };
-                        TimerGo(true,1);
+                        TimerGo(true, 1);
                     }
                 }
 
@@ -240,6 +345,7 @@ namespace InstrukcjeProdukcyjne
             }
 
         }
+
 
         private void TimerGo(bool EndfForm, int delay)
         {
@@ -295,7 +401,7 @@ namespace InstrukcjeProdukcyjne
                 if (Timer_EndForm)
                 {
                     this.DialogResult = System.Windows.Forms.DialogResult.OK;
-                    if (AppCloseRadioButton.Checked == true)
+                    if (DlgAction == LoginDlgAction.AppClose)
                         Application.Exit();
 
                     this.Close();
