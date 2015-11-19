@@ -44,12 +44,23 @@ namespace InstrukcjeProdukcyjne
             PopulateComboTreeView(x, true);
         }
 
+        private void PopulateComboTreeView()
+        {
+            PopulateComboTreeView(Models, checkBox1.Checked);
+        }
+
         private void PopulateComboTreeView(List<Resource> r, bool AllItems)
         {
 
             var col = r;
             if (!AllItems)
                 col = r.Where(m => m.ModelsWorkstation.Any(n => n.idW == Workstation.Id)).ToList();
+            
+            var filtr = textBoxFiltr.Text;
+            
+            if (!string.IsNullOrEmpty(filtr))
+                col = col.Where(m => m.Name.Contains(filtr) | m.Resource1.Any(n=>n.Name.Contains(filtr))
+                    ).ToList();
 
             comboTreeBox1.Nodes.Clear();
 
@@ -60,7 +71,13 @@ namespace InstrukcjeProdukcyjne
                     ComboTreeNode parent = nodes.Add(grp.Id.ToString(), grp.Name);
                     foreach (var item in grp.Resource1)
                     {
-                        parent.Nodes.Add(item.Id.ToString(), item.Name);
+                        if (!string.IsNullOrEmpty(filtr))
+                        {
+                            if (item.Name.Contains(filtr))
+                                parent.Nodes.Add(item.Id.ToString(), item.Name);
+                        }
+                        else
+                            parent.Nodes.Add(item.Id.ToString(), item.Name);
                     }
                 }
             };
@@ -70,8 +87,13 @@ namespace InstrukcjeProdukcyjne
             {
                 addNodesHelper(ctb.Nodes);
                 ctb.Sort();
+
                 if (ctb.Nodes.Count > 0)
+                {
+                    ctb.Nodes[0].Expanded = true;
                     ctb.SelectedNode = ctb.Nodes[0];
+                }
+
             };
 
 
@@ -80,7 +102,30 @@ namespace InstrukcjeProdukcyjne
             // select node by name
             var key = ModelWorkstationInfo.idM.ToString();
             var node = comboTreeBox1.Nodes.FindName(key, StringComparison.CurrentCulture, true);
-            comboTreeBox1.SelectedNode = node;
+            if (node!=null)
+                comboTreeBox1.SelectedNode = node;
+            else
+                if (comboTreeBox1.Nodes.Count > 0)
+                {
+                    var x = FindLikeName(filtr);
+                    comboTreeBox1.SelectedNode = x;
+                }
+        }
+
+        private ComboTreeNode FindLikeName(string filtr)
+        {
+            foreach (var item in comboTreeBox1.Nodes)
+	        {
+                if (item.Text.Contains(filtr))
+                    return item;
+                foreach (var item2 in item.Nodes)
+                {
+                    if (item2.Text.Contains(filtr))
+                        return item2;
+                }
+	        }
+
+            return null;
         }
 
         private void PopulateComboTreeView2(List<Resource> r)
@@ -244,6 +289,17 @@ namespace InstrukcjeProdukcyjne
         private void buttonCancel_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            VirtualKeyboard.Show();
+            textBoxFiltr.Focus();
+        }
+
+        private void textBoxFiltr_TextChanged(object sender, EventArgs e)
+        {
+            PopulateComboTreeView();
         }
     }
 }

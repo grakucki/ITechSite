@@ -75,10 +75,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/30/2015 11:14:41</publishTime>
     </File>
     <File Include="bin/ITechInstrukcjeModel.dll">
-      <publishTime>10/26/2015 17:54:26</publishTime>
+      <publishTime>11/19/2015 13:24:09</publishTime>
     </File>
     <File Include="bin/ITechService.dll">
-      <publishTime>10/26/2015 18:17:28</publishTime>
+      <publishTime>11/19/2015 15:47:18</publishTime>
     </File>
     <File Include="bin/ja/Microsoft.Data.Edm.resources.dll">
       <publishTime>06/30/2015 11:14:29</publishTime>
