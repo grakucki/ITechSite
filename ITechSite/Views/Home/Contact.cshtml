@@ -12,5 +12,12 @@
 
 <address>
     <strong>Wsparcie email:</strong>   <a href="mailto:insofter@insofter.pl">insofter@insofter.pl</a><br />
-    <strong>Aplikacja do</strong>   <a href="~/app/install.html">przeglądania dokumentów</a><br />
+    <br /><br />
+
+    @if (@Request.Url.ToString().Contains("10.48.120.49") == true)
+    { 
+        <strong>Aplikacja dla sitech</strong>   <a href="~/app/install.html">przeglądania dokumentów</a><br />
+        <br /><br />
+    }
+    <strong>Aplikacja dla insofter</strong>   <a href="~/appi/install.html">przeglądania dokumentów</a><br />
 </address>
