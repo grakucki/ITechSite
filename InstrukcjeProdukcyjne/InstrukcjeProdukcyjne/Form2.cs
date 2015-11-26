@@ -199,6 +199,7 @@ namespace InstrukcjeProdukcyjne
                     }
                     if (ret == System.Windows.Forms.DialogResult.OK)
                     {
+                        // sprawdzić bo przejumuje usera podas wchodzenia do ustawień
                         LoginUser2 = login.User2;
                         _LoginForm = null;
                          return ret;
