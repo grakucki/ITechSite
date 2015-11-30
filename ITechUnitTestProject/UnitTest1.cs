@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
+using System.IO;
 
 namespace ITechUnitTestProject
 {
@@ -46,6 +47,32 @@ namespace ITechUnitTestProject
         {
             var d = new ITechService.ServiceWorkstation();
             //d.GetDokumentsList(10);
+        }
+
+        [TestMethod]
+        public void Dokument_DownloadDokument()
+        {
+            var d = new ITechService.ServiceDokument();
+            var FileServer = d.DownloadDokument2(26);
+            using (var fileOut = File.Create(@"d:\26.mp4"))
+            {
+                FileServer.CopyTo(fileOut);
+            }
+
+        }
+
+        [TestMethod]
+        public void Dokument_DownloadServiceDokument()
+        {
+            var d = new ServiceDokument.ServiceDokumentClient("webHttpBinding_IServiceDokument");
+            string filename = @"d:\2014-12-15 161703.jpeg";
+            filename = @"d:\26.mp4";
+            var FileServer = d.DownloadDokument3(filename);
+            using (var fileOut = File.Create(filename.Replace(".","_l.")))
+            {
+                FileServer.CopyTo(fileOut);
+            }
+
         }
 
 

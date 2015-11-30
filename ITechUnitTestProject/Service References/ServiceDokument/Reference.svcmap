@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5894f114-3894-4234-8f35-6b5f50ca6b8e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:53854/ServiceDokument.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServiceDokument.xsd" MetadataType="Schema" ID="cc0afac9-c911-42ff-b331-325388a95b2d" SourceId="1" SourceUrl="http://localhost:53854/ServiceDokument.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceDokument1.xsd" MetadataType="Schema" ID="df6757f5-e1a3-4fca-af95-dcb28d1da94e" SourceId="1" SourceUrl="http://localhost:53854/ServiceDokument.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceDokument2.xsd" MetadataType="Schema" ID="b3dff0a3-9f01-434b-a851-b771943c4c10" SourceId="1" SourceUrl="http://localhost:53854/ServiceDokument.svc?xsd=xsd2" />
+    <MetadataFile FileName="ServiceDokument.disco" MetadataType="Disco" ID="8cb9d734-0fa1-4d72-8f58-a737bf9fda81" SourceId="1" SourceUrl="http://localhost:53854/ServiceDokument.svc?disco" />
+    <MetadataFile FileName="ServiceDokument.wsdl" MetadataType="Wsdl" ID="b4b6dcbb-f1ab-486e-9b3a-79206b8941d9" SourceId="1" SourceUrl="http://localhost:53854/ServiceDokument.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

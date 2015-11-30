@@ -25,5 +25,12 @@ namespace ITechService
         [WebInvoke(Method = "POST", UriTemplate = "DownloadDokument", RequestFormat = WebMessageFormat.Xml, ResponseFormat = WebMessageFormat.Xml, BodyStyle = WebMessageBodyStyle.Wrapped)]
         System.IO.Stream DownloadDokument(int idd);
 
+        [OperationContract]
+        System.IO.Stream DownloadDokument2(int idd);
+
+        [OperationContract]
+        System.IO.Stream DownloadDokument3(string filename);
+
+
     }
 }

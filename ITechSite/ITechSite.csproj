@@ -473,6 +473,7 @@
     <Content Include="Models\sql\2015-08-21.sql" />
     <Content Include="Models\sql\2015-07-14 pytania.sql" />
     <Content Include="Models\sql\2015-09-01.sql" />
+    <Content Include="Models\sql\2015-11-30.sql" />
     <Content Include="Scripts\bootstrap-dialog.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

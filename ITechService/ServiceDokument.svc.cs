@@ -42,11 +42,23 @@ namespace ITechService
         {
             ITechInstrukcjeModel.DBFile f = new ITechInstrukcjeModel.DBFile();
 
-            WebOperationContext.Current.OutgoingResponse.ContentType = "image/jpeg";
-            //WebOperationContext.Current.OutgoingResponse.ContentType= "application/octet-stream";
-            WebOperationContext.Current.OutgoingResponse.Headers.Add("content-disposition", "inline; filename=" + "out.jpg");
+            //WebOperationContext.Current.OutgoingResponse.ContentType = "image/jpeg";
+            WebOperationContext.Current.OutgoingResponse.ContentType= "application/octet-stream";
+            //WebOperationContext.Current.OutgoingResponse.Headers.Add("content-disposition", "inline; filename=" + "out.jpg");
             return f.Get(idd);
         }
-       
+        
+        public System.IO.Stream DownloadDokument2(int idd)
+        {
+            ITechInstrukcjeModel.DBFile f = new ITechInstrukcjeModel.DBFile();
+            return f.Get(idd);
+        }
+
+        public System.IO.Stream DownloadDokument3(string filename)
+        {
+            var s = File.OpenRead(filename);
+            return s;
+        }
+
     }
 }
