@@ -152,6 +152,7 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserBalanceConverter.cs" />
     <Compile Include="GroupListView2.xaml.cs">
       <DependentUpon>GroupListView2.xaml</DependentUpon>
     </Compile>

@@ -50,7 +50,11 @@ namespace InstrukcjeProdukcyjne
                 lvUsers.ItemsSource = Items;
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvUsers.ItemsSource);
                 PropertyGroupDescription groupDescription = new PropertyGroupDescription("GroupBy");
+                
                 view.GroupDescriptions.Add(groupDescription);
+                var o = view.Groups;
+
+                
             }
         }
 
@@ -97,6 +101,7 @@ namespace InstrukcjeProdukcyjne
         }
 
     }
+
 
 
     public class User
