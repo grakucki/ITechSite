@@ -363,7 +363,6 @@ namespace InstrukcjeProdukcyjne
         {
             PrepareListView(listView1);
             PrepareListView(listView2);
-            PrepareListView(listView3);
         }
 
         string _SimaticLastMsg = string.Empty;

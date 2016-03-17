@@ -98,7 +98,7 @@ namespace InstrukcjeProdukcyjne
 
             
             // sprawdzamy czy należy wykonać test
-            //SprawdźTestKompetencji(user2);
+            SprawdźTestKompetencji(user2);
             
             //zapis do sterownika
             SimaticWriteAsync(user2.UserId, true);
@@ -486,7 +486,8 @@ namespace InstrukcjeProdukcyjne
         }
         private void PrepareListView()
         {
-            groupListViewWorkstation.ColumnsCnt = 1;
+            groupListViewWorkstation.ColumnsCnt = 2;
+            groupListViewModels.ColumnsCnt = 1;
             groupListViewWorkstation.OnMouseDoubleClickItem+=groupListViewWorkstation_OnMouseDoubleClick;
             groupListViewModels.OnMouseDoubleClickItem += groupListViewWorkstation_OnMouseDoubleClick;
 
@@ -702,6 +703,8 @@ namespace InstrukcjeProdukcyjne
 
             var my = new List<Object>();
             MyFileInfoEx fe = new MyFileInfoEx();
+            
+            int i = 0;
             foreach (var item in IP)
             {
                 if (item.Dokument != null)
@@ -716,6 +719,9 @@ namespace InstrukcjeProdukcyjne
                         d.GroupBy = item.Dokument.Kategorie.name;
                     else
                         d.GroupBy = "inne";
+                    i++;
+                    d.IsRead = (i%2==0);
+
                     my.Add(d);
                 }
             }
@@ -809,10 +815,11 @@ namespace InstrukcjeProdukcyjne
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void labelTime_Click(object sender, EventArgs e)
         {
             ShowMyMenu(sender, e);
         }
+
 
         private void ShowMyMenu(object sender, EventArgs e)
         {
@@ -1267,6 +1274,10 @@ namespace InstrukcjeProdukcyjne
                 
             }
         }
+
+      
+
+     
 
         
 

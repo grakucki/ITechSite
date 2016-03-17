@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3));
             this.listView1 = new System.Windows.Forms.ListView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -77,10 +77,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.customPanel4 = new CustomPanelControl.CustomPanel();
-            this.listView3 = new System.Windows.Forms.ListView();
-            this.customPanel6 = new CustomPanelControl.CustomPanel();
-            this.label3 = new System.Windows.Forms.Label();
             this.customPanel3 = new CustomPanelControl.CustomPanel();
             this.listView2 = new System.Windows.Forms.ListView();
             this.customPanel7 = new CustomPanelControl.CustomPanel();
@@ -104,8 +100,6 @@
             this.customPanel2.SuspendLayout();
             this.customPanel8.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.customPanel4.SuspendLayout();
-            this.customPanel6.SuspendLayout();
             this.customPanel3.SuspendLayout();
             this.customPanel7.SuspendLayout();
             this.customPanel5.SuspendLayout();
@@ -123,7 +117,7 @@
             this.listView1.Location = new System.Drawing.Point(5, 49);
             this.listView1.Name = "listView1";
             this.listView1.OwnerDraw = true;
-            this.listView1.Size = new System.Drawing.Size(352, 416);
+            this.listView1.Size = new System.Drawing.Size(695, 416);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 1;
             this.listView1.TileSize = new System.Drawing.Size(503, 90);
@@ -573,7 +567,7 @@
             this.customPanel2.Name = "customPanel2";
             this.customPanel2.Padding = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel2.SetRowSpan(this.customPanel2, 2);
-            this.customPanel2.Size = new System.Drawing.Size(362, 470);
+            this.customPanel2.Size = new System.Drawing.Size(705, 470);
             this.customPanel2.TabIndex = 0;
             // 
             // customPanel8
@@ -588,7 +582,7 @@
             this.customPanel8.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
             this.customPanel8.Location = new System.Drawing.Point(5, 5);
             this.customPanel8.Name = "customPanel8";
-            this.customPanel8.Size = new System.Drawing.Size(352, 44);
+            this.customPanel8.Size = new System.Drawing.Size(695, 44);
             this.customPanel8.TabIndex = 3;
             // 
             // label6
@@ -598,7 +592,7 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
             this.label6.Location = new System.Drawing.Point(14, 7);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(324, 31);
+            this.label6.Size = new System.Drawing.Size(667, 31);
             this.label6.TabIndex = 0;
             this.label6.Text = "Instrukcje dla stanowiska";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -617,11 +611,9 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.30824F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0.7168459F));
-            this.tableLayoutPanel2.Controls.Add(this.customPanel4, 2, 0);
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.70968F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.29032F));
             this.tableLayoutPanel2.Controls.Add(this.customPanel3, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.customPanel2, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -632,70 +624,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(1116, 476);
             this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // customPanel4
-            // 
-            this.customPanel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.customPanel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.customPanel4.BackColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.customPanel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.customPanel4.BorderWidth = 3;
-            this.customPanel4.Controls.Add(this.listView3);
-            this.customPanel4.Controls.Add(this.customPanel6);
-            this.customPanel4.Curvature = 10;
-            this.customPanel4.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
-            this.customPanel4.Location = new System.Drawing.Point(1110, 3);
-            this.customPanel4.Name = "customPanel4";
-            this.customPanel4.Padding = new System.Windows.Forms.Padding(5);
-            this.customPanel4.Size = new System.Drawing.Size(3, 421);
-            this.customPanel4.TabIndex = 11;
-            this.customPanel4.Visible = false;
-            // 
-            // listView3
-            // 
-            this.listView3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.listView3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.listView3.FullRowSelect = true;
-            this.listView3.LargeImageList = this.imageList1;
-            this.listView3.Location = new System.Drawing.Point(5, 49);
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(0, 367);
-            this.listView3.SmallImageList = this.imageList1;
-            this.listView3.TabIndex = 0;
-            this.listView3.TileSize = new System.Drawing.Size(503, 90);
-            this.listView3.UseCompatibleStateImageBehavior = false;
-            this.listView3.View = System.Windows.Forms.View.Tile;
-            // 
-            // customPanel6
-            // 
-            this.customPanel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.customPanel6.BackColor2 = System.Drawing.Color.Silver;
-            this.customPanel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.customPanel6.BorderWidth = 3;
-            this.customPanel6.Controls.Add(this.label3);
-            this.customPanel6.Curvature = 10;
-            this.customPanel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.customPanel6.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
-            this.customPanel6.Location = new System.Drawing.Point(5, 5);
-            this.customPanel6.Name = "customPanel6";
-            this.customPanel6.Size = new System.Drawing.Size(0, 44);
-            this.customPanel6.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
-            this.label3.Location = new System.Drawing.Point(14, 7);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(0, 31);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Instrukcjie BHP";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customPanel3
             // 
@@ -710,11 +638,11 @@
             this.customPanel3.Controls.Add(this.customPanel7);
             this.customPanel3.Curvature = 10;
             this.customPanel3.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
-            this.customPanel3.Location = new System.Drawing.Point(371, 3);
+            this.customPanel3.Location = new System.Drawing.Point(714, 3);
             this.customPanel3.Name = "customPanel3";
             this.customPanel3.Padding = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel2.SetRowSpan(this.customPanel3, 2);
-            this.customPanel3.Size = new System.Drawing.Size(733, 470);
+            this.customPanel3.Size = new System.Drawing.Size(399, 470);
             this.customPanel3.TabIndex = 10;
             // 
             // listView2
@@ -728,7 +656,7 @@
             this.listView2.LargeImageList = this.imageList1;
             this.listView2.Location = new System.Drawing.Point(5, 49);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(723, 416);
+            this.listView2.Size = new System.Drawing.Size(389, 416);
             this.listView2.SmallImageList = this.imageList1;
             this.listView2.TabIndex = 0;
             this.listView2.TileSize = new System.Drawing.Size(503, 90);
@@ -749,7 +677,7 @@
             this.customPanel7.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
             this.customPanel7.Location = new System.Drawing.Point(5, 5);
             this.customPanel7.Name = "customPanel7";
-            this.customPanel7.Size = new System.Drawing.Size(723, 44);
+            this.customPanel7.Size = new System.Drawing.Size(389, 44);
             this.customPanel7.TabIndex = 2;
             // 
             // label5
@@ -759,7 +687,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
             this.label5.Location = new System.Drawing.Point(14, 7);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(695, 31);
+            this.label5.Size = new System.Drawing.Size(361, 31);
             this.label5.TabIndex = 0;
             this.label5.Text = "Dokumenty modeli";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -811,7 +739,7 @@
             this.timer3.Interval = 5000;
             this.timer3.Tick += new System.EventHandler(this.timer3_Tick);
             // 
-            // Form2
+            // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -825,7 +753,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form2";
+            this.Name = "Form3";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.Text = "ITech - Sitech";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -848,8 +776,6 @@
             this.customPanel2.ResumeLayout(false);
             this.customPanel8.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.customPanel4.ResumeLayout(false);
-            this.customPanel6.ResumeLayout(false);
             this.customPanel3.ResumeLayout(false);
             this.customPanel7.ResumeLayout(false);
             this.customPanel5.ResumeLayout(false);
@@ -905,8 +831,6 @@
         private System.Windows.Forms.Label label2;
         private CustomPanelControl.CustomPanel customPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private CustomPanelControl.CustomPanel customPanel4;
-        private System.Windows.Forms.ListView listView3;
         private CustomPanelControl.CustomPanel customPanel3;
         private System.Windows.Forms.ListView listView2;
         private CustomPanelControl.CustomPanel customPanel5;
@@ -914,8 +838,6 @@
         private System.Windows.Forms.Panel panel6;
         private CustomPanelControl.CustomPanel customPanel8;
         private System.Windows.Forms.Label label6;
-        private CustomPanelControl.CustomPanel customPanel6;
-        private System.Windows.Forms.Label label3;
         private CustomPanelControl.CustomPanel customPanel7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;

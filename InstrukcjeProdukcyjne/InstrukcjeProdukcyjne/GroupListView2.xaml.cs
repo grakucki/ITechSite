@@ -25,22 +25,15 @@ namespace InstrukcjeProdukcyjne
         public GroupListView2()
         {
             InitializeComponent();
-            List<User> items = new List<User>();
-            items.Add(new User() { Name = "Kay Doe", Age = 13, GroupBy = "Female", ItemIcon = null });
-            items.Add(new User() { Name = "Pey Doe", Age = 13, GroupBy = "Female", ItemIcon = null });
-            items.Add(new User() { Name = "Rey Doe", Age = 13, GroupBy = "Female2", ItemIcon = null });
-
 
             System.Windows.Media.Color c = Colors.Gray;
             c.A = 200;
             PanelColor = new SolidColorBrush(c);
+            c = Colors.Blue;
+            c.A = 200;
+            Panel2ReadColor = new SolidColorBrush(c);
+
             ColumnsCnt = 3;
-
-
-            //lvUsers.ItemsSource = items; 
-            //CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvUsers.ItemsSource);
-            //PropertyGroupDescription groupDescription = new PropertyGroupDescription("GroupBy");
-            //view.GroupDescriptions.Add(groupDescription);
         }
 
 
@@ -59,8 +52,6 @@ namespace InstrukcjeProdukcyjne
                 PropertyGroupDescription groupDescription = new PropertyGroupDescription("GroupBy");
                 view.GroupDescriptions.Add(groupDescription);
             }
-
-
         }
 
 
@@ -76,6 +67,12 @@ namespace InstrukcjeProdukcyjne
         /// domyśly rBrush kafelka
         /// </summary>
         public SolidColorBrush PanelColor { get; set; }
+
+
+        /// <summary>
+        /// domyśly rBrush kafelka
+        /// </summary>
+        public SolidColorBrush Panel2ReadColor { get; set; }
 
         /// <summary>
         /// Liczba kolumn
@@ -96,8 +93,6 @@ namespace InstrukcjeProdukcyjne
             {
                 if (OnMouseDoubleClickItem!=null)
                     OnMouseDoubleClickItem(sender, x);
-                //User u = (User)x;
-                //MessageBox.Show(u.Name);
             }
         }
 

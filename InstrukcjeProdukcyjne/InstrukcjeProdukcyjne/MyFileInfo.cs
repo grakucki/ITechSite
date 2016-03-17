@@ -19,6 +19,21 @@ namespace InstrukcjeProdukcyjne
         public string ItemText2 { get; set; }
         public ImageSource ItemIcon { get; set; }
         public string GroupBy { get; set; }
+        public bool IsRead { get; set; }
+        public SolidColorBrush Panel2ReadColor2
+        {
+            get
+            {
+                System.Windows.Media.Color c;
+                if (IsRead)
+                    c = Colors.Gray;
+                else
+                    c = Colors.Blue;
+                c.A = 200;
+                return new SolidColorBrush(c); ;
+            }
+        }
+
 
         public Dokument Dok { get; set; }
         
