@@ -33,7 +33,8 @@ namespace InstrukcjeProdukcyjne
             c.A = 200;
             Panel2ReadColor = new SolidColorBrush(c);
 
-            ColumnsCnt = 3;
+            ColumnsCnt = 2;
+            ScrollViewer sv;
         }
 
 

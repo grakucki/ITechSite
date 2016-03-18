@@ -10,7 +10,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
    
     <UserControl.Resources>
-        <c:UserBalanceConverter x:Key="UserBalanceConverter"/>
+        <c:Doc2ReadConverter x:Key="Doc2ReadConverter"/>
+   
     </UserControl.Resources>
 
     <Grid x:Name="grid" >
@@ -18,8 +19,9 @@
         <Grid.DataContext>
             <local:MyFileInfo/>
         </Grid.DataContext>
+        
         <ListView x:Name="lvUsers" HorizontalAlignment="Left"
-			Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" Background="{x:Null}" >
+			Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}" Background="{x:Null}">
 
             <ListView.ItemContainerStyle>
                 <Style TargetType="{x:Type ListViewItem}">
@@ -49,7 +51,7 @@
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
+            
             <ListView.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.ContainerStyle>
@@ -57,20 +59,30 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate>
-                                        <Expander IsExpanded="True">
+                                        <Expander IsExpanded="True" >
                                             <Expander.Header>
-                                                <StackPanel Orientation="Horizontal" >
+                                                <StackPanel Orientation="Horizontal"  Width="{Binding ActualWidth, ElementName=grid, Mode=OneWay}">
                                                     <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="48" VerticalAlignment="Center" />
                                                     <TextBlock Text="{Binding ItemCount}" FontSize="22" Foreground="Gray" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Center" />
+
                                                     <Border Background="Red" CornerRadius="10" Margin="10,0,0,0" VerticalAlignment="Center">
-                                                    <TextBlock  FontSize="22" Foreground="#FFF9F9F9" FontWeight="Bold" FontStyle="Italic" Padding="5,5,15,5" >
-                                                        <TextBlock.Text>
-                                                            <MultiBinding Converter="{StaticResource UserBalanceConverter}">
-                                                                <Binding Path="Name"/>
-                                                                <Binding />
-                                                            </MultiBinding>
-                                                        </TextBlock.Text>
-                                                    </TextBlock>
+                                                            <TextBlock FontSize="22" Foreground="#FFF9F9F9" FontWeight="Bold" FontStyle="Italic" Padding="5,5,15,5" >
+                                                            <TextBlock.Text>
+                                                                <MultiBinding Converter="{StaticResource Doc2ReadConverter}">
+                                                                    <Binding Path="Name"/>
+                                                                    <Binding />
+                                                                </MultiBinding>
+                                                            </TextBlock.Text>
+                                                                <TextBlock.Style>
+                                                                    <Style TargetType="TextBlock" >
+                                                                        <Style.Triggers>
+                                                                            <Trigger  Property="Text" Value="">
+                                                                                <Setter  Property="Visibility" Value="Collapsed" />
+                                                                            </Trigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>        
+                                                                </TextBlock.Style>
+                                                            </TextBlock>
                                                     </Border>
                                                 </StackPanel>
                                             </Expander.Header>
@@ -83,6 +95,7 @@
                     </GroupStyle.ContainerStyle>
                 </GroupStyle>
             </ListView.GroupStyle>
+            
             <ListView.DataContext>
                 <local:MyFileInfo/>
             </ListView.DataContext>

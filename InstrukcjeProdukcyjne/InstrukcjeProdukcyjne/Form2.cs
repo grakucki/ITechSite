@@ -386,7 +386,6 @@ namespace InstrukcjeProdukcyjne
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            
             var waitDlg = new WaitDlg();
             waitDlg.Show(this);
             Application.DoEvents();
@@ -556,6 +555,7 @@ namespace InstrukcjeProdukcyjne
                     if (client.IsOnLine())
                     {
                         var t = await client.GetInformationPlainsListAsync(idR.Value);
+                        
                         db.Resource_Local = t.ToList();
                         db.ExportResources(null);
                         var i = await client.GetITechUserListAsync();

@@ -11,39 +11,9 @@ using System.Windows.Data;
 
 namespace InstrukcjeProdukcyjne
 {
-    //public static class GroupItemEx
-    //{
-    //    public static string IsReadCnt2(this CollectionViewGroup item)
-    //    {
-    //        //var o = item.DataContext;
-    //        return "33";
-    //    }
-
-    //    //System.Windows.Data.CollectionViewGroup {MS.Internal.Data.CollectionViewGroupInternal}
 
 
-    //    public static string IsReadCnt
-    //    {
-    //        get
-    //        {
-    //            return "34";
-    //        }
-    //    }
-    //}
-
-
-    //public partial class CollectionViewGroup
-    //{
-    //     public string IsReadCnt()
-    //    {
-    //        return "33";
-    //    }
-    //}
-
-
-
-
-    public class UserBalanceConverter : IMultiValueConverter
+    public class Doc2ReadConverter : IMultiValueConverter
     {
 
         private int GetToReadDoc(CollectionViewGroup obj)
