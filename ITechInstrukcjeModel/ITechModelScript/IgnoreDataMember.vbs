@@ -23,6 +23,9 @@ InsertIgnoreDataMember "../News.cs", "public virtual Resource Resource"
 
 InsertIgnoreDataMember "../Workstation.cs", "public virtual Resource Resource"
 
+InsertIgnoreDataMember "../ItechUsersDokumentRead.cs", "public virtual Dokument Dokument"
+InsertIgnoreDataMember "../ItechUsersDokumentRead.cs", "public virtual ItechUsers ItechUsers"
+
 'InsertIgnoreDataMember "../WorkstationGroup.cs", ""
 
 'InsertIgnoreDataMember "../.cs", ""

@@ -12,23 +12,17 @@ namespace ITechInstrukcjeModel
     using System;
     using System.Collections.Generic;
     
-    public partial class InformationPlan
+    public partial class ItechUsersDokumentRead
     {
-        public int id { get; set; }
-        public int idR { get; set; }
-        public int IdD { get; set; }
-        public Nullable<int> Order { get; set; }
-        public bool Enabled { get; set; }
-        public Nullable<int> IdM { get; set; }
-        public string OwnerId { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
-    
+        public int DokId { get; set; }
+        public int UserId { get; set; }
+        public Nullable<System.DateTime> FirsReadAt { get; set; }
+        public Nullable<System.DateTime> LastReadAt { get; set; }
+
+        [System.Runtime.Serialization.IgnoreDataMember]
         public virtual Dokument Dokument { get; set; }
+        
         [System.Runtime.Serialization.IgnoreDataMember]
-	public virtual Resource ResourceWorkstation { get; set; }
-        [System.Runtime.Serialization.IgnoreDataMember]
-	public virtual Resource ResourceModel { get; set; }
+        public virtual ItechUsers ItechUsers { get; set; }
     }
 }
-
-

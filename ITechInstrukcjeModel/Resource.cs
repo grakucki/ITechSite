@@ -43,7 +43,6 @@ namespace ITechInstrukcjeModel
         public virtual ICollection<InformationPlan> InformationPlanModel { get; set; }
         public virtual ICollection<Workstation> Workstation { get; set; }
         public virtual ICollection<Resource> Resource1 { get; set; }
-                [System.Runtime.Serialization.IgnoreDataMember]
         public virtual ICollection<Resource> Resource2 { get; set; }
     }
 }

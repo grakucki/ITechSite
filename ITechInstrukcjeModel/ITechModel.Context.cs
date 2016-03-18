@@ -38,5 +38,6 @@ namespace ITechInstrukcjeModel
         public virtual DbSet<NewsPriority> NewsPriority { get; set; }
         public virtual DbSet<Workstation> Workstation { get; set; }
         public virtual DbSet<TestSettings> TestSettings { get; set; }
+        public virtual DbSet<ItechUsersDokumentRead> ItechUsersDokumentRead { get; set; }
     }
 }

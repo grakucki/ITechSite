@@ -17,6 +17,7 @@ namespace ITechInstrukcjeModel
         public Dokument()
         {
             this.InformationPlan = new HashSet<InformationPlan>();
+            this.ItechUsersDokumentRead = new HashSet<ItechUsersDokumentRead>();
         }
     
         public int Id { get; set; }
@@ -35,10 +36,12 @@ namespace ITechInstrukcjeModel
         public Nullable<int> Kategoria_Id { get; set; }
         public System.DateTime CreateTime { get; set; }
         public string OwnerId { get; set; }
+        public string LastWriteUserId { get; set; }
     
         [System.Runtime.Serialization.IgnoreDataMember]
 	public virtual ICollection<InformationPlan> InformationPlan { get; set; }
         public virtual Kategorie Kategorie { get; set; }
+        public virtual ICollection<ItechUsersDokumentRead> ItechUsersDokumentRead { get; set; }
     }
 }
 

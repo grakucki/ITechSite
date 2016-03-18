@@ -88,6 +88,9 @@
     <Compile Include="ItechUsers.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ItechUsersDokumentRead.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Kategorie.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>

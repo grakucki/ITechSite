@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="ITechModel.WorkstationGroup" Width="1.5" PointX="9.75" PointY="0.5" />
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Resource" />
         <AssociationConnector Association="ITechModel.FK_News_Resource" />
-        <EntityTypeShape EntityType="ITechModel.SimaticCpuType" Width="1.5" PointX="2.625" PointY="4.5" />
+        <EntityTypeShape EntityType="ITechModel.SimaticCpuType" Width="1.5" PointX="2.75" PointY="5" />
         <EntityTypeShape EntityType="ITechModel.ModelsWorkstation" Width="1.5" PointX="7.875" PointY="3.875" />
         <AssociationConnector Association="ITechModel.FK_ModelsWorkstation_Resource" />
         <AssociationConnector Association="ITechModel.FK_ModelsWorkstation_Resource1" />
@@ -29,6 +29,9 @@
         <AssociationConnector Association="ITechModel.FK_Workstation_Resource" />
         <EntityTypeShape EntityType="ITechModel.TestSettings" Width="1.5" PointX="5.375" PointY="8.75" />
         <AssociationConnector Association="ITechModel.ModelsVersionModels" />
+        <EntityTypeShape EntityType="ITechModel.ItechUsersDokumentRead" Width="1.5" PointX="7.625" PointY="9.75" />
+        <AssociationConnector Association="ITechModel.FK_ItechUsersDokumentRead_Dokument" />
+        <AssociationConnector Association="ITechModel.FK_ItechUsersDokumentRead_ItechUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
