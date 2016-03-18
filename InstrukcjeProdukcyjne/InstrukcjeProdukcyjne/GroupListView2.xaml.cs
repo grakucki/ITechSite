@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -34,11 +35,11 @@ namespace InstrukcjeProdukcyjne
             Panel2ReadColor = new SolidColorBrush(c);
 
             ColumnsCnt = 2;
-            ScrollViewer sv;
+
         }
 
 
-        public List<Object> DataSource
+        public ObservableCollection<MyFileInfo> DataSource
         {
             get
             { 
@@ -49,23 +50,33 @@ namespace InstrukcjeProdukcyjne
                 lvUsers.ItemsSource = null;
                 Items = value;
                 lvUsers.ItemsSource = Items;
+
                 CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvUsers.ItemsSource);
-                PropertyGroupDescription groupDescription = new PropertyGroupDescription("GroupBy");
-                
-                view.GroupDescriptions.Add(groupDescription);
-                var o = view.Groups;
+                if (view.GroupDescriptions.Count == 0)
+                {
+                    PropertyGroupDescription groupDescription = new PropertyGroupDescription("GroupBy");
+                    view.GroupDescriptions.Add(groupDescription);
+                    
+                }
 
                 
             }
         }
 
 
-
+        public void Refresh()
+        {
+            //CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvUsers.ItemsSource);
+            //view.Refresh();
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(lvUsers.ItemsSource);
+            //http://stackoverflow.com/questions/10878500/listview-grouping-does-not-update-when-bound-property-is-changed
+            
+        }
 
         /// <summary>
         ///  lista do prezentacji
         /// </summary>
-        public List<Object> Items = new List<Object>();
+        public ObservableCollection<MyFileInfo> Items = new ObservableCollection<MyFileInfo>();
 
 
         /// <summary>

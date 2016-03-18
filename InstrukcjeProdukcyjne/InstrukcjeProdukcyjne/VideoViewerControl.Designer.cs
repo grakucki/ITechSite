@@ -93,6 +93,7 @@
             // 
             // button9
             // 
+            this.button9.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button9.FlatAppearance.BorderSize = 0;
             this.button9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray;

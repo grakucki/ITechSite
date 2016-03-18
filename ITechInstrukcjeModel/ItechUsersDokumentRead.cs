@@ -18,11 +18,13 @@ namespace ITechInstrukcjeModel
         public int UserId { get; set; }
         public Nullable<System.DateTime> FirsReadAt { get; set; }
         public Nullable<System.DateTime> LastReadAt { get; set; }
-
+        public int DokVersion { get; set; }
+    
         [System.Runtime.Serialization.IgnoreDataMember]
-        public virtual Dokument Dokument { get; set; }
-        
+	public virtual Dokument Dokument { get; set; }
         [System.Runtime.Serialization.IgnoreDataMember]
-        public virtual ItechUsers ItechUsers { get; set; }
+	public virtual ItechUsers ItechUsers { get; set; }
     }
 }
+
+

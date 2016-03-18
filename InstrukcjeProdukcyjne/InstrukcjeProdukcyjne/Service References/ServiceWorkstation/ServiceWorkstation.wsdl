@@ -99,6 +99,18 @@
   <wsdl:message name="IServiceWorkstation_UpdateTestKompetencji_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateTestKompetencjiResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_UserReadDok_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserReadDok" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_UserReadDok_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserReadDokResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_UserReadMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:UserReadMessage" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_UserReadMessage_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UserReadMessageResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceWorkstation">
     <wsdl:operation name="Ping">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/Ping" message="tns:IServiceWorkstation_Ping_InputMessage" />
@@ -159,6 +171,14 @@
     <wsdl:operation name="UpdateTestKompetencji">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencji" message="tns:IServiceWorkstation_UpdateTestKompetencji_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencjiResponse" message="tns:IServiceWorkstation_UpdateTestKompetencji_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserReadDok">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/UserReadDok" message="tns:IServiceWorkstation_UserReadDok_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/UserReadDokResponse" message="tns:IServiceWorkstation_UserReadDok_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UserReadMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/UserReadMessage" message="tns:IServiceWorkstation_UserReadMessage_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/UserReadMessageResponse" message="tns:IServiceWorkstation_UserReadMessage_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceWorkstation" type="tns:IServiceWorkstation">
@@ -291,6 +311,24 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateTestKompetencji">
       <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencji" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserReadDok">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/UserReadDok" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserReadMessage">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/UserReadMessage" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

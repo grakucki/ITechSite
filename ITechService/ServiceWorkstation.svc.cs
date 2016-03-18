@@ -23,7 +23,7 @@ namespace ITechService
         public string TestConnection(int value)
         {
             StringBuilder ret = new StringBuilder();
-            ret.AppendLine("Serwis ... v15.11.25 Ok");
+            ret.AppendLine("Serwis ... v16.03.19 Ok");
             try
             {
                 ret.Append("Baza danych ... ");
@@ -171,7 +171,7 @@ namespace ITechService
         /// </summary>
         /// <param name="idR"></param>
         /// <returns></returns>
-        public List<Resource> GetInformationPlainsList(int idR)
+        public List<Resource> GetInformationPlainsList(int idR, int? ItechUserId)
         {
             StringBuilder ret = new StringBuilder();
             List<Resource> o = null;
@@ -188,6 +188,7 @@ namespace ITechService
                         .Include(m => m.InformationPlanWorkstation)
                         .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument))
                         .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument).Select(z => z.Kategorie))
+                        .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument).Select(z => z.ItechUsersDokumentRead))
                         .Include(m => m.News)
                         .Include(m => m.ModelsWorkstation)
                         ;
@@ -197,6 +198,7 @@ namespace ITechService
                         .Include(m => m.InformationPlanWorkstation)
                         .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument))
                         .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument).Select(z => z.Kategorie))
+                        //.Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument).Select(z => z.ItechUsersDokumentRead.Where(x => x.UserId == ItechUserId)))
                         .Include(m => m.News)
                         .Include(m => m.ModelsWorkstation)
                         ;
@@ -465,7 +467,7 @@ namespace ITechService
             StringBuilder str = new StringBuilder();
             str.AppendLine("Błąd !!!!!!");
             str.AppendLine(ExceptionResolver.Resolve(ex));
-            throw new FaultException(ret.ToString());
+            throw new FaultException(str.ToString());
         }
         return false;
     }
@@ -495,11 +497,47 @@ namespace ITechService
             StringBuilder str = new StringBuilder();
             str.AppendLine("Błąd !!!!!!");
             str.AppendLine(ExceptionResolver.Resolve(ex));
-            throw new FaultException(ret.ToString());
+            throw new FaultException(str.ToString());
         }
     }
 
 
+    public void UserReadDok(int IUserId, int DokId, int DokVersion)
+    {
+        try
+        {
+            using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
+            {
+
+                var u = context.ItechUsersDokumentRead.Where(m => m.UserId == IUserId && m.DokId==DokId).FirstOrDefault();
+                if (u == null)
+                {
+                    u = new ITechInstrukcjeModel.ItechUsersDokumentRead();
+                    u.DokId = DokId;
+                    u.UserId = IUserId;
+                    u.FirsReadAt = DateTime.Now;
+                    context.ItechUsersDokumentRead.Add(u);
+                }
+                u.LastReadAt = DateTime.Now;
+                u.DokVersion = DokVersion;
+                
+                //context.SaveChanges();
+                System.Threading.Thread.Sleep(3000);
+            }
+        }
+        catch (Exception ex)
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine("Błąd !!!!!!");
+            str.AppendLine(ExceptionResolver.Resolve(ex));
+            throw new FaultException(str.ToString());
+        }
+    }
+
+    public void UserReadMessage(int IUserId, string Message)
+    {
+
+    }
 
        
     }

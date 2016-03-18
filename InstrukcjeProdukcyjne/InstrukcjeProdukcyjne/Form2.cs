@@ -17,6 +17,7 @@ using System.ServiceModel;
 using System.Net;
 using System.Threading;
 using System.Drawing.Drawing2D;
+using System.Collections.ObjectModel;
 
 namespace InstrukcjeProdukcyjne
 {
@@ -554,7 +555,7 @@ namespace InstrukcjeProdukcyjne
                     SetSerwerStatus("łączę",null);
                     if (client.IsOnLine())
                     {
-                        var t = await client.GetInformationPlainsListAsync(idR.Value);
+                        var t = await client.GetInformationPlainsListAsync(idR.Value, 2119);
                         
                         db.Resource_Local = t.ToList();
                         db.ExportResources(null);
@@ -605,7 +606,7 @@ namespace InstrukcjeProdukcyjne
             {
                 if (client.IsOnLine())
                 {
-                    db.Resource_Local =  client.GetInformationPlainsList(idR.Value).ToList();
+                    db.Resource_Local =  client.GetInformationPlainsList(idR.Value, null).ToList();
                     db.ExportResources(null);
                     var i = client.GetITechUserList();
                     db.ItechUsers_Local = i.ToList();
@@ -701,7 +702,7 @@ namespace InstrukcjeProdukcyjne
             var g = IP.Where(m => m.Dokument.Kategorie != null).Select(m => m.Dokument.Kategorie.name).Distinct();
 
 
-            var my = new List<Object>();
+            var my = new ObservableCollection<MyFileInfo>();
             MyFileInfoEx fe = new MyFileInfoEx();
             
             int i = 0;
@@ -709,7 +710,7 @@ namespace InstrukcjeProdukcyjne
             {
                 if (item.Dokument != null)
                 {
-                    var d = new MyFileInfo { FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Dok = item.Dokument };
+                    var d = new MyFileInfo {Id= item.Dokument.Id, FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Dok = item.Dokument, IsRead=item.Dokument.ItechUsersDokumentRead.Any() };
                     var s = string.IsNullOrEmpty(item.Dokument.Description) ? item.Dokument.FileName : item.Dokument.Description;
 
                     d.ItemText = s;
@@ -720,7 +721,6 @@ namespace InstrukcjeProdukcyjne
                     else
                         d.GroupBy = "inne";
                     i++;
-                    d.IsRead = (i%2==0);
 
                     my.Add(d);
                 }
@@ -790,12 +790,28 @@ namespace InstrukcjeProdukcyjne
             listView_MouseDoubleClick(sender, e);
         }
 
-        private void OnDokumentShow(MyFileInfo file)
+        private async void OnDokumentShow(MyFileInfo file)
         {
             try
             {
                 var dial = new DokumentShowDlg(file, LoginUser);
-                dial.ShowDialog();
+                if (dial.ShowDialog()== System.Windows.Forms.DialogResult.OK)
+                {
+                    // wyślij info na serwer
+                    int userid = LoginUser2.id;
+                    int DokId = file.Dok.Id;
+                    int Version = file.Version;
+
+                     using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+                     {
+                         file.IsRead = true;
+                         groupListViewWorkstation.Refresh();
+                         groupListViewModels.Refresh();
+
+                         await client.UserReadDokAsync(userid, DokId, Version);
+
+                     }
+                }
 
             }
             catch (Exception ex)

@@ -108,3 +108,5 @@ D:\projekty\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bin\Debug\ItechSterwnik.exe
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.ModelsWorkstationEditDlg2.resources
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bin\Debug\DropDownControls.dll
+D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\GeneratedInternalTypeHelper.g.cs
+D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne_MarkupCompile.lref

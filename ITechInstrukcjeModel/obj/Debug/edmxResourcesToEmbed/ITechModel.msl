@@ -4,6 +4,8 @@
     <EntitySetMapping Name="Dokument">
       <EntityTypeMapping TypeName="IsTypeOf(ITechModel.Dokument)">
         <MappingFragment StoreEntitySet="Dokument">
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="LastWriteUserId" ColumnName="LastWriteUserId" />
           <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
           <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
           <ScalarProperty Name="Kategoria_Id" ColumnName="Kategoria_Id" />
@@ -26,6 +28,8 @@
     <EntitySetMapping Name="InformationPlan">
       <EntityTypeMapping TypeName="ITechModel.InformationPlan">
         <MappingFragment StoreEntitySet="InformationPlan">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
           <ScalarProperty Name="IdM" ColumnName="IdM" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="idR" ColumnName="idR" />
@@ -175,5 +179,16 @@
         <ScalarProperty Name="Id" ColumnName="IdM" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="ItechUsersDokumentRead">
+      <EntityTypeMapping TypeName="ITechModel.ItechUsersDokumentRead">
+        <MappingFragment StoreEntitySet="ItechUsersDokumentRead">
+          <ScalarProperty Name="DokVersion" ColumnName="DokVersion" />
+          <ScalarProperty Name="LastReadAt" ColumnName="LastReadAt" />
+          <ScalarProperty Name="FirsReadAt" ColumnName="FirsReadAt" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DokId" ColumnName="DokId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

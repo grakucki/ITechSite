@@ -22,6 +22,9 @@
     <NavigationProperty Name="Kategorie" Relationship="ITechModel.FK_Dokument_Kategorie" FromRole="Dokument" ToRole="Kategorie" />
     <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="OwnerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="LastWriteUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ItechUsersDokumentRead" Relationship="ITechModel.FK_ItechUsersDokumentRead_Dokument" FromRole="Dokument" ToRole="ItechUsersDokumentRead" />
+    <Property Name="Version" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="InformationPlan">
     <Key>
@@ -36,6 +39,8 @@
     <NavigationProperty Name="ResourceWorkstation" Relationship="ITechModel.FK_InformationPlan_Resource" FromRole="InformationPlan" ToRole="Resource" />
     <Property Name="IdM" Type="Int32" />
     <NavigationProperty Name="ResourceModel" Relationship="ITechModel.FK_InformationPlan_Resource1" FromRole="InformationPlan" ToRole="Resource" />
+    <Property Name="OwnerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK_InformationPlan_Dokument">
     <End Role="Dokument" Type="Self.Dokument" Multiplicity="1" />
@@ -106,6 +111,15 @@
     <AssociationSet Name="ModelsVersionModels" Association="ITechModel.ModelsVersionModels">
       <End Role="Resource" EntitySet="Resource" />
       <End Role="Resource1" EntitySet="Resource" />
+    </AssociationSet>
+    <EntitySet Name="ItechUsersDokumentRead" EntityType="ITechModel.ItechUsersDokumentRead" />
+    <AssociationSet Name="FK_ItechUsersDokumentRead_Dokument" Association="ITechModel.FK_ItechUsersDokumentRead_Dokument">
+      <End Role="Dokument" EntitySet="Dokument" />
+      <End Role="ItechUsersDokumentRead" EntitySet="ItechUsersDokumentRead" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItechUsersDokumentRead_ItechUsers" Association="ITechModel.FK_ItechUsersDokumentRead_ItechUsers">
+      <End Role="ItechUsers" EntitySet="ItechUsers" />
+      <End Role="ItechUsersDokumentRead" EntitySet="ItechUsersDokumentRead" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="News">
@@ -244,6 +258,7 @@
     <Property Name="Enabled" Type="Boolean" Nullable="false" />
     <Property Name="LastTestKompetencjiDtmSucces" Type="DateTime" Precision="3" />
     <Property Name="ForceTestKompetencji" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ItechUsersDokumentRead" Relationship="ITechModel.FK_ItechUsersDokumentRead_ItechUsers" FromRole="ItechUsers" ToRole="ItechUsersDokumentRead" />
   </EntityType>
   <Association Name="ItechUsersRoles">
     <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
@@ -341,5 +356,42 @@
   <Association Name="ModelsVersionModels">
     <End Type="ITechModel.Resource" Role="Resource" Multiplicity="*" />
     <End Type="ITechModel.Resource" Role="Resource1" Multiplicity="*" />
+  </Association>
+  <EntityType Name="ItechUsersDokumentRead">
+    <Key>
+      <PropertyRef Name="DokId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="DokId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="FirsReadAt" Type="DateTime" Precision="3" />
+    <Property Name="LastReadAt" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_ItechUsersDokumentRead_Dokument" FromRole="ItechUsersDokumentRead" ToRole="Dokument" />
+    <NavigationProperty Name="ItechUsers" Relationship="ITechModel.FK_ItechUsersDokumentRead_ItechUsers" FromRole="ItechUsersDokumentRead" ToRole="ItechUsers" />
+    <Property Name="DokVersion" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ItechUsersDokumentRead_Dokument">
+    <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="1" />
+    <End Type="ITechModel.ItechUsersDokumentRead" Role="ItechUsersDokumentRead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dokument">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ItechUsersDokumentRead">
+        <PropertyRef Name="DokId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItechUsersDokumentRead_ItechUsers">
+    <End Type="ITechModel.ItechUsers" Role="ItechUsers" Multiplicity="1" />
+    <End Type="ITechModel.ItechUsersDokumentRead" Role="ItechUsersDokumentRead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItechUsers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ItechUsersDokumentRead">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

@@ -66,9 +66,10 @@ namespace ITechService
         /// Plan ifnoramcyjny dla stanowiska roboczego0 idR oraz jego modeli Modeli
         /// </summary>
         /// <param name="idR">Identyfikator zasobu dla którego ma zostać wygenerowana lista</param>
+        /// <param name="ItechUserId">Identyfikator użytkownika dla którego ma zostać wygenerowana lista lub null jeśłi nie mamy jeszcze użytkownika</param>
         /// <returns></returns>
         [OperationContract]
-        List<Resource> GetInformationPlainsList(int idR);
+        List<Resource> GetInformationPlainsList(int idR, int? ItechUserId);
 
         /// <summary>
         /// Lista plików dla wzkazanego workstation oraz produkowanych dla niego modeli
@@ -128,6 +129,22 @@ namespace ITechService
         /// <param name="modelWorkstationInfo"></param>
         [OperationContract]
         void UpdateTestKompetencji(string SitechUserId, int? TestResult);
+
+
+        /// <summary>
+        /// Oznacza przeczytanie dokumentu
+        /// </summary>
+        /// <param name="modelWorkstationInfo"></param>
+        [OperationContract]
+        void UserReadDok(int IUserId, int DokId, int DokVersion);
+
+        /// <summary>
+        /// Oznacza przeczytanie komunikatu
+        /// </summary>
+        /// <param name="modelWorkstationInfo"></param>
+        [OperationContract]
+        void UserReadMessage(int IUserId, string Message);
+
     }
 
 

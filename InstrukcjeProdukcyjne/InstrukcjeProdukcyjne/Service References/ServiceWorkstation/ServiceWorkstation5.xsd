@@ -47,6 +47,8 @@
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="News" nillable="true" type="tns:News" />
       <xs:element minOccurs="0" name="No" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Resource1" nillable="true" type="tns:ArrayOfResource" />
+      <xs:element minOccurs="0" name="Resource2" nillable="true" type="tns:ArrayOfResource" />
       <xs:element minOccurs="0" name="Type" type="xs:int" />
       <xs:element minOccurs="0" name="WorkProcess" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Workstation" nillable="true" type="tns:ArrayOfWorkstation" />
@@ -61,11 +63,13 @@
   <xs:element name="ArrayOfInformationPlan" nillable="true" type="tns:ArrayOfInformationPlan" />
   <xs:complexType name="InformationPlan">
     <xs:sequence>
+      <xs:element minOccurs="0" name="CreateTime" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Dokument" nillable="true" type="tns:Dokument" />
       <xs:element minOccurs="0" name="Enabled" type="xs:boolean" />
       <xs:element minOccurs="0" name="IdD" type="xs:int" />
       <xs:element minOccurs="0" name="IdM" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Order" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="OwnerId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="id" type="xs:int" />
       <xs:element minOccurs="0" name="idR" type="xs:int" />
     </xs:sequence>
@@ -80,19 +84,38 @@
       <xs:element minOccurs="0" name="FileName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FileType" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="ItechUsersDokumentRead" nillable="true" type="tns:ArrayOfItechUsersDokumentRead" />
       <xs:element minOccurs="0" name="Kategoria_Id" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="Kategorie" nillable="true" type="tns:Kategorie" />
       <xs:element minOccurs="0" name="Keywords" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="LastWriteTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastWriteUserId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="LocalFileName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OwnerId" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Size" nillable="true" type="xs:long" />
       <xs:element minOccurs="0" name="ValidDtmOff" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="ValidDtmOn" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Version" type="xs:int" />
       <xs:element minOccurs="0" name="WorkProcess_Id" nillable="true" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Dokument" nillable="true" type="tns:Dokument" />
+  <xs:complexType name="ArrayOfItechUsersDokumentRead">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ItechUsersDokumentRead" nillable="true" type="tns:ItechUsersDokumentRead" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfItechUsersDokumentRead" nillable="true" type="tns:ArrayOfItechUsersDokumentRead" />
+  <xs:complexType name="ItechUsersDokumentRead">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="DokId" type="xs:int" />
+      <xs:element minOccurs="0" name="DokVersion" type="xs:int" />
+      <xs:element minOccurs="0" name="FirsReadAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastReadAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ItechUsersDokumentRead" nillable="true" type="tns:ItechUsersDokumentRead" />
   <xs:complexType name="Kategorie">
     <xs:sequence>
       <xs:element minOccurs="0" name="id" type="xs:int" />
@@ -150,6 +173,7 @@
       <xs:element minOccurs="0" name="Enabled" type="xs:boolean" />
       <xs:element minOccurs="0" name="ForceTestKompetencji" type="xs:boolean" />
       <xs:element minOccurs="0" name="Frozen" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ItechUsersDokumentRead" nillable="true" type="tns:ArrayOfItechUsersDokumentRead" />
       <xs:element minOccurs="0" name="LastTestKompetencjiDtm" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="LastTestKompetencjiDtmSucces" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="LastTestKompetencjiResult" nillable="true" type="xs:int" />

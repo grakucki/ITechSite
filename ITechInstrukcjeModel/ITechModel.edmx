@@ -33,6 +33,7 @@
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="OwnerId" Type="nvarchar" MaxLength="128" />
           <Property Name="LastWriteUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="Version" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="InformationPlan">
           <Key>
@@ -75,6 +76,7 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="FirsReadAt" Type="datetime" />
           <Property Name="LastReadAt" Type="datetime" />
+          <Property Name="DokVersion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ItechUsersRoles">
           <Key>
@@ -449,6 +451,7 @@
           <Property Name="OwnerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="LastWriteUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ItechUsersDokumentRead" Relationship="ITechModel.FK_ItechUsersDokumentRead_Dokument" FromRole="Dokument" ToRole="ItechUsersDokumentRead" />
+          <Property Name="Version" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="InformationPlan">
           <Key>
@@ -792,6 +795,7 @@
           <Property Name="LastReadAt" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_ItechUsersDokumentRead_Dokument" FromRole="ItechUsersDokumentRead" ToRole="Dokument" />
           <NavigationProperty Name="ItechUsers" Relationship="ITechModel.FK_ItechUsersDokumentRead_ItechUsers" FromRole="ItechUsersDokumentRead" ToRole="ItechUsers" />
+          <Property Name="DokVersion" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_ItechUsersDokumentRead_Dokument">
           <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="1" />
@@ -826,6 +830,7 @@
           <EntitySetMapping Name="Dokument">
             <EntityTypeMapping TypeName="IsTypeOf(ITechModel.Dokument)">
               <MappingFragment StoreEntitySet="Dokument">
+                <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="LastWriteUserId" ColumnName="LastWriteUserId" />
                 <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
@@ -1003,6 +1008,7 @@
           <EntitySetMapping Name="ItechUsersDokumentRead">
             <EntityTypeMapping TypeName="ITechModel.ItechUsersDokumentRead">
               <MappingFragment StoreEntitySet="ItechUsersDokumentRead">
+                <ScalarProperty Name="DokVersion" ColumnName="DokVersion" />
                 <ScalarProperty Name="LastReadAt" ColumnName="LastReadAt" />
                 <ScalarProperty Name="FirsReadAt" ColumnName="FirsReadAt" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />

@@ -85,6 +85,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idR" type="xs:int" />
+        <xs:element minOccurs="0" name="ItechUserId" nillable="true" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -195,6 +196,33 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateTestKompetencjiResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserReadDok">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IUserId" type="xs:int" />
+        <xs:element minOccurs="0" name="DokId" type="xs:int" />
+        <xs:element minOccurs="0" name="DokVersion" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserReadDokResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserReadMessage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IUserId" type="xs:int" />
+        <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UserReadMessageResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
