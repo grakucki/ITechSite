@@ -233,6 +233,7 @@
             this.KomunikatLabel.TabIndex = 0;
             this.KomunikatLabel.Text = "Komunikat stanowisko ......";
             this.KomunikatLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.KomunikatLabel.Click += new System.EventHandler(this.KomunikatLabel_Click);
             this.KomunikatLabel.DoubleClick += new System.EventHandler(this.KomunikatLabel_DoubleClick);
             // 
             // panel5

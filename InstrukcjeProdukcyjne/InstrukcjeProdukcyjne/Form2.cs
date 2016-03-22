@@ -1291,6 +1291,24 @@ namespace InstrukcjeProdukcyjne
             }
         }
 
+        private void KomunikatLabel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var dial = new NewsMessageDlg();
+                dial.Message = KomunikatLabel.Text;
+                dial.MessageColor = NewsCustomPanel.BackColor;
+                if (dial.ShowDialog()== System.Windows.Forms.DialogResult.Cancel)
+                    return;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
       
 
      

@@ -203,6 +203,12 @@
     </Compile>
     <Compile Include="MyFileInfo.cs" />
     <Compile Include="NewsCss.cs" />
+    <Compile Include="NewsMessageDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewsMessageDlg.Designer.cs">
+      <DependentUpon>NewsMessageDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="PdfViewerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -310,6 +316,9 @@
     <EmbeddedResource Include="ModelsWorkstationImprtDlg.resx">
       <DependentUpon>ModelsWorkstationImprtDlg.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewsMessageDlg.resx">
+      <DependentUpon>NewsMessageDlg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PdfViewerControl.resx">
       <DependentUpon>PdfViewerControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -399,6 +408,9 @@
     <Content Include="Icon1.ico" />
     <Content Include="image\Icon1.ico" />
     <Content Include="image\avi.bmp" />
+    <None Include="Resources\newsdlg2.png" />
+    <None Include="Resources\newsdlg1.png" />
+    <None Include="Resources\newsdlg.png" />
     <None Include="Resources\ikonaAvi.png" />
     <None Include="Resources\ikonaPDF.png" />
     <Resource Include="image\ikonaAvi.png" />
