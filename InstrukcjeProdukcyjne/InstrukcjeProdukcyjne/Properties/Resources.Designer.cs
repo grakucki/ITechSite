@@ -93,26 +93,6 @@ namespace InstrukcjeProdukcyjne.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap newsdlg {
-            get {
-                object obj = ResourceManager.GetObject("newsdlg", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap newsdlg1 {
-            get {
-                object obj = ResourceManager.GetObject("newsdlg1", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap newsdlg2 {
             get {
                 object obj = ResourceManager.GetObject("newsdlg2", resourceCulture);

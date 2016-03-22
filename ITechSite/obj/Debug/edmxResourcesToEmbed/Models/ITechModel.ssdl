@@ -30,11 +30,12 @@
     <Property Name="WorkProcess_Id" Type="int" />
     <Property Name="Keywords" Type="nvarchar(max)" />
     <Property Name="Size" Type="bigint" StoreGeneratedPattern="Computed" />
-    <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
     <Property Name="Kategoria_Id" Type="int" />
+    <Property Name="LocalFileName" Type="nvarchar(max)" StoreGeneratedPattern="Computed" Nullable="false" />
     <Property Name="CreateTime" Type="datetime" Nullable="false" />
     <Property Name="OwnerId" Type="nvarchar" MaxLength="128" />
     <Property Name="LastWriteUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="Version" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Factory">
     <Key>
@@ -68,6 +69,7 @@
     <Property Name="CodeName" Type="nvarchar" MaxLength="16" Nullable="false" />
     <Property Name="FileID" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Content" Type="varbinary(max)" />
+    <Property Name="size" Type="bigint" StoreGeneratedPattern="Computed" />
   </EntityType>
   <EntityType Name="InformationPlan">
     <Key>
@@ -95,9 +97,9 @@
     <Property Name="LastTestKompetencjiDtm" Type="datetime" />
     <Property Name="LastTestKompetencjiResult" Type="int" />
     <Property Name="Frozen" Type="bit" Nullable="false" />
-    <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="Desc" Type="nvarchar(max)" />
     <Property Name="AccessProfile" Type="nvarchar" MaxLength="50" />
+    <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="LastTestKompetencjiDtmSucces" Type="datetime" />
     <Property Name="ForceTestKompetencji" Type="bit" Nullable="false" />
   </EntityType>
@@ -148,6 +150,18 @@
     <Property Name="News" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ValidEnd" Type="datetime" />
     <Property Name="CreatedAt" Type="datetime" />
+    <Property Name="NewsPriorityId" Type="int" Nullable="false" />
+    <Property Name="ItemId" Type="int" />
+  </EntityType>
+  <EntityType Name="NewsItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NewsText" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ValidEnd" Type="datetime" />
+    <Property Name="CreateAt" Type="datetime" />
+    <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
     <Property Name="NewsPriorityId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="NewsPriority">
@@ -225,30 +239,6 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="16" Nullable="false" />
   </EntityType>
-  <Association Name="FK_Dokument_Kategorie">
-    <End Role="Kategorie" Type="Self.Kategorie" Multiplicity="0..1" />
-    <End Role="Dokument" Type="Self.Dokument" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Kategorie">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Dokument">
-        <PropertyRef Name="Kategoria_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Dokument_WorkProcess">
-    <End Role="WorkProcess" Type="Self.WorkProcess" Multiplicity="0..1" />
-    <End Role="Dokument" Type="Self.Dokument" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="WorkProcess">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Dokument">
-        <PropertyRef Name="WorkProcess_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_FactoryDepartment_Department">
     <End Role="Department" Type="Self.Department" Multiplicity="1" />
     <End Role="FactoryDepartment" Type="Self.FactoryDepartment" Multiplicity="*" />
@@ -294,18 +284,6 @@
       </Principal>
       <Dependent Role="FactoryWorkProcess">
         <PropertyRef Name="WorkProcessId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_FileContent_Dokument1">
-    <End Role="Dokument" Type="Self.Dokument" Multiplicity="0..1" />
-    <End Role="FileContent" Type="Self.FileContent" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Dokument">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="FileContent">
-        <PropertyRef Name="Dokument_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -417,6 +395,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_News_NewsItems">
+    <End Role="NewsItems" Type="Self.NewsItems" Multiplicity="0..1" />
+    <End Role="News" Type="Self.News" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewsItems">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="News">
+        <PropertyRef Name="ItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_News_NewsPriority">
     <End Role="NewsPriority" Type="Self.NewsPriority" Multiplicity="1" />
     <End Role="News" Type="Self.News" Multiplicity="*" />
@@ -438,6 +428,18 @@
       </Principal>
       <Dependent Role="News">
         <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_NewsItems_NewsPriority">
+    <End Role="NewsPriority" Type="Self.NewsPriority" Multiplicity="1" />
+    <End Role="NewsItems" Type="Self.NewsItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewsPriority">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="NewsItems">
+        <PropertyRef Name="NewsPriorityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -481,6 +483,7 @@
     <EntitySet Name="ModelsVersionModels" EntityType="Self.ModelsVersionModels" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ModelsWorkstation" EntityType="Self.ModelsWorkstation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NewsItems" EntityType="Self.NewsItems" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NewsPriority" EntityType="Self.NewsPriority" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ResourceType" EntityType="Self.ResourceType" Schema="dbo" store:Type="Tables" />
@@ -489,14 +492,6 @@
     <EntitySet Name="WorkProcess" EntityType="Self.WorkProcess" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorkstationGroup" EntityType="Self.WorkstationGroup" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Dokument_Kategorie" Association="Self.FK_Dokument_Kategorie">
-      <End Role="Kategorie" EntitySet="Kategorie" />
-      <End Role="Dokument" EntitySet="Dokument" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Dokument_WorkProcess" Association="Self.FK_Dokument_WorkProcess">
-      <End Role="WorkProcess" EntitySet="WorkProcess" />
-      <End Role="Dokument" EntitySet="Dokument" />
-    </AssociationSet>
     <AssociationSet Name="FK_FactoryDepartment_Department" Association="Self.FK_FactoryDepartment_Department">
       <End Role="Department" EntitySet="Department" />
       <End Role="FactoryDepartment" EntitySet="FactoryDepartment" />
@@ -512,10 +507,6 @@
     <AssociationSet Name="FK_FactoryWorkProcess_WorkProcess" Association="Self.FK_FactoryWorkProcess_WorkProcess">
       <End Role="WorkProcess" EntitySet="WorkProcess" />
       <End Role="FactoryWorkProcess" EntitySet="FactoryWorkProcess" />
-    </AssociationSet>
-    <AssociationSet Name="FK_FileContent_Dokument1" Association="Self.FK_FileContent_Dokument1">
-      <End Role="Dokument" EntitySet="Dokument" />
-      <End Role="FileContent" EntitySet="FileContent" />
     </AssociationSet>
     <AssociationSet Name="FK_InformationPlan_Dokument" Association="Self.FK_InformationPlan_Dokument">
       <End Role="Dokument" EntitySet="Dokument" />
@@ -553,6 +544,10 @@
       <End Role="Resource" EntitySet="Resource" />
       <End Role="ModelsWorkstation" EntitySet="ModelsWorkstation" />
     </AssociationSet>
+    <AssociationSet Name="FK_News_NewsItems" Association="Self.FK_News_NewsItems">
+      <End Role="NewsItems" EntitySet="NewsItems" />
+      <End Role="News" EntitySet="News" />
+    </AssociationSet>
     <AssociationSet Name="FK_News_NewsPriority" Association="Self.FK_News_NewsPriority">
       <End Role="NewsPriority" EntitySet="NewsPriority" />
       <End Role="News" EntitySet="News" />
@@ -560,6 +555,10 @@
     <AssociationSet Name="FK_News_Resource" Association="Self.FK_News_Resource">
       <End Role="Resource" EntitySet="Resource" />
       <End Role="News" EntitySet="News" />
+    </AssociationSet>
+    <AssociationSet Name="FK_NewsItems_NewsPriority" Association="Self.FK_NewsItems_NewsPriority">
+      <End Role="NewsPriority" EntitySet="NewsPriority" />
+      <End Role="NewsItems" EntitySet="NewsItems" />
     </AssociationSet>
     <AssociationSet Name="FK_Resource_Type" Association="Self.FK_Resource_Type">
       <End Role="ResourceType" EntitySet="ResourceType" />

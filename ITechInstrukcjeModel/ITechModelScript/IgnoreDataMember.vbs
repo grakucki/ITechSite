@@ -52,6 +52,7 @@ Function InsertString(strFileName , strFindText, strInsertText)
 		objFile.WriteLine source 
 		objFile.Close
 
+
 	i = InStr(source, strFindText)
 
 

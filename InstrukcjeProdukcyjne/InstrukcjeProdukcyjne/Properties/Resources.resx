@@ -124,9 +124,6 @@
   <data name="ikonaPDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ikonaPDF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="newsdlg1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\newsdlg1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="schemat bitmap dla PDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image\schemat bitmap dla PDF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -138,9 +135,6 @@
   </data>
   <data name="szablon podziału klatek z PLAY" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image\szablon podziału klatek z PLAY.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="newsdlg" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\newsdlg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\image\Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

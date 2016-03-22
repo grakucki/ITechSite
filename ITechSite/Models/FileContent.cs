@@ -19,6 +19,7 @@ namespace ITechSite.Models
         public string CodeName { get; set; }
         public System.Guid FileID { get; set; }
         public Nullable<int> Dokument_Id { get; set; }
+        public Nullable<long> size { get; set; }
     
         public virtual Dokument Dokument { get; set; }
     }

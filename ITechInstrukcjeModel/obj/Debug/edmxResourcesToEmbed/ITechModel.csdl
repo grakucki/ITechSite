@@ -133,6 +133,7 @@
     <Property Name="CreatedAt" Type="DateTime" Precision="3" />
     <Property Name="NewsPriorityId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="NewsPriority" Relationship="ITechModel.FK_News_NewsPriority" FromRole="News" ToRole="NewsPriority" />
+    <Property Name="ItemId" Type="Int32" />
   </EntityType>
   <EntityType Name="Resource">
     <Key>
@@ -364,11 +365,11 @@
     </Key>
     <Property Name="DokId" Type="Int32" Nullable="false" />
     <Property Name="UserId" Type="Int32" Nullable="false" />
-    <Property Name="FirsReadAt" Type="DateTime" Precision="3" />
     <Property Name="LastReadAt" Type="DateTime" Precision="3" />
     <NavigationProperty Name="Dokument" Relationship="ITechModel.FK_ItechUsersDokumentRead_Dokument" FromRole="ItechUsersDokumentRead" ToRole="Dokument" />
     <NavigationProperty Name="ItechUsers" Relationship="ITechModel.FK_ItechUsersDokumentRead_ItechUsers" FromRole="ItechUsersDokumentRead" ToRole="ItechUsers" />
     <Property Name="DokVersion" Type="Int32" Nullable="false" />
+    <Property Name="FirstReadAt" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK_ItechUsersDokumentRead_Dokument">
     <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="1" />

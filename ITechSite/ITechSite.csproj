@@ -297,6 +297,9 @@
     <Compile Include="Models\News.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\NewsItems.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\NewsPriority.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>

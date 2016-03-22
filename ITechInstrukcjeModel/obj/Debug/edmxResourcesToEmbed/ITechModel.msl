@@ -42,6 +42,7 @@
     <EntitySetMapping Name="News">
       <EntityTypeMapping TypeName="ITechModel.News">
         <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
           <ScalarProperty Name="NewsPriorityId" ColumnName="NewsPriorityId" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="ValidEnd" ColumnName="ValidEnd" />
@@ -182,9 +183,9 @@
     <EntitySetMapping Name="ItechUsersDokumentRead">
       <EntityTypeMapping TypeName="ITechModel.ItechUsersDokumentRead">
         <MappingFragment StoreEntitySet="ItechUsersDokumentRead">
+          <ScalarProperty Name="FirstReadAt" ColumnName="FirstReadAt" />
           <ScalarProperty Name="DokVersion" ColumnName="DokVersion" />
           <ScalarProperty Name="LastReadAt" ColumnName="LastReadAt" />
-          <ScalarProperty Name="FirsReadAt" ColumnName="FirsReadAt" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="DokId" ColumnName="DokId" />
         </MappingFragment>

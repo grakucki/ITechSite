@@ -23,7 +23,9 @@ namespace ITechInstrukcjeModel
         public string name { get; set; }
     
         [System.Runtime.Serialization.IgnoreDataMember]
+	
 	public virtual ICollection<Dokument> Dokument { get; set; }
     }
 }
+
 

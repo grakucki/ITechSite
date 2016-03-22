@@ -25,7 +25,9 @@ namespace ITechInstrukcjeModel
         public string AllowIp { get; set; }
     
         [System.Runtime.Serialization.IgnoreDataMember]
+	
 	public virtual Resource Resource { get; set; }
     }
 }
+
 

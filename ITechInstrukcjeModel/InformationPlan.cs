@@ -25,10 +25,12 @@ namespace ITechInstrukcjeModel
     
         public virtual Dokument Dokument { get; set; }
         [System.Runtime.Serialization.IgnoreDataMember]
-	public virtual Resource ResourceWorkstation { get; set; }
+		public virtual Resource ResourceWorkstation { get; set; }
         [System.Runtime.Serialization.IgnoreDataMember]
 	public virtual Resource ResourceModel { get; set; }
     }
 }
+
+
 
 

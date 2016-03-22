@@ -956,6 +956,10 @@ namespace InstrukcjeProdukcyjne
 
         void DisplayNews(string news, int CssId)
         {
+            bool isNewNews = KomunikatLabel.Text != news;
+            if (string.IsNullOrEmpty(news))
+                isNewNews = false;
+
             KomunikatLabel.Text = news;
             var css = NewsCss.GetCss(CssId);
             NewsCustomPanel.BackColor = css.BackgroundColor;
@@ -964,6 +968,8 @@ namespace InstrukcjeProdukcyjne
             NewsCustomPanel.Refresh();
 
             KomunikatLabel.ForeColor = css.Color;
+            if (isNewNews)
+                ShowNewsDlg();
         }
 
         public DateTime _LastReadNews { get; set; }
@@ -1291,16 +1297,30 @@ namespace InstrukcjeProdukcyjne
             }
         }
 
+        NewsMessageDlg NewsDialog = null;
+        private void ShowNewsDlg()
+        {
+            if (NewsDialog != null)
+                return;
+
+            NewsDialog = new NewsMessageDlg();
+
+            NewsDialog.Message = KomunikatLabel.Text;
+            NewsDialog.MessageColor = NewsCustomPanel.BackColor;
+            if (NewsDialog.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+            {
+                NewsDialog = null;
+                return;
+            }
+
+            NewsDialog = null;
+        }
+
         private void KomunikatLabel_Click(object sender, EventArgs e)
         {
             try
             {
-                var dial = new NewsMessageDlg();
-                dial.Message = KomunikatLabel.Text;
-                dial.MessageColor = NewsCustomPanel.BackColor;
-                if (dial.ShowDialog()== System.Windows.Forms.DialogResult.Cancel)
-                    return;
-
+                ShowNewsDlg();
             }
             catch (Exception ex)
             {

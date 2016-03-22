@@ -24,7 +24,7 @@ CREATE TABLE dbo.ItechUsersDokumentRead
 	(
 	DokId int NOT NULL,
 	UserId int NOT NULL,
-	FirsReadAt datetime NULL,
+	FirstReadAt datetime NULL,
 	LastReadAt datetime NULL,
 	DokVersion int NOT NULL CONSTRAINT DF_ItechUsersDokumentRead_DokVersion DEFAULT 0
 	)  ON [PRIMARY]

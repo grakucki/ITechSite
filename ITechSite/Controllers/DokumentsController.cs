@@ -75,6 +75,7 @@ namespace ITechSite.Controllers
             model.ValidDtmOn = DateTime.Now;
             model.Description = "";
             model.Enabled = true;
+            model.Version = 0;
             return View(model);
         }
 
@@ -95,6 +96,7 @@ namespace ITechSite.Controllers
                     dokument.OwnerId =User.Identity.Name;
                     dokument.LastWriteTime = DateTime.Now;
                     dokument.LastWriteUserId = User.Identity.Name;
+                    dokument.Version = 0;
 
                     if (dokument.File != null)
                     {
@@ -188,7 +190,10 @@ namespace ITechSite.Controllers
                 // zapisz plik
 
                 if (dokument.File.Length>0)
-                { 
+                {
+                    dokument.Version++;
+                    db.SaveChanges();
+
                     // zapisujemy dane pliku tylko gdy został podany
                     FileData uploadData = new FileData();
                     uploadData.Name = dokument.CodeName;
@@ -220,9 +225,9 @@ namespace ITechSite.Controllers
                     dokument.LastWriteUserId = User.Identity.Name;
 
                     db.Entry(dokument).State = EntityState.Modified;
+
                     db.Entry(dokument).Property("CreateTime").IsModified = false;
                     db.Entry(dokument).Property("OwnerId").IsModified = false;
-
 
                     db.SaveChanges();
 

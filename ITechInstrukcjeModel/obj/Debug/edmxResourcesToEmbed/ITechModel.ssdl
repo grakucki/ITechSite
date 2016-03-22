@@ -69,7 +69,7 @@
     </Key>
     <Property Name="DokId" Type="int" Nullable="false" />
     <Property Name="UserId" Type="int" Nullable="false" />
-    <Property Name="FirsReadAt" Type="datetime" />
+    <Property Name="FirstReadAt" Type="datetime" />
     <Property Name="LastReadAt" Type="datetime" />
     <Property Name="DokVersion" Type="int" Nullable="false" />
   </EntityType>
@@ -114,6 +114,7 @@
     <Property Name="ValidEnd" Type="datetime" />
     <Property Name="CreatedAt" Type="datetime" />
     <Property Name="NewsPriorityId" Type="int" Nullable="false" />
+    <Property Name="ItemId" Type="int" />
   </EntityType>
   <EntityType Name="NewsPriority">
     <Key>

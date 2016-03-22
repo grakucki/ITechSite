@@ -515,7 +515,7 @@ namespace ITechService
                     u = new ITechInstrukcjeModel.ItechUsersDokumentRead();
                     u.DokId = DokId;
                     u.UserId = IUserId;
-                    u.FirsReadAt = DateTime.Now;
+                    u.FirstReadAt = DateTime.Now;
                     context.ItechUsersDokumentRead.Add(u);
                 }
                 u.LastReadAt = DateTime.Now;

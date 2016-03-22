@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 
 namespace ITechSite.Models
@@ -57,20 +58,23 @@ namespace ITechSite.Models
                 }
                 else
                 {
+                    var newNewsItem= CreateNewsItem(NewNews, ValidEnd, priority);
+                    
+
                     foreach (var item in actionChk)
                     {
                         int idr = 0;
                         if (int.TryParse(item, out idr))
                         {
-                            InsertNews(NewNews, ValidEnd, idr, priority);
+                            InsertNews(newNewsItem, idr);
+                            //InsertNews(NewNews, ValidEnd, idr, priority);
                         }
                     }
                     try
                     {
                         db.SaveChanges();
-
                     }
-                    catch (Exception /*ex*/)
+                    catch (Exception ex)
                     {
 
                     }
@@ -106,6 +110,19 @@ namespace ITechSite.Models
 
             return View(news);
         }
+
+        private NewsItems CreateNewsItem(string NewNews, DateTime? ValidEnd, int? priority)
+        {
+            var newItem = new NewsItems();
+            newItem.NewsText = NewNews;
+            newItem.ValidEnd = ValidEnd;
+            newItem.CreateAt = DateTime.Now;
+            newItem.CreateBy = User.Identity.GetUserId();
+            newItem.NewsPriorityId = priority.Value;
+            db.NewsItems.Add(newItem);
+            db.SaveChanges();
+            return newItem;
+        }
         private void InsertNews(string msg, DateTime? ValidEnd, int idR, int? priority)
         {
             var q = db.Resource.Find(idR);
@@ -118,6 +135,25 @@ namespace ITechSite.Models
                 q.News.News1 = msg;
                 q.News.ValidEnd = ValidEnd;
                 q.News.NewsPriorityId = priority.Value;
+
+                q.News.CreatedAt = DateTime.Now;
+            }
+        }
+
+        private void InsertNews(NewsItems item, int idR)
+        {
+            var q = db.Resource.Find(idR);
+            if (q != null)
+            {
+                if (q.News == null)
+                {
+                    q.News = new News();
+                }
+                q.News.News1 = item.NewsText;
+                q.News.ValidEnd = item.ValidEnd;
+                q.News.NewsPriorityId = item.NewsPriorityId;
+                q.News.CreatedAt = item.CreateAt;
+                q.News.NewsItems = item;
             }
         }
 

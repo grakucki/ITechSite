@@ -4,6 +4,7 @@
     <EntitySetMapping Name="FileContent">
       <EntityTypeMapping TypeName="ITechModel.FileContent">
         <MappingFragment StoreEntitySet="FileContent">
+          <ScalarProperty Name="size" ColumnName="size" />
           <ScalarProperty Name="Dokument_Id" ColumnName="Dokument_Id" />
           <ScalarProperty Name="FileID" ColumnName="FileID" />
           <ScalarProperty Name="CodeName" ColumnName="CodeName" />
@@ -38,6 +39,7 @@
     <EntitySetMapping Name="Dokument">
       <EntityTypeMapping TypeName="ITechModel.Dokument">
         <MappingFragment StoreEntitySet="Dokument">
+          <ScalarProperty Name="Version" ColumnName="Version" />
           <ScalarProperty Name="LastWriteUserId" ColumnName="LastWriteUserId" />
           <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
           <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
@@ -91,6 +93,7 @@
     <EntitySetMapping Name="News">
       <EntityTypeMapping TypeName="ITechModel.News">
         <MappingFragment StoreEntitySet="News">
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
           <ScalarProperty Name="NewsPriorityId" ColumnName="NewsPriorityId" />
           <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
           <ScalarProperty Name="ValidEnd" ColumnName="ValidEnd" />
@@ -242,6 +245,18 @@
           <ScalarProperty Name="Test_BlokOnValid" ColumnName="Test_BlokOnValid" />
           <ScalarProperty Name="Test_PeriodDay" ColumnName="Test_PeriodDay" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NewsItems">
+      <EntityTypeMapping TypeName="ITechModel.NewsItems">
+        <MappingFragment StoreEntitySet="NewsItems">
+          <ScalarProperty Name="NewsPriorityId" ColumnName="NewsPriorityId" />
+          <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+          <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+          <ScalarProperty Name="ValidEnd" ColumnName="ValidEnd" />
+          <ScalarProperty Name="NewsText" ColumnName="NewsText" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

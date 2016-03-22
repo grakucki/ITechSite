@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f7b5d33c4c714c9ba3dbfd9400f38094" Name="Diagram1" ZoomLevel="111">
-        <EntityTypeShape EntityType="ITechModel.FileContent" Width="1.5" PointX="4" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ITechModel.FileContent" Width="1.5" PointX="4.375" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.Model" Width="1.5" PointX="16" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.Dokument" Width="1.5" PointX="6.5" PointY="0.75" />
@@ -35,13 +35,16 @@
         <AssociationConnector Association="ITechModel.FK_Dokument_WorkProcess" />
         <AssociationConnector Association="ITechModel.FactoryDepartment" />
         <AssociationConnector Association="ITechModel.FactoryWorkProcess" />
-        <EntityTypeShape EntityType="ITechModel.NewsPriority" Width="1.5" PointX="20" PointY="0.5" />
+        <EntityTypeShape EntityType="ITechModel.NewsPriority" Width="1.5" PointX="22.25" PointY="0.5" />
         <AssociationConnector Association="ITechModel.FK_News_NewsPriority" />
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Resource1" />
         <EntityTypeShape EntityType="ITechModel.ItechUsers" Width="1.5" PointX="4.875" PointY="6.25" />
         <AssociationConnector Association="ITechModel.ItechUsersRoles" />
         <AssociationConnector Association="ITechModel.ModelsVersionModels" />
         <EntityTypeShape EntityType="ITechModel.TestSettings" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="ITechModel.NewsItems" Width="1.5" PointX="20.25" PointY="3.625" />
+        <AssociationConnector Association="ITechModel.FK_News_NewsItems" />
+        <AssociationConnector Association="ITechModel.FK_NewsItems_NewsPriority1" />
         </Diagram>
       <Diagram DiagramId="3054951c8206400f9fa79692752eb712" Name="Diagram2" />
       <Diagram DiagramId="112f2905862845bcb4f4f1b35f51eb8a" Name="Diagram3" >
