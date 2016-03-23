@@ -39,5 +39,7 @@ namespace ITechInstrukcjeModel
         public virtual DbSet<Workstation> Workstation { get; set; }
         public virtual DbSet<TestSettings> TestSettings { get; set; }
         public virtual DbSet<ItechUsersDokumentRead> ItechUsersDokumentRead { get; set; }
+        public virtual DbSet<ItechUsersNewsRead> ItechUsersNewsRead { get; set; }
+        public virtual DbSet<NewsItems> NewsItems { get; set; }
     }
 }

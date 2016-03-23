@@ -22,10 +22,9 @@ namespace ITechInstrukcjeModel
         public Nullable<int> ItemId { get; set; }
     
         [System.Runtime.Serialization.IgnoreDataMember]
-	
 	public virtual Resource Resource { get; set; }
         public virtual NewsPriority NewsPriority { get; set; }
+        public virtual NewsItems NewsItems { get; set; }
     }
 }
-
 

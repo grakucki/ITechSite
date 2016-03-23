@@ -269,6 +269,12 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetNews", ReplyAction="http://tempuri.org/IServiceWorkstation/GetNewsResponse")]
         System.Threading.Tasks.Task<ITechInstrukcjeModel.News> GetNewsAsync(int idR);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetNewsUser", ReplyAction="http://tempuri.org/IServiceWorkstation/GetNewsUserResponse")]
+        ITechInstrukcjeModel.News GetNewsUser(int idR, int IUserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetNewsUser", ReplyAction="http://tempuri.org/IServiceWorkstation/GetNewsUserResponse")]
+        System.Threading.Tasks.Task<ITechInstrukcjeModel.News> GetNewsUserAsync(int idR, int IUserId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetSimaticCpuType", ReplyAction="http://tempuri.org/IServiceWorkstation/GetSimaticCpuTypeResponse")]
         string[] GetSimaticCpuType();
         
@@ -288,10 +294,10 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         System.Threading.Tasks.Task<ITechInstrukcjeModel.Resource> GetInformationPlainAsync(int idR);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetInformationPlainsList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetInformationPlainsListResponse")]
-        ITechInstrukcjeModel.Resource[] GetInformationPlainsList(int idR, System.Nullable<int> ItechUserId);
+        ITechInstrukcjeModel.Resource[] GetInformationPlainsList(int idR);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetInformationPlainsList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetInformationPlainsListResponse")]
-        System.Threading.Tasks.Task<ITechInstrukcjeModel.Resource[]> GetInformationPlainsListAsync(int idR, System.Nullable<int> ItechUserId);
+        System.Threading.Tasks.Task<ITechInstrukcjeModel.Resource[]> GetInformationPlainsListAsync(int idR);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetDokumentsList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetDokumentsListResponse")]
         InstrukcjeProdukcyjne.ServiceWorkstation.DokumentIdentity[] GetDokumentsList(int idR);
@@ -341,6 +347,12 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencji", ReplyAction="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencjiResponse")]
         System.Threading.Tasks.Task UpdateTestKompetencjiAsync(string SitechUserId, System.Nullable<int> TestResult);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetUserReadDokList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetUserReadDokListResponse")]
+        ITechInstrukcjeModel.ItechUsersDokumentRead[] GetUserReadDokList(int IUserId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetUserReadDokList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetUserReadDokListResponse")]
+        System.Threading.Tasks.Task<ITechInstrukcjeModel.ItechUsersDokumentRead[]> GetUserReadDokListAsync(int IUserId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/UserReadDok", ReplyAction="http://tempuri.org/IServiceWorkstation/UserReadDokResponse")]
         void UserReadDok(int IUserId, int DokId, int DokVersion);
         
@@ -348,10 +360,10 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         System.Threading.Tasks.Task UserReadDokAsync(int IUserId, int DokId, int DokVersion);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/UserReadMessage", ReplyAction="http://tempuri.org/IServiceWorkstation/UserReadMessageResponse")]
-        void UserReadMessage(int IUserId, string Message);
+        void UserReadMessage(int IUserId, int NewsItemId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/UserReadMessage", ReplyAction="http://tempuri.org/IServiceWorkstation/UserReadMessageResponse")]
-        System.Threading.Tasks.Task UserReadMessageAsync(int IUserId, string Message);
+        System.Threading.Tasks.Task UserReadMessageAsync(int IUserId, int NewsItemId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -405,6 +417,14 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
             return base.Channel.GetNewsAsync(idR);
         }
         
+        public ITechInstrukcjeModel.News GetNewsUser(int idR, int IUserId) {
+            return base.Channel.GetNewsUser(idR, IUserId);
+        }
+        
+        public System.Threading.Tasks.Task<ITechInstrukcjeModel.News> GetNewsUserAsync(int idR, int IUserId) {
+            return base.Channel.GetNewsUserAsync(idR, IUserId);
+        }
+        
         public string[] GetSimaticCpuType() {
             return base.Channel.GetSimaticCpuType();
         }
@@ -429,12 +449,12 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
             return base.Channel.GetInformationPlainAsync(idR);
         }
         
-        public ITechInstrukcjeModel.Resource[] GetInformationPlainsList(int idR, System.Nullable<int> ItechUserId) {
-            return base.Channel.GetInformationPlainsList(idR, ItechUserId);
+        public ITechInstrukcjeModel.Resource[] GetInformationPlainsList(int idR) {
+            return base.Channel.GetInformationPlainsList(idR);
         }
         
-        public System.Threading.Tasks.Task<ITechInstrukcjeModel.Resource[]> GetInformationPlainsListAsync(int idR, System.Nullable<int> ItechUserId) {
-            return base.Channel.GetInformationPlainsListAsync(idR, ItechUserId);
+        public System.Threading.Tasks.Task<ITechInstrukcjeModel.Resource[]> GetInformationPlainsListAsync(int idR) {
+            return base.Channel.GetInformationPlainsListAsync(idR);
         }
         
         public InstrukcjeProdukcyjne.ServiceWorkstation.DokumentIdentity[] GetDokumentsList(int idR) {
@@ -501,6 +521,14 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
             return base.Channel.UpdateTestKompetencjiAsync(SitechUserId, TestResult);
         }
         
+        public ITechInstrukcjeModel.ItechUsersDokumentRead[] GetUserReadDokList(int IUserId) {
+            return base.Channel.GetUserReadDokList(IUserId);
+        }
+        
+        public System.Threading.Tasks.Task<ITechInstrukcjeModel.ItechUsersDokumentRead[]> GetUserReadDokListAsync(int IUserId) {
+            return base.Channel.GetUserReadDokListAsync(IUserId);
+        }
+        
         public void UserReadDok(int IUserId, int DokId, int DokVersion) {
             base.Channel.UserReadDok(IUserId, DokId, DokVersion);
         }
@@ -509,12 +537,12 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
             return base.Channel.UserReadDokAsync(IUserId, DokId, DokVersion);
         }
         
-        public void UserReadMessage(int IUserId, string Message) {
-            base.Channel.UserReadMessage(IUserId, Message);
+        public void UserReadMessage(int IUserId, int NewsItemId) {
+            base.Channel.UserReadMessage(IUserId, NewsItemId);
         }
         
-        public System.Threading.Tasks.Task UserReadMessageAsync(int IUserId, string Message) {
-            return base.Channel.UserReadMessageAsync(IUserId, Message);
+        public System.Threading.Tasks.Task UserReadMessageAsync(int IUserId, int NewsItemId) {
+            return base.Channel.UserReadMessageAsync(IUserId, NewsItemId);
         }
     }
 }

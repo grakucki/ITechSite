@@ -23,9 +23,7 @@ namespace ITechInstrukcjeModel
         public string Name { get; set; }
     
         [System.Runtime.Serialization.IgnoreDataMember]
-	
 	public virtual ICollection<ItechUsers> ItechUsers { get; set; }
     }
 }
-
 

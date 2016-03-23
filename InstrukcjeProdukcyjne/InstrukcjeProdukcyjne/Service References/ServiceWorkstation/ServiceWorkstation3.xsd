@@ -43,6 +43,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetNewsUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="idR" type="xs:int" />
+        <xs:element minOccurs="0" name="IUserId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNewsUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetNewsUserResult" nillable="true" type="q2:News" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetSimaticCpuType">
     <xs:complexType>
       <xs:sequence />
@@ -51,7 +66,7 @@
   <xs:element name="GetSimaticCpuTypeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetSimaticCpuTypeResult" nillable="true" type="q2:ArrayOfstring" />
+        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GetSimaticCpuTypeResult" nillable="true" type="q3:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -63,7 +78,7 @@
   <xs:element name="GetWorkstationListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetWorkstationListResult" nillable="true" type="q3:ArrayOfResource" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetWorkstationListResult" nillable="true" type="q4:ArrayOfResource" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -77,7 +92,7 @@
   <xs:element name="GetInformationPlainResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetInformationPlainResult" nillable="true" type="q4:Resource" />
+        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetInformationPlainResult" nillable="true" type="q5:Resource" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -85,14 +100,13 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="idR" type="xs:int" />
-        <xs:element minOccurs="0" name="ItechUserId" nillable="true" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetInformationPlainsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetInformationPlainsListResult" nillable="true" type="q5:ArrayOfResource" />
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetInformationPlainsListResult" nillable="true" type="q6:ArrayOfResource" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -106,7 +120,7 @@
   <xs:element name="GetDokumentsListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/ITechService" minOccurs="0" name="GetDokumentsListResult" nillable="true" type="q6:ArrayOfDokumentIdentity" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ITechService" minOccurs="0" name="GetDokumentsListResult" nillable="true" type="q7:ArrayOfDokumentIdentity" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -118,14 +132,14 @@
   <xs:element name="GetITechUserListResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetITechUserListResult" nillable="true" type="q7:ArrayOfItechUsers" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetITechUserListResult" nillable="true" type="q8:ArrayOfItechUsers" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateWorkstation">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="idR" nillable="true" type="q8:Workstation" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="idR" nillable="true" type="q9:Workstation" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -144,7 +158,7 @@
   <xs:element name="GetModelWorkstationInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/ITechService" minOccurs="0" name="GetModelWorkstationInfoResult" nillable="true" type="q9:ArrayOfModelWorkstationInfo" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/ITechService" minOccurs="0" name="GetModelWorkstationInfoResult" nillable="true" type="q10:ArrayOfModelWorkstationInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -156,14 +170,14 @@
   <xs:element name="GetModelsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetModelsResult" nillable="true" type="q10:ArrayOfResource" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetModelsResult" nillable="true" type="q11:ArrayOfResource" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="UpdateModelWorkstationInfo">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/ITechService" minOccurs="0" name="modelWorkstationInfo" nillable="true" type="q11:ModelWorkstationInfo" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/ITechService" minOccurs="0" name="modelWorkstationInfo" nillable="true" type="q12:ModelWorkstationInfo" />
         <xs:element minOccurs="0" name="Remove" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
@@ -200,6 +214,20 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetUserReadDokList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="IUserId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUserReadDokListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetUserReadDokListResult" nillable="true" type="q13:ArrayOfItechUsersDokumentRead" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="UserReadDok">
     <xs:complexType>
       <xs:sequence>
@@ -218,7 +246,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="IUserId" type="xs:int" />
-        <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="NewsItemId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

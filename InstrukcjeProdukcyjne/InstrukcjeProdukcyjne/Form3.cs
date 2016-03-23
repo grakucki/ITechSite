@@ -423,7 +423,7 @@ namespace InstrukcjeProdukcyjne
             {
                 if (client.IsOnLine())
                 {
-                    db.Resource_Local =  client.GetInformationPlainsList(idR.Value, null).ToList();
+                    db.Resource_Local =  client.GetInformationPlainsList(idR.Value).ToList();
                     db.ExportResources(null);
                     var i = client.GetITechUserList();
                     db.ItechUsers_Local = i.ToList();

@@ -36,6 +36,9 @@ namespace InstrukcjeProdukcyjne
 
         private SitechUser LoginUser = null;
         private ItechUsers LoginUser2 = null;
+
+        public News CurrentNews { get; set; }
+
         private Resource _CurrentWorkstation = null;
         public Resource CurrentWorkstation
         {
@@ -430,7 +433,8 @@ namespace InstrukcjeProdukcyjne
                 timer3.Enabled = true;
                 if (ShowLoginDlg("", true, AllowRoles.All) == System.Windows.Forms.DialogResult.Cancel)
                     this.Close();
-                
+
+                await OnLogin();
                 waitDlg.Show();
 
                 ZaładujPliki();
@@ -450,6 +454,19 @@ namespace InstrukcjeProdukcyjne
             DocSyncDlg.Sync();
 
             ShowTestKompetencji();
+        }
+
+        private async Task OnLogin()
+        {
+            if (LoginUser2 != null)
+            {
+                using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+                {
+                    var rd = await client.GetUserReadDokListAsync(LoginUser2.id);
+                    LoginUser2.ItechUsersDokumentRead = rd;
+                }
+            }
+
         }
 
         private void CheckUpdate()
@@ -555,14 +572,13 @@ namespace InstrukcjeProdukcyjne
                     SetSerwerStatus("łączę",null);
                     if (client.IsOnLine())
                     {
-                        var t = await client.GetInformationPlainsListAsync(idR.Value, 2119);
+                        var t = await client.GetInformationPlainsListAsync(idR.Value);
                         
                         db.Resource_Local = t.ToList();
                         db.ExportResources(null);
                         var i = await client.GetITechUserListAsync();
                         db.ItechUsers_Local = i.ToList();
                         db.ExportItechUsers(null);
-
                         SetSerwerStatus("Ok", "Połaczony");
                     }
                     else
@@ -606,7 +622,7 @@ namespace InstrukcjeProdukcyjne
             {
                 if (client.IsOnLine())
                 {
-                    db.Resource_Local =  client.GetInformationPlainsList(idR.Value, null).ToList();
+                    db.Resource_Local =  client.GetInformationPlainsList(idR.Value).ToList();
                     db.ExportResources(null);
                     var i = client.GetITechUserList();
                     db.ItechUsers_Local = i.ToList();
@@ -710,12 +726,14 @@ namespace InstrukcjeProdukcyjne
             {
                 if (item.Dokument != null)
                 {
-                    var d = new MyFileInfo {Id= item.Dokument.Id, FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Dok = item.Dokument, IsRead=item.Dokument.ItechUsersDokumentRead.Any() };
+                    var d = new MyFileInfo {Id= item.Dokument.Id, FileName = item.Dokument.FileName, FullFileName = db.CreateLocalFileName(item.Dokument), Dok = item.Dokument };
                     var s = string.IsNullOrEmpty(item.Dokument.Description) ? item.Dokument.FileName : item.Dokument.Description;
 
                     d.ItemText = s;
                     d.ItemText2 = d.Dok.CodeName;
                     d.ItemIcon = fe.GetBitmapForFileExt(d.Extension);
+                    if (LoginUser2!=null)
+                    d.IsRead = LoginUser2.ItechUsersDokumentRead.Any(m => m.DokId == d.Id);
                     if (item.Dokument.Kategorie != null)
                         d.GroupBy = item.Dokument.Kategorie.name;
                     else
@@ -854,6 +872,7 @@ namespace InstrukcjeProdukcyjne
                 {
                     dial.Show();
                     await LoadResource_Async(Properties.Settings.Default.App.Stanowisko);
+                    await OnLogin();
                     ZaładujPliki();
                     DocSyncDlg.Sync();
                     ShowTestKompetencji();
@@ -954,22 +973,34 @@ namespace InstrukcjeProdukcyjne
 
         NewsCssColection NewsCss = new NewsCssColection();
 
-        void DisplayNews(string news, int CssId)
+        void DisplayNews(News news)
         {
-            bool isNewNews = KomunikatLabel.Text != news;
-            if (string.IsNullOrEmpty(news))
-                isNewNews = false;
+            string msg = "";
+            int cssid = 0;
 
-            KomunikatLabel.Text = news;
-            var css = NewsCss.GetCss(CssId);
+            if (news!=null)
+            {
+                msg = news.News1;
+                cssid = news.NewsPriorityId;
+            }
+            
+            KomunikatLabel.Text = msg;
+            var css = NewsCss.GetCss(cssid);
             NewsCustomPanel.BackColor = css.BackgroundColor;
             NewsCustomPanel.BackColor2 = css.BackgroundColor;
             NewsCustomPanel.GradientMode = CustomPanelControl.LinearGradientMode.None;
             NewsCustomPanel.Refresh();
-
             KomunikatLabel.ForeColor = css.Color;
-            if (isNewNews)
-                ShowNewsDlg();
+
+            if (news != null)
+            {
+                // sprawdzamy czy należy wyświetlić news w messagebox
+                if (news.NewsItems.ItechUsersNewsRead.Count()==0)
+                {
+                    ShowNewsDlg(news);
+                }
+            }
+            CurrentNews = news;
         }
 
         public DateTime _LastReadNews { get; set; }
@@ -989,16 +1020,13 @@ namespace InstrukcjeProdukcyjne
                     {
                         var d = await client.PingAsync();
                         toolStripStatusITechTime.Text = (d.ToShortTimeString());
-                        News news = await client.GetNewsAsync(idR);
-                        if (news != null)
-                            DisplayNews(news.News1, (news.NewsPriorityId));
-                        else
-                            DisplayNews("",0);
+                        News news = await client.GetNewsUserAsync(idR, LoginUser2.id);
+                        DisplayNews(news);
                     }
                     Work.SetState(ActionControlStatus.ActionControlState.Ok, "");
                 }
             }
-            catch (Exception /*ex*/)
+            catch (Exception ex)
             {
 
             }
@@ -1298,14 +1326,18 @@ namespace InstrukcjeProdukcyjne
         }
 
         NewsMessageDlg NewsDialog = null;
-        private void ShowNewsDlg()
+        private void ShowNewsDlg(News news)
         {
             if (NewsDialog != null)
                 return;
 
+            if (news==null)
+                return;
+
             NewsDialog = new NewsMessageDlg();
 
-            NewsDialog.Message = KomunikatLabel.Text;
+            NewsDialog.Message = news.News1;
+            NewsDialog.MessageId = news.ItemId.Value;
             NewsDialog.MessageColor = NewsCustomPanel.BackColor;
             if (NewsDialog.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
             {
@@ -1313,6 +1345,10 @@ namespace InstrukcjeProdukcyjne
                 return;
             }
 
+            using (var c = new ServiceWorkstation.ServiceWorkstationClient())
+            {
+                c.UserReadMessageAsync(LoginUser2.id, NewsDialog.MessageId);
+            }
             NewsDialog = null;
         }
 
@@ -1320,7 +1356,7 @@ namespace InstrukcjeProdukcyjne
         {
             try
             {
-                ShowNewsDlg();
+                ShowNewsDlg(CurrentNews);
             }
             catch (Exception ex)
             {

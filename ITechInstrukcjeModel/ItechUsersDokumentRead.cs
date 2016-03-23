@@ -19,6 +19,7 @@ namespace ITechInstrukcjeModel
         public Nullable<System.DateTime> LastReadAt { get; set; }
         public int DokVersion { get; set; }
         public Nullable<System.DateTime> FirstReadAt { get; set; }
+        public int ReadCount { get; set; }
     
         [System.Runtime.Serialization.IgnoreDataMember]
 	public virtual Dokument Dokument { get; set; }
@@ -26,7 +27,5 @@ namespace ITechInstrukcjeModel
 	public virtual ItechUsers ItechUsers { get; set; }
     }
 }
-
-
 
 

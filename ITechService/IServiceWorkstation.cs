@@ -32,12 +32,21 @@ namespace ITechService
         string TestConnection(int value);
 
         /// <summary>
-        /// Zwraca News dla zadanej Workstation według IDR
+        /// *Zwraca News dla zadanej Workstation według IDR - funkcja wycofana
         /// </summary>
         /// <param name="idR">Identyfikator Resources</param>
         /// <returns>Wiadomość do wyświelenia na stacji roboczej</returns>
         [OperationContract]
         News GetNews(int idR);
+
+        /// <summary>
+        /// Zwraca News dla zadanej Workstation według IDR oraz IUserId z oznaczeniem czy wiadomość była już przeczytana
+        /// </summary>
+        /// <param name="idR">Identyfikator Resources</param>
+        /// <param name="IUserId">Identyfikator usera</param>
+        /// <returns>Wiadomość do wyświelenia na stacji roboczej dla konkretnego użytkownika z oznaczeniem czy została przez niego przeczytana</returns>
+        [OperationContract]
+        News GetNewsUser(int idR, int IUserId);
 
         /// <summary>
         /// Lista obsługiwanych modeli sterowników
@@ -69,7 +78,7 @@ namespace ITechService
         /// <param name="ItechUserId">Identyfikator użytkownika dla którego ma zostać wygenerowana lista lub null jeśłi nie mamy jeszcze użytkownika</param>
         /// <returns></returns>
         [OperationContract]
-        List<Resource> GetInformationPlainsList(int idR, int? ItechUserId);
+        List<Resource> GetInformationPlainsList(int idR);
 
         /// <summary>
         /// Lista plików dla wzkazanego workstation oraz produkowanych dla niego modeli
@@ -130,6 +139,14 @@ namespace ITechService
         [OperationContract]
         void UpdateTestKompetencji(string SitechUserId, int? TestResult);
 
+        /// <summary>
+        /// lista przeczytanych dokumentów
+        /// </summary>
+        /// <param name="IUserId"></param>
+        /// <returns></returns>
+        [OperationContract]
+        List<ItechUsersDokumentRead> GetUserReadDokList(int IUserId);
+
 
         /// <summary>
         /// Oznacza przeczytanie dokumentu
@@ -143,7 +160,7 @@ namespace ITechService
         /// </summary>
         /// <param name="modelWorkstationInfo"></param>
         [OperationContract]
-        void UserReadMessage(int IUserId, string Message);
+        void UserReadMessage(int IUserId, int NewsItemId);
 
     }
 

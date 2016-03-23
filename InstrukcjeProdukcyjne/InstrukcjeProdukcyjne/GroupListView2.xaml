@@ -65,8 +65,8 @@
                                                     <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="Gray" FontSize="48" VerticalAlignment="Center" />
                                                     <TextBlock Text="{Binding ItemCount}" FontSize="22" Foreground="Gray" FontStyle="Italic" Margin="10,0,0,0" VerticalAlignment="Center" />
 
-                                                    <Border Background="Red" CornerRadius="10" Margin="10,0,0,0" VerticalAlignment="Center">
-                                                            <TextBlock FontSize="22" Foreground="#FFF9F9F9" FontWeight="Bold" FontStyle="Italic" Padding="5,5,15,5" >
+                                                    <Border Background="Blue" CornerRadius="10" Margin="10,0,0,0" VerticalAlignment="Center">
+                                                            <TextBlock FontSize="22" Foreground="#FFF9F9F9" FontWeight="Bold"  Padding="10,5,10,5" >
                                                             <TextBlock.Text>
                                                                 <MultiBinding Converter="{StaticResource Doc2ReadConverter}">
                                                                     <Binding Path="Name"/>

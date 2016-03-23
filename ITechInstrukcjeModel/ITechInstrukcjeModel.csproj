@@ -91,6 +91,9 @@
     <Compile Include="ItechUsersDokumentRead.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ItechUsersNewsRead.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Kategorie.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
@@ -99,6 +102,9 @@
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
     <Compile Include="News.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NewsItems.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>
     <Compile Include="NewsPriority.cs">

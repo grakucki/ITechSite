@@ -12,22 +12,18 @@ namespace ITechInstrukcjeModel
     using System;
     using System.Collections.Generic;
     
-    public partial class ItechUsersDokumentRead
+    public partial class ItechUsersNewsRead
     {
-        public int DokId { get; set; }
+        public int NewsItemId { get; set; }
         public int UserId { get; set; }
-        public Nullable<System.DateTime> LastReadAt { get; set; }
-        public int DokVersion { get; set; }
         public Nullable<System.DateTime> FirstReadAt { get; set; }
+        public Nullable<System.DateTime> LastReadAt { get; set; }
+        public int ReadCount { get; set; }
     
         [System.Runtime.Serialization.IgnoreDataMember]
-	[System.Runtime.Serialization.IgnoreDataMember]
-	public virtual Dokument Dokument { get; set; }
-        [System.Runtime.Serialization.IgnoreDataMember]
 	public virtual ItechUsers ItechUsers { get; set; }
+        public virtual NewsItems NewsItems { get; set; }
     }
 }
-
-
 
 

@@ -62,6 +62,13 @@ namespace ITechUnitTestProject
         }
 
         [TestMethod]
+        public void Dokument_GetInformationPlainsList()
+        {
+            var d = new ServiceReference1.ServiceWorkstationClient();
+            var o = d.GetInformationPlainsList(11, 2019);
+        }
+
+        [TestMethod]
         public void Dokument_DownloadServiceDokument()
         {
             var d = new ServiceDokument.ServiceDokumentClient("webHttpBinding_IServiceDokument");

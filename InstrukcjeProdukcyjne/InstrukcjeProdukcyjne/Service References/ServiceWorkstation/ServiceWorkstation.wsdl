@@ -27,6 +27,12 @@
   <wsdl:message name="IServiceWorkstation_GetNews_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetNewsResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetNewsUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNewsUser" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetNewsUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNewsUserResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceWorkstation_GetSimaticCpuType_InputMessage">
     <wsdl:part name="parameters" element="tns:GetSimaticCpuType" />
   </wsdl:message>
@@ -99,6 +105,12 @@
   <wsdl:message name="IServiceWorkstation_UpdateTestKompetencji_OutputMessage">
     <wsdl:part name="parameters" element="tns:UpdateTestKompetencjiResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetUserReadDokList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserReadDokList" />
+  </wsdl:message>
+  <wsdl:message name="IServiceWorkstation_GetUserReadDokList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserReadDokListResponse" />
+  </wsdl:message>
   <wsdl:message name="IServiceWorkstation_UserReadDok_InputMessage">
     <wsdl:part name="parameters" element="tns:UserReadDok" />
   </wsdl:message>
@@ -123,6 +135,10 @@
     <wsdl:operation name="GetNews">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetNews" message="tns:IServiceWorkstation_GetNews_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetNewsResponse" message="tns:IServiceWorkstation_GetNews_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetNewsUser" message="tns:IServiceWorkstation_GetNewsUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetNewsUserResponse" message="tns:IServiceWorkstation_GetNewsUser_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetSimaticCpuType">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetSimaticCpuType" message="tns:IServiceWorkstation_GetSimaticCpuType_InputMessage" />
@@ -172,6 +188,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencji" message="tns:IServiceWorkstation_UpdateTestKompetencji_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencjiResponse" message="tns:IServiceWorkstation_UpdateTestKompetencji_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetUserReadDokList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/GetUserReadDokList" message="tns:IServiceWorkstation_GetUserReadDokList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/GetUserReadDokListResponse" message="tns:IServiceWorkstation_GetUserReadDokList_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="UserReadDok">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceWorkstation/UserReadDok" message="tns:IServiceWorkstation_UserReadDok_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceWorkstation/UserReadDokResponse" message="tns:IServiceWorkstation_UserReadDok_OutputMessage" />
@@ -203,6 +223,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetNews">
       <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetNews" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewsUser">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetNewsUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -311,6 +340,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdateTestKompetencji">
       <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencji" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserReadDokList">
+      <soap:operation soapAction="http://tempuri.org/IServiceWorkstation/GetUserReadDokList" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

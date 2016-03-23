@@ -18,6 +18,7 @@ namespace ITechInstrukcjeModel
         {
             this.AspNetRoles = new HashSet<AspNetRoles>();
             this.ItechUsersDokumentRead = new HashSet<ItechUsersDokumentRead>();
+            this.ItechUsersNewsRead = new HashSet<ItechUsersNewsRead>();
         }
     
         public int id { get; set; }
@@ -37,5 +38,6 @@ namespace ITechInstrukcjeModel
     
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
         public virtual ICollection<ItechUsersDokumentRead> ItechUsersDokumentRead { get; set; }
+        public virtual ICollection<ItechUsersNewsRead> ItechUsersNewsRead { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace InstrukcjeProdukcyjne
 
 
         public string Message { get; set; }
+        public int MessageId { get; set; }
         public Color MessageColor { get; set; }
 
         private void NewsMessageDlg_Load(object sender, EventArgs e)

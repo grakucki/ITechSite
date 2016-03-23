@@ -3,7 +3,9 @@
   <xs:complexType name="News">
     <xs:sequence>
       <xs:element minOccurs="0" name="CreatedAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ItemId" nillable="true" type="xs:int" />
       <xs:element minOccurs="0" name="News1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NewsItems" nillable="true" type="tns:NewsItems" />
       <xs:element minOccurs="0" name="NewsPriority" nillable="true" type="tns:NewsPriority" />
       <xs:element minOccurs="0" name="NewsPriorityId" type="xs:int" />
       <xs:element minOccurs="0" name="ValidEnd" nillable="true" type="xs:dateTime" />
@@ -11,11 +13,41 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="News" nillable="true" type="tns:News" />
+  <xs:complexType name="NewsItems">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CreateAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="CreateBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="ItechUsersNewsRead" nillable="true" type="tns:ArrayOfItechUsersNewsRead" />
+      <xs:element minOccurs="0" name="NewsPriority" nillable="true" type="tns:NewsPriority" />
+      <xs:element minOccurs="0" name="NewsPriorityId" type="xs:int" />
+      <xs:element minOccurs="0" name="NewsText" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ValidEnd" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NewsItems" nillable="true" type="tns:NewsItems" />
+  <xs:complexType name="ArrayOfItechUsersNewsRead">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ItechUsersNewsRead" nillable="true" type="tns:ItechUsersNewsRead" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfItechUsersNewsRead" nillable="true" type="tns:ArrayOfItechUsersNewsRead" />
+  <xs:complexType name="ItechUsersNewsRead">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FirstReadAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LastReadAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="NewsItemId" type="xs:int" />
+      <xs:element minOccurs="0" name="ReadCount" type="xs:int" />
+      <xs:element minOccurs="0" name="UserId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ItechUsersNewsRead" nillable="true" type="tns:ItechUsersNewsRead" />
   <xs:complexType name="NewsPriority">
     <xs:sequence>
       <xs:element minOccurs="0" name="CssName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="News" nillable="true" type="tns:ArrayOfNews" />
+      <xs:element minOccurs="0" name="NewsItems" nillable="true" type="tns:ArrayOfNewsItems" />
       <xs:element minOccurs="0" name="id" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
@@ -26,6 +58,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfNews" nillable="true" type="tns:ArrayOfNews" />
+  <xs:complexType name="ArrayOfNewsItems">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NewsItems" nillable="true" type="tns:NewsItems" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNewsItems" nillable="true" type="tns:ArrayOfNewsItems" />
   <xs:complexType name="ArrayOfResource">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Resource" nillable="true" type="tns:Resource" />
@@ -110,8 +148,9 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="DokId" type="xs:int" />
       <xs:element minOccurs="0" name="DokVersion" type="xs:int" />
-      <xs:element minOccurs="0" name="FirsReadAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FirstReadAt" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="LastReadAt" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ReadCount" type="xs:int" />
       <xs:element minOccurs="0" name="UserId" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
@@ -174,6 +213,7 @@
       <xs:element minOccurs="0" name="ForceTestKompetencji" type="xs:boolean" />
       <xs:element minOccurs="0" name="Frozen" type="xs:boolean" />
       <xs:element minOccurs="0" name="ItechUsersDokumentRead" nillable="true" type="tns:ArrayOfItechUsersDokumentRead" />
+      <xs:element minOccurs="0" name="ItechUsersNewsRead" nillable="true" type="tns:ArrayOfItechUsersNewsRead" />
       <xs:element minOccurs="0" name="LastTestKompetencjiDtm" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="LastTestKompetencjiDtmSucces" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="LastTestKompetencjiResult" nillable="true" type="xs:int" />

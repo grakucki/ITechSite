@@ -77,6 +77,18 @@
           <Property Name="FirstReadAt" Type="datetime" />
           <Property Name="LastReadAt" Type="datetime" />
           <Property Name="DokVersion" Type="int" Nullable="false" />
+          <Property Name="ReadCount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ItechUsersNewsRead">
+          <Key>
+            <PropertyRef Name="NewsItemId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="NewsItemId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FirstReadAt" Type="datetime" />
+          <Property Name="LastReadAt" Type="datetime" />
+          <Property Name="ReadCount" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ItechUsersRoles">
           <Key>
@@ -120,6 +132,17 @@
           <Property Name="CreatedAt" Type="datetime" />
           <Property Name="NewsPriorityId" Type="int" Nullable="false" />
           <Property Name="ItemId" Type="int" />
+        </EntityType>
+        <EntityType Name="NewsItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewsText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ValidEnd" Type="datetime" />
+          <Property Name="CreateAt" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="NewsPriorityId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="NewsPriority">
           <Key>
@@ -242,6 +265,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ItechUsersNewsRead_ItechUsers">
+          <End Role="ItechUsers" Type="Self.ItechUsers" Multiplicity="1" />
+          <End Role="ItechUsersNewsRead" Type="Self.ItechUsersNewsRead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItechUsers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ItechUsersNewsRead">
+              <PropertyRef Name="NewsItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItechUsersNewsRead_NewsItems">
+          <End Role="NewsItems" Type="Self.NewsItems" Multiplicity="1" />
+          <End Role="ItechUsersNewsRead" Type="Self.ItechUsersNewsRead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItechUsersNewsRead">
+              <PropertyRef Name="NewsItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ItechUsersRoles_AspNetRoles">
           <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
           <End Role="ItechUsersRoles" Type="Self.ItechUsersRoles" Multiplicity="*" />
@@ -314,6 +361,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_News_NewsItems">
+          <End Role="NewsItems" Type="Self.NewsItems" Multiplicity="0..1" />
+          <End Role="News" Type="Self.News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_News_NewsPriority">
           <End Role="NewsPriority" Type="Self.NewsPriority" Multiplicity="1" />
           <End Role="News" Type="Self.News" Multiplicity="*" />
@@ -338,6 +397,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_NewsItems_NewsPriority">
+          <End Role="NewsPriority" Type="Self.NewsPriority" Multiplicity="1" />
+          <End Role="NewsItems" Type="Self.NewsItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsPriority">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NewsItems">
+              <PropertyRef Name="NewsPriorityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Workstation_Resource">
           <End Role="Resource" Type="Self.Resource" Multiplicity="0..1" />
           <End Role="Workstation" Type="Self.Workstation" Multiplicity="*" />
@@ -356,11 +427,13 @@
           <EntitySet Name="InformationPlan" EntityType="Self.InformationPlan" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItechUsers" EntityType="Self.ItechUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItechUsersDokumentRead" EntityType="Self.ItechUsersDokumentRead" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItechUsersNewsRead" EntityType="Self.ItechUsersNewsRead" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ItechUsersRoles" EntityType="Self.ItechUsersRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kategorie" EntityType="Self.Kategorie" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModelsVersionModels" EntityType="Self.ModelsVersionModels" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModelsWorkstation" EntityType="Self.ModelsWorkstation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewsItems" EntityType="Self.NewsItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NewsPriority" EntityType="Self.NewsPriority" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SimaticCpuType" EntityType="Self.SimaticCpuType" Schema="dbo" store:Type="Tables" />
@@ -387,6 +460,14 @@
             <End Role="ItechUsers" EntitySet="ItechUsers" />
             <End Role="ItechUsersDokumentRead" EntitySet="ItechUsersDokumentRead" />
           </AssociationSet>
+          <AssociationSet Name="FK_ItechUsersNewsRead_ItechUsers" Association="Self.FK_ItechUsersNewsRead_ItechUsers">
+            <End Role="ItechUsers" EntitySet="ItechUsers" />
+            <End Role="ItechUsersNewsRead" EntitySet="ItechUsersNewsRead" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItechUsersNewsRead_NewsItems" Association="Self.FK_ItechUsersNewsRead_NewsItems">
+            <End Role="NewsItems" EntitySet="NewsItems" />
+            <End Role="ItechUsersNewsRead" EntitySet="ItechUsersNewsRead" />
+          </AssociationSet>
           <AssociationSet Name="FK_ItechUsersRoles_AspNetRoles" Association="Self.FK_ItechUsersRoles_AspNetRoles">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="ItechUsersRoles" EntitySet="ItechUsersRoles" />
@@ -411,6 +492,10 @@
             <End Role="Resource" EntitySet="Resource" />
             <End Role="ModelsWorkstation" EntitySet="ModelsWorkstation" />
           </AssociationSet>
+          <AssociationSet Name="FK_News_NewsItems" Association="Self.FK_News_NewsItems">
+            <End Role="NewsItems" EntitySet="NewsItems" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
           <AssociationSet Name="FK_News_NewsPriority" Association="Self.FK_News_NewsPriority">
             <End Role="NewsPriority" EntitySet="NewsPriority" />
             <End Role="News" EntitySet="News" />
@@ -418,6 +503,10 @@
           <AssociationSet Name="FK_News_Resource" Association="Self.FK_News_Resource">
             <End Role="Resource" EntitySet="Resource" />
             <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsItems_NewsPriority" Association="Self.FK_NewsItems_NewsPriority">
+            <End Role="NewsPriority" EntitySet="NewsPriority" />
+            <End Role="NewsItems" EntitySet="NewsItems" />
           </AssociationSet>
           <AssociationSet Name="FK_Workstation_Resource" Association="Self.FK_Workstation_Resource">
             <End Role="Resource" EntitySet="Resource" />
@@ -549,6 +638,24 @@
             <End Role="ItechUsers" EntitySet="ItechUsers" />
             <End Role="ItechUsersDokumentRead" EntitySet="ItechUsersDokumentRead" />
           </AssociationSet>
+          <EntitySet Name="ItechUsersNewsRead" EntityType="ITechModel.ItechUsersNewsRead" />
+          <EntitySet Name="NewsItems" EntityType="ITechModel.NewsItems" />
+          <AssociationSet Name="FK_ItechUsersNewsRead_ItechUsers" Association="ITechModel.FK_ItechUsersNewsRead_ItechUsers">
+            <End Role="ItechUsers" EntitySet="ItechUsers" />
+            <End Role="ItechUsersNewsRead" EntitySet="ItechUsersNewsRead" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItechUsersNewsRead_NewsItems" Association="ITechModel.FK_ItechUsersNewsRead_NewsItems">
+            <End Role="NewsItems" EntitySet="NewsItems" />
+            <End Role="ItechUsersNewsRead" EntitySet="ItechUsersNewsRead" />
+          </AssociationSet>
+          <AssociationSet Name="FK_News_NewsItems" Association="ITechModel.FK_News_NewsItems">
+            <End Role="NewsItems" EntitySet="NewsItems" />
+            <End Role="News" EntitySet="News" />
+          </AssociationSet>
+          <AssociationSet Name="FK_NewsItems_NewsPriority" Association="ITechModel.FK_NewsItems_NewsPriority">
+            <End Role="NewsPriority" EntitySet="NewsPriority" />
+            <End Role="NewsItems" EntitySet="NewsItems" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="News">
           <Key>
@@ -562,6 +669,7 @@
           <Property Name="NewsPriorityId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="NewsPriority" Relationship="ITechModel.FK_News_NewsPriority" FromRole="News" ToRole="NewsPriority" />
           <Property Name="ItemId" Type="Int32" />
+          <NavigationProperty Name="NewsItems" Relationship="ITechModel.FK_News_NewsItems" FromRole="News" ToRole="NewsItems" />
         </EntityType>
         <EntityType Name="Resource">
           <Key>
@@ -688,6 +796,7 @@
           <Property Name="LastTestKompetencjiDtmSucces" Type="DateTime" Precision="3" />
           <Property Name="ForceTestKompetencji" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ItechUsersDokumentRead" Relationship="ITechModel.FK_ItechUsersDokumentRead_ItechUsers" FromRole="ItechUsers" ToRole="ItechUsersDokumentRead" />
+          <NavigationProperty Name="ItechUsersNewsRead" Relationship="ITechModel.FK_ItechUsersNewsRead_ItechUsers" FromRole="ItechUsers" ToRole="ItechUsersNewsRead" />
         </EntityType>
         <Association Name="ItechUsersRoles">
           <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
@@ -721,6 +830,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CssName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="News" Relationship="ITechModel.FK_News_NewsPriority" FromRole="NewsPriority" ToRole="News" />
+          <NavigationProperty Name="NewsItems" Relationship="ITechModel.FK_NewsItems_NewsPriority" FromRole="NewsPriority" ToRole="NewsItems" />
         </EntityType>
         <Association Name="FK_InformationPlan_Resource1">
           <End Type="ITechModel.Resource" Role="Resource" Multiplicity="0..1" />
@@ -798,6 +908,7 @@
           <NavigationProperty Name="ItechUsers" Relationship="ITechModel.FK_ItechUsersDokumentRead_ItechUsers" FromRole="ItechUsersDokumentRead" ToRole="ItechUsers" />
           <Property Name="DokVersion" Type="Int32" Nullable="false" />
           <Property Name="FirstReadAt" Type="DateTime" Precision="3" />
+          <Property Name="ReadCount" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_ItechUsersDokumentRead_Dokument">
           <End Type="ITechModel.Dokument" Role="Dokument" Multiplicity="1" />
@@ -820,6 +931,81 @@
             </Principal>
             <Dependent Role="ItechUsersDokumentRead">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ItechUsersNewsRead">
+          <Key>
+            <PropertyRef Name="NewsItemId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="NewsItemId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FirstReadAt" Type="DateTime" Precision="3" />
+          <Property Name="LastReadAt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ItechUsers" Relationship="ITechModel.FK_ItechUsersNewsRead_ItechUsers" FromRole="ItechUsersNewsRead" ToRole="ItechUsers" />
+          <NavigationProperty Name="NewsItems" Relationship="ITechModel.FK_ItechUsersNewsRead_NewsItems" FromRole="ItechUsersNewsRead" ToRole="NewsItems" />
+          <Property Name="ReadCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewsItems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewsText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ValidEnd" Type="DateTime" Precision="3" />
+          <Property Name="CreateAt" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="NewsPriorityId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ItechUsersNewsRead" Relationship="ITechModel.FK_ItechUsersNewsRead_NewsItems" FromRole="NewsItems" ToRole="ItechUsersNewsRead" />
+          <NavigationProperty Name="News" Relationship="ITechModel.FK_News_NewsItems" FromRole="NewsItems" ToRole="News" />
+          <NavigationProperty Name="NewsPriority" Relationship="ITechModel.FK_NewsItems_NewsPriority" FromRole="NewsItems" ToRole="NewsPriority" />
+        </EntityType>
+        <Association Name="FK_ItechUsersNewsRead_ItechUsers">
+          <End Type="ITechModel.ItechUsers" Role="ItechUsers" Multiplicity="1" />
+          <End Type="ITechModel.ItechUsersNewsRead" Role="ItechUsersNewsRead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ItechUsers">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ItechUsersNewsRead">
+              <PropertyRef Name="NewsItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItechUsersNewsRead_NewsItems">
+          <End Type="ITechModel.NewsItems" Role="NewsItems" Multiplicity="1" />
+          <End Type="ITechModel.ItechUsersNewsRead" Role="ItechUsersNewsRead" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ItechUsersNewsRead">
+              <PropertyRef Name="NewsItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_News_NewsItems">
+          <End Type="ITechModel.NewsItems" Role="NewsItems" Multiplicity="0..1" />
+          <End Type="ITechModel.News" Role="News" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsItems">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="News">
+              <PropertyRef Name="ItemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_NewsItems_NewsPriority">
+          <End Type="ITechModel.NewsPriority" Role="NewsPriority" Multiplicity="1" />
+          <End Type="ITechModel.NewsItems" Role="NewsItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewsPriority">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="NewsItems">
+              <PropertyRef Name="NewsPriorityId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1011,11 +1197,35 @@
           <EntitySetMapping Name="ItechUsersDokumentRead">
             <EntityTypeMapping TypeName="ITechModel.ItechUsersDokumentRead">
               <MappingFragment StoreEntitySet="ItechUsersDokumentRead">
+                <ScalarProperty Name="ReadCount" ColumnName="ReadCount" />
                 <ScalarProperty Name="FirstReadAt" ColumnName="FirstReadAt" />
                 <ScalarProperty Name="DokVersion" ColumnName="DokVersion" />
                 <ScalarProperty Name="LastReadAt" ColumnName="LastReadAt" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="DokId" ColumnName="DokId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItechUsersNewsRead">
+            <EntityTypeMapping TypeName="ITechModel.ItechUsersNewsRead">
+              <MappingFragment StoreEntitySet="ItechUsersNewsRead">
+                <ScalarProperty Name="ReadCount" ColumnName="ReadCount" />
+                <ScalarProperty Name="LastReadAt" ColumnName="LastReadAt" />
+                <ScalarProperty Name="FirstReadAt" ColumnName="FirstReadAt" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="NewsItemId" ColumnName="NewsItemId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewsItems">
+            <EntityTypeMapping TypeName="ITechModel.NewsItems">
+              <MappingFragment StoreEntitySet="NewsItems">
+                <ScalarProperty Name="NewsPriorityId" ColumnName="NewsPriorityId" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+                <ScalarProperty Name="ValidEnd" ColumnName="ValidEnd" />
+                <ScalarProperty Name="NewsText" ColumnName="NewsText" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -34,7 +34,7 @@ namespace InstrukcjeProdukcyjne
             CollectionViewGroup cvg = ((CollectionViewGroup)(value[1]));
             int c = GetToReadDoc(cvg);
             if (c>0)
-                return string.Format("{0}", c);
+                return string.Format("{0} !", c);
             return string.Empty;
         }
 

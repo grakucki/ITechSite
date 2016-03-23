@@ -17,6 +17,7 @@ namespace ITechInstrukcjeModel
         public NewsPriority()
         {
             this.News = new HashSet<News>();
+            this.NewsItems = new HashSet<NewsItems>();
         }
     
         public int id { get; set; }
@@ -24,5 +25,6 @@ namespace ITechInstrukcjeModel
         public string CssName { get; set; }
     
         public virtual ICollection<News> News { get; set; }
+        public virtual ICollection<NewsItems> NewsItems { get; set; }
     }
 }

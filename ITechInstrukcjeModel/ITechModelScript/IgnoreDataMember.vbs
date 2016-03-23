@@ -30,6 +30,11 @@ InsertIgnoreDataMember "../ItechUsersDokumentRead.cs", "public virtual ItechUser
 
 'InsertIgnoreDataMember "../.cs", ""
 
+InsertIgnoreDataMember "../NewsItems.cs", "public virtual ICollection<News> News { get; set; }"
+
+InsertIgnoreDataMember "../ItechUsersNewsRead.cs", "public virtual ItechUsers ItechUsers { get; set; }"
+InsertIgnoreDataMember "../ItechUsersNewsRead.cs", "public virtual NewsItems NewsItems { get; set; }"
+
 
 
 Function InsertString(strFileName , strFindText, strInsertText)

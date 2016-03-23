@@ -58,6 +58,9 @@ namespace InstrukcjeProdukcyjne
                     c = Colors.Gray;
                 else
                     c = Colors.Blue;
+
+                //c = Colors.Red;
+                //c = Colors.Blue;
                 c.A = 200;
                 return new SolidColorBrush(c); ;
             }

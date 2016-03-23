@@ -81,7 +81,44 @@ namespace ITechService
             return o;
         }
 
+        public News GetNewsUser(int idR, int IUserId)
+        {
+            StringBuilder ret = new StringBuilder();
+            News o = null;
+            try
+            {
 
+                        //.Include(m => m.InformationPlanWorkstation)
+                        //.Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument))
+
+                using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
+                {
+                    context.Configuration.LazyLoadingEnabled = false;
+                    context.Configuration.ProxyCreationEnabled = false;
+                    var d = context.News.Where(m => m.ValidEnd == null || m.ValidEnd > DateTime.Now).Where(m => m.Resource.Id == idR);
+                    d = d.Include(n => n.NewsItems);
+                    o = d.FirstOrDefault();
+
+                    // informacja o przeczytanej wiadomości
+                    if (o != null)
+                    {
+                        if (o.ItemId.HasValue)
+                        {
+                            var r = context.ItechUsersNewsRead.Where(m => m.UserId == IUserId && m.NewsItemId == o.ItemId).FirstOrDefault();
+                            if (r!=null)
+                                o.NewsItems.ItechUsersNewsRead.Add(r);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ret.AppendLine("Błąd !!!!!!");
+                ret.AppendLine(ExceptionResolver.Resolve(ex));
+                throw new FaultException(ret.ToString());
+            }
+            return o;
+        }
 
         public List<string> GetSimaticCpuType()
         {
@@ -171,7 +208,7 @@ namespace ITechService
         /// </summary>
         /// <param name="idR"></param>
         /// <returns></returns>
-        public List<Resource> GetInformationPlainsList(int idR, int? ItechUserId)
+        public List<Resource> GetInformationPlainsList(int idR)
         {
             StringBuilder ret = new StringBuilder();
             List<Resource> o = null;
@@ -188,17 +225,16 @@ namespace ITechService
                         .Include(m => m.InformationPlanWorkstation)
                         .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument))
                         .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument).Select(z => z.Kategorie))
-                        .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument).Select(z => z.ItechUsersDokumentRead))
                         .Include(m => m.News)
                         .Include(m => m.ModelsWorkstation)
                         ;
+
                     o = q.ToList();
                     q = context.Resource.Where(m=>m.ModelsWorkstationModel.Any(n=>n.idW==idR))
                         .Include(m => m.Workstation)
                         .Include(m => m.InformationPlanWorkstation)
                         .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument))
                         .Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument).Select(z => z.Kategorie))
-                        //.Include(m => m.InformationPlanWorkstation.Select(y => y.Dokument).Select(z => z.ItechUsersDokumentRead.Where(x => x.UserId == ItechUserId)))
                         .Include(m => m.News)
                         .Include(m => m.ModelsWorkstation)
                         ;
@@ -374,7 +410,7 @@ namespace ITechService
                     context.Configuration.LazyLoadingEnabled = false;
                     context.Configuration.ProxyCreationEnabled = false;
                     //o = context.ResourceModel.OrderBy(m => m.Name).ToList();
-                    o = context.ResourceModelsOnly.OrderBy(m => m.Name).ToList();
+                    //o = context.ResourceModelsOnly.OrderBy(m => m.Name).ToList();
                     o = context.ResourceModelsOnly.Include(m => m.Resource1).OrderBy(m => m.Name).ToList();
                 }
             }
@@ -501,6 +537,29 @@ namespace ITechService
         }
     }
 
+    public List<ItechUsersDokumentRead> GetUserReadDokList(int IUserId)
+    {
+        try
+        {
+            List<ItechUsersDokumentRead> l = null;
+            using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                context.Configuration.ProxyCreationEnabled = false;
+                var u = context.ItechUsersDokumentRead.Where(m => m.UserId == IUserId && m.Dokument.Version==m.DokVersion);
+                l = u.ToList();
+            }
+            return l;
+        }
+        catch (Exception ex)
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine("Błąd !!!!!!");
+            str.AppendLine(ExceptionResolver.Resolve(ex));
+            throw new FaultException(str.ToString());
+        }
+
+    }
 
     public void UserReadDok(int IUserId, int DokId, int DokVersion)
     {
@@ -520,9 +579,9 @@ namespace ITechService
                 }
                 u.LastReadAt = DateTime.Now;
                 u.DokVersion = DokVersion;
-                
-                //context.SaveChanges();
-                System.Threading.Thread.Sleep(3000);
+                u.ReadCount += 1;
+
+                context.SaveChanges();
             }
         }
         catch (Exception ex)
@@ -534,9 +593,36 @@ namespace ITechService
         }
     }
 
-    public void UserReadMessage(int IUserId, string Message)
+    public void UserReadMessage(int IUserId, int NewsItemId)
     {
+        try
+        {
+            using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
+            {
 
+                var u = context.ItechUsersNewsRead.Where(m => m.UserId == IUserId && m.NewsItemId == NewsItemId).FirstOrDefault();
+                if (u == null)
+                {
+                    u = new ITechInstrukcjeModel.ItechUsersNewsRead();
+                    u.NewsItemId = NewsItemId;
+                    u.UserId = IUserId;
+                    u.FirstReadAt = DateTime.Now;
+                    context.ItechUsersNewsRead.Add(u);
+                }
+                u.ReadCount += 1;
+                u.LastReadAt = DateTime.Now;
+                
+                context.SaveChanges();
+                //System.Threading.Thread.Sleep(3000);
+            }
+        }
+        catch (Exception ex)
+        {
+            StringBuilder str = new StringBuilder();
+            str.AppendLine("Błąd !!!!!!");
+            str.AppendLine(ExceptionResolver.Resolve(ex));
+            throw new FaultException(str.ToString());
+        }
     }
 
        

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8a32f924-8bcd-443c-bd02-8947dc204400" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:53854/ServiceWorkstation.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServiceWorkstation.disco" MetadataType="Disco" ID="194620e7-b7a6-47f1-b862-bf3201e71c1d" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?disco" />
+    <MetadataFile FileName="ServiceWorkstation.xsd" MetadataType="Schema" ID="4e5d1997-f5e9-4e87-8d46-12f323df9f37" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd1" />
+    <MetadataFile FileName="ServiceWorkstation1.xsd" MetadataType="Schema" ID="241895c2-0ce6-41e2-b87e-1d967ec0f95a" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd4" />
+    <MetadataFile FileName="ServiceWorkstation.wsdl" MetadataType="Wsdl" ID="71aab8bc-5192-4922-8436-be3b583f8262" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?wsdl" />
+    <MetadataFile FileName="ServiceWorkstation2.xsd" MetadataType="Schema" ID="36004b3a-2d19-4103-889e-234a10d5e6dc" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd0" />
+    <MetadataFile FileName="ServiceWorkstation3.xsd" MetadataType="Schema" ID="b9f386b5-af03-4ca3-9031-785e36b42129" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd3" />
+    <MetadataFile FileName="ServiceWorkstation4.xsd" MetadataType="Schema" ID="60a78a6b-22ba-4844-ba6a-dba3beb9b6c8" SourceId="1" SourceUrl="http://localhost:53854/ServiceWorkstation.svc?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
