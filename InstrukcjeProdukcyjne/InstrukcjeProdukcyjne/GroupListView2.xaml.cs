@@ -112,6 +112,26 @@ namespace InstrukcjeProdukcyjne
             }
         }
 
+        bool _DoScroll = false;
+        private void lvUsers_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _DoScroll = true;
+        }
+
+        private void lvUsers_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            _DoScroll = false;
+
+        }
+
+        private void lvUsers_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (_DoScroll)
+            {
+                
+            }
+        }
+
     }
 
 
