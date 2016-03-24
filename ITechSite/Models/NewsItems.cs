@@ -17,6 +17,7 @@ namespace ITechSite.Models
         public NewsItems()
         {
             this.News = new HashSet<News>();
+            this.ItechUsersNewsRead = new HashSet<ItechUsersNewsRead>();
         }
     
         public int Id { get; set; }
@@ -28,5 +29,6 @@ namespace ITechSite.Models
     
         public virtual ICollection<News> News { get; set; }
         public virtual NewsPriority NewsPriority1 { get; set; }
+        public virtual ICollection<ItechUsersNewsRead> ItechUsersNewsRead { get; set; }
     }
 }

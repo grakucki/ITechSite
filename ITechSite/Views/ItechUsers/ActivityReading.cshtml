@@ -1,0 +1,93 @@
+﻿@model ITechSite.Models.Repository.ItechUserActivityReadingModel
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Aktywność czytań";
+}
+<div class="alert alert-info">
+    <form method="post" class="form-inline" role="form">
+        <div class="row">
+            <div class="form-group">
+                <Label> &nbsp;Aktywność czytań:</Label>
+            </div>
+            @if (Model.ItechUser!=null)
+            {
+                <div class="form-group">
+                    <label class="form-control input-lg">@Model.ItechUser.UserName</label>
+                </div>
+                <div class="form-group">
+                    <label class="">identyfikator:</label>
+                    <label class="form-control input-lg">@Model.ItechUser.UserId</label>
+                </div>
+                <div class="form-group">
+                    <label class="">Karta:</label>
+                    <label class="form-control input-lg">@Model.ItechUser.CardNo</label>
+                </div>
+                <div class="form-group" >
+                    &nbsp; &nbsp;&nbsp;@Html.ActionLink("Powrót", "Edit", new { id = @Model.UserId })
+                </div>
+
+            }
+    </div>
+        <hr />
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" name="FindAction" value="Szukaj" type="submit">Szukaj <span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                    <input type="search" id="FText" name="FText" value="@Model.FText" class="form-control" placeholder="Szukana fraza ..." style=" width: 100%; max-width:none">
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+            <div class="col-lg-6 pagination">
+                <div style="float:left; padding: 6px 1px;">
+                    @if (Model.PageCount != 0)
+                    {   <span> &nbsp; &nbsp;strona @Model.page z @Model.ActivityList.PageCount &nbsp; </span>    }
+                </div>
+                <div>
+                    @Html.PagedListPager(Model.ActivityList, page => Url.Action("ActivityReading", new { page, FText = Model.FText, UserId = Model.UserId, Type = Model.Type, FindAction = "page" }))
+                </div>
+            </div>
+            </div><!-- /.row -->
+    </form>
+    <div class="row">
+    </div>
+
+</div>
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayName("")
+        </th>
+        <th>
+            @Html.DisplayName("Pierwsze czytatnie")
+        </th>
+        <th>
+            @Html.DisplayName("Ostatnie czytatnie")
+        </th>
+        <th>
+            @Html.DisplayName("Ilość czytań")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.ActivityList) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Text)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstReadAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastReadAt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReadCount)
+        </td>
+        <td>
+        </td>
+    </tr>
+}
+
+</table>

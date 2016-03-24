@@ -14,4 +14,6 @@ namespace ITechSite.Models.Repository.ItechUsersImport
         public string Profil_dostepu { get; set; }
         public string Opis { get; set; }
     }
+
+    
 }

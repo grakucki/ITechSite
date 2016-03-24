@@ -18,6 +18,7 @@ namespace ITechSite.Models
         {
             this.FileContent = new HashSet<FileContent>();
             this.InformationPlan = new HashSet<InformationPlan>();
+            this.ItechUsersDokumentRead = new HashSet<ItechUsersDokumentRead>();
         }
     
         public int Id { get; set; }
@@ -43,5 +44,6 @@ namespace ITechSite.Models
         public virtual ICollection<InformationPlan> InformationPlan { get; set; }
         public virtual Kategorie Kategorie { get; set; }
         public virtual WorkProcess WorkProcess { get; set; }
+        public virtual ICollection<ItechUsersDokumentRead> ItechUsersDokumentRead { get; set; }
     }
 }

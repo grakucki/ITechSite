@@ -230,6 +230,17 @@ namespace ITechSite.Controllers
             @ViewBag.AllRoles = r.GetAllRoles();
             return View(u);
         }
+
+
+        public ActionResult ActivityReading(ItechUserActivityReadingModel activity)
+        {
+            if (!activity.UserId.HasValue)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            ItechUsersRepository rep = new ItechUsersRepository();
+            var model = rep.GetActivity(activity);
+            return View(model);
+        }
 #endregion
 
         //***** konta serwisu www ***********************************************************************

@@ -45,5 +45,7 @@ namespace ITechSite.Models
         public virtual DbSet<ItechUsers> ItechUsers { get; set; }
         public virtual DbSet<TestSettings> TestSettings { get; set; }
         public virtual DbSet<NewsItems> NewsItems { get; set; }
+        public virtual DbSet<ItechUsersDokumentRead> ItechUsersDokumentRead { get; set; }
+        public virtual DbSet<ItechUsersNewsRead> ItechUsersNewsRead { get; set; }
     }
 }

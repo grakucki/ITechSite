@@ -103,6 +103,29 @@
     <Property Name="LastTestKompetencjiDtmSucces" Type="datetime" />
     <Property Name="ForceTestKompetencji" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="ItechUsersDokumentRead">
+    <Key>
+      <PropertyRef Name="DokId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="DokId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="FirstReadAt" Type="datetime" />
+    <Property Name="LastReadAt" Type="datetime" />
+    <Property Name="DokVersion" Type="int" Nullable="false" />
+    <Property Name="ReadCount" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ItechUsersNewsRead">
+    <Key>
+      <PropertyRef Name="NewsItemId" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="NewsItemId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="FirstReadAt" Type="datetime" />
+    <Property Name="LastReadAt" Type="datetime" />
+    <Property Name="ReadCount" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="ItechUsersRoles">
     <Key>
       <PropertyRef Name="ItechUserId" />
@@ -323,6 +346,54 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_ItechUsersDokumentRead_Dokument">
+    <End Role="Dokument" Type="Self.Dokument" Multiplicity="1" />
+    <End Role="ItechUsersDokumentRead" Type="Self.ItechUsersDokumentRead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Dokument">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ItechUsersDokumentRead">
+        <PropertyRef Name="DokId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItechUsersDokumentRead_ItechUsers">
+    <End Role="ItechUsers" Type="Self.ItechUsers" Multiplicity="1" />
+    <End Role="ItechUsersDokumentRead" Type="Self.ItechUsersDokumentRead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItechUsers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ItechUsersDokumentRead">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItechUsersNewsRead_ItechUsers">
+    <End Role="ItechUsers" Type="Self.ItechUsers" Multiplicity="1" />
+    <End Role="ItechUsersNewsRead" Type="Self.ItechUsersNewsRead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItechUsers">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ItechUsersNewsRead">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ItechUsersNewsRead_NewsItems">
+    <End Role="NewsItems" Type="Self.NewsItems" Multiplicity="1" />
+    <End Role="ItechUsersNewsRead" Type="Self.ItechUsersNewsRead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewsItems">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ItechUsersNewsRead">
+        <PropertyRef Name="NewsItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ItechUsersRoles_AspNetRoles">
     <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
     <End Role="ItechUsersRoles" Type="Self.ItechUsersRoles" Multiplicity="*" />
@@ -477,6 +548,8 @@
     <EntitySet Name="FileContent" EntityType="Self.FileContent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="InformationPlan" EntityType="Self.InformationPlan" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ItechUsers" EntityType="Self.ItechUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItechUsersDokumentRead" EntityType="Self.ItechUsersDokumentRead" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItechUsersNewsRead" EntityType="Self.ItechUsersNewsRead" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ItechUsersRoles" EntityType="Self.ItechUsersRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Kategorie" EntityType="Self.Kategorie" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Model" EntityType="Self.Model" Schema="dbo" store:Type="Tables" />
@@ -519,6 +592,22 @@
     <AssociationSet Name="FK_InformationPlan_Resource1" Association="Self.FK_InformationPlan_Resource1">
       <End Role="Resource" EntitySet="Resource" />
       <End Role="InformationPlan" EntitySet="InformationPlan" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItechUsersDokumentRead_Dokument" Association="Self.FK_ItechUsersDokumentRead_Dokument">
+      <End Role="Dokument" EntitySet="Dokument" />
+      <End Role="ItechUsersDokumentRead" EntitySet="ItechUsersDokumentRead" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItechUsersDokumentRead_ItechUsers" Association="Self.FK_ItechUsersDokumentRead_ItechUsers">
+      <End Role="ItechUsers" EntitySet="ItechUsers" />
+      <End Role="ItechUsersDokumentRead" EntitySet="ItechUsersDokumentRead" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItechUsersNewsRead_ItechUsers" Association="Self.FK_ItechUsersNewsRead_ItechUsers">
+      <End Role="ItechUsers" EntitySet="ItechUsers" />
+      <End Role="ItechUsersNewsRead" EntitySet="ItechUsersNewsRead" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ItechUsersNewsRead_NewsItems" Association="Self.FK_ItechUsersNewsRead_NewsItems">
+      <End Role="NewsItems" EntitySet="NewsItems" />
+      <End Role="ItechUsersNewsRead" EntitySet="ItechUsersNewsRead" />
     </AssociationSet>
     <AssociationSet Name="FK_ItechUsersRoles_AspNetRoles" Association="Self.FK_ItechUsersRoles_AspNetRoles">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />

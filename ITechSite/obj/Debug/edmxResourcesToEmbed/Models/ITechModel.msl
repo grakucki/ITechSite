@@ -260,5 +260,28 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ItechUsersDokumentRead">
+      <EntityTypeMapping TypeName="ITechModel.ItechUsersDokumentRead">
+        <MappingFragment StoreEntitySet="ItechUsersDokumentRead">
+          <ScalarProperty Name="ReadCount" ColumnName="ReadCount" />
+          <ScalarProperty Name="DokVersion" ColumnName="DokVersion" />
+          <ScalarProperty Name="LastReadAt" ColumnName="LastReadAt" />
+          <ScalarProperty Name="FirstReadAt" ColumnName="FirstReadAt" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="DokId" ColumnName="DokId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItechUsersNewsRead">
+      <EntityTypeMapping TypeName="ITechModel.ItechUsersNewsRead">
+        <MappingFragment StoreEntitySet="ItechUsersNewsRead">
+          <ScalarProperty Name="ReadCount" ColumnName="ReadCount" />
+          <ScalarProperty Name="LastReadAt" ColumnName="LastReadAt" />
+          <ScalarProperty Name="FirstReadAt" ColumnName="FirstReadAt" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="NewsItemId" ColumnName="NewsItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

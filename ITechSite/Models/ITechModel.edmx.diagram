@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f7b5d33c4c714c9ba3dbfd9400f38094" Name="Diagram1" ZoomLevel="111">
+      <Diagram DiagramId="f7b5d33c4c714c9ba3dbfd9400f38094" Name="Diagram1" ZoomLevel="116">
         <EntityTypeShape EntityType="ITechModel.FileContent" Width="1.5" PointX="4.375" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.Model" Width="1.5" PointX="16" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ITechModel.Workstation" Width="1.5" PointX="13.75" PointY="0.75" IsExpanded="true" />
@@ -17,7 +17,7 @@
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Dokument" ManuallyRouted="false" >
         </AssociationConnector>
         <EntityTypeShape EntityType="ITechModel.News" Width="1.5" PointX="17.875" PointY="0.5" />
-        <EntityTypeShape EntityType="ITechModel.AspNetRoles" Width="1.5" PointX="9" PointY="6.875" />
+        <EntityTypeShape EntityType="ITechModel.AspNetRoles" Width="1.5" PointX="14.25" PointY="11.25" />
         <EntityTypeShape EntityType="ITechModel.Kategorie" Width="1.5" PointX="8.875" PointY="4.75" />
         <AssociationConnector Association="ITechModel.FK_Dokument_Kategorie" />
         <EntityTypeShape EntityType="ITechModel.Department" Width="1.5" PointX="2.5" PointY="4.875" />
@@ -38,13 +38,19 @@
         <EntityTypeShape EntityType="ITechModel.NewsPriority" Width="1.5" PointX="22.25" PointY="0.5" />
         <AssociationConnector Association="ITechModel.FK_News_NewsPriority" />
         <AssociationConnector Association="ITechModel.FK_InformationPlan_Resource1" />
-        <EntityTypeShape EntityType="ITechModel.ItechUsers" Width="1.5" PointX="4.875" PointY="6.25" />
+        <EntityTypeShape EntityType="ITechModel.ItechUsers" Width="1.5" PointX="16.75" PointY="7.375" />
         <AssociationConnector Association="ITechModel.ItechUsersRoles" />
         <AssociationConnector Association="ITechModel.ModelsVersionModels" />
         <EntityTypeShape EntityType="ITechModel.TestSettings" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="ITechModel.NewsItems" Width="1.5" PointX="20.25" PointY="3.625" />
         <AssociationConnector Association="ITechModel.FK_News_NewsItems" />
         <AssociationConnector Association="ITechModel.FK_NewsItems_NewsPriority1" />
+        <EntityTypeShape EntityType="ITechModel.ItechUsersDokumentRead" Width="2.625" PointX="12.875" PointY="8.125" />
+        <EntityTypeShape EntityType="ITechModel.ItechUsersNewsRead" Width="2.25" PointX="19.75" PointY="7.5" />
+        <AssociationConnector Association="ITechModel.FK_ItechUsersDokumentRead_Dokument" />
+        <AssociationConnector Association="ITechModel.FK_ItechUsersDokumentRead_ItechUsers" />
+        <AssociationConnector Association="ITechModel.FK_ItechUsersNewsRead_NewsItems" />
+        <AssociationConnector Association="ITechModel.FK_ItechUsersNewsRead_ItechUsers" />
         </Diagram>
       <Diagram DiagramId="3054951c8206400f9fa79692752eb712" Name="Diagram2" />
       <Diagram DiagramId="112f2905862845bcb4f4f1b35f51eb8a" Name="Diagram3" >

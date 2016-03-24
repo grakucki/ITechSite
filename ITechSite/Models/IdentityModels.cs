@@ -45,5 +45,7 @@ namespace ITechSite.Models
             return new ApplicationDbContext();
         }
 
+        public System.Data.Entity.DbSet<ITechSite.Models.Repository.ActivityReadingItem> ActivityReadingItems { get; set; }
+
     }
 }

@@ -17,6 +17,8 @@ namespace ITechSite.Models
         public ItechUsers()
         {
             this.AspNetRoles = new HashSet<AspNetRoles>();
+            this.ItechUsersDokumentRead = new HashSet<ItechUsersDokumentRead>();
+            this.ItechUsersNewsRead = new HashSet<ItechUsersNewsRead>();
         }
     
         public int id { get; set; }
@@ -35,5 +37,7 @@ namespace ITechSite.Models
         public bool ForceTestKompetencji { get; set; }
     
         public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
+        public virtual ICollection<ItechUsersDokumentRead> ItechUsersDokumentRead { get; set; }
+        public virtual ICollection<ItechUsersNewsRead> ItechUsersNewsRead { get; set; }
     }
 }
