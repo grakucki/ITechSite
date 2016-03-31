@@ -26,11 +26,11 @@ namespace ITechSite.Models.Repository.ItechUsersImport
         public bool SaveChanges()
         {
 
-            if (UserReadError > 0)
-            { 
-                showErrorMessage("Lista nie została zapisana. Popraw błedy aby kontynuować!", 0);
-                return false;
-            }
+            //if (UserReadError > 0)
+            //{ 
+            //    showErrorMessage("Lista nie została zapisana. Popraw błedy aby kontynuować!", 0);
+            //    return false;
+            //}
 
             try
             {
@@ -147,7 +147,7 @@ namespace ITechSite.Models.Repository.ItechUsersImport
             if (line.Length == 0)
                 return null;
 
-            string[] ss = line.Split(new Char[] { ';' }, StringSplitOptions.None);
+            string[] ss = line.Split(new Char[] { ';','\t' }, StringSplitOptions.None);
             if (ss.Count() < 4)
             {
                 showErrorMessage("Linia " + LineRead.ToString() + ". Za mało parametrów - " + line);

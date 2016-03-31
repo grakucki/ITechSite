@@ -113,8 +113,6 @@ namespace ITechSite.Controllers
             return View(d);
         }
         
-
-
         [HttpPost]
         public ActionResult Import(ItechUsersImport ImportFile, int? step)
         {
@@ -160,13 +158,18 @@ namespace ITechSite.Controllers
                 switch (step)
                 {
                     case 0:
+                        
                         if (FileIsValid(data, ImportFile))
                         {
                             step = 1;
                             ImportFile.MsgOk = "Plik poprawny kliknij zapisz aby wrowadzić zmiany.";
                         }
                         else
-                            ImportFile.MsgError = "Popraw błędy w pliku i wczytaj plik ponownie.";
+                        {
+                            step = 1;
+                            ImportFile.MsgOk = "Informacja o pliku";
+                            ImportFile.MsgError = "Znalezono błedy w pliku!";
+                        }
                         break;
                     case 1:
                         if (FilSaveChanges(data, ImportFile))
@@ -193,14 +196,14 @@ namespace ITechSite.Controllers
             {
                 ImportFile.ErrorItem = users.ErrorList;
                 ImportFile.StatusList = users.StatusList;
-                ImportFile.MsgError = "Zapis zakończony niepowodzeniem.";
-                return false;
+                //ImportFile.MsgError = "Zapis zakończony niepowodzeniem.";
+                // return false;
             }
 
             var ret= users.SaveChanges();
             ImportFile.ErrorItem = users.ErrorList;
             ImportFile.StatusList = users.StatusList;
-
+            ImportFile.MsgOk = "Zapis zakończony powodzeniem.";
 
             
             return ret;
