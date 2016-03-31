@@ -18,6 +18,7 @@ namespace ITechSite.Models
     public class ItechUsersData
     {
         [Unique]
+        [Required]
         public string UserId { get; set; }
     }
 
