@@ -93,16 +93,6 @@ namespace InstrukcjeProdukcyjne.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap newsdlg2 {
-            get {
-                object obj = ResourceManager.GetObject("newsdlg2", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap schemat_bitmap_dla_PDF {
             get {
                 object obj = ResourceManager.GetObject("schemat bitmap dla PDF", resourceCulture);
