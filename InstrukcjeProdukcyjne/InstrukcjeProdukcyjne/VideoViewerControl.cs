@@ -35,7 +35,7 @@ namespace InstrukcjeProdukcyjne
 
         public static bool MediaSuported(string filetype)
         {
-            string SuportedEx = ".mp4.avi.wmv";
+            string SuportedEx = ".mp4.avi.wmv.m2t";
             return (SuportedEx.IndexOf(filetype) >= 0);
         }
 

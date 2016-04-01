@@ -104,7 +104,7 @@ namespace InstrukcjeProdukcyjne
             AviBmp = BitmapToImageSource(Properties.Resources.ikonaAvi);
             PdfBmp = BitmapToImageSource(Properties.Resources.ikonaPDF);
             AnyBmp = BitmapToImageSource(Properties.Resources.ikonaPDF);
-            AviExt = ".mp4,.avi,wmv";
+            AviExt = ".mp4,.avi,.wmv,.m2t";
             PdfExt =".pdf";
         }
 
