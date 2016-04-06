@@ -165,6 +165,32 @@ namespace InstrukcjeProdukcyjne
             return user.IsInRoles(AllowRoles.RoleCanAppExit);
         }
 
+
+        /// <summary>
+        /// pobiera użytkownika
+        /// </summary>
+        /// <param name="cardno">numer karty</param>
+        /// <param name="passowrd">if null to logowanie za pomocą karty lub hasło</param>
+        /// <returns></returns>
+        private ITechInstrukcjeModel.ItechUsers GetLoginUser(string cardno, string? passowrd)
+        {
+            ITechInstrukcjeModel.ItechUsers u = null;
+
+            if (passowrd.HasValue)
+                u = db.ItechUsers_Local.Where(m => m.CardNo == cardno).FirstOrDefault();
+            else
+                u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password == passowrd.Value).FirstOrDefault();
+            return u;
+            
+        }
+
+        private void LoginByCard(string cardno)
+        {
+            var u = GetLoginUser(cardno, null);
+            RunAction(u);
+        }
+
+
         private void ManualLogin()
         {
             try
@@ -181,7 +207,8 @@ namespace InstrukcjeProdukcyjne
                     return;
                 }
 
-                var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password==pass).FirstOrDefault();
+                //var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password==pass).FirstOrDefault();
+                var u = GetLoginUser(cardno, pass);
                 RunAction(u);
             }
             catch (Exception ex)
@@ -272,6 +299,7 @@ namespace InstrukcjeProdukcyjne
         bool Timer_EndForm = false;
         DateTime Timer_ActionAt = DateTime.Now;
 
+
         private void ReadCard()
         {
             try
@@ -281,9 +309,7 @@ namespace InstrukcjeProdukcyjne
                 {
                     var cardno =  GetCardNo(f);
                     label2.Text = cardno;
-
-                    var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno).FirstOrDefault();
-                    RunAction(u);
+                    LoginByCard(cardno);
                 }
 
             }

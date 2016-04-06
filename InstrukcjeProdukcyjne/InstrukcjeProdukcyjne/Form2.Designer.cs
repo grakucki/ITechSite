@@ -132,14 +132,14 @@
             this.toolStripStatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(10, 660);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1116, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1163, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(929, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(976, 17);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -180,7 +180,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1116, 184);
+            this.panel1.Size = new System.Drawing.Size(1163, 184);
             this.panel1.TabIndex = 5;
             // 
             // tableLayoutPanel3
@@ -201,7 +201,7 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 66.66666F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1116, 184);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1163, 184);
             this.tableLayoutPanel3.TabIndex = 14;
             // 
             // NewsCustomPanel
@@ -218,7 +218,7 @@
             this.NewsCustomPanel.Location = new System.Drawing.Point(3, 64);
             this.NewsCustomPanel.Name = "NewsCustomPanel";
             this.NewsCustomPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.NewsCustomPanel.Size = new System.Drawing.Size(1110, 117);
+            this.NewsCustomPanel.Size = new System.Drawing.Size(1157, 117);
             this.NewsCustomPanel.TabIndex = 9;
             // 
             // KomunikatLabel
@@ -229,7 +229,7 @@
             this.KomunikatLabel.Location = new System.Drawing.Point(5, 5);
             this.KomunikatLabel.Margin = new System.Windows.Forms.Padding(3);
             this.KomunikatLabel.Name = "KomunikatLabel";
-            this.KomunikatLabel.Size = new System.Drawing.Size(1100, 107);
+            this.KomunikatLabel.Size = new System.Drawing.Size(1147, 107);
             this.KomunikatLabel.TabIndex = 0;
             this.KomunikatLabel.Text = "Komunikat stanowisko ......";
             this.KomunikatLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -248,7 +248,7 @@
             this.panel5.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
             this.panel5.Location = new System.Drawing.Point(804, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(309, 55);
+            this.panel5.Size = new System.Drawing.Size(356, 55);
             this.panel5.TabIndex = 8;
             // 
             // elementyComboBox
@@ -264,7 +264,7 @@
             this.elementyComboBox.FormattingEnabled = true;
             this.elementyComboBox.Location = new System.Drawing.Point(3, 13);
             this.elementyComboBox.Name = "elementyComboBox";
-            this.elementyComboBox.Size = new System.Drawing.Size(303, 32);
+            this.elementyComboBox.Size = new System.Drawing.Size(350, 32);
             this.elementyComboBox.TabIndex = 6;
             this.elementyComboBox.SelectedIndexChanged += new System.EventHandler(this.elementyComboBox_SelectedIndexChanged);
             // 
@@ -574,7 +574,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1116, 420);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1163, 420);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // customPanel3
@@ -590,11 +590,11 @@
             this.customPanel3.Controls.Add(this.customPanel7);
             this.customPanel3.Curvature = 10;
             this.customPanel3.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
-            this.customPanel3.Location = new System.Drawing.Point(746, 3);
+            this.customPanel3.Location = new System.Drawing.Point(778, 3);
             this.customPanel3.Name = "customPanel3";
             this.customPanel3.Padding = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel2.SetRowSpan(this.customPanel3, 2);
-            this.customPanel3.Size = new System.Drawing.Size(367, 414);
+            this.customPanel3.Size = new System.Drawing.Size(382, 414);
             this.customPanel3.TabIndex = 10;
             // 
             // elementHost1
@@ -603,7 +603,7 @@
             this.elementHost1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.elementHost1.Location = new System.Drawing.Point(5, 49);
             this.elementHost1.Name = "elementHost1";
-            this.elementHost1.Size = new System.Drawing.Size(357, 360);
+            this.elementHost1.Size = new System.Drawing.Size(372, 360);
             this.elementHost1.TabIndex = 3;
             this.elementHost1.Text = "elementHost1";
             this.elementHost1.Child = this.groupListViewModels;
@@ -620,7 +620,7 @@
             this.customPanel7.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
             this.customPanel7.Location = new System.Drawing.Point(5, 5);
             this.customPanel7.Name = "customPanel7";
-            this.customPanel7.Size = new System.Drawing.Size(357, 44);
+            this.customPanel7.Size = new System.Drawing.Size(372, 44);
             this.customPanel7.TabIndex = 2;
             // 
             // label5
@@ -630,7 +630,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
             this.label5.Location = new System.Drawing.Point(14, 7);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(329, 31);
+            this.label5.Size = new System.Drawing.Size(344, 31);
             this.label5.TabIndex = 0;
             this.label5.Text = "Dokumenty modeli";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -652,7 +652,7 @@
             this.customPanel2.Name = "customPanel2";
             this.customPanel2.Padding = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanel2.SetRowSpan(this.customPanel2, 2);
-            this.customPanel2.Size = new System.Drawing.Size(737, 414);
+            this.customPanel2.Size = new System.Drawing.Size(769, 414);
             this.customPanel2.TabIndex = 0;
             // 
             // elementHost2
@@ -660,7 +660,7 @@
             this.elementHost2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.elementHost2.Location = new System.Drawing.Point(5, 49);
             this.elementHost2.Name = "elementHost2";
-            this.elementHost2.Size = new System.Drawing.Size(727, 360);
+            this.elementHost2.Size = new System.Drawing.Size(759, 360);
             this.elementHost2.TabIndex = 4;
             this.elementHost2.Text = "elementHost2";
             this.elementHost2.Child = this.groupListViewWorkstation;
@@ -677,7 +677,7 @@
             this.customPanel8.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
             this.customPanel8.Location = new System.Drawing.Point(5, 5);
             this.customPanel8.Name = "customPanel8";
-            this.customPanel8.Size = new System.Drawing.Size(727, 44);
+            this.customPanel8.Size = new System.Drawing.Size(759, 44);
             this.customPanel8.TabIndex = 3;
             // 
             // label6
@@ -687,7 +687,7 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F);
             this.label6.Location = new System.Drawing.Point(14, 7);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(699, 31);
+            this.label6.Size = new System.Drawing.Size(731, 31);
             this.label6.TabIndex = 0;
             this.label6.Text = "Instrukcje dla stanowiska";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -704,7 +704,7 @@
             this.customPanel5.Controls.Add(this.button2);
             this.customPanel5.Curvature = 10;
             this.customPanel5.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
-            this.customPanel5.Location = new System.Drawing.Point(837, 1);
+            this.customPanel5.Location = new System.Drawing.Point(884, 1);
             this.customPanel5.Name = "customPanel5";
             this.customPanel5.Size = new System.Drawing.Size(269, 43);
             this.customPanel5.TabIndex = 12;
@@ -732,7 +732,7 @@
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel6.Location = new System.Drawing.Point(10, 614);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1116, 46);
+            this.panel6.Size = new System.Drawing.Size(1163, 46);
             this.panel6.TabIndex = 9;
             // 
             // timer3
@@ -745,7 +745,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(116)))), ((int)(((byte)(9)))));
-            this.ClientSize = new System.Drawing.Size(1136, 692);
+            this.ClientSize = new System.Drawing.Size(1183, 692);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel1);
