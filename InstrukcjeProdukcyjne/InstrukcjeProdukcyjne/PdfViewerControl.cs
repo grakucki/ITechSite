@@ -79,9 +79,14 @@ namespace InstrukcjeProdukcyjne
             axAcroPDF1.setView("Fit");
         }
 
-        public void Pause()
+        public void Pause(bool value)
         {
             return;
+        }
+
+        public bool IsPause()
+        {
+            return false;
         }
 
         public void Stop()
@@ -230,12 +235,5 @@ namespace InstrukcjeProdukcyjne
             SendKeys.SendWait(_SendWait);
             Debug.WriteLine(_SendWait);
         }
-
-
-
-
-       
-
-       
     }
 }

@@ -69,9 +69,17 @@ namespace InstrukcjeProdukcyjne
             FileName = fileName;
         }
 
-        public void Pause()
+        public void Pause(bool value)
         {
-            axWindowsMediaPlayer1.Ctlcontrols.pause();
+            if (value)
+                axWindowsMediaPlayer1.Ctlcontrols.pause();
+            else
+                axWindowsMediaPlayer1.Ctlcontrols.play();
+        }
+
+        public bool IsPause()
+        {
+            return axWindowsMediaPlayer1.playState != WMPLib.WMPPlayState.wmppsPlaying;
         }
 
         public void Stop()

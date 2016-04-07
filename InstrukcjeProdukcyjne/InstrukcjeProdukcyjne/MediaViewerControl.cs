@@ -11,7 +11,7 @@ using System.IO;
 
 namespace InstrukcjeProdukcyjne
 {
-    public partial class MediaViewerControl : UserControl
+    public partial class MediaViewerControl : UserControl, IMediaViewer
     {
         public MediaViewerControl()
         {
@@ -75,5 +75,28 @@ namespace InstrukcjeProdukcyjne
             newmv.Start(fileName);
         }
 
+
+        public void Start(string fileName)
+        {
+            ShowDokument(fileName);
+        }
+
+        public void Pause(bool value)
+        {
+            IMediaViewer mv = (IMediaViewer)this.Controls[0];
+            if (mv!=null)
+                mv.Pause(value);
+        }
+
+
+
+
+        public bool IsPause()
+        {
+            IMediaViewer mv = (IMediaViewer)this.Controls[0];
+            if (mv != null)
+                return mv.IsPause();
+            return false;
+        }
     }
 }

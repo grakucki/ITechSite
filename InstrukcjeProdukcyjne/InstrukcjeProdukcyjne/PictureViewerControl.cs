@@ -36,7 +36,12 @@ namespace InstrukcjeProdukcyjne
             this.pictureBox1.Image = Image.FromFile(fileName);
         }
 
-        public void Pause()
+        public bool IsPause()
+        {
+            return false;
+        }
+
+        public void Pause(bool value)
         {
             return;
         }

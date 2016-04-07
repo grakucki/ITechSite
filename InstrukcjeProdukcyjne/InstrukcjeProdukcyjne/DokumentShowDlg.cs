@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace InstrukcjeProdukcyjne
 {
-    public partial class DokumentShowDlg : Form
+    public partial class DokumentShowDlg : Form, IMediaViewer
     {
         public DokumentShowDlg(MyFileInfo file, SitechUser user)
         {
@@ -76,5 +76,26 @@ namespace InstrukcjeProdukcyjne
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        public void Start(string fileName)
+        {
+            mediaViewerControl1.Start(fileName);
+        }
+
+        public void Pause(bool value)
+        {
+            mediaViewerControl1.Pause(value);
+        }
+
+        public void Stop()
+        {
+            mediaViewerControl1.Stop();
+        }
+
+        public bool IsPause()
+        {
+            return mediaViewerControl1.IsPause();
+        }
+
     }
 }

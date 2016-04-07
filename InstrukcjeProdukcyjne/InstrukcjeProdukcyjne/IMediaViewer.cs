@@ -9,7 +9,8 @@ namespace InstrukcjeProdukcyjne
     interface IMediaViewer
     {
         void Start(string fileName);
-        void Pause();
+        void Pause(bool value);
         void Stop();
+        bool IsPause();
     }
 }

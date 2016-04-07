@@ -809,12 +809,16 @@ namespace InstrukcjeProdukcyjne
             listView_MouseDoubleClick(sender, e);
         }
 
+        private DokumentShowDlg DokumentShowDlg=null;
         private async void OnDokumentShow(MyFileInfo file)
         {
             try
             {
-                var dial = new DokumentShowDlg(file, LoginUser);
-                if (dial.ShowDialog()== System.Windows.Forms.DialogResult.OK)
+                if (DokumentShowDlg != null)
+                    return;
+
+                DokumentShowDlg = new DokumentShowDlg(file, LoginUser);
+                if (DokumentShowDlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     // wyślij info na serwer
                     int userid = LoginUser2.id;
@@ -837,7 +841,7 @@ namespace InstrukcjeProdukcyjne
             {
                 MessageBox.Show(ex.Message);
             }
-
+            DokumentShowDlg = null;
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -998,6 +1002,7 @@ namespace InstrukcjeProdukcyjne
                 // sprawdzamy czy należy wyświetlić news w messagebox
                 if (news.NewsItems.ItechUsersNewsRead.Count()==0)
                 {
+
                     ShowNewsDlg(news);
                 }
             }
@@ -1340,7 +1345,11 @@ namespace InstrukcjeProdukcyjne
             NewsDialog.Message = news.News1;
             NewsDialog.MessageId = news.ItemId.Value;
             NewsDialog.MessageColor = NewsCustomPanel.BackColor;
-            if (NewsDialog.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
+
+            var prev = PauseVideo(true);
+            var res = NewsDialog.ShowDialog();
+            PauseVideo(prev);
+            if (res == System.Windows.Forms.DialogResult.Cancel)
             {
                 NewsDialog = null;
                 return;
@@ -1351,6 +1360,17 @@ namespace InstrukcjeProdukcyjne
                 c.UserReadMessageAsync(LoginUser2.id, NewsDialog.MessageId);
             }
             NewsDialog = null;
+        }
+
+        private bool PauseVideo(bool value)
+        {
+            var dial = DokumentShowDlg;
+            if (dial == null)
+                return false;
+            
+            var prev = dial.IsPause();
+            dial.Pause(value);
+            return prev;
         }
 
         private void KomunikatLabel_Click(object sender, EventArgs e)
