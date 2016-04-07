@@ -31,7 +31,7 @@ namespace InstrukcjeProdukcyjne
 
         public object Convert(object[] value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            CollectionViewGroup cvg = ((CollectionViewGroup)(value[1]));
+            CollectionViewGroup cvg = ((CollectionViewGroup)(value[2]));
             int c = GetToReadDoc(cvg);
             if (c>0)
                 return string.Format("{0} !", c);

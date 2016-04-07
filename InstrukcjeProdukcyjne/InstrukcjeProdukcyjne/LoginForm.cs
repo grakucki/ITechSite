@@ -172,21 +172,21 @@ namespace InstrukcjeProdukcyjne
         /// <param name="cardno">numer karty</param>
         /// <param name="passowrd">if null to logowanie za pomocą karty lub hasło</param>
         /// <returns></returns>
-        private ITechInstrukcjeModel.ItechUsers GetLoginUser(string cardno, string? passowrd)
+        private ITechInstrukcjeModel.ItechUsers GetLoginUser(string cardno, string passowrd, bool OnlyCardNo)
         {
             ITechInstrukcjeModel.ItechUsers u = null;
 
-            if (passowrd.HasValue)
+            if (OnlyCardNo)
                 u = db.ItechUsers_Local.Where(m => m.CardNo == cardno).FirstOrDefault();
             else
-                u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password == passowrd.Value).FirstOrDefault();
+                u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password == passowrd).FirstOrDefault();
             return u;
             
         }
 
         private void LoginByCard(string cardno)
         {
-            var u = GetLoginUser(cardno, null);
+            var u = GetLoginUser(cardno, string.Empty,true);
             RunAction(u);
         }
 
@@ -208,7 +208,7 @@ namespace InstrukcjeProdukcyjne
                 }
 
                 //var u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password==pass).FirstOrDefault();
-                var u = GetLoginUser(cardno, pass);
+                var u = GetLoginUser(cardno, pass, false);
                 RunAction(u);
             }
             catch (Exception ex)

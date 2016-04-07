@@ -90,6 +90,35 @@ namespace InstrukcjeProdukcyjne
         }
     }
 
+
+    public class MyFileInfoList : INotifyPropertyChanged
+    {
+        public MyFileInfoList(ICollection<MyFileInfo> list)
+        {
+            MyFileInfo = list.ToList();
+            foreach (var item in MyFileInfo)
+            {
+                item.PropertyChanged += OnMyFileInfoPropertyChanged;
+            }
+
+        }
+
+        private void OnMyFileInfoPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsRead")
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("MyFileInfo"));
+            }
+        }
+
+        public List<MyFileInfo> MyFileInfo { get; private set; }
+
+
+        #region INotifyPropertyChanged Members
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+    }
+
     public class MyFileInfoEx
     {
         public ImageSource AviBmp { get; set; }

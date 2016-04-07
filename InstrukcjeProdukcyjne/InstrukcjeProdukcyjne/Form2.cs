@@ -744,7 +744,8 @@ namespace InstrukcjeProdukcyjne
                 }
             }
 
-            listView.DataSource = my;
+            //listView.DataSource = my;
+            listView.DataContext = new MyFileInfoList(my);
         }
 
         private void listView2_MouseDoubleClick(object sender, MouseEventArgs e)
