@@ -738,6 +738,7 @@ namespace InstrukcjeProdukcyjne
                         d.GroupBy = item.Dokument.Kategorie.name;
                     else
                         d.GroupBy = "inne";
+                    d.Version = d.Dok.Version;
                     i++;
 
                     my.Add(d);
@@ -831,7 +832,13 @@ namespace InstrukcjeProdukcyjne
                          groupListViewWorkstation.Refresh();
                          groupListViewModels.Refresh();
 
-                         await client.UserReadDokAsync(userid, DokId, Version);
+                         try
+                         {
+                             await client.UserReadDokAsync(userid, DokId, Version);
+                         }
+                         catch (Exception)
+                         {
+                         }
 
                      }
                 }

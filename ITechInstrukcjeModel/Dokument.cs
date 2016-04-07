@@ -38,7 +38,6 @@ namespace ITechInstrukcjeModel
         public string OwnerId { get; set; }
         public string LastWriteUserId { get; set; }
         public int Version { get; set; }
-        
     
         [System.Runtime.Serialization.IgnoreDataMember]
 	public virtual ICollection<InformationPlan> InformationPlan { get; set; }

@@ -568,17 +568,17 @@ namespace ITechService
             using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
             {
 
-                var u = context.ItechUsersDokumentRead.Where(m => m.UserId == IUserId && m.DokId==DokId).FirstOrDefault();
+                var u = context.ItechUsersDokumentRead.Where(m => m.UserId == IUserId && m.DokId == DokId && m.DokVersion == DokVersion).FirstOrDefault();
                 if (u == null)
                 {
                     u = new ITechInstrukcjeModel.ItechUsersDokumentRead();
                     u.DokId = DokId;
                     u.UserId = IUserId;
+                    u.DokVersion = DokVersion;
                     u.FirstReadAt = DateTime.Now;
                     context.ItechUsersDokumentRead.Add(u);
                 }
                 u.LastReadAt = DateTime.Now;
-                u.DokVersion = DokVersion;
                 u.ReadCount += 1;
 
                 context.SaveChanges();

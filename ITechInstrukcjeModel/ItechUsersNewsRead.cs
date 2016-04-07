@@ -21,10 +21,7 @@ namespace ITechInstrukcjeModel
         public int ReadCount { get; set; }
     
         [System.Runtime.Serialization.IgnoreDataMember]
-	public virtual ItechUsers ItechUsers { get; set; }
-        [System.Runtime.Serialization.IgnoreDataMember]
 	public virtual NewsItems NewsItems { get; set; }
     }
 }
-
 

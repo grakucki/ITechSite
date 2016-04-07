@@ -565,6 +565,7 @@
     <Key>
       <PropertyRef Name="DokId" />
       <PropertyRef Name="UserId" />
+      <PropertyRef Name="DokVersion" />
     </Key>
     <Property Name="DokId" Type="Int32" Nullable="false" />
     <Property Name="UserId" Type="Int32" Nullable="false" />

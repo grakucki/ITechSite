@@ -35,10 +35,10 @@
         <AssociationConnector Association="ITechModel.FK_ItechUsersDokumentRead_ItechUsers" />
         <EntityTypeShape EntityType="ITechModel.ItechUsersNewsRead" Width="1.875" PointX="8" PointY="10.125" />
         <EntityTypeShape EntityType="ITechModel.NewsItems" Width="1.5" PointX="5.625" PointY="9" />
-        <AssociationConnector Association="ITechModel.FK_ItechUsersNewsRead_ItechUsers" />
         <AssociationConnector Association="ITechModel.FK_ItechUsersNewsRead_NewsItems" />
         <AssociationConnector Association="ITechModel.FK_News_NewsItems" />
         <AssociationConnector Association="ITechModel.FK_NewsItems_NewsPriority" />
+        <AssociationConnector Association="ITechModel.FK_ItechUsersNewsRead_ItechUsers1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

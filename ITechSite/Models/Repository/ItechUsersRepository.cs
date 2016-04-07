@@ -142,8 +142,13 @@ namespace ITechSite.Models.Repository
             {
                 var o = u.ItechUsersDokumentRead.AsQueryable();
 
+                //var o = _dataContex.ItechUsersDokumentRead.Where(m => m.UserId ==activity.UserId.Value).AsQueryable();
+
                 if (!string.IsNullOrEmpty(activity.FText))
-                    o = o.Where(m => m.Dokument.CodeName.Contains(activity.FText) || m.Dokument.FileName.Contains(activity.FText) || m.Dokument.Description.Contains(activity.FText));
+                    o = o.Where(m => m.Dokument.CodeName.Contains(activity.FText) || m.Dokument.FileName.Contains(activity.FText)
+                        || ( !string.IsNullOrEmpty(m.Dokument.Description) &&  m.Dokument.Description.Contains(activity.FText) ));
+//                o = o.Where(m => m.Dokument.CodeName.Contains(activity.FText) || m.Dokument.FileName.Contains(activity.FText) || m.Dokument.Description.Contains(activity.FText));
+                var xx = o.Count();
 
                 items = o.Select(m => new ActivityReadingItem()
                     {
@@ -152,11 +157,11 @@ namespace ITechSite.Models.Repository
                         FirstReadAt = m.FirstReadAt,
                         LastReadAt = m.LastReadAt,
                         ReadCount = m.ReadCount,
-                        Text = string.Concat(m.Dokument.CodeName, " ", m.Dokument.Description, " (ver "+ m.DokVersion+ ")")
+                        Text = string.Concat(m.Dokument.CodeName, " ", m.Dokument.Description, " (ver: "+ m.DokVersion+ ")")
                     }).OrderByDescending(m => m.FirstReadAt);
             }
-            
-            activity.ActivityList = items.ToPagedList(activity.page.Value, 2);
+
+            activity.ActivityList = items.ToPagedList(activity.page.Value, 20);
             activity.ItechUser = u;
             activity.PageCount = activity.ActivityList.PageCount;
             return activity;

@@ -191,8 +191,15 @@ namespace ITechSite.Controllers
 
                 if (dokument.File.Length>0)
                 {
-                    dokument.Version++;
-                    db.SaveChanges();
+                    using (var ldb = new ITechEntities(0))
+                    {
+                        var d = ldb.Dokument.Find(dokument.Id);
+                        if (d != null)
+                        {
+                            d.Version += 1;
+                            ldb.SaveChanges();
+                        }
+                    }
 
                     // zapisujemy dane pliku tylko gdy został podany
                     FileData uploadData = new FileData();
@@ -218,7 +225,7 @@ namespace ITechSite.Controllers
                 {
                     dokument.LastWriteTime = DateTime.Now;
                     dokument.FileType = Path.GetExtension(dokument.FileName);
-
+                    
                     //TryUpdateModel(dokument, "",  new  string []  {"FileName,CodeName,Enabled,Description,ValidDtmOn,ValidDtmOff,WorkProcess_Id,Kategoria_Id,Keywords"});
 
                     dokument.LastWriteTime = DateTime.Now;
@@ -228,7 +235,8 @@ namespace ITechSite.Controllers
 
                     db.Entry(dokument).Property("CreateTime").IsModified = false;
                     db.Entry(dokument).Property("OwnerId").IsModified = false;
-
+                    db.Entry(dokument).Property("Version").IsModified = false;
+                    
                     db.SaveChanges();
 
                     SaveFileContent(dokument);
