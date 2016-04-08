@@ -162,7 +162,7 @@ namespace InstrukcjeProdukcyjne
 
             using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
             {
-                if (client.IsOnLine())
+                if (client.IsOnLineTry())
                 {
                     db.Resource_Local = client.GetInformationPlainsList(idR.Value).ToList();
                     db.ExportResources(null);

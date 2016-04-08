@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.ServiceModel;
@@ -51,20 +52,60 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation
 
         }
 
-        public bool IsOnLine()
+        public string IsOnLineMsg = string.Empty;
+        public DateTime LastOnLineConnect = DateTime.MinValue;
+        public bool LastIsOnLineValue = true;
+
+        public void IsOnLine()
         {
-            
-            if (this.State != System.ServiceModel.CommunicationState.Opened)
+            if ((DateTime.Now - LastOnLineConnect) < new TimeSpan(0, 0, 10))
             {
-                try
+                if (!LastIsOnLineValue)
+                    throw new Exception("Brak połączenia");
+                return;
+            }
+            
+            Stopwatch stopWatch  = new Stopwatch();
+            stopWatch.Start();
+            try
+            {
+                using (var client = ServiceWorkstationClientEx.WorkstationClient())
                 {
-                    this.Ping();
-                    return true;
+                    client.ChannelFactory.Endpoint.Binding.OpenTimeout = new TimeSpan(0, 0, 3);
+                    client.ChannelFactory.Endpoint.Binding.ReceiveTimeout = new TimeSpan(0, 0, 3);
+                    client.ChannelFactory.Endpoint.Binding.SendTimeout = new TimeSpan(0, 0, 3);
+                    client.ChannelFactory.Endpoint.Binding.CloseTimeout = new TimeSpan(0, 0, 3);
+                    var d = client.Ping();
+                    LastIsOnLineValue = true;
                 }
-                catch (Exception) {}
+
+            }
+            catch (Exception ex)
+            {
+                LastIsOnLineValue = false;
+                throw ex;
+            }
+            TimeSpan ts = stopWatch.Elapsed;
+            Debug.WriteLine("IsOnlineTime : "+ ts.ToString());
+        }
+
+        public bool IsOnLineTry()
+        {
+            try
+            {
+                IsOnLine();
+                IsOnLineMsg = "Ok";
+                return true;
+            }
+            catch (Exception ex) 
+            { 
+                IsOnLineMsg = ex.Message; 
             }
             return false;
         }
+
+         
+    
 
         public static string UrlPathCombine(string path1, string path2)
         {

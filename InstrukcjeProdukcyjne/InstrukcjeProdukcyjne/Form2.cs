@@ -456,14 +456,24 @@ namespace InstrukcjeProdukcyjne
             ShowTestKompetencji();
         }
 
+        private string OnLoginMsg = string.Empty;
         private async Task OnLogin()
         {
             if (LoginUser2 != null)
             {
-                using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+                try
                 {
-                    var rd = await client.GetUserReadDokListAsync(LoginUser2.id);
-                    LoginUser2.ItechUsersDokumentRead = rd;
+                    using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+                    {
+                        client.IsOnLine();
+                        var rd = await client.GetUserReadDokListAsync(LoginUser2.id);
+                        LoginUser2.ItechUsersDokumentRead = rd;
+                        OnLoginMsg = "ok";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    OnLoginMsg = ex.Message;
                 }
             }
 
@@ -570,7 +580,7 @@ namespace InstrukcjeProdukcyjne
                 try
                 {
                     SetSerwerStatus("łączę",null);
-                    if (client.IsOnLine())
+                    if (client.IsOnLineTry())
                     {
                         var t = await client.GetInformationPlainsListAsync(idR.Value);
                         
@@ -620,7 +630,8 @@ namespace InstrukcjeProdukcyjne
 
             using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
             {
-                if (client.IsOnLine())
+                
+                if (client.IsOnLineTry())
                 {
                     db.Resource_Local =  client.GetInformationPlainsList(idR.Value).ToList();
                     db.ExportResources(null);
@@ -819,7 +830,9 @@ namespace InstrukcjeProdukcyjne
                     return;
 
                 DokumentShowDlg = new DokumentShowDlg(file, LoginUser);
-                if (DokumentShowDlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                var res = DokumentShowDlg.ShowDialog();
+                DokumentShowDlg = null;
+                if (res == System.Windows.Forms.DialogResult.OK)
                 {
                     // wyślij info na serwer
                     int userid = LoginUser2.id;
@@ -834,6 +847,7 @@ namespace InstrukcjeProdukcyjne
 
                          try
                          {
+                             //client.IsOnLine();
                              await client.UserReadDokAsync(userid, DokId, Version);
                          }
                          catch (Exception)
@@ -848,7 +862,7 @@ namespace InstrukcjeProdukcyjne
             {
                 MessageBox.Show(ex.Message);
             }
-            DokumentShowDlg = null;
+            
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1167,6 +1181,7 @@ namespace InstrukcjeProdukcyjne
 
                 using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
                 {
+                    client.IsOnLine();
                     _RunTestKompetencji = client.RunTestKompetencji(LoginUser2.UserId);
 
                     if (!_RunTestKompetencji)

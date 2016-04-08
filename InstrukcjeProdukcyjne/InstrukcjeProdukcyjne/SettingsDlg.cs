@@ -227,8 +227,13 @@ namespace InstrukcjeProdukcyjne
                 using(new CursorWait())
                 { 
                     client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient(addr);
-                    s = client.TestConnection(idR);
-                    resourceBindingSource.DataSource = client.GetWorkstationList();
+                    if (client.IsOnLineTry())
+                    {
+                        s = client.TestConnection(idR);
+                        resourceBindingSource.DataSource = client.GetWorkstationList();
+                    }
+                    else
+                        s = client.IsOnLineMsg;
                     client.Close();
                 }
                 MessageBox.Show(s);
