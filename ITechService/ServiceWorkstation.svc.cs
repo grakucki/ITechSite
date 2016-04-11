@@ -567,7 +567,6 @@ namespace ITechService
         {
             using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
             {
-
                 var u = context.ItechUsersDokumentRead.Where(m => m.UserId == IUserId && m.DokId == DokId && m.DokVersion == DokVersion).FirstOrDefault();
                 if (u == null)
                 {
@@ -623,6 +622,32 @@ namespace ITechService
             str.AppendLine(ExceptionResolver.Resolve(ex));
             throw new FaultException(str.ToString());
         }
+    }
+
+    public ItechUsers GetLoginUser(string cardno, string passowrd, bool OnlyCardNo)
+    {
+        StringBuilder ret = new StringBuilder();
+        List<ItechUsers> o = null;
+        try
+        {
+
+            using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
+            {
+                context.Configuration.LazyLoadingEnabled = false;
+                context.Configuration.ProxyCreationEnabled = false;
+                if (OnlyCardNo)
+                    o = context.ItechUsers.Where(m => m.CardNo == cardno).Include(m => m.AspNetRoles).ToList();
+                else
+                    o = context.ItechUsers.Where(m => m.CardNo == cardno && m.Password == passowrd).Include(m => m.AspNetRoles).ToList();
+            }
+        }
+        catch (Exception ex)
+        {
+            ret.AppendLine("Błąd !!!!!!");
+            ret.AppendLine(ExceptionResolver.Resolve(ex));
+            throw new FaultException(ret.ToString());
+        }
+        return o.FirstOrDefault();
     }
 
        

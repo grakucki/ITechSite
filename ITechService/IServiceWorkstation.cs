@@ -162,6 +162,17 @@ namespace ITechService
         [OperationContract]
         void UserReadMessage(int IUserId, int NewsItemId);
 
+
+        /// <summary>
+        /// Zwraca usera o zadanym cardno oraz password lub tylko cardno gdy OnlyCardNo=true
+        /// </summary>
+        /// <param name="cardno"></param>
+        /// <param name="passowrd"></param>
+        /// <param name="OnlyCardNo"></param>
+        /// <returns></returns>
+        [OperationContract]
+        ItechUsers GetLoginUser(string cardno, string passowrd, bool OnlyCardNo);
+
     }
 
 
