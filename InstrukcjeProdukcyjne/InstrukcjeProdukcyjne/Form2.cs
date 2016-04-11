@@ -574,7 +574,7 @@ namespace InstrukcjeProdukcyjne
         {
             if (!idR.HasValue)
                 return;
-#if !DEBUGE
+
             using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
             {
                 try
@@ -599,7 +599,7 @@ namespace InstrukcjeProdukcyjne
                     SetSerwerStatus("Błąd", ex.Message);
                 }
             }
-#endif
+
             if (db.Resource_Local == null)
             {
                 // pobieramy z pliku
@@ -1356,32 +1356,37 @@ namespace InstrukcjeProdukcyjne
         NewsMessageDlg NewsDialog = null;
         private void ShowNewsDlg(News news)
         {
+            if (news == null)
+                return;
+
             if (NewsDialog != null)
                 return;
+            try
+            {
+                NewsDialog = new NewsMessageDlg();
 
-            if (news==null)
-                return;
+                NewsDialog.Message = news.News1;
+                NewsDialog.MessageId = news.ItemId.Value;
+                NewsDialog.MessageColor = NewsCustomPanel.BackColor;
 
-            NewsDialog = new NewsMessageDlg();
+                var prev = PauseVideo(true);
+                var res = NewsDialog.ShowDialog();
+                PauseVideo(prev);
+                if (res == System.Windows.Forms.DialogResult.Cancel)
+                {
+                    NewsDialog = null;
+                    return;
+                }
 
-            NewsDialog.Message = news.News1;
-            NewsDialog.MessageId = news.ItemId.Value;
-            NewsDialog.MessageColor = NewsCustomPanel.BackColor;
-
-            var prev = PauseVideo(true);
-            var res = NewsDialog.ShowDialog();
-            PauseVideo(prev);
-            if (res == System.Windows.Forms.DialogResult.Cancel)
+                using (var c = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+                {
+                    c.UserReadMessageAsync(LoginUser2.id, NewsDialog.MessageId);
+                }
+            }
+            finally
             {
                 NewsDialog = null;
-                return;
             }
-
-            using (var c = new ServiceWorkstation.ServiceWorkstationClient())
-            {
-                c.UserReadMessageAsync(LoginUser2.id, NewsDialog.MessageId);
-            }
-            NewsDialog = null;
         }
 
         private bool PauseVideo(bool value)
