@@ -176,10 +176,28 @@ namespace InstrukcjeProdukcyjne
         {
             ITechInstrukcjeModel.ItechUsers u = null;
 
-            if (OnlyCardNo)
-                u = db.ItechUsers_Local.Where(m => m.CardNo == cardno).FirstOrDefault();
-            else
-                u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password == passowrd).FirstOrDefault();
+            using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+            {
+                try 
+	                {
+                        
+                        client.IsOnLine();
+                        u=client.GetLoginUser(cardno, passowrd, OnlyCardNo);
+	                }
+	                catch (Exception ex)
+	                {
+                        System.Diagnostics.Debug.WriteLine(ex.Message);
+	                }
+            }
+
+            //gdy logowanie onlien się niepowiodło
+            if (u==null)
+            {
+                if (OnlyCardNo)
+                    u = db.ItechUsers_Local.Where(m => m.CardNo == cardno).FirstOrDefault();
+                else
+                    u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password == passowrd).FirstOrDefault();
+            }
             return u;
             
         }

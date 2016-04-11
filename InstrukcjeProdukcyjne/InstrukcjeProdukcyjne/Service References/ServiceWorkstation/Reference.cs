@@ -364,6 +364,12 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/UserReadMessage", ReplyAction="http://tempuri.org/IServiceWorkstation/UserReadMessageResponse")]
         System.Threading.Tasks.Task UserReadMessageAsync(int IUserId, int NewsItemId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetLoginUser", ReplyAction="http://tempuri.org/IServiceWorkstation/GetLoginUserResponse")]
+        ITechInstrukcjeModel.ItechUsers GetLoginUser(string cardno, string passowrd, bool OnlyCardNo);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetLoginUser", ReplyAction="http://tempuri.org/IServiceWorkstation/GetLoginUserResponse")]
+        System.Threading.Tasks.Task<ITechInstrukcjeModel.ItechUsers> GetLoginUserAsync(string cardno, string passowrd, bool OnlyCardNo);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -543,6 +549,14 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         
         public System.Threading.Tasks.Task UserReadMessageAsync(int IUserId, int NewsItemId) {
             return base.Channel.UserReadMessageAsync(IUserId, NewsItemId);
+        }
+        
+        public ITechInstrukcjeModel.ItechUsers GetLoginUser(string cardno, string passowrd, bool OnlyCardNo) {
+            return base.Channel.GetLoginUser(cardno, passowrd, OnlyCardNo);
+        }
+        
+        public System.Threading.Tasks.Task<ITechInstrukcjeModel.ItechUsers> GetLoginUserAsync(string cardno, string passowrd, bool OnlyCardNo) {
+            return base.Channel.GetLoginUserAsync(cardno, passowrd, OnlyCardNo);
         }
     }
 }

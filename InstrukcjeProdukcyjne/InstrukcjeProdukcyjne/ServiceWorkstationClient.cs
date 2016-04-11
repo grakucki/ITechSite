@@ -71,10 +71,10 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation
             {
                 using (var client = ServiceWorkstationClientEx.WorkstationClient())
                 {
-                    client.ChannelFactory.Endpoint.Binding.OpenTimeout = new TimeSpan(0, 0, 3);
-                    client.ChannelFactory.Endpoint.Binding.ReceiveTimeout = new TimeSpan(0, 0, 3);
-                    client.ChannelFactory.Endpoint.Binding.SendTimeout = new TimeSpan(0, 0, 3);
-                    client.ChannelFactory.Endpoint.Binding.CloseTimeout = new TimeSpan(0, 0, 3);
+                    client.ChannelFactory.Endpoint.Binding.OpenTimeout = new TimeSpan(0, 0, 5);
+                    client.ChannelFactory.Endpoint.Binding.ReceiveTimeout = new TimeSpan(0, 0, 5);
+                    client.ChannelFactory.Endpoint.Binding.SendTimeout = new TimeSpan(0, 0, 5);
+                    client.ChannelFactory.Endpoint.Binding.CloseTimeout = new TimeSpan(0, 0, 5);
                     var d = client.Ping();
                     LastIsOnLineValue = true;
                 }

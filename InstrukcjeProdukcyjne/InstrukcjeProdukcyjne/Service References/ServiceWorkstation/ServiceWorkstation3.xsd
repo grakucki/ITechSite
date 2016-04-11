@@ -255,4 +255,20 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetLoginUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="cardno" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="passowrd" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="OnlyCardNo" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetLoginUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/ITechInstrukcjeModel" minOccurs="0" name="GetLoginUserResult" nillable="true" type="q14:ItechUsers" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -213,7 +213,6 @@
       <xs:element minOccurs="0" name="ForceTestKompetencji" type="xs:boolean" />
       <xs:element minOccurs="0" name="Frozen" type="xs:boolean" />
       <xs:element minOccurs="0" name="ItechUsersDokumentRead" nillable="true" type="tns:ArrayOfItechUsersDokumentRead" />
-      <xs:element minOccurs="0" name="ItechUsersNewsRead" nillable="true" type="tns:ArrayOfItechUsersNewsRead" />
       <xs:element minOccurs="0" name="LastTestKompetencjiDtm" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="LastTestKompetencjiDtmSucces" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="LastTestKompetencjiResult" nillable="true" type="xs:int" />
