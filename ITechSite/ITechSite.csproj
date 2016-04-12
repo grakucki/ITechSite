@@ -990,6 +990,7 @@
     <Content Include="Views\Resources\_StanowiskoListaModeli.cshtml" />
     <Content Include="Views\Resources\_ModelListaWariantów.cshtml" />
     <Content Include="Views\ItechUsers\ActivityReading.cshtml" />
+    <Content Include="Views\ItechUsers\EditAccountPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

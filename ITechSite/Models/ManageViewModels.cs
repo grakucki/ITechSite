@@ -43,19 +43,27 @@ namespace ITechSite.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Current password")]
+        [Display(Name = "Twoje aktualne hasło")]
         public string OldPassword { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "New password")]
+        [Display(Name = "Nowe hasło")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Display(Name = "Powtórz nowe hasło")]
+        [Compare("NewPassword", ErrorMessage = "Nowe hasło musi być takie samo jak powtórzone hasło.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class ChangeUserPasswordViewModel : ChangePasswordViewModel
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Zmiana hasła dla")]
+        public string UserName { get; set; }
     }
 
     public class AddPhoneNumberViewModel

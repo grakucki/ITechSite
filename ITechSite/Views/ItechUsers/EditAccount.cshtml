@@ -52,17 +52,18 @@
             </div>
         </div>
 
+
         <div class="form-group">
-            @Html.Label(" ", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AllowRoles, "Hasło", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.Partial("_ChangePasswordPartial", @Model.User.UserName)*@
+                <a href="@Url.Action("EditAccountPassword", new { UserName = Model.User.UserName })" class="btn btn-info">
+                    <span class="glyphicon glyphicon-credit-card"></span> Ustaw nowe
+                </a>
             </div>
         </div>
-
-
-
     </div>
 }
+
 
 <div>
     @Html.ActionLink("Powrót", "Accounts")

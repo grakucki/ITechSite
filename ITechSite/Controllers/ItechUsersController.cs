@@ -262,7 +262,6 @@ namespace ITechSite.Controllers
                 {
                     var userStore = new UserStore<ApplicationUser>(context);
                     var userManager = new UserManager<ApplicationUser>(userStore);
-
                     var users = userManager.Users.AsQueryable();
                     if (!string.IsNullOrEmpty(userModel.UserName))
                         users = users.Where(m => m.UserName.Contains(userModel.UserName));
@@ -339,6 +338,68 @@ namespace ITechSite.Controllers
             }
             return RedirectToAction("EditAccount", new { UserName = UserName });
         }
+
+        [HttpGet]
+        public ActionResult EditAccountPassword(string UserName, string i)
+        {
+            var u = new ChangeUserPasswordViewModel();
+            u.UserName = UserName;
+            return View(u);
+        }
+
+
+        // POST: /Manage/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+//        public ActionResult EditAccountPassword(string UserName, ChangePasswordViewModel model)
+        public ActionResult EditAccountPassword(ChangeUserPasswordViewModel UserPass)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(UserPass);
+            }
+            ApplicationUserManager UserManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+            var x = UserManager.PasswordValidator.ValidateAsync(UserPass.OldPassword);
+            x.Wait();
+            var xx = x.Result;
+            //if (!authenticationService.ValidateUser(User.Identity.Name, UserPass.OldPassword, ""))
+           if (!xx.Succeeded)
+           {
+                ModelState.AddModelError("OldPassword", "Hasło nie jest poprawne.");
+                return View(new ChangeUserPasswordViewModel() { UserName = UserPass.UserName });
+            }
+
+            //ModelState.AddModelError("OldPassword", "Hasło jest poprawne.");
+            //return View(new ChangeUserPasswordViewModel() { UserName = UserPass.UserName });
+           try
+           {
+               var UserToChange = UserManager.FindByName(UserPass.UserName);
+               if (UserToChange == null)
+                   throw new Exception("Nie odalezono urzytkownika " + UserPass.UserName);
+               UserManager.RemovePassword(UserToChange.Id);
+               var result = UserManager.AddPassword(UserToChange.Id, UserPass.NewPassword);
+
+               if (!result.Succeeded)
+               {
+                   foreach (var item in result.Errors)
+                   {
+                       ModelState.AddModelError("NewPassword", item);
+                   }
+                   ModelState.AddModelError("NewPassword", "Nie udało się zmienić hasła");
+                   return View(new ChangeUserPasswordViewModel() { UserName = UserPass.UserName });
+               }
+
+           }
+           catch (Exception ex)
+           {
+               ModelState.AddModelError("NewPassword", ex.Message);
+               return View(new ChangeUserPasswordViewModel() { UserName = UserPass.UserName });
+           }
+            return RedirectToAction("EditAccount", new { UserName = UserPass.UserName });
+
+        }
+
     }
         #endregion
 }
