@@ -250,6 +250,8 @@ namespace InstrukcjeProdukcyjne
                         }
                     }
                 }
+                else
+                    MessageBox.Show("Posiadasz najnowszą wersję.");
             }
             else
                 MessageBox.Show("Ta aplikacja nie obsługuje aktualizacji automatycznej.");
@@ -258,7 +260,9 @@ namespace InstrukcjeProdukcyjne
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             InstallUpdateSyncWithInfo();
+            this.Cursor = Cursors.Default;
         }
 
         private void AboutBox1_Load(object sender, EventArgs e)

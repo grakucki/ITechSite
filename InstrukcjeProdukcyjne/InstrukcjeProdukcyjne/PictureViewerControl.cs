@@ -25,7 +25,7 @@ namespace InstrukcjeProdukcyjne
 
         public static bool MediaSuported(string filetype)
         {
-            string SuportedEx = ".jpg.bmp";
+            string SuportedEx = ".jpg.bmp.png";
             return (SuportedEx.IndexOf(filetype) >= 0);
         }
 

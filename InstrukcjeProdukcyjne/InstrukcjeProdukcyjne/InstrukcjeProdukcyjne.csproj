@@ -29,7 +29,7 @@
     <SuiteName>Sitech</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>install.html</WebPage>
-    <ApplicationRevision>35</ApplicationRevision>
+    <ApplicationRevision>51</ApplicationRevision>
     <ApplicationVersion>3.5.10.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -209,6 +209,12 @@
     <Compile Include="NewsMessageDlg.Designer.cs">
       <DependentUpon>NewsMessageDlg.cs</DependentUpon>
     </Compile>
+    <Compile Include="NoneDlgcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NoneDlgcs.Designer.cs">
+      <DependentUpon>NoneDlgcs.cs</DependentUpon>
+    </Compile>
     <Compile Include="PdfViewerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -318,6 +324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewsMessageDlg.resx">
       <DependentUpon>NewsMessageDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NoneDlgcs.resx">
+      <DependentUpon>NoneDlgcs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PdfViewerControl.resx">
       <DependentUpon>PdfViewerControl.cs</DependentUpon>

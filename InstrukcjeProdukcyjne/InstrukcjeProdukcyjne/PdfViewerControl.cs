@@ -71,12 +71,19 @@ namespace InstrukcjeProdukcyjne
 
         public void Start(string fileName)
         {
-            FileName = fileName;
-            this.axAcroPDF1.Focus();
+
+            FileName = fileName; 
+            
+            
             this.axAcroPDF1.setShowScrollbars(true);
             this.axAcroPDF1.setShowToolbar(false);
             this.axAcroPDF1.setPageMode("bookmarks");
             axAcroPDF1.setView("Fit");
+            this.axAcroPDF1.Focus();
+
+            var d = new NoneDlg();
+            d.Show();
+            d.Close();
         }
 
         public void Pause(bool value)

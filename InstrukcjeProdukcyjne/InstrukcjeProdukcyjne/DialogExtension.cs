@@ -19,6 +19,10 @@ namespace InstrukcjeProdukcyjne
                 dial.WindowState = FormWindowState.Normal;
                 dial.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
                 dial.Bounds = Screen.PrimaryScreen.Bounds;
+                dial.TopLevel = true;
+                dial.Select();
+                dial.Activate();
+                //MessageBox.Show("Fullscrean On");
             }
             else
             {

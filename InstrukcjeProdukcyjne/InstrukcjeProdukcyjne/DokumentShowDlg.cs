@@ -23,6 +23,7 @@ namespace InstrukcjeProdukcyjne
         public SitechUser User { get; set; }
 
 
+
         private void GoFullscreen(bool fullscreen)
         {
             if (fullscreen)
@@ -43,8 +44,9 @@ namespace InstrukcjeProdukcyjne
         {
             try
             {
-
-                GoFullscreen(true);
+                //this.WindowState = FormWindowState.Maximized;
+                this.FullScreen(true);
+                //GoFullscreen(true);
 
                 if (User != null)
                 {
