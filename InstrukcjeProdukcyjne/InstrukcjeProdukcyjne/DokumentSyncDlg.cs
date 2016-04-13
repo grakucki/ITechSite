@@ -199,9 +199,15 @@ namespace InstrukcjeProdukcyjne
 
             if (File.Exists(tempfilename))
             {
-                if (File.Exists(destfilename))
-                    File.Delete(destfilename);
-                File.Move(tempfilename, destfilename);
+                try
+                {
+                    if (File.Exists(destfilename))
+                        File.Delete(destfilename);
+                    File.Move(tempfilename, destfilename);
+                }
+                catch (Exception)
+                {
+                }
             }
 
         }
