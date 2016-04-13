@@ -23,7 +23,7 @@ namespace ITechService
         public string TestConnection(int value)
         {
             StringBuilder ret = new StringBuilder();
-            ret.AppendLine("Serwis ... v16.03.19 Ok");
+            ret.AppendLine("Serwis ... v16.04.11 Ok");
             try
             {
                 ret.Append("Baza danych ... ");
@@ -147,13 +147,14 @@ namespace ITechService
         {
             StringBuilder ret = new StringBuilder();
             List<Resource> o = null;
+            int kp = 11;
             try
             {
                 using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
                 {
                     context.Configuration.LazyLoadingEnabled = false;
                     context.Configuration.ProxyCreationEnabled = false;
-                    o = context.Resource.Where(m=>m.Enabled==true & m.Type==1).Include(m=>m.Workstation).OrderBy(m=>m.Name).ToList();
+                    o = context.Resource.Where(m=>m.Enabled==true & m.Type==1).Include(m=>m.Workstation).Take(kp*3).OrderBy(m=>m.Name).ToList();
                 }
             }
             catch (Exception ex)
