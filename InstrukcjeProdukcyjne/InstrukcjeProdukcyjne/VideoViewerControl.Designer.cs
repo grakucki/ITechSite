@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VideoViewerControl));
-            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.customPanel2 = new CustomPanelControl.CustomPanel();
             this.customPanel5 = new CustomPanelControl.CustomPanel();
@@ -41,21 +40,12 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
+            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
             this.customPanel2.SuspendLayout();
             this.customPanel5.SuspendLayout();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // axWindowsMediaPlayer1
-            // 
-            this.axWindowsMediaPlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.axWindowsMediaPlayer1.Enabled = true;
-            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(0, 0);
-            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
-            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
-            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(639, 801);
-            this.axWindowsMediaPlayer1.TabIndex = 0;
             // 
             // customPanel2
             // 
@@ -68,7 +58,7 @@
             this.customPanel2.Curvature = 10;
             this.customPanel2.Dock = System.Windows.Forms.DockStyle.Right;
             this.customPanel2.GradientMode = CustomPanelControl.LinearGradientMode.Vertical;
-            this.customPanel2.Location = new System.Drawing.Point(301, 0);
+            this.customPanel2.Location = new System.Drawing.Point(468, 0);
             this.customPanel2.Name = "customPanel2";
             this.customPanel2.Padding = new System.Windows.Forms.Padding(5);
             this.customPanel2.Size = new System.Drawing.Size(338, 801);
@@ -181,19 +171,29 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // axWindowsMediaPlayer1
+            // 
+            this.axWindowsMediaPlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.axWindowsMediaPlayer1.Enabled = true;
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(0, 0);
+            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(468, 801);
+            this.axWindowsMediaPlayer1.TabIndex = 0;
+            // 
             // VideoViewerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.customPanel2);
             this.Controls.Add(this.axWindowsMediaPlayer1);
+            this.Controls.Add(this.customPanel2);
             this.Name = "VideoViewerControl";
-            this.Size = new System.Drawing.Size(639, 801);
+            this.Size = new System.Drawing.Size(806, 801);
             this.Load += new System.EventHandler(this.VideoViewerControl_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.customPanel2.ResumeLayout(false);
             this.customPanel5.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
 
         }
