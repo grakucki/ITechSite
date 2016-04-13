@@ -29,6 +29,7 @@ namespace ITechSite.Models
         public System.DateTime LastWriteTime { get; set; }
 
         [DisplayName("Numer")]
+        [Required(ErrorMessage = "Numer jest wymagany. Podaj numer (identyfikator) po którym będziesz identyfikować ten wpis.")]
         public string No { get; set; }
 
         [DisplayName("Proces roboczy")]

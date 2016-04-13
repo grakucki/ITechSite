@@ -79,8 +79,11 @@ namespace ITechSite.Models.Repository
                 query = query.Where(m => m.WorkProcess_Id == WorkProcess);
 
             if (!Models.Repository.FilterExtansion.IsEmpty(filter))
-                query = query.Where(m => (m.CodeName.Contains(filter) || m.FileName.Contains(filter) || m.Description.Contains(filter) || m.Keywords.Contains(filter)));
+                query = query.Where(m => ((m.CodeName.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) >= 0) || (m.FileName.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                    || (m.Description.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) >= 0) || (m.Keywords.IndexOf(filter, StringComparison.CurrentCultureIgnoreCase) >= 0)));
+//            query = query.Where(m => (m.CodeName.Contains(filter) || m.FileName.Contains(filter) || m.Description.Contains(filter) || m.Keywords.Contains(filter)));
 
+            //, StringComparison.CurrentCultureIgnoreCase
             query = query.Include(d => d.WorkProcess).Include(d => d.Kategorie);
             return query.ToList();
         }

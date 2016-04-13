@@ -205,8 +205,10 @@ namespace ITechSite.Controllers
         {
             try
             {
+
                 if (ModelState.IsValid)
                 {
+                    int min = 11;
                     resource.LastWriteTime = DateTime.Now;
                     // sprawdzamy czy nazwa już istniej
                     if (db.Resource.Where(m => m.Name == resource.Name).Any())
@@ -222,6 +224,13 @@ namespace ITechSite.Controllers
                             resource.Description = string.Empty;
                         if (resource.Keywords == null)
                             resource.Keywords = string.Empty;
+                        
+                        if (resource.Type==1)
+                        {
+                            int cnt=db.Resource.Where(m => m.Type == 1).Count();
+                            if (cnt>min*3)
+                                throw new ArgumentException(string.Format("Przekroczono limit licencji. Nie można utworzyć wiecej niż {0} stanowiska", cnt));
+                        }
 
                         db.Resource.Add(resource);
                         db.SaveChanges();

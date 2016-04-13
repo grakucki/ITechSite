@@ -157,7 +157,8 @@ namespace ITechSite.Models
 
 
             if (!Models.Repository.FilterExtansion.IsEmpty(Find_Word))
-                Resources2 = Resources2.Where(m => m.Name.IndexOf(Find_Word) >= 0);
+                Resources2 = Resources2.Where(m => m.Name.IndexOf(Find_Word, StringComparison.CurrentCultureIgnoreCase) >= 0 || m.No.IndexOf(Find_Word, StringComparison.CurrentCultureIgnoreCase) >= 0);
+            //Resources2 = Resources2.Where(m => (m.Name.Contains(Find_Word) || m.No.Contains(Find_Word)));
 
 
             var l = Resources2.OrderBy(m => m.Name).ToList(); 
