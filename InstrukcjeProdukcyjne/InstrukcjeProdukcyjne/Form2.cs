@@ -583,6 +583,7 @@ namespace InstrukcjeProdukcyjne
                     SetSerwerStatus("łączę",null);
                     if (client.IsOnLineTry())
                     {
+                        //var t = await client.GetInformationPlainsListAsync(idR.Value);
                         var t = await client.GetInformationPlainsListAsync(idR.Value);
                         
                         db.Resource_Local = t.ToList();
@@ -611,7 +612,19 @@ namespace InstrukcjeProdukcyjne
                 db.ImportItechUsers(null);
 
             if (idR.HasValue)
-                CurrentWorkstation = db.ResourceWorkstation_Local.Where(m => m.Id == idR.Value).FirstOrDefault();
+            {
+                var cw = db.ResourceWorkstation_Local.Where(m => m.Id == idR.Value).FirstOrDefault();
+                if (cw != null)
+                    CurrentWorkstation = cw;
+                else
+                {
+                    string msg = "Bieżąca konfiguracja nie jest poprawna!\r\nWybrane stanowisko nie istnieje!\r\nSkontaktuj się z administratorem aby naprawić problem!";
+                    News UserNews = new News() { News1 = msg, id = -1, ItemId=-1,  NewsPriorityId = 3 };
+                    DisplayNews(UserNews);
+                    //MessageBox.Show(msg);
+                    //KomunikatLabel.Text = msg;
+                }
+            }
             else
                 CurrentWorkstation = null;
 
@@ -779,7 +792,6 @@ namespace InstrukcjeProdukcyjne
                     if (mfi != null)
                     {
                         if (File.Exists(mfi.FullFileName))
-                            //mediaViewerControl1.ShowDokument(mfi.FullFileName);
                             OnDokumentShow(mfi);
                         else
                             MessageBox.Show("Nie odnaleziono pliku." + mfi.FileName);
@@ -1022,11 +1034,11 @@ namespace InstrukcjeProdukcyjne
             if (news != null)
             {
                 // sprawdzamy czy należy wyświetlić news w messagebox
-                if (news.NewsItems.ItechUsersNewsRead.Count()==0)
-                {
-
-                    ShowNewsDlg(news);
-                }
+                if (news.NewsItems!=null)
+                    if (news.NewsItems.ItechUsersNewsRead.Count()==0)
+                    {
+                        ShowNewsDlg(news);
+                    }
             }
             CurrentNews = news;
         }
@@ -1072,7 +1084,7 @@ namespace InstrukcjeProdukcyjne
             {
                 if (CurrentWorkstation != null)
                     if (LoginUser2!=null)
-                    LoadNews(CurrentWorkstation.Id, LoginUser2.id);
+                     LoadNews(CurrentWorkstation.Id, LoginUser2.id);
                 DownloadDocIf();
             }
             catch (Exception /*ex*/)
@@ -1382,9 +1394,13 @@ namespace InstrukcjeProdukcyjne
                     return;
                 }
 
-                using (var c = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+                if (news.id > 0)
                 {
-                    c.UserReadMessageAsync(LoginUser2.id, NewsDialog.MessageId);
+                    //nie wysyłamy gdy id<0
+                    using (var c = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+                    {
+                        c.UserReadMessageAsync(LoginUser2.id, NewsDialog.MessageId);
+                    }
                 }
             }
             finally

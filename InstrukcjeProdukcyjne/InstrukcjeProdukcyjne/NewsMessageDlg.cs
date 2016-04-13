@@ -51,5 +51,10 @@ namespace InstrukcjeProdukcyjne
             lab.Font = new Font(lab.Font.FontFamily, newSize, lab.Font.Style);
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
