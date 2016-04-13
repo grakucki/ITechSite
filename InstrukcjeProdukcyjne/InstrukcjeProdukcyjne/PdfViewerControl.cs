@@ -63,9 +63,13 @@ namespace InstrukcjeProdukcyjne
 
         }
 
+        public static string SuportedEx
+        {
+            get { return ".pdf"; }
+        }
+
         public static bool MediaSuported(string filetype)
         {
-            string SuportedEx = ".pdf";
             return (SuportedEx.IndexOf(filetype) >= 0);
         }
 
@@ -242,5 +246,8 @@ namespace InstrukcjeProdukcyjne
             SendKeys.SendWait(_SendWait);
             Debug.WriteLine(_SendWait);
         }
+
+
+      
     }
 }

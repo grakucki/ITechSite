@@ -98,6 +98,5 @@ namespace InstrukcjeProdukcyjne
         {
             return mediaViewerControl1.IsPause();
         }
-
     }
 }

@@ -98,5 +98,8 @@ namespace InstrukcjeProdukcyjne
                 return mv.IsPause();
             return false;
         }
+
+
+       
     }
 }

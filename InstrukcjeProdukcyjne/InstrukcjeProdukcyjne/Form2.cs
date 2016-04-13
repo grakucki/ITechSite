@@ -112,7 +112,8 @@ namespace InstrukcjeProdukcyjne
 
         private void DoLogOut()
         {
-            
+            LoginUser = null;
+            LoginUser2 = null;
             SimaticWriteAsync(string.Empty, false);
         }
 
@@ -1032,7 +1033,7 @@ namespace InstrukcjeProdukcyjne
 
         public DateTime _LastReadNews { get; set; }
         AutoResetEvent _TaskNewsIsRunning = new AutoResetEvent(true);
-        private async void LoadNews(int idR)
+        private async void LoadNews(int idR, int UserId)
         {
             try
             {
@@ -1047,7 +1048,7 @@ namespace InstrukcjeProdukcyjne
                     {
                         var d = await client.PingAsync();
                         toolStripStatusITechTime.Text = (d.ToShortTimeString());
-                        News news = await client.GetNewsUserAsync(idR, LoginUser2.id);
+                        News news = await client.GetNewsUserAsync(idR, UserId);
                         DisplayNews(news);
                     }
                     Work.SetState(ActionControlStatus.ActionControlState.Ok, "");
@@ -1070,7 +1071,8 @@ namespace InstrukcjeProdukcyjne
             try
             {
                 if (CurrentWorkstation != null)
-                    LoadNews(CurrentWorkstation.Id);
+                    if (LoginUser2!=null)
+                    LoadNews(CurrentWorkstation.Id, LoginUser2.id);
                 DownloadDocIf();
             }
             catch (Exception /*ex*/)
@@ -1125,8 +1127,10 @@ namespace InstrukcjeProdukcyjne
             {
                 if (CurrentWorkstation == null)
                     return;
+                if (LoginUser2 == null)
+                    return;
 
-                LoadNews(CurrentWorkstation.Id);
+                LoadNews(CurrentWorkstation.Id, LoginUser2.id);
             }
             catch (CommunicationException ex)
             {

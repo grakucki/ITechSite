@@ -22,10 +22,14 @@ namespace InstrukcjeProdukcyjne
 
         }
 
+        public static string SuportedEx
+        {
+            get { return ".jpg.bmp.png"; }
+        }
+
 
         public static bool MediaSuported(string filetype)
         {
-            string SuportedEx = ".jpg.bmp.png";
             return (SuportedEx.IndexOf(filetype) >= 0);
         }
 

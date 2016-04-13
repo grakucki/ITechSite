@@ -418,9 +418,7 @@
     <Content Include="Icon1.ico" />
     <Content Include="image\Icon1.ico" />
     <Content Include="image\avi.bmp" />
-    <None Include="Resources\newsdlg2.png" />
-    <None Include="Resources\newsdlg1.png" />
-    <None Include="Resources\newsdlg.png" />
+    <Content Include="Resources\ikonaJpg.png" />
     <None Include="Resources\ikonaAvi.png" />
     <None Include="Resources\ikonaPDF.png" />
     <Resource Include="image\ikonaAvi.png" />

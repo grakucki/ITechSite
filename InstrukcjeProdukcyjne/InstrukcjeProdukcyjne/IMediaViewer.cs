@@ -12,5 +12,6 @@ namespace InstrukcjeProdukcyjne
         void Pause(bool value);
         void Stop();
         bool IsPause();
+
     }
 }

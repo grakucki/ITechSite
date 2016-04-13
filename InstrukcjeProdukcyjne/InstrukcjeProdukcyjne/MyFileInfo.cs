@@ -123,18 +123,22 @@ namespace InstrukcjeProdukcyjne
     {
         public ImageSource AviBmp { get; set; }
         public ImageSource PdfBmp { get; set; }
+        public ImageSource JpgBmp { get; set; }
         public ImageSource AnyBmp { get; set; }
-        public string AviExt { get; set; }
-        public string PdfExt { get; set; }
+        //public string AviExt { get; set; }
+        //public string PdfExt { get; set; }
+        //public string JpgExt { get; set; }
 
 
         public MyFileInfoEx()
         {
             AviBmp = BitmapToImageSource(Properties.Resources.ikonaAvi);
             PdfBmp = BitmapToImageSource(Properties.Resources.ikonaPDF);
+            JpgBmp = BitmapToImageSource(Properties.Resources.ikonaJpg);
             AnyBmp = BitmapToImageSource(Properties.Resources.ikonaPDF);
-            AviExt = ".mp4,.avi,.wmv,.m2t";
-            PdfExt =".pdf";
+            //AviExt = VideoViewerControl.SuportedEx; // ".mp4,.avi,.wmv,.m2t";
+            //JpgExt = PictureViewerControl.SuportedEx;
+            //PdfExt = PdfViewerControl.SuportedEx; // ".pdf";
         }
 
 
@@ -154,11 +158,21 @@ namespace InstrukcjeProdukcyjne
 
         public ImageSource GetBitmapForFileExt(string extension)
         {
-            if (AviExt.IndexOf(extension) >= 0)
+
+            if (VideoViewerControl.MediaSuported(extension))
                 return AviBmp;
 
-            if (PdfExt.IndexOf(extension) >= 0)
+            if (PdfViewerControl.MediaSuported(extension))
                 return PdfBmp;
+
+            if (PictureViewerControl.MediaSuported(extension))
+                return JpgBmp;
+
+            //if (AviExt.IndexOf(extension) >= 0)
+            //    return AviBmp;
+
+            //if (PdfExt.IndexOf(extension) >= 0)
+            //    return PdfBmp;
 
             return AnyBmp;
         }

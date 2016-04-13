@@ -32,10 +32,13 @@ namespace InstrukcjeProdukcyjne
             }
         }
 
+        public static string SuportedEx
+        {
+            get { return ".mp4.avi.wmv.m2t"; }
+        }
 
         public static bool MediaSuported(string filetype)
         {
-            string SuportedEx = ".mp4.avi.wmv.m2t";
             return (SuportedEx.IndexOf(filetype) >= 0);
         }
 
