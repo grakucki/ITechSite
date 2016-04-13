@@ -61,7 +61,9 @@ namespace ITechInstrukcjeModel
 
         public List<Resource> GetResourceModel_Local(Resource WorkstatinoResource)
         {
-            
+
+            if (WorkstatinoResource == null)
+                return null;
             var data2 = WorkstatinoResource.ModelsWorkstation;
             List<Resource> models = new List<Resource>();
             foreach (var item in data2)
