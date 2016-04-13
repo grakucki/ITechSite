@@ -176,5 +176,46 @@ namespace InstrukcjeProdukcyjne
 
             return AnyBmp;
         }
+
+        public ImageSource GetBitmapForFile(string fileName)
+        {
+            var extension = Path.GetExtension(fileName).ToLower();
+            if (VideoViewerControl.MediaSuported(extension))
+                return AviBmp;
+
+            if (PdfViewerControl.MediaSuported(extension))
+                return CreateImageFromPdfFile(fileName);  
+
+            if (PictureViewerControl.MediaSuported(extension))
+                 return CreateImageFromImgeFile(fileName);
+
+            return AnyBmp;
+        }
+
+        private ImageSource CreateImageFromPdfFile(string fileName)
+        {
+            return PdfBmp;
+        }
+
+        private ImageSource CreateImageFromImgeFile(string fileName)
+        {
+            BitmapImage logo = new BitmapImage();
+            if (File.Exists(fileName))
+            {
+                try
+                {
+                    logo.BeginInit();
+                    logo.UriSource = new Uri(fileName);
+                    logo.DecodePixelWidth = 96;
+                    logo.EndInit();
+                    return logo;
+                }
+                catch (Exception)
+                {
+                }
+            }
+            return JpgBmp;
+         
+        }
     }
 }

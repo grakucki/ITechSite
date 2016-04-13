@@ -756,7 +756,9 @@ namespace InstrukcjeProdukcyjne
 
                     d.ItemText = s;
                     d.ItemText2 = d.Dok.CodeName;
-                    d.ItemIcon = fe.GetBitmapForFileExt(d.Extension);
+                    //d.ItemIcon = fe.GetBitmapForFileExt(d.Extension);
+                    d.ItemIcon = fe.GetBitmapForFile(d.FullFileName);
+
                     if (LoginUser2!=null)
                     d.IsRead = LoginUser2.ItechUsersDokumentRead.Any(m => m.DokId == d.Id);
                     if (item.Dokument.Kategorie != null)
