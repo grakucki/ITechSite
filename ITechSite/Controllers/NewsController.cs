@@ -42,6 +42,7 @@ namespace ITechSite.Models
         }
 
         [HttpPost]
+        [AuthorizeI]
         public ActionResult Index(string NewNews, DateTime? ValidEnd, string[] actionChk, int? priority, ResourceListFind rf)
         {
             if (!priority.HasValue)

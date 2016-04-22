@@ -10,6 +10,8 @@ using ITechSite.Models;
 using System.Data.Entity.Validation;
 using System.IO;
 using PagedList;
+using Nati;
+using ITechSite.Custom;
 
 namespace ITechSite.Controllers
 {
@@ -24,11 +26,11 @@ namespace ITechSite.Controllers
             return RedirectToAction("index");
         }
 
+        [AuthorizeI]
         public ActionResult Index(IndexDokumentModel model)
         {
             if (model == null)
                 model = new IndexDokumentModel();
-
 
             if (string.IsNullOrEmpty(model.FindAction))
             {

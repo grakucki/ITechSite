@@ -43,6 +43,9 @@
     <Reference Include="Microsoft.Web.Helpers">
       <HintPath>..\packages\Microsoft.AspNet.WebHelpers.3.2.3\lib\net45\Microsoft.Web.Helpers.dll</HintPath>
     </Reference>
+    <Reference Include="Nati">
+      <HintPath>..\bin\Nati.dll</HintPath>
+    </Reference>
     <Reference Include="PagedList">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -254,6 +257,8 @@
     <Compile Include="CustomResults\ValidDateTimeStringAttribute.cs" />
     <Compile Include="CustomResults\XmlResult.cs" />
     <Compile Include="CustomResults\SqlFileStreamResult.cs" />
+    <Compile Include="Custom\AuthorizeI.cs" />
+    <Compile Include="Custom\Class1.cs" />
     <Compile Include="Custom\NestedActionLink.cs" />
     <Compile Include="Custom\ExtendedSelectListItem.cs" />
     <Compile Include="Global.asax.cs">
@@ -991,6 +996,7 @@
     <Content Include="Views\Resources\_ModelListaWariantów.cshtml" />
     <Content Include="Views\ItechUsers\ActivityReading.cshtml" />
     <Content Include="Views\ItechUsers\EditAccountPassword.cshtml" />
+    <Content Include="Views\Resources\SetValid.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -34,7 +34,8 @@ namespace ITechSite.Models
         public string Action { get; set; }
     }
     
-    public class IndexDokumentModel
+    
+    public partial class IndexDokumentModel
     {
 //         public  FindDokumentModel Find { get; set; }
          public string CodeName { get; set; }
@@ -54,6 +55,8 @@ namespace ITechSite.Models
          //    kat.AddRange(context.Kategorie.OrderBy(m => m.name));
          //    return kat;
          //}
+
+         
     }
 
     public class JoinDoc

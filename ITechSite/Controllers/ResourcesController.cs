@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using ITechSite.Models;
 using PagedList;
+using ITechSite.Custom;
+using Nati;
 
 namespace ITechSite.Controllers
 {
@@ -45,7 +47,14 @@ namespace ITechSite.Controllers
             return RedirectToAction("Index", new { rf = rf });
         }
 
+        public ActionResult SetValid(string msg, bool CultureInfo=false)
+        {
+            var ll = new ModelL();
+            @ViewBag.Message = ll.SetValid(msg, CultureInfo);
+            return View();
+        }
 
+         
         public ActionResult Index(ResourceListFind rf)
         {
             if (rf == null)
