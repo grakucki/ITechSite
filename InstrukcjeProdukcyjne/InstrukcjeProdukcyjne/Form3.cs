@@ -370,12 +370,12 @@ namespace InstrukcjeProdukcyjne
         {
             if (!idR.HasValue)
                 return;
-#if !DEBUG
+#if !DEBUGE
             using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
             {
                 try
                 {
-                    if (client.IsOnLine())
+                    client.IsOnLine();
                     {
                         var t = await client.GetInformationPlainsListAsync(idR.Value);
                         db.Resource_Local = t.ToList();

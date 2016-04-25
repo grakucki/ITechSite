@@ -64,7 +64,6 @@ namespace ITechSite.Areas.Testy.Controllers
                 for (int i = 0; i < Int32.Parse(this.quantity); i++)
                 {
                     int idx = rand.Next(0, questions.Count);
-                    //TODO GR: Zabezpieczenie przed genrowaniem większej liczby pytań niż dostępna ilość. Test musi się poprawnie generować przy mniejszej liczbie pytań w puli dostępnych (w szczególności gdy w puli =0)
 
                     if (questions.Count > idx)
                     {
@@ -134,6 +133,12 @@ namespace ITechSite.Areas.Testy.Controllers
 
             var question = db.Pytania.Find(questionId);
             model.question = question;
+            if (model.question == null)
+            {
+                model.question = new Pytania();
+                model.question.content = "Brak pytań.";
+            }
+
 
             var sTest = new Test();
         
@@ -142,13 +147,18 @@ namespace ITechSite.Areas.Testy.Controllers
                 sTest = (Test)serializer.Deserialize(reader);
             }
 
-            List<UserAnswer> answers = sTest.userAnswers.ToList();
+
+            List<UserAnswer> answers = new List<UserAnswer>();
+            if (sTest.userAnswers!=null)
+                answers = sTest.userAnswers.ToList();
+
 
             UserAnswer answer = answers.Where(a => a.questionId == questionId).SingleOrDefault();
 
-            ViewBag.userAnswer = answer.answerId;
-            ViewBag.isCorrect = answer.isCorrect;
-            ViewBag.correctAnswer = question.Odpowiedzi.Where(o => o.is_correct == true).SingleOrDefault().id;
+            ViewBag.userAnswer = (answer!=null)?  answer.answerId : 0;;
+            ViewBag.isCorrect = (answer != null) ? answer.isCorrect : true;
+            if (question!=null)
+                ViewBag.correctAnswer = question.Odpowiedzi.Where(o => o.is_correct == true).SingleOrDefault().id;
 
             return View(model);
         }
@@ -174,7 +184,9 @@ public ActionResult Test(int resourceId = 0, int questionId = 0, string accessio
             test = this.prepareTest(test, resourceId, accessionNumber);
         }
     }
+    
     myModel.test = test;
+
     var sTest = new Test();
 
     using (TextReader reader = new StringReader(test.xml))
@@ -189,6 +201,11 @@ public ActionResult Test(int resourceId = 0, int questionId = 0, string accessio
     else
     {
         uAnswers = new List<UserAnswer>();
+    }
+
+    if (sTest.questions.Count()==0)
+    {
+        return RedirectToAction("EndTest", new { accessionNumber = accessionNumber });
     }
 
     myModel.question = null;
@@ -314,7 +331,8 @@ public ActionResult Test(int resourceId = 0, int questionId = 0, string accessio
 
             sTest.score = score;
             StanTestu state;
-            if(score == Int32.Parse(this.quantity))
+            //if (score == Int32.Parse(this.quantity))
+            if (score == sTest.questions.Count())
             {
                 state = db.StanTestu.Where(s => s.name == "Zdany").FirstOrDefault();
             }
@@ -335,7 +353,7 @@ public ActionResult Test(int resourceId = 0, int questionId = 0, string accessio
             db.SaveChanges();
 
             ViewBag.score = score;
-            ViewBag.quantity = this.quantity;
+            ViewBag.quantity = sTest.questions.Count();
             ViewBag.state = state.name;
             ViewBag.accessionNumber = accessionNumber;
 

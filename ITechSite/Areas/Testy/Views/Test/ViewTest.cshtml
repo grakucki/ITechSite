@@ -53,7 +53,7 @@
         <th class="tg-lahg" colspan="3">
             @ViewBag.Title
             <div class="question">
-                @Model.question.content
+                    @Model.question.content
             </div>
         </th>
     </tr>
@@ -68,6 +68,8 @@
             <table>
                 @foreach (var ans in @Model.question.Odpowiedzi)
                 {
+                    if (@ans.content!=null)
+                    {
                     if (ans.id == ViewBag.userAnswer)
                     {
                         if (ViewBag.isCorrect == true)
@@ -102,6 +104,7 @@
                                 @ans.content
                             </td>
                         </tr>
+                    }
                     }
                 }
             </table>
