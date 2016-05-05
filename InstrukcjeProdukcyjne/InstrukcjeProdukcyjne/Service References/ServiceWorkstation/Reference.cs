@@ -336,16 +336,16 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
         System.Threading.Tasks.Task UpdateModelWorkstationInfoAsync(InstrukcjeProdukcyjne.ServiceWorkstation.ModelWorkstationInfo modelWorkstationInfo, bool Remove);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/RunTestKompetencji", ReplyAction="http://tempuri.org/IServiceWorkstation/RunTestKompetencjiResponse")]
-        bool RunTestKompetencji(string SitechUserId);
+        bool RunTestKompetencji(int UserId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/RunTestKompetencji", ReplyAction="http://tempuri.org/IServiceWorkstation/RunTestKompetencjiResponse")]
-        System.Threading.Tasks.Task<bool> RunTestKompetencjiAsync(string SitechUserId);
+        System.Threading.Tasks.Task<bool> RunTestKompetencjiAsync(int UserId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencji", ReplyAction="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencjiResponse")]
-        void UpdateTestKompetencji(string SitechUserId, System.Nullable<int> TestResult);
+        void UpdateTestKompetencji(int UserId, System.Nullable<int> TestResult);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencji", ReplyAction="http://tempuri.org/IServiceWorkstation/UpdateTestKompetencjiResponse")]
-        System.Threading.Tasks.Task UpdateTestKompetencjiAsync(string SitechUserId, System.Nullable<int> TestResult);
+        System.Threading.Tasks.Task UpdateTestKompetencjiAsync(int UserId, System.Nullable<int> TestResult);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceWorkstation/GetUserReadDokList", ReplyAction="http://tempuri.org/IServiceWorkstation/GetUserReadDokListResponse")]
         ITechInstrukcjeModel.ItechUsersDokumentRead[] GetUserReadDokList(int IUserId);
@@ -511,20 +511,20 @@ namespace InstrukcjeProdukcyjne.ServiceWorkstation {
             return base.Channel.UpdateModelWorkstationInfoAsync(modelWorkstationInfo, Remove);
         }
         
-        public bool RunTestKompetencji(string SitechUserId) {
-            return base.Channel.RunTestKompetencji(SitechUserId);
+        public bool RunTestKompetencji(int UserId) {
+            return base.Channel.RunTestKompetencji(UserId);
         }
         
-        public System.Threading.Tasks.Task<bool> RunTestKompetencjiAsync(string SitechUserId) {
-            return base.Channel.RunTestKompetencjiAsync(SitechUserId);
+        public System.Threading.Tasks.Task<bool> RunTestKompetencjiAsync(int UserId) {
+            return base.Channel.RunTestKompetencjiAsync(UserId);
         }
         
-        public void UpdateTestKompetencji(string SitechUserId, System.Nullable<int> TestResult) {
-            base.Channel.UpdateTestKompetencji(SitechUserId, TestResult);
+        public void UpdateTestKompetencji(int UserId, System.Nullable<int> TestResult) {
+            base.Channel.UpdateTestKompetencji(UserId, TestResult);
         }
         
-        public System.Threading.Tasks.Task UpdateTestKompetencjiAsync(string SitechUserId, System.Nullable<int> TestResult) {
-            return base.Channel.UpdateTestKompetencjiAsync(SitechUserId, TestResult);
+        public System.Threading.Tasks.Task UpdateTestKompetencjiAsync(int UserId, System.Nullable<int> TestResult) {
+            return base.Channel.UpdateTestKompetencjiAsync(UserId, TestResult);
         }
         
         public ITechInstrukcjeModel.ItechUsersDokumentRead[] GetUserReadDokList(int IUserId) {

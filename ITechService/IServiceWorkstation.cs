@@ -130,14 +130,14 @@ namespace ITechService
         /// </summary>
         /// <param name="modelWorkstationInfo"></param>
         [OperationContract]
-        bool RunTestKompetencji(string SitechUserId);
+        bool RunTestKompetencji(int UserId);
 
         /// <summary>
         /// Zapisanie wyniku testu
         /// </summary>
         /// <param name="modelWorkstationInfo"></param>
         [OperationContract]
-        void UpdateTestKompetencji(string SitechUserId, int? TestResult);
+        void UpdateTestKompetencji(int UserId, int? TestResult);
 
         /// <summary>
         /// lista przeczytanych dokumentów

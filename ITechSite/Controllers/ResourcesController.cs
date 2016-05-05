@@ -50,15 +50,16 @@ namespace ITechSite.Controllers
         public ActionResult SetValid(string msg, bool CultureInfo=false)
         {
             var ll = new ModelL();
+            var d = DateTime.Parse(msg);
             @ViewBag.Message = ll.SetValid(msg, CultureInfo);
             return View();
-        }
+        } 
 
          
         public ActionResult Index(ResourceListFind rf)
         {
             if (rf == null)
-                rf = GetOrDefault();
+                rf = GetOrDefault();  
             else
                 if (rf.FindAction == null)
                     rf = GetOrDefault();

@@ -181,3 +181,4 @@ D:\projekty2\automotive\ITechSite\ITechSite\bin\Microsoft.Owin.Security.Microsof
 D:\projekty2\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.dll
 D:\projekty2\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.pdb
 D:\projekty2\automotive\ITechSite\ITechSite\bin\Nati.dll
+D:\projekty2\automotive\ITechSite\ITechSite\obj\Debug\ITechSite.csprojResolveAssemblyReference.cache

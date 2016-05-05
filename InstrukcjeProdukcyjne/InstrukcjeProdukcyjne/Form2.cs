@@ -102,7 +102,7 @@ namespace InstrukcjeProdukcyjne
 
             
             // sprawdzamy czy należy wykonać test
-            SprawdźTestKompetencji(user2);
+            ShowTestKompetencji();
             
             //zapis do sterownika
             SimaticWriteAsync(user2.UserId, true);
@@ -117,27 +117,76 @@ namespace InstrukcjeProdukcyjne
             SimaticWriteAsync(string.Empty, false);
         }
 
-       
 
-        private void SprawdźTestKompetencji(ItechUsers user2)
+
+        private void ShowTestKompetencji(bool ForceShow = false)
         {
-            // 1. sprawdzamy kiedy ostatni został wykonany test kompetencji
-            if (CzyNależyWykonacTest(user2))
-                UruchomTest(user2);
+            try
+            {
 
+                using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
+                {
+                    client.IsOnLine();
+                    if (ForceShow)
+                        _RunTestKompetencji = true;
+                    else
+                        _RunTestKompetencji = client.RunTestKompetencji(LoginUser2.id);
+
+                    
+                    if (!_RunTestKompetencji)
+                        return;
+                    
+                    _RunTestKompetencji = false;
+                    var dial = new TestKompetencjiDlg();
+                    dial.UserId = LoginUser2.id;
+                    dial.ShowDialog();
+
+                    //dial.TestRes;
+                    client.UpdateTestKompetencjiAsync(LoginUser2.id, dial.TestRes ? 1 : 0);
+                }
+            }
+            catch (Exception ex)
+            {
+                SaveError(ex.Message, "TestKompetencji.txt");
+            }
+            return;
         }
 
-        private void UruchomTest(ItechUsers user2)
-        {
-            throw new NotImplementedException();
-        }
 
-        private bool CzyNależyWykonacTest(ItechUsers user2)
-        {
-            if (user2.LastTestKompetencjiDtm == null)
-                return true;
-            return false;
-        }
+        //private void SprawdźTestKompetencji(ItechUsers user2)
+        //{
+        //    // 1. sprawdzamy kiedy ostatni został wykonany test kompetencji
+        //    if (CzyNależyWykonacTest(user2))
+        //        UruchomTest(user2);
+        //}
+
+
+
+
+
+        //private void UruchomTest(ItechUsers user2)
+        //{
+        //    //throw new NotImplementedException();
+        //    //todo sprawdzić czy tak powinno być i kiedy to zostało zmienione
+        //    try
+        //    {
+        //        var dial = new TestKompetencjiDlg();
+        //        dial.UserId = user2.id;
+        //        dial.ShowDialog();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
+
+        //private bool CzyNależyWykonacTest(ItechUsers user2)
+        //{
+        //    return false;
+        //    if (user2.LastTestKompetencjiDtm == null)
+        //        return true;
+        //    return false;
+        //}
 
        
         private DialogResult ShowLoginDlg(String message, bool allowCancel, string allowroles)
@@ -1192,42 +1241,15 @@ namespace InstrukcjeProdukcyjne
             //testy
         }
 
-        private void ShowTestKompetencji()
-        {
-            try
-            {
-
-                using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
-                {
-                    client.IsOnLine();
-                    _RunTestKompetencji = client.RunTestKompetencji(LoginUser2.UserId);
-
-                    if (!_RunTestKompetencji)
-                        return;
-                    _RunTestKompetencji = false;
-                    var dial = new TestKompetencjiDlg();
-                    dial.UserId = LoginUser2.UserId;
-                    dial.ShowDialog();
-
-                    //dial.TestRes;
-                    client.UpdateTestKompetencjiAsync(LoginUser2.UserId, dial.TestRes? 1:0);
-                }
-            }
-            catch (Exception ex)
-            {
-                SaveError(ex.Message, "TestKompetencji.txt");
-            }
-            return;
-        }
+       
 
 
         private void testKompetencjiToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             try
             {
-                var dial = new TestKompetencjiDlg();
-                dial.UserId = LoginUser2.UserId;
-                dial.ShowDialog();
+                ShowTestKompetencji(true);
             }
             catch (Exception ex)
             {

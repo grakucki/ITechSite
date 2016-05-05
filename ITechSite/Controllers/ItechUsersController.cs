@@ -15,6 +15,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.IO;
 using ITechSite.Models.Repository.ItechUsersImport;
+using System.Text;
 
 namespace ITechSite.Controllers
 {
@@ -124,6 +125,12 @@ namespace ITechSite.Controllers
             {
                 if (ImportFile.File != null)
                 {
+
+                    //System.Text.Encoding en = Encoding.Default;
+                    //if (false)
+                    //    en = Encoding.GetEncoding(1253);
+
+                    //using (StreamReader sr = new StreamReader(ImportFile.File.InputStream,en,true))
                     using (StreamReader sr = new StreamReader(ImportFile.File.InputStream))
                     {
                         string f = sr.ReadToEnd();

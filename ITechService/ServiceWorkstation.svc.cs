@@ -23,7 +23,7 @@ namespace ITechService
         public string TestConnection(int value)
         {
             StringBuilder ret = new StringBuilder();
-            ret.AppendLine("Serwis ... v16.04.11 Ok");
+            ret.AppendLine("Serwis ... v16.04.29 Ok");
             try
             {
                 ret.Append("Baza danych ... ");
@@ -468,7 +468,7 @@ namespace ITechService
         }
 
     
-    public bool RunTestKompetencji(string SitechUserId)
+    public bool RunTestKompetencji(int UserId)
     {
         bool ret = false;
         try
@@ -483,7 +483,7 @@ namespace ITechService
                 if (!set.Test_Run)
                     return false;
 
-                var u = context.ItechUsers.Where(m => m.UserId == SitechUserId).FirstOrDefault();
+                var u = context.ItechUsers.Where(m => m.id == UserId).FirstOrDefault();
                 if (u == null)
                     return false;
 
@@ -509,7 +509,7 @@ namespace ITechService
         return false;
     }
 
-    public void UpdateTestKompetencji(string SitechUserId, int? TestResult)
+    public void UpdateTestKompetencji(int  UserId, int? TestResult)
     {
         bool ret = false;
         try
@@ -517,7 +517,7 @@ namespace ITechService
             using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
             {
 
-                var u = context.ItechUsers.Where(m => m.UserId == SitechUserId).FirstOrDefault();
+                var u = context.ItechUsers.Where(m => m.id == UserId).FirstOrDefault();
                 if (u == null)
                     return;
                 int? SuccessTestResult = 1;

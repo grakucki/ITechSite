@@ -26,7 +26,7 @@ namespace ITechSite.Areas.Testy.Controllers
             return View();
         }
 
-        private TestKompetencji prepareTest(TestKompetencji test, int resourceId, string accessionNumber = null)
+        private TestKompetencji prepareTest(TestKompetencji test, int resourceId, string accessionNumber, int UserId)
         {
             Test sTest = new Test();
             int ib = 0;
@@ -81,15 +81,17 @@ namespace ITechSite.Areas.Testy.Controllers
                 }
                 ib++;
                 sTest.questions = testQuestions.ToArray();
-                test.createdAt = DateTime.Now;
                 test.accessionNumber = guid;
                 ib++;
                 // niezakończony
                 test.stateId = 1;
                 sTest.stateId = 1;
+                sTest.userId = test.UserId;
                 ib++;
+
                 db.TestKompetencji.Add(test);
                 db.SaveChanges();
+                
                 sTest.id = test.id;
                 string xml;
                 XmlSerializer serializer = new XmlSerializer(typeof(Test));
@@ -164,7 +166,7 @@ namespace ITechSite.Areas.Testy.Controllers
         }
 
 [HttpGet]
-public ActionResult Test(int resourceId = 0, int questionId = 0, string accessionNumber = null)
+public ActionResult Test(int resourceId = 0, int questionId = 0, string accessionNumber = null, int UserId=0)
 {
     dynamic myModel = new ExpandoObject();
     XmlSerializer serializer = new XmlSerializer(typeof(Test));
@@ -173,7 +175,9 @@ public ActionResult Test(int resourceId = 0, int questionId = 0, string accessio
     if (accessionNumber == null)
     {
         test = new TestKompetencji();
-        test = this.prepareTest(test, resourceId);
+        test.createdAt = DateTime.Now;
+        test.UserId = UserId;
+        test = this.prepareTest(test, resourceId, accessionNumber, UserId);
     }
     else
     {
@@ -181,14 +185,15 @@ public ActionResult Test(int resourceId = 0, int questionId = 0, string accessio
         if (test == null)
         {
             test = new TestKompetencji();
-            test = this.prepareTest(test, resourceId, accessionNumber);
+            test.createdAt = DateTime.Now;
+            test.UserId = UserId;
+            test = this.prepareTest(test, resourceId, accessionNumber, UserId);
         }
     }
     
     myModel.test = test;
 
     var sTest = new Test();
-
     using (TextReader reader = new StringReader(test.xml))
     {
         sTest = (Test)serializer.Deserialize(reader);
@@ -349,6 +354,7 @@ public ActionResult Test(int resourceId = 0, int questionId = 0, string accessio
             }
             test.xml = xml;
             test.stateId = state.id;
+            test.finishedAt = DateTime.Now;
             test.score = score;
             db.SaveChanges();
 
@@ -356,7 +362,6 @@ public ActionResult Test(int resourceId = 0, int questionId = 0, string accessio
             ViewBag.quantity = sTest.questions.Count();
             ViewBag.state = state.name;
             ViewBag.accessionNumber = accessionNumber;
-
             return View();
         }
 

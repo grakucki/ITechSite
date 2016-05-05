@@ -19,7 +19,7 @@ namespace InstrukcjeProdukcyjne
         }
 
         public string TestUri { get; set; }
-        public string UserId { get; set; }
+        public int UserId { get; set; }
         public Guid AccessionNumber { get; set; }
         public bool TestRes { get; set; }
 
@@ -32,7 +32,7 @@ namespace InstrukcjeProdukcyjne
             if (AccessionNumber == Guid.Empty)
                 AccessionNumber = Guid.NewGuid();
             TestUri = Properties.Settings.Default.App.ServerTestKompetencjiAddress;
-            TestUri += string.Format(@"?resourceId={0}&accessionNumber={1}&user_id={2}",
+            TestUri += string.Format(@"?resourceId={0}&accessionNumber={1}&UserId={2}",
                 Properties.Settings.Default.App.Stanowisko,
                 AccessionNumber.ToString(),
                 UserId);
