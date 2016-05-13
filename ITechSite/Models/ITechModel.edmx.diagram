@@ -51,6 +51,7 @@
         <AssociationConnector Association="ITechModel.FK_ItechUsersDokumentRead_ItechUsers" />
         <AssociationConnector Association="ITechModel.FK_ItechUsersNewsRead_NewsItems" />
         <AssociationConnector Association="ITechModel.FK_ItechUsersNewsRead_ItechUsers" />
+        <EntityTypeShape EntityType="ITechModel.TestKompetencji2" Width="2" PointX="2.875" PointY="7.75" />
         </Diagram>
       <Diagram DiagramId="3054951c8206400f9fa79692752eb712" Name="Diagram2" />
       <Diagram DiagramId="112f2905862845bcb4f4f1b35f51eb8a" Name="Diagram3" >

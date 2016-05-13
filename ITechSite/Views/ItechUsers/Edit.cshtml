@@ -133,8 +133,14 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.LastTestKompetencjiResult, "Wynik ostatniego testu", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-1">
                     @Html.Label("", Model.LastTestKompetencjiResult.ToString(), htmlAttributes: new { @class = "form-label" })
+                </div>
+                <div class="col-md-9">
+                    @if (!string.IsNullOrEmpty(@ViewBag.LastAC))
+                    { 
+                        @Html.ActionLink("Pokaż ostatni test", "ViewTest", "Test", new { area = "Testy", accessionNumber = @ViewBag.LastAC }, new { target = "_blank", @class = "col-md-2 btn btn-info" })
+                    }
                 </div>
             </div>
 

@@ -430,6 +430,9 @@
     <Content Include="Models\sql\2015-09-24.sql" />
     <Content Include="Models\sql\2015-10-19.sql" />
     <Content Include="Models\sql\2015-10-30.sql" />
+    <Compile Include="Models\TestKompetencji2.cs">
+      <DependentUpon>ITechModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TestSettings.cs">
       <DependentUpon>ITechModel.tt</DependentUpon>
     </Compile>

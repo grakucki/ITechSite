@@ -79,6 +79,7 @@ namespace ITechSite.Controllers
             if (u == null)
                 return new HttpStatusCodeResult(HttpStatusCode.NotFound);
             @ViewBag.AllRoles = r.GetAllRoles();
+            @ViewBag.LastAC = r.GetLastAccessionNumber(id);
             return View(u);
         }
 

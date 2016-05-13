@@ -11,7 +11,7 @@ using System.Data.Entity.Validation;
 using System.IO;
 using PagedList;
 using System.Web.Security;
-using ITechSite.Models.Repository.ItechUsersImport;
+//using ITechSite.Models.Repository.ItechUsersImport;
 
 namespace ITechSite.Models.Repository
 {
@@ -85,6 +85,15 @@ namespace ITechSite.Models.Repository
         public List<SelectedItem> GetAllRoles()
         {
             return _dataContex.AspNetRoles.Select(m => new SelectedItem { Id = m.Id, Name = m.Name }).ToList();
+        }
+
+        public string GetLastAccessionNumber(int? id)
+        {
+            if (!id.HasValue)
+                return null;
+
+            var r = _dataContex.TestKompetencji.Where(m => m.UserId == id).OrderByDescending(m=>m.createdAt).Select(m=>m.accessionNumber).FirstOrDefault();
+            return r;
         }
 
 

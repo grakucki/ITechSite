@@ -296,10 +296,13 @@ public ActionResult Test(int resourceId = 0, int questionId = 0, string accessio
             db.TestKompetencjiLog.Add(log);
             db.SaveChanges();
         }
-[HttpGet]
+
+        [HttpGet]
         public ActionResult EndTest(string accessionNumber)
         {
-            var test = db.TestKompetencji.Where(t => t.accessionNumber == accessionNumber).First();
+            var test = db.TestKompetencji.Where(t => t.accessionNumber == accessionNumber).FirstOrDefault();
+            if (test==null)
+                return View();
 
             int score = 0;
 
@@ -354,7 +357,8 @@ public ActionResult Test(int resourceId = 0, int questionId = 0, string accessio
             }
             test.xml = xml;
             test.stateId = state.id;
-            test.finishedAt = DateTime.Now;
+            if (!test.finishedAt.HasValue)
+                test.finishedAt = DateTime.Now;
             test.score = score;
             db.SaveChanges();
 
