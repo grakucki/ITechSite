@@ -105,6 +105,7 @@
     <EntitySetMapping Name="ItechUsers">
       <EntityTypeMapping TypeName="ITechModel.ItechUsers">
         <MappingFragment StoreEntitySet="ItechUsers">
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
           <ScalarProperty Name="ForceTestKompetencji" ColumnName="ForceTestKompetencji" />
           <ScalarProperty Name="LastTestKompetencjiDtmSucces" ColumnName="LastTestKompetencjiDtmSucces" />
           <ScalarProperty Name="Enabled" ColumnName="Enabled" />

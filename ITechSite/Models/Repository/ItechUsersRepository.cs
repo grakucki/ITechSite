@@ -28,6 +28,8 @@ namespace ITechSite.Models.Repository
         {
             var x = _dataContex.ItechUsers.AsQueryable();
             var order = "name";
+
+            x = x.Where(m => m.Deleted == false);
             if (!string.IsNullOrEmpty(userName))
                 x = x.Where(m => m.UserName.Contains(userName));
             else

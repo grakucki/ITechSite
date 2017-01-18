@@ -205,6 +205,7 @@
     <EntitySetMapping Name="ItechUsers">
       <EntityTypeMapping TypeName="ITechModel.ItechUsers">
         <MappingFragment StoreEntitySet="ItechUsers">
+          <ScalarProperty Name="Deleted" ColumnName="Deleted" />
           <ScalarProperty Name="ForceTestKompetencji" ColumnName="ForceTestKompetencji" />
           <ScalarProperty Name="LastTestKompetencjiDtmSucces" ColumnName="LastTestKompetencjiDtmSucces" />
           <ScalarProperty Name="Enabled" ColumnName="Enabled" />
@@ -280,6 +281,20 @@
           <ScalarProperty Name="FirstReadAt" ColumnName="FirstReadAt" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="NewsItemId" ColumnName="NewsItemId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TestKompetencji">
+      <EntityTypeMapping TypeName="ITechModel.TestKompetencji2">
+        <MappingFragment StoreEntitySet="TestKompetencji">
+          <ScalarProperty Name="stateId" ColumnName="stateId" />
+          <ScalarProperty Name="accessionNumber" ColumnName="accessionNumber" />
+          <ScalarProperty Name="score" ColumnName="score" />
+          <ScalarProperty Name="xml" ColumnName="xml" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="finishedAt" ColumnName="finishedAt" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

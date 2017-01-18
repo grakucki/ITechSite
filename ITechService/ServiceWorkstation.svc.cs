@@ -264,7 +264,7 @@ namespace ITechService
                 {
                     context.Configuration.LazyLoadingEnabled = false;
                     context.Configuration.ProxyCreationEnabled = false;
-                    o = context.ItechUsers.Include(m=>m.AspNetRoles).OrderBy(m=>m.CardNo).ToList();
+                    o = context.ItechUsers.Where(m=>m.Enabled==true && m.Deleted==false).Include(m=>m.AspNetRoles).OrderBy(m=>m.CardNo).ToList();
                 }
             }
             catch (Exception ex)
@@ -637,9 +637,9 @@ namespace ITechService
                 context.Configuration.LazyLoadingEnabled = false;
                 context.Configuration.ProxyCreationEnabled = false;
                 if (OnlyCardNo)
-                    o = context.ItechUsers.Where(m => m.CardNo == cardno).Include(m => m.AspNetRoles).ToList();
+                    o = context.ItechUsers.Where(m => m.CardNo == cardno && m.Enabled==true && m.Deleted==false).Include(m => m.AspNetRoles).ToList();
                 else
-                    o = context.ItechUsers.Where(m => m.CardNo == cardno && m.Password == passowrd).Include(m => m.AspNetRoles).ToList();
+                    o = context.ItechUsers.Where(m => m.CardNo == cardno && m.Password == passowrd && m.Enabled == true && m.Deleted == false).Include(m => m.AspNetRoles).ToList();
             }
         }
         catch (Exception ex)

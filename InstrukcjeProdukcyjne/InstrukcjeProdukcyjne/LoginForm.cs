@@ -179,25 +179,22 @@ namespace InstrukcjeProdukcyjne
             using (var client = ServiceWorkstation.ServiceWorkstationClientEx.WorkstationClient())
             {
                 try 
-	                {
+	            {
                         
-                        client.IsOnLine();
-                        u=client.GetLoginUser(cardno, passowrd, OnlyCardNo);
-	                }
-	                catch (Exception ex)
-	                {
-                        System.Diagnostics.Debug.WriteLine(ex.Message);
-	                }
+                    client.IsOnLine();
+                    u=client.GetLoginUser(cardno, passowrd, OnlyCardNo);
+	            }
+	            catch (Exception ex)
+	            {
+                    System.Diagnostics.Debug.WriteLine(ex.Message);
+                    //gdy logowanie online się niepowiodło
+                    if (OnlyCardNo)
+                        u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Enabled == true).FirstOrDefault();
+                    else
+                        u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password == passowrd && m.Enabled == true).FirstOrDefault();
+	            }
             }
 
-            //gdy logowanie onlien się niepowiodło
-            if (u==null)
-            {
-                if (OnlyCardNo)
-                    u = db.ItechUsers_Local.Where(m => m.CardNo == cardno).FirstOrDefault();
-                else
-                    u = db.ItechUsers_Local.Where(m => m.CardNo == cardno && m.Password == passowrd).FirstOrDefault();
-            }
             return u;
             
         }
