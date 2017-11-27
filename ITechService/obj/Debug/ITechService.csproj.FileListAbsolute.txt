@@ -132,3 +132,15 @@ D:\projekty\automotive\ITechSite\ITechService\bin\zh-Hant\System.Spatial.resourc
 D:\projekty\automotive\ITechSite\ITechService\obj\Debug\ITechService.csprojResolveAssemblyReference.cache
 D:\projekty\automotive\ITechSite\ITechService\obj\Debug\ITechService.dll
 D:\projekty\automotive\ITechSite\ITechService\obj\Debug\ITechService.pdb
+d:\projekty\automotive2017\ITechSite\ITechService\bin\ITechService.dll.config
+d:\projekty\automotive2017\ITechSite\ITechService\bin\ITechService.dll
+d:\projekty\automotive2017\ITechSite\ITechService\bin\ITechService.pdb
+d:\projekty\automotive2017\ITechSite\ITechService\bin\EntityFramework.dll
+d:\projekty\automotive2017\ITechSite\ITechService\bin\EntityFramework.SqlServer.dll
+d:\projekty\automotive2017\ITechSite\ITechService\bin\ITechInstrukcjeModel.dll
+d:\projekty\automotive2017\ITechSite\ITechService\bin\ITechInstrukcjeModel.pdb
+d:\projekty\automotive2017\ITechSite\ITechService\bin\EntityFramework.xml
+d:\projekty\automotive2017\ITechSite\ITechService\bin\EntityFramework.SqlServer.xml
+d:\projekty\automotive2017\ITechSite\ITechService\obj\Debug\ITechService.csprojResolveAssemblyReference.cache
+d:\projekty\automotive2017\ITechSite\ITechService\obj\Debug\ITechService.dll
+d:\projekty\automotive2017\ITechSite\ITechService\obj\Debug\ITechService.pdb

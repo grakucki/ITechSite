@@ -1119,7 +1119,7 @@ namespace InstrukcjeProdukcyjne
             }
             catch (Exception ex)
             {
-
+                Debug.Write(ex.Message);
             }
             finally
             {

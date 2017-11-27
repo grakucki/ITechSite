@@ -28,3 +28,9 @@ D:\projekty2\automotive\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGenera
 D:\projekty2\automotive\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.csproj.GenerateResource.Cache
 D:\projekty2\automotive\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.exe
 D:\projekty2\automotive\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.pdb
+D:\projekty\automotive2017\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.csprojResolveAssemblyReference.cache
+D:\projekty\automotive2017\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.Form1.resources
+D:\projekty\automotive2017\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.Properties.Resources.resources
+D:\projekty\automotive2017\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.csproj.GenerateResource.Cache
+D:\projekty\automotive2017\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.exe
+D:\projekty\automotive2017\ITechSite\ItechGeneratorInstrukcji\obj\Debug\ItechGeneratorInstrukcji.pdb

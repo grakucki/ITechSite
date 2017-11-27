@@ -195,7 +195,6 @@ namespace InstrukcjeProdukcyjne
                 {
                     
                     info = ad.CheckForDetailedUpdate();
-                    info.
 
                 }
                 catch (DeploymentDownloadException dde)

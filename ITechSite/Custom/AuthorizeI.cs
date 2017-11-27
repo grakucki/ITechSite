@@ -1,4 +1,4 @@
-﻿using Nati;
+﻿//using Nati;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +11,10 @@ namespace ITechSite.Custom
     {
         void IActionFilter.OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var n = new ModelL();
+            //var n = new ModelL();
             
-            if (!n.IsValid(filterContext))
-                throw new ArgumentException(ModelL.ErrorMessage);
+            //if (!n.IsValid(filterContext))
+                //throw new ArgumentException(ModelL.ErrorMessage);
 
             this.OnActionExecuting(filterContext);
         }

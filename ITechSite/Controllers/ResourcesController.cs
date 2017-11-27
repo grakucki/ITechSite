@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using ITechSite.Models;
 using PagedList;
 using ITechSite.Custom;
-using Nati;
+//using Nati;
 
 namespace ITechSite.Controllers
 {
@@ -49,9 +49,9 @@ namespace ITechSite.Controllers
 
         public ActionResult SetValid(string msg, bool CultureInfo=false)
         {
-            var ll = new ModelL();
-            var d = DateTime.Parse(msg);
-            @ViewBag.Message = ll.SetValid(msg, CultureInfo);
+            //var ll = new ModelL();
+            //var d = DateTime.Parse(msg);
+            //@ViewBag.Message = ll.SetValid(msg, CultureInfo);
             return View();
         } 
 

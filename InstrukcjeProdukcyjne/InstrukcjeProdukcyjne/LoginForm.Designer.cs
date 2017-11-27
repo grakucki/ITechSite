@@ -54,6 +54,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.labelMessage = new System.Windows.Forms.Label();
+            this.labelVer = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.customPanel1.SuspendLayout();
@@ -146,6 +147,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.labelVer);
             this.panel2.Controls.Add(this.pictureBox2);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
@@ -155,6 +157,7 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1144, 351);
             this.panel2.TabIndex = 13;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // pictureBox2
             // 
@@ -340,6 +343,17 @@
             this.labelMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelMessage.Click += new System.EventHandler(this.labelMessage_Click);
             // 
+            // labelVer
+            // 
+            this.labelVer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelVer.Location = new System.Drawing.Point(3, 300);
+            this.labelVer.Name = "labelVer";
+            this.labelVer.Size = new System.Drawing.Size(506, 25);
+            this.labelVer.TabIndex = 8;
+            this.labelVer.Text = "Label2";
+            // 
             // LoginForm
             // 
             this.AcceptButton = this.buttonOk;
@@ -402,5 +416,6 @@
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.RadioButton LoginRadioButton2;
         private System.Windows.Forms.RadioButton AppCloseRadioButton;
+        private System.Windows.Forms.Label labelVer;
     }
 }

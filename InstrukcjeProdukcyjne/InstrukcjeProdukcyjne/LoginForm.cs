@@ -68,6 +68,7 @@ namespace InstrukcjeProdukcyjne
             fileSystemWatcher1.Path = Path.GetDirectoryName(Properties.Settings.Default.App.CardReaderFileDat);
             fileSystemWatcher1.Filter = Path.GetFileName(Properties.Settings.Default.App.CardReaderFileDat);
             textBoxCarNo.Focus();
+            labelVer.Text = Application.ProductVersion;
 
             AutoLogin();
             
@@ -509,6 +510,9 @@ namespace InstrukcjeProdukcyjne
                 buttonOk.Text = "Zaloguj";
         }
 
-        
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

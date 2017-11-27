@@ -1,6 +1,5 @@
 ﻿using ITechSite.Models;
 using ITechSite.Models.Repository;
-using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +15,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using System.IO;
 using ITechSite.Models.Repository.ItechUsersImport;
 using System.Text;
+using PagedList;
 
 namespace ITechSite.Controllers
 {

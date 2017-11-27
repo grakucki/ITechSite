@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="InstrukcjeProdukcyjne.exe" version="3.5.10.58" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="InstrukcjeProdukcyjne.exe" version="3.7.11.5" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="Icon1.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="InstrukcjeProdukcyjne" version="3.16.4.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="InstrukcjeProdukcyjne" version="3.17.11.2" language="neutral" processorArchitecture="msil" />
     <commandLine file="InstrukcjeProdukcyjne.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/SA6y/s7Z05KiGJ4v+AJ22+iNWYhren/l1XzdZ8W7qE=</dsig:DigestValue>
+        <dsig:DigestValue>oQmi9rgTf6lpBkEw32qbbgp5XjMcPw3+kLnghUYgh8A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>rAQTyO/iwpD4B9lVHJEjvGeEqbfeAwAVRV+jSK5q40Q=</dsig:DigestValue>
+        <dsig:DigestValue>NOgKmwfI98jOEHIMhli+cARrF+BNCDX2wsqYyabK5j4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -79,38 +79,38 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EntityFramework.dll" size="5196496">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EntityFramework.dll" size="5225168">
       <assemblyIdentity name="EntityFramework" version="6.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>7W69dJBS+QGPZplnGuVGmt7fCGz4sb1CVrvpxOf2/wU=</dsig:DigestValue>
+        <dsig:DigestValue>nCD7KthqdgsMauvZMByQCYkdAq4UcgqTkmwLU1uK0Js=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EntityFramework.SqlServer.dll" size="621264">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EntityFramework.SqlServer.dll" size="622288">
       <assemblyIdentity name="EntityFramework.SqlServer" version="6.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ob9snjgg6D9D6fIN19mwozYqkxRvCv4LEzAYXi1RsMs=</dsig:DigestValue>
+        <dsig:DigestValue>4OEmw7inupUB0D+Z1Upcu9F0vOy2FwCYq0zBIZ8n+TM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InstrukcjeProdukcyjne.exe" size="2081728">
-      <assemblyIdentity name="InstrukcjeProdukcyjne" version="3.16.4.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InstrukcjeProdukcyjne.exe" size="2074048">
+      <assemblyIdentity name="InstrukcjeProdukcyjne" version="3.17.11.2" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>p4tjEU0SUuasXwu4sGGIin2NB0axX2XvnnQwgYP70kw=</dsig:DigestValue>
+        <dsig:DigestValue>OOU41NvkrcIMVYoch3oN29+ND5fl2ilZW3w9v7n3Z9k=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -122,43 +122,43 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>6LnroUTD4KzwSjIjM2BaaWRcsBNHz3JaiN6TmfUgqJ8=</dsig:DigestValue>
+        <dsig:DigestValue>IfdE/Ld3POPEDOheuZOJs8eRL/sIYmOLN8JgEHJ9aBo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.WMPLib.dll" size="331264">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Interop.WMPLib.dll" size="330752">
       <assemblyIdentity name="Interop.WMPLib" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>85RGpjhtyDmqBDX4j4X6g08mUQc4eYICszek3p8Ki/w=</dsig:DigestValue>
+        <dsig:DigestValue>q6Yb/oPA0qehXA4rgIG1JhNL1JypfmX/pcQPW4IpP2A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ITechInstrukcjeModel.dll" size="114688">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ITechInstrukcjeModel.dll" size="110592">
       <assemblyIdentity name="ITechInstrukcjeModel" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>/LoZnFZqKWyL9sFReFb2IOEMvB9ZHwdM9jXgI4nKpPc=</dsig:DigestValue>
+        <dsig:DigestValue>/kzRNH5WkEkfhfiKRiLt5V/g/3XeGOEoysJykzr9DFI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ItechSimatic.dll" size="28160">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ItechSimatic.dll" size="27648">
       <assemblyIdentity name="ItechSimatic" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>nE9xb3oQqYs1yWZVFGROQyveoSeMMeL5ZAvygpcnY/Q=</dsig:DigestValue>
+        <dsig:DigestValue>T9tLC9kDmPFccEYs0eK579BrTG7KrgFQ/9qFq7qZrY0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -264,13 +264,13 @@
       <dsig:DigestValue>Q4Erj4XR9+WjntLnEIXC0tCN54P0Htr7A1g8f6iioxQ=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="InstrukcjeProdukcyjne.exe.config" size="4077">
+  <file name="InstrukcjeProdukcyjne.exe.config" size="3964">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>Sm+JX7lrscUkpisrzX67ltIA9hatoEa1lLTiYRepQNA=</dsig:DigestValue>
+      <dsig:DigestValue>7DPbH3vgdiMsXSBs1sD4PaTGyGDAAQ2qBZBDlL2g0gE=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\ikonaJpg.png" size="16459">

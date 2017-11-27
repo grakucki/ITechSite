@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITechSite", "ITechSite\ITechSite.csproj", "{18392ED0-DE70-4EAF-9F9B-4092DA2E991E}"
 EndProject
@@ -44,7 +44,6 @@ Global
 		{18392ED0-DE70-4EAF-9F9B-4092DA2E991E}.Release|x86.ActiveCfg = Release|x86
 		{18392ED0-DE70-4EAF-9F9B-4092DA2E991E}.Release|x86.Build.0 = Release|x86
 		{69F414B1-39A1-48EC-8E7E-246EEF7A02E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{69F414B1-39A1-48EC-8E7E-246EEF7A02E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69F414B1-39A1-48EC-8E7E-246EEF7A02E1}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{69F414B1-39A1-48EC-8E7E-246EEF7A02E1}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{69F414B1-39A1-48EC-8E7E-246EEF7A02E1}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -47,7 +48,7 @@ namespace ITechSite.Models
         public string FindAction { get; set; }
         public int? page { get; set; }
 
-        public PagedList.IPagedList<Dokument> Dokuments { get; set; }
+        public IPagedList<Dokument> Dokuments { get; set; }
 
         [DisplayName("Dołączone dokumenty")]
         public IList<InformationPlan> IncludeDoc { get; set; }
