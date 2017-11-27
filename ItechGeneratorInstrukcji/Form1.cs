@@ -43,7 +43,7 @@ namespace ItechGeneratorInstrukcji
                 db.ExportDokuments();
 
 
-                MessageBox.Show("Zapis ok " + db.WorkDir);
+                MessageBox.Show("Zapis ok. " + db.WorkDir);
             }
             catch (Exception ex)
             {
