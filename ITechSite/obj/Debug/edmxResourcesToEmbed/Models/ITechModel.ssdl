@@ -102,6 +102,7 @@
     <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="LastTestKompetencjiDtmSucces" Type="datetime" />
     <Property Name="ForceTestKompetencji" Type="bit" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ItechUsersDokumentRead">
     <Key>
@@ -225,6 +226,19 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CpuType" Type="nvarchar" MaxLength="50" />
     <Property Name="Enabled" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TestKompetencji">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="createdAt" Type="datetime" Nullable="false" />
+    <Property Name="finishedAt" Type="datetime" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="xml" Type="nvarchar(max)" />
+    <Property Name="score" Type="int" />
+    <Property Name="accessionNumber" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="stateId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TestSettings">
     <Key>
@@ -562,6 +576,7 @@
     <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ResourceType" EntityType="Self.ResourceType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SimaticCpuType" EntityType="Self.SimaticCpuType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TestKompetencji" EntityType="Self.TestKompetencji" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TestSettings" EntityType="Self.TestSettings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WorkProcess" EntityType="Self.WorkProcess" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Workstation" EntityType="Self.Workstation" Schema="dbo" store:Type="Tables" />

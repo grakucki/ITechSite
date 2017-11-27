@@ -22,6 +22,9 @@ namespace ITechInstrukcjeModel
     
         [System.Runtime.Serialization.IgnoreDataMember]
 	public virtual NewsItems NewsItems { get; set; }
+        [System.Runtime.Serialization.IgnoreDataMember]
+	public virtual ItechUsers ItechUsers { get; set; }
     }
 }
+
 

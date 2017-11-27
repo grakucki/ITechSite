@@ -135,7 +135,7 @@
       <End Role="NewsPriority" EntitySet="NewsPriority" />
       <End Role="NewsItems" EntitySet="NewsItems" />
     </AssociationSet>
-    <AssociationSet Name="FK_ItechUsersNewsRead_ItechUsers1" Association="ITechModel.FK_ItechUsersNewsRead_ItechUsers1">
+    <AssociationSet Name="FK_ItechUsersNewsRead_ItechUsers" Association="ITechModel.FK_ItechUsersNewsRead_ItechUsers">
       <End Role="ItechUsers" EntitySet="ItechUsers" />
       <End Role="ItechUsersNewsRead" EntitySet="ItechUsersNewsRead" />
     </AssociationSet>
@@ -279,6 +279,8 @@
     <Property Name="LastTestKompetencjiDtmSucces" Type="DateTime" Precision="3" />
     <Property Name="ForceTestKompetencji" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="ItechUsersDokumentRead" Relationship="ITechModel.FK_ItechUsersDokumentRead_ItechUsers" FromRole="ItechUsers" ToRole="ItechUsersDokumentRead" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="ItechUsersNewsRead" Relationship="ITechModel.FK_ItechUsersNewsRead_ItechUsers" FromRole="ItechUsers" ToRole="ItechUsersNewsRead" />
   </EntityType>
   <Association Name="ItechUsersRoles">
     <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
@@ -428,6 +430,7 @@
     <Property Name="LastReadAt" Type="DateTime" Precision="3" />
     <NavigationProperty Name="NewsItems" Relationship="ITechModel.FK_ItechUsersNewsRead_NewsItems" FromRole="ItechUsersNewsRead" ToRole="NewsItems" />
     <Property Name="ReadCount" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ItechUsers" Relationship="ITechModel.FK_ItechUsersNewsRead_ItechUsers" FromRole="ItechUsersNewsRead" ToRole="ItechUsers" />
   </EntityType>
   <EntityType Name="NewsItems">
     <Key>
@@ -479,7 +482,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ItechUsersNewsRead_ItechUsers1">
+  <Association Name="FK_ItechUsersNewsRead_ItechUsers">
     <End Type="ITechModel.ItechUsers" Role="ItechUsers" Multiplicity="1" />
     <End Type="ITechModel.ItechUsersNewsRead" Role="ItechUsersNewsRead" Multiplicity="*" />
     <ReferentialConstraint>

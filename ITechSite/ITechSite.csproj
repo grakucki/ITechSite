@@ -492,6 +492,7 @@
     <Content Include="Models\sql\2015-09-01.sql" />
     <Content Include="Models\sql\2015-11-30.sql" />
     <Content Include="Models\sql\2016-03-18.sql" />
+    <Content Include="Models\sql\2016-05-31.sql" />
     <Content Include="Scripts\bootstrap-dialog.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

@@ -61,6 +61,7 @@
     <Property Name="Enabled" Type="bit" Nullable="false" />
     <Property Name="LastTestKompetencjiDtmSucces" Type="datetime" />
     <Property Name="ForceTestKompetencji" Type="bit" Nullable="false" />
+    <Property Name="Deleted" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="ItechUsersDokumentRead">
     <Key>

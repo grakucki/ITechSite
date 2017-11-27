@@ -150,6 +150,7 @@
       <End Role="ItechUsers" EntitySet="ItechUsers" />
       <End Role="ItechUsersNewsRead" EntitySet="ItechUsersNewsRead" />
     </AssociationSet>
+    <EntitySet Name="TestKompetencji" EntityType="ITechModel.TestKompetencji2" />
   </EntityContainer>
   <EntityType Name="Dokument">
     <Key>
@@ -505,6 +506,7 @@
     <Property Name="ForceTestKompetencji" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="ItechUsersDokumentRead" Relationship="ITechModel.FK_ItechUsersDokumentRead_ItechUsers" FromRole="ItechUsers" ToRole="ItechUsersDokumentRead" />
     <NavigationProperty Name="ItechUsersNewsRead" Relationship="ITechModel.FK_ItechUsersNewsRead_ItechUsers" FromRole="ItechUsers" ToRole="ItechUsersNewsRead" />
+    <Property Name="Deleted" Type="Boolean" Nullable="false" />
   </EntityType>
   <Association Name="ItechUsersRoles">
     <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
@@ -637,4 +639,17 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="TestKompetencji2">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="createdAt" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="finishedAt" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="xml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="score" Type="Int32" />
+    <Property Name="accessionNumber" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="stateId" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

@@ -107,6 +107,7 @@
           <Property Name="Enabled" Type="bit" Nullable="false" />
           <Property Name="LastTestKompetencjiDtmSucces" Type="datetime" />
           <Property Name="ForceTestKompetencji" Type="bit" Nullable="false" />
+          <Property Name="Deleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ItechUsersDokumentRead">
           <Key>
@@ -1188,6 +1189,7 @@
           <Property Name="ForceTestKompetencji" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ItechUsersDokumentRead" Relationship="ITechModel.FK_ItechUsersDokumentRead_ItechUsers" FromRole="ItechUsers" ToRole="ItechUsersDokumentRead" />
           <NavigationProperty Name="ItechUsersNewsRead" Relationship="ITechModel.FK_ItechUsersNewsRead_ItechUsers" FromRole="ItechUsers" ToRole="ItechUsersNewsRead" />
+          <Property Name="Deleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="ItechUsersRoles">
           <End Type="ITechModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
@@ -1543,6 +1545,7 @@
           <EntitySetMapping Name="ItechUsers">
             <EntityTypeMapping TypeName="ITechModel.ItechUsers">
               <MappingFragment StoreEntitySet="ItechUsers">
+                <ScalarProperty Name="Deleted" ColumnName="Deleted" />
                 <ScalarProperty Name="ForceTestKompetencji" ColumnName="ForceTestKompetencji" />
                 <ScalarProperty Name="LastTestKompetencjiDtmSucces" ColumnName="LastTestKompetencjiDtmSucces" />
                 <ScalarProperty Name="Enabled" ColumnName="Enabled" />
