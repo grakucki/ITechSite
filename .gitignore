@@ -1,9 +1,14 @@
+InstrukcjeProdukcyjne/InstrukcjeProdukcyjne/obj/Debug*
+ITechInstrukcjeModel/bin/Debug/*
+ITechInstrukcjeModel/obj/Debug/*
+ITechSite/ITechService/bin/Debug/*
+ITechSite/ITechService/obj/Debug/*
+InstrukcjeProdukcyjne/InstrukcjeProdukcyjne/bin/Debug/app.publish/InstrukcjeProdukcyjne.exe
 *.cache
 *.dll
 *.pdb
 bin
 obj
-InstrukcjeProdukcyjne/InstrukcjeProdukcyjne/bin/Debug/app.publish/InstrukcjeProdukcyjne.exe
 ITechService/obj/Debug/ITechService.pdb
 Deploy/ITechSite.zip
 *.suo
@@ -13,9 +18,7 @@ ITechSite/bin/ITechSite.dll
 *.pdb
 Deploy/ITechSite.deploy.cmd
 *.pdb
-*.pdb
 *.suo
-*.pdb
 *.exe
 *.pdb
 *.dll
