@@ -3,6 +3,8 @@ ITechInstrukcjeModel/bin/Debug/*
 ITechInstrukcjeModel/obj/Debug/*
 ITechSite/ITechService/bin/Debug/*
 ITechSite/ITechService/obj/Debug/*
+ITechSite/bin/Debug/*
+ITechSite/obj/Debug/*
 InstrukcjeProdukcyjne/InstrukcjeProdukcyjne/bin/Debug/app.publish/InstrukcjeProdukcyjne.exe
 *.cache
 *.dll

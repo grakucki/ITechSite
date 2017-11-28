@@ -11,6 +11,7 @@ using ITechSite.Models;
 
 namespace ITechSite.Areas.Settings.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class ProjectsController : Controller
     {
         private ITechEntities db = new ITechEntities();

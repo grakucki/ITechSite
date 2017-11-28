@@ -185,6 +185,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Settings\Controllers\FactoriesController.cs" />
     <Compile Include="Areas\Settings\Controllers\ProjectsController.cs" />
+    <Compile Include="Areas\Settings\Models\FactoriesEditViewModel.cs" />
     <Compile Include="Areas\Settings\SettingsAreaRegistration.cs" />
     <Compile Include="Areas\Testy\Controllers\alaController.cs" />
     <Compile Include="Areas\Testy\Controllers\TestController.cs" />
@@ -1021,7 +1022,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Settings\Models\" />
     <Folder Include="Areas\Settings\Views\Shared\" />
     <Folder Include="Views\Factory\" />
   </ItemGroup>

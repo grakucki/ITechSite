@@ -8,9 +8,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ITechSite.Models;
+using ITechSite.Areas.Settings.Models;
 
 namespace ITechSite.Areas.Settings.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class FactoriesController : Controller
     {
         private ITechEntities db = new ITechEntities();
@@ -53,7 +55,7 @@ namespace ITechSite.Areas.Settings.Controllers
             {
                 db.Factory.Add(factory);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", new { id = factory.Id });
             }
 
             return View(factory);
@@ -71,7 +73,12 @@ namespace ITechSite.Areas.Settings.Controllers
             {
                 return HttpNotFound();
             }
-            return View(factory);
+
+            FactoriesEditViewModel model = new FactoriesEditViewModel(factory);
+            model.AvailableProject = db.Department.AsEnumerable().Where(m=>!factory.Department.Contains(m)).ToList();
+            model.AvailableWorkProcess = db.WorkProcess.AsEnumerable().Where(m => !factory.WorkProcess.Contains(m)).ToList();
+            return View(model);
+//            return View(factory);
         }
 
         // POST: Settings/Factories/Edit/5
@@ -115,6 +122,53 @@ namespace ITechSite.Areas.Settings.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+        
+        public async Task<ActionResult> AddProject(int id, int projectId, string act)
+        {
+            Factory factory = await db.Factory.FindAsync(id);
+
+            if (act == "Remove")
+            {
+                Department project = factory.Department.Where(m=>m.Id== projectId).FirstOrDefault();
+                if (project!=null)
+                    factory.Department.Remove(project);
+            }
+
+            if (act == "Add")
+            {
+                Department project = db.Department.Find(projectId);
+                //Department project = await db.Department.FindAsync(projectId);
+                factory.Department.Add(project);
+            }
+
+            db.SaveChanges();
+            return RedirectToAction("Edit", new { id = id });
+        }
+
+
+        public async Task<ActionResult> AddWorkProccess(int id, int workProcessId, string act)
+        {
+            Factory factory = await db.Factory.FindAsync(id);
+
+            if (act == "Remove")
+            {
+                WorkProcess e = factory.WorkProcess.Where(m => m.Id == workProcessId).FirstOrDefault();
+                if (e != null)
+                    factory.WorkProcess.Remove(e);
+            }
+
+            if (act == "Add")
+            {
+                WorkProcess e = db.WorkProcess.Find(workProcessId);
+                //Department project = await db.Department.FindAsync(projectId);
+                factory.WorkProcess.Add(e);
+            }
+
+            db.SaveChanges();
+            return RedirectToAction("Edit", new { id = id });
+        }
+
 
         protected override void Dispose(bool disposing)
         {
