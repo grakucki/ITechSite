@@ -183,7 +183,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Areas\Settings\Controllers\FactorysController.cs" />
+    <Compile Include="Areas\Settings\Controllers\FactoriesController.cs" />
     <Compile Include="Areas\Settings\Controllers\ProjectsController.cs" />
     <Compile Include="Areas\Settings\SettingsAreaRegistration.cs" />
     <Compile Include="Areas\Testy\Controllers\alaController.cs" />
@@ -592,7 +592,11 @@
     <Content Include="Areas\Settings\Views\web.config" />
     <Content Include="Areas\Settings\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Settings\Views\Projects\Index.cshtml" />
-    <Content Include="Areas\Settings\Views\Factorys\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\Factories\Create.cshtml" />
+    <Content Include="Areas\Settings\Views\Factories\Delete.cshtml" />
+    <Content Include="Areas\Settings\Views\Factories\Details.cshtml" />
+    <Content Include="Areas\Settings\Views\Factories\Edit.cshtml" />
+    <Content Include="Areas\Settings\Views\Factories\Index.cshtml" />
     <None Include="Properties\PublishProfiles\insofter.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\build.js" />
