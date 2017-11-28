@@ -1,23 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using ITechSite.Models;
 
 namespace ITechSite.Areas.Settings.Controllers
 {
     public class ProjectsController : Controller
     {
+        private ITechEntities db = new ITechEntities();
+
         // GET: Settings/Projects
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            return View(await db.Department.ToListAsync());
         }
 
         // GET: Settings/Projects/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Department department = await db.Department.FindAsync(id);
+            if (department == null)
+            {
+                return HttpNotFound();
+            }
+            return View(department);
         }
 
         // GET: Settings/Projects/Create
@@ -27,63 +43,86 @@ namespace ITechSite.Areas.Settings.Controllers
         }
 
         // POST: Settings/Projects/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name")] Department department)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                db.Department.Add(department);
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(department);
         }
 
         // GET: Settings/Projects/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Department department = await db.Department.FindAsync(id);
+            if (department == null)
+            {
+                return HttpNotFound();
+            }
+            return View(department);
         }
 
         // POST: Settings/Projects/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "Id,Name")] Department department)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
+                db.Entry(department).State = EntityState.Modified;
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(department);
         }
 
         // GET: Settings/Projects/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Department department = await db.Department.FindAsync(id);
+            if (department == null)
+            {
+                return HttpNotFound();
+            }
+            return View(department);
         }
 
         // POST: Settings/Projects/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            Department department = await db.Department.FindAsync(id);
+            db.Department.Remove(department);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
+                db.Dispose();
             }
+            base.Dispose(disposing);
         }
     }
 }

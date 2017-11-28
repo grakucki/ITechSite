@@ -591,12 +591,16 @@
     <Content Include="Content\images\News.pdn" />
     <Content Include="Areas\Settings\Views\web.config" />
     <Content Include="Areas\Settings\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Settings\Views\Projects\Index.cshtml" />
     <Content Include="Areas\Settings\Views\Factories\Create.cshtml" />
     <Content Include="Areas\Settings\Views\Factories\Delete.cshtml" />
     <Content Include="Areas\Settings\Views\Factories\Details.cshtml" />
     <Content Include="Areas\Settings\Views\Factories\Edit.cshtml" />
     <Content Include="Areas\Settings\Views\Factories\Index.cshtml" />
+    <Content Include="Areas\Settings\Views\Projects\Create.cshtml" />
+    <Content Include="Areas\Settings\Views\Projects\Delete.cshtml" />
+    <Content Include="Areas\Settings\Views\Projects\Details.cshtml" />
+    <Content Include="Areas\Settings\Views\Projects\Edit.cshtml" />
+    <Content Include="Areas\Settings\Views\Projects\Index.cshtml" />
     <None Include="Properties\PublishProfiles\insofter.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\build.js" />
