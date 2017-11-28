@@ -14,7 +14,7 @@ namespace ITechSite.Areas.Settings.Controllers
     [Authorize(Roles = "admin")]
     public class ProjectsController : Controller
     {
-        private ITechEntities db = new ITechEntities();
+        private ITechEntities db = new ITechEntities(0);
 
         // GET: Settings/Projects
         public async Task<ActionResult> Index()

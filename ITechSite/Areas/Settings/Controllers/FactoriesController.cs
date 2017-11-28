@@ -15,7 +15,7 @@ namespace ITechSite.Areas.Settings.Controllers
     [Authorize(Roles = "admin")]
     public class FactoriesController : Controller
     {
-        private ITechEntities db = new ITechEntities();
+        private ITechEntities db = new ITechEntities(0);
 
         // GET: Settings/Factories
         public async Task<ActionResult> Index()
