@@ -100,6 +100,7 @@ namespace InstrukcjeProdukcyjne
             WorkstationComboBox.SelectedItem = w;
 
             checkBox1.Checked = Properties.Settings.Default.App.PozwalajNaBlokowanieStanowiska.Value;
+            checkBox2.Checked = ClickOnceHelper.IsShortcutToStartupGroup();
 
         }
 
@@ -117,7 +118,22 @@ namespace InstrukcjeProdukcyjne
                 Properties.Settings.Default.App.Stanowisko = w.Id;
             else
                 Properties.Settings.Default.App.Stanowisko = null;
+
             Properties.Settings.Default.Save();
+
+            SaveAutoStart();
+            
+        }
+
+        private void SaveAutoStart()
+        {
+            if (checkBox2.Checked != ClickOnceHelper.IsShortcutToStartupGroup())
+            {
+                if (checkBox2.Checked)
+                    ClickOnceHelper.AddShortcutToStartupGroup();
+                else
+                    ClickOnceHelper.RemoveShortcutToStartupGroup();
+            }
         }
 
         private Resource GetCurrent()

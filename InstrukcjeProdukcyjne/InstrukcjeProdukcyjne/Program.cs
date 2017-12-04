@@ -18,7 +18,7 @@ namespace InstrukcjeProdukcyjne
            
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                ClickOnceHelper.AddShortcutToStartupGroup();
+                ClickOnceHelper.AddShortcutToStartupGroupFirstRun();
                 Application.Run(new Form2());
         }
         
