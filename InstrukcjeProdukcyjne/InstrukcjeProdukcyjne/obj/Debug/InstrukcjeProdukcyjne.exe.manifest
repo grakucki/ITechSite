@@ -50,7 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oQmi9rgTf6lpBkEw32qbbgp5XjMcPw3+kLnghUYgh8A=</dsig:DigestValue>
+        <dsig:DigestValue>ySKst8Sn4cZoTIgfpZLGIObUUTVGRMx5+1QyyUzsP6A=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -62,7 +62,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>NOgKmwfI98jOEHIMhli+cARrF+BNCDX2wsqYyabK5j4=</dsig:DigestValue>
+        <dsig:DigestValue>vPbXjT7Gvi3Ch0uaBMs2eiJNspAgVh/X5E0x5WEUZV8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -103,14 +103,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InstrukcjeProdukcyjne.exe" size="2075072">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="InstrukcjeProdukcyjne.exe" size="2074560">
       <assemblyIdentity name="InstrukcjeProdukcyjne" version="3.17.11.2" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ByVoWrD2CvwM0IDrPrfcuq5G/dgsYOveZxZcjq92Gfo=</dsig:DigestValue>
+        <dsig:DigestValue>iacDUdDA6Dv3YJU7SPCwMo8F7Hx7u74Zw0jaXe5f3QQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -122,7 +122,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>IfdE/Ld3POPEDOheuZOJs8eRL/sIYmOLN8JgEHJ9aBo=</dsig:DigestValue>
+        <dsig:DigestValue>hCsKn91MrOqkXRQWpVGx3aNdQXdPR2PJyRkCmvYJb9Y=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -134,7 +134,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>sH6DRJxpvDPEIuFgr1kFN/363Kr6Iz1Q0/yd1+Jst10=</dsig:DigestValue>
+        <dsig:DigestValue>abIMkczcQsC/wO/+4HFchknfJHebPcce912Bl87LEh4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -146,7 +146,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>A2rPW/7L+mKGdqXR0PSRUxEm11zPxhXItoNjl/k38Bg=</dsig:DigestValue>
+        <dsig:DigestValue>d0plOuMB6ucJ6YmQQH4OPtFUyjwRLI9VsAkPmixZTfk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

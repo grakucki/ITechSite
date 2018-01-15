@@ -30,4 +30,3 @@ d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\bin\Debug\EntityFramew
 d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\bin\Debug\EntityFramework.SqlServer.xml
 d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\obj\Debug\ITechInstrukcjeModel.dll
 d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\obj\Debug\ITechInstrukcjeModel.pdb
-D:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\obj\Debug\ITechInstrukcjeModel.csprojResolveAssemblyReference.cache

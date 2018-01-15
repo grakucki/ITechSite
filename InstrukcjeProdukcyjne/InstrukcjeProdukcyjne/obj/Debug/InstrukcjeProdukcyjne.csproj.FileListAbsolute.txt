@@ -112,7 +112,6 @@ D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\ob
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne_MarkupCompile.lref
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.NewsMessageDlg.resources
 D:\projekty2\automotive\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.NoneDlg.resources
-d:\projekty\automotive2017\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.csprojResolveAssemblyReference.cache
 d:\projekty\automotive2017\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\Interop.AcroPDFLib.dll
 d:\projekty\automotive2017\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\Interop.WMPLib.dll
 d:\projekty\automotive2017\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\AxInterop.AcroPDFLib.dll
@@ -172,3 +171,4 @@ d:\projekty\automotive2017\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne
 d:\projekty\automotive2017\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\bin\Debug\AxInterop.WMPLib.dll
 d:\projekty\automotive2017\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.exe.manifest
 d:\projekty\automotive2017\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.application
+D:\projekty\automotive2017\ITechSite\InstrukcjeProdukcyjne\InstrukcjeProdukcyjne\obj\Debug\InstrukcjeProdukcyjne.csprojResolveAssemblyReference.cache
