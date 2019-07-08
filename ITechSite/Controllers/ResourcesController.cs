@@ -218,7 +218,7 @@ namespace ITechSite.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    int min = 11;
+                    int min = 1100; //11;
                     resource.LastWriteTime = DateTime.Now;
                     // sprawdzamy czy nazwa już istniej
                     if (db.Resource.Where(m => m.Name == resource.Name).Any())

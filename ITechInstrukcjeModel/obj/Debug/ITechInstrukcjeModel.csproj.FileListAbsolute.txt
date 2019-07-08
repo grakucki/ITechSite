@@ -20,13 +20,3 @@ D:\projekty\automotive\ITechSite\ITechInstrukcjeModel\bin\Debug\EntityFramework.
 D:\projekty\automotive\ITechSite\ITechInstrukcjeModel\obj\Debug\ITechInstrukcjeModel.csprojResolveAssemblyReference.cache
 D:\projekty\automotive\ITechSite\ITechInstrukcjeModel\obj\Debug\ITechInstrukcjeModel.dll
 D:\projekty\automotive\ITechSite\ITechInstrukcjeModel\obj\Debug\ITechInstrukcjeModel.pdb
-d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\bin\Debug\ITechInstrukcjeModel.dll.config
-d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\bin\Debug\ITechInstrukcjeModel.dll
-d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\bin\Debug\ITechInstrukcjeModel.pdb
-d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\bin\Debug\EntityFramework.dll
-d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\bin\Debug\EntityFramework.SqlServer.dll
-d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\bin\Debug\System.Data.dll
-d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\bin\Debug\EntityFramework.xml
-d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\bin\Debug\EntityFramework.SqlServer.xml
-d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\obj\Debug\ITechInstrukcjeModel.dll
-d:\projekty\automotive2017\ITechSite\ITechInstrukcjeModel\obj\Debug\ITechInstrukcjeModel.pdb

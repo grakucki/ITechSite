@@ -23,7 +23,8 @@ namespace ITechService
         public string TestConnection(int value)
         {
             StringBuilder ret = new StringBuilder();
-            ret.AppendLine("Serwis ... v16.04.29 Ok");
+//            ret.AppendLine("Serwis ... v16.04.29 Ok");
+            ret.AppendLine("Serwis ... v19.07.08 Ok");
             try
             {
                 ret.Append("Baza danych ... ");
@@ -147,7 +148,7 @@ namespace ITechService
         {
             StringBuilder ret = new StringBuilder();
             List<Resource> o = null;
-            int kp = 11;
+            int kp = 1100;// 11;
             try
             {
                 using (ITechInstrukcjeModel.ITechEntities context = new ITechInstrukcjeModel.ITechEntities())
