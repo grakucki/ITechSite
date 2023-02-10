@@ -27,7 +27,7 @@ namespace InstrukcjeProdukcyjne
             //    this.labelUpdateAddres.Text = ad.ActivationUri.ToString();
             //}
             //else
-                this.labelUpdateAddres.Text = string.Empty;
+            this.labelUpdateAddres.Text = "2023";
         }
 
         #region Assembly Attribute Accessors

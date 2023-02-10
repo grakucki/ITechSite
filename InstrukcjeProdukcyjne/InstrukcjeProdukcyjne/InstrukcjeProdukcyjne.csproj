@@ -23,14 +23,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://www.insofter.pl/itech/app/</InstallUrl>
+    <InstallUrl>http://10.28.61.82/app/</InstallUrl>
     <ProductName>InstrukcjeProdukcyjne</ProductName>
     <PublisherName>Insofter</PublisherName>
     <SuiteName>Sitech</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>install.html</WebPage>
-    <ApplicationRevision>6</ApplicationRevision>
-    <ApplicationVersion>3.7.11.%2a</ApplicationVersion>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>23.02.10.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -59,10 +59,10 @@
     <ApplicationIcon>Icon1.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>D2CFEEE06DEE518BDAE70DF5061F824791970BC1</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>2A47BCF29E200B171EDE715E9E6D0A623CEB435D</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>InstrukcjeProdukcyjne_1_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>InstrukcjeProdukcyjne_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -361,6 +361,7 @@
       <DependentUpon>WaitDlg.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="InstrukcjeProdukcyjne_1_TemporaryKey.pfx" />
+    <None Include="InstrukcjeProdukcyjne_2_TemporaryKey.pfx" />
     <None Include="InstrukcjeProdukcyjne_TemporaryKey.pfx" />
     <Compile Include="SitechSimaticDevice.cs" />
     <None Include="packages.config" />
